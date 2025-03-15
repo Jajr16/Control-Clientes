@@ -1,1 +1,7 @@
+Backend
 npm i dotenv morgan pg express
+npm install cors
+
+
+Frontend
+npm i axios
