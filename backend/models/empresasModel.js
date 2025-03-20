@@ -5,13 +5,13 @@ export const createTableEmpresa = async () => {
     try {
         await pool.query(`
             CREATE TABLE IF NOT EXISTS empresa (
-                cif VARCHAR(10) PRIMARY KEY,
+                cif VARCHAR(9) PRIMARY KEY,
                 clave VARCHAR(3),
                 nombre VARCHAR(300),
                 propietario VARCHAR(9),
                 direccion INTEGER REFERENCES direccion(id),
                 dato_registral INTEGER REFERENCES dato_registral(id_dr),
-                telefono INTEGER,
+                telefono NVARCHAR(9),
                 FOREIGN KEY (propietario) REFERENCES propietario(nie)
             );
         `);

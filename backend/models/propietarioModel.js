@@ -10,7 +10,7 @@ export const createTablePropietario = async () => {
                 apellido_p VARCHAR(255),
                 apellido_m VARCHAR(255),
                 email VARCHAR(255),
-                telefono INTEGER
+                telefono NVARCHAR(9)
             );
         `);
         console.log("Tabla 'Propietario' creada");
