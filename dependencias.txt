@@ -4,4 +4,4 @@ npm install cors
 
 
 Frontend
-npm i axios
+npm i axios vite

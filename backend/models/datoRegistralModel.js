@@ -24,7 +24,7 @@ export const agregarDatoRegistral = async (num_protocolo, folio, hoja, inscripci
     try {
         const result = await pool.query(
             `INSERT INTO dato_registral (num_protocolo, folio, hoja, inscripcion, notario, fecha_inscripcion) 
-             VALUES ($1, $2, $3, $4, $5, $6) 
+            VALUES ($1, $2, $3, $4, $5, $6) 
              RETURNING *`,
             [num_protocolo, folio, hoja, inscripcion, notario, fecha_inscripcion]
         );
