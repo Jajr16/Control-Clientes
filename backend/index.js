@@ -1,46 +1,46 @@
-import express from 'express';
-import empresasRoutes from './routes/empresasRoutes.js';
-import direccionRoutes from './routes/direccionRoutes.js';
-import propietarioRoutes from './routes/propietarioRoutes.js';
-import datoRegistralRoutes from './routes/datoRegistralRoutes.js';
-import { connectDB } from './config/db.js';
-import cors from 'cors';
+import app from './app.js';
+import { connectDB } from './config/db.js'; 
+import { createTableDireccion } from './models/direccionModel.js'
+import { createTableDatoRegistral } from './models/datoRegistralModel.js'
+import { createTablePropietario } from './models/propietarioModel.js'
+import { createTableEmpresa } from './models/empresasModel.js'
+import { createTableInmueble } from './models/inmuebleModel.js'
+import { createTableProveedor } from './models/proveedorModel.js'
+import { createTableSeguro } from './models/seguroModel.js'
+import { createTableHipoteca } from './models/hipotecaModel.js'
+import { createTableEmpresaInmueble } from './models/empresainmuebleModel.js'
+import { createTableInmuebleProveedor } from './models/inmuebleproveedorModel.js'
+import { createTableInmuebleSeguro } from './models/inmuebleseguroModel.js'
+import { createTableInmuebleHipoteca } from './models/inmueblehipotecaModel.js'
 
-const app = express();
 const PORT = process.env.PORT || 3000;
 
-//Permitir solicitudes desde el frontend
-app.use(cors({
-    origin: 'http://localhost:5173', // Permite el acceso solo desde el frontend
-    methods: 'GET,POST,PUT,DELETE', // Métodos permitidos
-    allowedHeaders: 'Content-Type,Authorization' // Headers permitidos
-}));
-
-// Middleware para JSON
-app.use(express.json());
-
-// Conectar a la BD antes de iniciar el servidor
 const iniciarServidor = async () => {
     try {
-        await connectDB(); // Esperar conexión antes de continuar
+        // Conectar a la base de datos
+        await connectDB();
 
-        // Usar rutas de clientes correctamente
-        console.log("Middleware de /api/clientes se está ejecutando");
-        app.use('/api/empresas', empresasRoutes);
-        app.use('/api/direcciones', direccionRoutes);
-        app.use('/api/propietario', propietarioRoutes);
-        app.use('/api/datoRegistral', datoRegistralRoutes);
+        // CREAR TABLAS
+        await createTableDireccion();
+        await createTableDatoRegistral();
+        await createTablePropietario();
+        await createTableEmpresa();
+        await createTableInmueble();
+        await createTableProveedor();
+        await createTableSeguro();
+        await createTableHipoteca();
+        await createTableEmpresaInmueble();
+        await createTableInmuebleProveedor();
+        await createTableInmuebleSeguro();
+        await createTableInmuebleHipoteca();
 
-        // Iniciar servidor solo si la BD se conectó
         app.listen(PORT, () => {
             console.log(`Servidor corriendo en http://localhost:${PORT}`);
         });
-        
     } catch (error) {
         console.error("Error al iniciar el servidor:", error);
-        process.exit(1); // Detiene la ejecución en caso de fallo
+        process.exit(1); 
     }
 };
 
-// Llamar función para iniciar el servidor
 iniciarServidor();
