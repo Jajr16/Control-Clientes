@@ -31,7 +31,9 @@ CREATE TABLE empresa (
     nombre VARCHAR(300),
     propietario VARCHAR(9),
     direccion INTEGER REFERENCES direccion(id),
-    dato_registral INTEGER REFERENCES dato_registral(id_dr),
+    dato_registral INTEGER REFERENCES dato_registral(id_dr)
+    ON DELETE CASCADE ON UPDATE CASCADE,
     telefono VARCHAR(9),
-    FOREIGN KEY (propietario) REFERENCES propietario(nie)
+    FOREIGN KEY (propietario) REFERENCES propietario(nie) 
+    ON DELETE CASCADE ON UPDATE CASCADE
 );
