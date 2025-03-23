@@ -7,6 +7,7 @@ class InmuebleController {
 
     async insertar(req, res) {
         try {
+            console.log(req.body)
             const nuevoInmueble = await this.inmuebleService.nuevoInmueble(req.body)
             res.status(201).json(nuevoInmueble);
         } catch (error) {
