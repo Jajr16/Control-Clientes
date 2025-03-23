@@ -11,7 +11,9 @@ export const createTableDatoRegistral = async () => {
                 hoja INTEGER,
                 inscripcion INTEGER,
                 notario VARCHAR(500),
-                fecha_inscripcion DATE
+                fecha_inscripcion DATE,
+                CONSTRAINT unique_dato_registral UNIQUE 
+                (num_protocolo, folio, hoja, inscripcion)
             );
         `);
         console.log("Tabla 'datoRegistral' creada");

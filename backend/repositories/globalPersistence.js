@@ -18,7 +18,7 @@ class Repositorio {
      * @param {*} datos Datos a enviar que se insertarán en la tabla establecida en el constructor 
      * @returns Respuesta SQL retornada por PostgreSQL
      */
-    async insertar(datos) {
+    async insertar(datos, client = pool) {
         if (!datos || Object.keys(datos).length == 0) {
             throw new Error("No se pueden insertar datos vacíos.");
         }
@@ -29,10 +29,13 @@ class Repositorio {
         const placeholders = valores.map((_, index) => `$${index + 1}`).join(', ') 
     
         try {
+            console.log(`Los datos recibidos son ${datos}`)
+
             const query = `
-                INSERT INTO ${this.tabla} (${columnas}) VALUES(${placeholders})
-                RETURNING *;
+            INSERT INTO ${this.tabla} (${columnas}) VALUES(${placeholders})
+            RETURNING *;
             `
+            console.log(`El query resultante es ${query}`)
 
             // Realizar query
             const result = await pool.query(query, valores)
@@ -92,7 +95,7 @@ class Repositorio {
      * @param {*} nuevosDatos Nuevos datos a registrar
      * @returns Respuesta SQL de éxito o fracaso
      */
-    async actualizarPorId(claves, nuevosDatos) {
+    async actualizarPorId(claves, nuevosDatos, client = pool) {
         if (!this._validarClaves(claves)) {
             throw new Error(`Las claves proporcionadas no coinciden con ${this.clavesPrimarias.join(', ')}`);
         }
@@ -125,7 +128,7 @@ class Repositorio {
      * @param {*} claves Llave primaria de la tabla
      * @returns Respuesta SQL indicando el éxito o fracaso de la operación
      */
-    async eliminarPorId(claves) {
+    async eliminarPorId(claves, client = pool) {
         if (!this._validarClaves(claves)) {
             throw new Error(`Las claves proporcionadas no coinciden con ${this.clavesPrimarias.join(', ')}`);
         }
