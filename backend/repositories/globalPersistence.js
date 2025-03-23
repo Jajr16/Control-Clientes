@@ -179,6 +179,45 @@ class Repositorio {
     }
 
     /**
+     * Método para hacer consultas SQL por diferentes filtros y JOINS. Se pueden buscar n cantidad de columnas por n filtros posibles
+     * 
+     * @param {*} joins Valores en donde vamos a unir tablas
+     * @param {*} filtros Filtros que aplicaremos en caso de que ocupemos
+     * @param {*} columnasSeleccionadas Columnas que queremos que se muestren
+     * @returns 
+     */
+    async BuscarConJoins(joins = [], filtros = {}, columnasSeleccionadas = []) {
+        if (!Array.isArray(joins)) {
+            joins = [joins]; // Asegura que joins sea un array
+        }
+
+        const columnasQuery = columnasSeleccionadas.length > 0 ? columnasSeleccionadas.join(', ') : '*';
+        let query = `SELECT ${columnasQuery} FROM ${this.tabla}`;
+
+        // Añadir JOINs a la consulta
+        joins.forEach(join => {
+            const { type, table, on } = join;
+            query += ` ${type} JOIN ${table} ON ${on}`;
+        });
+
+        // Añadir condiciones si hay filtros
+        if (Object.keys(filtros).length > 0) {
+            const condiciones = Object.keys(filtros).map((col, index) => `${col} = $${index + 1}`).join(' AND ');
+            query += ` WHERE ${condiciones}`;
+        }
+
+        const valores = Object.values(filtros);
+
+        try {
+            const result = await pool.query(query, valores);
+            return result.rows;
+        } catch (error) {
+            console.error(`Error al buscar en ${this.tabla} con JOINs:`, error);
+            throw new Error(`No se pudo realizar la búsqueda en ${this.tabla} con JOINs`);
+        }
+    }
+
+    /**
      * Función en la que compara si las llaves primarias que se le pasan a las funciones coincide con las llaves primarias definidas en sus clases
      * 
      * @param {*} claves Llaves primarias de la tabla

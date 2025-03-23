@@ -9,6 +9,7 @@ import direccionRoutes from './routes/direccionRoutes.js';
 import propietarioRoutes from './routes/propietarioRoutes.js';
 import datoRegistralRoutes from './routes/datoRegistralRoutes.js';
 import inmuebleRoutes from './routes/InmuebleRoutes.js'
+import clienteRouter from './routes/searchClientRoute.js'
 
 // Configurar dotenv para acceder a las variables de entorno
 dotenv.config();
@@ -34,5 +35,6 @@ app.use('/api/direcciones', direccionRoutes);
 app.use('/api/propietario', propietarioRoutes);
 app.use('/api/datoRegistral', datoRegistralRoutes);
 app.use('/api/inmueble', inmuebleRoutes);
+app.use('/api/searchClients', clienteRouter);
 
 export default app;

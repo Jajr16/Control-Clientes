@@ -1,6 +1,6 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import { HomeIcon, UserCircleIcon, BuildingOffice2Icon } from "@heroicons/react/24/solid";
+import { HomeIcon, UserCircleIcon, BuildingOffice2Icon, UserGroupIcon } from "@heroicons/react/24/solid";
 
 const Sidebar = () => {
     return (
@@ -13,10 +13,10 @@ const Sidebar = () => {
                     </Link>
                 </div>
 
-                {/* Ícono de Empresas */}
+                {/* Ícono de clientes */}
                 <div className="flex items-center justify-center w-full">
-                    <Link to="/nuevosClientes">
-                        <BuildingOffice2Icon className="h-16 w-6" />
+                    <Link to="/clientes">
+                        <UserGroupIcon className="h-16 w-6" />
                     </Link>
                 </div>
             </div>
