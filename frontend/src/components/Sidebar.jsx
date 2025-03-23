@@ -15,7 +15,7 @@ const Sidebar = () => {
 
                 {/* Ícono de Empresas */}
                 <div className="flex items-center justify-center w-full">
-                    <Link to="/clientes">
+                    <Link to="/nuevosClientes">
                         <BuildingOffice2Icon className="h-16 w-6" />
                     </Link>
                 </div>
