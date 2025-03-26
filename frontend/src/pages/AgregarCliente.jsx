@@ -11,6 +11,12 @@ import { getPropietario, addPropietario } from "../api/moduloClientes/propietari
 import { getDatoRegistral, addDatoRegistral } from "../api/moduloClientes/datoRegistral.js";
 
 const AddClientesPage = () => {
+    // Carga inicial para evitar errores en consola
+    const [empresas, setEmpresas] = useState([]);
+    const [direcciones, setDirecciones] = useState([]);
+    const [propietarios, setPropietarios] = useState([]);
+    const [datosRegistrales, setDatosRegistrales] = useState([]);
+
     //  Estados para Empresas
     const [empresa, setEmpresa] = useState({
         cif: "", clave: "", nombre: "", propietario: "", direccion: "", dato_registral: "", telefono: ""

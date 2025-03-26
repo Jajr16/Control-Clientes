@@ -186,34 +186,58 @@ class Repositorio {
      * @param {*} columnasSeleccionadas Columnas que queremos que se muestren
      * @returns 
      */
-    async BuscarConJoins(joins = [], filtros = {}, columnasSeleccionadas = []) {
+    async BuscarConJoins(joins = [], filtros = {}, operador = 'AND', columnasSeleccionadas = []) {
         if (!Array.isArray(joins)) {
-            joins = [joins]; // Asegura que joins sea un array
+            joins = [joins];
         }
-
-        const columnasQuery = columnasSeleccionadas.length > 0 ? columnasSeleccionadas.join(', ') : '*';
-        let query = `SELECT ${columnasQuery} FROM ${this.tabla}`;
-
-        // Añadir JOINs a la consulta
+    
+        // Validar filtros
+        if (!filtros || typeof filtros !== 'object') {
+            filtros = {};
+        }
+    
+        // Construir SELECT
+        const columnas = columnasSeleccionadas.length > 0 ? 
+            columnasSeleccionadas.join(', ') : 
+            `${this.tabla}.*`;
+    
+        // Construir JOINs
+        let joinClause = '';
         joins.forEach(join => {
-            const { type, table, on } = join;
-            query += ` ${type} JOIN ${table} ON ${on}`;
+            joinClause += ` ${join.type} JOIN ${join.table} ON ${join.on}`;
         });
-
-        // Añadir condiciones si hay filtros
-        if (Object.keys(filtros).length > 0) {
-            const condiciones = Object.keys(filtros).map((col, index) => `${col} = $${index + 1}`).join(' AND ');
-            query += ` WHERE ${condiciones}`;
+    
+        // Construir WHERE
+        const condiciones = [];
+        const valores = [];
+        let contador = 1;
+    
+        for (const [campo, valor] of Object.entries(filtros)) {
+            if (valor !== undefined && valor !== null && valor !== '') {
+                condiciones.push(`${campo} = $${contador}`);
+                valores.push(valor);
+                contador++;
+            }
         }
-
-        const valores = Object.values(filtros);
-
+    
+        const whereClause = condiciones.length > 0 ? 
+            `WHERE ${condiciones.join(` ${operador} `)}` : 
+            '';
+    
+        // Construir query final
+        const query = `
+            SELECT ${columnas} 
+            FROM ${this.tabla}
+            ${joinClause}
+            ${whereClause}
+        `;
+    
         try {
             const result = await pool.query(query, valores);
             return result.rows;
         } catch (error) {
             console.error(`Error al buscar en ${this.tabla} con JOINs:`, error);
-            throw new Error(`No se pudo realizar la búsqueda en ${this.tabla} con JOINs`);
+            throw new Error(`No se pudo realizar la búsqueda en ${this.tabla}`);
         }
     }
 

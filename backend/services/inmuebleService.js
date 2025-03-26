@@ -9,6 +9,7 @@ class InmuebleService {
         this.repositorioInmueble = new Repositorio('inmueble', 'clave_catastral')
         this.repositorioDireccion = new Repositorio('direccion', 'id')
         this.repositorioDatoRegistral = new Repositorio('dato_registral', 'id_dr')
+        this.repositorioEmpresaInmueble = new Repositorio('empresa_inmueble', ['cif', 'clave_catastral'])
     }
 
     /**
@@ -52,6 +53,32 @@ class InmuebleService {
         } finally {
             client.release(); // Liberar el cliente de la pool
         }
+    }
+
+    async getInmuebleDetails(cif) {
+        try {
+            const joins = [
+                {type: 'INNER', table: 'inmueble i', on: 'empresa_inmueble.clave_catastral = i.clave_catastral'},
+                {type: 'INNER', table: 'direccion d', on: 'i.direccion = d.id'},
+                {type: 'INNER', table: 'dato_registral dr', on: 'i.dato_registral = dr.id_dr'},
+            ]
+
+            const filtro = {
+                'empresa_inmueble.cif': cif
+            }
+
+            const inmueblesList = await this.repositorioEmpresaInmueble.BuscarConJoins(joins, filtro, '', ['d.calle', 'd.numero', 'd.piso', 
+                'd.codigo_postal', 'd.localidad', 'empresa_inmueble.clave_catastral', 'empresa_inmueble.valor_adquisicion', 
+                'empresa_inmueble.fecha_adquisicion', 'dr.num_protocolo', 'dr.folio', 'dr.hoja', 'dr.inscripcion', 
+                'dr.notario', 'dr.fecha_inscripcion'
+            ]);
+
+            return inmueblesList;
+
+        } catch (error) {
+            console.error("Error en la transacción:", error);
+            throw new Error("No se pudo completar la operación. Transacción revertida.");
+        } 
     }
 }
 

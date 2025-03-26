@@ -14,6 +14,18 @@ class InmuebleController {
             res.status(500).json({ error: error.message });
         }
     }
+
+    async getInmuebleDetails(req, res) {
+        try {
+            const { cif } = req.params;
+            const resultados = await this.inmuebleService.getInmuebleDetails(cif);
+
+            res.status(200).json(resultados);
+        } catch (error) {
+            console.error("Error en infoClientes:", error);
+            res.status(500).json({ error: "Error al obtener la información de los clientes" });
+        }
+    }
 }
 
 export default InmuebleController;
