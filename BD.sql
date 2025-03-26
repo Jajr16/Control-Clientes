@@ -37,3 +37,28 @@ CREATE TABLE empresa (
     FOREIGN KEY (propietario) REFERENCES propietario(nie) 
     ON DELETE CASCADE ON UPDATE CASCADE
 );
+
+-- Datos del cliente (tanto empresa como el del dueño de la empresa)
+SELECT empresa.clave, empresa.cif, empresa.nombre, p.nie, CONCAT(p.nombre, ' ', p.apellido_p, ' ', p.apellido_m) AS propietario,
+p.telefono, p.email, d.calle, d.numero, d.piso, d.codigo_postal, d.localidad, dr.num_protocolo, dr.folio, dr.hoja,
+dr.inscripcion, dr.notario, dr.fecha_inscripcion FROM empresa INNER JOIN propietario p
+on empresa.propietario = p.nie INNER JOIN direccion d on empresa.direccion = d.id INNER JOIN dato_registral dr ON
+dato_registral = dr.id_dr;
+
+-- Datos de los inmuebles de la empresa
+select d.calle, d.numero, d.piso, d.codigo_postal, d.localidad, empresa_inmueble.clave_catastral, empresa_inmueble.valor_adquisicion, empresa_inmueble.fecha_adquisicion,
+dr.num_protocolo, dr.folio, dr.hoja, dr.inscripcion, dr.notario, dr.fecha_inscripcion from empresa_inmueble
+INNER JOIN inmueble i ON empresa_inmueble.clave_catastral = i.clave_catastral 
+INNER JOIN direccion d ON i.direccion = d.id
+INNER JOIN dato_registral dr ON i.dato_registral = dr.id_dr
+WHERE empresa_inmueble.cif = '5454';
+
+-- Datos de los proveedores de un inmueble
+select p.nombre, p.telefono, p.email, p.tipo_servicio from inmueble_proveedor 
+INNER JOIN proveedor p ON inmueble_proveedor.clave = p.clave 
+WHERE inmueble_proveedor.clave_catastral = 'ABC123XYZ';
+
+-- Datos de los seguros de los inmuebles de la empresa
+select s.empresa_seguro, s.tipo_seguro, s.telefono, s.email, s.poliza from inmueble_seguro
+INNER JOIN seguro s ON inmueble_seguro.empresa_seguro = s.empresa_seguro 
+WHERE inmueble_seguro.clave_catastral = 'ABC123XYZ';

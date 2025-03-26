@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import Select from "react-select";
 import { XMarkIcon } from "@heroicons/react/24/solid";
+import { getInmuebles } from "../../api/moduloClientes/inmueble";
 const API_URL = import.meta.env.VITE_API_URL;
 
 const ClientSearch = ({ onSelectClient, className }) => {
@@ -20,7 +21,7 @@ const ClientSearch = ({ onSelectClient, className }) => {
     // Formatear los clientes para React Select
     const clientOptions = clients.map((client) => ({
         value: client.cif,
-        label: `${client.clave} - ${client.nombre}`, 
+        label: `${client.clave} - ${client.nombre}`,
         clave: client.clave || "", 
         cif: client.cif || "",
         nombre: client.nombre || "", 
@@ -79,8 +80,8 @@ const ClientSearch = ({ onSelectClient, className }) => {
     };
 
     return (
-        <div className={`p-4 ${selectedClient ? "w-[30%]" : "w-full"}`}>
-            <div className="flex items-center">
+        <div className='p-4 w-full'>
+            <div className={`flex items-center w-full`}>
                 <Select
                     options={clientOptions}
                     value={selectedClient}
