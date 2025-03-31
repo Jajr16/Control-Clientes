@@ -11,17 +11,37 @@ const Cliente = () => {
     const [selectedClient, setSelectedClient] = useState(null);
     const [inmueblesList, setInmueblesList] = useState(null);
     const [selectedInmueble, setSelectedInmueble] = useState(null);
+    const [proveedoresList, setProveedoresSegurosList] = useState(null);
 
     useEffect(() => {
-        if (!selectedClient) return;
+        // Limpieza completa al cambiar de cliente
+        const cleanup = () => {
+            setInmueblesList(null);
+            setSelectedInmueble(null);
+            setProveedoresSegurosList(null);
+        };
+
+        if (!selectedClient) {
+            cleanup();
+            return;
+        }
         
         const fetchInmuebles = async () => {
-            const response = await getInmuebles(selectedClient.cif);
-            setInmueblesList(response)
-        }
+            try {
+                const response = await getInmuebles(selectedClient.cif);
+                setInmueblesList(response);
+            } catch (error) {
+                console.error("Error fetching inmuebles:", error);
+                cleanup();
+            }
+        };
 
         fetchInmuebles()
     }, [selectedClient])
+
+    useEffect(() => {
+        setProveedoresSegurosList(null);
+    }, [selectedInmueble]);
 
     return (
         <div className="w-full h-full border border-black relative">
@@ -59,7 +79,7 @@ const Cliente = () => {
                 <div className="h-full flex">
                     {selectedClient && (
                         <div className="flex-grow h-full">
-                            <InmuebleDetails client={selectedInmueble} />
+                            <InmuebleDetails inmueble={selectedInmueble} setProveedoresSegurosList={setProveedoresSegurosList} proveedoresList={proveedoresList} />
                         </div>
                     )}
                 </div>
