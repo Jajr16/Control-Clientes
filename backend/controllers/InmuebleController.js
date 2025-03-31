@@ -26,6 +26,19 @@ class InmuebleController {
             res.status(500).json({ error: "Error al obtener la información de los clientes" });
         }
     }
+
+    async getProveedoresSegurosDetails(req, res) {
+        try {
+            const { cc } = req.params;
+            
+            const resultados = await this.inmuebleService.getProveedoresSegurosDetails(cc);
+
+            res.status(200).json(resultados);
+        } catch (error) {
+            console.error("Error en infoClientes:", error);
+            res.status(500).json({ error: "Error al obtener la información de los clientes" });
+        }
+    }
 }
 
 export default InmuebleController;

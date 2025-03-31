@@ -10,6 +10,8 @@ class InmuebleService {
         this.repositorioDireccion = new Repositorio('direccion', 'id')
         this.repositorioDatoRegistral = new Repositorio('dato_registral', 'id_dr')
         this.repositorioEmpresaInmueble = new Repositorio('empresa_inmueble', ['cif', 'clave_catastral'])
+        this.repositorioInmuebleProveedor = new Repositorio('inmueble_proveedor', ['clave_catastral', 'clave'])
+        this.repositorioInmuebleSeguro = new Repositorio('inmueble_seguro', ['clave_catastral', 'empresa_seguro'])
     }
 
     /**
@@ -53,6 +55,49 @@ class InmuebleService {
         } finally {
             client.release(); // Liberar el cliente de la pool
         }
+    }
+
+    async getProveedoresSegurosDetails(CC) {
+        try {
+            // =========== PROVEEDORES ===========
+            const joinsProveedor = [
+                {type: 'INNER', table: 'proveedor p', on: 'inmueble_proveedor.clave = p.clave'},
+            ]
+
+            const filtroProveedor = {
+                'inmueble_proveedor.clave_catastral': CC
+            }
+
+            const proveedoresList = await this.repositorioInmuebleProveedor.BuscarConJoins(joinsProveedor, filtroProveedor, '', [
+                'p.nombre', 'p.telefono', 'p.email', 'p.tipo_servicio'
+            ]);
+
+            console.log(`Los proveedores son: ${proveedoresList}`)
+
+            // =========== SEGUROS ===========
+            const joinsSeguros = [
+                {type: 'INNER', table: 'seguro s', on: 'inmueble_seguro.empresa_seguro = s.empresa_seguro'}
+            ]
+
+            const filtroSeguro = {
+                'inmueble_seguro.clave_catastral': CC
+            }
+
+            const segurosList = await this.repositorioInmuebleSeguro.BuscarConJoins(joinsSeguros, filtroSeguro, '', [
+                's.empresa_seguro', 's.tipo_seguro', 's.telefono', 's.email', 's.poliza'
+            ])
+
+            console.log(`Los seguros son: ${segurosList}`)
+
+            return {
+                'proveedores': proveedoresList,
+                'seguros': segurosList
+            };
+
+        } catch (error) {
+            console.error("Error en la transacción:", error);
+            throw new Error("No se pudo completar la operación. Transacción revertida.");
+        } 
     }
 
     async getInmuebleDetails(cif) {

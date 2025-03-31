@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from "react";
 import Select from "react-select";
 import { XMarkIcon } from "@heroicons/react/24/solid";
-import { getInmuebles } from "../../api/moduloClientes/inmueble";
 const API_URL = import.meta.env.VITE_API_URL;
 
 const ClientSearch = ({ onSelectClient, className }) => {

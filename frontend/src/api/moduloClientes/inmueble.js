@@ -11,3 +11,8 @@ export const getInmuebles = async (cif) => {
     const res = await axios.get(`${API_URL}/inmueble/inmueblesList/${cif}`);
     return res.data;
 };
+
+export const getInmuebleDetails = async (cc) => {
+    const res = await axios.get(`${API_URL}/inmueble/inmueblesProveedoresSeguros/${cc}`);
+    return res.data;
+};
