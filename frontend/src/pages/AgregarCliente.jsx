@@ -1,5 +1,7 @@
 import React, { useEffect, useState } from "react";
 
+import { Card, Button, Input, Label, Message } from "../components/UI";
+
 import DatoRegistralForm from "../components/forms/DatoRegistralForms.jsx";
 import DireccionForm from "../components/forms/DireccionForms.jsx";
 import EmpresaForm from "../components/forms/EmpresaForms.jsx";
@@ -93,33 +95,50 @@ const AddClientesPage = () => {
         <div>
 
             {/* Formulario para agregar Empresa con Referencias */}
-            <h2>Agregar Datos Yeah</h2>
-            <form onSubmit={handleAddEmpresaConReferencias}>
-                <h3>Empresa</h3>
-                {["cif", "clave", "nombre", "telefono"].map(field => (
-                    <input key={field} type="text" name={field} placeholder={field} value={empresa[field]} onChange={(e) => setEmpresa(prev => ({ ...prev, [field]: e.target.value }))} />
-                ))}
-                <input type="text" name="propietario" placeholder="Propietario"/>
-                <input type="text" name="direccion" placeholder="Dirección"/>
-                <input type="text" name="dato_registral" placeholder="Dato Registral"/>
+            <Card>
 
-                <h3>Dirección</h3>
-                {["calle", "numero", "piso", "codigo_postal", "localidad"].map(field => (
-                    <input key={field} type="text" name={field} placeholder={field} value={direccion[field]} onChange={(e) => setDireccion(prev => ({ ...prev, [field]: e.target.value }))} />
-                ))}
+                <h1 className="text-2xl font-bold mb-4">Agregar Cliente</h1>
 
-                <h3>Propietario</h3>
-                {["nie", "nombre", "apellido_p", "apellido_m", "email", "telefono"].map(field => (
-                    <input key={field} type="text" name={field} placeholder={field} value={propietario[field]} onChange={(e) => setPropietario(prev => ({ ...prev, [field]: e.target.value }))} />
-                ))}
+                <form onSubmit={handleAddEmpresaConReferencias}>
 
-                <h3>Dato Registral</h3>
-                {["num_protocolo", "folio", "hoja", "inscripcion", "notario", "fecha_inscripcion"].map(field => (
-                    <input key={field} type={field === "fecha_inscripcion" ? "date" : "text"} name={field} placeholder={field} value={datoRegistral[field]} onChange={(e) => setDatoRegistral(prev => ({ ...prev, [field]: e.target.value }))} />
-                ))}
+                    <div className="mb-4">
 
-                <button type="submit">Agregar Datos</button>
-            </form>
+                        <Label htmlFor="nombreempresa"> Empresa </Label>
+                        {["cif", "clave", "nombre", "telefono"].map(field => (
+                            <input key={field} type="text" name={field} placeholder={field} value={empresa[field]} onChange={(e) => setEmpresa(prev => ({ ...prev, [field]: e.target.value }))} />
+                        ))}
+                        <Label htmlFor="nombreempresa"> Propietario </Label>
+                        <Input type="text" name="propietario" placeholder="Escribe el propietario" autoFocus/>
+
+                        <Label htmlFor="nombreempresa"> Dirección </Label>
+                        <Input type="text" name="direccion" placeholder="Escribe la dirección" autoFocus/>
+
+                        <Label htmlFor="nombreempresa"> Dato Registral </Label>
+                        <Input type="text" name="dato_registral" placeholder="Escribe el dato registral" autoFocus/>
+
+                        <Label htmlFor="nombredireccion"> Dirección </Label>
+                        {["calle", "numero", "piso", "codigo_postal", "localidad"].map(field => (
+                            <input key={field} type="text" name={field} placeholder={field} value={direccion[field]} onChange={(e) => setDireccion(prev => ({ ...prev, [field]: e.target.value }))} />
+                        ))}
+
+                        <Label htmlFor="nombrepropietario"> Propietario </Label>
+                        {["nie", "nombre", "apellido_p", "apellido_m", "email", "telefono"].map(field => (
+                            <input key={field} type="text" name={field} placeholder={field} value={propietario[field]} onChange={(e) => setPropietario(prev => ({ ...prev, [field]: e.target.value }))} />
+                        ))}
+
+                        <Label htmlFor="nombredatoreg"> Dato Registral </Label>
+                        {["num_protocolo", "folio", "hoja", "inscripcion", "notario", "fecha_inscripcion"].map(field => (
+                            <input key={field} type={field === "fecha_inscripcion" ? "date" : "text"} name={field} placeholder={field} value={datoRegistral[field]} onChange={(e) => setDatoRegistral(prev => ({ ...prev, [field]: e.target.value }))} />
+                        ))}
+
+                    </div>
+
+                    <Button> Agregar Datos </Button>
+
+                </form>
+
+            </Card>
+            
         </div>
     );
 };

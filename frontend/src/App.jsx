@@ -3,9 +3,18 @@ import { BrowserRouter as Router, Routes, Route, Link } from "react-router-dom";
 
 import Layout from "./components/layout";
 
+// Pagina principal
+import Home from "./pages/Home";
+
+// CRUD Clientes
 import AddClientesPage from "./pages/AgregarCliente";
 import Cliente from "./pages/Cliente";
-import Home from "./pages/Home";
+
+// CRUD Inmuebles
+import AddInmueblePage from "./pages/AgregarInmueble";
+
+// CRUD Proveedores
+import AddProveedorPage from "./pages/AgregarProveedor";
 
 const App = () => {
     return (
@@ -15,6 +24,8 @@ const App = () => {
                     <Route path="/" element={<Home />} />
                     <Route path="/nuevosClientes" element={<AddClientesPage />} />
                     <Route path="/clientes" element={<Cliente />} />
+                    <Route path="/nuevosInmuebles" element={<AddInmueblePage />} />
+                    <Route path="/nuevosProveedores" element={<AddProveedorPage />} />
                 </Routes>
             </Layout>
         </Router>
