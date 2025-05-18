@@ -26,6 +26,7 @@ router.post('/', async (req, res) => {
         res.status(201).json(empresa);
     } catch (error) {
         res.status(500).json({ error: error.message });
+        console.error("Error al agregar dato registral:", error);
     }
 });
 
