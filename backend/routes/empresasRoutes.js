@@ -16,18 +16,22 @@ router.get('/', async (req, res) => {
 
 router.post('/', async (req, res) => {
     console.log("POST / ejecutado");
-    const { cif, clave, nombre, propietario, direccion, dato_registral, telefono } = req.body;
-    if (!cif || !clave || !nombre || !propietario || !direccion || !dato_registral|| !telefono) {
-        return res.status(400).json({ error: "Faltan campos obligatorios" });
+
+    const { empresa, direccion, propietario, datoRegistral } = req.body;
+
+    if (!empresa || !direccion || !propietario || !datoRegistral) {
+        return res.status(400).json({ error: "Faltan bloques de datos (empresa, direccion, etc.)" });
     }
 
     try {
-        const empresa = await agregarEmpresa(cif, clave, nombre, propietario, direccion, dato_registral, telefono);
-        res.status(201).json(empresa);
+        const nuevaEmpresa = await agregarEmpresa({ empresa, direccion, propietario, datoRegistral });
+        res.status(201).json(nuevaEmpresa);
     } catch (error) {
-        res.status(500).json({ error: error.message });
+        console.error("Error al agregar empresa:", error.message);
+        res.status(400).json({ error: error.message });
     }
 });
+
 
 //Debug para confirmar que las rutas están registradas
 // console.log("Rutas registradas en clienteRoutes al final:");

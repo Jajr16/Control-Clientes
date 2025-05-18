@@ -51,43 +51,139 @@ const AddClientesPage = () => {
     const cargarPropietarios = async () => { setPropietarios(await getPropietario()); };
     const cargarDatosRegistrales = async () => { setDatosRegistrales(await getDatoRegistral()); };
 
-    const handleAddEmpresaConReferencias = async (e) => {
-        e.preventDefault();
-        try {
-            // Insertar Dirección y obtener el ID
-            const nuevaDireccion = await addDirecciones(direccion);
+    const esNumero = (valor) => /^\d+$/.test(valor);
 
-            // Insertar Propietario y obtener el NIE
-            const nuevoPropietario = await addPropietario(propietario);
-
-            // Insertar Datos Registrales y obtener el ID
-            const nuevoDatoRegistral = await addDatoRegistral(datoRegistral);
-
-            // Insertar Empresa con las claves correctas
-            await addEmpresas({
-                ...empresa,
-                propietario: nuevoPropietario.nie,
-                direccion: nuevaDireccion.id,
-                dato_registral: nuevoDatoRegistral.id_dr
-            });
-
-            //  Recargar datos
-            cargarEmpresas();
-            cargarDirecciones();
-            cargarPropietarios();
-            cargarDatosRegistrales();
-
-
-            // Limpiar los estados
-            setEmpresa({ cif: "", clave: "", nombre: "", propietario: "", direccion: "", dato_registral: "", telefono: "" });
-            setDireccion({ calle: "", numero: "", piso: "", codigo_postal: "", localidad: "" });
-            setPropietario({ nie: "", nombre: "", apellido_p: "", apellido_m: "", email: "", telefono: "" });
-            setDatoRegistral({ num_protocolo: "", folio: "", hoja: "", inscripcion: "", notario: "", fecha_inscripcion: "" });
-
-        } catch (error) {
-            console.error("Error al agregar empresa con referencias:", error);
+const handleAddEmpresaConReferencias = async (e) => {
+    e.preventDefault();
+    try {
+        // Validación de longitud de campos
+        if (empresa.clave.length > 3) {
+            alert("El campo 'clave' no puede tener más de 3 caracteres.");
+            return;
         }
-    };
+        if (empresa.cif.length > 10) {
+            alert("El campo 'cif' no puede tener más de 10 caracteres.");
+            return;
+        }
+        if (empresa.propietario.length > 9) {
+            alert("El campo 'propietario' no puede tener más de 9 caracteres.");
+            return;
+        }
+        if (empresa.telefono.length > 10) {
+            alert("El campo 'telefono' de empresa no puede tener más de 10 caracteres.");
+            return;
+        }
+        if (propietario.telefono.length > 10) {
+            alert("El campo 'telefono' del propietario no puede tener más de 10 caracteres.");
+            return;
+        }
+        if (propietario.nie.length > 9) {
+            alert("El campo 'nie' no puede tener más de 9 caracteres.");
+            return;
+        }
+
+        // Validación de campos numéricos
+        if (!esNumero(empresa.telefono)) {
+            alert("El campo 'Teléfono de empresa' debe ser un número.");
+            return;
+        }
+        if (!esNumero(propietario.telefono)) {
+            alert("El campo 'Teléfono del propietario' debe ser un número.");
+            return;
+        }
+        if (!esNumero(direccion.numero)) {
+            alert("El campo 'Número de dirección' debe ser un número.");
+            return;
+        }
+        if (!esNumero(direccion.codigo_postal)) {
+            alert("El campo 'Código postal' debe ser un número.");
+            return;
+        }
+
+        // Validación de fecha
+        if (datoRegistral.fecha_inscripcion && isNaN(Date.parse(datoRegistral.fecha_inscripcion))) {
+            alert("La fecha de inscripción no es válida.");
+            return;
+        }
+
+        // Validación de campos vacíos
+        const camposEmpresa = ["cif", "clave", "nombre", "telefono"];
+        const camposDireccion = ["calle", "numero", "codigo_postal", "localidad"];
+        const camposPropietario = ["nie", "nombre", "apellido_p", "apellido_m", "email", "telefono"];
+        const camposRegistrales = ["num_protocolo", "folio", "hoja", "inscripcion", "notario", "fecha_inscripcion"];
+
+        for (const campo of camposEmpresa) {
+            if (!empresa[campo]) {
+                alert(`El campo '${campo}' de empresa es obligatorio.`);
+                return;
+            }
+        }
+        for (const campo of camposDireccion) {
+            if (!direccion[campo]) {
+                alert(`El campo '${campo}' de dirección es obligatorio.`);
+                return;
+            }
+        }
+        for (const campo of camposPropietario) {
+            if (!propietario[campo]) {
+                alert(`El campo '${campo}' de propietario es obligatorio.`);
+                return;
+            }
+        }
+        for (const campo of camposRegistrales) {
+            if (!datoRegistral[campo]) {
+                alert(`El campo '${campo}' de dato registral es obligatorio.`);
+                return;
+            }
+        }
+
+        // Validación de unicidad del NIE
+        const propietarioExistente = propietarios.find(p => p.nie === propietario.nie);
+        if (propietarioExistente) {
+            alert(`Ya existe un propietario con el NIE: ${propietario.nie}`);
+            return;
+        }
+        console.log("Enviando datos al backend:");
+        console.log("Empresa:", empresa);
+        console.log("Dirección:", direccion);
+        console.log("Propietario:", propietario);
+        console.log("Dato registral:", datoRegistral);
+
+        // Enviar al backend todo junto
+        const nuevaEmpresa = await addEmpresas({
+            empresa,
+            direccion,
+            propietario,
+            datoRegistral
+        });
+        
+        console.log("Empresa registrada en backend:", nuevaEmpresa);
+        alert("Empresa agregada exitosamente");
+
+        // Recargar datos
+        await Promise.all([
+            cargarEmpresas(),
+            cargarDirecciones(),
+            cargarPropietarios(),
+            cargarDatosRegistrales()
+        ]);
+
+        // Limpiar formularios
+        setEmpresa({ cif: "", clave: "", nombre: "", propietario: "", direccion: "", dato_registral: "", telefono: "" });
+        setDireccion({ calle: "", numero: "", piso: "", codigo_postal: "", localidad: "" });
+        setPropietario({ nie: "", nombre: "", apellido_p: "", apellido_m: "", email: "", telefono: "" });
+        setDatoRegistral({ num_protocolo: "", folio: "", hoja: "", inscripcion: "", notario: "", fecha_inscripcion: "" });
+
+    } catch (error) {
+        if (error.response && error.response.data && error.response.data.error) {
+            alert("Error: " + error.response.data.error);
+            console.error("Backend dijo:", error.response.data.error);
+        } else {
+            console.error("Error inesperado:", error);
+            alert("Ocurrió un error inesperado.");
+        }
+    }
+};
 
     return (
         <div>
