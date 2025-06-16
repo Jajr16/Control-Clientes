@@ -62,3 +62,9 @@ WHERE inmueble_proveedor.clave_catastral = 'ABC123XYZ';
 select s.empresa_seguro, s.tipo_seguro, s.telefono, s.email, s.poliza from inmueble_seguro
 INNER JOIN seguro s ON inmueble_seguro.empresa_seguro = s.empresa_seguro 
 WHERE inmueble_seguro.clave_catastral = 'ABC123XYZ';
+
+-- CONSULTA PARA DATOS DE HIPOTECAS
+SELECT h.prestamo, h.banco_prestamo, h.fecha_hipoteca, h.cuota_hipoteca 
+FROM inmueble_hipoteca 
+INNER JOIN hipoteca h ON inmueble_hipoteca.id_hipoteca = h.id
+WHERE inmueble_hipoteca.clave_catastral = 'ABC123XYZ';

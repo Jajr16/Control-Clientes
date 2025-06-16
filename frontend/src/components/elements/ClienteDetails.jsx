@@ -11,7 +11,7 @@ const ClientDetails = ({ client }) => {
                     <strong className="block break-words">
                         <p className="flex items-center gap-2">
                             <BuildingOfficeIcon className="h-6 w-6" />
-                            {client.cif} - {client.nombre} - {client.clave}
+                            CIF: {client.cif} - CLIENTE: {client.nombre} - CLAVE: {client.clave}
                         </p>
                     </strong>
                     <p className="flex break-words whitespace-normal">
