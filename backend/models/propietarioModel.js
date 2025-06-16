@@ -8,7 +8,7 @@ export const createTablePropietario = async () => {
                 nie VARCHAR(9) PRIMARY KEY,
                 nombre VARCHAR(255),
                 email VARCHAR(255),
-                telefono VARCHAR(9)
+                telefono VARCHAR(10)
             );
         `);
         console.log("Tabla 'Propietario' creada");
@@ -25,12 +25,14 @@ export const agregarPropietario = async (nie, nombre, email, telefono) => {
              RETURNING *`,
             [nie, nombre, email, telefono]
         );
-        console.log("Propietario agregada:", result.rows[0]);
+
+        console.log("Propietario agregado:", result.rows[0]);
         return result.rows[0];
     } catch (error) {
-        throw new Error("Error al agregar Propietario: " + error.message);
+        throw new Error("Error al agregar propietario: " + error.message);
     }
 };
+
 
 export const obtenerPropietario = async () => {
     try {
