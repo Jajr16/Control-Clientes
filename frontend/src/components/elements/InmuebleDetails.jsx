@@ -1,11 +1,11 @@
 import React, { useState, useEffect } from "react";
-import { getInmuebleDetails } from "../../api/moduloClientes/inmueble";
+import { getInmuebleDetails, getInmuebleHipotecas } from "../../api/moduloClientes/inmueble";
 import { MapPinIcon, IdentificationIcon, ClipboardDocumentListIcon, ShieldCheckIcon,
     LifebuoyIcon, BuildingOfficeIcon, PhoneIcon, AtSymbolIcon, CurrencyEuroIcon,
     CalendarDaysIcon } from "@heroicons/react/24/solid";
 
 
-const InmuebleDetails = ({ inmueble, setProveedoresSegurosList, proveedoresList }) => {
+const InmuebleDetails = ({ inmueble, setProveedoresSegurosList, proveedoresList, setHipotecas, HipotecasList }) => {
 
     useEffect(() => {
         if (!inmueble) {
@@ -13,11 +13,23 @@ const InmuebleDetails = ({ inmueble, setProveedoresSegurosList, proveedoresList 
             return;
         }
 
+        async function fetchHipotecas(CC) {
+            try {
+                const response = await getInmuebleHipotecas(CC);
+                setHipotecas(response)
+
+                return response
+            } catch (error) {
+                console.error("Error en fetchHipotecas:", error)
+                return null                
+            }
+        }
+
         async function fetchProveedoresSeguros(CC) {
             try {
                 const response = await getInmuebleDetails(CC);
-                console.log(response)
                 setProveedoresSegurosList(response);
+
                 return response;
             } catch (error) {
                 console.error("Error en fetchProveedoresSeguros:", error);
@@ -26,12 +38,14 @@ const InmuebleDetails = ({ inmueble, setProveedoresSegurosList, proveedoresList 
         }
         
         fetchProveedoresSeguros(inmueble.clave_catastral);
+        fetchHipotecas(inmueble.clave_catastral);
     }, [inmueble]);
 
     return (
         <div className="relative flex w-[100%] h-full p-2">
             <div className="relative w-full h-full flex flex-col border border-black p-2">
                 <div className={`w-full h-full p-3 ${proveedoresList == null ? null : "bg-white"}`}>
+
                     {/* Contenedor flexible para Seguros, Proveedores y el nuevo div */}
                     <div className="flex flex-col h-full">
                         {/* Contenedor de Seguros */}
@@ -65,8 +79,8 @@ const InmuebleDetails = ({ inmueble, setProveedoresSegurosList, proveedoresList 
                                                         {seguro.email}
                                                     </div>
                                                     <div className="flex items-center bg-gray-200 p-3">
-                                                        <ClipboardDocumentListIcon className="h-6 w-6 mr-2" />
-                                                        {seguro.poliza}
+                                                        <ClipboardDocumentListIcon className="h-6 w-6" />
+                                                        <b className="mr-2">POLIZA:</b> {seguro.poliza}
                                                     </div>
                                                 </div>
                                             </div>
@@ -150,6 +164,38 @@ const InmuebleDetails = ({ inmueble, setProveedoresSegurosList, proveedoresList 
                                             </div>
 
                                         </div>
+                                    </div>
+                                </div>
+                            </>
+                        )}
+
+                        {/* Sección para hipotecas */}
+                        {(HipotecasList === null || HipotecasList.length === 0) ? (
+                            <>
+                                <h4 className="text-2xl font-bold">Hipotecas</h4>
+                                <div className="flex-1">El inmueble no tiene hipotecas.</div>
+                            </>
+                            ) : (
+                            <>
+                                <h4 className="text-2xl font-bold">Hipotecas</h4>
+                                <div className="flex-1 overflow-y-auto mt-5">
+                                    <div className="border border-black rounded-xl p-2">
+                                    {HipotecasList.map((hipoteca, index) => (
+                                        <div className="grid grid-cols-4 gap-4">
+                                            <div className="flex items-center bg-gray-100 p-3">
+                                                <b className="mr-2">Banco:</b>{hipoteca.banco_prestamo}
+                                            </div>
+                                            <div className="flex items-center bg-gray-100 p-3">
+                                                <b className="mr-2">Prestamo:</b>{hipoteca.prestamo.toLocaleString('de-DE')}
+                                            </div>
+                                            <div className="flex items-center bg-gray-200 p-3">
+                                                <b className="mr-2">Fecha Prestamo:</b>{new Date(hipoteca.fecha_hipoteca).toLocaleDateString('es-ES')}
+                                            </div>
+                                            <div className="flex items-center bg-gray-100 p-3">
+                                                <b className="mr-2">Cuota:</b>{hipoteca.cuota.toLocaleString('de-DE')}
+                                            </div>
+                                        </div>
+                                    ))}
                                     </div>
                                 </div>
                             </>

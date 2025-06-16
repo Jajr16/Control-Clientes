@@ -12,6 +12,7 @@ class InmuebleService {
         this.repositorioEmpresaInmueble = new Repositorio('empresa_inmueble', ['cif', 'clave_catastral'])
         this.repositorioInmuebleProveedor = new Repositorio('inmueble_proveedor', ['clave_catastral', 'clave'])
         this.repositorioInmuebleSeguro = new Repositorio('inmueble_seguro', ['clave_catastral', 'empresa_seguro'])
+        this.repositorioHipoteca = new Repositorio('inmueble_hipoteca', ['clave_catastral', 'id_hipoteca'])
     }
 
     /**
@@ -119,6 +120,28 @@ class InmuebleService {
             ]);
 
             return inmueblesList;
+
+        } catch (error) {
+            console.error("Error en la transacción:", error);
+            throw new Error("No se pudo completar la operación. Transacción revertida.");
+        } 
+    }
+
+    async getHipotecas(cc) {
+        try {
+            const joins = [
+                {type: 'INNER', table: 'hipoteca h', on: 'inmueble_hipoteca.id_hipoteca = h.id'},
+            ]
+
+            const filtro = {
+                'inmueble_hipoteca.clave_catastral': cc
+            }
+
+            const hipotecaList = await this.repositorioHipoteca.BuscarConJoins(joins, filtro, '', [
+                'h.prestamo', 'h.banco_prestamo', 'h.fecha_hipoteca', 'h.cuota_hipoteca'
+            ]);
+
+            return hipotecaList;
 
         } catch (error) {
             console.error("Error en la transacción:", error);

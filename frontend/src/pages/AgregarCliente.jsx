@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import { RiArrowDownSLine } from "react-icons/ri";
 
 import DatoRegistralForm from "../components/forms/DatoRegistralForms.jsx";
 import DireccionForm from "../components/forms/DireccionForms.jsx";
@@ -9,6 +10,10 @@ import { getEmpresas, addEmpresas } from "../api/moduloClientes/empresas.js";
 import { getDirecciones, addDirecciones } from "../api/moduloClientes/direcciones.js";
 import { getPropietario, addPropietario } from "../api/moduloClientes/propietario.js";
 import { getDatoRegistral, addDatoRegistral } from "../api/moduloClientes/datoRegistral.js";
+
+const mostrarFormularioCliente = () => {
+
+}
 
 const AddClientesPage = () => {
     // Carga inicial para evitar errores en consola
@@ -91,9 +96,27 @@ const AddClientesPage = () => {
 
     return (
         <div>
-
             {/* Formulario para agregar Empresa con Referencias */}
-            <h2>Agregar Datos Yeah</h2>
+            <strong className="text-2xl"><center>Nuevo Cliente</center></strong>
+            <div className="border border-black rounded-b-lg">
+                <div className="border-b border-black flex w-full justify-between">
+                    <strong className="text-xl ml-5">Datos Empresa</strong>
+                    <RiArrowDownSLine className="h-6 w-6" onClick={mostrarFormularioCliente} />
+                </div>
+                <div className="">
+                    <div className="grid grid-cols-[48%_48%] mb-4 mt-4 w-full justify-evenly">
+                        <div className="border border-black rounded-md">
+                            <strong className="text-lg">Empresa</strong>
+
+                        </div>
+                        <div className="border border-black rounded-md">
+                            <strong className="text-lg">Propietario</strong>
+                        </div>
+                    </div>
+                    <div></div>
+                </div>
+            </div>
+
             <form onSubmit={handleAddEmpresaConReferencias}>
                 <h3>Empresa</h3>
                 {["cif", "clave", "nombre", "telefono"].map(field => (

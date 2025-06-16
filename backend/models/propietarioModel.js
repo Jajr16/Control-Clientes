@@ -7,8 +7,6 @@ export const createTablePropietario = async () => {
             CREATE TABLE IF NOT EXISTS propietario (
                 nie VARCHAR(9) PRIMARY KEY,
                 nombre VARCHAR(255),
-                apellido_p VARCHAR(255),
-                apellido_m VARCHAR(255),
                 email VARCHAR(255),
                 telefono VARCHAR(9)
             );
@@ -19,13 +17,13 @@ export const createTablePropietario = async () => {
     }
 };
 
-export const agregarPropietario = async (nie, nombre, apellido_p, apellido_m, email, telefono) => {
+export const agregarPropietario = async (nie, nombre, email, telefono) => {
     try {
         const result = await pool.query(
-            `INSERT INTO propietario (nie, nombre, apellido_p, apellido_m, email, telefono) 
-             VALUES ($1, $2, $3, $4, $5, $6) 
+            `INSERT INTO propietario (nie, nombre, email, telefono) 
+            VALUES ($1, $2, $3, $4) 
              RETURNING *`,
-            [nie, nombre, apellido_p, apellido_m, email, telefono]
+            [nie, nombre, email, telefono]
         );
         console.log("Propietario agregada:", result.rows[0]);
         return result.rows[0];

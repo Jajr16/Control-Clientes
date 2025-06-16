@@ -8,5 +8,6 @@ const inmuebleController = new InmuebleController();
 router.post('/', inmuebleController.insertar.bind(inmuebleController));
 router.get('/inmueblesList/:cif', inmuebleController.getInmuebleDetails.bind(inmuebleController));
 router.get('/inmueblesProveedoresSeguros/:cc', inmuebleController.getProveedoresSegurosDetails.bind(inmuebleController));
+router.get('/hipotecas/:cc', inmuebleController.getHipotecas.bind(inmuebleController));
 
 export default router;

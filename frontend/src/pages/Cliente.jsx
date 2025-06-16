@@ -12,6 +12,7 @@ const Cliente = () => {
     const [inmueblesList, setInmueblesList] = useState(null);
     const [selectedInmueble, setSelectedInmueble] = useState(null);
     const [proveedoresList, setProveedoresSegurosList] = useState(null);
+    const [HipotecasList, setHipotecas] = useState(null);
 
     useEffect(() => {
         // Limpieza completa al cambiar de cliente
@@ -19,6 +20,7 @@ const Cliente = () => {
             setInmueblesList(null);
             setSelectedInmueble(null);
             setProveedoresSegurosList(null);
+            setHipotecas(null);
         };
 
         if (!selectedClient) {
@@ -37,6 +39,7 @@ const Cliente = () => {
         };
 
         fetchInmuebles()
+        cleanup();
     }, [selectedClient])
 
     useEffect(() => {
@@ -79,7 +82,8 @@ const Cliente = () => {
                 <div className="h-full flex">
                     {selectedClient && (
                         <div className="flex-grow h-full">
-                            <InmuebleDetails inmueble={selectedInmueble} setProveedoresSegurosList={setProveedoresSegurosList} proveedoresList={proveedoresList} />
+                            <InmuebleDetails inmueble={selectedInmueble} setProveedoresSegurosList={setProveedoresSegurosList} proveedoresList={proveedoresList} 
+                            setHipotecas={setHipotecas} HipotecasList={HipotecasList} />
                         </div>
                     )}
                 </div>

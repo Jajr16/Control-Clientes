@@ -17,7 +17,7 @@ class ClienteService {
         ]
 
         const resultados = await this.repositorioPropietario.BuscarConJoins(joins, {}, '', ['empresa.clave', 'empresa.cif', 'empresa.nombre',
-            'p.nie', "CONCAT(p.nombre, ' ', p.apellido_p, ' ', p.apellido_m) AS propietario", 'p.telefono', 'p.email', 'd.calle', 'd.numero', 'd.piso',
+            'p.nie', "p.nombre AS propietario", 'p.telefono', 'p.email', 'd.calle', 'd.numero', 'd.piso',
             'd.codigo_postal', 'd.localidad', 'dr.num_protocolo', 'dr.folio', 'dr.hoja', 'dr.inscripcion', 'dr.notario', 'dr.fecha_inscripcion'
         ]);
         
