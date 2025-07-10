@@ -1,20 +1,46 @@
 import React from "react";
 
-const EmpresaForm = ({ empresa, setEmpresa }) => {
+const EmpresaForm = ({ empresa, setEmpresa, validationErrors = {} }) => {
+
+    const getError = (field) => {
+        return validationErrors[field];
+    };
+
+    const handleChange = (e) => {
+        const { name, value } = e.target;
+        setEmpresa(prev => ({
+            ...prev,
+            [name]: value
+        }));
+    };
+
     return (
         <div className="mb-6">
-            <h3 className="text-xl font-semibold mb-4">Empresa</h3>
-            {["cif", "clave", "nombre", "telefono"].map(field => (
-                <input
-                    key={field}
-                    type="text"
-                    name={field}
-                    placeholder={field.charAt(0).toUpperCase() + field.slice(1)}
-                    value={empresa[field]}
-                    onChange={(e) => setEmpresa(prev => ({ ...prev, [field]: e.target.value }))}
-                    className="w-full p-2 mb-2 border border-gray-300 rounded-md"
-                />
-            ))}
+            <div className="grid grid-cols-3 m-3">
+                <div className="flex justify-between">
+                    <label htmlFor="CIF">CIF:</label>
+                    <input id="CIF" type="text" name="cif" maxLength={9}
+                        onChange={handleChange}
+                        className={`w-full ml-2 mr-2 border rounded-md ${getError('cif') ? 'border-red-500' : 'border-gray-300'}`} />
+                </div>
+                <div className="flex justify-between">
+                    <label htmlFor="CLAVE">CLAVE:</label>
+                    <input id="CLAVE" type="text" name="clave" maxLength={3}
+                        onChange={handleChange}
+                        className={`w-full ml-2 mr-2 border rounded-md ${getError('clave') ? 'border-red-500' : 'border-gray-300'}`} />
+                </div>
+                <div className="flex justify-between">
+                    <label htmlFor="TELEFONO">Teléfono:</label>
+                    <input id="TELEFONO" type="text" name="tel" maxLength={9}
+                        onChange={handleChange}
+                        className={`w-full ml-2 mr-2 border rounded-md ${getError('tel') ? 'border-red-500' : 'border-gray-300'}`} />
+                </div>
+            </div>
+            <div className="flex justify-between m-3">
+                <label htmlFor="NombreEmpresa">Nombre:</label>
+                    <input id="NombreEmpresa" type="text" name="nombre" onChange={handleChange}
+                        className={`w-full ml-2 mr-2 border rounded-md ${getError('nombre') ? 'border-red-500' : 'border-gray-300'}`} />
+            </div>
         </div>
     );
 }
