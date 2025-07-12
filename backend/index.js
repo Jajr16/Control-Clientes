@@ -12,6 +12,7 @@ import { createTableEmpresaInmueble } from './models/empresainmuebleModel.js'
 import { createTableInmuebleProveedor } from './models/inmuebleproveedorModel.js'
 import { createTableInmuebleSeguro } from './models/inmuebleseguroModel.js'
 import { createTableInmuebleHipoteca } from './models/inmueblehipotecaModel.js'
+import { createTableAdeudo } from './models/adeudoModel.js';
 
 const PORT = process.env.PORT || 3000;
 
@@ -33,6 +34,7 @@ const iniciarServidor = async () => {
         await createTableInmuebleProveedor();
         await createTableInmuebleSeguro();
         await createTableInmuebleHipoteca();
+        await createTableAdeudo();
 
         app.listen(PORT, () => {
             console.log(`Servidor corriendo en http://localhost:${PORT}`);
