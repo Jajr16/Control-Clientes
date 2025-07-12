@@ -75,6 +75,8 @@ const AdeudosForm = ({
     return true;
   };
 
+  const [botonGuardarDeshabilitado, setBotonGuardarDeshabilitado] = useState(false);
+
   const handleGuardarAdeudo = () => {
     if (!validarCampos()) return;
 
@@ -92,6 +94,7 @@ const AdeudosForm = ({
 
     setAdeudosGuardados((prev) => [...prev, cleanedEmpresa]);
     setVistaPrevia(true);
+    setBotonGuardarDeshabilitado(true);
     alert("Adeudo guardado correctamente.");
     };
 
@@ -114,6 +117,7 @@ const AdeudosForm = ({
       adeudo_pendiente: 0
     });
     setVistaPrevia(false);
+    setBotonGuardarDeshabilitado(false);
 
   };
 
@@ -304,11 +308,14 @@ const AdeudosForm = ({
       {/* Botones */}
       <div className="grid grid-cols-3 m-3 gap-4">
         <button
-          type="button"
-          onClick={handleGuardarAdeudo}
-          className="bg-blue-600 hover:bg-blue-700 text-white font-semibold py-2 px-4 rounded-md"
-        >
-          Guardar Adeudo
+            type="button"
+            onClick={handleGuardarAdeudo}
+            className={`bg-blue-600 hover:bg-blue-700 text-white font-semibold py-2 px-4 rounded-md ${
+                botonGuardarDeshabilitado ? "opacity-50 cursor-not-allowed" : ""
+            }`}
+            disabled={botonGuardarDeshabilitado}
+            >
+            Guardar Adeudo
         </button>
         <button
           type="button"
