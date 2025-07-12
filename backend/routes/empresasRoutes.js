@@ -14,6 +14,16 @@ router.get('/', async (req, res) => {
     }
 });
 
+router.get('/adeudos', async (req, res) => {
+    console.log("GET / ejecutado");
+    try {
+        const clientes = await obtenerEmpresasAdeudos();
+        res.json(clientes);
+    } catch (error) {
+        res.status(500).json({ error: error.message });
+    }
+});
+
 router.post('/', async (req, res) => {
     console.log("POST / ejecutado");
 

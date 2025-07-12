@@ -7,6 +7,11 @@ export const getEmpresas = async () => {
     return res.data;
 };
 
+export const getEmpresasadeudos = async () => {
+  const res = await axios.get(`${API_URL}/empresas/adeudos`);
+  return res.data;
+};
+
 export const addEmpresas = async (empresa) => {
     const res = await axios.post(`${API_URL}/empresas`, empresa);
     return res.data;
