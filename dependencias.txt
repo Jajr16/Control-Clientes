@@ -7,3 +7,4 @@ Frontend
 npm i axios vite react-router-dom
 npm install @heroicons/react 
 npm install react-select
+npm install react-icons
