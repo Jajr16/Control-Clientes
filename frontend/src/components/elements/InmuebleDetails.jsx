@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { getInmuebleDetails, getInmuebleHipotecas } from "../../api/moduloClientes/inmueble";
+import { getInmuebleDetails, getInmuebleHipotecas } from "../../api/moduloInmuebles/inmueble";
 import { MapPinIcon, IdentificationIcon, ClipboardDocumentListIcon, ShieldCheckIcon,
     LifebuoyIcon, BuildingOfficeIcon, PhoneIcon, AtSymbolIcon, CurrencyEuroIcon,
     CalendarDaysIcon } from "@heroicons/react/24/solid";

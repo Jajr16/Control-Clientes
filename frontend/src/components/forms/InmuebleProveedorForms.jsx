@@ -22,7 +22,6 @@ const InmuebleProveedorForm = ({ inmuebleProveedor, setInmuebleProveedor, valida
                         type="text"
                         name="clave_catastral"
                         maxLength={25}
-                        value={inmuebleProveedor.clave_catastral || ""}
                         onChange={handleChange}
                         className={`w-full ml-2 mr-2 border rounded-md ${getError('clave_catastral') ? 'border-red-500' : 'border-gray-300'}`}
                     />
@@ -34,7 +33,6 @@ const InmuebleProveedorForm = ({ inmuebleProveedor, setInmuebleProveedor, valida
                         type="text"
                         name="clave"
                         maxLength={30}
-                        value={inmuebleProveedor.clave || ""}
                         onChange={handleChange}
                         className={`w-full ml-2 mr-2 border rounded-md ${getError('clave') ? 'border-red-500' : 'border-gray-300'}`}
                     />
