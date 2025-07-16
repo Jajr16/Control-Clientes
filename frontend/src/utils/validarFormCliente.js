@@ -91,3 +91,67 @@ export const validarClienteCompleto = (datosEmpresa, datosDireccion, datosRegist
     allErrors = allErrors.concat(validarPropietario(datosPropietario));
     return allErrors;
 };
+
+export const validarInmueble = (datosInmueble) => {
+    const errors = [];
+
+    if (!datosInmueble.clave_catastral) errors.push(VALIDACIONES_FORMULARIO.REQUERIDO("Clave Catastral del Inmueble"));
+    else if (datosInmueble.clave_catastral.length > 25) errors.push(VALIDACIONES_FORMULARIO.TAM("Clave Catastral del Inmueble", 25));
+
+    if (!datosInmueble.direccion) errors.push(VALIDACIONES_FORMULARIO.REQUERIDO("Dirección del Inmueble"));
+    else if (!esNumero(datosInmueble.direccion)) errors.push(VALIDACIONES_FORMULARIO.NUMBER("Dirección del Inmueble"));
+
+    if (!datosInmueble.dato_registral) errors.push(VALIDACIONES_FORMULARIO.REQUERIDO("Dato Registral del Inmueble"));
+    else if (!esNumero(datosInmueble.dato_registral)) errors.push(VALIDACIONES_FORMULARIO.NUMBER("Dato Registral del Inmueble"));
+
+    return errors;
+}
+
+export const validarProveedor = (datosProveedor) => {
+    const errors = [];
+
+    if (!datosProveedor.nombre) errors.push(VALIDACIONES_FORMULARIO.REQUERIDO("Nombre del Proveedor"));
+
+    if (!datosProveedor.tel) errors.push(VALIDACIONES_FORMULARIO.REQUERIDO("Teléfono del Proveedor"));
+    else if (!esNumero(datosProveedor.tel)) errors.push(VALIDACIONES_FORMULARIO.NUMBER("Teléfono del Proveedor"));
+
+    if (!datosProveedor.email) errors.push(VALIDACIONES_FORMULARIO.REQUERIDO("Correo del Proveedor"));
+
+    return errors;
+}
+
+export const validarHipoteca = (datosHipoteca) => {
+    const errors = [];
+
+    if (!datosHipoteca.entidad) errors.push(VALIDACIONES_FORMULARIO.REQUERIDO("Entidad de la Hipoteca"));
+
+    if (!datosHipoteca.cuota) errors.push(VALIDACIONES_FORMULARIO.REQUERIDO("Cuota de la Hipoteca"));
+    else if (!esNumero(datosHipoteca.cuota)) errors.push(VALIDACIONES_FORMULARIO.NUMBER("Cuota de la Hipoteca"));
+
+    if (!datosHipoteca.fecha_inicio) errors.push(VALIDACIONES_FORMULARIO.REQUERIDO("Fecha de Inicio de la Hipoteca"));
+
+    return errors;
+}
+
+export const validarSeguro = (datosSeguro) => {
+    const errors = [];
+
+    if (!datosSeguro.compania) errors.push(VALIDACIONES_FORMULARIO.REQUERIDO("Compañía de Seguro"));
+
+    if (!datosSeguro.poliza) errors.push(VALIDACIONES_FORMULARIO.REQUERIDO("Póliza de Seguro"));
+
+    if (!datosSeguro.fecha_inicio) errors.push(VALIDACIONES_FORMULARIO.REQUERIDO("Fecha de Inicio del Seguro"));
+
+    if (!datosSeguro.fecha_fin) errors.push(VALIDACIONES_FORMULARIO.REQUERIDO("Fecha de Fin del Seguro"));
+    
+    return errors;
+}
+
+export const validarInmuebleCompleto = (datosInmueble, datosProveedor, datosHipoteca, datosSeguro) => {
+    let allErrors = [];
+    allErrors = allErrors.concat(validarInmueble(datosInmueble));
+    allErrors = allErrors.concat(validarProveedor(datosProveedor));
+    allErrors = allErrors.concat(validarHipoteca(datosHipoteca));
+    allErrors = allErrors.concat(validarSeguro(datosSeguro));
+    return allErrors;
+}

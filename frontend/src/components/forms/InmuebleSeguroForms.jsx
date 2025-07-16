@@ -22,7 +22,6 @@ const InmuebleSeguroForm = ({ inmuebleSeguro, setInmuebleSeguro, validationError
                         type="text"
                         name="clave_catastral"
                         maxLength={25}
-                        value={inmuebleSeguro.clave_catastral || ""}
                         onChange={handleChange}
                         className={`w-full ml-2 mr-2 border rounded-md ${getError('clave_catastral') ? 'border-red-500' : 'border-gray-300'}`}
                     />
@@ -34,7 +33,6 @@ const InmuebleSeguroForm = ({ inmuebleSeguro, setInmuebleSeguro, validationError
                         type="text"
                         name="empresa_seguro"
                         maxLength={300}
-                        value={inmuebleSeguro.empresa_seguro || ""}
                         onChange={handleChange}
                         className={`w-full ml-2 mr-2 border rounded-md ${getError('empresa_seguro') ? 'border-red-500' : 'border-gray-300'}`}
                     />
