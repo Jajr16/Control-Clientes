@@ -53,6 +53,7 @@ const AddClientesPage = () => {
             datosSeguro: {},
         }
     ]);
+    // Estado para el inmueble activo
     const [inmuebleActivo, setInmuebleActivo] = useState(0);
 
     // Función para añadir un nuevo inmueble
@@ -71,24 +72,44 @@ const AddClientesPage = () => {
 
     // Funciones para actualizar los datos del inmueble activo
     const setDatosInmuebleActivo = (nuevo) => {
-        const copia = [...inmuebles];
-        copia[inmuebleActivo].datosInmueble = nuevo;
-        setInmuebles(copia);
+        setInmuebles(prev => {
+            const copia = [...prev];
+            copia[inmuebleActivo] = {
+                ...copia[inmuebleActivo],
+                datosInmueble: { ...nuevo }
+            };
+            return copia;
+        });
     };
     const setDatosProveedorActivo = (nuevo) => {
-        const copia = [...inmuebles];
-        copia[inmuebleActivo].datosProveedor = nuevo;
-        setInmuebles(copia);
+        setInmuebles(prev => {
+            const copia = [...prev];
+            copia[inmuebleActivo] = {
+                ...copia[inmuebleActivo],
+                datosProveedor: { ...nuevo }
+            };
+            return copia;
+        });
     };
     const setDatosHipotecaActivo = (nuevo) => {
-        const copia = [...inmuebles];
-        copia[inmuebleActivo].datosHipoteca = nuevo;
-        setInmuebles(copia);
+        setInmuebles(prev => {
+            const copia = [...prev];
+            copia[inmuebleActivo] = {
+                ...copia[inmuebleActivo],
+                datosHipoteca: { ...nuevo }
+            };
+            return copia;
+        });
     };
     const setDatosSeguroActivo = (nuevo) => {
-        const copia = [...inmuebles];
-        copia[inmuebleActivo].datosSeguro = nuevo;
-        setInmuebles(copia);
+        setInmuebles(prev => {
+            const copia = [...prev];
+            copia[inmuebleActivo] = {
+                ...copia[inmuebleActivo],
+                datosSeguro: { ...nuevo }
+            };
+            return copia;
+        });
     };
 
     const [seccionInmuebleActiva, setSeccionInmuebleActiva] = useState(0); // 0: Datos, 1: Proveedor, 2: Hipoteca, 3: Seguro
@@ -227,8 +248,8 @@ const AddClientesPage = () => {
                                 <div className="border border-black rounded-md p-2">
                                     <strong className="text-lg">Proveedor</strong>
                                     <InmuebleProveedorForm
-                                        proveedor={inmuebles[inmuebleActivo].datosProveedor}
-                                        setProveedor={setDatosProveedorActivo}
+                                        inmuebleProveedor={inmuebles[inmuebleActivo].datosProveedor}
+                                        setInmuebleProveedor={setDatosProveedorActivo}
                                         validationErrors={ValidarErrores}
                                     />
                                 </div>
@@ -237,8 +258,8 @@ const AddClientesPage = () => {
                                 <div className="border border-black rounded-md p-2">
                                     <strong className="text-lg">Hipoteca</strong>
                                     <InmuebleHipotecaForm
-                                        hipoteca={inmuebles[inmuebleActivo].datosHipoteca}
-                                        setHipoteca={setDatosHipotecaActivo}
+                                        inmuebleHipoteca={inmuebles[inmuebleActivo].datosHipoteca}
+                                        setInmuebleHipoteca={setDatosHipotecaActivo}
                                         validationErrors={ValidarErrores}
                                     />
                                 </div>
@@ -247,8 +268,8 @@ const AddClientesPage = () => {
                                 <div className="border border-black rounded-md p-2">
                                     <strong className="text-lg">Seguro</strong>
                                     <InmuebleSeguroForm
-                                        seguro={inmuebles[inmuebleActivo].datosSeguro}
-                                        setSeguro={setDatosSeguroActivo}
+                                        inmuebleSeguro={inmuebles[inmuebleActivo].datosSeguro}
+                                        setInmuebleSeguro={setDatosSeguroActivo}
                                         validationErrors={ValidarErrores}
                                     />
                                 </div>

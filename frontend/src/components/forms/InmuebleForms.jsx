@@ -6,10 +6,10 @@ const InmuebleForm = ({ inmueble, setInmueble, validationErrors = {} }) => {
 
     const handleChange = (e) => {
         const { name, value } = e.target;
-        setInmueble(prev => ({
-            ...prev,
+        setInmueble({
+            ...inmueble,
             [name]: value
-        }));
+        });
     };
 
     return (
@@ -22,6 +22,7 @@ const InmuebleForm = ({ inmueble, setInmueble, validationErrors = {} }) => {
                         type="text"
                         name="clave_catastral"
                         maxLength={25}
+                        value={inmueble.clave_catastral || ""}
                         onChange={handleChange}
                         className={`w-full ml-2 mr-2 border rounded-md ${getError('clave_catastral') ? 'border-red-500' : 'border-gray-300'}`}
                     />
@@ -32,6 +33,7 @@ const InmuebleForm = ({ inmueble, setInmueble, validationErrors = {} }) => {
                         id="direccion"
                         type="number"
                         name="direccion"
+                        value={inmueble.direccion || ""}
                         onChange={handleChange}
                         className={`w-full ml-2 mr-2 border rounded-md ${getError('direccion') ? 'border-red-500' : 'border-gray-300'}`}
                     />
@@ -42,6 +44,7 @@ const InmuebleForm = ({ inmueble, setInmueble, validationErrors = {} }) => {
                         id="dato_registral"
                         type="number"
                         name="dato_registral"
+                        value={inmueble.dato_registral || ""}
                         onChange={handleChange}
                         className={`w-full ml-2 mr-2 border rounded-md ${getError('dato_registral') ? 'border-red-500' : 'border-gray-300'}`}
                     />
