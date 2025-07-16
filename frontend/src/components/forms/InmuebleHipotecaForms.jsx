@@ -1,15 +1,15 @@
 import React from "react";
 
-const InmuebleHipotecaForm = ({ inmuebleHipoteca, setInmuebleHipoteca, validationErrors = {} }) => {
+const InmuebleHipotecaForm = ({ inmuebleHipoteca = {}, setInmuebleHipoteca, validationErrors = {} }) => {
 
     const getError = (field) => validationErrors[field];
 
     const handleChange = (e) => {
         const { name, value } = e.target;
-        setInmuebleHipoteca(prev => ({
-            ...prev,
+        setInmuebleHipoteca({
+            ...inmuebleHipoteca,
             [name]: value
-        }));
+        });
     };
 
     return (
@@ -22,6 +22,7 @@ const InmuebleHipotecaForm = ({ inmuebleHipoteca, setInmuebleHipoteca, validatio
                         type="text"
                         name="clave_catastral"
                         maxLength={25}
+                        value={inmuebleHipoteca.clave_catastral || ""}
                         onChange={handleChange}
                         className={`w-full ml-2 mr-2 border rounded-md ${getError('clave_catastral') ? 'border-red-500' : 'border-gray-300'}`}
                     />
@@ -32,6 +33,7 @@ const InmuebleHipotecaForm = ({ inmuebleHipoteca, setInmuebleHipoteca, validatio
                         id="id_hipoteca"
                         type="number"
                         name="id_hipoteca"
+                        value={inmuebleHipoteca.id_hipoteca || ""}
                         onChange={handleChange}
                         className={`w-full ml-2 mr-2 border rounded-md ${getError('id_hipoteca') ? 'border-red-500' : 'border-gray-300'}`}
                     />
