@@ -42,7 +42,8 @@ class Repositorio {
             return result.rows[0]
         } catch (error) {
             console.error(`Error al insertar en ${this.tabla}:`, error);
-            throw new Error(`No se pudo insertar en ${this.tabla}`);
+            // throw new Error(`No se pudo insertar en ${this.tabla}`);
+            throw error;
         }
     }
 

@@ -28,7 +28,7 @@ export const validarAdeudo = (adeudoData) => {
         { campo: "csiniva", nombre: "Conceptos sin IVA" },
         { campo: "total", nombre: "Total" },
         { campo: "anticipocliente", nombre: "Anticipo por el cliente" },
-        { campo: "honorarios", nombre: "Honorarios Finatech (IVA incluido)" }
+        // { campo: "honorarios", nombre: "Honorarios Finatech (IVA incluido)" }
     ];
 
     camposNumericos.forEach(({ campo, nombre }) => {

@@ -12,7 +12,10 @@ const AdeudosForm = ({
   empresasDisponibles = []
 }) => {
 
+
   const getError = (field) => validationErrors[field];
+
+  const [importeBloqueado, setImporteBloqueado] = useState(false);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -21,7 +24,7 @@ const AdeudosForm = ({
       "importe",
       "csiniva",
       "anticipocliente",
-      "honorarios"
+      // "honorarios"
     ];
 
     const parsedValue = camposNumericos.includes(name)
@@ -29,18 +32,30 @@ const AdeudosForm = ({
       : value;
 
     setEmpresa((prev) => {
-      const updated = { ...prev, [name]: parsedValue };
+      let updated = { ...prev, [name]: parsedValue };
+
+      if (name === "empresa_cif") {
+        fetchAdeudos(value);
+      }
+
+      if (name === "concepto" && parsedValue === "Registro Mercantil de Madrid") {
+      updated.importe = 200;
+      setImporteBloqueado(true);
+
+      } else if (name === "concepto") {
+      setImporteBloqueado(false);
+      }
 
       const importe = parseFloat(updated.importe) || 0;
       const csiniva = parseFloat(updated.csiniva) || 0;
       const anticipo_cliente = parseFloat(updated.anticipocliente) || 0;
-      const honorarios = parseFloat(updated.honorarios) || 0;
+      // const honorarios = parseFloat(updated.honorarios) || 0;
 
       const iva = +(importe * 0.21).toFixed(2);
       const retencion = +(importe * 0.15).toFixed(2);
       const total = +(importe + iva - retencion + csiniva).toFixed(2);
       const total_adeudos = total;
-      const adeudo_pendiente = +(total_adeudos + honorarios - anticipo_cliente).toFixed(2);
+      const adeudo_pendiente = +(total_adeudos - anticipo_cliente).toFixed(2);
 
       return {
         ...updated,
@@ -61,7 +76,7 @@ const AdeudosForm = ({
     "numfactura",
     "importe",
     "anticipocliente",
-    "honorarios"
+    // "honorarios"
   ];
 
   const validarCampos = () => {
@@ -77,26 +92,72 @@ const AdeudosForm = ({
 
   const [botonGuardarDeshabilitado, setBotonGuardarDeshabilitado] = useState(false);
 
-  const handleGuardarAdeudo = () => {
-    if (!validarCampos()) return;
-
-    const cleanedEmpresa = {
-        ...empresa,
-        importe: parseFloat(empresa.importe) || 0,
-        iva: parseFloat(empresa.iva) || 0,
-        retencion: parseFloat(empresa.retencion) || 0,
-        csiniva: parseFloat(empresa.csiniva) || 0,
-        total: parseFloat(empresa.total) || 0,
-        anticipocliente: parseFloat(empresa.anticipocliente) || 0,
-        honorarios: parseFloat(empresa.honorarios) || 0,
-        adeudo_pendiente: parseFloat(empresa.adeudo_pendiente) || 0,
-    };
-
-    setAdeudosGuardados((prev) => [...prev, cleanedEmpresa]);
+const fetchAdeudos = async (empresaId) => {
+  try {
+    const response = await fetch(`http://localhost:3000/api/adeudos/empresa/${empresaId}`);
+    if (!response.ok) throw new Error("Error al obtener adeudos");
+    const data = await response.json();
+    setAdeudosGuardados(data);
     setVistaPrevia(true);
-    setBotonGuardarDeshabilitado(true);
+  } catch (error) {
+    console.error("Error al cargar adeudos:", error);
+  }
+};
+
+
+
+ const handleGuardarAdeudo = async () => {
+  if (!validarCampos()) return;
+
+  const cleanedEmpresa = {
+    num_factura: empresa.numfactura,
+    concepto: empresa.concepto,
+    proveedor: empresa.proveedor,
+    ff: empresa.fechafactura,
+    importe: parseFloat(empresa.importe) || 0,
+    iva: parseFloat(empresa.iva) || 0,
+    retencion: parseFloat(empresa.retencion) || 0,
+    empresa_cif: empresa.empresa_cif
+  };
+
+  try {
+    const response = await fetch("http://localhost:3000/api/adeudos", {
+      method: "POST",
+      headers: { "Content-Type": "application/json" },
+      body: JSON.stringify({
+        adeudo: cleanedEmpresa,
+        protocolo: {
+          num_factura: empresa.numfactura,
+          protocolo_entrada: empresa.protocoloentrada,
+          cs_iva: parseFloat(empresa.csiniva) || 0
+        },
+        ajuste: {
+          num_factura: empresa.numfactura,
+          diferencia: parseFloat(empresa.total_adeudos) - parseFloat(empresa.anticipocliente || 0)
+        }
+      })
+    });
+
+    if (response.status === 409) {
+      const errorData = await response.json();
+      alert(errorData.error || "El número de factura ya existe.");
+      return;
+    }
+
+    if (!response.ok) throw new Error("Error al guardar el adeudo");
+
     alert("Adeudo guardado correctamente.");
-    };
+
+    //Refrescar lista desde BD
+    fetchAdeudos();
+
+    setVistaPrevia(true);
+  } catch (error) {
+    console.error("Error al guardar:", error);
+    alert(`Ocurrió un error: ${error.message}`);
+  }
+};
+
 
   const handleNuevoAdeudo = () => {
     setEmpresa({
@@ -112,7 +173,7 @@ const AdeudosForm = ({
       csiniva: "",
       total: 0,
       anticipocliente: "",
-      honorarios: "",
+      // honorarios: "",
       total_adeudos: 0,
       adeudo_pendiente: 0
     });
@@ -122,7 +183,7 @@ const AdeudosForm = ({
   };
 
     // Nuevo state
-    const [mostrarVistaPrevia, setVistaPrevia] = useState(null);
+    const [mostrarVistaPrevia, setVistaPrevia] = useState(false);
 
     const exportarExcel = async () => {
   if (adeudosGuardados.length === 0) {
@@ -158,7 +219,6 @@ const AdeudosForm = ({
 
   // Encabezado personalizado
   worksheet.addRow([`Adeudos a Finatech de parte de la empresa ${empresaNombre}`]).font = { bold: true };
-  worksheet.addRow([`Adeudos a Finatech desde ${periodoTexto}`]).font = { italic: true };
   worksheet.addRow([]); // Espacio
 
   const headers = [
@@ -191,13 +251,13 @@ const AdeudosForm = ({
     worksheet.addRow(["", "", "", "", "", "", "", "", "Anticipo por el cliente:", 
     parseFloat(adeudosEmpresa[0].anticipocliente || 0)
     ]);
-    worksheet.addRow(["", "", "", "", "", "", "", "", "Honorarios FINATECH (IVA incluido):", 
-    parseFloat(adeudosEmpresa[0].honorarios || 0)
-    ]);
+    // worksheet.addRow(["", "", "", "", "", "", "", "", "Honorarios FINATECH (IVA incluido):", 
+    // parseFloat(adeudosEmpresa[0].honorarios || 0)
+    // ]);
     worksheet.addRow(["", "", "", "", "", "", "", "", "Adeudo pendiente:",
     (
         adeudosEmpresa.reduce((acc, a) => acc + parseFloat(a.total || 0), 0) +
-        parseFloat(adeudosEmpresa[0].honorarios || 0) -
+        // parseFloat(adeudosEmpresa[0].honorarios || 0) -
         parseFloat(adeudosEmpresa[0].anticipocliente || 0)
     )
     ]);
@@ -253,6 +313,10 @@ const AdeudosForm = ({
     </div>
   );
 
+  const honorarios = adeudosGuardados
+    .filter((a) => a.empresa_cif === empresa.empresa_cif)
+    .reduce((acc, a) => acc + parseFloat(a.honorarios || 0), 0);
+
   return (
     <div className="mb-6">
       {/* Select Empresa */}
@@ -269,7 +333,7 @@ const AdeudosForm = ({
             <option value="">Selecciona una empresa</option>
             {empresasDisponibles.map((e) => (
               <option key={e.cif} value={e.cif}>
-                {e.nombre}
+                {e.cif}
               </option>
             ))}
           </select>
@@ -289,20 +353,11 @@ const AdeudosForm = ({
       </div>
 
       <div className="grid grid-cols-5 m-3 gap-4">
-        {renderInput("Importe:", "importe", false, true, "number")}
+        {renderInput("Importe:", "importe", importeBloqueado, true, "number")}
         {renderInput("IVA:", "iva", true, false, "number")}
         {renderInput("Retención:", "retencion", true, false, "number")}
         {renderInput("Conceptos sin IVA:", "csiniva", false, false, "number")}
         {renderInput("Total:", "total", true, false, "number")}
-      </div>
-
-      <div className="grid grid-cols-2 m-3 gap-4">
-        {renderInput("Anticipo por el cliente:", "anticipocliente", false, true, "number")}
-        {renderInput("Honorarios Finatech (IVA incluido):", "honorarios", false, true, "number")}
-      </div>
-
-      <div className="grid grid-cols-1 m-3">
-        {renderInput("Adeudo Pendiente:", "adeudo_pendiente", true, false, "number")}
       </div>
 
       {/* Botones */}
@@ -322,20 +377,20 @@ const AdeudosForm = ({
           onClick={handleNuevoAdeudo}
           className="bg-blue-600 hover:bg-blue-700 text-white font-semibold py-2 px-4 rounded-md"
         >
-          Agregar Otro Adeudo
+          Generar borrador de liquidación
         </button>
         <button
           type="button"
           onClick={exportarExcel}
           className="bg-blue-600 hover:bg-blue-700 text-white font-semibold py-2 px-4 rounded-md"
         >
-          Descargar Excel
+          Generar liquidación
         </button>
       </div>
 
       {mostrarVistaPrevia && (
   <div className="m-3 mt-6 border-t-4 border-gray-400 pt-4">
-    <h3 className="text-lg font-bold text-center mb-4">Vista previa del reporte Excel</h3>
+    <h3 className="text-lg font-bold text-center mb-4">Vista previa de los adeudos</h3>
 
     {/* NUEVO BLOQUE: Encabezado como en el Excel */}
     <div className="mb-4">
@@ -343,19 +398,6 @@ const AdeudosForm = ({
         Adeudos a Finatech de parte de {empresa.empresa_cif 
           ? (empresasDisponibles.find(e => e.cif === empresa.empresa_cif)?.nombre || empresa.empresa_cif) 
           : "No seleccionada"}
-      </p>
-      <p className="text-sm font-semibold">
-        Adeudos a Finatech desde {
-          (() => {
-            const fechas = adeudosGuardados.map(a => new Date(a.fechafactura)).filter(f => !isNaN(f));
-            if (fechas.length === 0) return "Sin fechas registradas";
-            const maxDate = new Date(Math.max(...fechas));
-            const inicio = new Date(maxDate.getFullYear(), maxDate.getMonth(), 1);
-            const fin = new Date(maxDate.getFullYear(), maxDate.getMonth() + 1, 0);
-            const meses = ["enero", "febrero", "marzo", "abril", "mayo", "junio", "julio", "agosto", "septiembre", "octubre", "noviembre", "diciembre"];
-            return `${inicio.getDate()} de ${meses[inicio.getMonth()]} ${inicio.getFullYear()} al ${fin.getDate()} de ${meses[fin.getMonth()]} ${fin.getFullYear()}`;
-          })()
-        }
       </p>
     </div>
 
@@ -376,56 +418,62 @@ const AdeudosForm = ({
         </tr>
       </thead>
       <tbody>
-        {adeudosGuardados
-            .filter((a) => a.empresa_cif === empresa.empresa_cif)
-            .map((a, i) => (
-          <tr key={i} className="text-center border">
-            <td>{a.concepto}</td>
-            <td>{a.proveedor}</td>
-            <td>{a.fechafactura}</td>
-            <td>{a.numfactura}</td>
-            <td>{a.protocoloentrada}</td>
-            <td>{parseFloat(a.importe || 0).toFixed(2)}</td>
-            <td>{parseFloat(a.iva || 0).toFixed(2)}</td>
-            <td>{parseFloat(a.retencion || 0).toFixed(2)}</td>
-            <td>{parseFloat(a.csiniva || 0).toFixed(2)}</td>
-            <td>{parseFloat(a.total || 0).toFixed(2)}</td>
-          </tr>
-        ))}
+        {adeudosGuardados.map((a, i) => (
+        <tr key={i} className="text-center border">
+          <td>{a.concepto}</td>
+          <td>{a.proveedor}</td>
+          <td>{new Date(a.ff).toLocaleDateString()}</td>
+          <td>{a.num_factura}</td>
+          <td>{a.protocolo_entrada}</td>
+          <td>{parseFloat(a.importe || 0).toFixed(2)}</td>
+          <td>{parseFloat(a.iva || 0).toFixed(2)}</td>
+          <td>{parseFloat(a.retencion || 0).toFixed(2)}</td>
+          <td>{parseFloat(a.cs_iva || 0).toFixed(2)}</td>
+          <td>{parseFloat(a.total || 0).toFixed(2)}</td>
+        </tr>
+      ))}
         <tr className="font-bold bg-gray-50">
-          <td colSpan={9} className="text-right pr-2">Total facturas pagadas:</td>
-          <td>
-            {adeudosGuardados
-  .filter((a) => a.empresa_cif === empresa.empresa_cif)
-  .reduce((acc, a) => acc + parseFloat(a.total || 0), 0).toFixed(2)}
-          </td>
-        </tr>
-        <tr className="bg-gray-50">
-          <td colSpan={9} className="text-right pr-2 font-bold">Anticipo por el cliente:</td>
-          <td>
-            {adeudosGuardados.length > 0 ? parseFloat(adeudosGuardados[0].anticipocliente || 0).toFixed(2) : "0.00"}
-          </td>
-        </tr>
-        <tr className="bg-gray-50">
-          <td colSpan={9} className="text-right pr-2 font-bold">Honorarios FINATECH (IVA incluido):</td>
-          <td>
-            {adeudosGuardados.length > 0 ? parseFloat(adeudosGuardados[0].honorarios || 0).toFixed(2) : "0.00"}
-          </td>
-        </tr>
-        <tr className="bg-yellow-100 font-bold">
-          <td colSpan={9} className="text-right pr-2">Adeudo pendiente:</td>
-          <td>
-            {adeudosGuardados.length > 0
-              ? (
-                  adeudosGuardados
-  .filter((a) => a.empresa_cif === empresa.empresa_cif)
-  .reduce((acc, a) => acc + parseFloat(a.total || 0), 0) +
-                  parseFloat(adeudosGuardados[0].honorarios || 0) -
-                  parseFloat(adeudosGuardados[0].anticipocliente || 0)
-                ).toFixed(2)
-              : "0.00"}
-          </td>
-        </tr>
+    <td colSpan={9} className="text-right pr-2">Total facturas pagadas:</td>
+    <td>
+      {adeudosGuardados
+        .filter((a) => a.empresa_cif === empresa.empresa_cif)
+        .reduce((acc, a) => acc + parseFloat(a.total || 0), 0).toFixed(2)}
+    </td>
+  </tr>
+
+  <tr className="bg-gray-50">
+    <td colSpan={9} className="text-right pr-2 font-bold">Anticipo por el cliente:</td>
+    <td>
+      {adeudosGuardados.length > 0
+        ? parseFloat(adeudosGuardados[0].anticipo || 0).toFixed(2)
+        : "0.00"}
+    </td>
+  </tr>
+
+  <tr className="bg-gray-50">
+    <td colSpan={9} className="text-right pr-2 font-bold">Honorarios FINATECH (IVA incluido):</td>
+    <td>{honorarios.toFixed(2)}</td>
+  </tr> 
+
+  <tr className="bg-yellow-100 font-bold">
+    <td colSpan={9} className="text-right pr-2">Adeudo pendiente:</td>
+    <td>
+      {(() => {
+        const totalFacturas = adeudosGuardados
+          .filter((a) => a.empresa_cif === empresa.empresa_cif)
+          .reduce((acc, a) => acc + parseFloat(a.total || 0), 0);
+
+        const honorarios = adeudosGuardados
+          .filter((a) => a.empresa_cif === empresa.empresa_cif)
+          .reduce((acc, a) => acc + parseFloat(a.honorarios || 0), 0);
+
+        const anticipo = parseFloat(adeudosGuardados[0]?.anticipo || 0);
+
+        const pendiente = anticipo - totalFacturas - honorarios;
+        return pendiente.toFixed(2);
+      })()}
+    </td>
+  </tr>
       </tbody>
     </table>
   </div>

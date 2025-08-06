@@ -18,7 +18,7 @@ export const manejarLogicaAdeudo = () => {
         csiniva: "",
         total: 0,
         anticipo_cliente: "",
-        honorarios: "",
+        // honorarios: "",
         empresa_cif: "",
         total_adeudos: 0,
         adeudo_pendiente: 0

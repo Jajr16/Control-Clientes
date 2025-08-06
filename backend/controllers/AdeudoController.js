@@ -1,28 +1,30 @@
-import AdeudoService from "../services/AdeudoService.js";
+import { insertarAdeudoCompleto, obtenerAdeudosPorEmpresa } from "../services/AdeudoService.js";
 
-const servicioAdeudos = new AdeudoService();
-
-const getAdeudos = async (req, res) => {
-    try {
-        const resultado = await servicioAdeudos.obtenerAdeudos();
-        res.status(200).json(resultado);
-    } catch (error) {
-        console.error("Error al obtener adeudos:", error);
-        res.status(500).json({ error: "Error interno al obtener los adeudos" });
-    }
+export const getAdeudosByEmpresa = async (req, res) => {
+  try {
+    const { empresa_cif } = req.params;
+    const adeudos = await obtenerAdeudosPorEmpresa(empresa_cif);
+    return res.status(200).json(adeudos);
+  } catch (error) {
+    console.error("Error en getAdeudosByEmpresa:", error);
+    return res.status(500).json({ error: "Error al obtener los adeudos." });
+  }
 };
 
-const createAdeudo = async (req, res) => {
-    try {
-        const nuevo = await servicioAdeudos.crearAdeudo(req.body);
-        res.status(201).json(nuevo);
-    } catch (error) {
-        console.error("Error al crear adeudo:", error);
-        res.status(500).json({ error: "Error interno al crear adeudo" });
-    }
-};
 
-export default {
-    getAdeudos,
-    createAdeudo
+export const createAdeudo = async (req, res) => {
+    try {
+        const { adeudo, protocolo, ajuste } = req.body;
+
+        const resultado = await insertarAdeudoCompleto({ adeudo, protocolo, ajuste });
+        res.status(201).json({ message: 'Adeudo creado correctamente', data: resultado });
+    } catch (error) {
+        console.error('Error en createAdeudo:', error);
+
+        if (error.code === '23505') {
+            return res.status(409).json({ error: 'Ya existe un adeudo con ese número de factura.' });
+        }
+
+        res.status(500).json({ error: 'Error al guardar el adeudo' });
+    }
 };
