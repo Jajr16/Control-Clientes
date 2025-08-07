@@ -33,10 +33,12 @@ export const createTableAdeudo = async () => {
 export const createTableHonorario = async () => {
     const query = `
         CREATE TABLE IF NOT EXISTS honorario(
-            num_liquidacion SERIAL PRIMARY KEY,
-            importe NUMERIC NOT NULL,
+            empresa_cif VARCHAR(9) NOT NULL,
+            num_liquidacion SERIAL,
+            honorario NUMERIC NOT NULL,
             iva NUMERIC NOT NULL,
-            num_factura VARCHAR(50) NOT NULL
+            num_factura VARCHAR(50) NOT NULL,
+            PRIMARY KEY(empresa_cif, num_liquidacion)
         );
     `;
 

@@ -8,7 +8,11 @@ const Layout = ({ children }) => {
             <Navbar />
             <div className="flex flex-1">
                 <Sidebar />
-                <main className="flex-1 p-5">{children}</main>
+                <main className="flex-1 p-5">
+                    <div className="w-full h-full border border-black relative">
+                        {children}
+                    </div>
+                </main>
             </div>
         </div>
     );

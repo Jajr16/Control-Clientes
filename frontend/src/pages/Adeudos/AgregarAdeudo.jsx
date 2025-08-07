@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
-import AdeudosForm from "../components/forms/AdeudosForms.jsx";
-import { getEmpresas } from "../api/moduloClientes/empresas";
-import { addAdeudo } from "../api/moduloAdeudos/adeudos.js"; 
+import AdeudosForm from "../../components/forms/AdeudosForms.jsx";
+import { getEmpresas } from "../../api/moduloClientes/empresas.js";
+import { addAdeudo } from "../../api/moduloAdeudos/adeudos.js"; 
 
 const AgregarAdeudo = () => {
     const [empresa, setEmpresa] = useState({
