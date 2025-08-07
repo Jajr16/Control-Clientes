@@ -94,7 +94,7 @@ export const obtenerEmpresas = async () => {
 
 export const obtenerEmpresasAdeudos = async () => {
     try{    
-        const result = await db.query("SELECT cif, nombre FROM empresa"); 
+        const result = await pool.query("SELECT cif, nombre, clave FROM empresa"); 
         return result.rows; 
     } catch (error) {
         throw new Error("Error al obtener empresas con adeudos: " + error.message);
