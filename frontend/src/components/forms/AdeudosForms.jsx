@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import ExcelJS from 'exceljs';
 import { saveAs } from 'file-saver';
 
@@ -9,7 +9,9 @@ const AdeudosForm = ({
   adeudosGuardados,
   setAdeudosGuardados,
   validationErrors = {},
-  empresasDisponibles = []
+  empresasDisponibles = [],
+  mostrarVistaPrevia,
+  setVistaPrevia
 }) => {
 
 
@@ -33,10 +35,6 @@ const AdeudosForm = ({
 
     setEmpresa((prev) => {
       let updated = { ...prev, [name]: parsedValue };
-
-      if (name === "empresa_cif") {
-        fetchAdeudos(value);
-      }
 
       if (name === "concepto" && parsedValue === "Registro Mercantil de Madrid") {
       updated.importe = 200;
@@ -149,7 +147,7 @@ const fetchAdeudos = async (empresaId) => {
     alert("Adeudo guardado correctamente.");
 
     //Refrescar lista desde BD
-    fetchAdeudos();
+      fetchAdeudos(empresa.empresa_cif);
 
     setVistaPrevia(true);
   } catch (error) {
@@ -181,9 +179,6 @@ const fetchAdeudos = async (empresaId) => {
     setBotonGuardarDeshabilitado(false);
 
   };
-
-    // Nuevo state
-    const [mostrarVistaPrevia, setVistaPrevia] = useState(false);
 
     const exportarExcel = async () => {
   if (adeudosGuardados.length === 0) {
@@ -399,8 +394,34 @@ const fetchAdeudos = async (empresaId) => {
           ? (empresasDisponibles.find(e => e.cif === empresa.empresa_cif)?.nombre || empresa.empresa_cif) 
           : "No seleccionada"}
       </p>
-    </div>
+      {(() => {
+      const fechas = adeudosGuardados
+        .filter(a => a.empresa_cif === empresa.empresa_cif)
+        .map(a => new Date(a.ff))
+        .filter(f => !isNaN(f.getTime()))
+        .sort((a, b) => a - b); // Ordenar por fecha ascendente
 
+      if (fechas.length === 0) return null;
+
+      const formatFecha = (fecha) => {
+        const meses = [
+          "enero", "febrero", "marzo", "abril", "mayo", "junio",
+          "julio", "agosto", "septiembre", "octubre", "noviembre", "diciembre"
+        ];
+        return `${fecha.getDate()} de ${meses[fecha.getMonth()]} ${fecha.getFullYear()}`;
+      };
+
+      const desde = formatFecha(fechas[0]);
+      const hasta = formatFecha(fechas[fechas.length - 1]);
+
+      return (
+        <p className="text-sm font-semibold">
+          Adeudos a Finatech desde {desde} al {hasta}
+        </p>
+      );
+    })()}
+    </div>
+    
     {/* Tu tabla intacta */}
     <table className="w-full text-sm border">
       <thead className="bg-gray-100">
