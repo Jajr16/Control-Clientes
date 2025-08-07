@@ -11,3 +11,8 @@ export const addAdeudo = async (adeudo) => {
     const res = await axios.post(`${API_URL}/adeudos`, adeudo);
     return res.data;
 };
+
+export const getAdeudoEmpresa = async (empresa) => {
+    const res = await axios.get(`${API_URL}/adeudos/${empresa}`);
+    return res.data
+}
