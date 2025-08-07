@@ -1,0 +1,13 @@
+import express from 'express'
+import InmuebleController from '../controllers/InmuebleController.js'
+
+const router = express.Router();
+const inmuebleController = new InmuebleController();
+
+// Rutas para operaciones CRUD
+router.post('/', inmuebleController.insertar.bind(inmuebleController));
+router.get('/inmueblesList/:cif', inmuebleController.getInmuebleDetails.bind(inmuebleController));
+router.get('/inmueblesProveedoresSeguros/:cc', inmuebleController.getProveedoresSegurosDetails.bind(inmuebleController));
+router.get('/hipotecas/:cc', inmuebleController.getHipotecas.bind(inmuebleController));
+
+export default router;
