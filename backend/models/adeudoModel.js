@@ -10,7 +10,7 @@ export const createTableAdeudo = async () => {
             importe NUMERIC NOT NULL,
             iva NUMERIC NOT NULL,
             retencion NUMERIC NOT NULL,
-            num_liquidacion INT NOT NULL,
+            num_liquidacion INT,
             empresa_cif VARCHAR(9) NOT NULL,
             FOREIGN KEY (empresa_cif) REFERENCES empresa(cif)
                 ON DELETE CASCADE
@@ -95,7 +95,7 @@ export const createTableAnticipo = async () => {
     const query = `
         CREATE TABLE IF NOT EXISTS anticipo(
             empresa_cif VARCHAR(9) PRIMARY KEY,
-            importe NUMERIC NOT NULL,
+            anticipo NUMERIC NOT NULL,
             FOREIGN KEY (empresa_cif) REFERENCES empresa(cif)
                 ON DELETE CASCADE
                 ON UPDATE CASCADE

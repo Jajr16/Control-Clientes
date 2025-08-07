@@ -37,6 +37,6 @@ app.use('/api/propietario', propietarioRoutes);
 app.use('/api/datoRegistral', datoRegistralRoutes);
 app.use('/api/inmueble', inmuebleRoutes);
 app.use('/api/searchClients', clienteRouter);
-app.use('/adeudos', adeudoRoutes);
+app.use('/api/adeudos', adeudoRoutes);
 
 export default app;
