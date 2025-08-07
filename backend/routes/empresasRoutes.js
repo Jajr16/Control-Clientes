@@ -1,5 +1,5 @@
 import express from 'express';
-import { agregarEmpresa, obtenerEmpresas } from '../models/empresasModel.js';
+import { agregarEmpresa, obtenerEmpresas, obtenerEmpresasAdeudos } from '../models/empresasModel.js';
 
 const router = express.Router();
 

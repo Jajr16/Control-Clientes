@@ -1,12 +1,12 @@
 import React, { useEffect, useState } from "react";
 import { RiArrowDownSLine, RiArrowUpSLine } from "react-icons/ri";
 
-import DatoRegistralForm from "../components/forms/DatoRegistralForms.jsx";
-import DireccionForm from "../components/forms/DireccionForms.jsx";
-import EmpresaForm from "../components/forms/EmpresaForms.jsx";
-import PropietarioForm from "../components/forms/PropietarioForms.jsx";
+import DatoRegistralForm from "../../components/forms/DatoRegistralForms.jsx";
+import DireccionForm from "../../components/forms/DireccionForms.jsx";
+import EmpresaForm from "../../components/forms/EmpresaForms.jsx";
+import PropietarioForm from "../../components/forms/PropietarioForms.jsx";
 
-import { manejarLogicaCliente } from "../hooks/operacionesClienteForm.js";
+import { manejarLogicaCliente } from "../../hooks/operacionesClienteForm.js";
 
 const AddClientesPage = () => {
     const {
