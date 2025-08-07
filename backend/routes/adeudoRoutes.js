@@ -1,9 +1,10 @@
 import express from "express";
-import AdeudoController from "../controllers/AdeudoController.js";
+import { createAdeudo, getAdeudosByEmpresa } from "../controllers/AdeudoController.js";
 
 const router = express.Router();
 
-router.get("/", AdeudoController.getAdeudos);
-router.post("/", AdeudoController.createAdeudo);
+router.post("/", createAdeudo);
+router.get("/empresa/:empresa_cif", getAdeudosByEmpresa);
 
 export default router;
+

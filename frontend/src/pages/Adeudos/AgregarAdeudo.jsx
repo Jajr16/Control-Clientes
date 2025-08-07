@@ -17,7 +17,7 @@ const AgregarAdeudo = () => {
         csiniva: 0,           // puede ir vacío
         total: 0,
         anticipocliente: 0,
-        honorarios: 0,
+        // honorarios: 0,
         total_adeudos: 0,
         adeudo_pendiente: 0
     });
@@ -75,7 +75,7 @@ const AgregarAdeudo = () => {
                 csiniva: 0,
                 total: 0,
                 anticipocliente: 0,
-                honorarios: 0,
+                // honorarios: 0,
                 total_adeudos: 0,
                 adeudo_pendiente: 0
             });
