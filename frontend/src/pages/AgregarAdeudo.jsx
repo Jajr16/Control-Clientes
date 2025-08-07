@@ -10,17 +10,18 @@ const AgregarAdeudo = () => {
         proveedor: "",
         ff: "",
         numfactura: "",
-        protocoloentrada: "", // puede ir vacío
+        protocoloentrada: "",
         importe: 0,
         iva: 0,
         retencion: 0,
-        csiniva: 0,           // puede ir vacío
+        csiniva: 0,
         total: 0,
         anticipocliente: 0,
-        // honorarios: 0,
         total_adeudos: 0,
         adeudo_pendiente: 0
     });
+
+    const [mostrarVistaPrevia, setMostrarVistaPrevia] = useState(false);
 
     const [adeudosGuardados, setAdeudosGuardados] = useState([]);
     const [empresasDisponibles, setEmpresasDisponibles] = useState([]);
@@ -39,6 +40,24 @@ const AgregarAdeudo = () => {
 
         cargarEmpresas();
     }, []);
+
+    useEffect(() => {
+        const fetchAdeudos = async () => {
+            if (empresa.empresa_cif) {
+                try {
+                    const response = await fetch(`http://localhost:3000/api/adeudos/empresa/${empresa.empresa_cif}`);
+                    if (!response.ok) throw new Error("Error al obtener adeudos");
+                    const data = await response.json();
+                    setAdeudosGuardados(data);
+                    setMostrarVistaPrevia(true);
+                } catch (error) {
+                    console.error("Error al obtener adeudos:", error);
+                }
+            }
+        };
+
+        fetchAdeudos();
+    }, [empresa.empresa_cif]);
 
     const handleSubmit = async (e) => {
         e.preventDefault();
@@ -75,7 +94,6 @@ const AgregarAdeudo = () => {
                 csiniva: 0,
                 total: 0,
                 anticipocliente: 0,
-                // honorarios: 0,
                 total_adeudos: 0,
                 adeudo_pendiente: 0
             });
@@ -97,12 +115,14 @@ const AgregarAdeudo = () => {
 
             <form onSubmit={handleSubmit}>
                 <AdeudosForm
-                empresa={empresa}
-                setEmpresa={setEmpresa}
-                adeudosGuardados={adeudosGuardados}
-                setAdeudosGuardados={setAdeudosGuardados}
-                empresasDisponibles={empresasDisponibles}  
-                validationErrors={validationErrors}        
+                    empresa={empresa}
+                    setEmpresa={setEmpresa}
+                    adeudosGuardados={adeudosGuardados}
+                    setAdeudosGuardados={setAdeudosGuardados}
+                    empresasDisponibles={empresasDisponibles}
+                    validationErrors={validationErrors}
+                    mostrarVistaPrevia={mostrarVistaPrevia}
+                    setVistaPrevia={setMostrarVistaPrevia}
                 />
             </form>
         </div>

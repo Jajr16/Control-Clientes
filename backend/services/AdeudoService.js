@@ -41,7 +41,7 @@ export const insertarAdeudoCompleto = async ({ adeudo, protocolo, ajuste }) => {
     } catch (error) {
         await client.query('ROLLBACK');
         console.error('Error en la transacción de insertarAdeudoCompleto:', error);
-        throw new Error('No se pudo insertar en adeudo');
+        throw error;
     } finally {
         client.release();
     }
