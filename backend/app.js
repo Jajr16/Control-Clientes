@@ -11,12 +11,12 @@ import datoRegistralRoutes from './routes/datoRegistralRoutes.js';
 import inmuebleRoutes from './routes/InmuebleRoutes.js'
 import clienteRouter from './routes/searchClientRoute.js'
 import adeudoRoutes from './routes/adeudoRoutes.js';
+import liquidacionRoutes from './routes/LiquidacionRoutes.js';
 
 // Configurar dotenv para acceder a las variables de entorno
 dotenv.config();
 
 const app = express();
-
 // Middleware de logging de peticiones
 app.use(morgan('dev'));
 
@@ -38,5 +38,6 @@ app.use('/api/datoRegistral', datoRegistralRoutes);
 app.use('/api/inmueble', inmuebleRoutes);
 app.use('/api/searchClients', clienteRouter);
 app.use('/api/adeudos', adeudoRoutes);
+app.use('/api/liquidaciones', liquidacionRoutes);
 
 export default app;
