@@ -1,23 +1,17 @@
 import React, { useEffect, useState } from "react";
 import { RiArrowDownSLine, RiArrowUpSLine } from "react-icons/ri";
 
-import DatoRegistralForm from "../components/forms/DatoRegistralForms.jsx";
-import DireccionForm from "../components/forms/DireccionForms.jsx";
-import EmpresaForm from "../components/forms/EmpresaForms.jsx";
-import PropietarioForm from "../components/forms/PropietarioForms.jsx";
-import InmuebleForm from "../components/forms/InmuebleForms.jsx";
-import InmuebleHipotecaForm from "../components/forms/InmuebleHipotecaForms.jsx";
-import InmuebleProveedorForm from "../components/forms/InmuebleProveedorForms.jsx";
-import InmuebleSeguroForm from "../components/forms/InmuebleSeguroForms.jsx";
-
-import { manejarLogicaCliente } from "../hooks/operacionesClienteForm.js";
-import { manejarLogicaInmueble } from "../hooks/operacionesClienteForm.js";
 import DatoRegistralForm from "../../components/forms/DatoRegistralForms.jsx";
 import DireccionForm from "../../components/forms/DireccionForms.jsx";
 import EmpresaForm from "../../components/forms/EmpresaForms.jsx";
 import PropietarioForm from "../../components/forms/PropietarioForms.jsx";
+import InmuebleForm from "../../components/forms/InmuebleForms.jsx";
+import InmuebleHipotecaForm from "../../components/forms/InmuebleHipotecaForms.jsx";
+import InmuebleProveedorForm from "../../components/forms/InmuebleProveedorForms.jsx";
+import InmuebleSeguroForm from "../../components/forms/InmuebleSeguroForms.jsx";
 
 import { manejarLogicaCliente } from "../../hooks/operacionesClienteForm.js";
+import { manejarLogicaInmueble } from "../../hooks/operacionesClienteForm.js";
 
 const AddClientesPage = () => {
     const {
