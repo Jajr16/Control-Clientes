@@ -16,7 +16,7 @@ const InmuebleDetails = ({ inmueble, setProveedoresSegurosList, proveedoresList,
         async function fetchHipotecas(CC) {
             try {
                 const response = await getInmuebleHipotecas(CC);
-                setHipotecas(response)
+                setHipotecas(response.data)
 
                 return response
             } catch (error) {
@@ -28,7 +28,7 @@ const InmuebleDetails = ({ inmueble, setProveedoresSegurosList, proveedoresList,
         async function fetchProveedoresSeguros(CC) {
             try {
                 const response = await getInmuebleDetails(CC);
-                setProveedoresSegurosList(response);
+                setProveedoresSegurosList(response.data);
 
                 return response;
             } catch (error) {

@@ -4,7 +4,8 @@ import {
     createAdeudo, 
     getAdeudosByEmpresa,
     getAdeudosPendientesByEmpresa,
-    checkAdeudosPendientes
+    checkAdeudosPendientes,
+    getEmpresasAdeudos
 } from "../controllers/AdeudoController.js";
 
 const router = express.Router();
@@ -20,5 +21,7 @@ router.get("/empresa/:empresa_cif/pendientes", getAdeudosPendientesByEmpresa);
 
 // Verificar si hay adeudos pendientes para una empresa
 router.get("/empresa/:empresa_cif/check-pendientes", checkAdeudosPendientes);
+
+router.get("/empresa_adeudo", getEmpresasAdeudos);
 
 export default router;

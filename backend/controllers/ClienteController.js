@@ -1,19 +1,22 @@
-import ClienteService from "../services/ClienteService.js";
+import { BaseController } from './BaseController.js';
+import ClienteService from '../services/ClienteService.js';
 
-class ClienteController {
+class ClienteController extends BaseController {
     constructor() {
-        this.clienteService = new ClienteService();
+        super(new ClienteService());
     }
 
     async infoClientes(req, res) {
         try {
-            const resultados = await this.clienteService.infoClientes();
-            res.status(200).json(resultados);
+            const result = await this.service.infoClientes();
+            return this.sendSuccess(res, result);
         } catch (error) {
-            console.error("Error en infoClientes:", error);
-            res.status(500).json({ error: "Error al obtener la información de los clientes" });
+            return this.handleError(error, res, "Error al obtener información de clientes");
         }
     }
 }
 
-export default ClienteController
+const clienteController = new ClienteController();
+export default clienteController;
+
+export const getInfoClientes = clienteController.infoClientes.bind(clienteController)

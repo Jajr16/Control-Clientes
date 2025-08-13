@@ -31,7 +31,7 @@ const Cliente = () => {
         const fetchInmuebles = async () => {
             try {
                 const response = await getInmuebles(selectedClient.cif);
-                setInmueblesList(response);
+                setInmueblesList(response.data);
             } catch (error) {
                 console.error("Error fetching inmuebles:", error);
                 cleanup();
@@ -53,7 +53,7 @@ const Cliente = () => {
                     onSelectClient={(c) => setSelectedClient(c)}
                     routeName={'searchClients'}
                     fieldsToInclude={[
-                        "cif", "nombre", "clave", "propietario", "telefono",
+                        "cif", "nombre", "clave", "nie", "propietario", "telefono", "email", 
                         "calle", "numero", "piso", "codigo_postal", "localidad",
                         "num_protocolo", "folio", "hoja", "inscripcion", "notario", "fecha_inscripcion"
                     ]}
