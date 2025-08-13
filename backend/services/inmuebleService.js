@@ -1,153 +1,129 @@
-import Repositorio from '../repositories/globalPersistence.js'
-import { pool } from '../config/db.js';
+import { BaseService } from './BaseService.js';
+import Repositorio from '../repositories/globalPersistence.js';
 
-/**
- * Clase para crear el servicio de la tabla Inmueble la cuál se comunicará directamente con el repositorio (capa de persistencia) para realizar operaciones SQL
- */
-class InmuebleService {
+class InmuebleService extends BaseService {
     constructor() {
-        this.repositorioInmueble = new Repositorio('inmueble', 'clave_catastral')
-        this.repositorioDireccion = new Repositorio('direccion', 'id')
-        this.repositorioDatoRegistral = new Repositorio('dato_registral', 'id_dr')
-        this.repositorioEmpresaInmueble = new Repositorio('empresa_inmueble', ['cif', 'clave_catastral'])
-        this.repositorioInmuebleProveedor = new Repositorio('inmueble_proveedor', ['clave_catastral', 'clave'])
-        this.repositorioInmuebleSeguro = new Repositorio('inmueble_seguro', ['clave_catastral', 'empresa_seguro'])
-        this.repositorioHipoteca = new Repositorio('inmueble_hipoteca', ['clave_catastral', 'id_hipoteca'])
+        super({
+            inmueble: new Repositorio('inmueble', 'clave_catastral'),
+            direccion: new Repositorio('direccion', 'id'),
+            datoRegistral: new Repositorio('dato_registral', 'id_dr'),
+            empresaInmueble: new Repositorio('empresa_inmueble', ['cif', 'clave_catastral']),
+            inmuebleProveedor: new Repositorio('inmueble_proveedor', ['clave_catastral', 'clave']),
+            inmuebleSeguro: new Repositorio('inmueble_seguro', ['clave_catastral', 'empresa_seguro']),
+            hipoteca: new Repositorio('inmueble_hipoteca', ['clave_catastral', 'id_hipoteca'])
+        });
     }
 
-    /**
-     * Método para agregar nuevos registros a la tabla Inmueble
-     * 
-     * @param {*} datos Datos que se usarán para guardar un nuevo registro en la tabla Inmueble
-     * @returns Respuesta del reporsitorio (Respuesta SQL)
-     */
     async nuevoInmueble(datos) {
-        const client = await pool.connect(); // Obtener cliente de pool para iniciar trnasacción
-
-        try {
-            // Iniciar transacción
-            await client.query('BEGIN')
+        return await this.withTransaction(async (client) => {
+            // Insertar dato registral
+            const datoRegistral = await this.repositories.datoRegistral.insertar(datos.dato_registral, client);
+            console.log("Dato registral registrado");
             
-            // Realizar registro del dato registral y obtener la PK generada
-            const datoRegistral = await this.repositorioDatoRegistral.insertar(datos.dato_registral, client)
-            const datoRegistralPK = datoRegistral.id_dr
-            console.log("Dato registral registrado")
+            // Insertar dirección
+            const direccion = await this.repositories.direccion.insertar(datos.direccion, client);
+            console.log("Dirección registrada");
             
-            //Realizar registro de la dirección y obtener su PK generada
-            const direccion = await this.repositorioDireccion.insertar(datos.direccion, client)
-            const direccionPK = direccion.id
-            console.log("Dirección registrada")
-            
-            const inmueble = {
+            // Crear inmueble
+            const inmuebleData = {
                 clave_catastral: datos.inmueble.clave_catastral,
-                direccion: direccionPK,
-                dato_registral: datoRegistralPK
-            }
-            console.log("Datos de inmueble creado")
-
-            const ResultadoInmueble = await this.repositorioInmueble.insertar(inmueble, client)
-            
-            await client.query('COMMIT') // Confirmar transacción
-            return { message: "Inmueble creado con éxito.", data: ResultadoInmueble };
-        } catch (error) {
-            await client.query('ROLLBACK'); // Deshacer la transacción en caso de error
-            console.error("Error en la transacción:", error);
-            throw new Error("No se pudo completar la operación. Transacción revertida.");
-        } finally {
-            client.release(); // Liberar el cliente de la pool
-        }
-    }
-
-    async getProveedoresSegurosDetails(CC) {
-        try {
-            // =========== PROVEEDORES ===========
-            const joinsProveedor = [
-                {type: 'INNER', table: 'proveedor p', on: 'inmueble_proveedor.clave = p.clave'},
-            ]
-
-            const filtroProveedor = {
-                'inmueble_proveedor.clave_catastral': CC
-            }
-
-            const proveedoresList = await this.repositorioInmuebleProveedor.BuscarConJoins(joinsProveedor, filtroProveedor, '', [
-                'p.nombre', 'p.telefono', 'p.email', 'p.tipo_servicio'
-            ]);
-
-            console.log(`Los proveedores son: ${proveedoresList}`)
-
-            // =========== SEGUROS ===========
-            const joinsSeguros = [
-                {type: 'INNER', table: 'seguro s', on: 'inmueble_seguro.empresa_seguro = s.empresa_seguro'}
-            ]
-
-            const filtroSeguro = {
-                'inmueble_seguro.clave_catastral': CC
-            }
-
-            const segurosList = await this.repositorioInmuebleSeguro.BuscarConJoins(joinsSeguros, filtroSeguro, '', [
-                's.empresa_seguro', 's.tipo_seguro', 's.telefono', 's.email', 's.poliza'
-            ])
-
-            console.log(`Los seguros son: ${segurosList}`)
-
-            return {
-                'proveedores': proveedoresList,
-                'seguros': segurosList
+                direccion: direccion.id,
+                dato_registral: datoRegistral.id_dr
             };
 
+            const resultado = await this.repositories.inmueble.insertar(inmuebleData, client);
+            
+            return { 
+                message: "Inmueble creado con éxito.", 
+                data: resultado 
+            };
+        });
+    }
+
+    async getProveedoresSegurosDetails(claveCatastral) {
+        try {
+            // Proveedores
+            const joinsProveedor = [
+                { type: 'INNER', table: 'proveedor p', on: 'inmueble_proveedor.clave = p.clave' }
+            ];
+
+            const proveedores = await this.repositories.inmuebleProveedor.BuscarConJoins(
+                joinsProveedor, 
+                { 'inmueble_proveedor.clave_catastral': claveCatastral }, 
+                'AND',
+                ['p.nombre', 'p.telefono', 'p.email', 'p.tipo_servicio']
+            );
+
+            // Seguros
+            const joinsSeguros = [
+                { type: 'INNER', table: 'seguro s', on: 'inmueble_seguro.empresa_seguro = s.empresa_seguro' }
+            ];
+
+            const seguros = await this.repositories.inmuebleSeguro.BuscarConJoins(
+                joinsSeguros,
+                { 'inmueble_seguro.clave_catastral': claveCatastral },
+                'AND',
+                ['s.empresa_seguro', 's.tipo_seguro', 's.telefono', 's.email', 's.poliza']
+            );
+
+            return {
+                proveedores,
+                seguros
+            };
         } catch (error) {
-            console.error("Error en la transacción:", error);
-            throw new Error("No se pudo completar la operación. Transacción revertida.");
-        } 
+            console.error("Error al obtener proveedores y seguros:", error);
+            throw new Error("No se pudo obtener la información de proveedores y seguros");
+        }
     }
 
     async getInmuebleDetails(cif) {
         try {
             const joins = [
-                {type: 'INNER', table: 'inmueble i', on: 'empresa_inmueble.clave_catastral = i.clave_catastral'},
-                {type: 'INNER', table: 'direccion d', on: 'i.direccion = d.id'},
-                {type: 'INNER', table: 'dato_registral dr', on: 'i.dato_registral = dr.id_dr'},
-            ]
+                { type: 'INNER', table: 'inmueble i', on: 'empresa_inmueble.clave_catastral = i.clave_catastral' },
+                { type: 'INNER', table: 'direccion d', on: 'i.direccion = d.id' },
+                { type: 'INNER', table: 'dato_registral dr', on: 'i.dato_registral = dr.id_dr' }
+            ];
 
-            const filtro = {
-                'empresa_inmueble.cif': cif
-            }
+            const columnas = [
+                'd.calle', 'd.numero', 'd.piso', 'd.codigo_postal', 'd.localidad',
+                'empresa_inmueble.clave_catastral', 'empresa_inmueble.valor_adquisicion', 
+                'empresa_inmueble.fecha_adquisicion', 'dr.num_protocolo', 'dr.folio', 
+                'dr.hoja', 'dr.inscripcion', 'dr.notario', 'dr.fecha_inscripcion'
+            ];
 
-            const inmueblesList = await this.repositorioEmpresaInmueble.BuscarConJoins(joins, filtro, '', ['d.calle', 'd.numero', 'd.piso', 
-                'd.codigo_postal', 'd.localidad', 'empresa_inmueble.clave_catastral', 'empresa_inmueble.valor_adquisicion', 
-                'empresa_inmueble.fecha_adquisicion', 'dr.num_protocolo', 'dr.folio', 'dr.hoja', 'dr.inscripcion', 
-                'dr.notario', 'dr.fecha_inscripcion'
-            ]);
-
-            return inmueblesList;
-
+            return await this.repositories.empresaInmueble.BuscarConJoins(
+                joins,
+                { 'empresa_inmueble.cif': cif },
+                'AND',
+                columnas
+            );
         } catch (error) {
-            console.error("Error en la transacción:", error);
-            throw new Error("No se pudo completar la operación. Transacción revertida.");
-        } 
+            console.error("Error al obtener detalles del inmueble:", error);
+            throw new Error("No se pudo obtener los detalles del inmueble");
+        }
     }
 
-    async getHipotecas(cc) {
+    async getHipotecas(claveCatastral) {
         try {
             const joins = [
-                {type: 'INNER', table: 'hipoteca h', on: 'inmueble_hipoteca.id_hipoteca = h.id'},
-            ]
+                { type: 'INNER', table: 'hipoteca h', on: 'inmueble_hipoteca.id_hipoteca = h.id' }
+            ];
 
-            const filtro = {
-                'inmueble_hipoteca.clave_catastral': cc
-            }
-
-            const hipotecaList = await this.repositorioHipoteca.BuscarConJoins(joins, filtro, '', [
+            const columnas = [
                 'h.prestamo', 'h.banco_prestamo', 'h.fecha_hipoteca', 'h.cuota_hipoteca'
-            ]);
+            ];
 
-            return hipotecaList;
-
+            return await this.repositories.hipoteca.BuscarConJoins(
+                joins,
+                { 'inmueble_hipoteca.clave_catastral': claveCatastral },
+                'AND',
+                columnas
+            );
         } catch (error) {
-            console.error("Error en la transacción:", error);
-            throw new Error("No se pudo completar la operación. Transacción revertida.");
-        } 
+            console.error("Error al obtener hipotecas:", error);
+            throw new Error("No se pudo obtener las hipotecas");
+        }
     }
 }
 
-export default InmuebleService
+export default InmuebleService;

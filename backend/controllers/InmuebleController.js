@@ -1,55 +1,47 @@
-import InmuebleService from "../services/inmuebleService.js";
+import { BaseController } from './BaseController.js';
+import InmuebleService from '../services/InmuebleService.js';
 
-class InmuebleController {
+class InmuebleController extends BaseController {
     constructor() {
-        this.inmuebleService = new InmuebleService();
+        super(new InmuebleService());
     }
 
     async insertar(req, res) {
         try {
-            console.log(req.body)
-            const nuevoInmueble = await this.inmuebleService.nuevoInmueble(req.body)
-            res.status(201).json(nuevoInmueble);
+            const result = await this.service.nuevoInmueble(req.body);
+            return this.sendSuccess(res, result, 'Inmueble creado correctamente', 201);
         } catch (error) {
-            res.status(500).json({ error: error.message });
+            return this.handleError(error, res, "Error al crear el inmueble");
         }
     }
 
     async getInmuebleDetails(req, res) {
         try {
             const { cif } = req.params;
-            const resultados = await this.inmuebleService.getInmuebleDetails(cif);
-
-            res.status(200).json(resultados);
+            const result = await this.service.getInmuebleDetails(cif);
+            return this.sendSuccess(res, result);
         } catch (error) {
-            console.error("Error en infoClientes:", error);
-            res.status(500).json({ error: "Error al obtener la información de los clientes" });
+            return this.handleError(error, res, "Error al obtener detalles del inmueble");
         }
     }
 
     async getProveedoresSegurosDetails(req, res) {
         try {
             const { cc } = req.params;
-            
-            const resultados = await this.inmuebleService.getProveedoresSegurosDetails(cc);
-
-            res.status(200).json(resultados);
+            const result = await this.service.getProveedoresSegurosDetails(cc);
+            return this.sendSuccess(res, result);
         } catch (error) {
-            console.error("Error en infoClientes:", error);
-            res.status(500).json({ error: "Error al obtener la información de los clientes" });
+            return this.handleError(error, res, "Error al obtener proveedores y seguros");
         }
     }
 
     async getHipotecas(req, res) {
         try {
             const { cc } = req.params;
-            
-            const resultados = await this.inmuebleService.getHipotecas(cc);
-
-            res.status(200).json(resultados);
+            const result = await this.service.getHipotecas(cc);
+            return this.sendSuccess(res, result);
         } catch (error) {
-            console.error("Error en infoClientes:", error);
-            res.status(500).json({ error: "Error al obtener la información de los clientes" });
+            return this.handleError(error, res, "Error al obtener hipotecas");
         }
     }
 }

@@ -1,88 +1,101 @@
-// controllers/AdeudoController.js - ACTUALIZADO
-import { 
-    insertarAdeudoCompleto, 
-    obtenerTodosAdeudosPorEmpresa,
-    obtenerAdeudosPendientes,
-    verificarAdeudosPendientes
-} from "../services/AdeudoService.js";
+import { BaseController } from './BaseController.js';
+import AdeudoService from '../services/AdeudoService.js';
 
-export const getAdeudosByEmpresa = async (req, res) => {
-  try {
-    const { empresa_cif } = req.params;
-    const adeudos = await obtenerTodosAdeudosPorEmpresa(empresa_cif);
-    
-    // Agregar información adicional en la respuesta
-    const pendientes = adeudos.filter(a => a.estado === 'PENDIENTE').length;
-    const liquidados = adeudos.filter(a => a.estado === 'LIQUIDADO').length;
-    
-    return res.status(200).json({
-      adeudos,
-      resumen: {
-        total: adeudos.length,
-        pendientes,
-        liquidados
-      }
-    });
-  } catch (error) {
-    console.error("Error en getAdeudosByEmpresa:", error);
-    return res.status(500).json({ error: "Error al obtener los adeudos." });
+class AdeudoController extends BaseController {
+  constructor() {
+    super(new AdeudoService());
   }
-};
 
-// NUEVO ENDPOINT: Solo adeudos pendientes
-export const getAdeudosPendientesByEmpresa = async (req, res) => {
-  try {
-    const { empresa_cif } = req.params;
-    const adeudosPendientes = await obtenerAdeudosPendientes(empresa_cif);
-    
-    return res.status(200).json({
-      adeudos: adeudosPendientes,
-      resumen: {
-        total_pendientes: adeudosPendientes.length
-      }
-    });
-  } catch (error) {
-    console.error("Error en getAdeudosPendientesByEmpresa:", error);
-    return res.status(500).json({ error: "Error al obtener los adeudos pendientes." });
-  }
-};
-
-// NUEVO ENDPOINT: Verificar si hay adeudos pendientes
-export const checkAdeudosPendientes = async (req, res) => {
-  try {
-    const { empresa_cif } = req.params;
-    const verificacion = await verificarAdeudosPendientes(empresa_cif);
-    
-    return res.status(200).json(verificacion);
-  } catch (error) {
-    console.error("Error en checkAdeudosPendientes:", error);
-    return res.status(500).json({ error: "Error al verificar adeudos pendientes." });
-  }
-};
-
-export const createAdeudo = async (req, res) => {
+  async getAdeudosByEmpresa(req, res) {
     try {
-        const { adeudo, protocolo, ajuste } = req.body;
+      const { empresa_cif } = req.params;
+      const { incluir_liquidados = 'true' } = req.query;
 
-        // Validar que el adeudo no tenga num_liquidacion (debe ser null para nuevos adeudos)
-        if (adeudo.num_liquidacion !== undefined && adeudo.num_liquidacion !== null) {
-            console.log("Removiendo num_liquidacion del nuevo adeudo - debe crearse como PENDIENTE");
-            delete adeudo.num_liquidacion;
-        }
+      const result = incluir_liquidados === 'true'
+        ? await this.service.obtenerTodosAdeudosPorEmpresa(empresa_cif)
+        : await this.service.obtenerAdeudosPendientes(empresa_cif);
 
-        const resultado = await insertarAdeudoCompleto({ adeudo, protocolo, ajuste });
-        
-        res.status(201).json({ 
-            message: 'Adeudo creado correctamente como PENDIENTE', 
-            data: resultado 
-        });
+      return this.sendSuccess(res, result);
     } catch (error) {
-        console.error('Error en createAdeudo:', error);
-
-        if (error.code === '23505') {
-            return res.status(409).json({ error: 'Ya existe un adeudo con ese número de factura.' });
-        }
-
-        res.status(500).json({ error: 'Error al guardar el adeudo' });
+      return this.handleError(error, res, "Error al obtener los adeudos");
     }
-};
+  }
+
+  async getAdeudosPendientes(req, res) {
+    try {
+      const { empresa_cif } = req.params;
+      const result = await this.service.obtenerAdeudosPendientes(empresa_cif);
+      return this.sendSuccess(res, result);
+    } catch (error) {
+      return this.handleError(error, res, "Error al obtener adeudos pendientes");
+    }
+  }
+
+  async checkAdeudosPendientes(req, res) {
+    try {
+      const { empresa_cif } = req.params;
+      const result = await this.service.verificarAdeudosPendientes(empresa_cif);
+      return this.sendSuccess(res, result);
+    } catch (error) {
+      return this.handleError(error, res, "Error al verificar adeudos pendientes");
+    }
+  }
+
+  async createAdeudo(req, res) {
+    try {
+      const { adeudo, protocolo, ajuste } = req.body;
+
+      if (!adeudo || !adeudo.num_factura) {
+        return res.status(400).json({ error: 'Número de factura es requerido' });
+      }
+
+      // Asegurar que se crea como pendiente
+      if (adeudo.num_liquidacion !== undefined) {
+        delete adeudo.num_liquidacion;
+      }
+
+      const result = await this.service.insertarAdeudoCompleto({ adeudo, protocolo, ajuste });
+      return this.sendSuccess(res, result, 'Adeudo creado correctamente', 201);
+    } catch (error) {
+      return this.handleError(error, res, "Error al crear el adeudo");
+    }
+  }
+
+  async getAdeudosPendientesByEmpresa(req, res) {
+    try {
+      const { empresa_cif } = req.params;
+      const adeudosPendientes = await obtenerAdeudosPendientes(empresa_cif);
+
+      return res.status(200).json({
+        adeudos: adeudosPendientes,
+        resumen: {
+          total_pendientes: adeudosPendientes.length
+        }
+      });
+    } catch (error) {
+      console.error("Error en getAdeudosPendientesByEmpresa:", error);
+      return res.status(500).json({ error: "Error al obtener los adeudos pendientes." });
+    }
+  };
+
+  async getEmpresasAdeudos(req, res) {
+    try {
+      const result = await this.service.getEmpresasAdeudos();
+      return this.sendSuccess(res, result)
+    } catch (error) {
+      return this.handleError(error, res, "Error al obtener las empresas para el historico.");
+    }
+  }
+}
+
+// Exportar tanto la clase como funciones individuales
+const adeudoController = new AdeudoController();
+export default adeudoController;
+
+// Para compatibilidad con el código existente
+export const getAdeudosByEmpresa = adeudoController.getAdeudosByEmpresa.bind(adeudoController);
+export const getAdeudosPendientes = adeudoController.getAdeudosPendientes.bind(adeudoController);
+export const checkAdeudosPendientes = adeudoController.checkAdeudosPendientes.bind(adeudoController);
+export const createAdeudo = adeudoController.createAdeudo.bind(adeudoController);
+export const getAdeudosPendientesByEmpresa = adeudoController.getAdeudosPendientesByEmpresa.bind(adeudoController);
+export const getEmpresasAdeudos = adeudoController.getEmpresasAdeudos.bind(adeudoController);

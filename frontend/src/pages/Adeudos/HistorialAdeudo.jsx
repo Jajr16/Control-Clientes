@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import ClientSearch from "../../components/elements/searchBar";
-import { getEmpresas } from "../../api/moduloClientes/empresas"
+import { getAdeudoEmpresa } from "../../api/moduloAdeudos/adeudos"
 
 const historico = () => {
     const [selectedClient, setSelectedClient] = useState(null);
@@ -9,13 +9,28 @@ const historico = () => {
 
 
     useEffect(() => {
+        const cleanup = () => {
+            setOriginalRows(null);
+            setEditedRows(null);
+        };
+
+        if (!selectedClient) {
+            cleanup();
+            return;
+        }
+
         const fetchGetHistorico = async() => {
             try {
                 const response = await getAdeudoEmpresa(selectedClient.cif)
+                setOriginalRows(response.data)
             } catch (error) {
-                
+                console.error("Error fetching historico adeudos:", error);
+                cleanup();
             }
-        }
+        };
+
+        fetchGetHistorico();
+        cleanup();
     })
 
     return (
@@ -24,7 +39,7 @@ const historico = () => {
                 <div className="flex w-[40%] ">
                     <ClientSearch
                         onSelectClient={(c) => setSelectedClient(c)}
-                        routeName={'empresas/adeudos'}
+                        routeName={'adeudos/empresa_adeudo'}
                         labelFormat={(c) => `${c.clave} - ${c.nombre}`}
                     />
                 </div>
@@ -33,6 +48,12 @@ const historico = () => {
                     <input id="anticipo" type="text" className="border border-black rounded-md"></input>
                 </div>
             </div>
+
+            {selectedClient && 
+                <div className="w-full h-full">
+                    Adeudos a Finatech desde 
+                </div>
+            }
         </div>
     )
 }
