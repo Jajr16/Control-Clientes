@@ -4,6 +4,11 @@ import ClientDetails from "../components/elements/ClienteDetails";
 import InmueblesList from "../components/elements/InmueblesList"; 
 import InmuebleDetails from "../components/elements/InmuebleDetails"; 
 import { getInmuebles } from "../api/moduloInmuebles/inmueble";
+import ClientSearch from "../../components/elements/searchBar";
+import ClientDetails from "../../components/elements/ClienteDetails";
+import InmueblesList from "../../components/elements/InmueblesList";
+import InmuebleDetails from "../../components/elements/InmuebleDetails";
+import { getInmuebles } from "../../api/moduloClientes/inmueble";
 import { UserPlusIcon } from "@heroicons/react/24/solid";
 import { Link } from "react-router-dom";
 
@@ -27,11 +32,11 @@ const Cliente = () => {
             cleanup();
             return;
         }
-        
+
         const fetchInmuebles = async () => {
             try {
                 const response = await getInmuebles(selectedClient.cif);
-                setInmueblesList(response);
+                setInmueblesList(response.data);
             } catch (error) {
                 console.error("Error fetching inmuebles:", error);
                 cleanup();
@@ -47,9 +52,18 @@ const Cliente = () => {
     }, [selectedInmueble]);
 
     return (
-        <div className="w-full h-full border border-black relative">
+        <div className="w-full h-full">
             <div className={`flex ${selectedClient ? "w-[30%]" : "w-full"}`}>
-                <ClientSearch onSelectClient={setSelectedClient} />
+                <ClientSearch
+                    onSelectClient={(c) => setSelectedClient(c)}
+                    routeName={'searchClients'}
+                    fieldsToInclude={[
+                        "cif", "nombre", "clave", "nie", "propietario", "telefono", "email", 
+                        "calle", "numero", "piso", "codigo_postal", "localidad",
+                        "num_protocolo", "folio", "hoja", "inscripcion", "notario", "fecha_inscripcion"
+                    ]}
+                    labelFormat={(c) => `${c.clave} - ${c.nombre}`}
+                />
                 {!selectedClient && (
                     <div className="flex">
                         <div className="self-center ml-1 mr-4">
@@ -82,8 +96,8 @@ const Cliente = () => {
                 <div className="h-full flex">
                     {selectedClient && (
                         <div className="flex-grow h-full">
-                            <InmuebleDetails inmueble={selectedInmueble} setProveedoresSegurosList={setProveedoresSegurosList} proveedoresList={proveedoresList} 
-                            setHipotecas={setHipotecas} HipotecasList={HipotecasList} />
+                            <InmuebleDetails inmueble={selectedInmueble} setProveedoresSegurosList={setProveedoresSegurosList} proveedoresList={proveedoresList}
+                                setHipotecas={setHipotecas} HipotecasList={HipotecasList} />
                         </div>
                     )}
                 </div>

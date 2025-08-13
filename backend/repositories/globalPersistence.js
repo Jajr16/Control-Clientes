@@ -18,10 +18,12 @@ class Repositorio {
      * @param {*} datos Datos a enviar que se insertarán en la tabla establecida en el constructor 
      * @returns Respuesta SQL retornada por PostgreSQL
      */
-    async insertar(datos, client = pool) {
+    async insertar(datos, client = null) {
         if (!datos || Object.keys(datos).length == 0) {
             throw new Error("No se pueden insertar datos vacíos.");
         }
+
+        const queryClient = client || pool;
 
         const columnas = Object.keys(datos).join(", "); // Obtiene las nombres de las llaves del diccionario
         const valores = Object.values(datos) // Obtiene los valores del diccionario
@@ -38,11 +40,12 @@ class Repositorio {
             console.log(`El query resultante es ${query}`)
 
             // Realizar query
-            const result = await pool.query(query, valores)
+            const result = await queryClient.query(query, valores)
             return result.rows[0]
         } catch (error) {
             console.error(`Error al insertar en ${this.tabla}:`, error);
-            throw new Error(`No se pudo insertar en ${this.tabla}`);
+            // throw new Error(`No se pudo insertar en ${this.tabla}`);
+            throw error;
         }
     }
 
@@ -76,15 +79,15 @@ class Repositorio {
 
         // Recorre cada valor para hacer la notación de las condiciones de los valores dentro de una consulta
         const condiciones = this.clavesPrimarias.map((clave, index) => `${clave} = $${index + 1}`).join(' AND ');
-        const valores = Object.values(claves); // Obtiene los valores del diccionario de claves (llaves primarias)
+        const valores = this.clavesPrimarias.map(clave => claves[clave]); // Obtiene los valores del diccionario de claves (llaves primarias)
 
         try {
             const query = `SELECT * FROM ${this.tabla} WHERE ${condiciones}`
             const result = await pool.query(query, valores)
             return result.rows[0] || null
         } catch (error) {
-            console.error(`Error al obtener el registro en ${this.table}: `, error)
-            throw new Error(`Error al obtener el registro en ${this.table}`);
+            console.error(`Error al obtener el registro en ${this.tabla}: `, error)
+            throw new Error(`Error al obtener el registro en ${this.tabla}`);
         }
     }
 
@@ -95,7 +98,7 @@ class Repositorio {
      * @param {*} nuevosDatos Nuevos datos a registrar
      * @returns Respuesta SQL de éxito o fracaso
      */
-    async actualizarPorId(claves, nuevosDatos, client = pool) {
+    async actualizarPorId(claves, nuevosDatos, client = null) {
         if (!this._validarClaves(claves)) {
             throw new Error(`Las claves proporcionadas no coinciden con ${this.clavesPrimarias.join(', ')}`);
         }
@@ -104,9 +107,11 @@ class Repositorio {
             throw new Error('No se pueden actualizar con datos vacíos.');
         }
 
+        const queryClient = client || pool;
+
         // Recorre cada valor para hacer la notación de inserción de valores dentro de un UPDATE
         const set = Object.keys(nuevosDatos).map((col, index) => `${col} = $${index + 1}`).join(', ')
-        const valores = [...Object.values(nuevosDatos), ...Object.values(claves)] // Los valores del diccionario 'nuevosDatos' los agrupa en un array
+        const valores = [...Object.values(nuevosDatos), ...this.clavesPrimarias.map(k => claves[k])]; // Los valores del diccionario 'nuevosDatos' los agrupa en un array
         // Notación para establecer las llaves primarias en las condiciones para el UPDATE
         const condiciones = this.clavesPrimarias.map((clave, index) => `${clave} = $${Object.keys(nuevosDatos).length + index + 1}`).join(' AND '); 
 
@@ -114,7 +119,7 @@ class Repositorio {
             const query = `
                 UPDATE ${this.tabla} SET ${set} WHERE ${condiciones} RETURNING *;
             `
-            const result = await pool.query(query, valores)
+            const result = await queryClient.query(query, valores)
             return result.rows[0] || null
         } catch (error) {
             console.error(`Error al actualizar en ${this.tabla}:`, error);
@@ -128,14 +133,16 @@ class Repositorio {
      * @param {*} claves Llave primaria de la tabla
      * @returns Respuesta SQL indicando el éxito o fracaso de la operación
      */
-    async eliminarPorId(claves, client = pool) {
+    async eliminarPorId(claves, client = null) {
         if (!this._validarClaves(claves)) {
             throw new Error(`Las claves proporcionadas no coinciden con ${this.clavesPrimarias.join(', ')}`);
         }
+
+        const queryClient = client || pool;
     
         // Notación para establecer las llaves primarias en las condiciones para el DELETE
         const condiciones = this.clavesPrimarias.map((clave, index) => `${clave} = $${index + 1}`).join(' AND ');
-        const valores = Object.values(claves); // Obtiene los valores del diccionario de claves (llaves primarias)
+        const valores = this.clavesPrimarias.map(clave => claves[clave]); // Obtiene los valores del diccionario de claves (llaves primarias)
     
         try {
             const query = `DELETE FROM ${this.tabla} WHERE ${condiciones} RETURNING *;`;
@@ -231,6 +238,8 @@ class Repositorio {
             ${joinClause}
             ${whereClause}
         `;
+
+        console.log(query);
     
         try {
             const result = await pool.query(query, valores);

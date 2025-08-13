@@ -8,3 +8,12 @@ npm i axios vite react-router-dom
 npm install @heroicons/react 
 npm install react-select
 npm install react-icons
+
+Excel
+npm install xlsx
+npm install exceljs file-saver
+
+PDF
+npm install pdfmake
+
+

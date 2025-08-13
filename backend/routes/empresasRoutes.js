@@ -1,5 +1,5 @@
 import express from 'express';
-import { agregarEmpresa, obtenerEmpresas } from '../models/empresasModel.js';
+import { agregarEmpresa, obtenerEmpresas, obtenerEmpresasAdeudos } from '../models/empresasModel.js';
 
 const router = express.Router();
 
@@ -8,6 +8,16 @@ router.get('/', async (req, res) => {
     console.log("GET / ejecutado");
     try {
         const clientes = await obtenerEmpresas();
+        res.json(clientes);
+    } catch (error) {
+        res.status(500).json({ error: error.message });
+    }
+});
+
+router.get('/adeudos', async (req, res) => {
+    console.log("GET / ejecutado");
+    try {
+        const clientes = await obtenerEmpresasAdeudos();
         res.json(clientes);
     } catch (error) {
         res.status(500).json({ error: error.message });
