@@ -44,6 +44,8 @@ const AddClientesPage = () => {
         setMostrarFormulariosInmueble(!mostrarFormulariosInmueble);
     };
 
+    const [mensajeExito, setMensajeExito] = useState("");
+
     // Estado para múltiples inmuebles
     const [inmuebles, setInmuebles] = useState([
         {
@@ -114,6 +116,61 @@ const AddClientesPage = () => {
 
     const [seccionInmuebleActiva, setSeccionInmuebleActiva] = useState(0); // 0: Datos, 1: Proveedor, 2: Hipoteca, 3: Seguro
 
+    const [errorCliente, setErrorCliente] = useState("");
+
+    // Función de validación
+    const validarCamposObligatorios = () => {
+        // Empresa
+        if (
+            !datosEmpresa.cif ||
+            !datosEmpresa.clave ||
+            !datosEmpresa.tel ||
+            !datosEmpresa.nombre
+        ) {
+            setErrorCliente("Completa todos los campos obligatorios de la empresa.");
+            return false;
+        }
+        // Propietario
+        if (
+            !datosPropietario.nie ||
+            !datosPropietario.nombre ||
+            !datosPropietario.email ||
+            !datosPropietario.telefono
+        ) {
+            setErrorCliente("Completa todos los campos obligatorios del propietario.");
+            return false;
+        }
+        // Dirección
+        if (
+            !dirEmpresa.calle ||
+            !dirEmpresa.localidad ||
+            !dirEmpresa.numero ||
+            !dirEmpresa.piso ||
+            !dirEmpresa.cp
+        ) {
+            setErrorCliente("Completa todos los campos obligatorios de la dirección.");
+            return false;
+        }
+        // Dato Registral
+        const camposDatoRegistral = [
+            "num_protocolo",
+            "folio",
+            "hoja",
+            "inscripcion",
+            "notario",
+            "fecha_inscripcion"
+        ];
+        for (const campo of camposDatoRegistral) {
+            if (!datoRegistralEmpresa[campo]) {
+                setErrorCliente("Completa todos los campos obligatorios de dato registral.");
+                return false;
+            }
+        }
+        setErrorCliente("");
+        return true;
+    };
+
+
     return (
         <div>
             {/* Formulario para agregar Empresa con Referencias */}
@@ -142,7 +199,7 @@ const AddClientesPage = () => {
                             <div className="border border-black rounded-md p-2">
                                 <strong className="text-lg">Propietario</strong>
                                 <PropietarioForm
-                                    direccion={datosPropietario}
+                                    propietario={datosPropietario}
                                     setPropietario={setDatosPropietario}
                                     validationErrors={ValidarErrores}
                                 />
@@ -277,6 +334,46 @@ const AddClientesPage = () => {
                         </div>
                     </div>
                 }
+            </div>
+            {/* Botón para añadir cliente e inmuebles */}
+            <div className="flex justify-end mt-6">
+                {errorCliente && (
+                    <span className="text-red-600 mr-4">{errorCliente}</span>
+                )}
+                <button
+                    className="bg-blue-600 text-white px-6 py-2 rounded hover:bg-blue-700"
+                    onClick={async () => {
+                        if (!validarCamposObligatorios()) return;
+
+                        const cliente = {
+                            empresa: datosEmpresa,
+                            direccion: dirEmpresa,
+                            datoRegistral: datoRegistralEmpresa,
+                            propietario: datosPropietario,
+                        };
+
+
+                        // Llama a la función para guardar cliente e inmuebles
+                        const exito = await manejarFormularioCliente(cliente, inmuebles);
+
+                        if (exito) {
+                            setMensajeExito("¡Cliente y sus inmuebles añadidos correctamente!");
+                            setErrorCliente("");
+
+                            // Limpiar formulario de cliente
+                            setDatosEmpresa({ clave: "", cif: "", nombre: "", tel: "" });
+                            setDirEmpresa({ calle: "", numero: "", piso: "", cp: "", localidad: "" });
+                            setDatoRegistralEmpresa({ num_protocolo: "", folio: "", hoja: "", inscripcion: "", notario: "", fecha_inscripcion: "" });
+                            setDatosPropietario({ nie: "", nombre: "", email: "", telefono: "" });
+
+                        } else {
+                            setMensajeExito("");
+                            setErrorCliente("Ocurrió un error al guardar el cliente.");
+                        }
+                    }}
+                >
+                    Añadir Cliente
+                </button>
             </div>
         </div>
     );

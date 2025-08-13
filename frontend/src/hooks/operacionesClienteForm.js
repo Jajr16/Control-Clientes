@@ -24,54 +24,58 @@ export const manejarLogicaCliente = () => {
         n_protocolo: "", folio: "", hoja: "",
         inscripcion: "", fecha_inscripcion: "", notario: ""
     })
-    const [datosPropietario, setDatosPropietario] = useState({ nie: "", nombre: "", tel: "", email: "" })
+    const [datosPropietario, setDatosPropietario] = useState({ nie: "", nombre: "", email: "", telefono: "" })
 
     const [ValidarErrores, setValidarErrores] = useState({})
 
-    const manejarFormularioCliente = useCallback(async (e) => {
-        e.preventDefault()
-        setValidarErrores({})
+    const manejarFormularioCliente = useCallback(async (cliente, inmuebles = []) => {
+        setValidarErrores({});
 
-        let erroresCompletos = {}
+        const errores = validarClienteCompleto(
+            cliente.empresa,
+            cliente.direccion,
+            cliente.datoRegistral,
+            cliente.propietario
+        );
 
-        const validarDatosCliente = validarClienteCompleto(
-            datosEmpresa,
-            dirEmpresa,
-            datoRegistralEmpresa,
-            datosPropietario
-        )
-        erroresCompletos.forEach(err => erroresCompletos[err.field] = err.message)
+        if (errores.length > 0) {
+            const erroresObj = {};
+            errores.forEach(err => erroresObj[err.field] = err.message);
+            setValidarErrores(erroresObj);
 
-        if (Object.keys(erroresCompletos).length > 0) {
-            setValidarErrores(erroresCompletos)
-            const errorMessages = Object.values(allErrors);
             Swal.fire({
                 icon: 'error',
                 title: 'Errores de Validación',
-                html: `<ul style="text-align: left;">${errorMessages.map(msg => `<li>${msg}</li>`).join('')}</ul>`,
+                html: `<ul style="text-align: left;">${errores.map(msg => `<li>${msg.message}</li>`).join('')}</ul>`,
                 confirmButtonText: 'Entendido'
             });
-            return;
+            return false;
         }
 
         try {
-            console.log(`Datos obtenidos del formulario: \n Empresa: ${datosEmpresa}\n DireccionEmpresa: ${dirEmpresa}`)
-            console.log(`Datos Registrales empresa: ${datoRegistralEmpresa}\n Propietario: ${datosPropietario}`)
+            console.log("Datos obtenidos del formulario cliente - propietario:", cliente.propietario);
+            const nuevoPropietario = await addPropietario(cliente.propietario);
+            const nuevaDireccion = await addDirecciones(cliente.direccion);
+            const nuevoDatoRegistral = await addDatoRegistral(cliente.datoRegistral);
+            const nuevaEmpresa = await addEmpresas(cliente.empresa);
 
-            const nuevoPropietario = await addPropietario(datosPropietario)
-            const nuevaDireccion = await addDirecciones(dirEmpresa)
-            const nuevoDatoRegistral = await addDatoRegistral(datoRegistralEmpresa)
-            const nuevaEmpresa = await addEmpresas(datosEmpresa)
+            // Guardar inmuebles si existen
+            for (const inmueble of inmuebles) {
+                await addInmueble(inmueble.datosInmueble);
+                await addProveedor(inmueble.datosProveedor);
+                await addHipoteca(inmueble.datosHipoteca);
+                await addSeguro(inmueble.datosSeguro);
+            }
 
             Swal.fire({
                 icon: 'success',
                 title: 'Registro Completo',
                 text: APP_MESSAGES.SUCCESS.OPERACION_EXITOSA,
-            })
-
+            });
+            return true;
         } catch (error) {
             console.error("Error completo en el registro:", error);
-            const errorMessage = (error.response && error.response.data && error.response.data.error)
+            const errorMessage = (error.response?.data?.error)
                 ? APP_MESSAGES.ERROR.API_ERROR(error.response.data.error)
                 : APP_MESSAGES.ERROR.GENERICO;
 
@@ -80,9 +84,9 @@ export const manejarLogicaCliente = () => {
                 title: 'Error en el Registro',
                 text: errorMessage,
             });
+            return false;
         }
-
-    })
+    });
 
     return {
         datosEmpresa, setDatosEmpresa,

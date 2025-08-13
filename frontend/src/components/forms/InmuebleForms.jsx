@@ -28,7 +28,7 @@ const InmuebleForm = ({ inmueble, setInmueble, validationErrors = {} }) => {
                     />
                 </div>
                 <div className="flex justify-between">
-                    <label htmlFor="direccion">Dirección (ID):</label>
+                    <label htmlFor="direccion">Dirección:</label>
                     <input
                         id="direccion"
                         type="number"
@@ -39,7 +39,7 @@ const InmuebleForm = ({ inmueble, setInmueble, validationErrors = {} }) => {
                     />
                 </div>
                 <div className="flex justify-between">
-                    <label htmlFor="dato_registral">Dato Registral (ID):</label>
+                    <label htmlFor="dato_registral">Dato Registral:</label>
                     <input
                         id="dato_registral"
                         type="number"
