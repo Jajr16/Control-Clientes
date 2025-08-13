@@ -12,6 +12,12 @@ import InmuebleSeguroForm from "../components/forms/InmuebleSeguroForms.jsx";
 
 import { manejarLogicaCliente } from "../hooks/operacionesClienteForm.js";
 import { manejarLogicaInmueble } from "../hooks/operacionesClienteForm.js";
+import DatoRegistralForm from "../../components/forms/DatoRegistralForms.jsx";
+import DireccionForm from "../../components/forms/DireccionForms.jsx";
+import EmpresaForm from "../../components/forms/EmpresaForms.jsx";
+import PropietarioForm from "../../components/forms/PropietarioForms.jsx";
+
+import { manejarLogicaCliente } from "../../hooks/operacionesClienteForm.js";
 
 const AddClientesPage = () => {
     const {

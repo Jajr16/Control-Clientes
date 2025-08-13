@@ -9,11 +9,14 @@ export const createTableEmpresa = async () => {
                 clave VARCHAR(3),
                 nombre VARCHAR(300),
                 propietario VARCHAR(9),
-                direccion INTEGER REFERENCES direccion(id),
-                dato_registral INTEGER REFERENCES dato_registral(id_dr),
+                direccion INTEGER REFERENCES direccion(id) NOT NULL,
+                dato_registral INTEGER NOT NULL,
                 telefono VARCHAR(10),
                 FOREIGN KEY (propietario) REFERENCES propietario(nie)
-                ON DELETE CASCADE ON UPDATE CASCADE
+                    ON DELETE CASCADE ON UPDATE CASCADE,
+                FOREIGN KEY (dato_registral) REFERENCES dato_registral(id_dr)
+                    ON DELETE CASCADE ON UPDATE CASCADE,
+                FOREIGN KEY (direccion) REFERENCES direccion(id) 
             );
         `);
         console.log("Tabla 'empresa' creada");
@@ -90,4 +93,13 @@ export const obtenerEmpresas = async () => {
     } catch (error) {
         throw new Error("Error al obtener clientes: " + error.message);
     }
+};
+
+export const obtenerEmpresasAdeudos = async () => {
+    try{    
+        const result = await pool.query("SELECT cif, nombre, clave FROM empresa"); 
+        return result.rows; 
+    } catch (error) {
+        throw new Error("Error al obtener empresas con adeudos: " + error.message);
+        }
 };
