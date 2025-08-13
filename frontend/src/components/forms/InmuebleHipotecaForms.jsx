@@ -28,7 +28,7 @@ const InmuebleHipotecaForm = ({ inmuebleHipoteca = {}, setInmuebleHipoteca, vali
                     />
                 </div>
                 <div className="flex justify-between">
-                    <label htmlFor="id_hipoteca">ID Hipoteca:</label>
+                    <label htmlFor="id_hipoteca">ID de Hipoteca:</label>
                     <input
                         id="id_hipoteca"
                         type="number"
