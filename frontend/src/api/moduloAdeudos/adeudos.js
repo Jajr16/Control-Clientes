@@ -13,6 +13,6 @@ export const addAdeudo = async (adeudo) => {
 };
 
 export const getAdeudoEmpresa = async (empresa) => {
-    const res = await axios.get(`${API_URL}/adeudos/${empresa}`);
+    const res = await axios.get(`${API_URL}/adeudos/empresa/${empresa}`);
     return res.data
 }

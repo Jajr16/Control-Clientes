@@ -238,8 +238,6 @@ class Repositorio {
             ${joinClause}
             ${whereClause}
         `;
-
-        console.log(query);
     
         try {
             const result = await pool.query(query, valores);
