@@ -48,6 +48,7 @@ const AgregarAdeudo = () => {
                     const response = await fetch(`http://localhost:3000/api/adeudos/empresa/${empresa.empresa_cif}`);
                     if (!response.ok) throw new Error("Error al obtener adeudos");
                     const data = await response.json();
+                    console.log(data)
                     setAdeudosGuardados(data.data);
                     setMostrarVistaPrevia(true);
                 } catch (error) {

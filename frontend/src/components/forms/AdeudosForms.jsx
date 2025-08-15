@@ -80,7 +80,8 @@ const AdeudosForm = ({
         throw new Error("Error al verificar adeudos pendientes");
       }
       
-      const checkData = await checkResponse.json();
+      let checkData = await checkResponse.json();
+      checkData = checkData.data
       
       if (!checkData.hay_pendientes) {
         alert("No hay adeudos pendientes para liquidar en esta empresa.");
@@ -107,7 +108,9 @@ const AdeudosForm = ({
         throw new Error(errorData.error || "Error al crear la liquidación");
       }
 
-      const result = await response.json();
+      const resultado = await response.json();
+      const result = resultado.data
+      console.log(result)
       const numeroLiquidacion = result.num_liquidacion;
 
       // Obtener los adeudos que se acaban de liquidar para el PDF
@@ -115,7 +118,7 @@ const AdeudosForm = ({
       const adeudosLiquidados = await adeudosLiquidadosResponse.json();
 
       // Generar PDF con el número de liquidación
-      generarPdfLiquidacionFinal(empresaSeleccionadaLiquidacion, adeudosLiquidados, honorariosSinIVA, numeroLiquidacion);
+      generarPdfLiquidacionFinal(empresaSeleccionadaLiquidacion, adeudosLiquidados.data, honorariosSinIVA, numeroLiquidacion);
       
       alert(`${result.mensaje || 'Liquidación creada exitosamente'}`);
       
@@ -196,6 +199,7 @@ const AdeudosForm = ({
 
   // Función para obtener datos calculados
   const obtenerDatosCalculados = (empresaCif, adeudos, honorariosSinIVA = 0) => {
+    console.log(adeudos)
     const adeudosFiltrados = adeudos.filter(a => a.empresa_cif === empresaCif);
     const empresaNombre = empresasDisponibles.find(e => e.cif === empresaCif)?.nombre || empresaCif;
     
@@ -665,10 +669,6 @@ const AdeudosForm = ({
             num_factura: empresa.numfactura,
             protocolo_entrada: empresa.protocoloentrada,
             cs_iva: parseFloat(empresa.csiniva) || 0
-          },
-          ajuste: {
-            num_factura: empresa.numfactura,
-            diferencia: parseFloat(empresa.total_adeudos) - parseFloat(empresa.anticipocliente || 0)
           }
         })
       });
