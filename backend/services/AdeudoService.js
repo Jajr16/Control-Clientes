@@ -8,12 +8,11 @@ class AdeudoService extends BaseService {
             adeudo: new Repositorio('adeudo', 'num_factura'),
             protocolo: new Repositorio('protocolo', 'num_factura'),
             anticipo: new Repositorio('anticipo', 'empresa_cif'),
-            ajuste: new Repositorio('ajuste', 'num_factura'),
             empresa: new Repositorio('empresa', 'cif')
         });
     }
 
-    async insertarAdeudoCompleto({ adeudo, protocolo, ajuste }) {
+    async insertarAdeudoCompleto({ adeudo, protocolo }) {
         return await this.withTransaction(async (client) => {
             // 1. Insertar adeudo SIN num_liquidacion
             const adeudoInsertado = await this.repositories.adeudo.insertar(adeudo, client);
@@ -31,12 +30,6 @@ class AdeudoService extends BaseService {
 
             if (anticipoExistente) {
                 console.log('Usando anticipo existente:', anticipoExistente);
-            }
-
-            // 4. Insertar ajuste si existe
-            if (ajuste && Object.keys(ajuste).length > 0) {
-                await this.repositories.ajuste.insertar(ajuste, client);
-                console.log('Ajuste insertado');
             }
 
             return adeudoInsertado;
@@ -57,19 +50,22 @@ class AdeudoService extends BaseService {
                 COALESCE(p.protocolo_entrada, '') AS protocolo_entrada,
                 COALESCE(p.cs_iva, 0) AS cs_iva,
                 (COALESCE(a.importe,0) + COALESCE(a.iva,0) - COALESCE(a.retencion,0) + COALESCE(p.cs_iva,0)) AS total,
-                COALESCE(an.anticipo, 0) AS anticipo,
                 COALESCE(h.honorario, 0) AS honorarios_base,
                 COALESCE(h.iva, 0) AS honorarios_iva,
-                a.empresa_cif,
                 CASE 
                     WHEN a.num_liquidacion IS NULL THEN 'PENDIENTE'
                     ELSE 'LIQUIDADO'
                 END as estado,
-                h.fecha_creacion as fecha_liquidacion
+                h.fecha_creacion as fecha_liquidacion,
+                CASE 
+                    WHEN a.concepto = 'Registro Mercantil de Madrid' THEN COALESCE(aj.diferencia, 0)
+                    ELSE NULL
+                END AS diferencia
             FROM adeudo a
             LEFT JOIN protocolo p ON a.num_factura = p.num_factura
             LEFT JOIN anticipo an ON a.empresa_cif = an.empresa_cif
             LEFT JOIN honorario h ON a.num_liquidacion = h.num_liquidacion AND a.empresa_cif = h.empresa_cif
+            LEFT JOIN ajuste aj ON a.num_factura = aj.num_factura
             WHERE a.empresa_cif = $1
             ORDER BY 
                 CASE WHEN a.num_liquidacion IS NULL THEN 0 ELSE 1 END,
@@ -79,10 +75,21 @@ class AdeudoService extends BaseService {
 
         const result = await pool.query(query, [empresa_cif]);
 
+        const query_anticipo = `
+            SELECT 
+                an.empresa_cif,
+                an.anticipo 
+            FROM anticipo an
+            WHERE an.empresa_cif = $1;
+        `
+
+        const anticipo_result = await pool.query(query_anticipo, [empresa_cif])
+
         // Calcular resumen
         const resumen = this._calcularResumen(result.rows);
 
         return {
+            anticipo: anticipo_result.rows,
             adeudos: result.rows,
             resumen
         };
@@ -142,6 +149,12 @@ class AdeudoService extends BaseService {
         return await this.withTransaction(async () => {
             const empresas = await this.repositories.empresa.BuscarConJoins([], {}, 'AND', ['cif', 'nombre', 'clave'])
             return empresas;
+        })
+    }
+
+    async getAdeudos() {
+        return await this.withTransaction(async () => {
+            // const adeudos = await this.repositories.
         })
     }
 

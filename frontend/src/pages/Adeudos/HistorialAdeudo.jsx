@@ -1,12 +1,14 @@
 import React, { useEffect, useState } from "react";
 import ClientSearch from "../../components/elements/searchBar";
 import { getAdeudoEmpresa } from "../../api/moduloAdeudos/adeudos"
+import {CheckIcon, XMarkIcon, EditIcon, TrashIcon} from '../../components/common/Icons'
 
 const historico = () => {
     const [selectedClient, setSelectedClient] = useState(null);
     const [originalRows, setOriginalRows] = useState([]);
     const [editedRows, setEditedRows] = useState([]);
-
+    const [selectedRows, setSelectedRows] = useState([]);
+    
 
     useEffect(() => {
         const cleanup = () => {
@@ -22,6 +24,11 @@ const historico = () => {
         const fetchGetHistorico = async() => {
             try {
                 const response = await getAdeudoEmpresa(selectedClient.cif)
+                
+                if (!response.success) {
+                    alert(response.error)
+                    return false;
+                }
                 setOriginalRows(response.data)
             } catch (error) {
                 console.error("Error fetching historico adeudos:", error);
@@ -31,7 +38,7 @@ const historico = () => {
 
         fetchGetHistorico();
         cleanup();
-    })
+    }, [selectedClient])
 
     return (
         <div className="w-full h-full">
@@ -51,7 +58,7 @@ const historico = () => {
 
             {selectedClient && 
                 <div className="w-full h-full">
-                    Adeudos a Finatech desde 
+                    Adeudos a Finatech desde {console.log(originalRows)}
                 </div>
             }
         </div>
