@@ -43,7 +43,7 @@ class AdeudoController extends BaseController {
 
   async createAdeudo(req, res) {
     try {
-      const { adeudo, protocolo, ajuste } = req.body;
+      const { adeudo, protocolo } = req.body;
 
       if (!adeudo || !adeudo.num_factura) {
         return res.status(400).json({ error: 'Número de factura es requerido' });
@@ -54,7 +54,7 @@ class AdeudoController extends BaseController {
         delete adeudo.num_liquidacion;
       }
 
-      const result = await this.service.insertarAdeudoCompleto({ adeudo, protocolo, ajuste });
+      const result = await this.service.insertarAdeudoCompleto({ adeudo, protocolo });
       return this.sendSuccess(res, result, 'Adeudo creado correctamente', 201);
     } catch (error) {
       return this.handleError(error, res, "Error al crear el adeudo");
@@ -86,6 +86,15 @@ class AdeudoController extends BaseController {
       return this.handleError(error, res, "Error al obtener las empresas para el historico.");
     }
   }
+
+  async getAdeudos(req, res) {
+    try {
+      const result = await this.service.getAdeudos();
+      return this.sendSuccess(res, result)
+    } catch (error) {
+      return this.handleError(error, res, "Error al obtener los adeudos de la empresa.");
+    }
+  } 
 }
 
 // Exportar tanto la clase como funciones individuales
@@ -99,3 +108,4 @@ export const checkAdeudosPendientes = adeudoController.checkAdeudosPendientes.bi
 export const createAdeudo = adeudoController.createAdeudo.bind(adeudoController);
 export const getAdeudosPendientesByEmpresa = adeudoController.getAdeudosPendientesByEmpresa.bind(adeudoController);
 export const getEmpresasAdeudos = adeudoController.getEmpresasAdeudos.bind(adeudoController);
+export const getAdeudos = adeudoController.getAdeudos.bind(adeudoController);
