@@ -16,3 +16,7 @@ export const getAdeudoEmpresa = async (empresa) => {
     const res = await axios.get(`${API_URL}/adeudos/empresa/${empresa}`);
     return res.data
 }
+
+export const updateAdeudos = async (cambios) => {
+    const res = await axios.post(`${API_URL}/adeudos/update`, cambios)
+}

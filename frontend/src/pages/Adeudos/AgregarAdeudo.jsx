@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import AdeudosForm from "../../components/forms/AdeudosForms.jsx";
 import { getEmpresas } from "../../api/moduloClientes/empresas.js";
-import { addAdeudo } from "../../api/moduloAdeudos/adeudos.js"; 
+import { addAdeudo } from "../../api/moduloAdeudos/adeudos.js";
 
 const AgregarAdeudo = () => {
     const [empresa, setEmpresa] = useState({
@@ -22,7 +22,6 @@ const AgregarAdeudo = () => {
     });
 
     const [mostrarVistaPrevia, setMostrarVistaPrevia] = useState(false);
-
     const [adeudosGuardados, setAdeudosGuardados] = useState([]);
     const [empresasDisponibles, setEmpresasDisponibles] = useState([]);
     const [validationErrors, setValidationErrors] = useState({});
@@ -105,29 +104,40 @@ const AgregarAdeudo = () => {
     };
 
     return (
-        <div className="p-6">
-            <strong className="text-2xl"><center>Agregar Adeudo</center></strong>
+        <div className="w-full h-full">
+            {/* Header responsive */}
+            <div className="bg-white border-b border-gray-200 px-3 sm:px-6 py-4 sm:py-6">
+                <h1 className="text-xl sm:text-2xl lg:text-3xl font-bold text-gray-900 text-center">
+                    Agregar Adeudo
+                </h1>
 
-            {mensaje && (
-                <div className="mb-4 text-center text-sm text-blue-700 font-semibold">
-                    {mensaje}
-                </div>
-            )}
+                {mensaje && (
+                    <div className={`mt-3 sm:mt-4 p-3 sm:p-4 rounded-md text-center text-sm sm:text-base font-semibold ${mensaje.includes('correctamente')
+                            ? 'bg-green-50 text-green-700 border border-green-200'
+                            : 'bg-red-50 text-red-700 border border-red-200'
+                        }`}>
+                        {mensaje}
+                    </div>
+                )}
+            </div>
 
-            <form onSubmit={handleSubmit}>
-                <AdeudosForm
-                    empresa={empresa}
-                    setEmpresa={setEmpresa}
-                    adeudosGuardados={adeudosGuardados}
-                    setAdeudosGuardados={setAdeudosGuardados}
-                    empresasDisponibles={empresasDisponibles}
-                    validationErrors={validationErrors}
-                    mostrarVistaPrevia={mostrarVistaPrevia}
-                    setVistaPrevia={setMostrarVistaPrevia}
-                />
-            </form>
+            {/* Formulario responsive */}
+            <div className="flex-1 overflow-y-auto p-3 sm:p-6">
+                <form onSubmit={handleSubmit} className="max-w-7xl mx-auto">
+                    <AdeudosForm
+                        empresa={empresa}
+                        setEmpresa={setEmpresa}
+                        adeudosGuardados={adeudosGuardados}
+                        setAdeudosGuardados={setAdeudosGuardados}
+                        empresasDisponibles={empresasDisponibles}
+                        validationErrors={validationErrors}
+                        mostrarVistaPrevia={mostrarVistaPrevia}
+                        setVistaPrevia={setMostrarVistaPrevia}
+                    />
+                </form>
+            </div>
         </div>
-    );
-};
+    )
+}
 
 export default AgregarAdeudo;

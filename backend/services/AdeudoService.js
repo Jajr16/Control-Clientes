@@ -84,13 +84,29 @@ class AdeudoService extends BaseService {
         `
 
         const anticipo_result = await pool.query(query_anticipo, [empresa_cif])
+        const anticipo = anticipo_result.rows[0] || null;
 
         // Calcular resumen
         const resumen = this._calcularResumen(result.rows);
 
+        const formatDate = (date) => {
+            if (!date) return null;
+            return new Date(date).toLocaleDateString("es-ES", {
+                day: "2-digit",
+                month: "2-digit",
+                year: "numeric"
+            });
+        };
+
+        const adeudos = result.rows.map(row => ({
+            ...row,
+            ff: formatDate(row.ff),
+            fecha_liquidacion: formatDate(row.fecha_liquidacion)
+        }));
+
         return {
-            anticipo: anticipo_result.rows,
-            adeudos: result.rows,
+            anticipo,
+            adeudos,
             resumen
         };
     }
@@ -156,6 +172,16 @@ class AdeudoService extends BaseService {
         return await this.withTransaction(async () => {
             // const adeudos = await this.repositories.
         })
+    }
+
+    async updateAdeudos(data) {
+        const is_num_fac = !!data.num_factura;
+        const is_anticipo = !!data.anticipo_unico;
+        let set = {}
+
+        if (is_anticipo) {
+            set.anticipo = data.anticipo_unico
+        }
     }
 
     _calcularResumen(adeudos) {

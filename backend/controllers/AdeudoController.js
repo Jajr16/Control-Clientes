@@ -94,7 +94,15 @@ class AdeudoController extends BaseController {
     } catch (error) {
       return this.handleError(error, res, "Error al obtener los adeudos de la empresa.");
     }
-  } 
+  }
+  
+  async updateAdeudos(req, res) {
+    try {
+      console.log(req.body)
+    } catch (error) {
+      return this.handleError(error, res, "Error al actualizar los adeudos de la empresa.");
+    }
+  }
 }
 
 // Exportar tanto la clase como funciones individuales
@@ -109,3 +117,4 @@ export const createAdeudo = adeudoController.createAdeudo.bind(adeudoController)
 export const getAdeudosPendientesByEmpresa = adeudoController.getAdeudosPendientesByEmpresa.bind(adeudoController);
 export const getEmpresasAdeudos = adeudoController.getEmpresasAdeudos.bind(adeudoController);
 export const getAdeudos = adeudoController.getAdeudos.bind(adeudoController);
+export const updateAdeudos = adeudoController.updateAdeudos.bind(adeudoController);

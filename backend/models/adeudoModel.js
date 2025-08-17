@@ -3,7 +3,7 @@ import { pool } from '../config/db.js';
 export const createTableAdeudo = async () => {
     const query = `
         CREATE TABLE IF NOT EXISTS adeudo (
-            num_factura VARCHAR(50) PRIMARY KEY,
+            num_factura VARCHAR(50),
             concepto VARCHAR(200) NOT NULL,
             proveedor VARCHAR(50) NOT NULL,
             ff DATE NOT NULL,
@@ -12,6 +12,7 @@ export const createTableAdeudo = async () => {
             retencion NUMERIC NOT NULL,
             num_liquidacion INT,
             empresa_cif VARCHAR(9) NOT NULL,
+            PRIMARY KEY (num_factura, empresa_cif),
             FOREIGN KEY (empresa_cif) REFERENCES empresa(cif)
                 ON DELETE CASCADE
                 ON UPDATE CASCADE,
