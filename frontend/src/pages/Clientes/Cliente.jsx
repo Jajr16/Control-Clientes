@@ -3,7 +3,7 @@ import ClientSearch from "../../components/elements/searchBar";
 import ClientDetails from "../../components/elements/ClienteDetails";
 import InmueblesList from "../../components/elements/InmueblesList";
 import InmuebleDetails from "../../components/elements/InmuebleDetails";
-import { getInmuebles } from "../../api/moduloClientes/inmueble";
+import { getInmuebles } from "../../api/moduloInmuebles/inmueble";
 import { UserPlusIcon } from "@heroicons/react/24/solid";
 import { Link } from "react-router-dom";
 

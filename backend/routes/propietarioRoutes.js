@@ -16,17 +16,19 @@ router.get('/', async (req, res) => {
 
 router.post('/', async (req, res) => {
     console.log("POST / ejecutado");
+    console.log("REQ.BODY:", req.body);
+
     const { nie, nombre, email, telefono } = req.body;
     if (!nie || !nombre || !email || !telefono  ) {
         return res.status(400).json({ error: "Faltan campos obligatorios" });
     }
 
     try {
-        const empresa = await agregarPropietario(nie, nombre, email, telefono);
-        res.status(201).json(empresa);
+        const propietario = await agregarPropietario(nie, nombre, email, telefono);
+        res.status(201).json(propietario);
     } catch (error) {
         res.status(500).json({ error: error.message });
-        console.error("Error al agregar empresa:", error);
+        console.error("Error al agregar propietario:", error);
     }
 });
 
