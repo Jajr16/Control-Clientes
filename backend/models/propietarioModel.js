@@ -19,6 +19,16 @@ export const createTablePropietario = async () => {
 
 export const agregarPropietario = async (nie, nombre, email, telefono) => {
     try {
+
+        // Limpiar el NIE (eliminar espacios)
+        const nieLimpio = nie.trim();
+        
+        console.log(`Intentando insertar NIE: '${nieLimpio}' (longitud: ${nieLimpio.length})`);
+        
+        if(nieLimpio.length > 9) {
+            throw new Error(`El NIE '${nieLimpio}' excede el límite de 9 caracteres`);
+        }
+        
         const result = await pool.query(
             `INSERT INTO propietario (nie, nombre, email, telefono) 
             VALUES ($1, $2, $3, $4) 
