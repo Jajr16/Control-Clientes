@@ -2,7 +2,6 @@ import React, { useState } from "react";
 import { AtSymbolIcon, PhoneIcon, MapPinIcon, IdentificationIcon, BuildingOfficeIcon, InformationCircleIcon } from "@heroicons/react/24/solid";
 
 const ClientDetails = ({ client }) => {
-    console.log(client)
     const [isOpen, setIsOpen] = useState(false);
 
     return (

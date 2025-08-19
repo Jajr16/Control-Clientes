@@ -1,12 +1,14 @@
 import { BaseService } from './BaseService.js';
 import Repositorio from "../repositories/globalPersistence.js";
 import { pool } from "../config/db.js";
+import formatDate from '../validations/formatDate.js';
+import { adeudoSchema } from '../middleware/Schemas.js'
 
 class AdeudoService extends BaseService {
     constructor() {
         super({
             adeudo: new Repositorio('adeudo', 'num_factura'),
-            protocolo: new Repositorio('protocolo', 'num_factura'),
+            protocolo: new Repositorio('protocolo', ['num_factura', 'empresa_cif']),
             anticipo: new Repositorio('anticipo', 'empresa_cif'),
             empresa: new Repositorio('empresa', 'cif')
         });
@@ -14,6 +16,8 @@ class AdeudoService extends BaseService {
 
     async insertarAdeudoCompleto({ adeudo, protocolo }) {
         return await this.withTransaction(async (client) => {
+            console.log(adeudo)
+            console.log(protocolo)
             // 1. Insertar adeudo SIN num_liquidacion
             const adeudoInsertado = await this.repositories.adeudo.insertar(adeudo, client);
             console.log('Adeudo insertado como PENDIENTE:', adeudoInsertado);
@@ -89,15 +93,6 @@ class AdeudoService extends BaseService {
         // Calcular resumen
         const resumen = this._calcularResumen(result.rows);
 
-        const formatDate = (date) => {
-            if (!date) return null;
-            return new Date(date).toLocaleDateString("es-ES", {
-                day: "2-digit",
-                month: "2-digit",
-                year: "numeric"
-            });
-        };
-
         const adeudos = result.rows.map(row => ({
             ...row,
             ff: formatDate(row.ff),
@@ -168,20 +163,93 @@ class AdeudoService extends BaseService {
         })
     }
 
-    async getAdeudos() {
-        return await this.withTransaction(async () => {
-            // const adeudos = await this.repositories.
-        })
-    }
-
     async updateAdeudos(data) {
-        const is_num_fac = !!data.num_factura;
-        const is_anticipo = !!data.anticipo_unico;
-        let set = {}
+        console.log("Datos recibidos:", data);
 
-        if (is_anticipo) {
-            set.anticipo = data.anticipo_unico
+        const empresa_cif = data.empresa_cif;
+        const anticipoUnico = data.anticipo_unico;
+        const cambiosProtocolo = data.cambios_protocolo || [];
+        const setAdeudos = data.cambios_filas || [];
+
+        if (anticipoUnico !== undefined && anticipoUnico !== null && isNaN(Number(anticipoUnico))) {
+            throw new Error("El anticipo debe ser un número válido");
         }
+
+        for (const adeudo of setAdeudos) {
+            const { num_factura_original, ...nuevosDatos } = adeudo;
+            const { error } = adeudoSchema.validate({ num_factura_original, ...nuevosDatos });
+            if (error) throw new Error(`Error de validación en factura ${num_factura_original}: ${error.message}`);
+        }
+
+        for (const protocolo of cambiosProtocolo) {
+            const { num_factura, cs_iva, protocolo_entrada } = protocolo;
+            if (!num_factura) throw new Error("num_factura es obligatorio en cambios_protocolo");
+        }
+
+        return await this.withTransaction(async (client) => {
+
+            // a) Anticipo
+            if (anticipoUnico !== undefined) {
+                const exists = await this.repositories.anticipo.ExistePorId({ empresa_cif });
+                if (exists) {
+                    await this.repositories.anticipo.actualizarPorId(
+                        { empresa_cif },
+                        { anticipo: Number(anticipoUnico) },
+                        client
+                    );
+                    console.log("ANTICIPO ACTUALIZADO");
+                } else {
+                    await this.repositories.anticipo.insertar(
+                        { empresa_cif, anticipo: Number(anticipoUnico) },
+                        client
+                    );
+                    console.log("ANTICIPO INSERTADO");
+                }
+            }
+
+            // b) Protocolos
+            if (cambiosProtocolo.length > 0) {
+                await Promise.all(
+                    cambiosProtocolo.map(async (protocolo) => {
+                        const { num_factura, ...nuevosDatos } = protocolo;
+                        const exists = await this.repositories.protocolo.ExistePorId({ num_factura, empresa_cif });
+                        if (exists) {
+                            await this.repositories.protocolo.actualizarPorId({ num_factura, empresa_cif }, nuevosDatos, client);
+                            console.log(`PROTOCOLO ACTUALIZADO: ${num_factura}`);
+                        } else {
+                            await this.repositories.protocolo.insertar({ ...nuevosDatos, num_factura, empresa_cif }, client);
+                            console.log(`PROTOCOLO INSERTADO: ${num_factura}`);
+                        }
+                    })
+                );
+            }
+
+            // c) Adeudos
+            if (setAdeudos.length > 0) {
+                await Promise.all(
+                    setAdeudos.map(async (adeudo) => {
+                        const { num_factura_original, ...nuevosDatos } = adeudo;
+
+                        if (nuevosDatos.num_liquidacion === "" || isNaN(Number(nuevosDatos.num_liquidacion))) {
+                            nuevosDatos.num_liquidacion = null;
+                        }
+
+                        await this.repositories.adeudo.actualizarPorId({ num_factura: num_factura_original }, nuevosDatos, client);
+                        console.log(`ADEUDO ACTUALIZADO: ${num_factura_original}`);
+                    })
+                );
+                console.log("ADEUDOS ACTUALIZADOS");
+            }
+
+            return {
+                success: true,
+                message: "Cambios guardados correctamente",
+                adeudosActualizados: setAdeudos.length,
+                protocolosActualizados: cambiosProtocolo.length,
+                anticipoActualizado: anticipoUnico !== undefined
+            };
+
+        });
     }
 
     _calcularResumen(adeudos) {

@@ -98,7 +98,8 @@ class AdeudoController extends BaseController {
   
   async updateAdeudos(req, res) {
     try {
-      console.log(req.body)
+      const result = await this.service.updateAdeudos(req.body);
+      return this.sendSuccess(res, result)
     } catch (error) {
       return this.handleError(error, res, "Error al actualizar los adeudos de la empresa.");
     }

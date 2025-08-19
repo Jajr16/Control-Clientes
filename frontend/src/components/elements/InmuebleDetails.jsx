@@ -1,8 +1,10 @@
 import React, { useState, useEffect } from "react";
 import { getInmuebleDetails, getInmuebleHipotecas } from "../../api/moduloInmuebles/inmueble";
-import { MapPinIcon, IdentificationIcon, ClipboardDocumentListIcon, ShieldCheckIcon,
+import {
+    MapPinIcon, IdentificationIcon, ClipboardDocumentListIcon, ShieldCheckIcon,
     LifebuoyIcon, BuildingOfficeIcon, PhoneIcon, AtSymbolIcon, CurrencyEuroIcon,
-    CalendarDaysIcon } from "@heroicons/react/24/solid";
+    CalendarDaysIcon
+} from "@heroicons/react/24/solid";
 
 
 const InmuebleDetails = ({ inmueble, setProveedoresSegurosList, proveedoresList, setHipotecas, HipotecasList }) => {
@@ -17,11 +19,11 @@ const InmuebleDetails = ({ inmueble, setProveedoresSegurosList, proveedoresList,
             try {
                 const response = await getInmuebleHipotecas(CC);
                 setHipotecas(response.data)
-
+                console.log(response.data)
                 return response
             } catch (error) {
                 console.error("Error en fetchHipotecas:", error)
-                return null                
+                return null
             }
         }
 
@@ -36,15 +38,16 @@ const InmuebleDetails = ({ inmueble, setProveedoresSegurosList, proveedoresList,
                 return null;
             }
         }
-        
+
         fetchProveedoresSeguros(inmueble.clave_catastral);
         fetchHipotecas(inmueble.clave_catastral);
+        console.log(HipotecasList)
     }, [inmueble]);
 
     return (
-        <div className="relative flex w-[100%] h-full p-2">
+        <div className="absolute flex w-[68%] h-full p-2">
             <div className="relative w-full h-full flex flex-col border border-black p-2">
-                <div className={`w-full h-full p-3 ${proveedoresList == null ? null : "bg-white"}`}>
+                <div className={`w-full h-full p-3 ${proveedoresList == null ? null : "bg-white"} overflow-y-auto`}>
 
                     {/* Contenedor flexible para Seguros, Proveedores y el nuevo div */}
                     <div className="flex flex-col h-full">
@@ -58,7 +61,7 @@ const InmuebleDetails = ({ inmueble, setProveedoresSegurosList, proveedoresList,
                             ) : (
                                 <>
                                     <h4 className="text-2xl font-bold">Seguros</h4>
-                                    <div className="flex-1 overflow-y-auto mt-5">
+                                    <div className="flex-1 mt-5">
                                         {proveedoresList.seguros.map((seguro, index) => (
                                             <div className="border border-black rounded-xl p-2 mb-3" key={index}>
                                                 <div className="grid grid-cols-3 gap-4">
@@ -100,7 +103,7 @@ const InmuebleDetails = ({ inmueble, setProveedoresSegurosList, proveedoresList,
                             ) : (
                                 <>
                                     <h4 className="text-2xl font-bold">Proveedores</h4>
-                                    <div className="flex-1 overflow-y-auto mt-5">
+                                    <div className="flex-1 mt-5">
                                         {proveedoresList.proveedores.map((proveedor, index) => (
                                             <div className="border border-black rounded-xl p-2 mb-3" key={index}>
                                                 <div className="grid grid-cols-2 gap-4">
@@ -127,13 +130,13 @@ const InmuebleDetails = ({ inmueble, setProveedoresSegurosList, proveedoresList,
                                 </>
                             )
                         }
-                        
+
                         {/* Sección de los datos registrales del inmueble */}
                         {inmueble && (
                             <>
                                 <h4 className="text-2xl font-bold">Datos Registrales</h4>
-                                <div className="flex-1 overflow-y-auto mt-5">
-                                    <div className="border border-black rounded-xl p-2">
+                                <div className="flex-1 mt-5">
+                                    <div className="border border-black rounded-xl p-2 mb-3">
                                         <div className="grid grid-cols-4 gap-4">
                                             <div className="flex items-center bg-gray-100 p-3">
                                                 <b className="mr-2">Clave catastral:</b>{inmueble.clave_catastral}
@@ -175,28 +178,28 @@ const InmuebleDetails = ({ inmueble, setProveedoresSegurosList, proveedoresList,
                                 <h4 className="text-2xl font-bold">Hipotecas</h4>
                                 <div className="flex-1">El inmueble no tiene hipotecas.</div>
                             </>
-                            ) : (
+                        ) : (
                             <>
                                 <h4 className="text-2xl font-bold">Hipotecas</h4>
-                                <div className="flex-1 overflow-y-auto mt-5">
-                                    <div className="border border-black rounded-xl p-2">
+                                <div className="flex-1 mt-5">
                                     {HipotecasList.map((hipoteca, index) => (
-                                        <div className="grid grid-cols-4 gap-4">
-                                            <div className="flex items-center bg-gray-100 p-3">
-                                                <b className="mr-2">Banco:</b>{hipoteca.banco_prestamo}
-                                            </div>
-                                            <div className="flex items-center bg-gray-100 p-3">
-                                                <b className="mr-2">Prestamo:</b>{hipoteca.prestamo.toLocaleString('de-DE')}
-                                            </div>
-                                            <div className="flex items-center bg-gray-200 p-3">
-                                                <b className="mr-2">Fecha Prestamo:</b>{new Date(hipoteca.fecha_hipoteca).toLocaleDateString('es-ES')}
-                                            </div>
-                                            <div className="flex items-center bg-gray-100 p-3">
-                                                <b className="mr-2">Cuota:</b>{hipoteca.cuota.toLocaleString('de-DE')}
+                                        <div className="border border-black rounded-xl p-2 mb-3" key={index}>
+                                            <div className="grid grid-cols-4 gap-4">
+                                                <div className="flex items-center bg-gray-100 p-3">
+                                                    <b className="mr-2">Banco:</b>{hipoteca.banco_prestamo}
+                                                </div>
+                                                <div className="flex items-center bg-gray-100 p-3">
+                                                    <b className="mr-2">Prestamo:</b>{hipoteca.prestamo.toLocaleString('de-DE')}
+                                                </div>
+                                                <div className="flex items-center bg-gray-200 p-3">
+                                                    <b className="mr-2">Fecha Prestamo:</b>{new Date(hipoteca.fecha_hipoteca).toLocaleDateString('es-ES')}
+                                                </div>
+                                                <div className="flex items-center bg-gray-100 p-3">
+                                                    <b className="mr-2">Cuota:</b>{hipoteca.cuota_hipoteca.toLocaleString('de-DE')}
+                                                </div>
                                             </div>
                                         </div>
                                     ))}
-                                    </div>
                                 </div>
                             </>
                         )}
