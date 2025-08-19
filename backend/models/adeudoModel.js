@@ -59,10 +59,12 @@ export const createTableHonorario = async () => {
 export const createTableProtocolo = async () => {
     const query = `
         CREATE TABLE IF NOT EXISTS protocolo(
-            num_factura VARCHAR(50) PRIMARY KEY, 
+            num_factura VARCHAR(50),
+            empresa_cif VARCHAR(9),
             protocolo_entrada VARCHAR(50) NOT NULL,
             cs_iva NUMERIC NOT NULL, 
-            FOREIGN KEY (num_factura) REFERENCES adeudo(num_factura)
+            PRIMARY KEY (num_factura, empresa_cif),
+            FOREIGN KEY (num_factura, empresa_cif) REFERENCES adeudo(num_factura, empresa_cif)
                 ON DELETE CASCADE
                 ON UPDATE CASCADE
         );
@@ -80,9 +82,11 @@ export const createTableProtocolo = async () => {
 export const createTableAjuste = async () => {
     const query = `
         CREATE TABLE IF NOT EXISTS ajuste(
-            num_factura VARCHAR(50) PRIMARY KEY, 
+            num_factura VARCHAR(50),
+            empresa_cif VARCHAR(9),
             diferencia NUMERIC NOT NULL,
-            FOREIGN KEY (num_factura) REFERENCES adeudo(num_factura)
+            PRIMARY KEY (num_factura, empresa_cif),
+            FOREIGN KEY (num_factura, empresa_cif) REFERENCES adeudo(num_factura, empresa_cif)
                 ON DELETE CASCADE
                 ON UPDATE CASCADE
         );
@@ -120,7 +124,7 @@ export const createTableAnticipo = async () => {
 // 2. Función para obtener SOLO adeudos pendientes (sin liquidar)
 export const obtenerAdeudosPendientes = async (empresa_cif) => {
     console.log("Buscando adeudos PENDIENTES (sin liquidar) para empresa:", empresa_cif);
-    
+
     const query = `
         SELECT 
             a.num_factura,
@@ -152,7 +156,7 @@ export const obtenerAdeudosPendientes = async (empresa_cif) => {
 // 3. Función para obtener SOLO adeudos liquidados
 export const obtenerAdeudosLiquidados = async (empresa_cif) => {
     console.log("Buscando adeudos LIQUIDADOS para empresa:", empresa_cif);
-    
+
     const query = `
         SELECT 
             a.num_factura,
@@ -188,7 +192,7 @@ export const obtenerAdeudosLiquidados = async (empresa_cif) => {
 // 4. Función para obtener TODOS los adeudos con su estado
 export const obtenerTodosAdeudosPorEmpresa = async (empresa_cif) => {
     console.log("Buscando TODOS los adeudos para empresa:", empresa_cif);
-    
+
     const query = `
         SELECT 
             a.num_factura,
@@ -224,14 +228,14 @@ export const obtenerTodosAdeudosPorEmpresa = async (empresa_cif) => {
 
     const result = await pool.query(query, [empresa_cif]);
     console.log("Total adeudos encontrados:", result.rows.length);
-    
+
     // Separar por estado para estadísticas
     const pendientes = result.rows.filter(r => r.estado === 'PENDIENTE').length;
     const liquidados = result.rows.filter(r => r.estado === 'LIQUIDADO').length;
-    
+
     console.log(`- Pendientes: ${pendientes}`);
     console.log(`- Liquidados: ${liquidados}`);
-    
+
     return result.rows;
 };
 
@@ -242,12 +246,12 @@ export const verificarAdeudosPendientes = async (empresa_cif) => {
         FROM adeudo 
         WHERE empresa_cif = $1 AND num_liquidacion IS NULL
     `;
-    
+
     const result = await pool.query(query, [empresa_cif]);
     const totalPendientes = parseInt(result.rows[0].total_pendientes);
-    
+
     console.log(`Empresa ${empresa_cif} tiene ${totalPendientes} adeudos pendientes`);
-    
+
     return {
         hay_pendientes: totalPendientes > 0,
         total_pendientes: totalPendientes

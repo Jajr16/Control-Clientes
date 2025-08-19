@@ -104,9 +104,9 @@ const AgregarAdeudo = () => {
     };
 
     return (
-        <div className="w-full h-full">
-            {/* Header responsive */}
-            <div className="bg-white border-b border-gray-200 px-3 sm:px-6 py-4 sm:py-6">
+        <div className="w-full h-full flex flex-col">
+            {/* Header fijo */}
+            <div className="flex-shrink-0 bg-white border-b border-gray-200 px-3 sm:px-6 py-4 sm:py-6">
                 <h1 className="text-xl sm:text-2xl lg:text-3xl font-bold text-gray-900 text-center">
                     Agregar Adeudo
                 </h1>
@@ -121,20 +121,22 @@ const AgregarAdeudo = () => {
                 )}
             </div>
 
-            {/* Formulario responsive */}
-            <div className="flex-1 overflow-y-auto p-3 sm:p-6">
-                <form onSubmit={handleSubmit} className="max-w-7xl mx-auto">
-                    <AdeudosForm
-                        empresa={empresa}
-                        setEmpresa={setEmpresa}
-                        adeudosGuardados={adeudosGuardados}
-                        setAdeudosGuardados={setAdeudosGuardados}
-                        empresasDisponibles={empresasDisponibles}
-                        validationErrors={validationErrors}
-                        mostrarVistaPrevia={mostrarVistaPrevia}
-                        setVistaPrevia={setMostrarVistaPrevia}
-                    />
-                </form>
+            {/* Contenido scrolleable */}
+            <div className="flex-1 overflow-y-auto bg-white">
+                <div className="p-3 sm:p-6">
+                    <form onSubmit={handleSubmit} className="max-w-7xl mx-auto">
+                        <AdeudosForm
+                            empresa={empresa}
+                            setEmpresa={setEmpresa}
+                            adeudosGuardados={adeudosGuardados}
+                            setAdeudosGuardados={setAdeudosGuardados}
+                            empresasDisponibles={empresasDisponibles}
+                            validationErrors={validationErrors}
+                            mostrarVistaPrevia={mostrarVistaPrevia}
+                            setVistaPrevia={setMostrarVistaPrevia}
+                        />
+                    </form>
+                </div>
             </div>
         </div>
     )

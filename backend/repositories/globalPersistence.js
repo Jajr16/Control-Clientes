@@ -27,9 +27,9 @@ class Repositorio {
 
         const columnas = Object.keys(datos).join(", "); // Obtiene las nombres de las llaves del diccionario
         const valores = Object.values(datos) // Obtiene los valores del diccionario
-         // Recorre cada valor para hacer la notación de inserción de valores dentro de una consulta
-        const placeholders = valores.map((_, index) => `$${index + 1}`).join(', ') 
-    
+        // Recorre cada valor para hacer la notación de inserción de valores dentro de una consulta
+        const placeholders = valores.map((_, index) => `$${index + 1}`).join(', ')
+
         try {
             console.log(`Los datos recibidos son ${datos}`)
 
@@ -58,7 +58,7 @@ class Repositorio {
         try {
             const query = `SELECT * FROM ${this.tabla};`
             const result = await pool.query(query)
-            
+
             return result.rows
         } catch (error) {
             console.error(`Error al obtener los registros de la tabla ${this.tabla}:`, error)
@@ -70,7 +70,7 @@ class Repositorio {
      * Método para buscar registros por id (sirve con llave primaria compuesta)
      * 
      * @param {*} claves Llave primaria de la tabla
-     * @returns Respuesta sQL con los registros guardados en la tabla
+     * @returns Respuesta SQL con los registros guardados en la tabla
      */
     async ObtenerPorId(claves) {
         if (!this._validarClaves(claves)) {
@@ -91,12 +91,39 @@ class Repositorio {
         }
     }
 
+    /** 
+     * Método para comprobar que un registro exista dentro de una tabla
+     * 
+     * @param {*} claves Llave primaria de la tabla
+     * @returns Respuesta SQL con confirmación de si existe un registro o no
+     * 
+     */
+    async ExistePorId(claves) {
+        if (!this._validarClaves(claves)) {
+            throw new Error(`Las claves proporcionadas no coinciden con ${this.clavesPrimarias.join(', ')}`);
+        }
+
+        // Recorre cada valor para hacer la notación de las condiciones de los valores dentro de una consulta
+        const condiciones = this.clavesPrimarias.map((clave, index) => `${clave} = $${index + 1}`).join(' AND ');
+        const valores = this.clavesPrimarias.map(clave => claves[clave]); // Obtiene los valores del diccionario de claves (llaves primarias)
+
+        try {
+            const query = `SELECT 1 FROM ${this.tabla} WHERE ${condiciones}`
+            const result = await pool.query(query, valores);
+            return result.rowCount > 0;
+        } catch (error) {
+            console.error(`Error al obtener el registro en ${this.tabla}: `, error)
+            throw new Error(`Error al obtener el registro en ${this.tabla}`);
+        }
+    }
+
     /**
      * Método para actualizar un registro en la base de datos por medio de la llave primaria (sirve con llaves primarias compuestas)
      * 
      * @param {*} claves Llave primaria de la tabla
      * @param {*} nuevosDatos Nuevos datos a registrar
      * @returns Respuesta SQL de éxito o fracaso
+     * 
      */
     async actualizarPorId(claves, nuevosDatos, client = null) {
         if (!this._validarClaves(claves)) {
@@ -113,7 +140,7 @@ class Repositorio {
         const set = Object.keys(nuevosDatos).map((col, index) => `${col} = $${index + 1}`).join(', ')
         const valores = [...Object.values(nuevosDatos), ...this.clavesPrimarias.map(k => claves[k])]; // Los valores del diccionario 'nuevosDatos' los agrupa en un array
         // Notación para establecer las llaves primarias en las condiciones para el UPDATE
-        const condiciones = this.clavesPrimarias.map((clave, index) => `${clave} = $${Object.keys(nuevosDatos).length + index + 1}`).join(' AND '); 
+        const condiciones = this.clavesPrimarias.map((clave, index) => `${clave} = $${Object.keys(nuevosDatos).length + index + 1}`).join(' AND ');
 
         try {
             const query = `
@@ -139,15 +166,15 @@ class Repositorio {
         }
 
         const queryClient = client || pool;
-    
+
         // Notación para establecer las llaves primarias en las condiciones para el DELETE
         const condiciones = this.clavesPrimarias.map((clave, index) => `${clave} = $${index + 1}`).join(' AND ');
         const valores = this.clavesPrimarias.map(clave => claves[clave]); // Obtiene los valores del diccionario de claves (llaves primarias)
-    
+
         try {
             const query = `DELETE FROM ${this.tabla} WHERE ${condiciones} RETURNING *;`;
             const result = await pool.query(query, valores);
-    
+
             return result.rowCount > 0;
         } catch (error) {
             console.error(`Error al eliminar en ${this.tabla}:`, error);
@@ -174,11 +201,11 @@ class Repositorio {
 
         const columnasQuery = columnasSeleccionadas.length > 0 ? columnasSeleccionadas.join(', ') : '*';
 
-        
+
         try {
             const query = `SELECT ${columnasQuery} FROM ${this.tabla} WHERE ${condiciones}`;
-            const result = await pool.query(query, valores)   
-            return result.rows;         
+            const result = await pool.query(query, valores)
+            return result.rows;
         } catch (error) {
             console.error(`Error al buscar en ${this.tabla} con filtros:`, error);
             throw new Error(`No se pudo realizar la búsqueda en ${this.tabla}`);
@@ -197,28 +224,28 @@ class Repositorio {
         if (!Array.isArray(joins)) {
             joins = [joins];
         }
-    
+
         // Validar filtros
         if (!filtros || typeof filtros !== 'object') {
             filtros = {};
         }
-    
+
         // Construir SELECT
-        const columnas = columnasSeleccionadas.length > 0 ? 
-            columnasSeleccionadas.join(', ') : 
+        const columnas = columnasSeleccionadas.length > 0 ?
+            columnasSeleccionadas.join(', ') :
             `${this.tabla}.*`;
-    
+
         // Construir JOINs
         let joinClause = '';
         joins.forEach(join => {
             joinClause += ` ${join.type} JOIN ${join.table} ON ${join.on}`;
         });
-    
+
         // Construir WHERE
         const condiciones = [];
         const valores = [];
         let contador = 1;
-    
+
         for (const [campo, valor] of Object.entries(filtros)) {
             if (valor !== undefined && valor !== null && valor !== '') {
                 condiciones.push(`${campo} = $${contador}`);
@@ -226,11 +253,11 @@ class Repositorio {
                 contador++;
             }
         }
-    
-        const whereClause = condiciones.length > 0 ? 
-            `WHERE ${condiciones.join(` ${operador} `)}` : 
+
+        const whereClause = condiciones.length > 0 ?
+            `WHERE ${condiciones.join(` ${operador} `)}` :
             '';
-    
+
         // Construir query final
         const query = `
             SELECT ${columnas} 
@@ -238,7 +265,7 @@ class Repositorio {
             ${joinClause}
             ${whereClause}
         `;
-    
+
         try {
             const result = await pool.query(query, valores);
             return result.rows;
@@ -256,7 +283,7 @@ class Repositorio {
      */
     _validarClaves(claves) {
         return Object.keys(claves).length === this.clavesPrimarias.length &&
-        this.clavesPrimarias.every(k => claves.hasOwnProperty(k));
+            this.clavesPrimarias.every(k => claves.hasOwnProperty(k));
     }
 }
 

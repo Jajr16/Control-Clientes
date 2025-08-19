@@ -26,7 +26,6 @@ export const useAdeudosManager = () => {
         });
 
         setHasChanges(anticipoChanged || rowsChanged);
-        console.log(hasChanges)
         console.log(editedRows)
     };
 
@@ -128,8 +127,33 @@ export const useAdeudosManager = () => {
         }
     };
 
+    const agruparProtocoloPorFactura = (cambios) => {
+        const map = {};
+
+        cambios.forEach(item => {
+            if (!map[item.num_factura]) {
+                map[item.num_factura] = { num_factura: item.num_factura };
+            }
+            if ('protocolo_entrada' in item) map[item.num_factura].protocolo_entrada = item.protocolo_entrada;
+            if ('cs_iva' in item) map[item.num_factura].cs_iva = item.cs_iva;
+        });
+
+        return Object.values(map);
+    };
+
     const handleSaveChanges = async (saveApiCall = updateAdeudos) => {
         try {
+            for (const row of editedRows) {
+                const camposObligatorios = ["num_factura", "concepto", "proveedor", "importe", "iva", "retencion"];
+                for (const campo of camposObligatorios) {
+                    if (!row[campo] || row[campo].toString().trim() === "") {
+                        alert(`El campo "${campo}" no puede estar vacío en la factura ${row.num_factura || "(sin número)"}`);
+                        return;
+                    }
+                }
+            }
+
+            const cambiosProtocolo = [];
             const cambiosAnticipo = anticipoUnico !== originalAnticipo ? {
                 anticipo_unico: anticipoUnico === "" || anticipoUnico === "0" ? null : parseFloat(anticipoUnico)
             } : {};
@@ -141,29 +165,35 @@ export const useAdeudosManager = () => {
 
                     const cambios = {};
                     let hayCambios = false;
-                    let cambioNumFactura = false;
 
                     Object.keys(row).forEach(key => {
                         if (key === 'total' || key === '_internal_id') return;
+
+                        if (key === 'protocolo_entrada' || key === 'cs_iva') {
+                            if (row[key] !== original[key]) {
+                                cambiosProtocolo.push({
+                                    num_factura: row.num_factura,
+                                    [key]: row[key]
+                                });
+                            }
+                            return;
+                        }
+
                         if (row[key] !== original[key]) {
                             cambios[key] = row[key];
                             hayCambios = true;
                         }
-                        if (key === 'num_factura') {
-                            if (row[key] !== original[key]) {
-                                cambioNumFactura = true;
-                            }
-                        }
                     });
 
-                    if (cambioNumFactura) {
-                        return hayCambios ? {
-                            num_factura_original: original.num_factura, // Número original para identificar en BD
+                    if (row.num_factura !== original.num_factura) {
+                        return {
+                            num_factura_original: original.num_factura,
                             ...cambios
-                        } : null;
+                        };
                     }
+
                     return hayCambios ? {
-                        num_factura_original: original.num_factura, // Número original para identificar en BD
+                        num_factura_original: original.num_factura,
                         ...cambios
                     } : null;
                 })
@@ -172,13 +202,15 @@ export const useAdeudosManager = () => {
             const payload = {
                 empresa_cif: selectedClient?.cif,
                 ...cambiosAnticipo,
-                cambios_filas: cambiosFilas
+                cambios_filas: cambiosFilas,
+                cambios_protocolo: cambiosProtocolo.length ? agruparProtocoloPorFactura(cambiosProtocolo) : undefined
             };
 
             console.log("Cambios a enviar:", payload);
 
             if (saveApiCall) {
                 const response = await saveApiCall(payload);
+                console.log("Respuesta del backend:", response);
                 if (!response.success) {
                     alert(response.error || "Error al guardar cambios");
                     return;

@@ -116,7 +116,7 @@ export function useAdeudos({ empresa, setEmpresa, adeudosGuardados, setAdeudosGu
       retencion: toNum(empresa.retencion),
       empresa_cif: empresa.empresa_cif,
     };
-    const protocolo = { num_factura: empresa.numfactura, protocolo_entrada: empresa.protocoloentrada || null, cs_iva: toNum(empresa.csiniva) };
+    const protocolo = { num_factura: empresa.numfactura, empresa_cif: empresa.empresa_cif, protocolo_entrada: empresa.protocoloentrada || null, cs_iva: toNum(empresa.csiniva) };
 
     try {
       setBotonGuardarDeshabilitado(true);
