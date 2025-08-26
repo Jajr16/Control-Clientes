@@ -1,6 +1,6 @@
 // hooks/useAdeudosManager.js
-import { useState } from 'react';
-import { updateAdeudos } from '../api/moduloAdeudos/adeudos'
+import { useState, useEffect } from 'react';
+import { updateAdeudos, deleteAdeudos } from '../api/moduloAdeudos/adeudos'
 
 export const useAdeudosManager = () => {
     const [selectedClient, setSelectedClient] = useState(null);
@@ -26,8 +26,11 @@ export const useAdeudosManager = () => {
         });
 
         setHasChanges(anticipoChanged || rowsChanged);
-        console.log(editedRows)
     };
+
+    useEffect(() => {
+        checkForChanges();
+    }, [anticipoUnico, editedRows]);
 
     const handleCellChange = (index, field, value) => {
         const newRows = [...editedRows];
@@ -42,12 +45,10 @@ export const useAdeudosManager = () => {
         }
 
         setEditedRows(newRows);
-        checkForChanges();
     };
 
     const handleAnticipoChange = (value) => {
         setAnticipoUnico(value);
-        checkForChanges();
     };
 
     // Cambiar a usar _internal_id en lugar de num_factura
@@ -85,7 +86,7 @@ export const useAdeudosManager = () => {
         setEditingRows(new Set(selectedRows));
     };
 
-    const handleDeleteSelected = async (deleteApiCall = null) => {
+    const handleDeleteSelected = async (deleteApiCall = deleteAdeudos) => {
         if (selectedRows.size === 0) {
             alert("Debes seleccionar al menos una fila para eliminar");
             return;
@@ -99,8 +100,13 @@ export const useAdeudosManager = () => {
             const facturasAEliminar = editedRows
                 .filter(row => selectedRows.has(row._internal_id))
                 .map(row => {
+                    console.log(editedRows)
                     const original = originalRows.find(orig => orig._internal_id === row._internal_id);
-                    return original ? original.num_factura : row.num_factura;
+                    const data = {
+                        num_factura: original ? original.num_factura : row.num_factura,
+                        empresa_cif: selectedClient.cif
+                    }
+                    return data;
                 });
 
             if (deleteApiCall) {

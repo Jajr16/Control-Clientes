@@ -4,6 +4,7 @@ import { getAdeudoEmpresa } from "../../api/moduloAdeudos/adeudos";
 import { CheckIcon, XMarkIcon, EditIcon, TrashIcon } from '../../components/common/Icons';
 import { useAdeudosManager } from '../../hooks/useAdeudosManager';
 
+
 const Historico = () => {
     const {
         // Estados

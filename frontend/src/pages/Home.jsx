@@ -1,8 +1,49 @@
 import React from "react";
 import { Link } from "react-router-dom";
 import { PlusIcon, BuildingOfficeIcon, UserGroupIcon, DocumentIcon } from "@heroicons/react/24/outline";
+import { useEffect, useState } from "react";
+import { getDatosHome } from "../api/Home/home";
 
 const Home = () => {
+    const [totalClientes, setTotalClientes] = useState("")
+    const [adeudosPendientes, setAdeudosPendientes] = useState("")
+    const [totalPendientes, setTotalPendientes] = useState("")
+    const [gananciasMes, setGananciasMes] = useState("")
+    const [movimientos, setMovimientos] = useState([]);
+
+    useEffect(() => {
+        const fetchDatosHome = async () => {
+            try {
+                const response = await getDatosHome();
+                console.log(response)
+                if (!response.success) {
+                    alert(response.error);
+                    return;
+                }
+
+                setTotalClientes(response.data.clientes)
+                setAdeudosPendientes(response.data.adeudos_pendientes)
+                setTotalPendientes(response.data.total_pendientes)
+                setGananciasMes(response.data.liquidados)
+                setMovimientos(response.data.movimientos || [])
+
+            } catch (error) {
+                console.error("Error fetching historico adeudos:", error);
+                resetState();
+            }
+        }
+
+        const resetState = () => {
+            setTotalClientes("")
+            setAdeudosPendientes("")
+            setTotalPendientes("")
+            setGananciasMes("")
+            setMovimientos([])
+        };
+
+        fetchDatosHome();
+    }, [])
+
     const quickActions = [
         {
             title: "Agregar Cliente",
@@ -37,7 +78,7 @@ const Home = () => {
     return (
         <div className="w-full h-full overflow-y-auto">
             {/* Header */}
-            <div className="bg-gradient-to-r from-blue-600 to-purple-600 px-4 sm:px-6 lg:px-8 py-8 sm:py-12">
+            <div className="bg-gradient-to-r from-[#5b3c1b] to-[#8f845b] px-4 sm:px-6 lg:px-8 py-8 sm:py-12">
                 <div className="max-w-7xl mx-auto text-center">
                     <h1 className="text-2xl sm:text-3xl lg:text-4xl font-bold text-white mb-3 sm:mb-4">
                         Sistema de Gestión Empresarial
@@ -61,7 +102,7 @@ const Home = () => {
                                     <p className="text-xs sm:text-sm font-medium text-gray-500 uppercase tracking-wide">
                                         Total Clientes
                                     </p>
-                                    <p className="text-lg sm:text-2xl font-semibold text-gray-900">--</p>
+                                    <p className="text-lg sm:text-2xl font-semibold text-gray-900">{totalClientes}</p>
                                 </div>
                             </div>
                         </div>
@@ -75,7 +116,7 @@ const Home = () => {
                                     <p className="text-xs sm:text-sm font-medium text-gray-500 uppercase tracking-wide">
                                         Adeudos Activos
                                     </p>
-                                    <p className="text-lg sm:text-2xl font-semibold text-gray-900">--</p>
+                                    <p className="text-lg sm:text-2xl font-semibold text-gray-900">{adeudosPendientes}</p>
                                 </div>
                             </div>
                         </div>
@@ -89,7 +130,7 @@ const Home = () => {
                                     <p className="text-xs sm:text-sm font-medium text-gray-500 uppercase tracking-wide">
                                         Total Pendiente
                                     </p>
-                                    <p className="text-lg sm:text-2xl font-semibold text-gray-900">€--</p>
+                                    <p className="text-lg sm:text-2xl font-semibold text-gray-900">€ {totalPendientes}</p>
                                 </div>
                             </div>
                         </div>
@@ -101,9 +142,9 @@ const Home = () => {
                                 </div>
                                 <div className="ml-3 sm:ml-4">
                                     <p className="text-xs sm:text-sm font-medium text-gray-500 uppercase tracking-wide">
-                                        Este Mes
+                                        Ganancias Este Mes
                                     </p>
-                                    <p className="text-lg sm:text-2xl font-semibold text-gray-900">€--</p>
+                                    <p className="text-lg sm:text-2xl font-semibold text-gray-900">€ {gananciasMes}</p>
                                 </div>
                             </div>
                         </div>
@@ -145,7 +186,7 @@ const Home = () => {
                                             {action.description}
                                         </p>
                                     </div>
-                                    
+
                                     {/* Hover effect bar */}
                                     <div className="h-1 bg-gray-100 group-hover:bg-gradient-to-r group-hover:from-blue-500 group-hover:to-purple-500 transition-all duration-300"></div>
                                 </Link>
@@ -164,23 +205,28 @@ const Home = () => {
                                     Últimas acciones realizadas en el sistema
                                 </p>
                             </div>
-                            
-                            <div className="px-4 sm:px-6 py-8 sm:py-12 text-center">
-                                <div className="max-w-sm mx-auto">
-                                    <DocumentIcon className="mx-auto h-12 w-12 text-gray-400 mb-4" />
-                                    <h3 className="text-sm sm:text-base font-medium text-gray-900 mb-2">
-                                        No hay actividad reciente
-                                    </h3>
-                                    <p className="text-xs sm:text-sm text-gray-500">
-                                        Las actividades recientes aparecerán aquí una vez que comiences a usar el sistema.
-                                    </p>
-                                </div>
+
+                            <div className="px-4 sm:px-6 py-4 sm:py-6">
+                                {movimientos.length === 0 ? (
+                                    <div className="text-center text-gray-500">
+                                        <DocumentIcon className="mx-auto h-12 w-12 mb-4" />
+                                        <p className="text-xs sm:text-sm">No hay actividad reciente</p>
+                                    </div>
+                                ) : (
+                                    <ul className="space-y-3 max-h-64 overflow-y-auto">
+                                        {movimientos.map((mov, index) => (
+                                            <li key={index} className="bg-gray-50 border border-gray-200 rounded-lg p-3 text-sm sm:text-base text-gray-800 truncate">
+                                                <span className="font-medium">{mov.accion}</span>
+                                            </li>
+                                        ))}
+                                    </ul>
+                                )}
                             </div>
                         </div>
                     </div>
 
                     {/* Help Section */}
-                    <div className="mt-8 sm:mt-12">
+                    {/* <div className="mt-8 sm:mt-12">
                         <div className="bg-gradient-to-r from-blue-50 to-purple-50 rounded-lg p-4 sm:p-6 border border-blue-200">
                             <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between">
                                 <div className="mb-4 sm:mb-0">
@@ -201,7 +247,7 @@ const Home = () => {
                                 </div>
                             </div>
                         </div>
-                    </div>
+                    </div> */}
                 </div>
             </div>
         </div>

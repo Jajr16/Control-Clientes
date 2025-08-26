@@ -1,0 +1,1392 @@
+[2025-08-25T20:54:17.204Z] Error: No se pudo realizar la búsqueda en empresa
+    at Repositorio.BuscarPorFiltros (file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/repositories/globalPersistence.js:211:19)
+    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at async file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/services/AdeudoService.js:39:29
+    at async AdeudoService.withTransaction (file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/services/BaseService.js:13:28)
+    at async AdeudoService.insertarAdeudoCompleto (file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/services/AdeudoService.js:18:16)
+    at async AdeudoController.createAdeudo (file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/controllers/AdeudoController.js:57:22)
+
+[2025-08-25T20:54:17.516Z] Error: Missing credentials for "PLAIN"
+    at SMTPConnection._formatError (C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\nodemailer\lib\smtp-connection\index.js:809:19)
+    at SMTPConnection.login (C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\nodemailer\lib\smtp-connection\index.js:454:38)
+    at C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\nodemailer\lib\smtp-transport\index.js:272:32
+    at SMTPConnection.<anonymous> (C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\nodemailer\lib\smtp-connection\index.js:215:17)
+    at Object.onceWrapper (node:events:638:28)
+    at SMTPConnection.emit (node:events:524:28)
+    at SMTPConnection._actionEHLO (C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\nodemailer\lib\smtp-connection\index.js:1371:14)
+    at SMTPConnection._processResponse (C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\nodemailer\lib\smtp-connection\index.js:993:20)
+    at SMTPConnection._onData (C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\nodemailer\lib\smtp-connection\index.js:774:14)
+    at SMTPConnection._onSocketData (C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\nodemailer\lib\smtp-connection\index.js:195:44)
+
+[2025-08-25T20:54:17.776Z] Error: Missing credentials for "PLAIN"
+    at SMTPConnection._formatError (C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\nodemailer\lib\smtp-connection\index.js:809:19)
+    at SMTPConnection.login (C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\nodemailer\lib\smtp-connection\index.js:454:38)
+    at C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\nodemailer\lib\smtp-transport\index.js:272:32
+    at SMTPConnection.<anonymous> (C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\nodemailer\lib\smtp-connection\index.js:215:17)
+    at Object.onceWrapper (node:events:638:28)
+    at SMTPConnection.emit (node:events:524:28)
+    at SMTPConnection._actionEHLO (C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\nodemailer\lib\smtp-connection\index.js:1371:14)
+    at SMTPConnection._processResponse (C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\nodemailer\lib\smtp-connection\index.js:993:20)
+    at SMTPConnection._onData (C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\nodemailer\lib\smtp-connection\index.js:774:14)
+    at SMTPConnection._onSocketData (C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\nodemailer\lib\smtp-connection\index.js:195:44)
+
+[2025-08-25T20:54:17.964Z] Error: Missing credentials for "PLAIN"
+    at SMTPConnection._formatError (C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\nodemailer\lib\smtp-connection\index.js:809:19)
+    at SMTPConnection.login (C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\nodemailer\lib\smtp-connection\index.js:454:38)
+    at C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\nodemailer\lib\smtp-transport\index.js:272:32
+    at SMTPConnection.<anonymous> (C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\nodemailer\lib\smtp-connection\index.js:215:17)
+    at Object.onceWrapper (node:events:638:28)
+    at SMTPConnection.emit (node:events:524:28)
+    at SMTPConnection._actionEHLO (C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\nodemailer\lib\smtp-connection\index.js:1371:14)
+    at SMTPConnection._processResponse (C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\nodemailer\lib\smtp-connection\index.js:993:20)
+    at SMTPConnection._onData (C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\nodemailer\lib\smtp-connection\index.js:774:14)
+    at SMTPConnection._onSocketData (C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\nodemailer\lib\smtp-connection\index.js:195:44)
+
+[2025-08-25T20:54:18.163Z] Error: Missing credentials for "PLAIN"
+    at SMTPConnection._formatError (C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\nodemailer\lib\smtp-connection\index.js:809:19)
+    at SMTPConnection.login (C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\nodemailer\lib\smtp-connection\index.js:454:38)
+    at C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\nodemailer\lib\smtp-transport\index.js:272:32
+    at SMTPConnection.<anonymous> (C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\nodemailer\lib\smtp-connection\index.js:215:17)
+    at Object.onceWrapper (node:events:638:28)
+    at SMTPConnection.emit (node:events:524:28)
+    at SMTPConnection._actionEHLO (C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\nodemailer\lib\smtp-connection\index.js:1371:14)
+    at SMTPConnection._processResponse (C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\nodemailer\lib\smtp-connection\index.js:993:20)
+    at SMTPConnection._onData (C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\nodemailer\lib\smtp-connection\index.js:774:14)
+    at SMTPConnection._onSocketData (C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\nodemailer\lib\smtp-connection\index.js:195:44)
+
+[2025-08-25T20:54:18.345Z] Error: Missing credentials for "PLAIN"
+    at SMTPConnection._formatError (C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\nodemailer\lib\smtp-connection\index.js:809:19)
+    at SMTPConnection.login (C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\nodemailer\lib\smtp-connection\index.js:454:38)
+    at C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\nodemailer\lib\smtp-transport\index.js:272:32
+    at SMTPConnection.<anonymous> (C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\nodemailer\lib\smtp-connection\index.js:215:17)
+    at Object.onceWrapper (node:events:638:28)
+    at SMTPConnection.emit (node:events:524:28)
+    at SMTPConnection._actionEHLO (C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\nodemailer\lib\smtp-connection\index.js:1371:14)
+    at SMTPConnection._processResponse (C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\nodemailer\lib\smtp-connection\index.js:993:20)
+    at SMTPConnection._onData (C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\nodemailer\lib\smtp-connection\index.js:774:14)
+    at SMTPConnection._onSocketData (C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\nodemailer\lib\smtp-connection\index.js:195:44)
+
+[2025-08-25T20:54:18.514Z] Error: Missing credentials for "PLAIN"
+    at SMTPConnection._formatError (C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\nodemailer\lib\smtp-connection\index.js:809:19)
+    at SMTPConnection.login (C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\nodemailer\lib\smtp-connection\index.js:454:38)
+    at C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\nodemailer\lib\smtp-transport\index.js:272:32
+    at SMTPConnection.<anonymous> (C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\nodemailer\lib\smtp-connection\index.js:215:17)
+    at Object.onceWrapper (node:events:638:28)
+    at SMTPConnection.emit (node:events:524:28)
+    at SMTPConnection._actionEHLO (C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\nodemailer\lib\smtp-connection\index.js:1371:14)
+    at SMTPConnection._processResponse (C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\nodemailer\lib\smtp-connection\index.js:993:20)
+    at SMTPConnection._onData (C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\nodemailer\lib\smtp-connection\index.js:774:14)
+    at SMTPConnection._onSocketData (C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\nodemailer\lib\smtp-connection\index.js:195:44)
+
+[2025-08-25T20:54:18.678Z] Error: Missing credentials for "PLAIN"
+    at SMTPConnection._formatError (C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\nodemailer\lib\smtp-connection\index.js:809:19)
+    at SMTPConnection.login (C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\nodemailer\lib\smtp-connection\index.js:454:38)
+    at C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\nodemailer\lib\smtp-transport\index.js:272:32
+    at SMTPConnection.<anonymous> (C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\nodemailer\lib\smtp-connection\index.js:215:17)
+    at Object.onceWrapper (node:events:638:28)
+    at SMTPConnection.emit (node:events:524:28)
+    at SMTPConnection._actionEHLO (C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\nodemailer\lib\smtp-connection\index.js:1371:14)
+    at SMTPConnection._processResponse (C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\nodemailer\lib\smtp-connection\index.js:993:20)
+    at SMTPConnection._onData (C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\nodemailer\lib\smtp-connection\index.js:774:14)
+    at SMTPConnection._onSocketData (C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\nodemailer\lib\smtp-connection\index.js:195:44)
+
+[2025-08-25T20:54:18.862Z] Error: Missing credentials for "PLAIN"
+    at SMTPConnection._formatError (C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\nodemailer\lib\smtp-connection\index.js:809:19)
+    at SMTPConnection.login (C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\nodemailer\lib\smtp-connection\index.js:454:38)
+    at C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\nodemailer\lib\smtp-transport\index.js:272:32
+    at SMTPConnection.<anonymous> (C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\nodemailer\lib\smtp-connection\index.js:215:17)
+    at Object.onceWrapper (node:events:638:28)
+    at SMTPConnection.emit (node:events:524:28)
+    at SMTPConnection._actionEHLO (C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\nodemailer\lib\smtp-connection\index.js:1371:14)
+    at SMTPConnection._processResponse (C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\nodemailer\lib\smtp-connection\index.js:993:20)
+    at SMTPConnection._onData (C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\nodemailer\lib\smtp-connection\index.js:774:14)
+    at SMTPConnection._onSocketData (C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\nodemailer\lib\smtp-connection\index.js:195:44)
+
+[2025-08-25T20:54:19.054Z] Error: Missing credentials for "PLAIN"
+    at SMTPConnection._formatError (C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\nodemailer\lib\smtp-connection\index.js:809:19)
+    at SMTPConnection.login (C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\nodemailer\lib\smtp-connection\index.js:454:38)
+    at C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\nodemailer\lib\smtp-transport\index.js:272:32
+    at SMTPConnection.<anonymous> (C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\nodemailer\lib\smtp-connection\index.js:215:17)
+    at Object.onceWrapper (node:events:638:28)
+    at SMTPConnection.emit (node:events:524:28)
+    at SMTPConnection._actionEHLO (C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\nodemailer\lib\smtp-connection\index.js:1371:14)
+    at SMTPConnection._processResponse (C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\nodemailer\lib\smtp-connection\index.js:993:20)
+    at SMTPConnection._onData (C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\nodemailer\lib\smtp-connection\index.js:774:14)
+    at SMTPConnection._onSocketData (C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\nodemailer\lib\smtp-connection\index.js:195:44)
+
+[2025-08-25T20:54:19.231Z] Error: Missing credentials for "PLAIN"
+    at SMTPConnection._formatError (C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\nodemailer\lib\smtp-connection\index.js:809:19)
+    at SMTPConnection.login (C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\nodemailer\lib\smtp-connection\index.js:454:38)
+    at C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\nodemailer\lib\smtp-transport\index.js:272:32
+    at SMTPConnection.<anonymous> (C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\nodemailer\lib\smtp-connection\index.js:215:17)
+    at Object.onceWrapper (node:events:638:28)
+    at SMTPConnection.emit (node:events:524:28)
+    at SMTPConnection._actionEHLO (C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\nodemailer\lib\smtp-connection\index.js:1371:14)
+    at SMTPConnection._processResponse (C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\nodemailer\lib\smtp-connection\index.js:993:20)
+    at SMTPConnection._onData (C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\nodemailer\lib\smtp-connection\index.js:774:14)
+    at SMTPConnection._onSocketData (C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\nodemailer\lib\smtp-connection\index.js:195:44)
+
+[2025-08-25T20:54:19.419Z] Error: Missing credentials for "PLAIN"
+    at SMTPConnection._formatError (C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\nodemailer\lib\smtp-connection\index.js:809:19)
+    at SMTPConnection.login (C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\nodemailer\lib\smtp-connection\index.js:454:38)
+    at C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\nodemailer\lib\smtp-transport\index.js:272:32
+    at SMTPConnection.<anonymous> (C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\nodemailer\lib\smtp-connection\index.js:215:17)
+    at Object.onceWrapper (node:events:638:28)
+    at SMTPConnection.emit (node:events:524:28)
+    at SMTPConnection._actionEHLO (C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\nodemailer\lib\smtp-connection\index.js:1371:14)
+    at SMTPConnection._processResponse (C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\nodemailer\lib\smtp-connection\index.js:993:20)
+    at SMTPConnection._onData (C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\nodemailer\lib\smtp-connection\index.js:774:14)
+    at SMTPConnection._onSocketData (C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\nodemailer\lib\smtp-connection\index.js:195:44)
+
+[2025-08-25T20:54:19.591Z] Error: Missing credentials for "PLAIN"
+    at SMTPConnection._formatError (C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\nodemailer\lib\smtp-connection\index.js:809:19)
+    at SMTPConnection.login (C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\nodemailer\lib\smtp-connection\index.js:454:38)
+    at C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\nodemailer\lib\smtp-transport\index.js:272:32
+    at SMTPConnection.<anonymous> (C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\nodemailer\lib\smtp-connection\index.js:215:17)
+    at Object.onceWrapper (node:events:638:28)
+    at SMTPConnection.emit (node:events:524:28)
+    at SMTPConnection._actionEHLO (C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\nodemailer\lib\smtp-connection\index.js:1371:14)
+    at SMTPConnection._processResponse (C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\nodemailer\lib\smtp-connection\index.js:993:20)
+    at SMTPConnection._onData (C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\nodemailer\lib\smtp-connection\index.js:774:14)
+    at SMTPConnection._onSocketData (C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\nodemailer\lib\smtp-connection\index.js:195:44)
+
+[2025-08-25T20:54:19.787Z] Error: Missing credentials for "PLAIN"
+    at SMTPConnection._formatError (C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\nodemailer\lib\smtp-connection\index.js:809:19)
+    at SMTPConnection.login (C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\nodemailer\lib\smtp-connection\index.js:454:38)
+    at C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\nodemailer\lib\smtp-transport\index.js:272:32
+    at SMTPConnection.<anonymous> (C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\nodemailer\lib\smtp-connection\index.js:215:17)
+    at Object.onceWrapper (node:events:638:28)
+    at SMTPConnection.emit (node:events:524:28)
+    at SMTPConnection._actionEHLO (C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\nodemailer\lib\smtp-connection\index.js:1371:14)
+    at SMTPConnection._processResponse (C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\nodemailer\lib\smtp-connection\index.js:993:20)
+    at SMTPConnection._onData (C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\nodemailer\lib\smtp-connection\index.js:774:14)
+    at SMTPConnection._onSocketData (C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\nodemailer\lib\smtp-connection\index.js:195:44)
+
+[2025-08-25T20:54:19.974Z] Error: Missing credentials for "PLAIN"
+    at SMTPConnection._formatError (C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\nodemailer\lib\smtp-connection\index.js:809:19)
+    at SMTPConnection.login (C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\nodemailer\lib\smtp-connection\index.js:454:38)
+    at C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\nodemailer\lib\smtp-transport\index.js:272:32
+    at SMTPConnection.<anonymous> (C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\nodemailer\lib\smtp-connection\index.js:215:17)
+    at Object.onceWrapper (node:events:638:28)
+    at SMTPConnection.emit (node:events:524:28)
+    at SMTPConnection._actionEHLO (C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\nodemailer\lib\smtp-connection\index.js:1371:14)
+    at SMTPConnection._processResponse (C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\nodemailer\lib\smtp-connection\index.js:993:20)
+    at SMTPConnection._onData (C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\nodemailer\lib\smtp-connection\index.js:774:14)
+    at SMTPConnection._onSocketData (C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\nodemailer\lib\smtp-connection\index.js:195:44)
+
+[2025-08-25T20:54:20.147Z] Error: Missing credentials for "PLAIN"
+    at SMTPConnection._formatError (C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\nodemailer\lib\smtp-connection\index.js:809:19)
+    at SMTPConnection.login (C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\nodemailer\lib\smtp-connection\index.js:454:38)
+    at C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\nodemailer\lib\smtp-transport\index.js:272:32
+    at SMTPConnection.<anonymous> (C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\nodemailer\lib\smtp-connection\index.js:215:17)
+    at Object.onceWrapper (node:events:638:28)
+    at SMTPConnection.emit (node:events:524:28)
+    at SMTPConnection._actionEHLO (C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\nodemailer\lib\smtp-connection\index.js:1371:14)
+    at SMTPConnection._processResponse (C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\nodemailer\lib\smtp-connection\index.js:993:20)
+    at SMTPConnection._onData (C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\nodemailer\lib\smtp-connection\index.js:774:14)
+    at SMTPConnection._onSocketData (C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\nodemailer\lib\smtp-connection\index.js:195:44)
+
+[2025-08-25T20:54:20.320Z] Error: Missing credentials for "PLAIN"
+    at SMTPConnection._formatError (C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\nodemailer\lib\smtp-connection\index.js:809:19)
+    at SMTPConnection.login (C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\nodemailer\lib\smtp-connection\index.js:454:38)
+    at C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\nodemailer\lib\smtp-transport\index.js:272:32
+    at SMTPConnection.<anonymous> (C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\nodemailer\lib\smtp-connection\index.js:215:17)
+    at Object.onceWrapper (node:events:638:28)
+    at SMTPConnection.emit (node:events:524:28)
+    at SMTPConnection._actionEHLO (C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\nodemailer\lib\smtp-connection\index.js:1371:14)
+    at SMTPConnection._processResponse (C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\nodemailer\lib\smtp-connection\index.js:993:20)
+    at SMTPConnection._onData (C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\nodemailer\lib\smtp-connection\index.js:774:14)
+    at SMTPConnection._onSocketData (C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\nodemailer\lib\smtp-connection\index.js:195:44)
+
+[2025-08-25T20:54:20.494Z] Error: Missing credentials for "PLAIN"
+    at SMTPConnection._formatError (C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\nodemailer\lib\smtp-connection\index.js:809:19)
+    at SMTPConnection.login (C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\nodemailer\lib\smtp-connection\index.js:454:38)
+    at C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\nodemailer\lib\smtp-transport\index.js:272:32
+    at SMTPConnection.<anonymous> (C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\nodemailer\lib\smtp-connection\index.js:215:17)
+    at Object.onceWrapper (node:events:638:28)
+    at SMTPConnection.emit (node:events:524:28)
+    at SMTPConnection._actionEHLO (C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\nodemailer\lib\smtp-connection\index.js:1371:14)
+    at SMTPConnection._processResponse (C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\nodemailer\lib\smtp-connection\index.js:993:20)
+    at SMTPConnection._onData (C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\nodemailer\lib\smtp-connection\index.js:774:14)
+    at SMTPConnection._onSocketData (C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\nodemailer\lib\smtp-connection\index.js:195:44)
+
+[2025-08-25T20:54:20.674Z] Error: Missing credentials for "PLAIN"
+    at SMTPConnection._formatError (C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\nodemailer\lib\smtp-connection\index.js:809:19)
+    at SMTPConnection.login (C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\nodemailer\lib\smtp-connection\index.js:454:38)
+    at C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\nodemailer\lib\smtp-transport\index.js:272:32
+    at SMTPConnection.<anonymous> (C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\nodemailer\lib\smtp-connection\index.js:215:17)
+    at Object.onceWrapper (node:events:638:28)
+    at SMTPConnection.emit (node:events:524:28)
+    at SMTPConnection._actionEHLO (C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\nodemailer\lib\smtp-connection\index.js:1371:14)
+    at SMTPConnection._processResponse (C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\nodemailer\lib\smtp-connection\index.js:993:20)
+    at SMTPConnection._onData (C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\nodemailer\lib\smtp-connection\index.js:774:14)
+    at SMTPConnection._onSocketData (C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\nodemailer\lib\smtp-connection\index.js:195:44)
+
+[2025-08-25T20:54:20.860Z] Error: Missing credentials for "PLAIN"
+    at SMTPConnection._formatError (C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\nodemailer\lib\smtp-connection\index.js:809:19)
+    at SMTPConnection.login (C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\nodemailer\lib\smtp-connection\index.js:454:38)
+    at C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\nodemailer\lib\smtp-transport\index.js:272:32
+    at SMTPConnection.<anonymous> (C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\nodemailer\lib\smtp-connection\index.js:215:17)
+    at Object.onceWrapper (node:events:638:28)
+    at SMTPConnection.emit (node:events:524:28)
+    at SMTPConnection._actionEHLO (C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\nodemailer\lib\smtp-connection\index.js:1371:14)
+    at SMTPConnection._processResponse (C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\nodemailer\lib\smtp-connection\index.js:993:20)
+    at SMTPConnection._onData (C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\nodemailer\lib\smtp-connection\index.js:774:14)
+    at SMTPConnection._onSocketData (C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\nodemailer\lib\smtp-connection\index.js:195:44)
+
+[2025-08-25T20:54:21.118Z] Error: Missing credentials for "PLAIN"
+    at SMTPConnection._formatError (C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\nodemailer\lib\smtp-connection\index.js:809:19)
+    at SMTPConnection.login (C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\nodemailer\lib\smtp-connection\index.js:454:38)
+    at C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\nodemailer\lib\smtp-transport\index.js:272:32
+    at SMTPConnection.<anonymous> (C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\nodemailer\lib\smtp-connection\index.js:215:17)
+    at Object.onceWrapper (node:events:638:28)
+    at SMTPConnection.emit (node:events:524:28)
+    at SMTPConnection._actionEHLO (C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\nodemailer\lib\smtp-connection\index.js:1371:14)
+    at SMTPConnection._processResponse (C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\nodemailer\lib\smtp-connection\index.js:993:20)
+    at SMTPConnection._onData (C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\nodemailer\lib\smtp-connection\index.js:774:14)
+    at SMTPConnection._onSocketData (C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\nodemailer\lib\smtp-connection\index.js:195:44)
+
+[2025-08-25T20:54:21.308Z] Error: Missing credentials for "PLAIN"
+    at SMTPConnection._formatError (C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\nodemailer\lib\smtp-connection\index.js:809:19)
+    at SMTPConnection.login (C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\nodemailer\lib\smtp-connection\index.js:454:38)
+    at C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\nodemailer\lib\smtp-transport\index.js:272:32
+    at SMTPConnection.<anonymous> (C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\nodemailer\lib\smtp-connection\index.js:215:17)
+    at Object.onceWrapper (node:events:638:28)
+    at SMTPConnection.emit (node:events:524:28)
+    at SMTPConnection._actionEHLO (C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\nodemailer\lib\smtp-connection\index.js:1371:14)
+    at SMTPConnection._processResponse (C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\nodemailer\lib\smtp-connection\index.js:993:20)
+    at SMTPConnection._onData (C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\nodemailer\lib\smtp-connection\index.js:774:14)
+    at SMTPConnection._onSocketData (C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\nodemailer\lib\smtp-connection\index.js:195:44)
+
+[2025-08-25T20:54:21.576Z] Error: Missing credentials for "PLAIN"
+    at SMTPConnection._formatError (C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\nodemailer\lib\smtp-connection\index.js:809:19)
+    at SMTPConnection.login (C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\nodemailer\lib\smtp-connection\index.js:454:38)
+    at C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\nodemailer\lib\smtp-transport\index.js:272:32
+    at SMTPConnection.<anonymous> (C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\nodemailer\lib\smtp-connection\index.js:215:17)
+    at Object.onceWrapper (node:events:638:28)
+    at SMTPConnection.emit (node:events:524:28)
+    at SMTPConnection._actionEHLO (C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\nodemailer\lib\smtp-connection\index.js:1371:14)
+    at SMTPConnection._processResponse (C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\nodemailer\lib\smtp-connection\index.js:993:20)
+    at SMTPConnection._onData (C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\nodemailer\lib\smtp-connection\index.js:774:14)
+    at SMTPConnection._onSocketData (C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\nodemailer\lib\smtp-connection\index.js:195:44)
+
+[2025-08-25T20:54:21.755Z] Error: Missing credentials for "PLAIN"
+    at SMTPConnection._formatError (C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\nodemailer\lib\smtp-connection\index.js:809:19)
+    at SMTPConnection.login (C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\nodemailer\lib\smtp-connection\index.js:454:38)
+    at C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\nodemailer\lib\smtp-transport\index.js:272:32
+    at SMTPConnection.<anonymous> (C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\nodemailer\lib\smtp-connection\index.js:215:17)
+    at Object.onceWrapper (node:events:638:28)
+    at SMTPConnection.emit (node:events:524:28)
+    at SMTPConnection._actionEHLO (C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\nodemailer\lib\smtp-connection\index.js:1371:14)
+    at SMTPConnection._processResponse (C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\nodemailer\lib\smtp-connection\index.js:993:20)
+    at SMTPConnection._onData (C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\nodemailer\lib\smtp-connection\index.js:774:14)
+    at SMTPConnection._onSocketData (C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\nodemailer\lib\smtp-connection\index.js:195:44)
+
+[2025-08-25T20:54:21.968Z] Error: Missing credentials for "PLAIN"
+    at SMTPConnection._formatError (C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\nodemailer\lib\smtp-connection\index.js:809:19)
+    at SMTPConnection.login (C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\nodemailer\lib\smtp-connection\index.js:454:38)
+    at C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\nodemailer\lib\smtp-transport\index.js:272:32
+    at SMTPConnection.<anonymous> (C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\nodemailer\lib\smtp-connection\index.js:215:17)
+    at Object.onceWrapper (node:events:638:28)
+    at SMTPConnection.emit (node:events:524:28)
+    at SMTPConnection._actionEHLO (C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\nodemailer\lib\smtp-connection\index.js:1371:14)
+    at SMTPConnection._processResponse (C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\nodemailer\lib\smtp-connection\index.js:993:20)
+    at SMTPConnection._onData (C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\nodemailer\lib\smtp-connection\index.js:774:14)
+    at SMTPConnection._onSocketData (C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\nodemailer\lib\smtp-connection\index.js:195:44)
+
+[2025-08-25T20:54:22.181Z] Error: Missing credentials for "PLAIN"
+    at SMTPConnection._formatError (C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\nodemailer\lib\smtp-connection\index.js:809:19)
+    at SMTPConnection.login (C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\nodemailer\lib\smtp-connection\index.js:454:38)
+    at C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\nodemailer\lib\smtp-transport\index.js:272:32
+    at SMTPConnection.<anonymous> (C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\nodemailer\lib\smtp-connection\index.js:215:17)
+    at Object.onceWrapper (node:events:638:28)
+    at SMTPConnection.emit (node:events:524:28)
+    at SMTPConnection._actionEHLO (C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\nodemailer\lib\smtp-connection\index.js:1371:14)
+    at SMTPConnection._processResponse (C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\nodemailer\lib\smtp-connection\index.js:993:20)
+    at SMTPConnection._onData (C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\nodemailer\lib\smtp-connection\index.js:774:14)
+    at SMTPConnection._onSocketData (C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\nodemailer\lib\smtp-connection\index.js:195:44)
+
+[2025-08-25T20:54:22.377Z] Error: Missing credentials for "PLAIN"
+    at SMTPConnection._formatError (C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\nodemailer\lib\smtp-connection\index.js:809:19)
+    at SMTPConnection.login (C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\nodemailer\lib\smtp-connection\index.js:454:38)
+    at C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\nodemailer\lib\smtp-transport\index.js:272:32
+    at SMTPConnection.<anonymous> (C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\nodemailer\lib\smtp-connection\index.js:215:17)
+    at Object.onceWrapper (node:events:638:28)
+    at SMTPConnection.emit (node:events:524:28)
+    at SMTPConnection._actionEHLO (C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\nodemailer\lib\smtp-connection\index.js:1371:14)
+    at SMTPConnection._processResponse (C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\nodemailer\lib\smtp-connection\index.js:993:20)
+    at SMTPConnection._onData (C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\nodemailer\lib\smtp-connection\index.js:774:14)
+    at SMTPConnection._onSocketData (C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\nodemailer\lib\smtp-connection\index.js:195:44)
+
+[2025-08-25T20:54:22.560Z] Error: Missing credentials for "PLAIN"
+    at SMTPConnection._formatError (C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\nodemailer\lib\smtp-connection\index.js:809:19)
+    at SMTPConnection.login (C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\nodemailer\lib\smtp-connection\index.js:454:38)
+    at C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\nodemailer\lib\smtp-transport\index.js:272:32
+    at SMTPConnection.<anonymous> (C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\nodemailer\lib\smtp-connection\index.js:215:17)
+    at Object.onceWrapper (node:events:638:28)
+    at SMTPConnection.emit (node:events:524:28)
+    at SMTPConnection._actionEHLO (C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\nodemailer\lib\smtp-connection\index.js:1371:14)
+    at SMTPConnection._processResponse (C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\nodemailer\lib\smtp-connection\index.js:993:20)
+    at SMTPConnection._onData (C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\nodemailer\lib\smtp-connection\index.js:774:14)
+    at SMTPConnection._onSocketData (C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\nodemailer\lib\smtp-connection\index.js:195:44)
+
+[2025-08-25T20:54:22.747Z] Error: Missing credentials for "PLAIN"
+    at SMTPConnection._formatError (C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\nodemailer\lib\smtp-connection\index.js:809:19)
+    at SMTPConnection.login (C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\nodemailer\lib\smtp-connection\index.js:454:38)
+    at C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\nodemailer\lib\smtp-transport\index.js:272:32
+    at SMTPConnection.<anonymous> (C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\nodemailer\lib\smtp-connection\index.js:215:17)
+    at Object.onceWrapper (node:events:638:28)
+    at SMTPConnection.emit (node:events:524:28)
+    at SMTPConnection._actionEHLO (C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\nodemailer\lib\smtp-connection\index.js:1371:14)
+    at SMTPConnection._processResponse (C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\nodemailer\lib\smtp-connection\index.js:993:20)
+    at SMTPConnection._onData (C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\nodemailer\lib\smtp-connection\index.js:774:14)
+    at SMTPConnection._onSocketData (C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\nodemailer\lib\smtp-connection\index.js:195:44)
+
+[2025-08-25T20:54:22.920Z] Error: Missing credentials for "PLAIN"
+    at SMTPConnection._formatError (C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\nodemailer\lib\smtp-connection\index.js:809:19)
+    at SMTPConnection.login (C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\nodemailer\lib\smtp-connection\index.js:454:38)
+    at C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\nodemailer\lib\smtp-transport\index.js:272:32
+    at SMTPConnection.<anonymous> (C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\nodemailer\lib\smtp-connection\index.js:215:17)
+    at Object.onceWrapper (node:events:638:28)
+    at SMTPConnection.emit (node:events:524:28)
+    at SMTPConnection._actionEHLO (C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\nodemailer\lib\smtp-connection\index.js:1371:14)
+    at SMTPConnection._processResponse (C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\nodemailer\lib\smtp-connection\index.js:993:20)
+    at SMTPConnection._onData (C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\nodemailer\lib\smtp-connection\index.js:774:14)
+    at SMTPConnection._onSocketData (C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\nodemailer\lib\smtp-connection\index.js:195:44)
+
+[2025-08-25T20:54:23.086Z] Error: Missing credentials for "PLAIN"
+    at SMTPConnection._formatError (C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\nodemailer\lib\smtp-connection\index.js:809:19)
+    at SMTPConnection.login (C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\nodemailer\lib\smtp-connection\index.js:454:38)
+    at C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\nodemailer\lib\smtp-transport\index.js:272:32
+    at SMTPConnection.<anonymous> (C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\nodemailer\lib\smtp-connection\index.js:215:17)
+    at Object.onceWrapper (node:events:638:28)
+    at SMTPConnection.emit (node:events:524:28)
+    at SMTPConnection._actionEHLO (C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\nodemailer\lib\smtp-connection\index.js:1371:14)
+    at SMTPConnection._processResponse (C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\nodemailer\lib\smtp-connection\index.js:993:20)
+    at SMTPConnection._onData (C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\nodemailer\lib\smtp-connection\index.js:774:14)
+    at SMTPConnection._onSocketData (C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\nodemailer\lib\smtp-connection\index.js:195:44)
+
+[2025-08-25T20:54:23.294Z] Error: Missing credentials for "PLAIN"
+    at SMTPConnection._formatError (C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\nodemailer\lib\smtp-connection\index.js:809:19)
+    at SMTPConnection.login (C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\nodemailer\lib\smtp-connection\index.js:454:38)
+    at C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\nodemailer\lib\smtp-transport\index.js:272:32
+    at SMTPConnection.<anonymous> (C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\nodemailer\lib\smtp-connection\index.js:215:17)
+    at Object.onceWrapper (node:events:638:28)
+    at SMTPConnection.emit (node:events:524:28)
+    at SMTPConnection._actionEHLO (C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\nodemailer\lib\smtp-connection\index.js:1371:14)
+    at SMTPConnection._processResponse (C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\nodemailer\lib\smtp-connection\index.js:993:20)
+    at SMTPConnection._onData (C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\nodemailer\lib\smtp-connection\index.js:774:14)
+    at SMTPConnection._onSocketData (C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\nodemailer\lib\smtp-connection\index.js:195:44)
+
+[2025-08-25T20:54:23.463Z] Error: Missing credentials for "PLAIN"
+    at SMTPConnection._formatError (C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\nodemailer\lib\smtp-connection\index.js:809:19)
+    at SMTPConnection.login (C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\nodemailer\lib\smtp-connection\index.js:454:38)
+    at C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\nodemailer\lib\smtp-transport\index.js:272:32
+    at SMTPConnection.<anonymous> (C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\nodemailer\lib\smtp-connection\index.js:215:17)
+    at Object.onceWrapper (node:events:638:28)
+    at SMTPConnection.emit (node:events:524:28)
+    at SMTPConnection._actionEHLO (C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\nodemailer\lib\smtp-connection\index.js:1371:14)
+    at SMTPConnection._processResponse (C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\nodemailer\lib\smtp-connection\index.js:993:20)
+    at SMTPConnection._onData (C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\nodemailer\lib\smtp-connection\index.js:774:14)
+    at SMTPConnection._onSocketData (C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\nodemailer\lib\smtp-connection\index.js:195:44)
+
+[2025-08-25T20:54:23.669Z] Error: Missing credentials for "PLAIN"
+    at SMTPConnection._formatError (C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\nodemailer\lib\smtp-connection\index.js:809:19)
+    at SMTPConnection.login (C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\nodemailer\lib\smtp-connection\index.js:454:38)
+    at C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\nodemailer\lib\smtp-transport\index.js:272:32
+    at SMTPConnection.<anonymous> (C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\nodemailer\lib\smtp-connection\index.js:215:17)
+    at Object.onceWrapper (node:events:638:28)
+    at SMTPConnection.emit (node:events:524:28)
+    at SMTPConnection._actionEHLO (C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\nodemailer\lib\smtp-connection\index.js:1371:14)
+    at SMTPConnection._processResponse (C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\nodemailer\lib\smtp-connection\index.js:993:20)
+    at SMTPConnection._onData (C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\nodemailer\lib\smtp-connection\index.js:774:14)
+    at SMTPConnection._onSocketData (C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\nodemailer\lib\smtp-connection\index.js:195:44)
+
+[2025-08-25T20:54:23.849Z] Error: Missing credentials for "PLAIN"
+    at SMTPConnection._formatError (C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\nodemailer\lib\smtp-connection\index.js:809:19)
+    at SMTPConnection.login (C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\nodemailer\lib\smtp-connection\index.js:454:38)
+    at C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\nodemailer\lib\smtp-transport\index.js:272:32
+    at SMTPConnection.<anonymous> (C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\nodemailer\lib\smtp-connection\index.js:215:17)
+    at Object.onceWrapper (node:events:638:28)
+    at SMTPConnection.emit (node:events:524:28)
+    at SMTPConnection._actionEHLO (C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\nodemailer\lib\smtp-connection\index.js:1371:14)
+    at SMTPConnection._processResponse (C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\nodemailer\lib\smtp-connection\index.js:993:20)
+    at SMTPConnection._onData (C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\nodemailer\lib\smtp-connection\index.js:774:14)
+    at SMTPConnection._onSocketData (C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\nodemailer\lib\smtp-connection\index.js:195:44)
+
+[2025-08-25T20:54:24.027Z] Error: Missing credentials for "PLAIN"
+    at SMTPConnection._formatError (C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\nodemailer\lib\smtp-connection\index.js:809:19)
+    at SMTPConnection.login (C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\nodemailer\lib\smtp-connection\index.js:454:38)
+    at C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\nodemailer\lib\smtp-transport\index.js:272:32
+    at SMTPConnection.<anonymous> (C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\nodemailer\lib\smtp-connection\index.js:215:17)
+    at Object.onceWrapper (node:events:638:28)
+    at SMTPConnection.emit (node:events:524:28)
+    at SMTPConnection._actionEHLO (C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\nodemailer\lib\smtp-connection\index.js:1371:14)
+    at SMTPConnection._processResponse (C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\nodemailer\lib\smtp-connection\index.js:993:20)
+    at SMTPConnection._onData (C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\nodemailer\lib\smtp-connection\index.js:774:14)
+    at SMTPConnection._onSocketData (C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\nodemailer\lib\smtp-connection\index.js:195:44)
+
+[2025-08-25T20:54:24.209Z] Error: Missing credentials for "PLAIN"
+    at SMTPConnection._formatError (C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\nodemailer\lib\smtp-connection\index.js:809:19)
+    at SMTPConnection.login (C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\nodemailer\lib\smtp-connection\index.js:454:38)
+    at C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\nodemailer\lib\smtp-transport\index.js:272:32
+    at SMTPConnection.<anonymous> (C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\nodemailer\lib\smtp-connection\index.js:215:17)
+    at Object.onceWrapper (node:events:638:28)
+    at SMTPConnection.emit (node:events:524:28)
+    at SMTPConnection._actionEHLO (C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\nodemailer\lib\smtp-connection\index.js:1371:14)
+    at SMTPConnection._processResponse (C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\nodemailer\lib\smtp-connection\index.js:993:20)
+    at SMTPConnection._onData (C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\nodemailer\lib\smtp-connection\index.js:774:14)
+    at SMTPConnection._onSocketData (C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\nodemailer\lib\smtp-connection\index.js:195:44)
+
+[2025-08-25T20:54:24.385Z] Error: Missing credentials for "PLAIN"
+    at SMTPConnection._formatError (C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\nodemailer\lib\smtp-connection\index.js:809:19)
+    at SMTPConnection.login (C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\nodemailer\lib\smtp-connection\index.js:454:38)
+    at C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\nodemailer\lib\smtp-transport\index.js:272:32
+    at SMTPConnection.<anonymous> (C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\nodemailer\lib\smtp-connection\index.js:215:17)
+    at Object.onceWrapper (node:events:638:28)
+    at SMTPConnection.emit (node:events:524:28)
+    at SMTPConnection._actionEHLO (C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\nodemailer\lib\smtp-connection\index.js:1371:14)
+    at SMTPConnection._processResponse (C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\nodemailer\lib\smtp-connection\index.js:993:20)
+    at SMTPConnection._onData (C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\nodemailer\lib\smtp-connection\index.js:774:14)
+    at SMTPConnection._onSocketData (C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\nodemailer\lib\smtp-connection\index.js:195:44)
+
+[2025-08-25T20:54:24.560Z] Error: Missing credentials for "PLAIN"
+    at SMTPConnection._formatError (C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\nodemailer\lib\smtp-connection\index.js:809:19)
+    at SMTPConnection.login (C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\nodemailer\lib\smtp-connection\index.js:454:38)
+    at C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\nodemailer\lib\smtp-transport\index.js:272:32
+    at SMTPConnection.<anonymous> (C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\nodemailer\lib\smtp-connection\index.js:215:17)
+    at Object.onceWrapper (node:events:638:28)
+    at SMTPConnection.emit (node:events:524:28)
+    at SMTPConnection._actionEHLO (C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\nodemailer\lib\smtp-connection\index.js:1371:14)
+    at SMTPConnection._processResponse (C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\nodemailer\lib\smtp-connection\index.js:993:20)
+    at SMTPConnection._onData (C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\nodemailer\lib\smtp-connection\index.js:774:14)
+    at SMTPConnection._onSocketData (C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\nodemailer\lib\smtp-connection\index.js:195:44)
+
+[2025-08-25T20:54:24.734Z] Error: Missing credentials for "PLAIN"
+    at SMTPConnection._formatError (C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\nodemailer\lib\smtp-connection\index.js:809:19)
+    at SMTPConnection.login (C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\nodemailer\lib\smtp-connection\index.js:454:38)
+    at C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\nodemailer\lib\smtp-transport\index.js:272:32
+    at SMTPConnection.<anonymous> (C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\nodemailer\lib\smtp-connection\index.js:215:17)
+    at Object.onceWrapper (node:events:638:28)
+    at SMTPConnection.emit (node:events:524:28)
+    at SMTPConnection._actionEHLO (C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\nodemailer\lib\smtp-connection\index.js:1371:14)
+    at SMTPConnection._processResponse (C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\nodemailer\lib\smtp-connection\index.js:993:20)
+    at SMTPConnection._onData (C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\nodemailer\lib\smtp-connection\index.js:774:14)
+    at SMTPConnection._onSocketData (C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\nodemailer\lib\smtp-connection\index.js:195:44)
+
+[2025-08-25T20:54:24.951Z] Error: Missing credentials for "PLAIN"
+    at SMTPConnection._formatError (C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\nodemailer\lib\smtp-connection\index.js:809:19)
+    at SMTPConnection.login (C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\nodemailer\lib\smtp-connection\index.js:454:38)
+    at C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\nodemailer\lib\smtp-transport\index.js:272:32
+    at SMTPConnection.<anonymous> (C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\nodemailer\lib\smtp-connection\index.js:215:17)
+    at Object.onceWrapper (node:events:638:28)
+    at SMTPConnection.emit (node:events:524:28)
+    at SMTPConnection._actionEHLO (C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\nodemailer\lib\smtp-connection\index.js:1371:14)
+    at SMTPConnection._processResponse (C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\nodemailer\lib\smtp-connection\index.js:993:20)
+    at SMTPConnection._onData (C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\nodemailer\lib\smtp-connection\index.js:774:14)
+    at SMTPConnection._onSocketData (C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\nodemailer\lib\smtp-connection\index.js:195:44)
+
+[2025-08-25T20:54:25.141Z] Error: Missing credentials for "PLAIN"
+    at SMTPConnection._formatError (C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\nodemailer\lib\smtp-connection\index.js:809:19)
+    at SMTPConnection.login (C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\nodemailer\lib\smtp-connection\index.js:454:38)
+    at C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\nodemailer\lib\smtp-transport\index.js:272:32
+    at SMTPConnection.<anonymous> (C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\nodemailer\lib\smtp-connection\index.js:215:17)
+    at Object.onceWrapper (node:events:638:28)
+    at SMTPConnection.emit (node:events:524:28)
+    at SMTPConnection._actionEHLO (C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\nodemailer\lib\smtp-connection\index.js:1371:14)
+    at SMTPConnection._processResponse (C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\nodemailer\lib\smtp-connection\index.js:993:20)
+    at SMTPConnection._onData (C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\nodemailer\lib\smtp-connection\index.js:774:14)
+    at SMTPConnection._onSocketData (C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\nodemailer\lib\smtp-connection\index.js:195:44)
+
+[2025-08-25T20:54:25.330Z] Error: Missing credentials for "PLAIN"
+    at SMTPConnection._formatError (C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\nodemailer\lib\smtp-connection\index.js:809:19)
+    at SMTPConnection.login (C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\nodemailer\lib\smtp-connection\index.js:454:38)
+    at C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\nodemailer\lib\smtp-transport\index.js:272:32
+    at SMTPConnection.<anonymous> (C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\nodemailer\lib\smtp-connection\index.js:215:17)
+    at Object.onceWrapper (node:events:638:28)
+    at SMTPConnection.emit (node:events:524:28)
+    at SMTPConnection._actionEHLO (C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\nodemailer\lib\smtp-connection\index.js:1371:14)
+    at SMTPConnection._processResponse (C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\nodemailer\lib\smtp-connection\index.js:993:20)
+    at SMTPConnection._onData (C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\nodemailer\lib\smtp-connection\index.js:774:14)
+    at SMTPConnection._onSocketData (C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\nodemailer\lib\smtp-connection\index.js:195:44)
+
+[2025-08-25T20:54:25.840Z] Error: Missing credentials for "PLAIN"
+    at SMTPConnection._formatError (C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\nodemailer\lib\smtp-connection\index.js:809:19)
+    at SMTPConnection.login (C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\nodemailer\lib\smtp-connection\index.js:454:38)
+    at C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\nodemailer\lib\smtp-transport\index.js:272:32
+    at SMTPConnection.<anonymous> (C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\nodemailer\lib\smtp-connection\index.js:215:17)
+    at Object.onceWrapper (node:events:638:28)
+    at SMTPConnection.emit (node:events:524:28)
+    at SMTPConnection._actionEHLO (C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\nodemailer\lib\smtp-connection\index.js:1371:14)
+    at SMTPConnection._processResponse (C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\nodemailer\lib\smtp-connection\index.js:993:20)
+    at SMTPConnection._onData (C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\nodemailer\lib\smtp-connection\index.js:774:14)
+    at SMTPConnection._onSocketData (C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\nodemailer\lib\smtp-connection\index.js:195:44)
+
+[2025-08-25T20:54:26.044Z] Error: Missing credentials for "PLAIN"
+    at SMTPConnection._formatError (C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\nodemailer\lib\smtp-connection\index.js:809:19)
+    at SMTPConnection.login (C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\nodemailer\lib\smtp-connection\index.js:454:38)
+    at C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\nodemailer\lib\smtp-transport\index.js:272:32
+    at SMTPConnection.<anonymous> (C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\nodemailer\lib\smtp-connection\index.js:215:17)
+    at Object.onceWrapper (node:events:638:28)
+    at SMTPConnection.emit (node:events:524:28)
+    at SMTPConnection._actionEHLO (C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\nodemailer\lib\smtp-connection\index.js:1371:14)
+    at SMTPConnection._processResponse (C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\nodemailer\lib\smtp-connection\index.js:993:20)
+    at SMTPConnection._onData (C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\nodemailer\lib\smtp-connection\index.js:774:14)
+    at SMTPConnection._onSocketData (C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\nodemailer\lib\smtp-connection\index.js:195:44)
+
+[2025-08-25T20:54:26.215Z] Error: Missing credentials for "PLAIN"
+    at SMTPConnection._formatError (C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\nodemailer\lib\smtp-connection\index.js:809:19)
+    at SMTPConnection.login (C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\nodemailer\lib\smtp-connection\index.js:454:38)
+    at C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\nodemailer\lib\smtp-transport\index.js:272:32
+    at SMTPConnection.<anonymous> (C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\nodemailer\lib\smtp-connection\index.js:215:17)
+    at Object.onceWrapper (node:events:638:28)
+    at SMTPConnection.emit (node:events:524:28)
+    at SMTPConnection._actionEHLO (C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\nodemailer\lib\smtp-connection\index.js:1371:14)
+    at SMTPConnection._processResponse (C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\nodemailer\lib\smtp-connection\index.js:993:20)
+    at SMTPConnection._onData (C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\nodemailer\lib\smtp-connection\index.js:774:14)
+    at SMTPConnection._onSocketData (C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\nodemailer\lib\smtp-connection\index.js:195:44)
+
+[2025-08-25T20:54:26.399Z] Error: Missing credentials for "PLAIN"
+    at SMTPConnection._formatError (C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\nodemailer\lib\smtp-connection\index.js:809:19)
+    at SMTPConnection.login (C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\nodemailer\lib\smtp-connection\index.js:454:38)
+    at C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\nodemailer\lib\smtp-transport\index.js:272:32
+    at SMTPConnection.<anonymous> (C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\nodemailer\lib\smtp-connection\index.js:215:17)
+    at Object.onceWrapper (node:events:638:28)
+    at SMTPConnection.emit (node:events:524:28)
+    at SMTPConnection._actionEHLO (C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\nodemailer\lib\smtp-connection\index.js:1371:14)
+    at SMTPConnection._processResponse (C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\nodemailer\lib\smtp-connection\index.js:993:20)
+    at SMTPConnection._onData (C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\nodemailer\lib\smtp-connection\index.js:774:14)
+    at SMTPConnection._onSocketData (C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\nodemailer\lib\smtp-connection\index.js:195:44)
+
+[2025-08-25T20:54:26.666Z] Error: Missing credentials for "PLAIN"
+    at SMTPConnection._formatError (C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\nodemailer\lib\smtp-connection\index.js:809:19)
+    at SMTPConnection.login (C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\nodemailer\lib\smtp-connection\index.js:454:38)
+    at C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\nodemailer\lib\smtp-transport\index.js:272:32
+    at SMTPConnection.<anonymous> (C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\nodemailer\lib\smtp-connection\index.js:215:17)
+    at Object.onceWrapper (node:events:638:28)
+    at SMTPConnection.emit (node:events:524:28)
+    at SMTPConnection._actionEHLO (C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\nodemailer\lib\smtp-connection\index.js:1371:14)
+    at SMTPConnection._processResponse (C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\nodemailer\lib\smtp-connection\index.js:993:20)
+    at SMTPConnection._onData (C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\nodemailer\lib\smtp-connection\index.js:774:14)
+    at SMTPConnection._onSocketData (C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\nodemailer\lib\smtp-connection\index.js:195:44)
+
+[2025-08-25T20:54:26.858Z] Error: Missing credentials for "PLAIN"
+    at SMTPConnection._formatError (C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\nodemailer\lib\smtp-connection\index.js:809:19)
+    at SMTPConnection.login (C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\nodemailer\lib\smtp-connection\index.js:454:38)
+    at C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\nodemailer\lib\smtp-transport\index.js:272:32
+    at SMTPConnection.<anonymous> (C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\nodemailer\lib\smtp-connection\index.js:215:17)
+    at Object.onceWrapper (node:events:638:28)
+    at SMTPConnection.emit (node:events:524:28)
+    at SMTPConnection._actionEHLO (C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\nodemailer\lib\smtp-connection\index.js:1371:14)
+    at SMTPConnection._processResponse (C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\nodemailer\lib\smtp-connection\index.js:993:20)
+    at SMTPConnection._onData (C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\nodemailer\lib\smtp-connection\index.js:774:14)
+    at SMTPConnection._onSocketData (C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\nodemailer\lib\smtp-connection\index.js:195:44)
+
+[2025-08-25T20:54:27.041Z] Error: Missing credentials for "PLAIN"
+    at SMTPConnection._formatError (C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\nodemailer\lib\smtp-connection\index.js:809:19)
+    at SMTPConnection.login (C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\nodemailer\lib\smtp-connection\index.js:454:38)
+    at C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\nodemailer\lib\smtp-transport\index.js:272:32
+    at SMTPConnection.<anonymous> (C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\nodemailer\lib\smtp-connection\index.js:215:17)
+    at Object.onceWrapper (node:events:638:28)
+    at SMTPConnection.emit (node:events:524:28)
+    at SMTPConnection._actionEHLO (C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\nodemailer\lib\smtp-connection\index.js:1371:14)
+    at SMTPConnection._processResponse (C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\nodemailer\lib\smtp-connection\index.js:993:20)
+    at SMTPConnection._onData (C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\nodemailer\lib\smtp-connection\index.js:774:14)
+    at SMTPConnection._onSocketData (C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\nodemailer\lib\smtp-connection\index.js:195:44)
+
+[2025-08-25T20:54:27.214Z] Error: Missing credentials for "PLAIN"
+    at SMTPConnection._formatError (C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\nodemailer\lib\smtp-connection\index.js:809:19)
+    at SMTPConnection.login (C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\nodemailer\lib\smtp-connection\index.js:454:38)
+    at C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\nodemailer\lib\smtp-transport\index.js:272:32
+    at SMTPConnection.<anonymous> (C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\nodemailer\lib\smtp-connection\index.js:215:17)
+    at Object.onceWrapper (node:events:638:28)
+    at SMTPConnection.emit (node:events:524:28)
+    at SMTPConnection._actionEHLO (C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\nodemailer\lib\smtp-connection\index.js:1371:14)
+    at SMTPConnection._processResponse (C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\nodemailer\lib\smtp-connection\index.js:993:20)
+    at SMTPConnection._onData (C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\nodemailer\lib\smtp-connection\index.js:774:14)
+    at SMTPConnection._onSocketData (C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\nodemailer\lib\smtp-connection\index.js:195:44)
+
+[2025-08-25T20:54:27.406Z] Error: Missing credentials for "PLAIN"
+    at SMTPConnection._formatError (C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\nodemailer\lib\smtp-connection\index.js:809:19)
+    at SMTPConnection.login (C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\nodemailer\lib\smtp-connection\index.js:454:38)
+    at C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\nodemailer\lib\smtp-transport\index.js:272:32
+    at SMTPConnection.<anonymous> (C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\nodemailer\lib\smtp-connection\index.js:215:17)
+    at Object.onceWrapper (node:events:638:28)
+    at SMTPConnection.emit (node:events:524:28)
+    at SMTPConnection._actionEHLO (C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\nodemailer\lib\smtp-connection\index.js:1371:14)
+    at SMTPConnection._processResponse (C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\nodemailer\lib\smtp-connection\index.js:993:20)
+    at SMTPConnection._onData (C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\nodemailer\lib\smtp-connection\index.js:774:14)
+    at SMTPConnection._onSocketData (C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\nodemailer\lib\smtp-connection\index.js:195:44)
+
+[2025-08-25T20:54:27.578Z] Error: Missing credentials for "PLAIN"
+    at SMTPConnection._formatError (C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\nodemailer\lib\smtp-connection\index.js:809:19)
+    at SMTPConnection.login (C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\nodemailer\lib\smtp-connection\index.js:454:38)
+    at C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\nodemailer\lib\smtp-transport\index.js:272:32
+    at SMTPConnection.<anonymous> (C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\nodemailer\lib\smtp-connection\index.js:215:17)
+    at Object.onceWrapper (node:events:638:28)
+    at SMTPConnection.emit (node:events:524:28)
+    at SMTPConnection._actionEHLO (C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\nodemailer\lib\smtp-connection\index.js:1371:14)
+    at SMTPConnection._processResponse (C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\nodemailer\lib\smtp-connection\index.js:993:20)
+    at SMTPConnection._onData (C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\nodemailer\lib\smtp-connection\index.js:774:14)
+    at SMTPConnection._onSocketData (C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\nodemailer\lib\smtp-connection\index.js:195:44)
+
+[2025-08-25T20:54:27.745Z] Error: Missing credentials for "PLAIN"
+    at SMTPConnection._formatError (C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\nodemailer\lib\smtp-connection\index.js:809:19)
+    at SMTPConnection.login (C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\nodemailer\lib\smtp-connection\index.js:454:38)
+    at C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\nodemailer\lib\smtp-transport\index.js:272:32
+    at SMTPConnection.<anonymous> (C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\nodemailer\lib\smtp-connection\index.js:215:17)
+    at Object.onceWrapper (node:events:638:28)
+    at SMTPConnection.emit (node:events:524:28)
+    at SMTPConnection._actionEHLO (C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\nodemailer\lib\smtp-connection\index.js:1371:14)
+    at SMTPConnection._processResponse (C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\nodemailer\lib\smtp-connection\index.js:993:20)
+    at SMTPConnection._onData (C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\nodemailer\lib\smtp-connection\index.js:774:14)
+    at SMTPConnection._onSocketData (C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\nodemailer\lib\smtp-connection\index.js:195:44)
+
+[2025-08-25T20:54:27.914Z] Error: Missing credentials for "PLAIN"
+    at SMTPConnection._formatError (C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\nodemailer\lib\smtp-connection\index.js:809:19)
+    at SMTPConnection.login (C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\nodemailer\lib\smtp-connection\index.js:454:38)
+    at C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\nodemailer\lib\smtp-transport\index.js:272:32
+    at SMTPConnection.<anonymous> (C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\nodemailer\lib\smtp-connection\index.js:215:17)
+    at Object.onceWrapper (node:events:638:28)
+    at SMTPConnection.emit (node:events:524:28)
+    at SMTPConnection._actionEHLO (C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\nodemailer\lib\smtp-connection\index.js:1371:14)
+    at SMTPConnection._processResponse (C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\nodemailer\lib\smtp-connection\index.js:993:20)
+    at SMTPConnection._onData (C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\nodemailer\lib\smtp-connection\index.js:774:14)
+    at SMTPConnection._onSocketData (C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\nodemailer\lib\smtp-connection\index.js:195:44)
+
+[2025-08-25T20:54:28.112Z] Error: Missing credentials for "PLAIN"
+    at SMTPConnection._formatError (C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\nodemailer\lib\smtp-connection\index.js:809:19)
+    at SMTPConnection.login (C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\nodemailer\lib\smtp-connection\index.js:454:38)
+    at C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\nodemailer\lib\smtp-transport\index.js:272:32
+    at SMTPConnection.<anonymous> (C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\nodemailer\lib\smtp-connection\index.js:215:17)
+    at Object.onceWrapper (node:events:638:28)
+    at SMTPConnection.emit (node:events:524:28)
+    at SMTPConnection._actionEHLO (C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\nodemailer\lib\smtp-connection\index.js:1371:14)
+    at SMTPConnection._processResponse (C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\nodemailer\lib\smtp-connection\index.js:993:20)
+    at SMTPConnection._onData (C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\nodemailer\lib\smtp-connection\index.js:774:14)
+    at SMTPConnection._onSocketData (C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\nodemailer\lib\smtp-connection\index.js:195:44)
+
+[2025-08-25T20:54:28.355Z] Error: Missing credentials for "PLAIN"
+    at SMTPConnection._formatError (C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\nodemailer\lib\smtp-connection\index.js:809:19)
+    at SMTPConnection.login (C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\nodemailer\lib\smtp-connection\index.js:454:38)
+    at C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\nodemailer\lib\smtp-transport\index.js:272:32
+    at SMTPConnection.<anonymous> (C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\nodemailer\lib\smtp-connection\index.js:215:17)
+    at Object.onceWrapper (node:events:638:28)
+    at SMTPConnection.emit (node:events:524:28)
+    at SMTPConnection._actionEHLO (C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\nodemailer\lib\smtp-connection\index.js:1371:14)
+    at SMTPConnection._processResponse (C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\nodemailer\lib\smtp-connection\index.js:993:20)
+    at SMTPConnection._onData (C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\nodemailer\lib\smtp-connection\index.js:774:14)
+    at SMTPConnection._onSocketData (C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\nodemailer\lib\smtp-connection\index.js:195:44)
+
+[2025-08-25T20:54:28.531Z] Error: Missing credentials for "PLAIN"
+    at SMTPConnection._formatError (C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\nodemailer\lib\smtp-connection\index.js:809:19)
+    at SMTPConnection.login (C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\nodemailer\lib\smtp-connection\index.js:454:38)
+    at C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\nodemailer\lib\smtp-transport\index.js:272:32
+    at SMTPConnection.<anonymous> (C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\nodemailer\lib\smtp-connection\index.js:215:17)
+    at Object.onceWrapper (node:events:638:28)
+    at SMTPConnection.emit (node:events:524:28)
+    at SMTPConnection._actionEHLO (C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\nodemailer\lib\smtp-connection\index.js:1371:14)
+    at SMTPConnection._processResponse (C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\nodemailer\lib\smtp-connection\index.js:993:20)
+    at SMTPConnection._onData (C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\nodemailer\lib\smtp-connection\index.js:774:14)
+    at SMTPConnection._onSocketData (C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\nodemailer\lib\smtp-connection\index.js:195:44)
+
+[2025-08-25T20:54:28.746Z] Error: Missing credentials for "PLAIN"
+    at SMTPConnection._formatError (C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\nodemailer\lib\smtp-connection\index.js:809:19)
+    at SMTPConnection.login (C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\nodemailer\lib\smtp-connection\index.js:454:38)
+    at C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\nodemailer\lib\smtp-transport\index.js:272:32
+    at SMTPConnection.<anonymous> (C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\nodemailer\lib\smtp-connection\index.js:215:17)
+    at Object.onceWrapper (node:events:638:28)
+    at SMTPConnection.emit (node:events:524:28)
+    at SMTPConnection._actionEHLO (C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\nodemailer\lib\smtp-connection\index.js:1371:14)
+    at SMTPConnection._processResponse (C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\nodemailer\lib\smtp-connection\index.js:993:20)
+    at SMTPConnection._onData (C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\nodemailer\lib\smtp-connection\index.js:774:14)
+    at SMTPConnection._onSocketData (C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\nodemailer\lib\smtp-connection\index.js:195:44)
+
+[2025-08-25T20:54:28.926Z] Error: Missing credentials for "PLAIN"
+    at SMTPConnection._formatError (C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\nodemailer\lib\smtp-connection\index.js:809:19)
+    at SMTPConnection.login (C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\nodemailer\lib\smtp-connection\index.js:454:38)
+    at C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\nodemailer\lib\smtp-transport\index.js:272:32
+    at SMTPConnection.<anonymous> (C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\nodemailer\lib\smtp-connection\index.js:215:17)
+    at Object.onceWrapper (node:events:638:28)
+    at SMTPConnection.emit (node:events:524:28)
+    at SMTPConnection._actionEHLO (C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\nodemailer\lib\smtp-connection\index.js:1371:14)
+    at SMTPConnection._processResponse (C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\nodemailer\lib\smtp-connection\index.js:993:20)
+    at SMTPConnection._onData (C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\nodemailer\lib\smtp-connection\index.js:774:14)
+    at SMTPConnection._onSocketData (C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\nodemailer\lib\smtp-connection\index.js:195:44)
+
+[2025-08-25T20:54:29.123Z] Error: Missing credentials for "PLAIN"
+    at SMTPConnection._formatError (C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\nodemailer\lib\smtp-connection\index.js:809:19)
+    at SMTPConnection.login (C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\nodemailer\lib\smtp-connection\index.js:454:38)
+    at C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\nodemailer\lib\smtp-transport\index.js:272:32
+    at SMTPConnection.<anonymous> (C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\nodemailer\lib\smtp-connection\index.js:215:17)
+    at Object.onceWrapper (node:events:638:28)
+    at SMTPConnection.emit (node:events:524:28)
+    at SMTPConnection._actionEHLO (C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\nodemailer\lib\smtp-connection\index.js:1371:14)
+    at SMTPConnection._processResponse (C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\nodemailer\lib\smtp-connection\index.js:993:20)
+    at SMTPConnection._onData (C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\nodemailer\lib\smtp-connection\index.js:774:14)
+    at SMTPConnection._onSocketData (C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\nodemailer\lib\smtp-connection\index.js:195:44)
+
+[2025-08-25T20:54:29.307Z] Error: Missing credentials for "PLAIN"
+    at SMTPConnection._formatError (C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\nodemailer\lib\smtp-connection\index.js:809:19)
+    at SMTPConnection.login (C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\nodemailer\lib\smtp-connection\index.js:454:38)
+    at C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\nodemailer\lib\smtp-transport\index.js:272:32
+    at SMTPConnection.<anonymous> (C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\nodemailer\lib\smtp-connection\index.js:215:17)
+    at Object.onceWrapper (node:events:638:28)
+    at SMTPConnection.emit (node:events:524:28)
+    at SMTPConnection._actionEHLO (C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\nodemailer\lib\smtp-connection\index.js:1371:14)
+    at SMTPConnection._processResponse (C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\nodemailer\lib\smtp-connection\index.js:993:20)
+    at SMTPConnection._onData (C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\nodemailer\lib\smtp-connection\index.js:774:14)
+    at SMTPConnection._onSocketData (C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\nodemailer\lib\smtp-connection\index.js:195:44)
+
+[2025-08-25T20:54:29.513Z] Error: Missing credentials for "PLAIN"
+    at SMTPConnection._formatError (C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\nodemailer\lib\smtp-connection\index.js:809:19)
+    at SMTPConnection.login (C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\nodemailer\lib\smtp-connection\index.js:454:38)
+    at C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\nodemailer\lib\smtp-transport\index.js:272:32
+    at SMTPConnection.<anonymous> (C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\nodemailer\lib\smtp-connection\index.js:215:17)
+    at Object.onceWrapper (node:events:638:28)
+    at SMTPConnection.emit (node:events:524:28)
+    at SMTPConnection._actionEHLO (C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\nodemailer\lib\smtp-connection\index.js:1371:14)
+    at SMTPConnection._processResponse (C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\nodemailer\lib\smtp-connection\index.js:993:20)
+    at SMTPConnection._onData (C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\nodemailer\lib\smtp-connection\index.js:774:14)
+    at SMTPConnection._onSocketData (C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\nodemailer\lib\smtp-connection\index.js:195:44)
+
+[2025-08-25T20:54:29.691Z] Error: Missing credentials for "PLAIN"
+    at SMTPConnection._formatError (C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\nodemailer\lib\smtp-connection\index.js:809:19)
+    at SMTPConnection.login (C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\nodemailer\lib\smtp-connection\index.js:454:38)
+    at C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\nodemailer\lib\smtp-transport\index.js:272:32
+    at SMTPConnection.<anonymous> (C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\nodemailer\lib\smtp-connection\index.js:215:17)
+    at Object.onceWrapper (node:events:638:28)
+    at SMTPConnection.emit (node:events:524:28)
+    at SMTPConnection._actionEHLO (C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\nodemailer\lib\smtp-connection\index.js:1371:14)
+    at SMTPConnection._processResponse (C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\nodemailer\lib\smtp-connection\index.js:993:20)
+    at SMTPConnection._onData (C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\nodemailer\lib\smtp-connection\index.js:774:14)
+    at SMTPConnection._onSocketData (C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\nodemailer\lib\smtp-connection\index.js:195:44)
+
+[2025-08-25T20:54:29.871Z] Error: Missing credentials for "PLAIN"
+    at SMTPConnection._formatError (C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\nodemailer\lib\smtp-connection\index.js:809:19)
+    at SMTPConnection.login (C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\nodemailer\lib\smtp-connection\index.js:454:38)
+    at C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\nodemailer\lib\smtp-transport\index.js:272:32
+    at SMTPConnection.<anonymous> (C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\nodemailer\lib\smtp-connection\index.js:215:17)
+    at Object.onceWrapper (node:events:638:28)
+    at SMTPConnection.emit (node:events:524:28)
+    at SMTPConnection._actionEHLO (C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\nodemailer\lib\smtp-connection\index.js:1371:14)
+    at SMTPConnection._processResponse (C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\nodemailer\lib\smtp-connection\index.js:993:20)
+    at SMTPConnection._onData (C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\nodemailer\lib\smtp-connection\index.js:774:14)
+    at SMTPConnection._onSocketData (C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\nodemailer\lib\smtp-connection\index.js:195:44)
+
+[2025-08-25T20:54:30.066Z] Error: Missing credentials for "PLAIN"
+    at SMTPConnection._formatError (C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\nodemailer\lib\smtp-connection\index.js:809:19)
+    at SMTPConnection.login (C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\nodemailer\lib\smtp-connection\index.js:454:38)
+    at C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\nodemailer\lib\smtp-transport\index.js:272:32
+    at SMTPConnection.<anonymous> (C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\nodemailer\lib\smtp-connection\index.js:215:17)
+    at Object.onceWrapper (node:events:638:28)
+    at SMTPConnection.emit (node:events:524:28)
+    at SMTPConnection._actionEHLO (C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\nodemailer\lib\smtp-connection\index.js:1371:14)
+    at SMTPConnection._processResponse (C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\nodemailer\lib\smtp-connection\index.js:993:20)
+    at SMTPConnection._onData (C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\nodemailer\lib\smtp-connection\index.js:774:14)
+    at SMTPConnection._onSocketData (C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\nodemailer\lib\smtp-connection\index.js:195:44)
+
+[2025-08-25T20:54:30.243Z] Error: Missing credentials for "PLAIN"
+    at SMTPConnection._formatError (C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\nodemailer\lib\smtp-connection\index.js:809:19)
+    at SMTPConnection.login (C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\nodemailer\lib\smtp-connection\index.js:454:38)
+    at C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\nodemailer\lib\smtp-transport\index.js:272:32
+    at SMTPConnection.<anonymous> (C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\nodemailer\lib\smtp-connection\index.js:215:17)
+    at Object.onceWrapper (node:events:638:28)
+    at SMTPConnection.emit (node:events:524:28)
+    at SMTPConnection._actionEHLO (C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\nodemailer\lib\smtp-connection\index.js:1371:14)
+    at SMTPConnection._processResponse (C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\nodemailer\lib\smtp-connection\index.js:993:20)
+    at SMTPConnection._onData (C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\nodemailer\lib\smtp-connection\index.js:774:14)
+    at SMTPConnection._onSocketData (C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\nodemailer\lib\smtp-connection\index.js:195:44)
+
+[2025-08-25T20:54:30.448Z] Error: Missing credentials for "PLAIN"
+    at SMTPConnection._formatError (C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\nodemailer\lib\smtp-connection\index.js:809:19)
+    at SMTPConnection.login (C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\nodemailer\lib\smtp-connection\index.js:454:38)
+    at C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\nodemailer\lib\smtp-transport\index.js:272:32
+    at SMTPConnection.<anonymous> (C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\nodemailer\lib\smtp-connection\index.js:215:17)
+    at Object.onceWrapper (node:events:638:28)
+    at SMTPConnection.emit (node:events:524:28)
+    at SMTPConnection._actionEHLO (C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\nodemailer\lib\smtp-connection\index.js:1371:14)
+    at SMTPConnection._processResponse (C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\nodemailer\lib\smtp-connection\index.js:993:20)
+    at SMTPConnection._onData (C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\nodemailer\lib\smtp-connection\index.js:774:14)
+    at SMTPConnection._onSocketData (C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\nodemailer\lib\smtp-connection\index.js:195:44)
+
+[2025-08-25T20:54:30.619Z] Error: Missing credentials for "PLAIN"
+    at SMTPConnection._formatError (C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\nodemailer\lib\smtp-connection\index.js:809:19)
+    at SMTPConnection.login (C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\nodemailer\lib\smtp-connection\index.js:454:38)
+    at C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\nodemailer\lib\smtp-transport\index.js:272:32
+    at SMTPConnection.<anonymous> (C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\nodemailer\lib\smtp-connection\index.js:215:17)
+    at Object.onceWrapper (node:events:638:28)
+    at SMTPConnection.emit (node:events:524:28)
+    at SMTPConnection._actionEHLO (C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\nodemailer\lib\smtp-connection\index.js:1371:14)
+    at SMTPConnection._processResponse (C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\nodemailer\lib\smtp-connection\index.js:993:20)
+    at SMTPConnection._onData (C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\nodemailer\lib\smtp-connection\index.js:774:14)
+    at SMTPConnection._onSocketData (C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\nodemailer\lib\smtp-connection\index.js:195:44)
+
+[2025-08-25T20:54:30.812Z] Error: Missing credentials for "PLAIN"
+    at SMTPConnection._formatError (C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\nodemailer\lib\smtp-connection\index.js:809:19)
+    at SMTPConnection.login (C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\nodemailer\lib\smtp-connection\index.js:454:38)
+    at C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\nodemailer\lib\smtp-transport\index.js:272:32
+    at SMTPConnection.<anonymous> (C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\nodemailer\lib\smtp-connection\index.js:215:17)
+    at Object.onceWrapper (node:events:638:28)
+    at SMTPConnection.emit (node:events:524:28)
+    at SMTPConnection._actionEHLO (C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\nodemailer\lib\smtp-connection\index.js:1371:14)
+    at SMTPConnection._processResponse (C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\nodemailer\lib\smtp-connection\index.js:993:20)
+    at SMTPConnection._onData (C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\nodemailer\lib\smtp-connection\index.js:774:14)
+    at SMTPConnection._onSocketData (C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\nodemailer\lib\smtp-connection\index.js:195:44)
+
+[2025-08-25T20:54:30.994Z] Error: Missing credentials for "PLAIN"
+    at SMTPConnection._formatError (C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\nodemailer\lib\smtp-connection\index.js:809:19)
+    at SMTPConnection.login (C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\nodemailer\lib\smtp-connection\index.js:454:38)
+    at C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\nodemailer\lib\smtp-transport\index.js:272:32
+    at SMTPConnection.<anonymous> (C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\nodemailer\lib\smtp-connection\index.js:215:17)
+    at Object.onceWrapper (node:events:638:28)
+    at SMTPConnection.emit (node:events:524:28)
+    at SMTPConnection._actionEHLO (C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\nodemailer\lib\smtp-connection\index.js:1371:14)
+    at SMTPConnection._processResponse (C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\nodemailer\lib\smtp-connection\index.js:993:20)
+    at SMTPConnection._onData (C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\nodemailer\lib\smtp-connection\index.js:774:14)
+    at SMTPConnection._onSocketData (C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\nodemailer\lib\smtp-connection\index.js:195:44)
+
+[2025-08-25T20:54:31.183Z] Error: Missing credentials for "PLAIN"
+    at SMTPConnection._formatError (C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\nodemailer\lib\smtp-connection\index.js:809:19)
+    at SMTPConnection.login (C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\nodemailer\lib\smtp-connection\index.js:454:38)
+    at C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\nodemailer\lib\smtp-transport\index.js:272:32
+    at SMTPConnection.<anonymous> (C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\nodemailer\lib\smtp-connection\index.js:215:17)
+    at Object.onceWrapper (node:events:638:28)
+    at SMTPConnection.emit (node:events:524:28)
+    at SMTPConnection._actionEHLO (C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\nodemailer\lib\smtp-connection\index.js:1371:14)
+    at SMTPConnection._processResponse (C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\nodemailer\lib\smtp-connection\index.js:993:20)
+    at SMTPConnection._onData (C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\nodemailer\lib\smtp-connection\index.js:774:14)
+    at SMTPConnection._onSocketData (C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\nodemailer\lib\smtp-connection\index.js:195:44)
+
+[2025-08-25T20:54:31.416Z] Error: Missing credentials for "PLAIN"
+    at SMTPConnection._formatError (C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\nodemailer\lib\smtp-connection\index.js:809:19)
+    at SMTPConnection.login (C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\nodemailer\lib\smtp-connection\index.js:454:38)
+    at C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\nodemailer\lib\smtp-transport\index.js:272:32
+    at SMTPConnection.<anonymous> (C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\nodemailer\lib\smtp-connection\index.js:215:17)
+    at Object.onceWrapper (node:events:638:28)
+    at SMTPConnection.emit (node:events:524:28)
+    at SMTPConnection._actionEHLO (C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\nodemailer\lib\smtp-connection\index.js:1371:14)
+    at SMTPConnection._processResponse (C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\nodemailer\lib\smtp-connection\index.js:993:20)
+    at SMTPConnection._onData (C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\nodemailer\lib\smtp-connection\index.js:774:14)
+    at SMTPConnection._onSocketData (C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\nodemailer\lib\smtp-connection\index.js:195:44)
+
+[2025-08-25T20:54:31.582Z] Error: Missing credentials for "PLAIN"
+    at SMTPConnection._formatError (C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\nodemailer\lib\smtp-connection\index.js:809:19)
+    at SMTPConnection.login (C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\nodemailer\lib\smtp-connection\index.js:454:38)
+    at C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\nodemailer\lib\smtp-transport\index.js:272:32
+    at SMTPConnection.<anonymous> (C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\nodemailer\lib\smtp-connection\index.js:215:17)
+    at Object.onceWrapper (node:events:638:28)
+    at SMTPConnection.emit (node:events:524:28)
+    at SMTPConnection._actionEHLO (C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\nodemailer\lib\smtp-connection\index.js:1371:14)
+    at SMTPConnection._processResponse (C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\nodemailer\lib\smtp-connection\index.js:993:20)
+    at SMTPConnection._onData (C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\nodemailer\lib\smtp-connection\index.js:774:14)
+    at SMTPConnection._onSocketData (C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\nodemailer\lib\smtp-connection\index.js:195:44)
+
+[2025-08-25T20:54:31.811Z] Error: Missing credentials for "PLAIN"
+    at SMTPConnection._formatError (C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\nodemailer\lib\smtp-connection\index.js:809:19)
+    at SMTPConnection.login (C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\nodemailer\lib\smtp-connection\index.js:454:38)
+    at C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\nodemailer\lib\smtp-transport\index.js:272:32
+    at SMTPConnection.<anonymous> (C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\nodemailer\lib\smtp-connection\index.js:215:17)
+    at Object.onceWrapper (node:events:638:28)
+    at SMTPConnection.emit (node:events:524:28)
+    at SMTPConnection._actionEHLO (C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\nodemailer\lib\smtp-connection\index.js:1371:14)
+    at SMTPConnection._processResponse (C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\nodemailer\lib\smtp-connection\index.js:993:20)
+    at SMTPConnection._onData (C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\nodemailer\lib\smtp-connection\index.js:774:14)
+    at SMTPConnection._onSocketData (C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\nodemailer\lib\smtp-connection\index.js:195:44)
+
+[2025-08-25T20:54:31.981Z] Error: Missing credentials for "PLAIN"
+    at SMTPConnection._formatError (C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\nodemailer\lib\smtp-connection\index.js:809:19)
+    at SMTPConnection.login (C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\nodemailer\lib\smtp-connection\index.js:454:38)
+    at C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\nodemailer\lib\smtp-transport\index.js:272:32
+    at SMTPConnection.<anonymous> (C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\nodemailer\lib\smtp-connection\index.js:215:17)
+    at Object.onceWrapper (node:events:638:28)
+    at SMTPConnection.emit (node:events:524:28)
+    at SMTPConnection._actionEHLO (C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\nodemailer\lib\smtp-connection\index.js:1371:14)
+    at SMTPConnection._processResponse (C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\nodemailer\lib\smtp-connection\index.js:993:20)
+    at SMTPConnection._onData (C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\nodemailer\lib\smtp-connection\index.js:774:14)
+    at SMTPConnection._onSocketData (C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\nodemailer\lib\smtp-connection\index.js:195:44)
+
+[2025-08-25T20:54:32.169Z] Error: Missing credentials for "PLAIN"
+    at SMTPConnection._formatError (C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\nodemailer\lib\smtp-connection\index.js:809:19)
+    at SMTPConnection.login (C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\nodemailer\lib\smtp-connection\index.js:454:38)
+    at C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\nodemailer\lib\smtp-transport\index.js:272:32
+    at SMTPConnection.<anonymous> (C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\nodemailer\lib\smtp-connection\index.js:215:17)
+    at Object.onceWrapper (node:events:638:28)
+    at SMTPConnection.emit (node:events:524:28)
+    at SMTPConnection._actionEHLO (C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\nodemailer\lib\smtp-connection\index.js:1371:14)
+    at SMTPConnection._processResponse (C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\nodemailer\lib\smtp-connection\index.js:993:20)
+    at SMTPConnection._onData (C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\nodemailer\lib\smtp-connection\index.js:774:14)
+    at SMTPConnection._onSocketData (C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\nodemailer\lib\smtp-connection\index.js:195:44)
+
+[2025-08-25T20:54:32.348Z] Error: Missing credentials for "PLAIN"
+    at SMTPConnection._formatError (C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\nodemailer\lib\smtp-connection\index.js:809:19)
+    at SMTPConnection.login (C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\nodemailer\lib\smtp-connection\index.js:454:38)
+    at C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\nodemailer\lib\smtp-transport\index.js:272:32
+    at SMTPConnection.<anonymous> (C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\nodemailer\lib\smtp-connection\index.js:215:17)
+    at Object.onceWrapper (node:events:638:28)
+    at SMTPConnection.emit (node:events:524:28)
+    at SMTPConnection._actionEHLO (C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\nodemailer\lib\smtp-connection\index.js:1371:14)
+    at SMTPConnection._processResponse (C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\nodemailer\lib\smtp-connection\index.js:993:20)
+    at SMTPConnection._onData (C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\nodemailer\lib\smtp-connection\index.js:774:14)
+    at SMTPConnection._onSocketData (C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\nodemailer\lib\smtp-connection\index.js:195:44)
+
+[2025-08-25T20:54:32.528Z] Error: Missing credentials for "PLAIN"
+    at SMTPConnection._formatError (C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\nodemailer\lib\smtp-connection\index.js:809:19)
+    at SMTPConnection.login (C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\nodemailer\lib\smtp-connection\index.js:454:38)
+    at C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\nodemailer\lib\smtp-transport\index.js:272:32
+    at SMTPConnection.<anonymous> (C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\nodemailer\lib\smtp-connection\index.js:215:17)
+    at Object.onceWrapper (node:events:638:28)
+    at SMTPConnection.emit (node:events:524:28)
+    at SMTPConnection._actionEHLO (C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\nodemailer\lib\smtp-connection\index.js:1371:14)
+    at SMTPConnection._processResponse (C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\nodemailer\lib\smtp-connection\index.js:993:20)
+    at SMTPConnection._onData (C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\nodemailer\lib\smtp-connection\index.js:774:14)
+    at SMTPConnection._onSocketData (C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\nodemailer\lib\smtp-connection\index.js:195:44)
+
+[2025-08-25T20:54:32.705Z] Error: Missing credentials for "PLAIN"
+    at SMTPConnection._formatError (C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\nodemailer\lib\smtp-connection\index.js:809:19)
+    at SMTPConnection.login (C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\nodemailer\lib\smtp-connection\index.js:454:38)
+    at C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\nodemailer\lib\smtp-transport\index.js:272:32
+    at SMTPConnection.<anonymous> (C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\nodemailer\lib\smtp-connection\index.js:215:17)
+    at Object.onceWrapper (node:events:638:28)
+    at SMTPConnection.emit (node:events:524:28)
+    at SMTPConnection._actionEHLO (C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\nodemailer\lib\smtp-connection\index.js:1371:14)
+    at SMTPConnection._processResponse (C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\nodemailer\lib\smtp-connection\index.js:993:20)
+    at SMTPConnection._onData (C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\nodemailer\lib\smtp-connection\index.js:774:14)
+    at SMTPConnection._onSocketData (C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\nodemailer\lib\smtp-connection\index.js:195:44)
+
+[2025-08-25T20:54:32.884Z] Error: Missing credentials for "PLAIN"
+    at SMTPConnection._formatError (C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\nodemailer\lib\smtp-connection\index.js:809:19)
+    at SMTPConnection.login (C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\nodemailer\lib\smtp-connection\index.js:454:38)
+    at C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\nodemailer\lib\smtp-transport\index.js:272:32
+    at SMTPConnection.<anonymous> (C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\nodemailer\lib\smtp-connection\index.js:215:17)
+    at Object.onceWrapper (node:events:638:28)
+    at SMTPConnection.emit (node:events:524:28)
+    at SMTPConnection._actionEHLO (C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\nodemailer\lib\smtp-connection\index.js:1371:14)
+    at SMTPConnection._processResponse (C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\nodemailer\lib\smtp-connection\index.js:993:20)
+    at SMTPConnection._onData (C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\nodemailer\lib\smtp-connection\index.js:774:14)
+    at SMTPConnection._onSocketData (C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\nodemailer\lib\smtp-connection\index.js:195:44)
+
+[2025-08-25T20:54:33.104Z] Error: Missing credentials for "PLAIN"
+    at SMTPConnection._formatError (C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\nodemailer\lib\smtp-connection\index.js:809:19)
+    at SMTPConnection.login (C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\nodemailer\lib\smtp-connection\index.js:454:38)
+    at C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\nodemailer\lib\smtp-transport\index.js:272:32
+    at SMTPConnection.<anonymous> (C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\nodemailer\lib\smtp-connection\index.js:215:17)
+    at Object.onceWrapper (node:events:638:28)
+    at SMTPConnection.emit (node:events:524:28)
+    at SMTPConnection._actionEHLO (C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\nodemailer\lib\smtp-connection\index.js:1371:14)
+    at SMTPConnection._processResponse (C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\nodemailer\lib\smtp-connection\index.js:993:20)
+    at SMTPConnection._onData (C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\nodemailer\lib\smtp-connection\index.js:774:14)
+    at SMTPConnection._onSocketData (C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\nodemailer\lib\smtp-connection\index.js:195:44)
+
+[2025-08-25T20:54:33.283Z] Error: Missing credentials for "PLAIN"
+    at SMTPConnection._formatError (C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\nodemailer\lib\smtp-connection\index.js:809:19)
+    at SMTPConnection.login (C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\nodemailer\lib\smtp-connection\index.js:454:38)
+    at C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\nodemailer\lib\smtp-transport\index.js:272:32
+    at SMTPConnection.<anonymous> (C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\nodemailer\lib\smtp-connection\index.js:215:17)
+    at Object.onceWrapper (node:events:638:28)
+    at SMTPConnection.emit (node:events:524:28)
+    at SMTPConnection._actionEHLO (C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\nodemailer\lib\smtp-connection\index.js:1371:14)
+    at SMTPConnection._processResponse (C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\nodemailer\lib\smtp-connection\index.js:993:20)
+    at SMTPConnection._onData (C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\nodemailer\lib\smtp-connection\index.js:774:14)
+    at SMTPConnection._onSocketData (C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\nodemailer\lib\smtp-connection\index.js:195:44)
+
+[2025-08-25T20:54:33.465Z] Error: Missing credentials for "PLAIN"
+    at SMTPConnection._formatError (C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\nodemailer\lib\smtp-connection\index.js:809:19)
+    at SMTPConnection.login (C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\nodemailer\lib\smtp-connection\index.js:454:38)
+    at C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\nodemailer\lib\smtp-transport\index.js:272:32
+    at SMTPConnection.<anonymous> (C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\nodemailer\lib\smtp-connection\index.js:215:17)
+    at Object.onceWrapper (node:events:638:28)
+    at SMTPConnection.emit (node:events:524:28)
+    at SMTPConnection._actionEHLO (C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\nodemailer\lib\smtp-connection\index.js:1371:14)
+    at SMTPConnection._processResponse (C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\nodemailer\lib\smtp-connection\index.js:993:20)
+    at SMTPConnection._onData (C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\nodemailer\lib\smtp-connection\index.js:774:14)
+    at SMTPConnection._onSocketData (C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\nodemailer\lib\smtp-connection\index.js:195:44)
+
+[2025-08-25T20:54:33.651Z] Error: Missing credentials for "PLAIN"
+    at SMTPConnection._formatError (C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\nodemailer\lib\smtp-connection\index.js:809:19)
+    at SMTPConnection.login (C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\nodemailer\lib\smtp-connection\index.js:454:38)
+    at C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\nodemailer\lib\smtp-transport\index.js:272:32
+    at SMTPConnection.<anonymous> (C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\nodemailer\lib\smtp-connection\index.js:215:17)
+    at Object.onceWrapper (node:events:638:28)
+    at SMTPConnection.emit (node:events:524:28)
+    at SMTPConnection._actionEHLO (C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\nodemailer\lib\smtp-connection\index.js:1371:14)
+    at SMTPConnection._processResponse (C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\nodemailer\lib\smtp-connection\index.js:993:20)
+    at SMTPConnection._onData (C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\nodemailer\lib\smtp-connection\index.js:774:14)
+    at SMTPConnection._onSocketData (C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\nodemailer\lib\smtp-connection\index.js:195:44)
+
+[2025-08-25T20:54:33.828Z] Error: Missing credentials for "PLAIN"
+    at SMTPConnection._formatError (C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\nodemailer\lib\smtp-connection\index.js:809:19)
+    at SMTPConnection.login (C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\nodemailer\lib\smtp-connection\index.js:454:38)
+    at C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\nodemailer\lib\smtp-transport\index.js:272:32
+    at SMTPConnection.<anonymous> (C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\nodemailer\lib\smtp-connection\index.js:215:17)
+    at Object.onceWrapper (node:events:638:28)
+    at SMTPConnection.emit (node:events:524:28)
+    at SMTPConnection._actionEHLO (C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\nodemailer\lib\smtp-connection\index.js:1371:14)
+    at SMTPConnection._processResponse (C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\nodemailer\lib\smtp-connection\index.js:993:20)
+    at SMTPConnection._onData (C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\nodemailer\lib\smtp-connection\index.js:774:14)
+    at SMTPConnection._onSocketData (C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\nodemailer\lib\smtp-connection\index.js:195:44)
+
+[2025-08-25T20:54:34.000Z] Error: Missing credentials for "PLAIN"
+    at SMTPConnection._formatError (C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\nodemailer\lib\smtp-connection\index.js:809:19)
+    at SMTPConnection.login (C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\nodemailer\lib\smtp-connection\index.js:454:38)
+    at C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\nodemailer\lib\smtp-transport\index.js:272:32
+    at SMTPConnection.<anonymous> (C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\nodemailer\lib\smtp-connection\index.js:215:17)
+    at Object.onceWrapper (node:events:638:28)
+    at SMTPConnection.emit (node:events:524:28)
+    at SMTPConnection._actionEHLO (C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\nodemailer\lib\smtp-connection\index.js:1371:14)
+    at SMTPConnection._processResponse (C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\nodemailer\lib\smtp-connection\index.js:993:20)
+    at SMTPConnection._onData (C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\nodemailer\lib\smtp-connection\index.js:774:14)
+    at SMTPConnection._onSocketData (C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\nodemailer\lib\smtp-connection\index.js:195:44)
+
+[2025-08-25T20:54:34.221Z] Error: Missing credentials for "PLAIN"
+    at SMTPConnection._formatError (C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\nodemailer\lib\smtp-connection\index.js:809:19)
+    at SMTPConnection.login (C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\nodemailer\lib\smtp-connection\index.js:454:38)
+    at C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\nodemailer\lib\smtp-transport\index.js:272:32
+    at SMTPConnection.<anonymous> (C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\nodemailer\lib\smtp-connection\index.js:215:17)
+    at Object.onceWrapper (node:events:638:28)
+    at SMTPConnection.emit (node:events:524:28)
+    at SMTPConnection._actionEHLO (C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\nodemailer\lib\smtp-connection\index.js:1371:14)
+    at SMTPConnection._processResponse (C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\nodemailer\lib\smtp-connection\index.js:993:20)
+    at SMTPConnection._onData (C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\nodemailer\lib\smtp-connection\index.js:774:14)
+    at SMTPConnection._onSocketData (C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\nodemailer\lib\smtp-connection\index.js:195:44)
+
+[2025-08-25T20:54:34.393Z] Error: Missing credentials for "PLAIN"
+    at SMTPConnection._formatError (C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\nodemailer\lib\smtp-connection\index.js:809:19)
+    at SMTPConnection.login (C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\nodemailer\lib\smtp-connection\index.js:454:38)
+    at C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\nodemailer\lib\smtp-transport\index.js:272:32
+    at SMTPConnection.<anonymous> (C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\nodemailer\lib\smtp-connection\index.js:215:17)
+    at Object.onceWrapper (node:events:638:28)
+    at SMTPConnection.emit (node:events:524:28)
+    at SMTPConnection._actionEHLO (C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\nodemailer\lib\smtp-connection\index.js:1371:14)
+    at SMTPConnection._processResponse (C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\nodemailer\lib\smtp-connection\index.js:993:20)
+    at SMTPConnection._onData (C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\nodemailer\lib\smtp-connection\index.js:774:14)
+    at SMTPConnection._onSocketData (C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\nodemailer\lib\smtp-connection\index.js:195:44)
+
+[2025-08-25T20:54:34.568Z] Error: Missing credentials for "PLAIN"
+    at SMTPConnection._formatError (C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\nodemailer\lib\smtp-connection\index.js:809:19)
+    at SMTPConnection.login (C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\nodemailer\lib\smtp-connection\index.js:454:38)
+    at C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\nodemailer\lib\smtp-transport\index.js:272:32
+    at SMTPConnection.<anonymous> (C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\nodemailer\lib\smtp-connection\index.js:215:17)
+    at Object.onceWrapper (node:events:638:28)
+    at SMTPConnection.emit (node:events:524:28)
+    at SMTPConnection._actionEHLO (C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\nodemailer\lib\smtp-connection\index.js:1371:14)
+    at SMTPConnection._processResponse (C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\nodemailer\lib\smtp-connection\index.js:993:20)
+    at SMTPConnection._onData (C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\nodemailer\lib\smtp-connection\index.js:774:14)
+    at SMTPConnection._onSocketData (C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\nodemailer\lib\smtp-connection\index.js:195:44)
+
+[2025-08-25T20:54:34.747Z] Error: Missing credentials for "PLAIN"
+    at SMTPConnection._formatError (C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\nodemailer\lib\smtp-connection\index.js:809:19)
+    at SMTPConnection.login (C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\nodemailer\lib\smtp-connection\index.js:454:38)
+    at C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\nodemailer\lib\smtp-transport\index.js:272:32
+    at SMTPConnection.<anonymous> (C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\nodemailer\lib\smtp-connection\index.js:215:17)
+    at Object.onceWrapper (node:events:638:28)
+    at SMTPConnection.emit (node:events:524:28)
+    at SMTPConnection._actionEHLO (C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\nodemailer\lib\smtp-connection\index.js:1371:14)
+    at SMTPConnection._processResponse (C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\nodemailer\lib\smtp-connection\index.js:993:20)
+    at SMTPConnection._onData (C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\nodemailer\lib\smtp-connection\index.js:774:14)
+    at SMTPConnection._onSocketData (C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\nodemailer\lib\smtp-connection\index.js:195:44)
+
+[2025-08-25T20:54:34.915Z] Error: Missing credentials for "PLAIN"
+    at SMTPConnection._formatError (C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\nodemailer\lib\smtp-connection\index.js:809:19)
+    at SMTPConnection.login (C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\nodemailer\lib\smtp-connection\index.js:454:38)
+    at C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\nodemailer\lib\smtp-transport\index.js:272:32
+    at SMTPConnection.<anonymous> (C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\nodemailer\lib\smtp-connection\index.js:215:17)
+    at Object.onceWrapper (node:events:638:28)
+    at SMTPConnection.emit (node:events:524:28)
+    at SMTPConnection._actionEHLO (C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\nodemailer\lib\smtp-connection\index.js:1371:14)
+    at SMTPConnection._processResponse (C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\nodemailer\lib\smtp-connection\index.js:993:20)
+    at SMTPConnection._onData (C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\nodemailer\lib\smtp-connection\index.js:774:14)
+    at SMTPConnection._onSocketData (C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\nodemailer\lib\smtp-connection\index.js:195:44)
+
+[2025-08-25T20:54:35.090Z] Error: Missing credentials for "PLAIN"
+    at SMTPConnection._formatError (C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\nodemailer\lib\smtp-connection\index.js:809:19)
+    at SMTPConnection.login (C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\nodemailer\lib\smtp-connection\index.js:454:38)
+    at C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\nodemailer\lib\smtp-transport\index.js:272:32
+    at SMTPConnection.<anonymous> (C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\nodemailer\lib\smtp-connection\index.js:215:17)
+    at Object.onceWrapper (node:events:638:28)
+    at SMTPConnection.emit (node:events:524:28)
+    at SMTPConnection._actionEHLO (C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\nodemailer\lib\smtp-connection\index.js:1371:14)
+    at SMTPConnection._processResponse (C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\nodemailer\lib\smtp-connection\index.js:993:20)
+    at SMTPConnection._onData (C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\nodemailer\lib\smtp-connection\index.js:774:14)
+    at SMTPConnection._onSocketData (C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\nodemailer\lib\smtp-connection\index.js:195:44)
+
+[2025-08-25T20:54:35.262Z] Error: Missing credentials for "PLAIN"
+    at SMTPConnection._formatError (C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\nodemailer\lib\smtp-connection\index.js:809:19)
+    at SMTPConnection.login (C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\nodemailer\lib\smtp-connection\index.js:454:38)
+    at C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\nodemailer\lib\smtp-transport\index.js:272:32
+    at SMTPConnection.<anonymous> (C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\nodemailer\lib\smtp-connection\index.js:215:17)
+    at Object.onceWrapper (node:events:638:28)
+    at SMTPConnection.emit (node:events:524:28)
+    at SMTPConnection._actionEHLO (C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\nodemailer\lib\smtp-connection\index.js:1371:14)
+    at SMTPConnection._processResponse (C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\nodemailer\lib\smtp-connection\index.js:993:20)
+    at SMTPConnection._onData (C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\nodemailer\lib\smtp-connection\index.js:774:14)
+    at SMTPConnection._onSocketData (C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\nodemailer\lib\smtp-connection\index.js:195:44)
+
+[2025-08-25T20:54:35.450Z] Error: Missing credentials for "PLAIN"
+    at SMTPConnection._formatError (C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\nodemailer\lib\smtp-connection\index.js:809:19)
+    at SMTPConnection.login (C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\nodemailer\lib\smtp-connection\index.js:454:38)
+    at C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\nodemailer\lib\smtp-transport\index.js:272:32
+    at SMTPConnection.<anonymous> (C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\nodemailer\lib\smtp-connection\index.js:215:17)
+    at Object.onceWrapper (node:events:638:28)
+    at SMTPConnection.emit (node:events:524:28)
+    at SMTPConnection._actionEHLO (C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\nodemailer\lib\smtp-connection\index.js:1371:14)
+    at SMTPConnection._processResponse (C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\nodemailer\lib\smtp-connection\index.js:993:20)
+    at SMTPConnection._onData (C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\nodemailer\lib\smtp-connection\index.js:774:14)
+    at SMTPConnection._onSocketData (C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\nodemailer\lib\smtp-connection\index.js:195:44)
+
+[2025-08-25T20:54:35.654Z] Error: Missing credentials for "PLAIN"
+    at SMTPConnection._formatError (C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\nodemailer\lib\smtp-connection\index.js:809:19)
+    at SMTPConnection.login (C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\nodemailer\lib\smtp-connection\index.js:454:38)
+    at C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\nodemailer\lib\smtp-transport\index.js:272:32
+    at SMTPConnection.<anonymous> (C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\nodemailer\lib\smtp-connection\index.js:215:17)
+    at Object.onceWrapper (node:events:638:28)
+    at SMTPConnection.emit (node:events:524:28)
+    at SMTPConnection._actionEHLO (C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\nodemailer\lib\smtp-connection\index.js:1371:14)
+    at SMTPConnection._processResponse (C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\nodemailer\lib\smtp-connection\index.js:993:20)
+    at SMTPConnection._onData (C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\nodemailer\lib\smtp-connection\index.js:774:14)
+    at SMTPConnection._onSocketData (C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\nodemailer\lib\smtp-connection\index.js:195:44)
+
+[2025-08-25T20:54:35.830Z] Error: Missing credentials for "PLAIN"
+    at SMTPConnection._formatError (C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\nodemailer\lib\smtp-connection\index.js:809:19)
+    at SMTPConnection.login (C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\nodemailer\lib\smtp-connection\index.js:454:38)
+    at C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\nodemailer\lib\smtp-transport\index.js:272:32
+    at SMTPConnection.<anonymous> (C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\nodemailer\lib\smtp-connection\index.js:215:17)
+    at Object.onceWrapper (node:events:638:28)
+    at SMTPConnection.emit (node:events:524:28)
+    at SMTPConnection._actionEHLO (C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\nodemailer\lib\smtp-connection\index.js:1371:14)
+    at SMTPConnection._processResponse (C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\nodemailer\lib\smtp-connection\index.js:993:20)
+    at SMTPConnection._onData (C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\nodemailer\lib\smtp-connection\index.js:774:14)
+    at SMTPConnection._onSocketData (C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\nodemailer\lib\smtp-connection\index.js:195:44)
+
+[2025-08-25T20:54:36.000Z] Error: Missing credentials for "PLAIN"
+    at SMTPConnection._formatError (C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\nodemailer\lib\smtp-connection\index.js:809:19)
+    at SMTPConnection.login (C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\nodemailer\lib\smtp-connection\index.js:454:38)
+    at C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\nodemailer\lib\smtp-transport\index.js:272:32
+    at SMTPConnection.<anonymous> (C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\nodemailer\lib\smtp-connection\index.js:215:17)
+    at Object.onceWrapper (node:events:638:28)
+    at SMTPConnection.emit (node:events:524:28)
+    at SMTPConnection._actionEHLO (C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\nodemailer\lib\smtp-connection\index.js:1371:14)
+    at SMTPConnection._processResponse (C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\nodemailer\lib\smtp-connection\index.js:993:20)
+    at SMTPConnection._onData (C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\nodemailer\lib\smtp-connection\index.js:774:14)
+    at SMTPConnection._onSocketData (C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\nodemailer\lib\smtp-connection\index.js:195:44)
+
+[2025-08-25T20:54:36.179Z] Error: Missing credentials for "PLAIN"
+    at SMTPConnection._formatError (C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\nodemailer\lib\smtp-connection\index.js:809:19)
+    at SMTPConnection.login (C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\nodemailer\lib\smtp-connection\index.js:454:38)
+    at C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\nodemailer\lib\smtp-transport\index.js:272:32
+    at SMTPConnection.<anonymous> (C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\nodemailer\lib\smtp-connection\index.js:215:17)
+    at Object.onceWrapper (node:events:638:28)
+    at SMTPConnection.emit (node:events:524:28)
+    at SMTPConnection._actionEHLO (C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\nodemailer\lib\smtp-connection\index.js:1371:14)
+    at SMTPConnection._processResponse (C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\nodemailer\lib\smtp-connection\index.js:993:20)
+    at SMTPConnection._onData (C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\nodemailer\lib\smtp-connection\index.js:774:14)
+    at SMTPConnection._onSocketData (C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\nodemailer\lib\smtp-connection\index.js:195:44)
+
+[2025-08-25T20:54:36.359Z] Error: Missing credentials for "PLAIN"
+    at SMTPConnection._formatError (C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\nodemailer\lib\smtp-connection\index.js:809:19)
+    at SMTPConnection.login (C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\nodemailer\lib\smtp-connection\index.js:454:38)
+    at C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\nodemailer\lib\smtp-transport\index.js:272:32
+    at SMTPConnection.<anonymous> (C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\nodemailer\lib\smtp-connection\index.js:215:17)
+    at Object.onceWrapper (node:events:638:28)
+    at SMTPConnection.emit (node:events:524:28)
+    at SMTPConnection._actionEHLO (C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\nodemailer\lib\smtp-connection\index.js:1371:14)
+    at SMTPConnection._processResponse (C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\nodemailer\lib\smtp-connection\index.js:993:20)
+    at SMTPConnection._onData (C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\nodemailer\lib\smtp-connection\index.js:774:14)
+    at SMTPConnection._onSocketData (C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\nodemailer\lib\smtp-connection\index.js:195:44)
+
+[2025-08-25T21:02:51.982Z] Error: No se pudo realizar la búsqueda en empresa
+    at Repositorio.BuscarPorFiltros (file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/repositories/globalPersistence.js:211:19)
+    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at async file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/services/AdeudoService.js:39:29
+    at async AdeudoService.withTransaction (file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/services/BaseService.js:13:28)
+    at async AdeudoService.insertarAdeudoCompleto (file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/services/AdeudoService.js:18:16)
+    at async AdeudoController.createAdeudo (file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/controllers/AdeudoController.js:57:22)
+
+[2025-08-25T21:40:07.413Z] ReferenceError: honorario is not defined
+    at new LiquidacionService (file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/services/LiquidacionService.js:8:40)
+    at new LiquidacionController (file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/controllers/LiquidacionController.js:7:15)
+    at file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/controllers/LiquidacionController.js:87:31
+    at ModuleJob.run (node:internal/modules/esm/module_job:271:25)
+    at async onImport.tracePromise.__proto__ (node:internal/modules/esm/loader:547:26)
+    at async asyncRunEntryPointWithESMLoader (node:internal/modules/run_main:116:5)
+
+[2025-08-26T00:00:55.603Z] ReferenceError: adeudo is not defined
+    at file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/services/AdeudoService.js:256:131
+    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at async AdeudoService.withTransaction (file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/services/BaseService.js:13:28)
+    at async AdeudoService.updateAdeudos (file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/services/AdeudoService.js:198:16)
+    at async AdeudoController.updateAdeudos (file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/controllers/AdeudoController.js:101:22)
+
+[2025-08-26T00:50:01.873Z] TypeError: HomeController.obtenerDatosHome is not a function
+    at file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/routes/Home/homeRoutes.js:8:32
+    at ModuleJob.run (node:internal/modules/esm/module_job:271:25)
+    at async onImport.tracePromise.__proto__ (node:internal/modules/esm/loader:547:26)
+    at async asyncRunEntryPointWithESMLoader (node:internal/modules/run_main:116:5)
+
+[2025-08-26T00:50:32.506Z] Error: Route.get() requires a callback function but got a [object Undefined]
+    at Route.<computed> [as get] (C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\express\lib\router\route.js:216:15)
+    at proto.<computed> [as get] (C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\express\lib\router\index.js:521:19)
+    at file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/routes/Home/homeRoutes.js:8:8
+    at ModuleJob.run (node:internal/modules/esm/module_job:271:25)
+    at async onImport.tracePromise.__proto__ (node:internal/modules/esm/loader:547:26)
+    at async asyncRunEntryPointWithESMLoader (node:internal/modules/run_main:116:5)
+
+[2025-08-26T00:51:13.929Z] TypeError: HomeController.obtenerDatosHome is not a function
+    at file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/routes/Home/homeRoutes.js:8:32
+    at ModuleJob.run (node:internal/modules/esm/module_job:271:25)
+    at async onImport.tracePromise.__proto__ (node:internal/modules/esm/loader:547:26)
+    at async asyncRunEntryPointWithESMLoader (node:internal/modules/run_main:116:5)
+
+[2025-08-26T00:51:38.957Z] TypeError: homeController.obtenerDatosHome is not a function
+    at file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/routes/Home/homeRoutes.js:8:32
+    at ModuleJob.run (node:internal/modules/esm/module_job:271:25)
+    at async onImport.tracePromise.__proto__ (node:internal/modules/esm/loader:547:26)
+    at async asyncRunEntryPointWithESMLoader (node:internal/modules/run_main:116:5)
+
+[2025-08-26T00:51:50.971Z] TypeError: Cannot read properties of undefined (reading 'bind')
+    at file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/routes/Home/homeRoutes.js:8:49
+    at ModuleJob.run (node:internal/modules/esm/module_job:271:25)
+    at async onImport.tracePromise.__proto__ (node:internal/modules/esm/loader:547:26)
+    at async asyncRunEntryPointWithESMLoader (node:internal/modules/run_main:116:5)
+
+[2025-08-26T00:52:18.288Z] ReferenceError: LiquidacionController is not defined
+    at file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/controllers/HomeController.js:19:24
+    at ModuleJob.run (node:internal/modules/esm/module_job:271:25)
+    at async onImport.tracePromise.__proto__ (node:internal/modules/esm/loader:547:26)
+    at async asyncRunEntryPointWithESMLoader (node:internal/modules/run_main:116:5)
+
+[2025-08-26T01:00:22.404Z] ReferenceError: filtros is not defined
+    at HomeService.obtenerDatosHome (file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/services/HomeService.js:13:82)
+    at HomeController.obtenerDatosHome (file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/controllers/HomeController.js:11:47)
+    at Layer.handle [as handle_request] (C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\express\lib\router\layer.js:95:5)
+    at next (C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\express\lib\router\route.js:149:13)
+    at Route.dispatch (C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\express\lib\router\route.js:119:3)
+    at Layer.handle [as handle_request] (C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\express\lib\router\layer.js:95:5)
+    at C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\express\lib\router\index.js:284:15
+    at Function.process_params (C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\express\lib\router\index.js:346:12)
+    at next (C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\express\lib\router\index.js:280:10)
+    at Function.handle (C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\express\lib\router\index.js:175:3)
+
+[2025-08-26T01:01:26.427Z] ReferenceError: filtros is not defined
+    at HomeService.obtenerDatosHome (file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/services/HomeService.js:13:82)
+    at HomeController.obtenerDatosHome (file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/controllers/HomeController.js:11:47)
+    at Layer.handle [as handle_request] (C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\express\lib\router\layer.js:95:5)
+    at next (C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\express\lib\router\route.js:149:13)
+    at Route.dispatch (C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\express\lib\router\route.js:119:3)
+    at Layer.handle [as handle_request] (C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\express\lib\router\layer.js:95:5)
+    at C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\express\lib\router\index.js:284:15
+    at Function.process_params (C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\express\lib\router\index.js:346:12)
+    at next (C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\express\lib\router\index.js:280:10)
+    at Function.handle (C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\express\lib\router\index.js:175:3)
+
+[2025-08-26T01:01:26.443Z] ReferenceError: filtros is not defined
+    at HomeService.obtenerDatosHome (file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/services/HomeService.js:13:82)
+    at HomeController.obtenerDatosHome (file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/controllers/HomeController.js:11:47)
+    at Layer.handle [as handle_request] (C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\express\lib\router\layer.js:95:5)
+    at next (C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\express\lib\router\route.js:149:13)
+    at Route.dispatch (C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\express\lib\router\route.js:119:3)
+    at Layer.handle [as handle_request] (C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\express\lib\router\layer.js:95:5)
+    at C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\express\lib\router\index.js:284:15
+    at Function.process_params (C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\express\lib\router\index.js:346:12)
+    at next (C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\express\lib\router\index.js:280:10)
+    at Function.handle (C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\express\lib\router\index.js:175:3)
+
+[2025-08-26T01:01:43.676Z] Error: Se requieren filtros para la búsqueda
+    at Repositorio.BuscarPorFiltros (file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/repositories/globalPersistence.js:194:19)
+    at HomeService.obtenerDatosHome (file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/services/HomeService.js:13:58)
+    at HomeController.obtenerDatosHome (file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/controllers/HomeController.js:11:47)
+    at Layer.handle [as handle_request] (C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\express\lib\router\layer.js:95:5)
+    at next (C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\express\lib\router\route.js:149:13)
+    at Route.dispatch (C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\express\lib\router\route.js:119:3)
+    at Layer.handle [as handle_request] (C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\express\lib\router\layer.js:95:5)
+    at C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\express\lib\router\index.js:284:15
+    at Function.process_params (C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\express\lib\router\index.js:346:12)
+    at next (C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\express\lib\router\index.js:280:10)
+
+[2025-08-26T01:01:43.716Z] Error: Se requieren filtros para la búsqueda
+    at Repositorio.BuscarPorFiltros (file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/repositories/globalPersistence.js:194:19)
+    at HomeService.obtenerDatosHome (file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/services/HomeService.js:13:58)
+    at HomeController.obtenerDatosHome (file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/controllers/HomeController.js:11:47)
+    at Layer.handle [as handle_request] (C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\express\lib\router\layer.js:95:5)
+    at next (C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\express\lib\router\route.js:149:13)
+    at Route.dispatch (C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\express\lib\router\route.js:119:3)
+    at Layer.handle [as handle_request] (C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\express\lib\router\layer.js:95:5)
+    at C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\express\lib\router\index.js:284:15
+    at Function.process_params (C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\express\lib\router\index.js:346:12)
+    at next (C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\express\lib\router\index.js:280:10)
+
+[2025-08-26T01:11:36.484Z] Error: No se pudo realizar la búsqueda en adeudo a
+    at Repositorio.BuscarConJoins (file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/repositories/globalPersistence.js:278:19)
+    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at async HomeService.obtenerDatosHome (file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/services/HomeService.js:29:35)
+    at async HomeController.obtenerDatosHome (file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/controllers/HomeController.js:11:28)
+
+[2025-08-26T01:11:36.575Z] Error: No se pudo realizar la búsqueda en adeudo a
+    at Repositorio.BuscarConJoins (file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/repositories/globalPersistence.js:278:19)
+    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at async HomeService.obtenerDatosHome (file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/services/HomeService.js:29:35)
+    at async HomeController.obtenerDatosHome (file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/controllers/HomeController.js:11:28)
+
+[2025-08-26T01:16:22.963Z] TypeError: Cannot read properties of null (reading 'op')
+    at Repositorio.BuscarConJoins (file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/repositories/globalPersistence.js:254:52)
+    at HomeService.obtenerDatosHome (file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/services/HomeService.js:29:66)
+    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at async HomeController.obtenerDatosHome (file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/controllers/HomeController.js:11:28)
+
+[2025-08-26T01:16:23.008Z] TypeError: Cannot read properties of null (reading 'op')
+    at Repositorio.BuscarConJoins (file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/repositories/globalPersistence.js:254:52)
+    at HomeService.obtenerDatosHome (file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/services/HomeService.js:29:66)
+    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at async HomeController.obtenerDatosHome (file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/controllers/HomeController.js:11:28)
+
+[2025-08-26T01:22:36.418Z] Error: No se pudo realizar la búsqueda en adeudo a
+    at Repositorio.BuscarConJoins (file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/repositories/globalPersistence.js:288:19)
+    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at async HomeService.obtenerDatosHome (file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/services/HomeService.js:45:29)
+    at async HomeController.obtenerDatosHome (file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/controllers/HomeController.js:11:28)
+
+[2025-08-26T01:22:36.493Z] Error: No se pudo realizar la búsqueda en adeudo a
+    at Repositorio.BuscarConJoins (file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/repositories/globalPersistence.js:288:19)
+    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at async HomeService.obtenerDatosHome (file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/services/HomeService.js:45:29)
+    at async HomeController.obtenerDatosHome (file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/controllers/HomeController.js:11:28)
+
+[2025-08-26T02:16:16.505Z] Error: No se pudo realizar la búsqueda en movimiento
+    at Repositorio.BuscarPorFiltros (file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/repositories/globalPersistence.js:215:19)
+    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at async HomeService.obtenerMovimientosRecientes (file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/services/HomeService.js:59:29)
+    at async HomeService.obtenerDatosHome (file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/services/HomeService.js:46:29)
+    at async HomeController.obtenerDatosHome (file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/controllers/HomeController.js:11:28)
+
+[2025-08-26T02:17:12.232Z] Error: No se pudo realizar la búsqueda en movimiento
+    at Repositorio.BuscarPorFiltros (file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/repositories/globalPersistence.js:215:19)
+    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at async HomeService.obtenerMovimientosRecientes (file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/services/HomeService.js:59:29)
+    at async HomeService.obtenerDatosHome (file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/services/HomeService.js:46:29)
+    at async HomeController.obtenerDatosHome (file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/controllers/HomeController.js:11:28)
+
+[2025-08-26T02:17:12.301Z] Error: No se pudo realizar la búsqueda en movimiento
+    at Repositorio.BuscarPorFiltros (file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/repositories/globalPersistence.js:215:19)
+    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at async HomeService.obtenerMovimientosRecientes (file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/services/HomeService.js:59:29)
+    at async HomeService.obtenerDatosHome (file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/services/HomeService.js:46:29)
+    at async HomeController.obtenerDatosHome (file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/controllers/HomeController.js:11:28)
+
+[2025-08-26T02:52:34.111Z] error: el mensaje de «bind» entrega 1 parámetros, pero la sentencia preparada «» requiere 0
+    at C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\pg-pool\index.js:45:11
+    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at async AdeudoService.obtenerTodosAdeudosPorEmpresa (file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/services/AdeudoService.js:89:24)
+    at async AdeudoController.getAdeudosByEmpresa (file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/controllers/AdeudoController.js:15:11)
+
+[2025-08-26T02:52:34.174Z] error: el mensaje de «bind» entrega 1 parámetros, pero la sentencia preparada «» requiere 0
+    at C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\pg-pool\index.js:45:11
+    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at async AdeudoService.obtenerTodosAdeudosPorEmpresa (file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/services/AdeudoService.js:89:24)
+    at async AdeudoController.getAdeudosByEmpresa (file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/controllers/AdeudoController.js:15:11)
+
+[2025-08-26T02:52:34.233Z] error: el mensaje de «bind» entrega 1 parámetros, pero la sentencia preparada «» requiere 0
+    at C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\pg-pool\index.js:45:11
+    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at async AdeudoService.obtenerTodosAdeudosPorEmpresa (file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/services/AdeudoService.js:89:24)
+    at async AdeudoController.getAdeudosByEmpresa (file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/controllers/AdeudoController.js:15:11)
+

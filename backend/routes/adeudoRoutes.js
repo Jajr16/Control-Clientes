@@ -6,7 +6,8 @@ import {
     getAdeudosPendientesByEmpresa,
     checkAdeudosPendientes,
     getEmpresasAdeudos,
-    updateAdeudos
+    updateAdeudos,
+    deleteAdeudos,
 } from "../controllers/AdeudoController.js";
 
 const router = express.Router();
@@ -28,5 +29,8 @@ router.get("/empresa_adeudo", getEmpresasAdeudos);
 
 // Actualizar adeudos
 router.post('/update', updateAdeudos);
+
+// Eliminar adeudos
+router.post('/delete', deleteAdeudos);
 
 export default router;

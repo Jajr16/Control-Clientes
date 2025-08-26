@@ -7,7 +7,7 @@ import { adeudoSchema } from '../middleware/Schemas.js'
 class AdeudoService extends BaseService {
     constructor() {
         super({
-            adeudo: new Repositorio('adeudo', 'num_factura'),
+            adeudo: new Repositorio('adeudo', ['num_factura', 'empresa_cif']),
             protocolo: new Repositorio('protocolo', ['num_factura', 'empresa_cif']),
             anticipo: new Repositorio('anticipo', 'empresa_cif'),
             empresa: new Repositorio('empresa', 'cif')
@@ -35,6 +35,15 @@ class AdeudoService extends BaseService {
             if (anticipoExistente) {
                 console.log('Usando anticipo existente:', anticipoExistente);
             }
+
+            const empresa = await this.repositories.empresa.BuscarPorFiltros({ cif: adeudo.empresa_cif }, ['nombre'])
+
+            if (empresa.length > 0) {
+                await this.repositories.adeudo.registrarMovimiento({ accion: `Se agregó un adeudo para: ${empresa[0].nombre}`, datos: adeudo }, client);
+            } else {
+                console.log('No se encontró la empresa')
+            }
+
 
             return adeudoInsertado;
         });
@@ -66,7 +75,7 @@ class AdeudoService extends BaseService {
                     ELSE NULL
                 END AS diferencia
             FROM adeudo a
-            LEFT JOIN protocolo p ON a.num_factura = p.num_factura
+            LEFT JOIN protocolo p ON a.num_factura = p.num_factura AND a.empresa_cif = p.empresa_cif
             LEFT JOIN anticipo an ON a.empresa_cif = an.empresa_cif
             LEFT JOIN honorario h ON a.num_liquidacion = h.num_liquidacion AND a.empresa_cif = h.empresa_cif
             LEFT JOIN ajuste aj ON a.num_factura = aj.num_factura
@@ -132,8 +141,13 @@ class AdeudoService extends BaseService {
 
         const result = await pool.query(query, [empresa_cif]);
 
+        const adeudos = result.rows.map(row => ({
+            ...row,
+            ff: formatDate(row.ff)
+        }));
+
         return {
-            adeudos: result.rows,
+            adeudos,
             resumen: {
                 total_pendientes: result.rows.length
             }
@@ -241,6 +255,14 @@ class AdeudoService extends BaseService {
                 console.log("ADEUDOS ACTUALIZADOS");
             }
 
+            const empresa = await this.repositories.empresa.BuscarPorFiltros({ cif: empresa_cif }, ['nombre'])
+
+            if (empresa.length > 0) {
+                await this.repositories.adeudo.registrarMovimiento({ accion: `Se actualizó un adeudo para: ${empresa[0].nombre}`, datos: data }, client);
+            } else {
+                console.log('No se encontró la empresa')
+            }
+
             return {
                 success: true,
                 message: "Cambios guardados correctamente",
@@ -249,6 +271,49 @@ class AdeudoService extends BaseService {
                 anticipoActualizado: anticipoUnico !== undefined
             };
 
+        });
+    }
+
+    async deleteAdeudos(data) {
+        return await this.withTransaction(async (cliente) => {
+            console.log(data);
+
+            await Promise.all(
+                data.map(async (adeudo) => {
+                    console.log(adeudo);
+                    const exists = await this.repositories.adeudo.ExistePorId({
+                        num_factura: adeudo.num_factura,
+                        empresa_cif: adeudo.empresa_cif
+                    });
+
+                    if (exists) {
+                        const eliminar = await this.repositories.adeudo.eliminarPorId(
+                            { num_factura: adeudo.num_factura, empresa_cif: adeudo.empresa_cif },
+                            cliente
+                        );
+
+                        if (!eliminar) {
+                            return {
+                                success: false,
+                                message: "Hubo un error al eliminar el adeudo."
+                            }
+                        }
+                    }
+                })
+            );
+
+            const empresa = await this.repositories.empresa.BuscarPorFiltros({ cif: adeudo.empresa_cif }, ['nombre'])
+
+            if (empresa.length > 0) {
+                await this.repositories.adeudo.registrarMovimiento({ accion: `Se eliminó el adeudo con factura: ${adeudo.num_factura} para: ${empresa[0].nombre}`, adeudo }, client)
+            } else {
+                console.log('No se encontró la empresa')
+            }
+
+            return {
+                success: true,
+                message: "Adeudos eliminados correctamente",
+            };
         });
     }
 

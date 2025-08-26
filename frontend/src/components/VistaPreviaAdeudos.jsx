@@ -1,10 +1,10 @@
 import React from 'react';
 
-const VistaPreviaAdeudos = ({ 
-  adeudosList, 
-  empresa, 
-  empresasDisponibles, 
-  estadoAdeudos 
+const VistaPreviaAdeudos = ({
+  adeudosList,
+  empresa,
+  empresasDisponibles,
+  estadoAdeudos
 }) => {
   // Comparador robusto por empresa
   const matchEmpresa = (a, empresaCif) => {
@@ -70,8 +70,8 @@ const VistaPreviaAdeudos = ({
       {/* Encabezado */}
       <div className="mb-4">
         <p className="text-sm font-semibold">
-          Adeudos a Finatech de parte de {empresa?.empresa_cif 
-            ? (empresasDisponibles.find(e => e.cif === empresa.empresa_cif)?.nombre || empresa.empresa_cif) 
+          Adeudos a Finatech de parte de {empresa?.empresa_cif
+            ? (empresasDisponibles.find(e => e.cif === empresa.empresa_cif)?.nombre || empresa.empresa_cif)
             : "No seleccionada"}
         </p>
         {(() => {
@@ -82,7 +82,7 @@ const VistaPreviaAdeudos = ({
 
           if (fechas.length === 0) return null;
 
-          const meses = ["enero","febrero","marzo","abril","mayo","junio","julio","agosto","septiembre","octubre","noviembre","diciembre"];
+          const meses = ["enero", "febrero", "marzo", "abril", "mayo", "junio", "julio", "agosto", "septiembre", "octubre", "noviembre", "diciembre"];
           const fmt = f => `${f.getDate()} de ${meses[f.getMonth()]} ${f.getFullYear()}`;
           return (
             <p className="text-sm font-semibold">Adeudos a Finatech desde {fmt(fechas[0])} al {fmt(fechas[fechas.length - 1])}</p>
@@ -108,12 +108,12 @@ const VistaPreviaAdeudos = ({
           </tr>
         </thead>
         <tbody>
-          {adeudosEmpresa.map((a) => (
-            <tr key={rowKey(a)} className={`text-center border ${a.num_liquidacion ? 'bg-green-50' : 'bg-white'}`}>
+          {adeudosEmpresa.map((a, index) => (
+            <tr key={`${rowKey(a)}-${index}`} className={`text-center border ${a.num_liquidacion ? 'bg-green-50' : 'bg-white'}`}>
               <td className="border p-2">{renderEstadoLiquidacion(a)}</td>
               <td className="border p-2">{a.concepto}</td>
               <td className="border p-2">{a.proveedor}</td>
-              <td className="border p-2">{new Date(a.ff).toLocaleDateString()}</td>
+              <td className="border p-2">{a.ff}</td>
               <td className="border p-2">{a.num_factura}</td>
               <td className="border p-2">{a.protocolo_entrada}</td>
               <td className="border p-2">{Number(a.importe || 0).toFixed(2)}</td>
@@ -160,7 +160,7 @@ const VistaPreviaAdeudos = ({
           <tr className="bg-gray-50">
             <td colSpan={10} className="text-right pr-2 font-bold border">Honorarios FINATECH (IVA incluido):</td>
             <td className="border">{honorarios.toFixed(2)}</td>
-          </tr> 
+          </tr>
 
           {/* Adeudo pendiente (solo pendientes) */}
           <tr className="bg-yellow-100 font-bold border-2">

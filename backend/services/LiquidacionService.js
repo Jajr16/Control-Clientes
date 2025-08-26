@@ -1,9 +1,12 @@
 import { BaseService } from './BaseService.js';
 import { pool } from "../config/db.js";
+import Repositorio from '../repositories/globalPersistence.js';
 
 class LiquidacionService extends BaseService {
     constructor() {
-        super();
+        super({
+            honorario: new Repositorio('honorario', ['empresa_cif', 'num_liquidacion'])
+        });
     }
 
     async crearLiquidacionFinal({ empresa_cif, honorarios_sin_iva }) {
@@ -80,8 +83,17 @@ class LiquidacionService extends BaseService {
                 WHERE h.num_liquidacion = $1 AND h.empresa_cif = $2
                 GROUP BY h.num_liquidacion, h.empresa_cif, h.honorario, h.iva, h.num_factura
             `;
-            
+
             const resumenResult = await client.query(resumenQuery, [num_liquidacion, empresa_cif]);
+
+            const empresa = await this.repositories.honorario.BuscarPorFiltros({ empresa_cif: empresa_cif }, ['nombre'])
+
+            if (empresa.length > 0) {
+                await this.repositories.adeudo.registrarMovimiento({ accion: `Se hizo una liquidación para los adeudos de:
+                    ${empresa[0].nombre}`, datos: {empresa_cif, honorarios_sin_iva} }, client)
+            } else {
+                console.log('No se encontró la empresa')
+            }
             
             return {
                 success: true,

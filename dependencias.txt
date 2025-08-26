@@ -1,6 +1,7 @@
 Backend
 npm i dotenv morgan pg express
 npm install cors
+npm install nodemailer
 
 
 Frontend

@@ -11,7 +11,7 @@ const AdeudosForm = ({
   mostrarVistaPrevia, setVistaPrevia
 }) => {
 
-  const h = useAdeudos({ empresa, setEmpresa, adeudosGuardados, setAdeudosGuardados, setVistaPrevia });
+  const h = useAdeudos({ empresa, setEmpresa, adeudosGuardados, setAdeudosGuardados, setVistaPrevia });  
 
   if (h.vistaActual === 'borrador') {
     return (

@@ -173,7 +173,7 @@ class Repositorio {
 
         try {
             const query = `DELETE FROM ${this.tabla} WHERE ${condiciones} RETURNING *;`;
-            const result = await pool.query(query, valores);
+            const result = await queryClient.query(query, valores);
 
             return result.rowCount > 0;
         } catch (error) {
@@ -189,22 +189,26 @@ class Repositorio {
      * @param {*} columnasSeleccionadas Columnas que queremos obtener
      * @returns 
      */
-    async BuscarPorFiltros(filtros, columnasSeleccionadas = []) {
-        if (!filtros || Object.keys(filtros).length == 0) {
-            throw new Error(`Se requieren filtros para la búsqueda`)
+    async BuscarPorFiltros(filtros = {}, columnasSeleccionadas = []) {
+        const tieneFiltros = filtros && Object.keys(filtros).length > 0;
+        const columnasQuery = columnasSeleccionadas.length > 0
+            ? columnasSeleccionadas.join(', ')
+            : '*';
+
+        let query = `SELECT ${columnasQuery} FROM ${this.tabla}`;
+        let valores = [];
+
+        if (tieneFiltros) {
+            const columnas = Object.keys(filtros);
+            const condiciones = columnas
+                .map((col, index) => `${col} = $${index + 1}`)
+                .join(' AND ');
+            valores = Object.values(filtros);
+            query += ` WHERE ${condiciones}`;
         }
 
-        const columnas = Object.keys(filtros) // Obtiene el nombre de las llaves del diccionario
-        // Notación para establecer las llaves primarias en las condiciones para la consulta
-        const condiciones = columnas.map((col, index) => `${col} = $${index + 1}`).join(' AND ')
-        const valores = Object.values(filtros) // Obtiene los valores del diccionario de los valores para filtrar
-
-        const columnasQuery = columnasSeleccionadas.length > 0 ? columnasSeleccionadas.join(', ') : '*';
-
-
         try {
-            const query = `SELECT ${columnasQuery} FROM ${this.tabla} WHERE ${condiciones}`;
-            const result = await pool.query(query, valores)
+            const result = await pool.query(query, valores);
             return result.rows;
         } catch (error) {
             console.error(`Error al buscar en ${this.tabla} con filtros:`, error);
@@ -247,7 +251,22 @@ class Repositorio {
         let contador = 1;
 
         for (const [campo, valor] of Object.entries(filtros)) {
-            if (valor !== undefined && valor !== null && valor !== '') {
+            if (valor === null) {
+                condiciones.push(`${campo} IS NULL`);
+            } else if (typeof valor === 'object') {
+                if (valor.raw) {
+                    // Insertar expresión SQL tal cual
+                    condiciones.push(`${campo} = ${valor.raw}`);
+                } else if (valor.op) {
+                    if (valor.value !== undefined) {
+                        condiciones.push(`${campo} ${valor.op} $${contador}`);
+                        valores.push(valor.value);
+                        contador++;
+                    } else {
+                        condiciones.push(`${campo} ${valor.op}`);
+                    }
+                }
+            } else {
                 condiciones.push(`${campo} = $${contador}`);
                 valores.push(valor);
                 contador++;
@@ -284,6 +303,25 @@ class Repositorio {
     _validarClaves(claves) {
         return Object.keys(claves).length === this.clavesPrimarias.length &&
             this.clavesPrimarias.every(k => claves.hasOwnProperty(k));
+    }
+
+    async registrarMovimiento({ accion, datos, }, client = null) {
+        const queryClient = client || pool;
+
+        try {
+            const query = `
+            INSERT INTO movimiento (accion, datos)
+            VALUES ($1, $2)
+            RETURNING *;
+        `;
+            const result = await queryClient.query(query, [
+                accion,
+                JSON.stringify(datos)
+            ]);
+            return result.rows[0];
+        } catch (error) {
+            console.error("Error al registrar movimiento:", error);
+        }
     }
 }
 

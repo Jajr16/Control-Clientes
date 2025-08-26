@@ -44,7 +44,7 @@ const PrincipalView = ({
     
     return { pendientes: adeudosPendientes.length, empresa: adeudosEmpresa.length };
   };
-
+  
   return (
     <div className="mb-6">
       {/* Select Empresa */}
@@ -61,7 +61,7 @@ const PrincipalView = ({
             <option value="">Selecciona una empresa</option>
             {empresasDisponibles.map((e) => (
               <option key={e.cif} value={e.cif}>
-                {e.cif}
+                {e.clave} - {e.nombre}
               </option>
             ))}
           </select>

@@ -21,3 +21,8 @@ export const updateAdeudos = async (cambios) => {
     const res = await axios.post(`${API_URL}/adeudos/update`, cambios)
     return res.data
 }
+
+export const deleteAdeudos = async (cambios) => {
+    const res = await axios.post(`${API_URL}/adeudos/delete`, cambios)
+    return res.data
+}

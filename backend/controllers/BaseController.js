@@ -1,9 +1,12 @@
+import { handleError as globalHandleError } from '../config/handleErrors.js';
 export class BaseController {
     constructor(service) {
         this.service = service;
     }
 
-    handleError(error, res, defaultMessage = "Error interno del servidor") {
+    async handleError(error, res, defaultMessage = "Error interno del servidor") {
+        await globalHandleError(error);
+
         console.error(`${this.constructor.name} Error:`, error);
         
         const errorMap = {
