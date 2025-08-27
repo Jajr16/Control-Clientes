@@ -8,6 +8,7 @@ import {
     getEmpresasAdeudos,
     updateAdeudos,
     deleteAdeudos,
+    createRecord,
 } from "../controllers/AdeudoController.js";
 
 const router = express.Router();
@@ -32,5 +33,7 @@ router.post('/update', updateAdeudos);
 
 // Eliminar adeudos
 router.post('/delete', deleteAdeudos);
+
+router.get('/historial/:empresa_cif', createRecord)
 
 export default router;

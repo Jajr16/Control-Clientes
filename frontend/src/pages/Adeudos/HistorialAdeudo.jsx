@@ -1,6 +1,6 @@
 import React, { useEffect } from "react";
 import ClientSearch from "../../components/elements/searchBar";
-import { getAdeudoEmpresa } from "../../api/moduloAdeudos/adeudos";
+import { getAdeudoEmpresa, createExcel } from "../../api/moduloAdeudos/adeudos";
 import { CheckIcon, XMarkIcon, EditIcon, TrashIcon } from '../../components/common/Icons';
 import { useAdeudosManager } from '../../hooks/useAdeudosManager';
 
@@ -158,6 +158,12 @@ const Historico = () => {
                                 <h2 className="text-lg sm:text-xl font-semibold break-words">
                                     Adeudos a Finatech - {selectedClient.nombre}
                                 </h2>
+                                <button type="button"
+                                onClick={() => createExcel(selectedClient.cif, selectedClient.nombre)}
+                                    className="focus:outline-none text-white bg-green-700 hover:bg-green-800 focus:ring-4 focus:ring-green-300 font-medium 
+                                    rounded-lg text-sm px-5 py-2.5 me-2 mb-2 dark:bg-green-600 dark:hover:bg-green-700 dark:focus:ring-green-800">
+                                    Descargar Excel
+                                </button>
                             </div>
 
                             {/* Contenedor de tabla con scroll vertical y horizontal */}
