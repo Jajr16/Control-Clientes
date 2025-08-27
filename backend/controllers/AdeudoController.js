@@ -95,7 +95,7 @@ class AdeudoController extends BaseController {
       return this.handleError(error, res, "Error al obtener los adeudos de la empresa.");
     }
   }
-  
+
   async updateAdeudos(req, res) {
     try {
       const result = await this.service.updateAdeudos(req.body);
@@ -104,13 +104,36 @@ class AdeudoController extends BaseController {
       return this.handleError(error, res, "Error al actualizar los adeudos de la empresa.");
     }
   }
-  
+
   async deleteAdeudos(req, res) {
     try {
       const result = await this.service.deleteAdeudos(req.body);
       return this.sendSuccess(res, result)
     } catch (error) {
       return this.handleError(error, res, "Error al actualizar los adeudos de la empresa.");
+    }
+  }
+
+  async createRecord(req, res) {
+    try {
+      const { empresa_cif } = req.params;
+      const workbook = await this.service.createRecord(empresa_cif);
+
+      res.setHeader(
+        "Content-Type",
+        "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"
+      );
+      
+      res.setHeader(
+        "Content-Disposition",
+        `attachment; filename="Historico_${empresa_cif}_${Date.now()}.xlsx"`
+      );
+
+      await workbook.xlsx.write(res);
+
+      res.end(); // Finalizar respuesta
+    } catch (error) {
+      return this.handleError(error, res, "Error al crear el Excel del histórico");
     }
   }
 }
@@ -129,3 +152,4 @@ export const getEmpresasAdeudos = adeudoController.getEmpresasAdeudos.bind(adeud
 export const getAdeudos = adeudoController.getAdeudos.bind(adeudoController);
 export const updateAdeudos = adeudoController.updateAdeudos.bind(adeudoController);
 export const deleteAdeudos = adeudoController.deleteAdeudos.bind(adeudoController);
+export const createRecord = adeudoController.createRecord.bind(adeudoController);

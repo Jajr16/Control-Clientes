@@ -11,7 +11,6 @@ npm install react-select
 npm install react-icons
 
 Excel
-npm install xlsx
 npm install exceljs file-saver
 
 PDF

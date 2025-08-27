@@ -12,6 +12,7 @@ export const createTableAdeudo = async () => {
             retencion NUMERIC NOT NULL,
             num_liquidacion INT,
             empresa_cif VARCHAR(9) NOT NULL,
+            fecha_creacion TIMESTAMP DEFAULT NOW(),
             PRIMARY KEY (num_factura, empresa_cif),
             FOREIGN KEY (empresa_cif) REFERENCES empresa(cif)
                 ON DELETE CASCADE

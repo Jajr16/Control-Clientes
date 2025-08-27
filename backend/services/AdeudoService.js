@@ -3,6 +3,7 @@ import Repositorio from "../repositories/globalPersistence.js";
 import { pool } from "../config/db.js";
 import formatDate from '../validations/formatDate.js';
 import { adeudoSchema } from '../middleware/Schemas.js'
+import { historicoExcel } from '../utils/adeudosExcel.js';
 
 class AdeudoService extends BaseService {
     constructor() {
@@ -60,6 +61,7 @@ class AdeudoService extends BaseService {
                 a.iva,
                 a.retencion,
                 a.num_liquidacion,
+                a.fecha_creacion as f_adeudo_creacion, 
                 COALESCE(p.protocolo_entrada, '') AS protocolo_entrada,
                 COALESCE(p.cs_iva, 0) AS cs_iva,
                 (COALESCE(a.importe,0) + COALESCE(a.iva,0) - COALESCE(a.retencion,0) + COALESCE(p.cs_iva,0)) AS total,
@@ -78,7 +80,7 @@ class AdeudoService extends BaseService {
             LEFT JOIN protocolo p ON a.num_factura = p.num_factura AND a.empresa_cif = p.empresa_cif
             LEFT JOIN anticipo an ON a.empresa_cif = an.empresa_cif
             LEFT JOIN honorario h ON a.num_liquidacion = h.num_liquidacion AND a.empresa_cif = h.empresa_cif
-            LEFT JOIN ajuste aj ON a.num_factura = aj.num_factura
+            LEFT JOIN ajuste aj ON a.num_factura = aj.num_factura AND a.empresa_cif = aj.empresa_cif
             WHERE a.empresa_cif = $1
             ORDER BY 
                 CASE WHEN a.num_liquidacion IS NULL THEN 0 ELSE 1 END,
@@ -248,7 +250,7 @@ class AdeudoService extends BaseService {
                             nuevosDatos.num_liquidacion = null;
                         }
 
-                        await this.repositories.adeudo.actualizarPorId({ num_factura: num_factura_original }, nuevosDatos, client);
+                        await this.repositories.adeudo.actualizarPorId({ num_factura: num_factura_original, empresa_cif }, nuevosDatos, client);
                         console.log(`ADEUDO ACTUALIZADO: ${num_factura_original}`);
                     })
                 );
@@ -315,6 +317,16 @@ class AdeudoService extends BaseService {
                 message: "Adeudos eliminados correctamente",
             };
         });
+    }
+
+    async createRecord(data) {
+        console.log("Esto llega primero " + data)
+        const historico = await this.obtenerTodosAdeudosPorEmpresa(data)
+        const empresa = await this.repositories.empresa.BuscarPorFiltros({ cif: data }, ['nombre'])
+        const nombreEmpresa = empresa[0].nombre
+        historico.nombreEmpresa = nombreEmpresa
+
+        return historicoExcel(historico)
     }
 
     _calcularResumen(adeudos) {
