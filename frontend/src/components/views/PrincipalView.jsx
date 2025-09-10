@@ -119,7 +119,7 @@ const PrincipalView = ({
 
       <div className="grid grid-cols-5 m-3 gap-4">
         <FormInput
-          label="Importe:"
+          label="Base Imponible:"
           name="importe"
           value={empresa.importe}
           onChange={onChange}

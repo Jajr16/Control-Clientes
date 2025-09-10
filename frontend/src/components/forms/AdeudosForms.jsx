@@ -67,7 +67,7 @@ const AdeudosForm = ({
 
         setEmpresa(prev => {
           let updated = { ...prev, [name]: parsed };
-          if (name === "concepto" && parsed === "Registro Mercantil de Madrid") {
+          if (name === "proveedor" && parsed === "Registro Mercantil de Madrid") {
             updated.importe = 200;
           }
           const importe = parseFloat(updated.importe) || 0;

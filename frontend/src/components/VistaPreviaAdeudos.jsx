@@ -78,7 +78,7 @@ const VistaPreviaAdeudos = ({
             ? (empresasDisponibles.find(e => e.cif === empresa.empresa_cif)?.nombre || empresa.empresa_cif)
             : "No seleccionada"}
         </p>
-        {(() => {
+        {/* {(() => {
           const fechas = adeudosEmpresa
             .map(a => new Date(a.ff))
             .filter(f => !isNaN(f.getTime()))
@@ -91,7 +91,7 @@ const VistaPreviaAdeudos = ({
           return (
             <p className="text-sm font-semibold">Adeudos a Finatech desde {fmt(fechas[0])} al {fmt(fechas[fechas.length - 1])}</p>
           );
-        })()}
+        })()} */}
       </div>
 
       {/* Tabla */}
@@ -104,7 +104,7 @@ const VistaPreviaAdeudos = ({
             <th className="border p-2">Fecha factura</th>
             <th className="border p-2">Num factura</th>
             <th className="border p-2">Protocolo / Entrada</th>
-            <th className="border p-2">Importe</th>
+            <th className="border p-2">Base Imponible</th>
             <th className="border p-2">IVA</th>
             <th className="border p-2">Retención</th>
             <th className="border p-2">Conceptos sin IVA</th>
