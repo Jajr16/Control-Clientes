@@ -263,3 +263,69 @@
     at async LiquidacionService.crearLiquidacionFinal (file:///C:/Users/LuisValle/Desktop/Control-Clientes/backend/services/LiquidacionService.js:13:16)
     at async LiquidacionController.createLiquidacion (file:///C:/Users/LuisValle/Desktop/Control-Clientes/backend/controllers/LiquidacionController.js:37:28)
 
+[2025-09-10T00:28:48.658Z] error: no existe la columna aj.empresa_cif
+    at C:\Users\LuisValle\Desktop\Control-Clientes\backend\node_modules\pg-pool\index.js:45:11
+    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
+    at async AdeudoService.obtenerTodosAdeudosPorEmpresa (file:///C:/Users/LuisValle/Desktop/Control-Clientes/backend/services/AdeudoService.js:87:24)
+    at async AdeudoController.getAdeudosByEmpresa (file:///C:/Users/LuisValle/Desktop/Control-Clientes/backend/controllers/AdeudoController.js:15:11)
+
+[2025-09-10T00:28:52.117Z] error: no existe la columna aj.empresa_cif
+    at C:\Users\LuisValle\Desktop\Control-Clientes\backend\node_modules\pg-pool\index.js:45:11
+    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
+    at async AdeudoService.obtenerTodosAdeudosPorEmpresa (file:///C:/Users/LuisValle/Desktop/Control-Clientes/backend/services/AdeudoService.js:87:24)
+    at async AdeudoController.getAdeudosByEmpresa (file:///C:/Users/LuisValle/Desktop/Control-Clientes/backend/controllers/AdeudoController.js:15:11)
+
+[2025-09-10T00:28:56.165Z] error: no existe la columna aj.empresa_cif
+    at C:\Users\LuisValle\Desktop\Control-Clientes\backend\node_modules\pg-pool\index.js:45:11
+    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
+    at async AdeudoService.obtenerTodosAdeudosPorEmpresa (file:///C:/Users/LuisValle/Desktop/Control-Clientes/backend/services/AdeudoService.js:87:24)
+    at async AdeudoController.getAdeudosByEmpresa (file:///C:/Users/LuisValle/Desktop/Control-Clientes/backend/controllers/AdeudoController.js:15:11)
+
+[2025-09-10T00:29:01.003Z] error: no existe la columna aj.empresa_cif
+    at C:\Users\LuisValle\Desktop\Control-Clientes\backend\node_modules\pg-pool\index.js:45:11
+    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
+    at async AdeudoService.obtenerTodosAdeudosPorEmpresa (file:///C:/Users/LuisValle/Desktop/Control-Clientes/backend/services/AdeudoService.js:87:24)
+    at async AdeudoController.getAdeudosByEmpresa (file:///C:/Users/LuisValle/Desktop/Control-Clientes/backend/controllers/AdeudoController.js:15:11)
+
+[2025-09-10T00:29:01.138Z] error: no existe la columna aj.empresa_cif
+    at C:\Users\LuisValle\Desktop\Control-Clientes\backend\node_modules\pg-pool\index.js:45:11
+    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
+    at async AdeudoService.obtenerTodosAdeudosPorEmpresa (file:///C:/Users/LuisValle/Desktop/Control-Clientes/backend/services/AdeudoService.js:87:24)
+    at async AdeudoController.getAdeudosByEmpresa (file:///C:/Users/LuisValle/Desktop/Control-Clientes/backend/controllers/AdeudoController.js:15:11)
+
+[2025-09-10T00:29:01.270Z] error: no existe la columna aj.empresa_cif
+    at C:\Users\LuisValle\Desktop\Control-Clientes\backend\node_modules\pg-pool\index.js:45:11
+    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
+    at async AdeudoService.obtenerTodosAdeudosPorEmpresa (file:///C:/Users/LuisValle/Desktop/Control-Clientes/backend/services/AdeudoService.js:87:24)
+    at async AdeudoController.getAdeudosByEmpresa (file:///C:/Users/LuisValle/Desktop/Control-Clientes/backend/controllers/AdeudoController.js:15:11)
+
+[2025-09-10T00:30:14.760Z] error: no existe la columna aj.empresa_cif
+    at C:\Users\LuisValle\Desktop\Control-Clientes\backend\node_modules\pg-pool\index.js:45:11
+    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
+    at async AdeudoService.obtenerTodosAdeudosPorEmpresa (file:///C:/Users/LuisValle/Desktop/Control-Clientes/backend/services/AdeudoService.js:87:24)
+    at async AdeudoController.getAdeudosByEmpresa (file:///C:/Users/LuisValle/Desktop/Control-Clientes/backend/controllers/AdeudoController.js:15:11)
+
+[2025-09-10T00:30:37.950Z] error: no existe la columna a.fecha_creacion
+    at C:\Users\LuisValle\Desktop\Control-Clientes\backend\node_modules\pg-pool\index.js:45:11
+    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
+    at async AdeudoService.obtenerTodosAdeudosPorEmpresa (file:///C:/Users/LuisValle/Desktop/Control-Clientes/backend/services/AdeudoService.js:87:24)
+    at async AdeudoController.getAdeudosByEmpresa (file:///C:/Users/LuisValle/Desktop/Control-Clientes/backend/controllers/AdeudoController.js:15:11)
+
+[2025-09-10T00:31:46.077Z] error: no existe la columna aj.empresa_cif
+    at C:\Users\LuisValle\Desktop\Control-Clientes\backend\node_modules\pg-pool\index.js:45:11
+    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
+    at async AdeudoService.obtenerTodosAdeudosPorEmpresa (file:///C:/Users/LuisValle/Desktop/Control-Clientes/backend/services/AdeudoService.js:87:24)
+    at async AdeudoController.getAdeudosByEmpresa (file:///C:/Users/LuisValle/Desktop/Control-Clientes/backend/controllers/AdeudoController.js:15:11)
+
+[2025-09-10T00:31:46.234Z] error: no existe la columna aj.empresa_cif
+    at C:\Users\LuisValle\Desktop\Control-Clientes\backend\node_modules\pg-pool\index.js:45:11
+    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
+    at async AdeudoService.obtenerTodosAdeudosPorEmpresa (file:///C:/Users/LuisValle/Desktop/Control-Clientes/backend/services/AdeudoService.js:87:24)
+    at async AdeudoController.getAdeudosByEmpresa (file:///C:/Users/LuisValle/Desktop/Control-Clientes/backend/controllers/AdeudoController.js:15:11)
+
+[2025-09-10T00:31:46.358Z] error: no existe la columna aj.empresa_cif
+    at C:\Users\LuisValle\Desktop\Control-Clientes\backend\node_modules\pg-pool\index.js:45:11
+    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
+    at async AdeudoService.obtenerTodosAdeudosPorEmpresa (file:///C:/Users/LuisValle/Desktop/Control-Clientes/backend/services/AdeudoService.js:87:24)
+    at async AdeudoController.getAdeudosByEmpresa (file:///C:/Users/LuisValle/Desktop/Control-Clientes/backend/controllers/AdeudoController.js:15:11)
+

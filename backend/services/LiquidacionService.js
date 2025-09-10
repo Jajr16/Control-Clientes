@@ -12,13 +12,6 @@ class LiquidacionService extends BaseService {
 
     async crearLiquidacionFinal({ empresa_cif, honorarios_sin_iva }) {
         return await this.withTransaction(async (client) => {
-            // --- Sanitiza y calcula IVA (evita NaN)
-            const honorariosSinIvaNum = Number(honorarios_sin_iva);
-            if (!Number.isFinite(honorariosSinIvaNum)) {
-                throw new Error('honorarios_sin_iva debe ser numérico');
-            }
-            const iva_honorarios = +(honorariosSinIvaNum * 0.21).toFixed(2);
-
             // 1. Obtener próximo número de liquidación
             const nextNumQuery = `
                 SELECT COALESCE(MAX(num_liquidacion), 0) + 1 as next_num 
@@ -28,42 +21,51 @@ class LiquidacionService extends BaseService {
             const nextNumResult = await client.query(nextNumQuery, [empresa_cif]);
             const num_liquidacion = nextNumResult.rows[0].next_num;
             
-            // 2. Insertar honorario
+            // 2. Calcular IVA
+            const iva_honorarios = honorarios_sin_iva * 0.21;
+            
+            // 3. Insertar honorario
             const num_factura_honorario = `HON-${empresa_cif}-${num_liquidacion}-${new Date().getFullYear()}`;
+            
             const insertHonorarioQuery = `
                 INSERT INTO honorario (empresa_cif, num_liquidacion, honorario, iva, num_factura)
                 VALUES ($1, $2, $3, $4, $5)
                 RETURNING *
             `;
+            
             await client.query(insertHonorarioQuery, [
-                empresa_cif, num_liquidacion, honorariosSinIvaNum, 
+                empresa_cif, num_liquidacion, honorarios_sin_iva, 
                 iva_honorarios, num_factura_honorario
             ]);
             
-            // 3. Obtener adeudos pendientes
+            // 4. Obtener adeudos pendientes
             const adeudosPendientesQuery = `
                 SELECT num_factura 
                 FROM adeudo 
                 WHERE empresa_cif = $1 AND num_liquidacion IS NULL
             `;
+            
             const adeudosPendientesResult = await client.query(adeudosPendientesQuery, [empresa_cif]);
             const facturasPendientes = adeudosPendientesResult.rows.map(row => row.num_factura);
+            
             console.log(`Liquidando ${facturasPendientes.length} adeudos para empresa ${empresa_cif}`);
             
-            // 4. Actualizar adeudos
+            // 5. Actualizar adeudos
             if (facturasPendientes.length > 0) {
                 const updateAdeudosQuery = `
                     UPDATE adeudo 
                     SET num_liquidacion = $1 
                     WHERE num_factura = ANY($2::varchar[]) AND empresa_cif = $3 AND num_liquidacion IS NULL
                 `;
+                
                 const updateResult = await client.query(updateAdeudosQuery, [
                     num_liquidacion, facturasPendientes, empresa_cif
                 ]);
+                
                 console.log(`${updateResult.rowCount} adeudos actualizados con liquidación N° ${num_liquidacion}`);
             }
             
-            // 5. Obtener resumen
+            // 6. Obtener resumen
             const resumenQuery = `
                 SELECT 
                     h.num_liquidacion,
@@ -82,6 +84,7 @@ class LiquidacionService extends BaseService {
                 WHERE h.num_liquidacion = $1 AND h.empresa_cif = $2
                 GROUP BY h.num_liquidacion, h.empresa_cif, h.honorario, h.iva, h.num_factura
             `;
+
             const resumenResult = await client.query(resumenQuery, [num_liquidacion, empresa_cif]);
 
             const empresa = await this.repositories.empresa.BuscarPorFiltros({ cif: empresa_cif }, ['nombre'])
@@ -90,10 +93,9 @@ class LiquidacionService extends BaseService {
                 await this.repositories.honorario.registrarMovimiento({ accion: `Se hizo una liquidación para los adeudos de:
                     ${empresa[0].nombre}`, datos: {empresa_cif, honorarios_sin_iva} }, client)
             } else {
-                console.log('No se encontró la empresa');
+                console.log('No se encontró la empresa')
             }
             
-            // 8. Respuesta
             return {
                 success: true,
                 num_liquidacion,
@@ -125,6 +127,7 @@ class LiquidacionService extends BaseService {
             GROUP BY h.num_liquidacion, h.empresa_cif, h.honorario, h.iva, h.num_factura, h.fecha_creacion
             ORDER BY h.num_liquidacion DESC
         `;
+        
         const result = await pool.query(query, [empresa_cif]);
         return result.rows;
     }
@@ -149,6 +152,7 @@ class LiquidacionService extends BaseService {
             WHERE a.empresa_cif = $1 AND a.num_liquidacion = $2
             ORDER BY a.ff
         `;
+        
         const result = await pool.query(query, [empresa_cif, num_liquidacion]);
         return result.rows;
     }
