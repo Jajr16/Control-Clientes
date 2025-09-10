@@ -100,7 +100,6 @@ export const useAdeudosManager = () => {
             const facturasAEliminar = editedRows
                 .filter(row => selectedRows.has(row._internal_id))
                 .map(row => {
-                    console.log(editedRows)
                     const original = originalRows.find(orig => orig._internal_id === row._internal_id);
                     const data = {
                         num_factura: original ? original.num_factura : row.num_factura,
@@ -212,11 +211,9 @@ export const useAdeudosManager = () => {
                 cambios_protocolo: cambiosProtocolo.length ? agruparProtocoloPorFactura(cambiosProtocolo) : undefined
             };
 
-            console.log("Cambios a enviar:", payload);
-
             if (saveApiCall) {
                 const response = await saveApiCall(payload);
-                console.log("Respuesta del backend:", response);
+                
                 if (!response.success) {
                     alert(response.error || "Error al guardar cambios");
                     return;

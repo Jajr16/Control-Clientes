@@ -17,6 +17,7 @@ const VistaPreviaPdf = ({
   honorariosSinIVA,
   empresasDisponibles,
   onConfirmarDescarga,
+  anticipoP,
 }) => {
   if (!mostrarVistaPrevia) return null;
 
@@ -52,9 +53,9 @@ const VistaPreviaPdf = ({
 
   // Anticipo proveniente de la propia lista (inyectado en fetch) o del cálculo
   const anticipo = Number(
-    (adeudosFiltrados[0]?.anticipo) ??
-    (Array.isArray(adeudosList) && adeudosList[0]?.anticipo) ??
-    datos?.anticipo ??
+    (anticipoP) ??
+    (Array.isArray(adeudosList) && anticipoP) ??
+    anticipoP ??
     0
   );
 

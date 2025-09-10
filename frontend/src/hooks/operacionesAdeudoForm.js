@@ -47,8 +47,6 @@ export const manejarLogicaAdeudo = () => {
         }
 
         try {
-            console.log("Datos del formulario Adeudo:", datosAdeudo);
-
             await addAdeudo(datosAdeudo);
 
             Swal.fire({

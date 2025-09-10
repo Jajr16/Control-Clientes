@@ -15,9 +15,6 @@ router.get('/', async (req, res) => {
 });
 
 router.post('/', async (req, res) => {
-    console.log("POST / ejecutado");
-    console.log("REQ.BODY:", req.body);
-
     const { nie, nombre, email, telefono } = req.body;
     if (!nie || !nombre || !email || !telefono  ) {
         return res.status(400).json({ error: "Faltan campos obligatorios" });
@@ -31,9 +28,5 @@ router.post('/', async (req, res) => {
         console.error("Error al agregar propietario:", error);
     }
 });
-
-//Debug para confirmar que las rutas están registradas
-// console.log("Rutas registradas en clienteRoutes al final:");
-console.log(router.stack.map(r => r.route?.path));
 
 export default router;

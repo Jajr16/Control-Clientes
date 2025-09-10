@@ -8,10 +8,10 @@ const AdeudosForm = ({
   adeudosGuardados, setAdeudosGuardados,
   validationErrors = {},
   empresasDisponibles = [],
-  mostrarVistaPrevia, setVistaPrevia
+  mostrarVistaPrevia, setVistaPrevia,
+  anticipo
 }) => {
-
-  const h = useAdeudos({ empresa, setEmpresa, adeudosGuardados, setAdeudosGuardados, setVistaPrevia });  
+  const h = useAdeudos({ empresa, setEmpresa, adeudosGuardados, setAdeudosGuardados, setVistaPrevia });
 
   if (h.vistaActual === 'borrador') {
     return (
@@ -25,6 +25,7 @@ const AdeudosForm = ({
         onGenerarPdf={h.handleGenerarPdfBorrador}
         onVolver={h.volverFormularioPrincipal}
         onConfirmarDescarga={h.confirmarDescargaPdf}
+        anticipo={anticipo}
       />
     );
   }
@@ -43,6 +44,7 @@ const AdeudosForm = ({
         onVerPrevia={h.handleVerPreviaLiquidacion}
         onVolver={h.volverFormularioPrincipal}
         onConfirmarDescarga={h.confirmarDescargaPdf}
+        anticipo={anticipo}
       />
     );
   }
@@ -56,6 +58,7 @@ const AdeudosForm = ({
       mostrarVistaPrevia={mostrarVistaPrevia}
       importeBloqueado={h.importeBloqueado}
       validationErrors={validationErrors}
+      anticipo={anticipo}
       onChange={(e)=>{
         const { name, value } = e.target;
         // Reutiliza tu lógica anterior para calcular iva/retencion/total:
@@ -69,7 +72,7 @@ const AdeudosForm = ({
           }
           const importe = parseFloat(updated.importe) || 0;
           const csiniva = parseFloat(updated.csiniva) || 0;
-          const anticipo_cliente = parseFloat(updated.anticipocliente) || 0;
+          const anticipo_cliente = parseFloat(anticipo) || 0;
           const iva = +(importe * 0.21).toFixed(2);
           const retencion = +(importe * 0.15).toFixed(2);
           const total = +(importe + iva - retencion + csiniva).toFixed(2);

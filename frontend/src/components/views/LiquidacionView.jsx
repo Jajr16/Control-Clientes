@@ -12,7 +12,8 @@ const LiquidacionView = ({
   setMostrarVistaPreviaPdf,
   onVerPrevia,
   onVolver,
-  onConfirmarDescarga
+  onConfirmarDescarga,
+  anticipo
 }) => {
 
 const matchEmpresa = (empresaCif) => (a) => {
@@ -154,6 +155,7 @@ const puedeGenerarLiquidacion = (empresaCif) => {
         honorariosSinIVA={honorariosSinIVA}
         empresasDisponibles={empresasDisponibles}
         onConfirmarDescarga={onConfirmarDescarga}
+        anticipoP={anticipo}
       />
     </div>
   );

@@ -53,12 +53,6 @@ export const manejarLogicaCliente = () => {
         }
 
         try {
-            console.log("Datos obtenidos del formulario cliente - propietario:", cliente.propietario);
-            const nuevoPropietario = await addPropietario(cliente.propietario);
-            const nuevaDireccion = await addDirecciones(cliente.direccion);
-            const nuevoDatoRegistral = await addDatoRegistral(cliente.datoRegistral);
-            const nuevaEmpresa = await addEmpresas(cliente.empresa);
-
             // Guardar inmuebles si existen
             for (const inmueble of inmuebles) {
                 await addInmueble(inmueble.datosInmueble);
@@ -133,10 +127,6 @@ export const manejarLogicaInmueble = () => {
         }
 
         try {
-            // Aquí se pueden agregar las llamadas a las APIs para registrar los datos del inmueble, proveedor, hipoteca y seguro
-            console.log(`Datos obtenidos del formulario: \n Inmueble: ${datosInmueble}\n Proveedor: ${datosProveedor}`);
-            console.log(`Datos Hipoteca: ${datosHipoteca}\n Seguro: ${datosSeguro}`);
-
             const nuevoInmueble = await addInmueble(datosInmueble);
             const nuevoProveedor = await addProveedor(datosProveedor);
             const nuevaHipoteca = await addHipoteca(datosHipoteca);

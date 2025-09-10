@@ -19,7 +19,6 @@ const InmuebleDetails = ({ inmueble, setProveedoresSegurosList, proveedoresList,
             try {
                 const response = await getInmuebleHipotecas(CC);
                 setHipotecas(response.data)
-                console.log(response.data)
                 return response
             } catch (error) {
                 console.error("Error en fetchHipotecas:", error)
@@ -41,7 +40,6 @@ const InmuebleDetails = ({ inmueble, setProveedoresSegurosList, proveedoresList,
 
         fetchProveedoresSeguros(inmueble.clave_catastral);
         fetchHipotecas(inmueble.clave_catastral);
-        console.log(HipotecasList)
     }, [inmueble]);
 
     return (

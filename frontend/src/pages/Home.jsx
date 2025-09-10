@@ -15,7 +15,7 @@ const Home = () => {
         const fetchDatosHome = async () => {
             try {
                 const response = await getDatosHome();
-                console.log(response)
+                
                 if (!response.success) {
                     alert(response.error);
                     return;

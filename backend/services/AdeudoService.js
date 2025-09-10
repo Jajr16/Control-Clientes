@@ -17,16 +17,12 @@ class AdeudoService extends BaseService {
 
     async insertarAdeudoCompleto({ adeudo, protocolo }) {
         return await this.withTransaction(async (client) => {
-            console.log(adeudo)
-            console.log(protocolo)
             // 1. Insertar adeudo SIN num_liquidacion
             const adeudoInsertado = await this.repositories.adeudo.insertar(adeudo, client);
-            console.log('Adeudo insertado como PENDIENTE:', adeudoInsertado);
 
             // 2. Insertar protocolo si existe
             if (protocolo && Object.keys(protocolo).length > 0) {
                 await this.repositories.protocolo.insertar(protocolo, client);
-                console.log('Protocolo insertado');
             }
 
             // 3. Verificar anticipo existente

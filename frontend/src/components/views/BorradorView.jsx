@@ -30,6 +30,7 @@ const BorradorView = ({
   onGenerarPdf,
   onVolver,
   onConfirmarDescarga,
+  anticipo,
 }) => {
   const { adeudosEmpresa, pendientes } = useMemo(() => {
     const lista = Array.isArray(adeudosList) ? adeudosList : [];
@@ -133,6 +134,7 @@ const BorradorView = ({
   honorariosSinIVA={0}              // no se usa en borrador
   empresasDisponibles={empresasDisponibles}
   onConfirmarDescarga={onConfirmarDescarga}
+  anticipoP={anticipo}
 />
     </div>
   );

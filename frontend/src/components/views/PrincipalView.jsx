@@ -16,7 +16,8 @@ const PrincipalView = ({
   onGenerarLiquidacion,
   botonGuardarDeshabilitado,
   puedeGenerarLiquidacion,
-  cargandoAdeudos
+  cargandoAdeudos,
+  anticipo
 }) => {
   const getError = (field) => validationErrors[field];
 
@@ -231,6 +232,7 @@ const PrincipalView = ({
           empresa={empresa}
           empresasDisponibles={empresasDisponibles}
           estadoAdeudos={estadoAdeudos}
+          anticipoP={anticipo}
         />
       )}
     </div>

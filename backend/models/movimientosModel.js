@@ -4,7 +4,7 @@ export const createTableMovimiento = async () => {
     const query = `
         CREATE TABLE IF NOT EXISTS movimiento(
             id_movimiento SERIAL PRIMARY KEY,
-            accion VARCHAR(50) NOT NULL, 
+            accion VARCHAR(200) NOT NULL, 
             datos JSONB,
             fecha TIMESTAMP DEFAULT NOW()
         );
