@@ -26,6 +26,7 @@ const AgregarAdeudo = () => {
     const [empresasDisponibles, setEmpresasDisponibles] = useState([]);
     const [validationErrors, setValidationErrors] = useState({});
     const [mensaje, setMensaje] = useState("");
+    const [anticipo, setAnticipo] = useState("")
 
     useEffect(() => {
         const cargarEmpresas = async () => {
@@ -47,7 +48,10 @@ const AgregarAdeudo = () => {
                     const response = await fetch(`http://localhost:3000/api/adeudos/empresa/${empresa.empresa_cif}`);
                     if (!response.ok) throw new Error("Error al obtener adeudos");
                     const data = await response.json();
+
                     console.log(data)
+                    setAnticipo(data.data?.anticipo?.anticipo ?? 0);
+
                     setAdeudosGuardados(data.data);
                     setMostrarVistaPrevia(true);
                 } catch (error) {
@@ -134,6 +138,7 @@ const AgregarAdeudo = () => {
                             validationErrors={validationErrors}
                             mostrarVistaPrevia={mostrarVistaPrevia}
                             setVistaPrevia={setMostrarVistaPrevia}
+                            anticipo={anticipo}
                         />
                     </form>
                 </div>

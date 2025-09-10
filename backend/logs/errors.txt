@@ -132,3 +132,42 @@
     at AdeudoController.createRecord (file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/controllers/AdeudoController.js:131:44)
     at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
 
+[2025-08-27T17:47:22.180Z] Error: No se pudo realizar la búsqueda en honorario
+    at Repositorio.BuscarPorFiltros (file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/repositories/globalPersistence.js:215:19)
+    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at async file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/services/LiquidacionService.js:89:29
+    at async LiquidacionService.withTransaction (file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/services/BaseService.js:13:28)
+    at async LiquidacionService.crearLiquidacionFinal (file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/services/LiquidacionService.js:13:16)
+    at async LiquidacionController.createLiquidacion (file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/controllers/LiquidacionController.js:37:28)
+
+[2025-08-27T18:28:43.002Z] Error: No se pudo realizar la búsqueda en honorario
+    at Repositorio.BuscarPorFiltros (file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/repositories/globalPersistence.js:215:19)
+    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at async file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/services/LiquidacionService.js:89:29
+    at async LiquidacionService.withTransaction (file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/services/BaseService.js:13:28)
+    at async LiquidacionService.crearLiquidacionFinal (file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/services/LiquidacionService.js:13:16)
+    at async LiquidacionController.createLiquidacion (file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/controllers/LiquidacionController.js:37:28)
+
+[2025-08-27T18:30:22.181Z] Error: No se pudo realizar la búsqueda en empresa
+    at Repositorio.BuscarPorFiltros (file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/repositories/globalPersistence.js:215:19)
+    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at async file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/services/LiquidacionService.js:90:29
+    at async LiquidacionService.withTransaction (file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/services/BaseService.js:13:28)
+    at async LiquidacionService.crearLiquidacionFinal (file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/services/LiquidacionService.js:14:16)
+    at async LiquidacionController.createLiquidacion (file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/controllers/LiquidacionController.js:37:28)
+
+[2025-08-27T18:30:46.227Z] Error: No se pudo realizar la búsqueda en empresa
+    at Repositorio.BuscarPorFiltros (file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/repositories/globalPersistence.js:215:19)
+    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at async file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/services/LiquidacionService.js:90:29
+    at async LiquidacionService.withTransaction (file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/services/BaseService.js:13:28)
+    at async LiquidacionService.crearLiquidacionFinal (file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/services/LiquidacionService.js:14:16)
+    at async LiquidacionController.createLiquidacion (file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/controllers/LiquidacionController.js:37:28)
+
+[2025-08-27T18:31:25.707Z] TypeError: Cannot read properties of undefined (reading 'registrarMovimiento')
+    at file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/services/LiquidacionService.js:93:48
+    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at async LiquidacionService.withTransaction (file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/services/BaseService.js:13:28)
+    at async LiquidacionService.crearLiquidacionFinal (file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/services/LiquidacionService.js:14:16)
+    at async LiquidacionController.createLiquidacion (file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/controllers/LiquidacionController.js:37:28)
+

@@ -4,8 +4,12 @@ const VistaPreviaAdeudos = ({
   adeudosList,
   empresa,
   empresasDisponibles,
-  estadoAdeudos
+  estadoAdeudos,
+  anticipoP
 }) => {
+
+  console.log(adeudosList)
+
   // Comparador robusto por empresa
   const matchEmpresa = (a, empresaCif) => {
     const cif = a?.empresa_cif ?? a?.cif ?? a?.empresaCif ?? a?.empresa;
@@ -147,12 +151,12 @@ const VistaPreviaAdeudos = ({
               </td>
             </tr>
           )}
-
+          
           <tr className="bg-gray-50">
             <td colSpan={10} className="text-right pr-2 font-bold border">Anticipo por el cliente:</td>
             <td className="border">
               {adeudosEmpresa.length > 0
-                ? Number(adeudosEmpresa[0].anticipo || 0).toFixed(2)
+                ? Number(anticipoP || 0).toFixed(2)
                 : "0.00"}
             </td>
           </tr>
@@ -171,8 +175,8 @@ const VistaPreviaAdeudos = ({
                   .filter(a => !a.num_liquidacion || a.estado === 'PENDIENTE')
                   .reduce((acc, a) => acc + Number(a.total || 0), 0);
 
-                const anticipo = Number(adeudosEmpresa[0]?.anticipo || 0);
-                return (totalPend - anticipo).toFixed(2);
+                const anticipo = Number(+anticipoP || 0);
+                return (totalPend - anticipoP).toFixed(2);
               })()}
             </td>
           </tr>
