@@ -67,16 +67,26 @@ const AdeudosForm = ({
 
         setEmpresa(prev => {
           let updated = { ...prev, [name]: parsed };
-          if (name === "concepto" && parsed === "Registro Mercantil de Madrid") {
+          if (name === "proveedor" && parsed === "Registro Mercantil de Madrid") {
             updated.importe = 200;
+            updated.csiniva = 0;
           }
+          const esRMM = (updated.proveedor || '').trim().toLowerCase() === 'registro mercantil de madrid';
           const importe = parseFloat(updated.importe) || 0;
-          const csiniva = parseFloat(updated.csiniva) || 0;
+          const csiniva = esRMM ? 0 : (parseFloat(updated.csiniva) || 0);
           const anticipo_cliente = parseFloat(anticipo) || 0;
-          const iva = +(importe * 0.21).toFixed(2);
-          const retencion = +(importe * 0.15).toFixed(2);
+          const iva = esRMM ? 0 : +(importe * 0.21).toFixed(2);
+          const retencion = esRMM ? 0 : +(importe * 0.15).toFixed(2);
           const total = +(importe + iva - retencion + csiniva).toFixed(2);
-          return { ...updated, iva, retencion, total, total_adeudos: total, adeudo_pendiente: +(total - anticipo_cliente).toFixed(2) };
+          return {
+            ...updated,
+            csiniva,
+            iva,
+            retencion,
+            total,
+            total_adeudos: total,
+            adeudo_pendiente: +(total - anticipo_cliente).toFixed(2)
+          };
         });
 
         if (name === "empresa_cif" && parsed) h.fetchAdeudos(parsed);

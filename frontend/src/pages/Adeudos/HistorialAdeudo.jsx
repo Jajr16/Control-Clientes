@@ -202,7 +202,7 @@ const Historico = () => {
                                                     Protocolo/Entrada
                                                 </th>
                                                 <th className="px-2 sm:px-4 py-2 sm:py-3 text-right text-xs font-medium text-gray-500 uppercase border-b whitespace-nowrap">
-                                                    Importe
+                                                    Base Imponible
                                                 </th>
                                                 <th className="px-2 sm:px-4 py-2 sm:py-3 text-right text-xs font-medium text-gray-500 uppercase border-b whitespace-nowrap">
                                                     IVA

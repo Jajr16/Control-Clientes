@@ -171,3 +171,161 @@
     at async LiquidacionService.crearLiquidacionFinal (file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/services/LiquidacionService.js:14:16)
     at async LiquidacionController.createLiquidacion (file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/controllers/LiquidacionController.js:37:28)
 
+[2025-08-26T04:07:40.117Z] Error: No se pudo realizar la búsqueda en adeudo a
+    at Repositorio.BuscarConJoins (file:///C:/Users/LuisValle/Desktop/Control-Clientes/backend/repositories/globalPersistence.js:293:19)
+    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
+    at async HomeService.obtenerDatosHome (file:///C:/Users/LuisValle/Desktop/Control-Clientes/backend/services/HomeService.js:29:35)
+    at async HomeController.obtenerDatosHome (file:///C:/Users/LuisValle/Desktop/Control-Clientes/backend/controllers/HomeController.js:11:28)
+
+[2025-08-26T04:07:40.230Z] Error: No se pudo realizar la búsqueda en adeudo a
+    at Repositorio.BuscarConJoins (file:///C:/Users/LuisValle/Desktop/Control-Clientes/backend/repositories/globalPersistence.js:293:19)
+    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
+    at async HomeService.obtenerDatosHome (file:///C:/Users/LuisValle/Desktop/Control-Clientes/backend/services/HomeService.js:29:35)
+    at async HomeController.obtenerDatosHome (file:///C:/Users/LuisValle/Desktop/Control-Clientes/backend/controllers/HomeController.js:11:28)
+
+[2025-08-28T17:03:30.778Z] Error: No se pudo realizar la búsqueda en adeudo a
+    at Repositorio.BuscarConJoins (file:///C:/Users/LuisValle/Desktop/Control-Clientes/backend/repositories/globalPersistence.js:293:19)
+    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
+    at async HomeService.obtenerDatosHome (file:///C:/Users/LuisValle/Desktop/Control-Clientes/backend/services/HomeService.js:29:35)
+    at async HomeController.obtenerDatosHome (file:///C:/Users/LuisValle/Desktop/Control-Clientes/backend/controllers/HomeController.js:11:28)
+
+[2025-08-28T17:03:30.895Z] Error: No se pudo realizar la búsqueda en adeudo a
+    at Repositorio.BuscarConJoins (file:///C:/Users/LuisValle/Desktop/Control-Clientes/backend/repositories/globalPersistence.js:293:19)
+    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
+    at async HomeService.obtenerDatosHome (file:///C:/Users/LuisValle/Desktop/Control-Clientes/backend/services/HomeService.js:29:35)
+    at async HomeController.obtenerDatosHome (file:///C:/Users/LuisValle/Desktop/Control-Clientes/backend/controllers/HomeController.js:11:28)
+
+[2025-08-28T17:03:36.704Z] error: no existe la columna p.empresa_cif
+    at C:\Users\LuisValle\Desktop\Control-Clientes\backend\node_modules\pg-pool\index.js:45:11
+    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
+    at async AdeudoService.obtenerTodosAdeudosPorEmpresa (file:///C:/Users/LuisValle/Desktop/Control-Clientes/backend/services/AdeudoService.js:89:24)
+    at async AdeudoController.getAdeudosByEmpresa (file:///C:/Users/LuisValle/Desktop/Control-Clientes/backend/controllers/AdeudoController.js:15:11)
+
+[2025-08-28T17:03:36.812Z] error: no existe la columna p.empresa_cif
+    at C:\Users\LuisValle\Desktop\Control-Clientes\backend\node_modules\pg-pool\index.js:45:11
+    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
+    at async AdeudoService.obtenerTodosAdeudosPorEmpresa (file:///C:/Users/LuisValle/Desktop/Control-Clientes/backend/services/AdeudoService.js:89:24)
+    at async AdeudoController.getAdeudosByEmpresa (file:///C:/Users/LuisValle/Desktop/Control-Clientes/backend/controllers/AdeudoController.js:15:11)
+
+[2025-08-28T17:03:36.912Z] error: no existe la columna p.empresa_cif
+    at C:\Users\LuisValle\Desktop\Control-Clientes\backend\node_modules\pg-pool\index.js:45:11
+    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
+    at async AdeudoService.obtenerTodosAdeudosPorEmpresa (file:///C:/Users/LuisValle/Desktop/Control-Clientes/backend/services/AdeudoService.js:89:24)
+    at async AdeudoController.getAdeudosByEmpresa (file:///C:/Users/LuisValle/Desktop/Control-Clientes/backend/controllers/AdeudoController.js:15:11)
+
+[2025-08-28T17:03:55.702Z] error: llave duplicada viola restricción de unicidad «adeudo_pkey»
+    at C:\Users\LuisValle\Desktop\Control-Clientes\backend\node_modules\pg\lib\client.js:545:17
+    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
+    at async Repositorio.insertar (file:///C:/Users/LuisValle/Desktop/Control-Clientes/backend/repositories/globalPersistence.js:43:28)
+    at async file:///C:/Users/LuisValle/Desktop/Control-Clientes/backend/services/AdeudoService.js:22:37
+    at async AdeudoService.withTransaction (file:///C:/Users/LuisValle/Desktop/Control-Clientes/backend/services/BaseService.js:13:28)
+    at async AdeudoService.insertarAdeudoCompleto (file:///C:/Users/LuisValle/Desktop/Control-Clientes/backend/services/AdeudoService.js:18:16)
+    at async AdeudoController.createAdeudo (file:///C:/Users/LuisValle/Desktop/Control-Clientes/backend/controllers/AdeudoController.js:57:22)
+
+[2025-08-28T17:04:18.446Z] error: no existe la columna «empresa_cif» en la relación «protocolo»
+    at C:\Users\LuisValle\Desktop\Control-Clientes\backend\node_modules\pg\lib\client.js:545:17
+    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
+    at async Repositorio.insertar (file:///C:/Users/LuisValle/Desktop/Control-Clientes/backend/repositories/globalPersistence.js:43:28)
+    at async file:///C:/Users/LuisValle/Desktop/Control-Clientes/backend/services/AdeudoService.js:27:17
+    at async AdeudoService.withTransaction (file:///C:/Users/LuisValle/Desktop/Control-Clientes/backend/services/BaseService.js:13:28)
+    at async AdeudoService.insertarAdeudoCompleto (file:///C:/Users/LuisValle/Desktop/Control-Clientes/backend/services/AdeudoService.js:18:16)
+    at async AdeudoController.createAdeudo (file:///C:/Users/LuisValle/Desktop/Control-Clientes/backend/controllers/AdeudoController.js:57:22)
+
+[2025-08-28T17:36:17.821Z] Error: No se pudo realizar la búsqueda en honorario
+    at Repositorio.BuscarPorFiltros (file:///C:/Users/LuisValle/Desktop/Control-Clientes/backend/repositories/globalPersistence.js:215:19)
+    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
+    at async file:///C:/Users/LuisValle/Desktop/Control-Clientes/backend/services/LiquidacionService.js:89:29
+    at async LiquidacionService.withTransaction (file:///C:/Users/LuisValle/Desktop/Control-Clientes/backend/services/BaseService.js:13:28)
+    at async LiquidacionService.crearLiquidacionFinal (file:///C:/Users/LuisValle/Desktop/Control-Clientes/backend/services/LiquidacionService.js:13:16)
+    at async LiquidacionController.createLiquidacion (file:///C:/Users/LuisValle/Desktop/Control-Clientes/backend/controllers/LiquidacionController.js:37:28)
+
+[2025-08-28T17:41:19.277Z] Error: No se pudo realizar la búsqueda en honorario
+    at Repositorio.BuscarPorFiltros (file:///C:/Users/LuisValle/Desktop/Control-Clientes/backend/repositories/globalPersistence.js:215:19)
+    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
+    at async file:///C:/Users/LuisValle/Desktop/Control-Clientes/backend/services/LiquidacionService.js:89:29
+    at async LiquidacionService.withTransaction (file:///C:/Users/LuisValle/Desktop/Control-Clientes/backend/services/BaseService.js:13:28)
+    at async LiquidacionService.crearLiquidacionFinal (file:///C:/Users/LuisValle/Desktop/Control-Clientes/backend/services/LiquidacionService.js:13:16)
+    at async LiquidacionController.createLiquidacion (file:///C:/Users/LuisValle/Desktop/Control-Clientes/backend/controllers/LiquidacionController.js:37:28)
+
+[2025-08-28T17:54:19.142Z] error: el valor es demasiado largo para el tipo character varying(50)
+    at C:\Users\LuisValle\Desktop\Control-Clientes\backend\node_modules\pg\lib\client.js:545:17
+    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
+    at async file:///C:/Users/LuisValle/Desktop/Control-Clientes/backend/services/LiquidacionService.js:107:17
+    at async LiquidacionService.withTransaction (file:///C:/Users/LuisValle/Desktop/Control-Clientes/backend/services/BaseService.js:13:28)
+    at async LiquidacionService.crearLiquidacionFinal (file:///C:/Users/LuisValle/Desktop/Control-Clientes/backend/services/LiquidacionService.js:13:16)
+    at async LiquidacionController.createLiquidacion (file:///C:/Users/LuisValle/Desktop/Control-Clientes/backend/controllers/LiquidacionController.js:37:28)
+
+[2025-08-28T17:56:21.262Z] error: el valor es demasiado largo para el tipo character varying(50)
+    at C:\Users\LuisValle\Desktop\Control-Clientes\backend\node_modules\pg\lib\client.js:545:17
+    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
+    at async file:///C:/Users/LuisValle/Desktop/Control-Clientes/backend/services/LiquidacionService.js:99:17
+    at async LiquidacionService.withTransaction (file:///C:/Users/LuisValle/Desktop/Control-Clientes/backend/services/BaseService.js:13:28)
+    at async LiquidacionService.crearLiquidacionFinal (file:///C:/Users/LuisValle/Desktop/Control-Clientes/backend/services/LiquidacionService.js:13:16)
+    at async LiquidacionController.createLiquidacion (file:///C:/Users/LuisValle/Desktop/Control-Clientes/backend/controllers/LiquidacionController.js:37:28)
+
+[2025-09-10T00:28:48.658Z] error: no existe la columna aj.empresa_cif
+    at C:\Users\LuisValle\Desktop\Control-Clientes\backend\node_modules\pg-pool\index.js:45:11
+    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
+    at async AdeudoService.obtenerTodosAdeudosPorEmpresa (file:///C:/Users/LuisValle/Desktop/Control-Clientes/backend/services/AdeudoService.js:87:24)
+    at async AdeudoController.getAdeudosByEmpresa (file:///C:/Users/LuisValle/Desktop/Control-Clientes/backend/controllers/AdeudoController.js:15:11)
+
+[2025-09-10T00:28:52.117Z] error: no existe la columna aj.empresa_cif
+    at C:\Users\LuisValle\Desktop\Control-Clientes\backend\node_modules\pg-pool\index.js:45:11
+    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
+    at async AdeudoService.obtenerTodosAdeudosPorEmpresa (file:///C:/Users/LuisValle/Desktop/Control-Clientes/backend/services/AdeudoService.js:87:24)
+    at async AdeudoController.getAdeudosByEmpresa (file:///C:/Users/LuisValle/Desktop/Control-Clientes/backend/controllers/AdeudoController.js:15:11)
+
+[2025-09-10T00:28:56.165Z] error: no existe la columna aj.empresa_cif
+    at C:\Users\LuisValle\Desktop\Control-Clientes\backend\node_modules\pg-pool\index.js:45:11
+    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
+    at async AdeudoService.obtenerTodosAdeudosPorEmpresa (file:///C:/Users/LuisValle/Desktop/Control-Clientes/backend/services/AdeudoService.js:87:24)
+    at async AdeudoController.getAdeudosByEmpresa (file:///C:/Users/LuisValle/Desktop/Control-Clientes/backend/controllers/AdeudoController.js:15:11)
+
+[2025-09-10T00:29:01.003Z] error: no existe la columna aj.empresa_cif
+    at C:\Users\LuisValle\Desktop\Control-Clientes\backend\node_modules\pg-pool\index.js:45:11
+    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
+    at async AdeudoService.obtenerTodosAdeudosPorEmpresa (file:///C:/Users/LuisValle/Desktop/Control-Clientes/backend/services/AdeudoService.js:87:24)
+    at async AdeudoController.getAdeudosByEmpresa (file:///C:/Users/LuisValle/Desktop/Control-Clientes/backend/controllers/AdeudoController.js:15:11)
+
+[2025-09-10T00:29:01.138Z] error: no existe la columna aj.empresa_cif
+    at C:\Users\LuisValle\Desktop\Control-Clientes\backend\node_modules\pg-pool\index.js:45:11
+    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
+    at async AdeudoService.obtenerTodosAdeudosPorEmpresa (file:///C:/Users/LuisValle/Desktop/Control-Clientes/backend/services/AdeudoService.js:87:24)
+    at async AdeudoController.getAdeudosByEmpresa (file:///C:/Users/LuisValle/Desktop/Control-Clientes/backend/controllers/AdeudoController.js:15:11)
+
+[2025-09-10T00:29:01.270Z] error: no existe la columna aj.empresa_cif
+    at C:\Users\LuisValle\Desktop\Control-Clientes\backend\node_modules\pg-pool\index.js:45:11
+    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
+    at async AdeudoService.obtenerTodosAdeudosPorEmpresa (file:///C:/Users/LuisValle/Desktop/Control-Clientes/backend/services/AdeudoService.js:87:24)
+    at async AdeudoController.getAdeudosByEmpresa (file:///C:/Users/LuisValle/Desktop/Control-Clientes/backend/controllers/AdeudoController.js:15:11)
+
+[2025-09-10T00:30:14.760Z] error: no existe la columna aj.empresa_cif
+    at C:\Users\LuisValle\Desktop\Control-Clientes\backend\node_modules\pg-pool\index.js:45:11
+    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
+    at async AdeudoService.obtenerTodosAdeudosPorEmpresa (file:///C:/Users/LuisValle/Desktop/Control-Clientes/backend/services/AdeudoService.js:87:24)
+    at async AdeudoController.getAdeudosByEmpresa (file:///C:/Users/LuisValle/Desktop/Control-Clientes/backend/controllers/AdeudoController.js:15:11)
+
+[2025-09-10T00:30:37.950Z] error: no existe la columna a.fecha_creacion
+    at C:\Users\LuisValle\Desktop\Control-Clientes\backend\node_modules\pg-pool\index.js:45:11
+    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
+    at async AdeudoService.obtenerTodosAdeudosPorEmpresa (file:///C:/Users/LuisValle/Desktop/Control-Clientes/backend/services/AdeudoService.js:87:24)
+    at async AdeudoController.getAdeudosByEmpresa (file:///C:/Users/LuisValle/Desktop/Control-Clientes/backend/controllers/AdeudoController.js:15:11)
+
+[2025-09-10T00:31:46.077Z] error: no existe la columna aj.empresa_cif
+    at C:\Users\LuisValle\Desktop\Control-Clientes\backend\node_modules\pg-pool\index.js:45:11
+    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
+    at async AdeudoService.obtenerTodosAdeudosPorEmpresa (file:///C:/Users/LuisValle/Desktop/Control-Clientes/backend/services/AdeudoService.js:87:24)
+    at async AdeudoController.getAdeudosByEmpresa (file:///C:/Users/LuisValle/Desktop/Control-Clientes/backend/controllers/AdeudoController.js:15:11)
+
+[2025-09-10T00:31:46.234Z] error: no existe la columna aj.empresa_cif
+    at C:\Users\LuisValle\Desktop\Control-Clientes\backend\node_modules\pg-pool\index.js:45:11
+    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
+    at async AdeudoService.obtenerTodosAdeudosPorEmpresa (file:///C:/Users/LuisValle/Desktop/Control-Clientes/backend/services/AdeudoService.js:87:24)
+    at async AdeudoController.getAdeudosByEmpresa (file:///C:/Users/LuisValle/Desktop/Control-Clientes/backend/controllers/AdeudoController.js:15:11)
+
+[2025-09-10T00:31:46.358Z] error: no existe la columna aj.empresa_cif
+    at C:\Users\LuisValle\Desktop\Control-Clientes\backend\node_modules\pg-pool\index.js:45:11
+    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
+    at async AdeudoService.obtenerTodosAdeudosPorEmpresa (file:///C:/Users/LuisValle/Desktop/Control-Clientes/backend/services/AdeudoService.js:87:24)
+    at async AdeudoController.getAdeudosByEmpresa (file:///C:/Users/LuisValle/Desktop/Control-Clientes/backend/controllers/AdeudoController.js:15:11)
+
