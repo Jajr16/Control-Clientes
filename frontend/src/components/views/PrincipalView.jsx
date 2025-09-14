@@ -20,6 +20,8 @@ const PrincipalView = ({
   anticipo
 }) => {
   const getError = (field) => validationErrors[field];
+  const esRegistroMercantil =
+    (empresa?.proveedor || '').trim().toLowerCase() === 'registro mercantil de madrid';
 
   const getDebugInfo = () => {
     if (!empresa.empresa_cif) return { pendientes: 0 };
@@ -88,11 +90,12 @@ const PrincipalView = ({
           error={getError('proveedor')}
         />
         <FormInput
-          label="Fecha Factura:"
+          label={esRegistroMercantil ? "Fecha Anticipo:" : "Fecha Factura:"}
           name="fechafactura"
           value={empresa.fechafactura}
           onChange={onChange}
           type="date"
+          required={!esRegistroMercantil}
           error={getError('fechafactura')}
         />
       </div>
@@ -119,7 +122,7 @@ const PrincipalView = ({
 
       <div className="grid grid-cols-5 m-3 gap-4">
         <FormInput
-          label="Base Imponible:"
+          label={esRegistroMercantil ? "Anticipo:" : "Base Imponible:"}
           name="importe"
           value={empresa.importe}
           onChange={onChange}
@@ -154,6 +157,8 @@ const PrincipalView = ({
           onChange={onChange}
           type="number"
           required={false}
+          readOnly={esRegistroMercantil} 
+          disabled={esRegistroMercantil}
           error={getError('csiniva')}
         />
         <FormInput

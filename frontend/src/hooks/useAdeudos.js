@@ -95,7 +95,10 @@ export function useAdeudos({ empresa, setEmpresa, adeudosGuardados, setAdeudosGu
 
   // --- Guardar adeudo
   const handleGuardarAdeudo = useCallback(async () => {
-    const campos = ["empresa_cif","concepto","proveedor","fechafactura","numfactura","importe"];
+    const esRMM = (empresa.proveedor || '').trim().toLowerCase() === 'registro mercantil de madrid';
+    const campos = esRMM
+      ? ["empresa_cif","concepto","proveedor","importe"] // numfactura y fechafactura NO obligatorios
+      : ["empresa_cif","concepto","proveedor","fechafactura","numfactura","importe"];
     for (const k of campos) {
       const v = empresa[k];
       if (!v && v !== 0) { alert(`El campo "${k}" es obligatorio.`); return; }
@@ -112,8 +115,8 @@ export function useAdeudos({ empresa, setEmpresa, adeudosGuardados, setAdeudosGu
       proveedor: empresa.proveedor,
       ff,
       importe: toNum(empresa.importe),
-      iva: toNum(empresa.iva),
-      retencion: toNum(empresa.retencion),
+      iva: esRMM ? 0 : toNum(empresa.iva),
+      retencion: esRMM ? 0 : toNum(empresa.retencion),
       empresa_cif: empresa.empresa_cif,
     };
     const protocolo = { num_factura: empresa.numfactura, empresa_cif: empresa.empresa_cif, protocolo_entrada: empresa.protocoloentrada || null, cs_iva: toNum(empresa.csiniva) };
