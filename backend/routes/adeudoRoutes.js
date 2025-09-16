@@ -16,7 +16,12 @@ const router = express.Router();
 // Crear adeudo (siempre se crea como PENDIENTE)
 router.post("/", createAdeudo);
 
-// Obtener TODOS los adeudos de una empresa (pendientes + liquidados)
+/** 
+ *  Obtener adeudos de una empresa
+ * Query params:
+ * incluir_liquidados = 'true' | 'false'   (default: true)
+ * agrupado = 'true' | 'false'             (default: false)
+ **/
 router.get("/empresa/:empresa_cif", getAdeudosByEmpresa);
 
 // Obtener SOLO adeudos PENDIENTES de una empresa

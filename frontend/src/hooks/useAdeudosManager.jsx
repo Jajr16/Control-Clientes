@@ -1,4 +1,4 @@
-// hooks/useAdeudosManager.js
+// hooks/useAdeudosManager.js - Versión actualizada para pestañas
 import { useState, useEffect } from 'react';
 import { updateAdeudos, deleteAdeudos } from '../api/moduloAdeudos/adeudos'
 
@@ -12,6 +12,9 @@ export const useAdeudosManager = () => {
     const [anticipoUnico, setAnticipoUnico] = useState("");
     const [hasChanges, setHasChanges] = useState(false);
 
+    // Nuevo estado para manejar cambios entre pestañas
+    const [tabChanges, setTabChanges] = useState(new Map());
+
     const checkForChanges = () => {
         const anticipoChanged = anticipoUnico !== originalAnticipo;
 
@@ -20,7 +23,7 @@ export const useAdeudosManager = () => {
             if (!original) return true;
 
             return Object.keys(row).some(key => {
-                if (key === 'total' || key === '_internal_id') return false; // Excluir ID interno
+                if (key === 'total' || key === '_internal_id') return false;
                 return row[key] !== original[key];
             });
         });
@@ -37,11 +40,12 @@ export const useAdeudosManager = () => {
         newRows[index][field] = value;
 
         // Recalcular total si es necesario
-        if (['importe', 'iva', 'retencion'].includes(field)) {
+        if (['importe', 'iva', 'retencion', 'cs_iva'].includes(field)) {
             const row = newRows[index];
             newRows[index].total = (parseFloat(row.importe) || 0) +
                 (parseFloat(row.iva) || 0) -
-                Math.abs(parseFloat(row.retencion) || 0);
+                Math.abs(parseFloat(row.retencion) || 0) +
+                (parseFloat(row.cs_iva) || 0);
         }
 
         setEditedRows(newRows);
@@ -51,7 +55,6 @@ export const useAdeudosManager = () => {
         setAnticipoUnico(value);
     };
 
-    // Cambiar a usar _internal_id en lugar de num_factura
     const handleRowSelection = (internalId, isChecked) => {
         const newSelectedRows = new Set(selectedRows);
 
@@ -139,7 +142,7 @@ export const useAdeudosManager = () => {
             if (!map[item.num_factura]) {
                 map[item.num_factura] = { num_factura: item.num_factura };
             }
-            if ('protocolo_entrada' in item) map[item.num_factura].protocolo_entrada = item.protocolo_entrada;
+            if ('num_protocolo' in item) map[item.num_factura].num_protocolo = item.num_protocolo;
             if ('cs_iva' in item) map[item.num_factura].cs_iva = item.cs_iva;
         });
 
@@ -148,6 +151,7 @@ export const useAdeudosManager = () => {
 
     const handleSaveChanges = async (saveApiCall = updateAdeudos) => {
         try {
+            // Validaciones
             for (const row of editedRows) {
                 const camposObligatorios = ["num_factura", "concepto", "proveedor", "importe", "iva", "retencion"];
                 for (const campo of camposObligatorios) {
@@ -174,7 +178,7 @@ export const useAdeudosManager = () => {
                     Object.keys(row).forEach(key => {
                         if (key === 'total' || key === '_internal_id') return;
 
-                        if (key === 'protocolo_entrada' || key === 'cs_iva') {
+                        if (key === 'num_protocolo' || key === 'cs_iva') {
                             if (row[key] !== original[key]) {
                                 cambiosProtocolo.push({
                                     num_factura: row.num_factura,
@@ -220,6 +224,7 @@ export const useAdeudosManager = () => {
                 }
             }
 
+            // Actualizar estados después del guardado exitoso
             setOriginalRows([...editedRows]);
             setOriginalAnticipo(anticipoUnico);
             setHasChanges(false);
@@ -227,9 +232,11 @@ export const useAdeudosManager = () => {
             setSelectedRows(new Set());
 
             alert("Cambios guardados exitosamente");
+            return true;
         } catch (error) {
             console.error("Error al guardar cambios:", error);
             alert("Error al guardar cambios");
+            return false;
         }
     };
 
@@ -249,13 +256,14 @@ export const useAdeudosManager = () => {
         setAnticipoUnico("");
         setOriginalAnticipo("");
         setHasChanges(false);
+        setTabChanges(new Map());
     };
 
     const initializeData = (adeudos, anticipo) => {
         // Agregar ID único interno a cada fila
         const adeudosWithId = adeudos.map((row, index) => ({
             ...row,
-            _internal_id: `row_${index}_${Date.now()}` // ID único interno
+            _internal_id: `row_${index}_${Date.now()}_${Math.random().toString(36).substr(2, 9)}` // ID único interno
         }));
 
         setOriginalRows(adeudosWithId);
@@ -263,6 +271,38 @@ export const useAdeudosManager = () => {
         const anticipoValue = anticipo?.anticipo ?? 0;
         setAnticipoUnico(anticipoValue.toString());
         setOriginalAnticipo(anticipoValue.toString());
+        
+        // Limpiar selecciones y ediciones cuando se cambia de pestaña
+        setSelectedRows(new Set());
+        setEditingRows(new Set());
+        setHasChanges(false);
+    };
+
+    // Función para guardar el estado de la pestaña actual antes de cambiar
+    const saveTabState = (tabId) => {
+        const currentTabState = {
+            editedRows: [...editedRows],
+            selectedRows: new Set(selectedRows),
+            editingRows: new Set(editingRows),
+            anticipoUnico,
+            hasChanges
+        };
+        
+        const newTabChanges = new Map(tabChanges);
+        newTabChanges.set(tabId, currentTabState);
+        setTabChanges(newTabChanges);
+    };
+
+    // Función para restaurar el estado de una pestaña
+    const restoreTabState = (tabId) => {
+        const savedState = tabChanges.get(tabId);
+        if (savedState) {
+            setEditedRows(savedState.editedRows);
+            setSelectedRows(savedState.selectedRows);
+            setEditingRows(savedState.editingRows);
+            setAnticipoUnico(savedState.anticipoUnico);
+            setHasChanges(savedState.hasChanges);
+        }
     };
 
     // Estados calculados
@@ -281,6 +321,7 @@ export const useAdeudosManager = () => {
         hasChanges,
         isAllSelected,
         isIndeterminate,
+        tabChanges,
 
         // Funciones
         handleCellChange,
@@ -292,6 +333,8 @@ export const useAdeudosManager = () => {
         handleSaveChanges,
         handleCancelChanges,
         resetState,
-        initializeData
+        initializeData,
+        saveTabState,
+        restoreTabState
     };
 };

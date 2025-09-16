@@ -21,7 +21,7 @@ const VistaPreviaAdeudos = ({
   // Clave estable por fila
   const rowKey = (a) => [
     a?.num_factura ?? 'nf',
-    a?.protocolo_entrada ?? 'pe',
+    a?.num_protocolo ?? 'pe',
     a?.ff ?? 'f',
     a?.proveedor ?? 'pv'
   ].join('|');
@@ -119,7 +119,7 @@ const VistaPreviaAdeudos = ({
               <td className="border p-2">{a.proveedor}</td>
               <td className="border p-2">{a.ff}</td>
               <td className="border p-2">{a.num_factura}</td>
-              <td className="border p-2">{a.protocolo_entrada}</td>
+              <td className="border p-2">{a.num_protocolo}</td>
               <td className="border p-2">{Number(a.importe || 0).toFixed(2)}</td>
               <td className="border p-2">{Number(a.iva || 0).toFixed(2)}</td>
               <td className="border p-2">{Number(a.retencion || 0).toFixed(2)}</td>

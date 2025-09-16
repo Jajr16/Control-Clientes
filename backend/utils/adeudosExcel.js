@@ -133,7 +133,7 @@ export function historicoExcel(data) {
                 adeudo.proveedor,
                 adeudo.ff,
                 adeudo.num_factura,
-                adeudo.protocolo_entrada,
+                adeudo.num_protocolo,
                 parseFloat(adeudo.importe || 0).toFixed(2),
                 parseFloat(adeudo.iva || 0).toFixed(2),
                 parseFloat(adeudo.retencion || 0).toFixed(2),

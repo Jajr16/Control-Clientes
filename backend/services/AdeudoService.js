@@ -58,25 +58,17 @@ class AdeudoService extends BaseService {
                 a.retencion,
                 a.num_liquidacion,
                 a.fecha_creacion as f_adeudo_creacion, 
-                COALESCE(p.protocolo_entrada, '') AS protocolo_entrada,
+                COALESCE(p.num_protocolo, '') AS num_protocolo,
                 COALESCE(p.cs_iva, 0) AS cs_iva,
                 (COALESCE(a.importe,0) + COALESCE(a.iva,0) - COALESCE(a.retencion,0) + COALESCE(p.cs_iva,0)) AS total,
                 COALESCE(h.honorario, 0) AS honorarios_base,
                 COALESCE(h.iva, 0) AS honorarios_iva,
-                CASE 
-                    WHEN a.num_liquidacion IS NULL THEN 'PENDIENTE'
-                    ELSE 'LIQUIDADO'
-                END as estado,
-                h.fecha_creacion as fecha_liquidacion,
-                CASE 
-                    WHEN a.concepto = 'Registro Mercantil de Madrid' THEN COALESCE(aj.diferencia, 0)
-                    ELSE NULL
-                END AS diferencia
+                a.estado,
+                h.fecha_creacion as fecha_liquidacion
             FROM adeudo a
             LEFT JOIN protocolo p ON a.num_factura = p.num_factura AND a.empresa_cif = p.empresa_cif
             LEFT JOIN anticipo an ON a.empresa_cif = an.empresa_cif
             LEFT JOIN honorario h ON a.num_liquidacion = h.num_liquidacion AND a.empresa_cif = h.empresa_cif
-            LEFT JOIN ajuste aj ON a.num_factura = aj.num_factura AND a.empresa_cif = aj.empresa_cif
             WHERE a.empresa_cif = $1
             ORDER BY 
                 CASE WHEN a.num_liquidacion IS NULL THEN 0 ELSE 1 END,
@@ -124,7 +116,7 @@ class AdeudoService extends BaseService {
                 a.iva,
                 a.retencion,
                 a.num_liquidacion,
-                COALESCE(p.protocolo_entrada, '') AS protocolo_entrada,
+                COALESCE(p.num_protocolo, '') AS num_protocolo,
                 COALESCE(p.cs_iva, 0) AS cs_iva,
                 (COALESCE(a.importe,0) + COALESCE(a.iva,0) - COALESCE(a.retencion,0) + COALESCE(p.cs_iva,0)) AS total,
                 COALESCE(an.anticipo, 0) AS anticipo,
@@ -149,6 +141,80 @@ class AdeudoService extends BaseService {
             resumen: {
                 total_pendientes: result.rows.length
             }
+        };
+    }
+
+    // Agregar este método a tu AdeudoService.js
+    async obtenerTodosAdeudosPorEmpresaAgrupados(empresa_cif) {
+        console.log(empresa_cif)
+        const query = `SELECT * FROM obtener_adeudos_por_empresa($1)`;
+        const result = await pool.query(query, [empresa_cif]);
+        console.log(result)
+
+        const query_anticipo = `
+            SELECT 
+                an.empresa_cif,
+                an.anticipo 
+            FROM anticipo an
+            WHERE an.empresa_cif = $1;
+        `
+
+        const anticipo_result = await pool.query(query_anticipo, [empresa_cif])
+        const anticipo = anticipo_result.rows[0] || null;
+
+        const adeudos = result.rows.map(row => ({
+            ...row,
+            ff: formatDate(row.ff),
+            fecha_liquidacion: formatDate(row.fecha_liquidacion)
+        }));
+
+        // Agrupar por num_liquidacion
+        const adeudosAgrupados = {};
+
+        adeudos.forEach(adeudo => {
+            const liquidacion = adeudo.num_liquidacion || 'pendientes';
+
+            if (!adeudosAgrupados[liquidacion]) {
+                adeudosAgrupados[liquidacion] = {
+                    num_liquidacion: liquidacion,
+                    adeudos: [],
+                    resumen: {
+                        total: 0,
+                        importe_total: 0,
+                        iva_total: 0,
+                        retencion_total: 0,
+                        total_general: 0
+                    }
+                };
+            }
+
+            adeudosAgrupados[liquidacion].adeudos.push(adeudo);
+
+            // Actualizar resumen
+            const resumen = adeudosAgrupados[liquidacion].resumen;
+            resumen.total++;
+            resumen.importe_total += parseFloat(adeudo.importe) || 0;
+            resumen.iva_total += parseFloat(adeudo.iva) || 0;
+            resumen.retencion_total += parseFloat(adeudo.retencion) || 0;
+            resumen.total_general += parseFloat(adeudo.total) || 0;
+        });
+
+        // Ordenar las liquidaciones: pendientes primero, luego por número descendente
+        const liquidacionesOrdenadas = Object.keys(adeudosAgrupados).sort((a, b) => {
+            if (a === 'pendientes') return -1;
+            if (b === 'pendientes') return 1;
+            return parseInt(b) - parseInt(a);
+        });
+
+        const liquidaciones = liquidacionesOrdenadas.map(key => adeudosAgrupados[key]);
+
+        // Calcular resumen general
+        const resumenGeneral = this._calcularResumen(adeudos);
+
+        return {
+            anticipo,
+            liquidaciones,
+            resumen: resumenGeneral
         };
     }
 
@@ -194,7 +260,7 @@ class AdeudoService extends BaseService {
         }
 
         for (const protocolo of cambiosProtocolo) {
-            const { num_factura, cs_iva, protocolo_entrada } = protocolo;
+            const { num_factura, cs_iva, num_protocolo } = protocolo;
             if (!num_factura) throw new Error("num_factura es obligatorio en cambios_protocolo");
         }
 

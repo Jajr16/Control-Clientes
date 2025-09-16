@@ -11,7 +11,7 @@ export const manejarLogicaAdeudo = () => {
         proveedor: "",
         ff: "",
         num_factura: "",
-        protocolo_entrada: "",
+        num_protocolo: "",
         importe: "",
         iva: 0,
         retencion: 0,

@@ -9,11 +9,19 @@ class AdeudoController extends BaseController {
   async getAdeudosByEmpresa(req, res) {
     try {
       const { empresa_cif } = req.params;
-      const { incluir_liquidados = 'true' } = req.query;
+      const { incluir_liquidados = 'true', agrupado = 'false' } = req.query;
 
-      const result = incluir_liquidados === 'true'
-        ? await this.service.obtenerTodosAdeudosPorEmpresa(empresa_cif)
-        : await this.service.obtenerAdeudosPendientes(empresa_cif);
+      let result;
+
+      if (agrupado === 'true') {
+        // Nueva funcionalidad agrupada por liquidaciones
+        result = await this.service.obtenerTodosAdeudosPorEmpresaAgrupados(empresa_cif);
+      } else {
+        // Funcionalidad original
+        result = incluir_liquidados === 'true'
+          ? await this.service.obtenerTodosAdeudosPorEmpresa(empresa_cif)
+          : await this.service.obtenerAdeudosPendientes(empresa_cif);
+      }
 
       return this.sendSuccess(res, result);
     } catch (error) {
@@ -53,6 +61,9 @@ class AdeudoController extends BaseController {
       if (adeudo.num_liquidacion !== undefined) {
         delete adeudo.num_liquidacion;
       }
+
+      console.log("CACACACACACA", adeudo);
+      console.log("CACACACACACA", protocolo);
 
       const result = await this.service.insertarAdeudoCompleto({ adeudo, protocolo });
       return this.sendSuccess(res, result, 'Adeudo creado correctamente', 201);
@@ -123,7 +134,7 @@ class AdeudoController extends BaseController {
         "Content-Type",
         "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"
       );
-      
+
       res.setHeader(
         "Content-Disposition",
         `attachment; filename="Historico_${empresa_cif}_${Date.now()}.xlsx"`

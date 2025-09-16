@@ -3,7 +3,7 @@ import { obtenerDatosCalculados, formatearFecha } from '../utils/calculations';
 
 const rowKey = (a) => {
   const nf = a.num_factura ?? a.numfactura ?? '';
-  const pe = a.protocolo_entrada ?? a.protocolo ?? '';
+  const pe = a.num_protocolo ?? a.protocolo ?? '';
   const ff = a.ff ?? a.fecha ?? '';
   return `${String(nf)}|${String(pe)}|${String(ff)}`;
 };

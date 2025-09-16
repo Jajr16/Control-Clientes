@@ -329,3 +329,219 @@
     at async AdeudoService.obtenerTodosAdeudosPorEmpresa (file:///C:/Users/LuisValle/Desktop/Control-Clientes/backend/services/AdeudoService.js:87:24)
     at async AdeudoController.getAdeudosByEmpresa (file:///C:/Users/LuisValle/Desktop/Control-Clientes/backend/controllers/AdeudoController.js:15:11)
 
+[2025-09-15T21:15:43.884Z] error: no existe la relación «ajuste»
+    at C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\pg-pool\index.js:45:11
+    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at async AdeudoService.obtenerTodosAdeudosPorEmpresa (file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/services/AdeudoService.js:87:24)
+    at async AdeudoController.getAdeudosByEmpresa (file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/controllers/AdeudoController.js:15:11)
+
+[2025-09-15T21:15:44.964Z] error: no existe la relación «ajuste»
+    at C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\pg-pool\index.js:45:11
+    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at async AdeudoService.obtenerTodosAdeudosPorEmpresa (file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/services/AdeudoService.js:87:24)
+    at async AdeudoController.getAdeudosByEmpresa (file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/controllers/AdeudoController.js:15:11)
+
+[2025-09-15T21:15:46.320Z] error: no existe la relación «ajuste»
+    at C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\pg-pool\index.js:45:11
+    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at async AdeudoService.obtenerTodosAdeudosPorEmpresa (file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/services/AdeudoService.js:87:24)
+    at async AdeudoController.getAdeudosByEmpresa (file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/controllers/AdeudoController.js:15:11)
+
+[2025-09-15T21:15:52.312Z] error: no existe la relación «ajuste»
+    at C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\pg-pool\index.js:45:11
+    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at async AdeudoService.obtenerTodosAdeudosPorEmpresa (file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/services/AdeudoService.js:87:24)
+    at async AdeudoController.getAdeudosByEmpresa (file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/controllers/AdeudoController.js:15:11)
+
+[2025-09-15T21:15:52.376Z] error: no existe la relación «ajuste»
+    at C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\pg-pool\index.js:45:11
+    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at async AdeudoService.obtenerTodosAdeudosPorEmpresa (file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/services/AdeudoService.js:87:24)
+    at async AdeudoController.getAdeudosByEmpresa (file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/controllers/AdeudoController.js:15:11)
+
+[2025-09-15T21:15:52.440Z] error: no existe la relación «ajuste»
+    at C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\pg-pool\index.js:45:11
+    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at async AdeudoService.obtenerTodosAdeudosPorEmpresa (file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/services/AdeudoService.js:87:24)
+    at async AdeudoController.getAdeudosByEmpresa (file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/controllers/AdeudoController.js:15:11)
+
+[2025-09-15T21:18:03.943Z] error: el valor nulo en la columna «estado» de la relación «adeudo» viola la restricción de no nulo
+    at C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\pg\lib\client.js:545:17
+    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at async Repositorio.insertar (file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/repositories/globalPersistence.js:43:28)
+    at async file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/services/AdeudoService.js:21:37
+    at async AdeudoService.withTransaction (file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/services/BaseService.js:13:28)
+    at async AdeudoService.insertarAdeudoCompleto (file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/services/AdeudoService.js:19:16)
+    at async AdeudoController.createAdeudo (file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/controllers/AdeudoController.js:57:22)
+
+[2025-09-15T21:19:03.047Z] error: no existe la columna «num_protocolo» en la relación «protocolo»
+    at C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\pg\lib\client.js:545:17
+    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at async Repositorio.insertar (file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/repositories/globalPersistence.js:43:28)
+    at async file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/services/AdeudoService.js:25:17
+    at async AdeudoService.withTransaction (file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/services/BaseService.js:13:28)
+    at async AdeudoService.insertarAdeudoCompleto (file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/services/AdeudoService.js:19:16)
+    at async AdeudoController.createAdeudo (file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/controllers/AdeudoController.js:57:22)
+
+[2025-09-15T21:20:08.068Z] error: no existe la relación «ajuste»
+    at C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\pg-pool\index.js:45:11
+    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at async AdeudoService.obtenerTodosAdeudosPorEmpresa (file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/services/AdeudoService.js:87:24)
+    at async AdeudoController.getAdeudosByEmpresa (file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/controllers/AdeudoController.js:15:11)
+
+[2025-09-15T21:20:08.138Z] error: no existe la relación «ajuste»
+    at C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\pg-pool\index.js:45:11
+    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at async AdeudoService.obtenerTodosAdeudosPorEmpresa (file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/services/AdeudoService.js:87:24)
+    at async AdeudoController.getAdeudosByEmpresa (file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/controllers/AdeudoController.js:15:11)
+
+[2025-09-15T21:20:08.200Z] error: no existe la relación «ajuste»
+    at C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\pg-pool\index.js:45:11
+    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at async AdeudoService.obtenerTodosAdeudosPorEmpresa (file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/services/AdeudoService.js:87:24)
+    at async AdeudoController.getAdeudosByEmpresa (file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/controllers/AdeudoController.js:15:11)
+
+[2025-09-15T21:20:09.429Z] error: no existe la relación «ajuste»
+    at C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\pg-pool\index.js:45:11
+    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at async AdeudoService.obtenerTodosAdeudosPorEmpresa (file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/services/AdeudoService.js:87:24)
+    at async AdeudoController.getAdeudosByEmpresa (file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/controllers/AdeudoController.js:15:11)
+
+[2025-09-15T21:20:09.491Z] error: no existe la relación «ajuste»
+    at C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\pg-pool\index.js:45:11
+    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at async AdeudoService.obtenerTodosAdeudosPorEmpresa (file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/services/AdeudoService.js:87:24)
+    at async AdeudoController.getAdeudosByEmpresa (file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/controllers/AdeudoController.js:15:11)
+
+[2025-09-15T21:20:09.552Z] error: no existe la relación «ajuste»
+    at C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\pg-pool\index.js:45:11
+    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at async AdeudoService.obtenerTodosAdeudosPorEmpresa (file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/services/AdeudoService.js:87:24)
+    at async AdeudoController.getAdeudosByEmpresa (file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/controllers/AdeudoController.js:15:11)
+
+[2025-09-15T21:20:10.346Z] error: no existe la relación «ajuste»
+    at C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\pg-pool\index.js:45:11
+    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at async AdeudoService.obtenerTodosAdeudosPorEmpresa (file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/services/AdeudoService.js:87:24)
+    at async AdeudoController.getAdeudosByEmpresa (file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/controllers/AdeudoController.js:15:11)
+
+[2025-09-15T21:20:10.415Z] error: no existe la relación «ajuste»
+    at C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\pg-pool\index.js:45:11
+    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at async AdeudoService.obtenerTodosAdeudosPorEmpresa (file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/services/AdeudoService.js:87:24)
+    at async AdeudoController.getAdeudosByEmpresa (file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/controllers/AdeudoController.js:15:11)
+
+[2025-09-15T21:20:10.472Z] error: no existe la relación «ajuste»
+    at C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\pg-pool\index.js:45:11
+    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at async AdeudoService.obtenerTodosAdeudosPorEmpresa (file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/services/AdeudoService.js:87:24)
+    at async AdeudoController.getAdeudosByEmpresa (file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/controllers/AdeudoController.js:15:11)
+
+[2025-09-15T21:21:24.690Z] error: error de sintaxis en o cerca de «FROM»
+    at C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\pg-pool\index.js:45:11
+    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at async AdeudoService.obtenerTodosAdeudosPorEmpresa (file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/services/AdeudoService.js:82:24)
+    at async AdeudoController.getAdeudosByEmpresa (file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/controllers/AdeudoController.js:15:11)
+
+[2025-09-15T21:21:24.748Z] error: error de sintaxis en o cerca de «FROM»
+    at C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\pg-pool\index.js:45:11
+    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at async AdeudoService.obtenerTodosAdeudosPorEmpresa (file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/services/AdeudoService.js:82:24)
+    at async AdeudoController.getAdeudosByEmpresa (file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/controllers/AdeudoController.js:15:11)
+
+[2025-09-15T21:21:24.800Z] error: error de sintaxis en o cerca de «FROM»
+    at C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\pg-pool\index.js:45:11
+    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at async AdeudoService.obtenerTodosAdeudosPorEmpresa (file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/services/AdeudoService.js:82:24)
+    at async AdeudoController.getAdeudosByEmpresa (file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/controllers/AdeudoController.js:15:11)
+
+[2025-09-16T00:11:36.553Z] error: structure of query does not match function result type
+    at C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\pg-pool\index.js:45:11
+    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at async AdeudoService.obtenerTodosAdeudosPorEmpresaAgrupados (file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/services/AdeudoService.js:150:24)
+    at async AdeudoController.getAdeudosByEmpresa (file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/controllers/AdeudoController.js:18:18)
+
+[2025-09-16T00:11:37.867Z] error: structure of query does not match function result type
+    at C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\pg-pool\index.js:45:11
+    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at async AdeudoService.obtenerTodosAdeudosPorEmpresaAgrupados (file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/services/AdeudoService.js:150:24)
+    at async AdeudoController.getAdeudosByEmpresa (file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/controllers/AdeudoController.js:18:18)
+
+[2025-09-16T00:14:39.255Z] error: structure of query does not match function result type
+    at C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\pg-pool\index.js:45:11
+    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at async AdeudoService.obtenerTodosAdeudosPorEmpresaAgrupados (file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/services/AdeudoService.js:150:24)
+    at async AdeudoController.getAdeudosByEmpresa (file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/controllers/AdeudoController.js:18:18)
+
+[2025-09-16T00:20:18.558Z] error: structure of query does not match function result type
+    at C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\pg-pool\index.js:45:11
+    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at async AdeudoService.obtenerTodosAdeudosPorEmpresaAgrupados (file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/services/AdeudoService.js:150:24)
+    at async AdeudoController.getAdeudosByEmpresa (file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/controllers/AdeudoController.js:18:18)
+
+[2025-09-16T00:21:53.451Z] error: structure of query does not match function result type
+    at C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\pg-pool\index.js:45:11
+    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at async AdeudoService.obtenerTodosAdeudosPorEmpresaAgrupados (file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/services/AdeudoService.js:150:24)
+    at async AdeudoController.getAdeudosByEmpresa (file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/controllers/AdeudoController.js:19:18)
+
+[2025-09-16T00:24:42.223Z] error: structure of query does not match function result type
+    at C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\pg-pool\index.js:45:11
+    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at async AdeudoService.obtenerTodosAdeudosPorEmpresaAgrupados (file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/services/AdeudoService.js:150:24)
+    at async AdeudoController.getAdeudosByEmpresa (file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/controllers/AdeudoController.js:19:18)
+
+[2025-09-16T00:25:21.206Z] error: structure of query does not match function result type
+    at C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\pg-pool\index.js:45:11
+    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at async AdeudoService.obtenerTodosAdeudosPorEmpresaAgrupados (file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/services/AdeudoService.js:150:24)
+    at async AdeudoController.getAdeudosByEmpresa (file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/controllers/AdeudoController.js:19:18)
+
+[2025-09-16T00:27:50.741Z] error: structure of query does not match function result type
+    at C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\pg-pool\index.js:45:11
+    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at async AdeudoService.obtenerTodosAdeudosPorEmpresaAgrupados (file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/services/AdeudoService.js:150:24)
+    at async AdeudoController.getAdeudosByEmpresa (file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/controllers/AdeudoController.js:19:18)
+
+[2025-09-16T00:29:02.655Z] error: structure of query does not match function result type
+    at C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\pg-pool\index.js:45:11
+    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at async AdeudoService.obtenerTodosAdeudosPorEmpresaAgrupados (file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/services/AdeudoService.js:151:24)
+    at async AdeudoController.getAdeudosByEmpresa (file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/controllers/AdeudoController.js:18:18)
+
+[2025-09-16T00:35:02.277Z] error: el valor nulo en la columna «num_protocolo» de la relación «protocolo» viola la restricción de no nulo
+    at C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\pg\lib\client.js:545:17
+    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at async Repositorio.insertar (file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/repositories/globalPersistence.js:43:28)
+    at async file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/services/AdeudoService.js:25:17
+    at async AdeudoService.withTransaction (file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/services/BaseService.js:13:28)
+    at async AdeudoService.insertarAdeudoCompleto (file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/services/AdeudoService.js:19:16)
+    at async AdeudoController.createAdeudo (file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/controllers/AdeudoController.js:65:22)
+
+[2025-09-16T00:37:47.512Z] error: el valor nulo en la columna «num_protocolo» de la relación «protocolo» viola la restricción de no nulo
+    at C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\pg\lib\client.js:545:17
+    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at async Repositorio.insertar (file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/repositories/globalPersistence.js:43:28)
+    at async file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/services/AdeudoService.js:25:17
+    at async AdeudoService.withTransaction (file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/services/BaseService.js:13:28)
+    at async AdeudoService.insertarAdeudoCompleto (file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/services/AdeudoService.js:19:16)
+    at async AdeudoController.createAdeudo (file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/controllers/AdeudoController.js:67:22)
+
+[2025-09-16T00:40:24.074Z] error: el valor nulo en la columna «num_protocolo» de la relación «protocolo» viola la restricción de no nulo
+    at C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\pg\lib\client.js:545:17
+    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at async Repositorio.insertar (file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/repositories/globalPersistence.js:43:28)
+    at async file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/services/AdeudoService.js:25:17
+    at async AdeudoService.withTransaction (file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/services/BaseService.js:13:28)
+    at async AdeudoService.insertarAdeudoCompleto (file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/services/AdeudoService.js:19:16)
+    at async AdeudoController.createAdeudo (file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/controllers/AdeudoController.js:67:22)
+
+[2025-09-16T00:40:38.150Z] error: el valor nulo en la columna «num_protocolo» de la relación «protocolo» viola la restricción de no nulo
+    at C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\pg\lib\client.js:545:17
+    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at async Repositorio.insertar (file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/repositories/globalPersistence.js:43:28)
+    at async file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/services/AdeudoService.js:25:17
+    at async AdeudoService.withTransaction (file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/services/BaseService.js:13:28)
+    at async AdeudoService.insertarAdeudoCompleto (file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/services/AdeudoService.js:19:16)
+    at async AdeudoController.createAdeudo (file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/controllers/AdeudoController.js:68:22)
+

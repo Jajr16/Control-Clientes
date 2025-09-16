@@ -144,7 +144,7 @@ class LiquidacionService extends BaseService {
                 a.retencion,
                 a.num_liquidacion,
                 a.empresa_cif,
-                COALESCE(p.protocolo_entrada, '') AS protocolo_entrada,
+                COALESCE(p.num_protocolo, '') AS num_protocolo,
                 COALESCE(p.cs_iva, 0) AS cs_iva,
                 (a.importe + a.iva - a.retencion + COALESCE(p.cs_iva, 0)) AS total
             FROM adeudo a

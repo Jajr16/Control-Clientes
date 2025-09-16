@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import ClientSearch from "../../components/elements/searchBar";
 import { getAdeudoEmpresa, createExcel } from "../../api/moduloAdeudos/adeudos";
 import { CheckIcon, XMarkIcon, EditIcon, TrashIcon } from '../../components/common/Icons';
@@ -6,6 +6,10 @@ import { useAdeudosManager } from '../../hooks/useAdeudosManager';
 
 
 const Historico = () => {
+    const [liquidaciones, setLiquidaciones] = useState([]);
+    const [selectedTab, setSelectedTab] = useState(0);
+    const [anticipoGeneral, setAnticipoGeneral] = useState(null);
+
     const {
         // Estados
         selectedClient,
@@ -42,19 +46,28 @@ const Historico = () => {
     useEffect(() => {
         if (!selectedClient) {
             resetState();
+            setLiquidaciones([]);
+            setSelectedTab(0);
             return;
         }
 
         const fetchGetHistorico = async () => {
             try {
-                const response = await getAdeudoEmpresa(selectedClient.cif);
+                const response = await getAdeudoEmpresa(selectedClient.cif, { agrupado: true });
 
                 if (!response.success) {
                     alert(response.error);
                     return;
                 }
+                console.log(response)
+                setLiquidaciones(response.data.liquidaciones);
+                setAnticipoGeneral(response.data.anticipo);
+                setSelectedTab(0);
 
-                initializeData(response.data.adeudos, response.data.anticipo);
+                // Inicializar con la primera pestaña si hay datos
+                if (response.data.liquidaciones.length > 0) {
+                    initializeData(response.data.liquidaciones[0].adeudos, response.data.anticipo);
+                }
 
             } catch (error) {
                 console.error("Error fetching historico adeudos:", error);
@@ -64,6 +77,40 @@ const Historico = () => {
 
         fetchGetHistorico();
     }, [selectedClient]);
+
+    const handleTabChange = (tabIndex) => {
+        if (hasChanges) {
+            const confirmChange = window.confirm("Tienes cambios sin guardar. ¿Deseas continuar sin guardar?");
+            if (!confirmChange) return;
+        }
+
+        setSelectedTab(tabIndex);
+        if (liquidaciones[tabIndex]) {
+            initializeData(liquidaciones[tabIndex].adeudos, anticipoGeneral);
+        }
+    };
+
+    const currentLiquidacion = liquidaciones[selectedTab];
+
+    // Función para obtener el nombre de la pestaña
+    const getTabName = (liquidacion) => {
+        if (liquidacion.num_liquidacion === 'pendientes') {
+            return 'Pendientes';
+        }
+        return `Liq. ${liquidacion.num_liquidacion}`;
+    };
+
+    // Función para obtener el color de la pestaña
+    const getTabColor = (liquidacion, isActive) => {
+        if (liquidacion.num_liquidacion === 'pendientes') {
+            return isActive
+                ? 'border-yellow-500 text-yellow-600 bg-yellow-50'
+                : 'border-transparent text-gray-500 hover:text-yellow-600 hover:border-yellow-300';
+        }
+        return isActive
+            ? 'border-blue-500 text-blue-600 bg-blue-50'
+            : 'border-transparent text-gray-500 hover:text-blue-600 hover:border-blue-300';
+    };
 
     return (
         <div className="w-full h-[calc(100vh-7rem)] p-2 sm:p-4 lg:p-6 bg-gray-50 flex flex-col">
@@ -97,8 +144,30 @@ const Historico = () => {
                     </div>
                 </div>
 
+                {/* Sistema de Pestañas */}
+                {selectedClient && liquidaciones.length > 0 && (
+                    <div className="mb-4 flex-shrink-0">
+                        <div className="border-b border-gray-200">
+                            <nav className="-mb-px flex space-x-8 overflow-x-auto">
+                                {liquidaciones.map((liquidacion, index) => (
+                                    <button
+                                        key={liquidacion.num_liquidacion}
+                                        onClick={() => handleTabChange(index)}
+                                        className={`whitespace-nowrap py-2 px-1 border-b-2 font-medium text-sm transition-colors ${getTabColor(liquidacion, selectedTab === index)}`}
+                                    >
+                                        {getTabName(liquidacion)}
+                                        <span className="ml-2 inline-flex items-center px-2 py-0.5 rounded-full text-xs font-medium bg-gray-100 text-gray-800">
+                                            {liquidacion.adeudos.length}
+                                        </span>
+                                    </button>
+                                ))}
+                            </nav>
+                        </div>
+                    </div>
+                )}
+
                 {/* Controles de selección - Responsive */}
-                {selectedClient && editedRows.length > 0 && (
+                {selectedClient && currentLiquidacion && editedRows.length > 0 && (
                     <div className="mb-4 bg-gray-50 p-3 sm:p-4 rounded-lg flex-shrink-0">
                         <div className="flex flex-col space-y-3 sm:space-y-0 sm:flex-row sm:items-center sm:justify-between">
                             <div className="flex flex-col sm:flex-row sm:items-center space-y-2 sm:space-y-0 sm:space-x-4">
@@ -152,14 +221,14 @@ const Historico = () => {
                 {/* Contenido principal que se expande */}
                 <div className="flex-1 flex flex-col min-h-0">
                     {/* Tabla de adeudos - Con altura controlada */}
-                    {selectedClient && editedRows.length > 0 && (
+                    {selectedClient && currentLiquidacion && editedRows.length > 0 && (
                         <div className="flex flex-col space-y-4 h-full">
                             <div className="flex justify-between items-center flex-shrink-0">
                                 <h2 className="text-lg sm:text-xl font-semibold break-words">
-                                    Adeudos a Finatech - {selectedClient.nombre}
+                                    {getTabName(currentLiquidacion)} - {selectedClient.nombre}
                                 </h2>
                                 <button type="button"
-                                onClick={() => createExcel(selectedClient.cif, selectedClient.nombre)}
+                                    onClick={() => createExcel(selectedClient.cif, selectedClient.nombre)}
                                     className="focus:outline-none text-white bg-green-700 hover:bg-green-800 focus:ring-4 focus:ring-green-300 font-medium 
                                     rounded-lg text-sm px-5 py-2.5 me-2 mb-2 dark:bg-green-600 dark:hover:bg-green-700 dark:focus:ring-green-800">
                                     Descargar Excel
@@ -315,12 +384,12 @@ const Historico = () => {
                                                             {isEditing ? (
                                                                 <input
                                                                     type="text"
-                                                                    value={row.protocolo_entrada || ""}
-                                                                    onChange={(e) => handleCellChange(index, 'protocolo_entrada', e.target.value)}
+                                                                    value={row.num_protocolo || ""}
+                                                                    onChange={(e) => handleCellChange(index, 'num_protocolo', e.target.value)}
                                                                     className="w-full px-2 py-1 border border-gray-300 rounded text-xs"
                                                                 />
                                                             ) : (
-                                                                row.protocolo_entrada
+                                                                row.num_protocolo
                                                             )}
                                                         </td>
                                                         <td className="px-2 sm:px-4 py-2 sm:py-3 text-xs sm:text-sm text-gray-900 text-right border-b">
@@ -392,9 +461,13 @@ const Historico = () => {
                                                             )}
                                                         </td>
                                                         <td className="px-4 py-3 text-center border-b">
-                                                            <span className={`inline-flex px-2 py-1 text-xs font-semibold rounded-full ${row.estado === 'PENDIENTE'
-                                                                ? 'bg-yellow-100 text-yellow-800'
-                                                                : 'bg-green-100 text-green-800'
+                                                            <span className={`inline-flex px-2 py-1 text-xs font-semibold rounded-full ${row.estado === 'LIQUIDACIÓN EN CURSO'
+                                                                ? 'bg-amber-100 text-amber-800'
+                                                                : row.estado === 'PENDIENTE DE ENVIAR'
+                                                                    ? 'bg-blue-100 text-blue-800'
+                                                                    : row.estado === 'ENVIADO AL CLIENTE'
+                                                                        ? 'bg-violet-100 text-violet-800'
+                                                                        : 'bg-emerald-100 text-emerald-800'
                                                                 }`}>
                                                                 {row.estado}
                                                             </span>
@@ -407,33 +480,46 @@ const Historico = () => {
                                 </div>
                             </div>
 
-                            {/* Resumen de totales - Siempre visible */}
-                            <div className="mt-4 sm:mt-6 bg-gray-50 p-3 sm:p-4 rounded-lg flex-shrink-0">
-                                <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 sm:gap-4">
-                                    <div className="text-center">
-                                        <div className="text-lg sm:text-2xl font-bold text-blue-600">
-                                            {formatCurrency(editedRows.reduce((sum, row) => sum + (parseFloat(row.total) || 0), 0))}
+                            {/* Resumen de totales de la pestaña actual */}
+                            {currentLiquidacion && (
+                                <div className="mt-4 sm:mt-6 bg-gray-50 p-3 sm:p-4 rounded-lg flex-shrink-0">
+                                    <div className="grid grid-cols-1 sm:grid-cols-4 gap-3 sm:gap-4">
+                                        <div className="text-center">
+                                            <div className="text-lg sm:text-2xl font-bold text-blue-600">
+                                                {formatCurrency(currentLiquidacion.resumen.total_general)}
+                                            </div>
+                                            <div className="text-xs sm:text-sm text-gray-600">Total {getTabName(currentLiquidacion)}</div>
                                         </div>
-                                        <div className="text-xs sm:text-sm text-gray-600">Total General</div>
+                                        <div className="text-center">
+                                            <div className="text-lg sm:text-xl font-bold text-green-600">
+                                                {formatCurrency(currentLiquidacion.resumen.importe_total)}
+                                            </div>
+                                            <div className="text-xs sm:text-sm text-gray-600">Base Imponible</div>
+                                        </div>
+                                        <div className="text-center">
+                                            <div className="text-lg sm:text-xl font-bold text-purple-600">
+                                                {formatCurrency(currentLiquidacion.resumen.iva_total)}
+                                            </div>
+                                            <div className="text-xs sm:text-sm text-gray-600">IVA Total</div>
+                                        </div>
+                                        <div className="text-center">
+                                            <div className="text-lg sm:text-xl font-bold text-red-600">
+                                                -{formatCurrency(Math.abs(currentLiquidacion.resumen.retencion_total))}
+                                            </div>
+                                            <div className="text-xs sm:text-sm text-gray-600">Retenciones</div>
+                                        </div>
                                     </div>
-                                    <div className="text-center">
-                                        <div className="text-lg sm:text-2xl font-bold text-yellow-600">
-                                            {formatCurrency(editedRows.filter(r => r.estado === 'PENDIENTE').reduce((sum, row) => sum + (parseFloat(row.total) || 0), 0))}
-                                        </div>
-                                        <div className="text-xs sm:text-sm text-gray-600">Pendientes</div>
-                                    </div>
-                                    <div className="text-center">
-                                        <div className="text-lg sm:text-2xl font-bold text-green-600">
-                                            {formatCurrency(editedRows.filter(r => r.estado === 'LIQUIDADO').reduce((sum, row) => sum + (parseFloat(row.total) || 0), 0))}
-                                        </div>
-                                        <div className="text-xs sm:text-sm text-gray-600">Liquidados</div>
+                                    <div className="mt-3 text-center">
+                                        <span className="text-xs text-gray-500">
+                                            {currentLiquidacion.resumen.total} registros en esta liquidación
+                                        </span>
                                     </div>
                                 </div>
-                            </div>
+                            )}
                         </div>
                     )}
 
-                    {selectedClient && editedRows.length === 0 && (
+                    {selectedClient && liquidaciones.length === 0 && (
                         <div className="text-center py-8 sm:py-12 text-gray-500 flex-1 flex items-center justify-center">
                             <p className="text-sm sm:text-base">Esta empresa no tiene adeudos.</p>
                         </div>
@@ -450,4 +536,4 @@ const Historico = () => {
     );
 };
 
-export default Historico;
+export default Historico

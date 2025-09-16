@@ -97,8 +97,8 @@ export function useAdeudos({ empresa, setEmpresa, adeudosGuardados, setAdeudosGu
   const handleGuardarAdeudo = useCallback(async () => {
     const esRMM = (empresa.proveedor || '').trim().toLowerCase() === 'registro mercantil de madrid';
     const campos = esRMM
-      ? ["empresa_cif","concepto","proveedor","importe"] // numfactura y fechafactura NO obligatorios
-      : ["empresa_cif","concepto","proveedor","fechafactura","numfactura","importe"];
+      ? ["empresa_cif", "concepto", "proveedor", "importe"] // numfactura y fechafactura NO obligatorios
+      : ["empresa_cif", "concepto", "proveedor", "fechafactura", "numfactura", "importe"];
     for (const k of campos) {
       const v = empresa[k];
       if (!v && v !== 0) { alert(`El campo "${k}" es obligatorio.`); return; }
@@ -106,7 +106,7 @@ export function useAdeudos({ empresa, setEmpresa, adeudosGuardados, setAdeudosGu
 
     let ff = empresa.fechafactura;
     if (ff && !ff.includes('/')) {
-      const [y,m,d] = ff.split('-'); ff = `${d}/${m}/${y}`;
+      const [y, m, d] = ff.split('-'); ff = `${d}/${m}/${y}`;
     }
 
     const payload = {
@@ -119,16 +119,33 @@ export function useAdeudos({ empresa, setEmpresa, adeudosGuardados, setAdeudosGu
       retencion: esRMM ? 0 : toNum(empresa.retencion),
       empresa_cif: empresa.empresa_cif,
     };
-    const protocolo = { num_factura: empresa.numfactura, empresa_cif: empresa.empresa_cif, protocolo_entrada: empresa.protocoloentrada || null, cs_iva: toNum(empresa.csiniva) };
+    let protocolo = null;
+
+    // Verificar si hay protocolo de entrada o conceptos sin IVA
+    const tieneProtocolo = empresa.protocoloentrada && empresa.protocoloentrada.trim();
+    const tieneCsIva = empresa.csiniva && toNum(empresa.csiniva) > 0;
+
+    if (tieneProtocolo || tieneCsIva) {
+      protocolo = {
+        num_factura: empresa.numfactura,
+        empresa_cif: empresa.empresa_cif,
+        cs_iva: toNum(empresa.csiniva)
+      };
+
+      // Solo agregar num_protocolo si realmente existe
+      if (tieneProtocolo) {
+        protocolo.num_protocolo = empresa.protocoloentrada;
+      }
+    }
 
     try {
       setBotonGuardarDeshabilitado(true);
-      await apiService.guardarAdeudo(payload, protocolo);
+      await apiService.guardarAdeudo(payload, protocolo); // protocolo será null si no hay datos
       const empresaActual = empresa.empresa_cif;
 
       setEmpresa({
-        empresa_cif: empresaActual, concepto:"", proveedor:"", fechafactura:"", numfactura:"",
-        protocoloentrada:"", importe:"", iva:0, retencion:0, csiniva:"", total:0, anticipocliente:""
+        empresa_cif: empresaActual, concepto: "", proveedor: "", fechafactura: "", numfactura: "",
+        protocoloentrada: "", importe: "", iva: 0, retencion: 0, csiniva: "", total: 0, anticipocliente: ""
       });
 
       await fetchAdeudos(empresaActual);
