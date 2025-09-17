@@ -27,8 +27,9 @@ export const useAdeudosManager = () => {
                 return row[key] !== original[key];
             });
         });
+        const isEditing = editingRows.size > 0;
 
-        setHasChanges(anticipoChanged || rowsChanged);
+        setHasChanges(anticipoChanged || rowsChanged || isEditing);
     };
 
     useEffect(() => {
@@ -151,6 +152,10 @@ export const useAdeudosManager = () => {
 
     const handleSaveChanges = async (saveApiCall = updateAdeudos) => {
         try {
+            console.log("=== INICIO SAVE CHANGES ===");
+            console.log("editedRows:", editedRows);
+            console.log("originalRows:", originalRows);
+
             // Validaciones
             for (const row of editedRows) {
                 const camposObligatorios = ["num_factura", "concepto", "proveedor", "importe", "iva", "retencion"];
@@ -167,10 +172,21 @@ export const useAdeudosManager = () => {
                 anticipo_unico: anticipoUnico === "" || anticipoUnico === "0" ? null : parseFloat(anticipoUnico)
             } : {};
 
+            console.log("Anticipo cambios:", cambiosAnticipo);
+
             const cambiosFilas = editedRows
                 .map((row, index) => {
                     const original = originalRows.find(orig => orig._internal_id === row._internal_id);
-                    if (!original) return null;
+                    console.log(`Fila ${index}:`, {
+                        row_internal_id: row._internal_id,
+                        found_original: !!original,
+                        original_internal_id: original?._internal_id
+                    });
+
+                    if (!original) {
+                        console.log(`No se encontró original para fila ${index}`);
+                        return null;
+                    }
 
                     const cambios = {};
                     let hayCambios = false;
@@ -180,6 +196,7 @@ export const useAdeudosManager = () => {
 
                         if (key === 'num_protocolo' || key === 'cs_iva') {
                             if (row[key] !== original[key]) {
+                                console.log(`Cambio protocolo/cs_iva en ${key}: ${original[key]} -> ${row[key]}`);
                                 cambiosProtocolo.push({
                                     num_factura: row.num_factura,
                                     [key]: row[key]
@@ -188,25 +205,38 @@ export const useAdeudosManager = () => {
                             return;
                         }
 
+                        if (key === 'num_liquidacion') {
+                            cambios[key] = row[key];
+                            return
+                        }
+
                         if (row[key] !== original[key]) {
+                            console.log(`Cambio detectado en ${key}: ${original[key]} -> ${row[key]}`);
                             cambios[key] = row[key];
                             hayCambios = true;
                         }
                     });
 
                     if (row.num_factura !== original.num_factura) {
+                        console.log(`Cambio en num_factura: ${original.num_factura} -> ${row.num_factura}`);
                         return {
                             num_factura_original: original.num_factura,
                             ...cambios
                         };
                     }
 
-                    return hayCambios ? {
+                    const result = hayCambios ? {
                         num_factura_original: original.num_factura,
                         ...cambios
                     } : null;
+
+                    console.log(`Resultado fila ${index}:`, result);
+                    return result;
                 })
                 .filter(Boolean);
+
+            console.log("cambiosFilas final:", cambiosFilas);
+            console.log("cambiosProtocolo:", cambiosProtocolo);
 
             const payload = {
                 empresa_cif: selectedClient?.cif,
@@ -215,18 +245,19 @@ export const useAdeudosManager = () => {
                 cambios_protocolo: cambiosProtocolo.length ? agruparProtocoloPorFactura(cambiosProtocolo) : undefined
             };
 
+            console.log("PAYLOAD FINAL:", payload);
+
             if (saveApiCall) {
                 const response = await saveApiCall(payload);
-                
+                console.log("Respuesta API:", response);
+
                 if (!response.success) {
                     alert(response.error || "Error al guardar cambios");
                     return;
                 }
             }
 
-            // Actualizar estados después del guardado exitoso
-            setOriginalRows([...editedRows]);
-            setOriginalAnticipo(anticipoUnico);
+            // Actualizar estados después del guardado exitos
             setHasChanges(false);
             setEditingRows(new Set());
             setSelectedRows(new Set());
@@ -271,7 +302,7 @@ export const useAdeudosManager = () => {
         const anticipoValue = anticipo?.anticipo ?? 0;
         setAnticipoUnico(anticipoValue.toString());
         setOriginalAnticipo(anticipoValue.toString());
-        
+
         // Limpiar selecciones y ediciones cuando se cambia de pestaña
         setSelectedRows(new Set());
         setEditingRows(new Set());
@@ -287,7 +318,7 @@ export const useAdeudosManager = () => {
             anticipoUnico,
             hasChanges
         };
-        
+
         const newTabChanges = new Map(tabChanges);
         newTabChanges.set(tabId, currentTabState);
         setTabChanges(newTabChanges);

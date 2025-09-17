@@ -8,8 +8,8 @@ export const createTableAdeudo = async () => {
             proveedor VARCHAR(50) NOT NULL,
             ff DATE NOT NULL,
             importe NUMERIC NOT NULL,
-            iva NUMERIC NOT NULL,
-            retencion NUMERIC NOT NULL,
+            iva NUMERIC NOT NULL GENERATED ALWAYS AS (importe * 0.21) STORED,
+            retencion NUMERIC NOT NULL GENERATED ALWAYS AS (importe * 0.15) STORED,
             num_liquidacion INT,
             empresa_cif VARCHAR(9) NOT NULL,
             fecha_creacion TIMESTAMP DEFAULT NOW(),
@@ -64,7 +64,7 @@ export const createTableProtocolo = async () => {
             num_factura VARCHAR(50),
             empresa_cif VARCHAR(9),
             num_protocolo VARCHAR(50) NOT NULL,
-            cs_iva NUMERIC NOT NULL, 
+            cs_iva NUMERIC NOT NULL DEFAULT 0, 
             PRIMARY KEY (num_factura, empresa_cif),
             FOREIGN KEY (num_factura, empresa_cif) REFERENCES adeudo(num_factura, empresa_cif)
                 ON DELETE CASCADE

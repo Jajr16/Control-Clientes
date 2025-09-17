@@ -146,10 +146,8 @@ class AdeudoService extends BaseService {
 
     // Agregar este método a tu AdeudoService.js
     async obtenerTodosAdeudosPorEmpresaAgrupados(empresa_cif) {
-        console.log(empresa_cif)
         const query = `SELECT * FROM obtener_adeudos_por_empresa($1)`;
         const result = await pool.query(query, [empresa_cif]);
-        console.log(result)
 
         const query_anticipo = `
             SELECT 

@@ -62,9 +62,6 @@ class AdeudoController extends BaseController {
         delete adeudo.num_liquidacion;
       }
 
-      console.log("CACACACACACA", adeudo);
-      console.log("CACACACACACA", protocolo);
-
       const result = await this.service.insertarAdeudoCompleto({ adeudo, protocolo });
       return this.sendSuccess(res, result, 'Adeudo creado correctamente', 201);
     } catch (error) {

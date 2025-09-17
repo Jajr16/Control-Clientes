@@ -3,7 +3,7 @@ import ClientSearch from "../../components/elements/searchBar";
 import { getAdeudoEmpresa, createExcel } from "../../api/moduloAdeudos/adeudos";
 import { CheckIcon, XMarkIcon, EditIcon, TrashIcon } from '../../components/common/Icons';
 import { useAdeudosManager } from '../../hooks/useAdeudosManager';
-
+import { ChevronDownIcon } from "@heroicons/react/24/solid";
 
 const Historico = () => {
     const [liquidaciones, setLiquidaciones] = useState([]);
@@ -185,7 +185,7 @@ const Historico = () => {
                                             Editar ({selectedRows.size})
                                         </button>
                                         <button
-                                            onClick={() => handleDeleteSelected()}
+                                            onClick={() => { handleDeleteSelected(); }}
                                             className="flex items-center px-2 sm:px-3 py-1 bg-red-600 text-white rounded-md hover:bg-red-700 transition-colors text-xs sm:text-sm"
                                         >
                                             <TrashIcon className="w-3 h-3 sm:w-4 sm:h-4 mr-1" />
@@ -199,7 +199,19 @@ const Historico = () => {
                             {hasChanges && (
                                 <div className="flex flex-wrap gap-2">
                                     <button
-                                        onClick={() => handleSaveChanges()}
+                                        onClick={async () => {
+                                            const success = await handleSaveChanges();
+                                            if (success) {
+                                                // Refrescar datos desde servidor
+                                                const response = await getAdeudoEmpresa(selectedClient.cif, { agrupado: true });
+                                                if (response.success) {
+                                                    setLiquidaciones(response.data.liquidaciones);
+                                                    setAnticipoGeneral(response.data.anticipo);
+                                                    // Reinicializar la pestaña actual con datos frescos
+                                                    initializeData(response.data.liquidaciones[selectedTab].adeudos, response.data.anticipo);
+                                                }
+                                            }
+                                        }}
                                         className="flex items-center px-3 sm:px-4 py-2 bg-green-600 text-white rounded-md hover:bg-green-700 transition-colors text-xs sm:text-sm"
                                     >
                                         <CheckIcon className="w-3 h-3 sm:w-4 sm:h-4 mr-1" />
@@ -285,12 +297,10 @@ const Historico = () => {
                                                 <th className="px-2 sm:px-4 py-2 sm:py-3 text-right text-xs font-medium text-gray-500 uppercase border-b whitespace-nowrap">
                                                     Total
                                                 </th>
-                                                <th className="px-2 sm:px-4 py-2 sm:py-3 text-right text-xs font-medium text-gray-500 uppercase border-b whitespace-nowrap">
-                                                    Diferencia Depósito
-                                                </th>
                                                 <th className="px-2 sm:px-4 py-2 sm:py-3 text-left text-xs font-medium text-gray-500 uppercase border-b whitespace-nowrap">
                                                     Estado
                                                 </th>
+                                                <th className="px-2 sm:px-4 py-2 sm:py-3 text-left text-xs font-medium text-gray-500 uppercase border-b whitespace-nowrap"></th>
                                             </tr>
                                         </thead>
                                         <tbody className="divide-y divide-gray-200">
@@ -413,6 +423,7 @@ const Historico = () => {
                                                                     value={row.iva || ""}
                                                                     onChange={(e) => handleCellChange(index, 'iva', parseFloat(e.target.value) || 0)}
                                                                     className="w-16 sm:w-20 px-2 py-1 border border-gray-300 rounded text-xs text-right"
+                                                                    disabled
                                                                 />
                                                             ) : (
                                                                 formatCurrency(row.iva)
@@ -426,6 +437,7 @@ const Historico = () => {
                                                                     value={row.retencion || ""}
                                                                     onChange={(e) => handleCellChange(index, 'retencion', parseFloat(e.target.value) || 0)}
                                                                     className="w-16 sm:w-20 px-2 py-1 border border-gray-300 rounded text-xs text-right"
+                                                                    disabled
                                                                 />
                                                             ) : (
                                                                 formatCurrency(row.retencion)
@@ -447,19 +459,6 @@ const Historico = () => {
                                                         <td className="px-2 sm:px-4 py-2 sm:py-3 text-xs sm:text-sm font-medium text-gray-900 text-right border-b">
                                                             {formatCurrency(row.total)}
                                                         </td>
-                                                        <td className="px-2 sm:px-4 py-2 sm:py-3 text-xs sm:text-sm text-gray-900 text-right border-b">
-                                                            {isEditing && row.diferencia ? (
-                                                                <input
-                                                                    type="number"
-                                                                    step="0.01"
-                                                                    value={row.diferencia || ""}
-                                                                    onChange={(e) => handleCellChange(index, 'diferencia', parseFloat(e.target.value) || 0)}
-                                                                    className="w-16 sm:w-20 px-2 py-1 border border-gray-300 rounded text-xs text-right"
-                                                                />
-                                                            ) : (
-                                                                row.diferencia || "-"
-                                                            )}
-                                                        </td>
                                                         <td className="px-4 py-3 text-center border-b">
                                                             <span className={`inline-flex px-2 py-1 text-xs font-semibold rounded-full ${row.estado === 'LIQUIDACIÓN EN CURSO'
                                                                 ? 'bg-amber-100 text-amber-800'
@@ -472,6 +471,11 @@ const Historico = () => {
                                                                 {row.estado}
                                                             </span>
                                                         </td>
+                                                        {row.proveedor.toLowerCase() === 'Registro Mercantil de Madrid'.toLowerCase() && (
+                                                            <td>
+                                                                <ChevronDownIcon className="h-6 w-6"/>
+                                                            </td>
+                                                        )}
                                                     </tr>
                                                 );
                                             })}
