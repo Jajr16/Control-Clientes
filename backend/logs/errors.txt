@@ -545,3 +545,71 @@
     at async AdeudoService.insertarAdeudoCompleto (file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/services/AdeudoService.js:19:16)
     at async AdeudoController.createAdeudo (file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/controllers/AdeudoController.js:68:22)
 
+[2025-09-17T00:35:52.942Z] error: el valor nulo en la columna «cs_iva» de la relación «protocolo» viola la restricción de no nulo
+    at C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\pg\lib\client.js:545:17
+    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at async Repositorio.insertar (file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/repositories/globalPersistence.js:43:28)
+    at async file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/services/AdeudoService.js:298:29
+    at async Promise.all (index 0)
+    at async file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/services/AdeudoService.js:290:17
+    at async AdeudoService.withTransaction (file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/services/BaseService.js:13:28)
+    at async AdeudoService.updateAdeudos (file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/services/AdeudoService.js:267:16)
+    at async AdeudoController.updateAdeudos (file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/controllers/AdeudoController.js:112:22)
+
+[2025-09-17T02:18:56.273Z] error: no se puede insertar un valor no-predeterminado en la columna «iva»
+    at C:\Users\LuisValle\Desktop\Control-Clientes\backend\node_modules\pg\lib\client.js:545:17
+    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
+    at async Repositorio.insertar (file:///C:/Users/LuisValle/Desktop/Control-Clientes/backend/repositories/globalPersistence.js:43:28)
+    at async file:///C:/Users/LuisValle/Desktop/Control-Clientes/backend/services/AdeudoService.js:21:37
+    at async AdeudoService.withTransaction (file:///C:/Users/LuisValle/Desktop/Control-Clientes/backend/services/BaseService.js:13:28)
+    at async AdeudoService.insertarAdeudoCompleto (file:///C:/Users/LuisValle/Desktop/Control-Clientes/backend/services/AdeudoService.js:19:16)
+    at async AdeudoController.createAdeudo (file:///C:/Users/LuisValle/Desktop/Control-Clientes/backend/controllers/AdeudoController.js:65:22)
+
+[2025-09-17T02:19:59.204Z] error: no se puede insertar un valor no-predeterminado en la columna «iva»
+    at C:\Users\LuisValle\Desktop\Control-Clientes\backend\node_modules\pg\lib\client.js:545:17
+    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
+    at async Repositorio.insertar (file:///C:/Users/LuisValle/Desktop/Control-Clientes/backend/repositories/globalPersistence.js:43:28)
+    at async file:///C:/Users/LuisValle/Desktop/Control-Clientes/backend/services/AdeudoService.js:21:37
+    at async AdeudoService.withTransaction (file:///C:/Users/LuisValle/Desktop/Control-Clientes/backend/services/BaseService.js:13:28)
+    at async AdeudoService.insertarAdeudoCompleto (file:///C:/Users/LuisValle/Desktop/Control-Clientes/backend/services/AdeudoService.js:19:16)
+    at async AdeudoController.createAdeudo (file:///C:/Users/LuisValle/Desktop/Control-Clientes/backend/controllers/AdeudoController.js:65:22)
+
+[2025-09-17T02:25:34.832Z] error: no se puede insertar un valor no-predeterminado en la columna «iva»
+    at C:\Users\LuisValle\Desktop\Control-Clientes\backend\node_modules\pg\lib\client.js:545:17
+    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
+    at async Repositorio.insertar (file:///C:/Users/LuisValle/Desktop/Control-Clientes/backend/repositories/globalPersistence.js:43:28)
+    at async file:///C:/Users/LuisValle/Desktop/Control-Clientes/backend/services/AdeudoService.js:21:37
+    at async AdeudoService.withTransaction (file:///C:/Users/LuisValle/Desktop/Control-Clientes/backend/services/BaseService.js:13:28)
+    at async AdeudoService.insertarAdeudoCompleto (file:///C:/Users/LuisValle/Desktop/Control-Clientes/backend/services/AdeudoService.js:19:16)
+    at async AdeudoController.createAdeudo (file:///C:/Users/LuisValle/Desktop/Control-Clientes/backend/controllers/AdeudoController.js:65:22)
+
+[2025-09-17T02:27:13.388Z] error: no se puede insertar un valor no-predeterminado en la columna «iva»
+    at C:\Users\LuisValle\Desktop\Control-Clientes\backend\node_modules\pg\lib\client.js:545:17
+    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
+    at async Repositorio.insertar (file:///C:/Users/LuisValle/Desktop/Control-Clientes/backend/repositories/globalPersistence.js:43:28)
+    at async file:///C:/Users/LuisValle/Desktop/Control-Clientes/backend/services/AdeudoService.js:21:37
+    at async AdeudoService.withTransaction (file:///C:/Users/LuisValle/Desktop/Control-Clientes/backend/services/BaseService.js:13:28)
+    at async AdeudoService.insertarAdeudoCompleto (file:///C:/Users/LuisValle/Desktop/Control-Clientes/backend/services/AdeudoService.js:19:16)
+    at async AdeudoController.createAdeudo (file:///C:/Users/LuisValle/Desktop/Control-Clientes/backend/controllers/AdeudoController.js:65:22)
+
+[2025-09-17T02:30:32.251Z] error: no se puede insertar un valor no-predeterminado en la columna «iva»
+    at C:\Users\LuisValle\Desktop\Control-Clientes\backend\node_modules\pg\lib\client.js:545:17
+    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
+    at async Repositorio.insertar (file:///C:/Users/LuisValle/Desktop/Control-Clientes/backend/repositories/globalPersistence.js:43:28)
+    at async file:///C:/Users/LuisValle/Desktop/Control-Clientes/backend/services/AdeudoService.js:21:37
+    at async AdeudoService.withTransaction (file:///C:/Users/LuisValle/Desktop/Control-Clientes/backend/services/BaseService.js:13:28)
+    at async AdeudoService.insertarAdeudoCompleto (file:///C:/Users/LuisValle/Desktop/Control-Clientes/backend/services/AdeudoService.js:19:16)
+    at async AdeudoController.createAdeudo (file:///C:/Users/LuisValle/Desktop/Control-Clientes/backend/controllers/AdeudoController.js:65:22)
+
+[2025-09-17T02:42:11.448Z] error: no existe la función obtener_adeudos_por_empresa(unknown)
+    at C:\Users\LuisValle\Desktop\Control-Clientes\backend\node_modules\pg-pool\index.js:45:11
+    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
+    at async AdeudoService.obtenerTodosAdeudosPorEmpresaAgrupados (file:///C:/Users/LuisValle/Desktop/Control-Clientes/backend/services/AdeudoService.js:158:20)
+    at async AdeudoController.getAdeudosByEmpresa (file:///C:/Users/LuisValle/Desktop/Control-Clientes/backend/controllers/AdeudoController.js:18:18)
+
+[2025-09-17T02:45:32.277Z] error: no existe la función obtener_adeudos_por_empresa(unknown)
+    at C:\Users\LuisValle\Desktop\Control-Clientes\backend\node_modules\pg-pool\index.js:45:11
+    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
+    at async AdeudoService.obtenerTodosAdeudosPorEmpresaAgrupados (file:///C:/Users/LuisValle/Desktop/Control-Clientes/backend/services/AdeudoService.js:158:20)
+    at async AdeudoController.getAdeudosByEmpresa (file:///C:/Users/LuisValle/Desktop/Control-Clientes/backend/controllers/AdeudoController.js:18:18)
+

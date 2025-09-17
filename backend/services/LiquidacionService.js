@@ -53,9 +53,12 @@ class LiquidacionService extends BaseService {
             // 5. Actualizar adeudos
             if (facturasPendientes.length > 0) {
                 const updateAdeudosQuery = `
-                    UPDATE adeudo 
-                    SET num_liquidacion = $1 
-                    WHERE num_factura = ANY($2::varchar[]) AND empresa_cif = $3 AND num_liquidacion IS NULL
+                    UPDATE adeudo
+                    SET num_liquidacion = $1,
+                        estado = 'PENDIENTE DE ENVIAR'
+                    WHERE num_factura = ANY($2::varchar[])
+                    AND empresa_cif = $3
+                    AND num_liquidacion IS NULL
                 `;
                 
                 const updateResult = await client.query(updateAdeudosQuery, [

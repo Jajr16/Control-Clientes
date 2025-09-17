@@ -70,15 +70,11 @@ const VistaPreviaAdeudos = ({
     if (status === 'LIQUIDADO') {
       // Mantengo tu etiqueta visual original para "liquidados"
       return (
-        <span className="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-green-100 text-green-800">
-          PENDIENTE DE ENVIAR
-        </span>
+        <span class="inline-flex px-2 py-1 text-xs font-semibold rounded-full bg-blue-100 text-blue-800">PENDIENTE DE ENVIAR</span>
       );
     }
     return (
-      <span className="inline-flex items-center px-2.5 py-0.5 rounded-full text-xs font-medium bg-yellow-100 text-yellow-800">
-        LIQUIDACIÓN EN CURSO
-      </span>
+      <span class="inline-flex px-2 py-1 text-xs font-semibold rounded-full bg-amber-100 text-amber-800">LIQUIDACIÓN EN CURSO</span>
     );
   };
 
