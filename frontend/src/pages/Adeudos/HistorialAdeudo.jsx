@@ -3,7 +3,8 @@ import ClientSearch from "../../components/elements/searchBar";
 import { getAdeudoEmpresa, createExcel } from "../../api/moduloAdeudos/adeudos";
 import { CheckIcon, XMarkIcon, EditIcon, TrashIcon } from '../../components/common/Icons';
 import { useAdeudosManager } from '../../hooks/useAdeudosManager';
-import { ChevronDownIcon } from "@heroicons/react/24/solid";
+import { ChevronDownIcon, ChevronUpIcon } from "@heroicons/react/24/solid";
+import { Extendible } from "../../components/elements/Historico/Expandible";
 
 const Historico = () => {
     const [liquidaciones, setLiquidaciones] = useState([]);
@@ -35,6 +36,16 @@ const Historico = () => {
         initializeData
     } = useAdeudosManager();
 
+    const {
+        // Estados
+        expandedRows, setExpandedRows,
+        editingRmm, setEditingRmm,
+
+        // Funciones
+        isRMM,
+        toggleExpansion
+    } = Extendible();
+
     const formatCurrency = (amount) => {
         return new Intl.NumberFormat('es-ES', {
             style: 'currency',
@@ -59,7 +70,7 @@ const Historico = () => {
                     alert(response.error);
                     return;
                 }
-                console.log(response)
+
                 setLiquidaciones(response.data.liquidaciones);
                 setAnticipoGeneral(response.data.anticipo);
                 setSelectedTab(0);
@@ -113,7 +124,7 @@ const Historico = () => {
     };
 
     return (
-        <div className="w-full h-[calc(100vh-7rem)] p-2 sm:p-4 lg:p-6 bg-gray-50 flex flex-col">
+        <div className="w-full h-[calc(100vh-7rem)] bg-gray-50 flex flex-col">
             <div className="bg-white rounded-lg shadow-sm p-3 sm:p-4 lg:p-6 flex flex-col h-full">
                 {/* Header con búsqueda y anticipo - Responsive */}
                 <div className="flex flex-col lg:flex-row lg:justify-between lg:items-center mb-4 sm:mb-6 space-y-4 lg:space-y-0 flex-shrink-0">
@@ -308,175 +319,261 @@ const Historico = () => {
                                                 const isSelected = selectedRows.has(row._internal_id);
                                                 const isEditing = editingRows.has(row._internal_id);
 
+                                                const showRMM = isRMM(row.proveedor);
+                                                const isExpanded = expandedRows.has(row._internal_id);
+                                                console.log(row)
+
                                                 return (
-                                                    <tr
-                                                        key={row._internal_id}
-                                                        className={`
+                                                    <>
+                                                        <tr
+                                                            key={row._internal_id}
+                                                            className={`
                                                             ${isSelected ? 'ring-2 ring-blue-500 ring-opacity-50' : ''}
                                                             ${isEditing ? 'bg-blue-50' : ''}
                                                         `}
-                                                    >
-                                                        <td className="sticky left-0 z-10 bg-white px-2 sm:px-4 py-2 sm:py-3 border-b border-r border-gray-200">
-                                                            <input
-                                                                type="checkbox"
-                                                                checked={isSelected}
-                                                                onChange={(e) => handleRowSelection(row._internal_id, e.target.checked)}
-                                                                className="rounded"
-                                                            />
-                                                        </td>
-                                                        <td className="px-2 sm:px-4 py-2 sm:py-3 text-xs sm:text-sm text-gray-900 border-b">
-                                                            {isEditing ? (
+                                                        >
+                                                            <td className="sticky left-0 z-10 bg-white px-2 sm:px-4 py-2 sm:py-3 border-b border-r border-gray-200">
                                                                 <input
-                                                                    type="text"
-                                                                    value={row.num_liquidacion || ""}
-                                                                    onChange={(e) => handleCellChange(index, 'num_liquidacion', e.target.value)}
-                                                                    className="w-full px-2 py-1 border border-gray-300 rounded text-xs"
+                                                                    type="checkbox"
+                                                                    checked={isSelected}
+                                                                    onChange={(e) => handleRowSelection(row._internal_id, e.target.checked)}
+                                                                    className="rounded"
                                                                 />
-                                                            ) : (
-                                                                <span className="block truncate max-w-[100px] sm:max-w-none" title={row.num_liquidacion || '-'}>
-                                                                    {row.num_liquidacion || '-'}
-                                                                </span>
-                                                            )}
-                                                        </td>
-                                                        <td className="px-2 sm:px-4 py-2 sm:py-3 text-xs sm:text-sm text-gray-900 border-b">
-                                                            {isEditing ? (
-                                                                <input
-                                                                    type="text"
-                                                                    value={row.concepto || ""}
-                                                                    onChange={(e) => handleCellChange(index, 'concepto', e.target.value)}
-                                                                    className="w-full px-2 py-1 border border-gray-300 rounded text-xs"
-                                                                />
-                                                            ) : (
-                                                                <span className="block truncate max-w-[120px] sm:max-w-none" title={row.concepto}>
-                                                                    {row.concepto}
-                                                                </span>
-                                                            )}
-                                                        </td>
-                                                        <td className="px-2 sm:px-4 py-2 sm:py-3 text-xs sm:text-sm text-gray-900 border-b">
-                                                            {isEditing ? (
-                                                                <input
-                                                                    type="text"
-                                                                    value={row.proveedor || ""}
-                                                                    onChange={(e) => handleCellChange(index, 'proveedor', e.target.value)}
-                                                                    className="w-full px-2 py-1 border border-gray-300 rounded text-xs"
-                                                                />
-                                                            ) : (
-                                                                <span className="block truncate max-w-[100px] sm:max-w-none" title={row.proveedor}>
-                                                                    {row.proveedor}
-                                                                </span>
-                                                            )}
-                                                        </td>
-                                                        <td className="px-2 sm:px-4 py-2 sm:py-3 text-xs sm:text-sm text-gray-900 border-b">
-                                                            {isEditing ? (
-                                                                <input
-                                                                    type="text"
-                                                                    value={row.ff || ""}
-                                                                    onChange={(e) => handleCellChange(index, 'ff', e.target.value)}
-                                                                    className="w-full px-2 py-1 border border-gray-300 rounded text-xs"
-                                                                />
-                                                            ) : (
-                                                                row.ff
-                                                            )}
-                                                        </td>
-                                                        <td className="px-2 sm:px-4 py-2 sm:py-3 text-xs sm:text-sm text-gray-900 border-b">
-                                                            {isEditing ? (
-                                                                <input
-                                                                    type="text"
-                                                                    value={row.num_factura || ""}
-                                                                    onChange={(e) => handleCellChange(index, 'num_factura', e.target.value)}
-                                                                    className="w-full px-2 py-1 border border-gray-300 rounded text-xs"
-                                                                />
-                                                            ) : (
-                                                                row.num_factura
-                                                            )}
-                                                        </td>
-                                                        <td className="px-2 sm:px-4 py-2 sm:py-3 text-xs sm:text-sm text-gray-900 border-b">
-                                                            {isEditing ? (
-                                                                <input
-                                                                    type="text"
-                                                                    value={row.num_protocolo || ""}
-                                                                    onChange={(e) => handleCellChange(index, 'num_protocolo', e.target.value)}
-                                                                    className="w-full px-2 py-1 border border-gray-300 rounded text-xs"
-                                                                />
-                                                            ) : (
-                                                                row.num_protocolo
-                                                            )}
-                                                        </td>
-                                                        <td className="px-2 sm:px-4 py-2 sm:py-3 text-xs sm:text-sm text-gray-900 text-right border-b">
-                                                            {isEditing ? (
-                                                                <input
-                                                                    type="number"
-                                                                    step="0.01"
-                                                                    value={row.importe || ""}
-                                                                    onChange={(e) => handleCellChange(index, 'importe', parseFloat(e.target.value) || 0)}
-                                                                    className="w-16 sm:w-20 px-2 py-1 border border-gray-300 rounded text-xs text-right"
-                                                                />
-                                                            ) : (
-                                                                formatCurrency(row.importe)
-                                                            )}
-                                                        </td>
-                                                        <td className="px-2 sm:px-4 py-2 sm:py-3 text-xs sm:text-sm text-gray-900 text-right border-b">
-                                                            {isEditing ? (
-                                                                <input
-                                                                    type="number"
-                                                                    step="0.01"
-                                                                    value={row.iva || ""}
-                                                                    onChange={(e) => handleCellChange(index, 'iva', parseFloat(e.target.value) || 0)}
-                                                                    className="w-16 sm:w-20 px-2 py-1 border border-gray-300 rounded text-xs text-right"
-                                                                    disabled
-                                                                />
-                                                            ) : (
-                                                                formatCurrency(row.iva)
-                                                            )}
-                                                        </td>
-                                                        <td className="px-2 sm:px-4 py-2 sm:py-3 text-xs sm:text-sm text-gray-900 text-right border-b">
-                                                            {isEditing ? (
-                                                                <input
-                                                                    type="number"
-                                                                    step="0.01"
-                                                                    value={row.retencion || ""}
-                                                                    onChange={(e) => handleCellChange(index, 'retencion', parseFloat(e.target.value) || 0)}
-                                                                    className="w-16 sm:w-20 px-2 py-1 border border-gray-300 rounded text-xs text-right"
-                                                                    disabled
-                                                                />
-                                                            ) : (
-                                                                formatCurrency(row.retencion)
-                                                            )}
-                                                        </td>
-                                                        <td className="px-2 sm:px-4 py-2 sm:py-3 text-xs sm:text-sm text-gray-900 text-right border-b">
-                                                            {isEditing ? (
-                                                                <input
-                                                                    type="number"
-                                                                    step="0.01"
-                                                                    value={row.cs_iva || ""}
-                                                                    onChange={(e) => handleCellChange(index, 'cs_iva', parseFloat(e.target.value) || 0)}
-                                                                    className="w-16 sm:w-20 px-2 py-1 border border-gray-300 rounded text-xs text-right"
-                                                                />
-                                                            ) : (
-                                                                formatCurrency(row.cs_iva)
-                                                            )}
-                                                        </td>
-                                                        <td className="px-2 sm:px-4 py-2 sm:py-3 text-xs sm:text-sm font-medium text-gray-900 text-right border-b">
-                                                            {formatCurrency(row.total)}
-                                                        </td>
-                                                        <td className="px-4 py-3 text-center border-b">
-                                                            <span className={`inline-flex px-2 py-1 text-xs font-semibold rounded-full ${row.estado === 'LIQUIDACIÓN EN CURSO'
-                                                                ? 'bg-amber-100 text-amber-800'
-                                                                : row.estado === 'PENDIENTE DE ENVIAR'
-                                                                    ? 'bg-blue-100 text-blue-800'
-                                                                    : row.estado === 'ENVIADO AL CLIENTE'
-                                                                        ? 'bg-violet-100 text-violet-800'
-                                                                        : 'bg-emerald-100 text-emerald-800'
-                                                                }`}>
-                                                                {row.estado}
-                                                            </span>
-                                                        </td>
-                                                        {row.proveedor.toLowerCase() === 'Registro Mercantil de Madrid'.toLowerCase() && (
-                                                            <td>
-                                                                <ChevronDownIcon className="h-6 w-6"/>
                                                             </td>
+                                                            <td className="px-2 sm:px-4 py-2 sm:py-3 text-xs sm:text-sm text-gray-900 border-b">
+                                                                {isEditing ? (
+                                                                    <input
+                                                                        type="text"
+                                                                        value={row.num_liquidacion || ""}
+                                                                        onChange={(e) => handleCellChange(index, 'num_liquidacion', e.target.value)}
+                                                                        className="w-[50%] px-2 py-1 border border-gray-300 rounded text-xs"
+                                                                    />
+                                                                ) : (
+                                                                    <span className="block truncate max-w-[50px] sm:max-w-none" title={row.num_liquidacion || '-'}>
+                                                                        {row.num_liquidacion || '-'}
+                                                                    </span>
+                                                                )}
+                                                            </td>
+                                                            <td className="px-2 sm:px-4 py-2 sm:py-3 text-xs sm:text-sm text-gray-900 border-b">
+                                                                {isEditing ? (
+                                                                    <input
+                                                                        type="text"
+                                                                        value={row.concepto || ""}
+                                                                        onChange={(e) => handleCellChange(index, 'concepto', e.target.value)}
+                                                                        className="min-w-[120px] px-2 py-1 border border-gray-300 rounded text-xs"
+                                                                    />
+                                                                ) : (
+                                                                    <span className="block truncate max-w-[120px] sm:max-w-none" title={row.concepto}>
+                                                                        {row.concepto}
+                                                                    </span>
+                                                                )}
+                                                            </td>
+                                                            <td className="px-2 sm:px-4 py-2 sm:py-3 text-xs sm:text-sm text-gray-900 border-b">
+                                                                {isEditing ? (
+                                                                    <input
+                                                                        type="text"
+                                                                        value={row.proveedor || ""}
+                                                                        onChange={(e) => handleCellChange(index, 'proveedor', e.target.value)}
+                                                                        className="min-w-[120px] px-2 py-1 border border-gray-300 rounded text-xs"
+                                                                    />
+                                                                ) : (
+                                                                    <span className="block truncate max-w-[120px] sm:max-w-none" title={row.proveedor}>
+                                                                        {row.proveedor}
+                                                                    </span>
+                                                                )}
+                                                            </td>
+                                                            <td className="px-2 sm:px-4 py-2 sm:py-3 text-xs sm:text-sm text-gray-900 border-b">
+                                                                {isEditing ? (
+                                                                    <input
+                                                                        type="date"
+                                                                        value={row.ff || ""}
+                                                                        onChange={(e) => handleCellChange(index, 'ff', e.target.value)}
+                                                                        className="w-full px-2 py-1 border border-gray-300 rounded text-xs"
+                                                                    />
+                                                                ) : (
+                                                                    row.ff
+                                                                )}
+                                                            </td>
+                                                            <td className="px-2 sm:px-4 py-2 sm:py-3 text-xs sm:text-sm text-gray-900 border-b">
+                                                                {isEditing ? (
+                                                                    <input
+                                                                        type="text"
+                                                                        value={row.num_factura || ""}
+                                                                        onChange={(e) => handleCellChange(index, 'num_factura', e.target.value)}
+                                                                        className="w-full px-2 py-1 border border-gray-300 rounded text-xs"
+                                                                    />
+                                                                ) : (
+                                                                    row.num_factura
+                                                                )}
+                                                            </td>
+                                                            <td className="px-2 sm:px-4 py-2 sm:py-3 text-xs sm:text-sm text-gray-900 border-b w-[80%]">
+                                                                {isEditing ? (
+                                                                    <input
+                                                                        type="text"
+                                                                        value={row.num_protocolo || row.num_entrada || ""}
+                                                                        onChange={(e) => handleCellChange(index, 'num_protocolo', e.target.value)}
+                                                                        className="w-[70%] px-2 py-1 border border-gray-300 rounded text-xs"
+                                                                    />
+                                                                ) : (
+                                                                    row.num_protocolo || row.num_entrada || "-"
+                                                                )}
+                                                            </td>
+                                                            <td className="px-2 sm:px-4 py-2 sm:py-3 text-xs sm:text-sm text-gray-900 text-right border-b">
+                                                                {isEditing ? (
+                                                                    <input
+                                                                        type="number"
+                                                                        step="0.01"
+                                                                        value={row.importe || ""}
+                                                                        onChange={(e) => handleCellChange(index, 'importe', parseFloat(e.target.value) || 0)}
+                                                                        className="w-16 sm:w-20 px-2 py-1 border border-gray-300 rounded text-xs text-right"
+                                                                    />
+                                                                ) : (
+                                                                    formatCurrency(row.importe)
+                                                                )}
+                                                            </td>
+                                                            <td className="px-2 sm:px-4 py-2 sm:py-3 text-xs sm:text-sm text-gray-900 text-right border-b">
+                                                                {(formatCurrency(row.iva))}
+                                                            </td>
+                                                            <td className="px-2 sm:px-4 py-2 sm:py-3 text-xs sm:text-sm text-gray-900 text-right border-b">
+                                                                {(formatCurrency(row.retencion))}
+                                                            </td>
+                                                            <td className="px-2 sm:px-4 py-2 sm:py-3 text-xs sm:text-sm text-gray-900 text-right border-b">
+                                                                {isEditing ? (
+                                                                    <input
+                                                                        type="number"
+                                                                        step="0.01"
+                                                                        value={row.cs_iva || ""}
+                                                                        onChange={(e) => handleCellChange(index, 'cs_iva', parseFloat(e.target.value) || 0)}
+                                                                        className="w-16 sm:w-20 px-2 py-1 border border-gray-300 rounded text-xs text-right"
+                                                                    />
+                                                                ) : (
+                                                                    formatCurrency(row.cs_iva)
+                                                                )}
+                                                            </td>
+                                                            <td className="px-2 sm:px-4 py-2 sm:py-3 text-xs sm:text-sm font-medium text-gray-900 text-right border-b">
+                                                                {formatCurrency(row.total)}
+                                                            </td>
+                                                            <td className="px-4 py-3 text-center border-b">
+                                                                <span className={`inline-flex px-2 py-1 text-xs font-semibold rounded-full ${row.estado === 'LIQUIDACIÓN EN CURSO'
+                                                                    ? 'bg-amber-100 text-amber-800'
+                                                                    : row.estado === 'PENDIENTE DE ENVIAR'
+                                                                        ? 'bg-blue-100 text-blue-800'
+                                                                        : row.estado === 'ENVIADO AL CLIENTE'
+                                                                            ? 'bg-violet-100 text-violet-800'
+                                                                            : 'bg-emerald-100 text-emerald-800'
+                                                                    }`}>
+                                                                    {row.estado}
+                                                                </span>
+                                                            </td>
+                                                            {showRMM && (
+                                                                <td>
+                                                                    <button
+                                                                        onClick={() => { toggleExpansion(row._internal_id) }}
+                                                                    >
+                                                                        {isExpanded ? (
+                                                                            <ChevronUpIcon className="h-5 w-5" />
+                                                                        ) : (
+                                                                            <ChevronDownIcon className="h-5 w-5" />
+                                                                        )}
+                                                                    </button>
+                                                                </td>
+                                                            )}
+                                                        </tr>
+
+                                                        {showRMM && isExpanded && (
+                                                            <tr className="bg-blue-25 border-l-4 border-l-blue-500">
+                                                                <td colSpan="14" className="px-4 py-4 bg-gradient-to-r from-blue-25 to-blue-50">
+                                                                    <div className="bg-white rounded-lg p-4 border border-blue-200 shadow-sm">
+                                                                        <div className="flex justify-between items-center mb-3">
+                                                                            <h4 className="text-sm font-semibold text-blue-800 flex items-center">
+                                                                                <span className="w-2 h-2 bg-blue-500 rounded-full mr-2"></span>
+                                                                                Datos Registro Mercantil de Madrid
+                                                                            </h4>
+
+                                                                        </div>
+                                                                        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
+                                                                            <div>
+                                                                                <label className="block text-xs font-medium text-gray-600 mb-1">
+                                                                                    Anticipo Pagado
+                                                                                </label>
+                                                                                {isEditing ? (
+                                                                                    <input
+                                                                                        type="number"
+                                                                                        step="0.01"
+                                                                                        value={row.anticipo_pagado || ''}
+                                                                                        onChange={(e) => handleCellChange(index, 'anticipo_pagado', parseFloat(e.target.value) || 0)}
+                                                                                        className="w-full px-2 py-1 text-sm border border-gray-300 rounded focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                                                                                    />
+                                                                                ) : (
+                                                                                    <div className="text-sm font-medium text-green-600 bg-green-50 px-2 py-1 rounded">
+                                                                                        {formatCurrency(row.anticipo_pagado) || '-'}
+                                                                                    </div>
+                                                                                )}
+                                                                            </div>
+
+                                                                            <div>
+                                                                                <label className="block text-xs font-medium text-gray-600 mb-1">
+                                                                                    Fecha Anticipo
+                                                                                </label>
+                                                                                {isEditing ? (
+                                                                                    <input
+                                                                                        type="date"
+                                                                                        value={row.fecha_anticipo || ''}
+                                                                                        onChange={(e) => handleCellChange(index, 'fecha_anticipo', e.target.value)}
+                                                                                        className="w-full px-2 py-1 text-sm border border-gray-300 rounded focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                                                                                    />
+                                                                                ) : (
+                                                                                    <div className="text-sm text-gray-800 bg-gray-50 px-2 py-1 rounded">
+                                                                                        {row.fecha_anticipo || '-'}
+                                                                                    </div>
+                                                                                )}
+                                                                            </div>
+
+                                                                            <div>
+                                                                                <label className="block text-xs font-medium text-gray-600 mb-1">
+                                                                                    Diferencia
+                                                                                </label>
+                                                                                {isEditing ? (
+                                                                                    <input
+                                                                                        type="number"
+                                                                                        step="0.01"
+                                                                                        value={row.diferencia || ''}
+                                                                                        onChange={(e) => handleCellChange(index, 'diferencia', parseFloat(e.target.value) || 0)}
+                                                                                        className="w-full px-2 py-1 text-sm border border-gray-300 rounded focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                                                                                    />
+                                                                                ) : (
+                                                                                    <div className={`text-sm font-medium px-2 py-1 rounded ${(row.diferencia || 0) >= 0
+                                                                                        ? 'text-green-600 bg-green-50'
+                                                                                        : 'text-red-600 bg-red-50'
+                                                                                        }`}>
+                                                                                        {formatCurrency(row.diferencia) || '-'}
+                                                                                    </div>
+                                                                                )}
+                                                                            </div>
+
+                                                                            <div>
+                                                                                <label className="block text-xs font-medium text-gray-600 mb-1">
+                                                                                    Fecha Devolución
+                                                                                </label>
+                                                                                {isEditing ? (
+                                                                                    <input
+                                                                                        type="date"
+                                                                                        value={row.fecha_devolucion_diferencia || ''}
+                                                                                        onChange={(e) => handleCellChange(index, 'fecha_devolucion_diferencia', e.target.value)}
+                                                                                        className="w-full px-2 py-1 text-sm border border-gray-300 rounded focus:ring-2 focus:ring-blue-500 focus:border-transparent"
+                                                                                    />
+                                                                                ) : (
+                                                                                    <div className="text-sm text-gray-800 bg-gray-50 px-2 py-1 rounded">
+                                                                                        {row.fecha_devolucion_diferencia || '-'}
+                                                                                    </div>
+                                                                                )}
+                                                                            </div>
+                                                                        </div>
+                                                                    </div>
+                                                                </td>
+                                                            </tr>
                                                         )}
-                                                    </tr>
+                                                    </>
                                                 );
                                             })}
                                         </tbody>
