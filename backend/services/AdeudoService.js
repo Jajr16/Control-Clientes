@@ -114,156 +114,156 @@ class AdeudoService extends BaseService {
 
   // ========== MEJORADO: crearEntradaRmmPendiente con validación ==========
   async crearEntradaRmmPendiente(datos) {
-  try {
-    console.log(`Creando entrada RMM pendiente:`, datos);
+    try {
+      console.log(`Creando entrada RMM pendiente:`, datos);
 
-    if (!datos.num_entrada || !datos.empresa_cif || !datos.fecha_anticipo) {
-      throw new Error('num_entrada, empresa_cif y fecha_anticipo son requeridos');
-    }
+      if (!datos.num_entrada || !datos.empresa_cif || !datos.fecha_anticipo) {
+        throw new Error('num_entrada, empresa_cif y fecha_anticipo son requeridos');
+      }
 
-    const existente = await this.repositories.entrada_rmm.ObtenerPorId({
-      num_entrada: String(datos.num_entrada).trim(),
-      empresa_cif: String(datos.empresa_cif).trim()
-    });
-
-    if (existente) {
-      throw new Error(`Ya existe una entrada RMM con número ${datos.num_entrada} para esta empresa`);
-    }
-
-    // 🔧 CAMBIO: El importe inicial del adeudo es 0, solo el anticipo_pagado se guarda
-    const resultado = await this.repositories.entrada_rmm.insertar({
-      num_entrada: String(datos.num_entrada).trim(),
-      empresa_cif: String(datos.empresa_cif).trim(),
-      anticipo_pagado: Number(datos.anticipo_pagado) || 200,  // 👈 Siempre 200 por defecto
-      fecha_anticipo: datos.fecha_anticipo,
-      diferencia: datos.diferencia ? Number(datos.diferencia) : null,
-      fecha_devolucion_diferencia: datos.fecha_devolucion_diferencia || null,
-      num_factura_final: null
-    });
-
-    console.log(`Entrada RMM creada exitosamente:`, resultado);
-    return resultado;
-  } catch (error) {
-    console.error(`Error creando entrada RMM:`, error);
-    throw error;
-  }
-}
-
-// ========== CORRECCIÓN 2: En AdeudoService.js - función finalizarRmmYCrearAdeudo ==========
-async finalizarRmmYCrearAdeudo(datos) {
-  try {
-    console.log(`🔄 Finalizando RMM:`, datos);
-
-    const { empresa_cif, num_entrada, num_factura_final, ff, concepto, proveedor, protocolo } = datos;
-
-    if (!empresa_cif || !num_entrada || !num_factura_final || !ff) {
-      throw new Error('empresa_cif, num_entrada, num_factura_final y ff son requeridos');
-    }
-
-    return await this.withTransaction(async (client) => {
-      // 1) Verificar que existe la entrada RMM
-      const rmm = await this.repositories.entrada_rmm.ObtenerPorId({ 
-        num_entrada: num_entrada,
-        empresa_cif: empresa_cif
+      const existente = await this.repositories.entrada_rmm.ObtenerPorId({
+        num_entrada: String(datos.num_entrada).trim(),
+        empresa_cif: String(datos.empresa_cif).trim()
       });
 
-      if (!rmm) {
-        throw new Error(`No se encontró entrada RMM: ${num_entrada}`);
+      if (existente) {
+        throw new Error(`Ya existe una entrada RMM con número ${datos.num_entrada} para esta empresa`);
       }
 
-      if (rmm.num_factura_final) {
-        throw new Error(`La entrada RMM ${num_entrada} ya está finalizada con factura: ${rmm.num_factura_final}`);
-      }
-
-      // 2) 🔧 CÁLCULO CORREGIDO: anticipo_pagado - diferencia, luego calcular importe base
-      const anticipo = parseFloat(rmm.anticipo_pagado || 200);
-      const diferencia = parseFloat(rmm.diferencia || 0);
-      const totalFinal = anticipo - diferencia;  // Total final que debe cobrar
-      
-      // Calcular el importe base usando la fórmula: importe = total / (1 + 0.21 - 0.15)
-      const importeBase = totalFinal / (1 + 0.21 - 0.15);
-
-      console.log(`💰 Cálculo RMM CORREGIDO:`, {
-        anticipo_pagado: anticipo,
-        diferencia: diferencia,
-        total_final: totalFinal,
-        formula_total: `${anticipo} - ${diferencia} = ${totalFinal}`,
-        importe_base_calculado: importeBase,
-        formula_importe: `${totalFinal} / (1 + 0.21 - 0.15) = ${importeBase}`,
-        iva_calculado: importeBase * 0.21,
-        retencion_calculada: importeBase * 0.15
+      // 🔧 CAMBIO: El importe inicial del adeudo es 0, solo el anticipo_pagado se guarda
+      const resultado = await this.repositories.entrada_rmm.insertar({
+        num_entrada: String(datos.num_entrada).trim(),
+        empresa_cif: String(datos.empresa_cif).trim(),
+        anticipo_pagado: Number(datos.anticipo_pagado) || 200,  // 👈 Siempre 200 por defecto
+        fecha_anticipo: datos.fecha_anticipo,
+        diferencia: datos.diferencia ? Number(datos.diferencia) : null,
+        fecha_devolucion_diferencia: datos.fecha_devolucion_diferencia || null,
+        num_factura_final: null
       });
 
-      // 3) Crear el adeudo con el importe base calculado
-      const adeudo = {
-        num_factura: num_factura_final,
-        concepto: concepto || 'Inscripción Registro Mercantil',
-        proveedor: proveedor || 'Registro Mercantil de Madrid',
-        ff: ff,
-        importe: Math.round(importeBase * 100) / 100, // Redondear a 2 decimales
-        num_liquidacion: null,
-        empresa_cif: empresa_cif,
-        estado: 'LIQUIDACIÓN EN CURSO'
-      };
-
-      const inserted = await this.repositories.adeudo.insertar(adeudo, client);
-
-      // 4) Actualizar entrada_rmm con la factura final
-      await this.repositories.entrada_rmm.actualizarPorId(
-        { num_entrada: num_entrada, empresa_cif: empresa_cif },
-        { num_factura_final: num_factura_final },
-        client
-      );
-
-      // 5) Insertar protocolo
-      if (protocolo && protocolo.num_protocolo) {
-        await this.repositories.protocolo.insertar(
-          {
-            empresa_cif: empresa_cif,
-            num_factura: num_factura_final,
-            ...protocolo
-          },
-          client
-        );
-      }
-
-      // 6) Registrar movimiento
-      const empresa = await this.repositories.empresa.BuscarPorFiltros(
-        { cif: empresa_cif }, ['nombre']
-      );
-
-      if (empresa.length > 0) {
-        await this.repositories.adeudo.registrarMovimiento(
-          {
-            accion: `Finalizar RMM y crear adeudo para: ${empresa[0].nombre} (entrada ${num_entrada})`,
-            datos: { 
-              adeudo, 
-              entrada_rmm: { 
-                num_entrada: num_entrada, 
-                calculo: `Total: ${totalFinal}, Importe base: ${importeBase}` 
-              } 
-            }
-          },
-          client
-        );
-      }
-
-      return inserted;
-    });
-  } catch (error) {
-    console.error(`❌ Error finalizando RMM:`, error);
-    throw error;
+      console.log(`Entrada RMM creada exitosamente:`, resultado);
+      return resultado;
+    } catch (error) {
+      console.error(`Error creando entrada RMM:`, error);
+      throw error;
+    }
   }
-}
+
+  // ========== CORRECCIÓN 2: En AdeudoService.js - función finalizarRmmYCrearAdeudo ==========
+  async finalizarRmmYCrearAdeudo(datos) {
+    try {
+      console.log(`🔄 Finalizando RMM:`, datos);
+
+      const { empresa_cif, num_entrada, num_factura_final, ff, concepto, proveedor, protocolo } = datos;
+
+      if (!empresa_cif || !num_entrada || !num_factura_final || !ff) {
+        throw new Error('empresa_cif, num_entrada, num_factura_final y ff son requeridos');
+      }
+
+      return await this.withTransaction(async (client) => {
+        // 1) Verificar que existe la entrada RMM
+        const rmm = await this.repositories.entrada_rmm.ObtenerPorId({
+          num_entrada: num_entrada,
+          empresa_cif: empresa_cif
+        });
+
+        if (!rmm) {
+          throw new Error(`No se encontró entrada RMM: ${num_entrada}`);
+        }
+
+        if (rmm.num_factura_final) {
+          throw new Error(`La entrada RMM ${num_entrada} ya está finalizada con factura: ${rmm.num_factura_final}`);
+        }
+
+        // 2) 🔧 CÁLCULO CORREGIDO: anticipo_pagado - diferencia, luego calcular importe base
+        const anticipo = parseFloat(rmm.anticipo_pagado || 200);
+        const diferencia = parseFloat(rmm.diferencia || 0);
+        const totalFinal = anticipo - diferencia;  // Total final que debe cobrar
+
+        // Calcular el importe base usando la fórmula: importe = total / (1 + 0.21 - 0.15)
+        const importeBase = totalFinal / (1 + 0.21 - 0.15);
+
+        console.log(`💰 Cálculo RMM CORREGIDO:`, {
+          anticipo_pagado: anticipo,
+          diferencia: diferencia,
+          total_final: totalFinal,
+          formula_total: `${anticipo} - ${diferencia} = ${totalFinal}`,
+          importe_base_calculado: importeBase,
+          formula_importe: `${totalFinal} / (1 + 0.21 - 0.15) = ${importeBase}`,
+          iva_calculado: importeBase * 0.21,
+          retencion_calculada: importeBase * 0.15
+        });
+
+        // 3) Crear el adeudo con el importe base calculado
+        const adeudo = {
+          num_factura: num_factura_final,
+          concepto: concepto || 'Inscripción Registro Mercantil',
+          proveedor: proveedor || 'Registro Mercantil de Madrid',
+          ff: ff,
+          importe: Math.round(importeBase * 100) / 100, // Redondear a 2 decimales
+          num_liquidacion: null,
+          empresa_cif: empresa_cif,
+          estado: 'LIQUIDACIÓN EN CURSO'
+        };
+
+        const inserted = await this.repositories.adeudo.insertar(adeudo, client);
+
+        // 4) Actualizar entrada_rmm con la factura final
+        await this.repositories.entrada_rmm.actualizarPorId(
+          { num_entrada: num_entrada, empresa_cif: empresa_cif },
+          { num_factura_final: num_factura_final },
+          client
+        );
+
+        // 5) Insertar protocolo
+        if (protocolo && protocolo.num_protocolo) {
+          await this.repositories.protocolo.insertar(
+            {
+              empresa_cif: empresa_cif,
+              num_factura: num_factura_final,
+              ...protocolo
+            },
+            client
+          );
+        }
+
+        // 6) Registrar movimiento
+        const empresa = await this.repositories.empresa.BuscarPorFiltros(
+          { cif: empresa_cif }, ['nombre']
+        );
+
+        if (empresa.length > 0) {
+          await this.repositories.adeudo.registrarMovimiento(
+            {
+              accion: `Finalizar RMM y crear adeudo para: ${empresa[0].nombre} (entrada ${num_entrada})`,
+              datos: {
+                adeudo,
+                entrada_rmm: {
+                  num_entrada: num_entrada,
+                  calculo: `Total: ${totalFinal}, Importe base: ${importeBase}`
+                }
+              }
+            },
+            client
+          );
+        }
+
+        return inserted;
+      });
+    } catch (error) {
+      console.error(`❌ Error finalizando RMM:`, error);
+      throw error;
+    }
+  }
 
   // ========== MEJORADO: obtenerEntradaRmm con mejor manejo ==========
   async obtenerEntradaRmm({ empresa_cif, num_entrada }) {
     try {
       console.log(`🔍 Buscando entrada RMM: ${num_entrada} para empresa: ${empresa_cif}`);
-      
-      const row = await this.repositories.entrada_rmm.ObtenerPorId({ 
-        num_entrada, 
-        empresa_cif 
+
+      const row = await this.repositories.entrada_rmm.ObtenerPorId({
+        num_entrada,
+        empresa_cif
       });
 
       if (!row) {
@@ -697,62 +697,7 @@ async finalizarRmmYCrearAdeudo(datos) {
         );
       }
 
-      // c) EntradaRMM
-      if (entradaRMM.length > 0) {
-        await Promise.all(
-          entradaRMM.map(async (entrada) => {
-            const { num_entrada_original, ...actuEntrada } = entrada;
-
-            // Actualizar entrada_rmm
-            await this.repositories.entrada_rmm.actualizarPorId(
-              { num_entrada: num_entrada_original, empresa_cif },
-              actuEntrada,
-              client
-            );
-            console.log(`Entrada RMM Actualizada: ${num_entrada_original}`);
-
-            // SI HAY CAMBIOS EN ANTICIPO O DIFERENCIA, RECALCULAR IMPORTE DEL ADEUDO RELACIONADO
-            if (actuEntrada.anticipo_pagado !== undefined || actuEntrada.diferencia !== undefined) {
-              // Buscar el adeudo relacionado
-              const query = `
-              SELECT num_factura_final, anticipo_pagado, diferencia 
-              FROM entrada_rmm 
-              WHERE num_entrada = $1 AND empresa_cif = $2
-            `;
-              const result = await client.query(query, [num_entrada_original, empresa_cif]);
-
-              if (result.rows.length > 0 && result.rows[0].num_factura_final) {
-                const entradaData = result.rows[0];
-                const anticipoPagado = parseFloat(entradaData.anticipo_pagado) || 200;
-                const diferencia = parseFloat(entradaData.diferencia) || 0;
-                const totalFinal = anticipoPagado - diferencia;  // CAMBIO: resta en lugar de suma
-                const importeCalculado = totalFinal / (1 + 0.21 - 0.15);
-
-                console.log(`🔧 Recalculando importe RMM:`, {
-      num_entrada: num_entrada_original,
-      num_factura_final: entradaData.num_factura_final,
-      anticipo_pagado: anticipoPagado,
-      diferencia: diferencia,
-      total_final: totalFinal,  // CORREGIDO
-      importe_calculado: importeCalculado,
-      formula: `(${anticipoPagado} - ${diferencia}) / (1 + 0.21 - 0.15) = ${importeCalculado}`
-    });
-
-                // Actualizar el importe del adeudo
-                await this.repositories.adeudo.actualizarPorId(
-                  { num_factura: entradaData.num_factura_final, empresa_cif },
-                  { importe: importeCalculado },
-                  client
-                );
-
-                console.log(`Importe actualizado automáticamente para factura: ${entradaData.num_factura_final}`);
-              }
-            }
-          })
-        );
-      }
-
-      // d) Adeudos (sin columnas generadas)
+      // c) Adeudos (sin columnas generadas)
       if (setAdeudos.length > 0) {
         await Promise.all(
           setAdeudos.map(async (adeudo) => {
@@ -777,17 +722,17 @@ async finalizarRmmYCrearAdeudo(datos) {
                   const anticipoPagado = parseFloat(entradaRmmData.anticipo_pagado) || 0;
                   const diferencia = parseFloat(entradaRmmData.diferencia) || 0;
                   const totalFinal = anticipoPagado - diferencia;  // CAMBIO: resta
-    const importeCalculado = totalFinal / (1 + 0.21 - 0.15);
+                  const importeCalculado = totalFinal / (1 + 0.21 - 0.15);
 
-    console.log(`🔧 Cálculo automático de importe RMM:`, {
-      anticipo_pagado: anticipoPagado,
-      diferencia: diferencia,
-      total_final: totalFinal,  // CORREGIDO
-      importe_calculado: importeCalculado
-    });
+                  console.log(`🔧 Cálculo automático de importe RMM:`, {
+                    anticipo_pagado: anticipoPagado,
+                    diferencia: diferencia,
+                    total_final: totalFinal,  // CORREGIDO
+                    importe_calculado: importeCalculado
+                  });
 
                   // Sobrescribir el importe con el calculado
-                 nuevosDatosLimpios.importe = Math.round(importeCalculado * 100) / 100;
+                  nuevosDatosLimpios.importe = Math.round(importeCalculado * 100) / 100;
                 } else {
                   console.log(`No se encontró entrada RMM para: ${num_entrada_original}`);
                 }
@@ -860,6 +805,61 @@ async finalizarRmmYCrearAdeudo(datos) {
           })
         );
         console.log("ADEUDOS ACTUALIZADOS");
+      }
+
+      // c) EntradaRMM
+      if (entradaRMM.length > 0) {
+        await Promise.all(
+          entradaRMM.map(async (entrada) => {
+            const { num_entrada_original, ...actuEntrada } = entrada;
+
+            // Actualizar entrada_rmm
+            await this.repositories.entrada_rmm.actualizarPorId(
+              { num_entrada: num_entrada_original, empresa_cif },
+              actuEntrada,
+              client
+            );
+            console.log(`Entrada RMM Actualizada: ${num_entrada_original}`);
+
+            // SI HAY CAMBIOS EN ANTICIPO O DIFERENCIA, RECALCULAR IMPORTE DEL ADEUDO RELACIONADO
+            if (actuEntrada.anticipo_pagado !== undefined || actuEntrada.diferencia !== undefined) {
+              // Buscar el adeudo relacionado
+              const query = `
+              SELECT num_factura_final, anticipo_pagado, diferencia 
+              FROM entrada_rmm 
+              WHERE num_entrada = $1 AND empresa_cif = $2
+            `;
+              const result = await client.query(query, [num_entrada_original, empresa_cif]);
+
+              if (result.rows.length > 0 && result.rows[0].num_factura_final) {
+                const entradaData = result.rows[0];
+                const anticipoPagado = parseFloat(entradaData.anticipo_pagado) || 200;
+                const diferencia = parseFloat(entradaData.diferencia) || 0;
+                const totalFinal = anticipoPagado - diferencia;  // CAMBIO: resta en lugar de suma
+                const importeCalculado = totalFinal / (1 + 0.21 - 0.15);
+
+                console.log(`🔧 Recalculando importe RMM:`, {
+                  num_entrada: num_entrada_original,
+                  num_factura_final: entradaData.num_factura_final,
+                  anticipo_pagado: anticipoPagado,
+                  diferencia: diferencia,
+                  total_final: totalFinal,  // CORREGIDO
+                  importe_calculado: importeCalculado,
+                  formula: `(${anticipoPagado} - ${diferencia}) / (1 + 0.21 - 0.15) = ${importeCalculado}`
+                });
+
+                // Actualizar el importe del adeudo
+                await this.repositories.adeudo.actualizarPorId(
+                  { num_factura: entradaData.num_factura_final, empresa_cif },
+                  { importe: importeCalculado },
+                  client
+                );
+
+                console.log(`Importe actualizado automáticamente para factura: ${entradaData.num_factura_final}`);
+              }
+            }
+          })
+        );
       }
 
       // Registrar movimiento
@@ -938,12 +938,12 @@ async finalizarRmmYCrearAdeudo(datos) {
   _calcularResumen(adeudos) {
     // Contar liquidados por estado textual
     const liquidados = adeudos.filter(a => (a.estado || '').toUpperCase() === 'LIQUIDADO').length;
-    
+
     // Contar pendientes: incluye adeudos sin liquidar Y entradas RMM pendientes
-    const pendientes = adeudos.filter(a => 
+    const pendientes = adeudos.filter(a =>
       a.num_liquidacion == null || a.estado === 'RMM PENDIENTE'
     ).length;
-    
+
     return {
       total: adeudos.length,
       pendientes,

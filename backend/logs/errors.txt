@@ -1329,3 +1329,32 @@
     at Function.process_params (C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\express\lib\router\index.js:346:12)
     at next (C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\express\lib\router\index.js:280:10)
 
+[2025-09-21T04:54:00.998Z] Error: Error de validación en factura (nuevo): "num_factura_original" is not allowed
+    at AdeudoService.updateAdeudos (file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/services/AdeudoService.js:625:24)
+    at AdeudoController.updateAdeudos (file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/controllers/AdeudoController.js:288:41)
+    at Layer.handle [as handle_request] (C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\express\lib\router\layer.js:95:5)
+    at next (C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\express\lib\router\route.js:149:13)
+    at Route.dispatch (C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\express\lib\router\route.js:119:3)
+    at Layer.handle [as handle_request] (C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\express\lib\router\layer.js:95:5)
+    at C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\express\lib\router\index.js:284:15
+    at Function.process_params (C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\express\lib\router\index.js:346:12)
+    at next (C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\express\lib\router\index.js:280:10)
+    at Function.handle (C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\express\lib\router\index.js:175:3)
+    at router (C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\express\lib\router\index.js:47:12)
+    at Layer.handle [as handle_request] (C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\express\lib\router\layer.js:95:5)
+    at trim_prefix (C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\express\lib\router\index.js:328:13)
+    at C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\express\lib\router\index.js:286:9
+    at Function.process_params (C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\express\lib\router\index.js:346:12)
+    at next (C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\express\lib\router\index.js:280:10)
+
+[2025-09-21T04:58:04.710Z] error: el valor nulo en la columna «num_factura» de la relación «adeudo» viola la restricción de no nulo
+    at C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\pg\lib\client.js:545:17
+    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at async Repositorio.insertar (file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/repositories/globalPersistence.js:43:28)
+    at async file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/services/AdeudoService.js:741:15
+    at async Promise.all (index 0)
+    at async file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/services/AdeudoService.js:702:9
+    at async AdeudoService.withTransaction (file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/services/BaseService.js:13:28)
+    at async AdeudoService.updateAdeudos (file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/services/AdeudoService.js:640:12)
+    at async AdeudoController.updateAdeudos (file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/controllers/AdeudoController.js:288:22)
+

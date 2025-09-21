@@ -20,6 +20,7 @@ export const adeudoInsertSchema = Joi.object({
     diferencia: Joi.number().optional(),
     fecha_devolucion_diferencia: Joi.date().iso().allow(null).optional(),
     num_entrada_original: Joi.string().min(1).optional(),
+    num_factura_original: Joi.string().allow(null).min(1).optional(),
     empresa_cif: Joi.string().length(9).optional()
 });
 
