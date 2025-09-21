@@ -22,7 +22,11 @@ const AgregarAdeudo = () => {
     });
 
     const [mostrarVistaPrevia, setMostrarVistaPrevia] = useState(false);
-    const [adeudosGuardados, setAdeudosGuardados] = useState([]);
+    const [adeudosGuardados, setAdeudosGuardados] = useState({
+    adeudos: [],
+    anticipo: [],
+    resumen: { pendientes: 0, liquidados: 0, total: 0 }
+    });
     const [empresasDisponibles, setEmpresasDisponibles] = useState([]);
     const [validationErrors, setValidationErrors] = useState({});
     const [mensaje, setMensaje] = useState("");
@@ -42,34 +46,48 @@ const AgregarAdeudo = () => {
     }, []);
 
     useEffect(() => {
-        const fetchAdeudos = async () => {
-            if (empresa.empresa_cif) {
-                try {
-                    const response = await fetch(`http://localhost:3000/api/adeudos/empresa/${empresa.empresa_cif}`);
-                    if (!response.ok) throw new Error("Error al obtener adeudos");
-                    const data = await response.json();
+    const fetchAdeudos = async () => {
+        if (!empresa.empresa_cif) return;
+        try {
+        const resp = await fetch(`http://localhost:3000/api/adeudos/empresa/${empresa.empresa_cif}`);
+        if (!resp.ok) throw new Error("Error al obtener adeudos");
+        const data = await resp.json();
+        const d = data?.data;
 
-                    console.log(data)
-                    setAnticipo(data.data?.anticipo?.anticipo ?? 0);
+        setAnticipo(d?.anticipo?.anticipo ?? 0);
 
-                    setAdeudosGuardados(data.data);
-                    setMostrarVistaPrevia(true);
-                } catch (error) {
-                    console.error("Error al obtener adeudos:", error);
-                }
-            }
+        const adeudos =
+            Array.isArray(d?.adeudos) ? d.adeudos :
+            Array.isArray(d?.data) ? d.data :
+            Array.isArray(d) ? d : [];
+
+        const resumen = d?.resumen ?? {
+            pendientes: 0,
+            liquidados: 0,
+            total: adeudos.length
         };
 
-        fetchAdeudos();
+        setAdeudosGuardados({ adeudos, anticipo: d?.anticipo ?? [], resumen });
+        setMostrarVistaPrevia(true);
+        } catch (err) {
+        console.error("Error al obtener adeudos:", err);
+        setAdeudosGuardados({ adeudos: [], anticipo: [], resumen: { pendientes:0, liquidados:0, total:0 } });
+        }
+    };
+    fetchAdeudos();
     }, [empresa.empresa_cif]);
+
 
     const handleSubmit = async (e) => {
         e.preventDefault();
         setValidationErrors({});
         setMensaje("");
 
+        const esRMM = /registro\s*mercantil.*madrid/i.test(empresa?.proveedor || "");
         const errores = {};
-        const camposObligatorios = ['empresa_cif', 'concepto', 'proveedor', 'ff', 'numfactura', 'importe'];
+        const camposObligatorios = esRMM
+           ? ['empresa_cif', 'concepto', 'proveedor', 'importe']       // ff y numfactura NO aquí
+            : ['empresa_cif', 'concepto', 'proveedor', 'ff', 'numfactura', 'importe'];
 
         for (let campo of camposObligatorios) {
             if (!empresa[campo] || empresa[campo].toString().trim() === "") {

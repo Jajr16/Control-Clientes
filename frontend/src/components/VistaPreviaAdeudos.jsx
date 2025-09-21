@@ -6,30 +6,25 @@ const VistaPreviaAdeudos = ({
   empresasDisponibles = [],
   anticipoP = 0,
 }) => {
-
   // --- Utils ---
   const norm = (s) => String(s || '')
-    .normalize('NFD').replace(/[\u0300-\u036f]/g, '') // quita acentos
+    .normalize('NFD').replace(/[\u0300-\u036f]/g, '')
     .toUpperCase().trim();
 
-  // Estado canónico por fila (evita solapamientos)
-  // Regla: si trae num_liquidacion => "LIQUIDADO" (etiqueta visual "PENDIENTE DE ENVIAR")
-  //       si texto dice "PENDIENTE DE ENVIAR" => "LIQUIDADO"
-  //       en cualquier otro caso => "PENDIENTE" (etiqueta "LIQUIDACIÓN EN CURSO")
+  // Estado canónico por fila
   const getStatus = (a) => {
     const est = norm(a?.estado);
     if (a?.num_liquidacion) return 'LIQUIDADO';
     if (est === 'PENDIENTE DE ENVIAR') return 'LIQUIDADO';
-    return 'PENDIENTE'; // "LIQUIDACION EN CURSO"
+    return 'PENDIENTE';
   };
 
   const isPendiente = (a) => getStatus(a) === 'PENDIENTE';
-  const isLiquidado = (a) => getStatus(a) === 'LIQUIDADO';
 
-  // Comparador robusto por empresa
+  // Comparador por empresa
   const matchEmpresa = (a, empresaCif) => {
     const cif = a?.empresa_cif ?? a?.cif ?? a?.empresaCif ?? a?.empresa;
-    if (!cif) return true; // si no trae cif, lo consideramos de la empresa actual
+    if (!cif) return true;
     return String(cif).trim().toLowerCase() === String(empresaCif || '').trim().toLowerCase();
   };
 
@@ -44,53 +39,41 @@ const VistaPreviaAdeudos = ({
   // Filtrar por empresa
   const adeudosEmpresa = adeudosList.filter(a => matchEmpresa(a, empresa?.empresa_cif));
 
-  // Resumen local (ya no dependemos de props externas)
+  // Quedarnos SOLO con LIQUIDACIÓN EN CURSO
+  const adeudosPendientes = adeudosEmpresa.filter(isPendiente);
+
+  // Resumen solo de pendientes
   const resumen = {
-    pendientes: adeudosEmpresa.filter(isPendiente).length,
-    liquidados: adeudosEmpresa.filter(isLiquidado).length,
-    total: adeudosEmpresa.length,
+    pendientes: adeudosPendientes.length,
+    total: adeudosPendientes.length,
   };
 
-  // Totales por estado (consistentes)
-  const totalPend = adeudosEmpresa
-    .filter(isPendiente)
-    .reduce((acc, a) => acc + Number(a?.total || 0), 0);
+  // Totales solo de pendientes
+  const totalPend = adeudosPendientes.reduce((acc, a) => acc + Number(a?.total || 0), 0);
 
-  const totalLiq = adeudosEmpresa
-    .filter(isLiquidado)
-    .reduce((acc, a) => acc + Number(a?.total || 0), 0);
+  // (opcional) Si tus filas traen honorarios; si no, puedes quitar esta línea/bloque
+  const honorarios = adeudosPendientes.reduce((acc, a) => acc + Number(a?.honorarios || 0), 0);
 
-  const honorarios = adeudosEmpresa.reduce((acc, a) => acc + Number(a?.honorarios || 0), 0);
   const anticipo = Number(anticipoP || 0);
   const adeudoPendiente = (totalPend - anticipo).toFixed(2);
 
   // Render helpers
-  const renderEstadoChip = (a) => {
-    const status = getStatus(a);
-    if (status === 'LIQUIDADO') {
-      // Mantengo tu etiqueta visual original para "liquidados"
-      return (
-        <span class="inline-flex px-2 py-1 text-xs font-semibold rounded-full bg-blue-100 text-blue-800">PENDIENTE DE ENVIAR</span>
-      );
-    }
-    return (
-      <span class="inline-flex px-2 py-1 text-xs font-semibold rounded-full bg-amber-100 text-amber-800">LIQUIDACIÓN EN CURSO</span>
-    );
-  };
+  const renderEstadoChip = () => (
+    // Etiqueta fija de "LIQUIDACIÓN EN CURSO"
+    <span className="inline-flex px-2 py-1 text-xs font-semibold rounded-full bg-amber-100 text-amber-800">
+      LIQUIDACIÓN EN CURSO
+    </span>
+  );
 
   const renderResumenEstados = () => {
     if (resumen.total === 0) return null;
     return (
       <div className="bg-gray-50 border rounded-lg p-4 mb-4">
         <h4 className="font-semibold text-gray-700 mb-2">Resumen de Adeudos</h4>
-        <div className="grid grid-cols-3 gap-4 text-center">
+        <div className="grid grid-cols-2 gap-4 text-center">
           <div className="bg-yellow-100 rounded p-2">
             <div className="text-2xl font-bold text-yellow-800">{resumen.pendientes}</div>
             <div className="text-sm text-yellow-600">LIQUIDACIÓN EN CURSO</div>
-          </div>
-          <div className="bg-green-100 rounded p-2">
-            <div className="text-2xl font-bold text-green-800">{resumen.liquidados}</div>
-            <div className="text-sm text-green-600">PENDIENTE DE ENVIAR</div>
           </div>
           <div className="bg-blue-100 rounded p-2">
             <div className="text-2xl font-bold text-blue-800">{resumen.total}</div>
@@ -136,48 +119,51 @@ const VistaPreviaAdeudos = ({
           </tr>
         </thead>
         <tbody>
-          {adeudosEmpresa.map((a, index) => {
-            const status = getStatus(a);
-            const isRowLiquidado = status === 'LIQUIDADO';
-            return (
-              <tr
-                key={`${rowKey(a)}-${index}`}
-                className={`text-center border ${isRowLiquidado ? 'bg-green-50' : 'bg-white'}`}
-              >
-                <td className="border p-2">{renderEstadoChip(a)}</td>
-                <td className="border p-2">{a?.concepto}</td>
-                <td className="border p-2">{a?.proveedor}</td>
-                <td className="border p-2">{a?.ff}</td>
-                <td className="border p-2">{a?.num_factura}</td>
-                <td className="border p-2">{a?.num_protocolo}</td>
-                <td className="border p-2">{Number(a?.importe || 0).toFixed(2)}</td>
-                <td className="border p-2">{Number(a?.iva || 0).toFixed(2)}</td>
-                <td className="border p-2">{Number(a?.retencion || 0).toFixed(2)}</td>
-                <td className="border p-2">{Number(a?.cs_iva || 0).toFixed(2)}</td>
-                <td className="border p-2">{Number(a?.total || 0).toFixed(2)}</td>
-              </tr>
-            );
-          })}
+          {/* Renderizar solo pendientes */}
+          {adeudosPendientes.map((a, index) => (
+            <tr
+              key={`${rowKey(a)}-${index}`}
+              className={`text-center border bg-white ${
+                a.es_entrada_rmm_pendiente ? 'bg-yellow-50 border-l-4 border-yellow-400' : ''
+              }`}
+            >
+              <td className="border p-2">{renderEstadoChip()}</td>
+              <td className="border p-2">{a?.concepto}</td>
+              <td className="border p-2">{a?.proveedor}</td>
+              <td className="border p-2">
+                {/* CORREGIDO: Mostrar texto adecuado para RMM pendientes */}
+                {a.es_entrada_rmm_pendiente ? 
+                  <em className="text-gray-500">Pendiente</em> : 
+                  (a?.ff || '-')
+                }
+              </td>
+              <td className="border p-2">
+                {a.es_entrada_rmm_pendiente ? 
+                  <em className="text-gray-500">Pendiente factura final</em> : 
+                  (a?.num_factura || '-')
+                }
+              </td>
+              <td className="border p-2">{a?.num_protocolo}</td>
+              <td className="border p-2">{Number(a?.importe || 0).toFixed(2)}</td>
+              <td className="border p-2">{Number(a?.iva || 0).toFixed(2)}</td>
+              <td className="border p-2">{Number(a?.retencion || 0).toFixed(2)}</td>
+              <td className="border p-2">{Number(a?.cs_iva || 0).toFixed(2)}</td>
+              <td className="border p-2">{Number(a?.total || 0).toFixed(2)}</td>
+            </tr>
+          ))}
 
-          {/* Totales PENDIENTES */}
+          {/* Totales solo de pendientes */}
           <tr className="font-bold bg-yellow-50 border-2">
             <td colSpan={10} className="text-right pr-2 border">Total facturas LIQUIDACIÓN EN CURSO:</td>
             <td className="border">{totalPend.toFixed(2)}</td>
           </tr>
-
-          {/* Totales LIQUIDADOS */}
-          {resumen.liquidados > 0 && (
-            <tr className="font-bold bg-green-50 border-2">
-              <td colSpan={10} className="text-right pr-2 border">Total facturas LIQUIDADAS:</td>
-              <td className="border">{totalLiq.toFixed(2)}</td>
-            </tr>
-          )}
 
           <tr className="bg-gray-50">
             <td colSpan={10} className="text-right pr-2 font-bold border">Anticipo por el cliente:</td>
             <td className="border">{anticipo.toFixed(2)}</td>
           </tr>
 
+          {/* (opcional) Honorarios si aplican a pendientes */}
           <tr className="bg-gray-50">
             <td colSpan={10} className="text-right pr-2 font-bold border">Honorarios FINATECH (IVA incluido):</td>
             <td className="border">{honorarios.toFixed(2)}</td>

@@ -1151,214 +1151,137 @@
     at Function.process_params (C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\express\lib\router\index.js:346:12)
     at next (C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\express\lib\router\index.js:280:10)
 
-[2025-09-20T06:28:17.930Z] error: la referencia a la columna «anticipo_original» es ambigua
-    at C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\pg-pool\index.js:45:11
-    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
-    at async AdeudoService.obtenerSaldoEmpresa (file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/services/AdeudoService.js:31:20)
-    at async AdeudoService.obtenerTodosAdeudosPorEmpresaAgrupados (file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/services/AdeudoService.js:209:23)
-    at async AdeudoController.getAdeudosByEmpresa (file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/controllers/AdeudoController.js:18:18)
+[2025-09-20T23:58:08.049Z] Error: Entrada RMM no encontrada
+    at file:///C:/Users/LuisValle/Desktop/Control-Clientes/backend/services/AdeudoService.js:109:23
+    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
+    at async AdeudoService.withTransaction (file:///C:/Users/LuisValle/Desktop/Control-Clientes/backend/services/BaseService.js:13:28)
+    at async AdeudoService.finalizarRmmYCrearAdeudo (file:///C:/Users/LuisValle/Desktop/Control-Clientes/backend/services/AdeudoService.js:106:12)
+    at async AdeudoController.finalizarRmm (file:///C:/Users/LuisValle/Desktop/Control-Clientes/backend/controllers/AdeudoController.js:103:22)
 
-[2025-09-20T06:28:20.021Z] error: la referencia a la columna «anticipo_original» es ambigua
-    at C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\pg-pool\index.js:45:11
-    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
-    at async AdeudoService.obtenerSaldoEmpresa (file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/services/AdeudoService.js:31:20)
-    at async AdeudoService.obtenerTodosAdeudosPorEmpresaAgrupados (file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/services/AdeudoService.js:209:23)
-    at async AdeudoController.getAdeudosByEmpresa (file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/controllers/AdeudoController.js:18:18)
+[2025-09-21T01:50:56.535Z] ReferenceError: entradaRmmSchema is not defined
+    at AdeudoService.crearEntradaRmmPendiente (file:///C:/Users/LuisValle/Desktop/Control-Clientes/backend/services/AdeudoService.js:66:32)
+    at AdeudoController.crearEntradaRmmPendiente (file:///C:/Users/LuisValle/Desktop/Control-Clientes/backend/controllers/AdeudoController.js:127:39)
+    at Layer.handle [as handle_request] (C:\Users\LuisValle\Desktop\Control-Clientes\backend\node_modules\express\lib\router\layer.js:95:5)
+    at next (C:\Users\LuisValle\Desktop\Control-Clientes\backend\node_modules\express\lib\router\route.js:149:13)
+    at Route.dispatch (C:\Users\LuisValle\Desktop\Control-Clientes\backend\node_modules\express\lib\router\route.js:119:3)
+    at Layer.handle [as handle_request] (C:\Users\LuisValle\Desktop\Control-Clientes\backend\node_modules\express\lib\router\layer.js:95:5)
+    at C:\Users\LuisValle\Desktop\Control-Clientes\backend\node_modules\express\lib\router\index.js:284:15
+    at Function.process_params (C:\Users\LuisValle\Desktop\Control-Clientes\backend\node_modules\express\lib\router\index.js:346:12)
+    at next (C:\Users\LuisValle\Desktop\Control-Clientes\backend\node_modules\express\lib\router\index.js:280:10)
+    at Function.handle (C:\Users\LuisValle\Desktop\Control-Clientes\backend\node_modules\express\lib\router\index.js:175:3)
+    at router (C:\Users\LuisValle\Desktop\Control-Clientes\backend\node_modules\express\lib\router\index.js:47:12)
+    at Layer.handle [as handle_request] (C:\Users\LuisValle\Desktop\Control-Clientes\backend\node_modules\express\lib\router\layer.js:95:5)
+    at trim_prefix (C:\Users\LuisValle\Desktop\Control-Clientes\backend\node_modules\express\lib\router\index.js:328:13)
+    at C:\Users\LuisValle\Desktop\Control-Clientes\backend\node_modules\express\lib\router\index.js:286:9
+    at Function.process_params (C:\Users\LuisValle\Desktop\Control-Clientes\backend\node_modules\express\lib\router\index.js:346:12)
+    at next (C:\Users\LuisValle\Desktop\Control-Clientes\backend\node_modules\express\lib\router\index.js:280:10)
 
-[2025-09-20T06:28:43.910Z] error: la referencia a la columna «anticipo_original» es ambigua
-    at C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\pg-pool\index.js:45:11
-    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
-    at async AdeudoService.obtenerSaldoEmpresa (file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/services/AdeudoService.js:31:20)
-    at async AdeudoService.obtenerTodosAdeudosPorEmpresaAgrupados (file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/services/AdeudoService.js:209:23)
-    at async AdeudoController.getAdeudosByEmpresa (file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/controllers/AdeudoController.js:18:18)
+[2025-09-21T01:58:13.627Z] ReferenceError: finalizarRmmSchema is not defined
+    at AdeudoService.finalizarRmmYCrearAdeudo (file:///C:/Users/LuisValle/Desktop/Control-Clientes/backend/services/AdeudoService.js:105:32)
+    at AdeudoController.finalizarRmm (file:///C:/Users/LuisValle/Desktop/Control-Clientes/backend/controllers/AdeudoController.js:202:39)
+    at Layer.handle [as handle_request] (C:\Users\LuisValle\Desktop\Control-Clientes\backend\node_modules\express\lib\router\layer.js:95:5)
+    at next (C:\Users\LuisValle\Desktop\Control-Clientes\backend\node_modules\express\lib\router\route.js:149:13)
+    at Route.dispatch (C:\Users\LuisValle\Desktop\Control-Clientes\backend\node_modules\express\lib\router\route.js:119:3)
+    at Layer.handle [as handle_request] (C:\Users\LuisValle\Desktop\Control-Clientes\backend\node_modules\express\lib\router\layer.js:95:5)
+    at C:\Users\LuisValle\Desktop\Control-Clientes\backend\node_modules\express\lib\router\index.js:284:15
+    at Function.process_params (C:\Users\LuisValle\Desktop\Control-Clientes\backend\node_modules\express\lib\router\index.js:346:12)
+    at next (C:\Users\LuisValle\Desktop\Control-Clientes\backend\node_modules\express\lib\router\index.js:280:10)
+    at Function.handle (C:\Users\LuisValle\Desktop\Control-Clientes\backend\node_modules\express\lib\router\index.js:175:3)
+    at router (C:\Users\LuisValle\Desktop\Control-Clientes\backend\node_modules\express\lib\router\index.js:47:12)
+    at Layer.handle [as handle_request] (C:\Users\LuisValle\Desktop\Control-Clientes\backend\node_modules\express\lib\router\layer.js:95:5)
+    at trim_prefix (C:\Users\LuisValle\Desktop\Control-Clientes\backend\node_modules\express\lib\router\index.js:328:13)
+    at C:\Users\LuisValle\Desktop\Control-Clientes\backend\node_modules\express\lib\router\index.js:286:9
+    at Function.process_params (C:\Users\LuisValle\Desktop\Control-Clientes\backend\node_modules\express\lib\router\index.js:346:12)
+    at next (C:\Users\LuisValle\Desktop\Control-Clientes\backend\node_modules\express\lib\router\index.js:280:10)
 
-[2025-09-20T06:32:14.708Z] error: la referencia a la columna «anticipo_original» es ambigua
-    at C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\pg-pool\index.js:45:11
-    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
-    at async AdeudoService.obtenerSaldoEmpresa (file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/services/AdeudoService.js:31:20)
-    at async AdeudoService.obtenerTodosAdeudosPorEmpresaAgrupados (file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/services/AdeudoService.js:209:23)
-    at async AdeudoController.getAdeudosByEmpresa (file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/controllers/AdeudoController.js:18:18)
+[2025-09-21T02:00:55.498Z] ReferenceError: value is not defined
+    at file:///C:/Users/LuisValle/Desktop/Control-Clientes/backend/services/AdeudoService.js:114:24
+    at AdeudoService.withTransaction (file:///C:/Users/LuisValle/Desktop/Control-Clientes/backend/services/BaseService.js:13:34)
+    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
+    at async AdeudoService.finalizarRmmYCrearAdeudo (file:///C:/Users/LuisValle/Desktop/Control-Clientes/backend/services/AdeudoService.js:111:14)
+    at async AdeudoController.finalizarRmm (file:///C:/Users/LuisValle/Desktop/Control-Clientes/backend/controllers/AdeudoController.js:202:20)
 
-[2025-09-20T17:37:11.329Z] error: no existe la columna «id»
-    at C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\pg\lib\client.js:545:17
-    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
-    at async Repositorio.insertar (file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/repositories/globalPersistence.js:43:28)
-    at async file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/services/AdeudoService.js:65:31
-    at async AdeudoService.withTransaction (file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/services/BaseService.js:13:28)
-    at async AdeudoService.insertarAdeudoCompleto (file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/services/AdeudoService.js:62:12)
-    at async AdeudoController.createAdeudo (file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/controllers/AdeudoController.js:65:22)
+[2025-09-21T02:16:02.255Z] error: cláusula UNION/INTERSECT/EXCEPT ORDER BY no válida
+    at C:\Users\LuisValle\Desktop\Control-Clientes\backend\node_modules\pg-pool\index.js:45:11
+    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
+    at async AdeudoService.obtenerTodosAdeudosPorEmpresa (file:///C:/Users/LuisValle/Desktop/Control-Clientes/backend/services/AdeudoService.js:342:18)
+    at async AdeudoController.getAdeudosByEmpresa (file:///C:/Users/LuisValle/Desktop/Control-Clientes/backend/controllers/AdeudoController.js:22:13)
 
-[2025-09-20T17:38:22.350Z] error: límite de profundidad de stack alcanzado
-    at C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\pg\lib\client.js:545:17
-    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
-    at async Repositorio.insertar (file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/repositories/globalPersistence.js:43:28)
-    at async file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/services/AdeudoService.js:65:31
-    at async AdeudoService.withTransaction (file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/services/BaseService.js:13:28)
-    at async AdeudoService.insertarAdeudoCompleto (file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/services/AdeudoService.js:62:12)
-    at async AdeudoController.createAdeudo (file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/controllers/AdeudoController.js:65:22)
+[2025-09-21T02:16:02.438Z] error: cláusula UNION/INTERSECT/EXCEPT ORDER BY no válida
+    at C:\Users\LuisValle\Desktop\Control-Clientes\backend\node_modules\pg-pool\index.js:45:11
+    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
+    at async AdeudoService.obtenerTodosAdeudosPorEmpresa (file:///C:/Users/LuisValle/Desktop/Control-Clientes/backend/services/AdeudoService.js:342:18)
+    at async AdeudoController.getAdeudosByEmpresa (file:///C:/Users/LuisValle/Desktop/Control-Clientes/backend/controllers/AdeudoController.js:22:13)
 
-[2025-09-20T20:07:59.189Z] TypeError: Cannot read properties of undefined (reading 'sort')
-    at historicoExcel (file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/utils/adeudosExcel.js:29:18)
-    at AdeudoService.createRecord (file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/services/AdeudoService.js:540:12)
-    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
-    at async AdeudoController.createRecord (file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/controllers/AdeudoController.js:128:24)
+[2025-09-21T02:16:29.018Z] error: cláusula UNION/INTERSECT/EXCEPT ORDER BY no válida
+    at C:\Users\LuisValle\Desktop\Control-Clientes\backend\node_modules\pg-pool\index.js:45:11
+    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
+    at async AdeudoService.obtenerTodosAdeudosPorEmpresa (file:///C:/Users/LuisValle/Desktop/Control-Clientes/backend/services/AdeudoService.js:342:18)
+    at async AdeudoController.getAdeudosByEmpresa (file:///C:/Users/LuisValle/Desktop/Control-Clientes/backend/controllers/AdeudoController.js:22:13)
 
-[2025-09-20T20:36:43.480Z] TypeError: Cannot read properties of undefined (reading 'sort')
-    at historicoExcel (file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/utils/adeudosExcel.js:29:18)
-    at AdeudoService.createRecord (file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/services/AdeudoService.js:544:12)
-    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
-    at async AdeudoController.createRecord (file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/controllers/AdeudoController.js:128:24)
+[2025-09-21T02:16:29.179Z] error: cláusula UNION/INTERSECT/EXCEPT ORDER BY no válida
+    at C:\Users\LuisValle\Desktop\Control-Clientes\backend\node_modules\pg-pool\index.js:45:11
+    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
+    at async AdeudoService.obtenerTodosAdeudosPorEmpresa (file:///C:/Users/LuisValle/Desktop/Control-Clientes/backend/services/AdeudoService.js:342:18)
+    at async AdeudoController.getAdeudosByEmpresa (file:///C:/Users/LuisValle/Desktop/Control-Clientes/backend/controllers/AdeudoController.js:22:13)
 
-[2025-09-20T20:38:36.744Z] TypeError: Cannot read properties of undefined (reading 'sort')
-    at historicoExcel (file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/utils/adeudosExcel.js:29:18)
-    at AdeudoService.createRecord (file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/services/AdeudoService.js:547:12)
-    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
-    at async AdeudoController.createRecord (file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/controllers/AdeudoController.js:128:24)
+[2025-09-21T02:16:34.178Z] error: cláusula UNION/INTERSECT/EXCEPT ORDER BY no válida
+    at C:\Users\LuisValle\Desktop\Control-Clientes\backend\node_modules\pg-pool\index.js:45:11
+    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
+    at async AdeudoService.obtenerTodosAdeudosPorEmpresa (file:///C:/Users/LuisValle/Desktop/Control-Clientes/backend/services/AdeudoService.js:342:18)
+    at async AdeudoController.getAdeudosByEmpresa (file:///C:/Users/LuisValle/Desktop/Control-Clientes/backend/controllers/AdeudoController.js:22:13)
 
-[2025-09-20T20:38:52.425Z] TypeError: Cannot read properties of undefined (reading 'sort')
-    at historicoExcel (file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/utils/adeudosExcel.js:29:18)
-    at AdeudoService.createRecord (file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/services/AdeudoService.js:548:12)
-    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
-    at async AdeudoController.createRecord (file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/controllers/AdeudoController.js:128:24)
+[2025-09-21T02:16:34.324Z] error: cláusula UNION/INTERSECT/EXCEPT ORDER BY no válida
+    at C:\Users\LuisValle\Desktop\Control-Clientes\backend\node_modules\pg-pool\index.js:45:11
+    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
+    at async AdeudoService.obtenerTodosAdeudosPorEmpresa (file:///C:/Users/LuisValle/Desktop/Control-Clientes/backend/services/AdeudoService.js:342:18)
+    at async AdeudoController.getAdeudosByEmpresa (file:///C:/Users/LuisValle/Desktop/Control-Clientes/backend/controllers/AdeudoController.js:22:13)
 
-[2025-09-20T20:39:18.314Z] TypeError: Cannot read properties of undefined (reading 'sort')
-    at historicoExcel (file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/utils/adeudosExcel.js:29:18)
-    at AdeudoService.createRecord (file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/services/AdeudoService.js:548:12)
-    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
-    at async AdeudoController.createRecord (file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/controllers/AdeudoController.js:128:24)
+[2025-09-21T02:46:53.658Z] error: no existe la función calcular_saldo_empresa(unknown)
+    at C:\Users\LuisValle\Desktop\Control-Clientes\backend\node_modules\pg-pool\index.js:45:11
+    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
+    at async AdeudoService.obtenerSaldoEmpresa (file:///C:/Users/LuisValle/Desktop/Control-Clientes/backend/services/AdeudoService.js:50:20)
+    at async AdeudoService.obtenerTodosAdeudosPorEmpresa (file:///C:/Users/LuisValle/Desktop/Control-Clientes/backend/services/AdeudoService.js:412:23)
+    at async AdeudoController.getAdeudosByEmpresa (file:///C:/Users/LuisValle/Desktop/Control-Clientes/backend/controllers/AdeudoController.js:22:13)
 
-[2025-09-20T20:42:23.014Z] ReferenceError: anticipoValor is not defined
-    at historicoExcel (file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/utils/adeudosExcel.js:331:5)
-    at AdeudoService.createRecord (file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/services/AdeudoService.js:547:12)
-    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
-    at async AdeudoController.createRecord (file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/controllers/AdeudoController.js:128:24)
+[2025-09-21T02:46:53.816Z] error: no existe la función calcular_saldo_empresa(unknown)
+    at C:\Users\LuisValle\Desktop\Control-Clientes\backend\node_modules\pg-pool\index.js:45:11
+    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
+    at async AdeudoService.obtenerSaldoEmpresa (file:///C:/Users/LuisValle/Desktop/Control-Clientes/backend/services/AdeudoService.js:50:20)
+    at async AdeudoService.obtenerTodosAdeudosPorEmpresa (file:///C:/Users/LuisValle/Desktop/Control-Clientes/backend/services/AdeudoService.js:412:23)
+    at async AdeudoController.getAdeudosByEmpresa (file:///C:/Users/LuisValle/Desktop/Control-Clientes/backend/controllers/AdeudoController.js:22:13)
 
-[2025-09-20T20:57:01.700Z] ReferenceError: anticipoValor is not defined
-    at historicoExcel (file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/utils/adeudosExcel.js:331:5)
-    at AdeudoService.createRecord (file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/services/AdeudoService.js:547:12)
-    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
-    at async AdeudoController.createRecord (file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/controllers/AdeudoController.js:128:24)
+[2025-09-21T02:56:01.671Z] error: no existe la función obtener_adeudos_con_rmm_por_empresa(unknown)
+    at C:\Users\LuisValle\Desktop\Control-Clientes\backend\node_modules\pg-pool\index.js:45:11
+    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
+    at async AdeudoService.obtenerTodosAdeudosPorEmpresaAgrupados (file:///C:/Users/LuisValle/Desktop/Control-Clientes/backend/services/AdeudoService.js:487:20)
+    at async AdeudoController.getAdeudosByEmpresa (file:///C:/Users/LuisValle/Desktop/Control-Clientes/backend/controllers/AdeudoController.js:18:18)
 
-[2025-09-20T23:25:51.994Z] ReferenceError: adeudos is not defined
-    at AdeudoService.obtenerTodosAdeudosPorEmpresaAgrupados (file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/services/AdeudoService.js:277:5)
-    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
-    at async AdeudoController.getAdeudosByEmpresa (file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/controllers/AdeudoController.js:18:18)
+[2025-09-21T02:58:45.225Z] error: la referencia a la columna «num_liquidacion» es ambigua
+    at C:\Users\LuisValle\Desktop\Control-Clientes\backend\node_modules\pg-pool\index.js:45:11
+    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
+    at async AdeudoService.obtenerTodosAdeudosPorEmpresaAgrupados (file:///C:/Users/LuisValle/Desktop/Control-Clientes/backend/services/AdeudoService.js:487:20)
+    at async AdeudoController.getAdeudosByEmpresa (file:///C:/Users/LuisValle/Desktop/Control-Clientes/backend/controllers/AdeudoController.js:18:18)
 
-[2025-09-20T23:25:53.120Z] ReferenceError: adeudos is not defined
-    at AdeudoService.obtenerTodosAdeudosPorEmpresaAgrupados (file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/services/AdeudoService.js:277:5)
-    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
-    at async AdeudoController.getAdeudosByEmpresa (file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/controllers/AdeudoController.js:18:18)
+[2025-09-21T03:03:58.160Z] error: los tipos numeric y date no son coincidentes en UNION
+    at C:\Users\LuisValle\Desktop\Control-Clientes\backend\node_modules\pg-pool\index.js:45:11
+    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
+    at async AdeudoService.obtenerTodosAdeudosPorEmpresaAgrupados (file:///C:/Users/LuisValle/Desktop/Control-Clientes/backend/services/AdeudoService.js:487:20)
+    at async AdeudoController.getAdeudosByEmpresa (file:///C:/Users/LuisValle/Desktop/Control-Clientes/backend/controllers/AdeudoController.js:18:18)
 
-[2025-09-20T23:48:36.104Z] ReferenceError: anticipoValor is not defined
-    at historicoExcel (file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/utils/adeudosExcel.js:331:5)
-    at AdeudoService.createRecord (file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/services/AdeudoService.js:607:12)
-    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
-    at async AdeudoController.createRecord (file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/controllers/AdeudoController.js:128:24)
+[2025-09-21T04:30:53.308Z] error: SELECT ... INTO no está permitido aquí
+    at C:\Users\LuisValle\Desktop\Control-Clientes\backend\node_modules\pg-pool\index.js:45:11
+    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
+    at async AdeudoService.obtenerSaldoEmpresa (file:///C:/Users/LuisValle/Desktop/Control-Clientes/backend/services/AdeudoService.js:50:20)
+    at async AdeudoService.obtenerTodosAdeudosPorEmpresaAgrupados (file:///C:/Users/LuisValle/Desktop/Control-Clientes/backend/services/AdeudoService.js:505:23)
+    at async AdeudoController.getAdeudosByEmpresa (file:///C:/Users/LuisValle/Desktop/Control-Clientes/backend/controllers/AdeudoController.js:18:18)
 
-[2025-09-21T00:03:57.728Z] ReferenceError: adeudosAgrupados is not defined
-    at file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/utils/adeudosExcel.js:48:23
-    at Array.forEach (<anonymous>)
-    at historicoExcel (file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/utils/adeudosExcel.js:44:31)
-    at AdeudoService.createRecord (file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/services/AdeudoService.js:607:12)
-    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
-    at async AdeudoController.createRecord (file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/controllers/AdeudoController.js:128:24)
-
-[2025-09-21T00:05:12.273Z] ReferenceError: anticipoValor is not defined
-    at historicoExcel (file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/utils/adeudosExcel.js:291:5)
-    at AdeudoService.createRecord (file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/services/AdeudoService.js:607:12)
-    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
-    at async AdeudoController.createRecord (file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/controllers/AdeudoController.js:128:24)
-
-[2025-09-21T00:06:38.029Z] ReferenceError: anticipoValor is not defined
-    at historicoExcel (file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/utils/adeudosExcel.js:291:5)
-    at AdeudoService.createRecord (file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/services/AdeudoService.js:607:12)
-    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
-    at async AdeudoController.createRecord (file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/controllers/AdeudoController.js:128:24)
-
-[2025-09-21T00:07:57.704Z] ReferenceError: anticipoValor is not defined
-    at historicoExcel (file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/utils/adeudosExcel.js:291:5)
-    at AdeudoService.createRecord (file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/services/AdeudoService.js:607:12)
-    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
-    at async AdeudoController.createRecord (file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/controllers/AdeudoController.js:128:24)
-
-[2025-09-21T00:09:40.681Z] ReferenceError: anticipoValor is not defined
-    at historicoExcel (file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/utils/adeudosExcel.js:288:5)
-    at AdeudoService.createRecord (file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/services/AdeudoService.js:607:12)
-    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
-    at async AdeudoController.createRecord (file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/controllers/AdeudoController.js:128:24)
-
-[2025-09-21T00:10:55.847Z] TypeError: adeudosLista.forEach is not a function
-    at historicoExcel (file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/utils/adeudosExcel.js:45:18)
-    at AdeudoService.createRecord (file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/services/AdeudoService.js:607:12)
-    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
-    at async AdeudoController.createRecord (file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/controllers/AdeudoController.js:128:24)
-
-[2025-09-21T00:14:42.014Z] ReferenceError: anticipoValor is not defined
-    at historicoExcel (file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/utils/adeudosExcel.js:289:5)
-    at AdeudoService.createRecord (file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/services/AdeudoService.js:607:12)
-    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
-    at async AdeudoController.createRecord (file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/controllers/AdeudoController.js:128:24)
-
-[2025-09-21T00:36:30.985Z] ReferenceError: grupo is not defined
-    at file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/utils/adeudosExcel.js:175:49
-    at Array.forEach (<anonymous>)
-    at historicoExcel (file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/utils/adeudosExcel.js:44:18)
-    at AdeudoService.createRecord (file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/services/AdeudoService.js:607:12)
-    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
-    at async AdeudoController.createRecord (file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/controllers/AdeudoController.js:128:24)
-
-[2025-09-21T00:36:45.192Z] ReferenceError: grupo is not defined
-    at file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/utils/adeudosExcel.js:191:37
-    at Array.forEach (<anonymous>)
-    at historicoExcel (file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/utils/adeudosExcel.js:44:18)
-    at AdeudoService.createRecord (file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/services/AdeudoService.js:607:12)
-    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
-    at async AdeudoController.createRecord (file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/controllers/AdeudoController.js:128:24)
-
-[2025-09-21T01:14:17.226Z] Error: Error de validación en factura (nuevo): "num_factura_original" is not allowed
-    at AdeudoService.updateAdeudos (file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/services/AdeudoService.js:371:24)
-    at AdeudoController.updateAdeudos (file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/controllers/AdeudoController.js:109:41)
-    at Layer.handle [as handle_request] (C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\express\lib\router\layer.js:95:5)
-    at next (C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\express\lib\router\route.js:149:13)
-    at Route.dispatch (C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\express\lib\router\route.js:119:3)
-    at Layer.handle [as handle_request] (C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\express\lib\router\layer.js:95:5)
-    at C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\express\lib\router\index.js:284:15
-    at Function.process_params (C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\express\lib\router\index.js:346:12)
-    at next (C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\express\lib\router\index.js:280:10)
-    at Function.handle (C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\express\lib\router\index.js:175:3)
-    at router (C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\express\lib\router\index.js:47:12)
-    at Layer.handle [as handle_request] (C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\express\lib\router\layer.js:95:5)
-    at trim_prefix (C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\express\lib\router\index.js:328:13)
-    at C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\express\lib\router\index.js:286:9
-    at Function.process_params (C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\express\lib\router\index.js:346:12)
-    at next (C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\express\lib\router\index.js:280:10)
-
-[2025-09-21T01:15:20.500Z] Error: Error de validación en factura (nuevo): "num_factura_original" must be a string
-    at AdeudoService.updateAdeudos (file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/services/AdeudoService.js:371:24)
-    at AdeudoController.updateAdeudos (file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/controllers/AdeudoController.js:109:41)
-    at Layer.handle [as handle_request] (C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\express\lib\router\layer.js:95:5)
-    at next (C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\express\lib\router\route.js:149:13)
-    at Route.dispatch (C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\express\lib\router\route.js:119:3)
-    at Layer.handle [as handle_request] (C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\express\lib\router\layer.js:95:5)
-    at C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\express\lib\router\index.js:284:15
-    at Function.process_params (C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\express\lib\router\index.js:346:12)
-    at next (C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\express\lib\router\index.js:280:10)
-    at Function.handle (C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\express\lib\router\index.js:175:3)
-    at router (C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\express\lib\router\index.js:47:12)
-    at Layer.handle [as handle_request] (C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\express\lib\router\layer.js:95:5)
-    at trim_prefix (C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\express\lib\router\index.js:328:13)
-    at C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\express\lib\router\index.js:286:9
-    at Function.process_params (C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\express\lib\router\index.js:346:12)
-    at next (C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\express\lib\router\index.js:280:10)
-
-[2025-09-21T01:22:46.929Z] ReferenceError: nuevosDatosLimpios is not defined
-    at file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/services/AdeudoService.js:457:17
-    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
-    at async Promise.all (index 0)
-    at async file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/services/AdeudoService.js:432:9
-    at async AdeudoService.withTransaction (file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/services/BaseService.js:13:28)
-    at async AdeudoService.updateAdeudos (file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/services/AdeudoService.js:372:14)
-    at async AdeudoController.updateAdeudos (file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/controllers/AdeudoController.js:109:22)
+[2025-09-21T04:31:11.414Z] error: SELECT ... INTO no está permitido aquí
+    at C:\Users\LuisValle\Desktop\Control-Clientes\backend\node_modules\pg-pool\index.js:45:11
+    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
+    at async AdeudoService.obtenerSaldoEmpresa (file:///C:/Users/LuisValle/Desktop/Control-Clientes/backend/services/AdeudoService.js:50:20)
+    at async AdeudoService.obtenerTodosAdeudosPorEmpresaAgrupados (file:///C:/Users/LuisValle/Desktop/Control-Clientes/backend/services/AdeudoService.js:505:23)
+    at async AdeudoController.getAdeudosByEmpresa (file:///C:/Users/LuisValle/Desktop/Control-Clientes/backend/controllers/AdeudoController.js:18:18)
 
 [2025-09-21T03:46:34.910Z] Error: No se pudo eliminar en adeudo
     at Repositorio.eliminarPorId (file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/repositories/globalPersistence.js:181:19)
