@@ -1360,3 +1360,49 @@
     at async AdeudoService.updateAdeudos (file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/services/AdeudoService.js:372:14)
     at async AdeudoController.updateAdeudos (file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/controllers/AdeudoController.js:109:22)
 
+[2025-09-21T03:46:34.910Z] Error: No se pudo eliminar en adeudo
+    at Repositorio.eliminarPorId (file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/repositories/globalPersistence.js:181:19)
+    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at async file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/services/AdeudoService.js:574:24
+    at async Promise.all (index 0)
+    at async file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/services/AdeudoService.js:566:7
+    at async AdeudoService.withTransaction (file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/services/BaseService.js:13:28)
+    at async AdeudoService.deleteAdeudos (file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/services/AdeudoService.js:565:12)
+    at async AdeudoController.deleteAdeudos (file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/controllers/AdeudoController.js:118:22)
+
+[2025-09-21T04:06:04.563Z] Error: Error de validación en factura (nuevo): "ff" must be a string
+    at AdeudoService.updateAdeudos (file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/services/AdeudoService.js:371:24)
+    at AdeudoController.updateAdeudos (file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/controllers/AdeudoController.js:109:41)
+    at Layer.handle [as handle_request] (C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\express\lib\router\layer.js:95:5)
+    at next (C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\express\lib\router\route.js:149:13)
+    at Route.dispatch (C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\express\lib\router\route.js:119:3)
+    at Layer.handle [as handle_request] (C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\express\lib\router\layer.js:95:5)
+    at C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\express\lib\router\index.js:284:15
+    at Function.process_params (C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\express\lib\router\index.js:346:12)
+    at next (C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\express\lib\router\index.js:280:10)
+    at Function.handle (C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\express\lib\router\index.js:175:3)
+    at router (C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\express\lib\router\index.js:47:12)
+    at Layer.handle [as handle_request] (C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\express\lib\router\layer.js:95:5)
+    at trim_prefix (C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\express\lib\router\index.js:328:13)
+    at C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\express\lib\router\index.js:286:9
+    at Function.process_params (C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\express\lib\router\index.js:346:12)
+    at next (C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\express\lib\router\index.js:280:10)
+
+[2025-09-21T04:16:19.943Z] Error: Error de validación en factura (nuevo): "ff" must be a string
+    at AdeudoService.updateAdeudos (file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/services/AdeudoService.js:371:24)
+    at AdeudoController.updateAdeudos (file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/controllers/AdeudoController.js:109:41)
+    at Layer.handle [as handle_request] (C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\express\lib\router\layer.js:95:5)
+    at next (C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\express\lib\router\route.js:149:13)
+    at Route.dispatch (C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\express\lib\router\route.js:119:3)
+    at Layer.handle [as handle_request] (C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\express\lib\router\layer.js:95:5)
+    at C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\express\lib\router\index.js:284:15
+    at Function.process_params (C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\express\lib\router\index.js:346:12)
+    at next (C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\express\lib\router\index.js:280:10)
+    at Function.handle (C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\express\lib\router\index.js:175:3)
+    at router (C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\express\lib\router\index.js:47:12)
+    at Layer.handle [as handle_request] (C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\express\lib\router\layer.js:95:5)
+    at trim_prefix (C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\express\lib\router\index.js:328:13)
+    at C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\express\lib\router\index.js:286:9
+    at Function.process_params (C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\express\lib\router\index.js:346:12)
+    at next (C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\express\lib\router\index.js:280:10)
+

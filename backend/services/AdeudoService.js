@@ -405,7 +405,7 @@ class AdeudoService extends BaseService {
         }
       }
 
-      // b) Resto de actualizaciones permanecen igual
+      // b) Protocolos
       if (cambiosProtocolo.length > 0) {
         await Promise.all(
           cambiosProtocolo.map(async (protocolo) => {
@@ -427,46 +427,7 @@ class AdeudoService extends BaseService {
         );
       }
 
-      // c) EntradaRMM - sin cambios
-      if (entradaRMM.length > 0) {
-        await Promise.all(
-          entradaRMM.map(async (entrada) => {
-            const { num_entrada_original, ...actuEntrada } = entrada;
-
-            await this.repositories.entrada_rmm.actualizarPorId(
-              { num_entrada: num_entrada_original, empresa_cif },
-              actuEntrada,
-              client
-            );
-
-            if (actuEntrada.anticipo_pagado !== undefined || actuEntrada.diferencia !== undefined) {
-              const query = `
-              SELECT num_factura_final, anticipo_pagado, diferencia 
-              FROM entrada_rmm 
-              WHERE num_entrada = $1 AND empresa_cif = $2
-            `;
-              const result = await client.query(query, [num_entrada_original, empresa_cif]);
-
-              if (result.rows.length > 0 && result.rows[0].num_factura_final) {
-                const entradaData = result.rows[0];
-                const anticipoPagado = parseFloat(entradaData.anticipo_pagado) || 0;
-                const diferencia = parseFloat(entradaData.diferencia) || 0;
-                  const total = anticipoPagado - diferencia;
-
-                  const importeCalculado = total / (1 + 0.21 - 0.15);
-
-                await this.repositories.adeudo.actualizarPorId(
-                  { num_factura: entradaData.num_factura_final, empresa_cif },
-                  { importe: importeCalculado },
-                  client
-                );
-              }
-            }
-          })
-        );
-      }
-
-      // d) Adeudos - sin cambios en lógica principal
+      // c) Adeudos
       if (setAdeudos.length > 0) {
         await Promise.all(
           setAdeudos.map(async (adeudo) => {
@@ -537,6 +498,45 @@ class AdeudoService extends BaseService {
                 nuevosDatosLimpios,
                 client
               );
+            }
+          })
+        );
+      }
+
+      // d) EntradaRMM - sin cambios
+      if (entradaRMM.length > 0) {
+        await Promise.all(
+          entradaRMM.map(async (entrada) => {
+            const { num_entrada_original, ...actuEntrada } = entrada;
+
+            await this.repositories.entrada_rmm.actualizarPorId(
+              { num_entrada: num_entrada_original, empresa_cif },
+              actuEntrada,
+              client
+            );
+
+            if (actuEntrada.anticipo_pagado !== undefined || actuEntrada.diferencia !== undefined) {
+              const query = `
+              SELECT num_factura_final, anticipo_pagado, diferencia 
+              FROM entrada_rmm 
+              WHERE num_entrada = $1 AND empresa_cif = $2
+            `;
+              const result = await client.query(query, [num_entrada_original, empresa_cif]);
+
+              if (result.rows.length > 0 && result.rows[0].num_factura_final) {
+                const entradaData = result.rows[0];
+                const anticipoPagado = parseFloat(entradaData.anticipo_pagado) || 0;
+                const diferencia = parseFloat(entradaData.diferencia) || 0;
+                  const total = anticipoPagado - diferencia;
+
+                  const importeCalculado = total / (1 + 0.21 - 0.15);
+
+                await this.repositories.adeudo.actualizarPorId(
+                  { num_factura: entradaData.num_factura_final, empresa_cif },
+                  { importe: importeCalculado },
+                  client
+                );
+              }
             }
           })
         );

@@ -96,7 +96,7 @@ export const createTableEntrada_RMM = async () => {
             FOREIGN KEY (empresa_cif) REFERENCES empresa(cif)
                 ON DELETE CASCADE ON UPDATE CASCADE,
             FOREIGN KEY (num_factura_final, empresa_cif) REFERENCES adeudo(num_factura, empresa_cif)
-                ON DELETE SET NULL ON UPDATE CASCADE
+                ON DELETE CASCADE ON UPDATE CASCADE
         );
     `;
 
