@@ -114,6 +114,9 @@ export const createTableAnticipo = async () => {
         CREATE TABLE IF NOT EXISTS anticipo(
             empresa_cif VARCHAR(9) PRIMARY KEY,
             anticipo NUMERIC NOT NULL,
+            anticipo_original NUMERIC NOT NULL DEFAULT 0,
+            saldo_actual NUMERIC NOT NULL DEFAULT 0,
+            fecha_ultima_actualizacion TIMESTAMP DEFAULT NOW(),
             FOREIGN KEY (empresa_cif) REFERENCES empresa(cif)
                 ON DELETE CASCADE
                 ON UPDATE CASCADE

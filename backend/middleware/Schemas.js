@@ -13,6 +13,7 @@ export const adeudoInsertSchema = Joi.object({
     fecha_anticipo: Joi.date().optional(),
     diferencia: Joi.number().optional(),
     fecha_devolucion_diferencia: Joi.date().optional(),
+    num_factura_original: Joi.string().allow(null, "").min(1).optional(),
     num_entrada_original: Joi.string().min(1).optional()
 });
 

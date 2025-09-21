@@ -3,7 +3,6 @@ import React, { useEffect, useState } from "react";
 export const Extendible = () => {
     // Info Adeudo (Expendible)
     const [expandedRows, setExpandedRows] = useState(new Set([]));
-    const [editingRmm, setEditingRmm] = useState(new Set([]));
 
     // Funciones para Expandible
     const isRMM = (proveedor) => {
@@ -21,21 +20,9 @@ export const Extendible = () => {
         setExpandedRows(newExpanded)
     }
 
-    const toggleRmmEditing = (rowId) => {
-        const newEditing = new Set(editingRmm)
-        if (newEditing.has(rowId)) {
-            newEditing.delete(rowId)
-        } else {
-            newEditing.add(rowId)
-        }
-
-        setEditingRmm(editingRmm)
-    }
-
     return {
         // Estados
-        expandedRows, setExpandedRows,
-        editingRmm, setEditingRmm,
+        expandedRows,
 
         // Funciones
         isRMM,
