@@ -301,3 +301,51 @@
     at Function.process_params (C:\Users\moise\OneDrive\Documentos\GitHub\Control-Clientes\backend\node_modules\express\lib\router\index.js:346:12)
     at next (C:\Users\moise\OneDrive\Documentos\GitHub\Control-Clientes\backend\node_modules\express\lib\router\index.js:280:10)
 
+[2025-09-22T03:34:19.505Z] Error: No se pudo agregar el cliente: pool.getConnection is not a function
+    at ClienteService.createCliente (file:///C:/Users/LuisValle/Desktop/Control-Clientes/backend/services/ClienteService.js:80:19)
+    at ClienteController.createCliente (file:///C:/Users/LuisValle/Desktop/Control-Clientes/backend/controllers/ClienteController.js:37:47)
+    at Layer.handle [as handle_request] (C:\Users\LuisValle\Desktop\Control-Clientes\backend\node_modules\express\lib\router\layer.js:95:5)
+    at next (C:\Users\LuisValle\Desktop\Control-Clientes\backend\node_modules\express\lib\router\route.js:149:13)
+    at Route.dispatch (C:\Users\LuisValle\Desktop\Control-Clientes\backend\node_modules\express\lib\router\route.js:119:3)
+    at Layer.handle [as handle_request] (C:\Users\LuisValle\Desktop\Control-Clientes\backend\node_modules\express\lib\router\layer.js:95:5)
+    at C:\Users\LuisValle\Desktop\Control-Clientes\backend\node_modules\express\lib\router\index.js:284:15
+    at Function.process_params (C:\Users\LuisValle\Desktop\Control-Clientes\backend\node_modules\express\lib\router\index.js:346:12)
+    at next (C:\Users\LuisValle\Desktop\Control-Clientes\backend\node_modules\express\lib\router\index.js:280:10)
+    at Function.handle (C:\Users\LuisValle\Desktop\Control-Clientes\backend\node_modules\express\lib\router\index.js:175:3)
+    at router (C:\Users\LuisValle\Desktop\Control-Clientes\backend\node_modules\express\lib\router\index.js:47:12)
+    at Layer.handle [as handle_request] (C:\Users\LuisValle\Desktop\Control-Clientes\backend\node_modules\express\lib\router\layer.js:95:5)
+    at trim_prefix (C:\Users\LuisValle\Desktop\Control-Clientes\backend\node_modules\express\lib\router\index.js:328:13)
+    at C:\Users\LuisValle\Desktop\Control-Clientes\backend\node_modules\express\lib\router\index.js:286:9
+    at Function.process_params (C:\Users\LuisValle\Desktop\Control-Clientes\backend\node_modules\express\lib\router\index.js:346:12)
+    at next (C:\Users\LuisValle\Desktop\Control-Clientes\backend\node_modules\express\lib\router\index.js:280:10)
+
+[2025-09-22T16:46:03.695Z] Error: No se pudo agregar el cliente: no existe la columna «cp» en la relación «direccion»
+    at ClienteService.createCliente (file:///C:/Users/LuisValle/Desktop/Control-Clientes/backend/services/ClienteService.js:91:19)
+    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
+    at async ClienteController.createCliente (file:///C:/Users/LuisValle/Desktop/Control-Clientes/backend/controllers/ClienteController.js:37:28)
+
+[2025-09-22T16:55:01.025Z] Error: No se pudo agregar el cliente: no existe la columna «cp» en la relación «direccion»
+    at ClienteService.createCliente (file:///C:/Users/LuisValle/Desktop/Control-Clientes/backend/services/ClienteService.js:97:19)
+    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
+    at async ClienteController.createCliente (file:///C:/Users/LuisValle/Desktop/Control-Clientes/backend/controllers/ClienteController.js:37:28)
+
+[2025-09-22T16:57:42.982Z] Error: No se pudo agregar el cliente: no existe la columna «cp» en la relación «direccion»
+    at ClienteService.createCliente (file:///C:/Users/LuisValle/Desktop/Control-Clientes/backend/services/ClienteService.js:109:19)
+    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
+    at async ClienteController.createCliente (file:///C:/Users/LuisValle/Desktop/Control-Clientes/backend/controllers/ClienteController.js:37:28)
+
+[2025-09-22T16:58:37.516Z] Error: No se pudo agregar el cliente: no existe la columna «cp» en la relación «direccion»
+    at ClienteService.createCliente (file:///C:/Users/LuisValle/Desktop/Control-Clientes/backend/services/ClienteService.js:109:19)
+    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
+    at async ClienteController.createCliente (file:///C:/Users/LuisValle/Desktop/Control-Clientes/backend/controllers/ClienteController.js:37:28)
+
+[2025-09-22T17:01:42.206Z] Error: No se pudo agregar el cliente: no existe la columna «n_protocolo» en la relación «dato_registral»
+    at ClienteService.createCliente (file:///C:/Users/LuisValle/Desktop/Control-Clientes/backend/services/ClienteService.js:109:19)
+    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
+    at async ClienteController.createCliente (file:///C:/Users/LuisValle/Desktop/Control-Clientes/backend/controllers/ClienteController.js:37:28)
+
+[2025-09-22T17:05:11.249Z] Error: No se pudo agregar el cliente: no existe la columna «tel» en la relación «empresa»
+    at ClienteService.createCliente (file:///C:/Users/LuisValle/Desktop/Control-Clientes/backend/services/ClienteService.js:126:19)
+    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
+    at async ClienteController.createCliente (file:///C:/Users/LuisValle/Desktop/Control-Clientes/backend/controllers/ClienteController.js:37:28)
+
