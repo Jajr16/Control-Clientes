@@ -1,10 +1,7 @@
 import { useState, useCallback } from "react";
 import Swal from 'sweetalert2';
 
-import { addEmpresas } from "../api/moduloClientes/empresas.js";
-import { addDirecciones } from "../api/moduloClientes/direcciones.js";
-import { addPropietario } from "../api/moduloClientes/propietario.js";
-import { addDatoRegistral } from "../api/moduloClientes/datoRegistral.js";
+import { addCliente } from "../api/moduloClientes/clientes.js"; // Asegúrate de tener esta función
 
 import { validarClienteCompleto } from '../utils/validarFormCliente.js';
 
@@ -53,6 +50,14 @@ export const manejarLogicaCliente = () => {
         }
 
         try {
+            console.log("Datos obtenidos del formulario cliente - propietario:", cliente.propietario);
+            await addCliente({
+                empresa: cliente.empresa,
+                propietario: cliente.propietario,
+                direccion: cliente.direccion,
+                datoRegistral: cliente.datoRegistral
+            });
+
             // Guardar inmuebles si existen
             for (const inmueble of inmuebles) {
                 await addInmueble(inmueble.datosInmueble);
@@ -103,16 +108,15 @@ export const manejarLogicaInmueble = () => {
         e.preventDefault();
         setValidarErroresInmueble({});
 
-        let erroresCompletos = {};
-
-        const validarDatosInmueble = validarInmuebleCompleto(
+        const errores = validarInmuebleCompleto(
             datosInmueble,
             datosProveedor,
             datosHipoteca,
             datosSeguro
         );
 
-        erroresCompletos.forEach(err => allErrors[err.field] = err.message);
+        const allErrors = {};
+        errores.forEach(err => allErrors[err.field] = err.message);
 
         if (Object.keys(allErrors).length > 0) {
             setValidarErroresInmueble(allErrors);
