@@ -4,12 +4,12 @@ import morgan from 'morgan';
 import cors from 'cors';
 
 // Importar rutas
-import empresasRoutes from './routes/empresasRoutes.js';
-import direccionRoutes from './routes/direccionRoutes.js';
-import propietarioRoutes from './routes/propietarioRoutes.js';
-import datoRegistralRoutes from './routes/datoRegistralRoutes.js';
+//import empresasRoutes from './routes/empresasRoutes.js';
+//import direccionRoutes from './routes/direccionRoutes.js';
+//import propietarioRoutes from './routes/propietarioRoutes.js';
+//import datoRegistralRoutes from './routes/datoRegistralRoutes.js';
 import inmuebleRoutes from './routes/InmuebleRoutes.js'
-import clienteRouter from './routes/searchClientRoute.js'
+import clienteRouter from './routes/clienteRoutes.js'
 import adeudoRoutes from './routes/adeudoRoutes.js';
 import liquidacionRoutes from './routes/LiquidacionRoutes.js';
 import HomeRoutes from './routes/Home/homeRoutes.js'
@@ -35,10 +35,10 @@ app.use(cors({
 app.use(express.json());
 
 // Definir las rutas de la API
-app.use('/api/empresas', empresasRoutes);
-app.use('/api/direcciones', direccionRoutes);
-app.use('/api/propietario', propietarioRoutes);
-app.use('/api/datoRegistral', datoRegistralRoutes);
+//app.use('/api/empresas', empresasRoutes);
+//app.use('/api/direcciones', direccionRoutes);
+//app.use('/api/propietario', propietarioRoutes);
+//app.use('/api/datoRegistral', datoRegistralRoutes);
 app.use('/api/inmueble', inmuebleRoutes);
 app.use('/api/searchClients', clienteRouter);
 app.use('/api/adeudos', adeudoRoutes);

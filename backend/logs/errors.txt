@@ -132,3 +132,82 @@
     at AdeudoController.createRecord (file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/controllers/AdeudoController.js:131:44)
     at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
 
+[2025-08-28T15:35:04.446Z] Error: No se pudo realizar la búsqueda en adeudo a
+    at Repositorio.BuscarConJoins (file:///C:/Users/moise/OneDrive/Documentos/GitHub/Control-Clientes/backend/repositories/globalPersistence.js:293:19)
+    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
+    at async HomeService.obtenerDatosHome (file:///C:/Users/moise/OneDrive/Documentos/GitHub/Control-Clientes/backend/services/HomeService.js:29:35)
+    at async HomeController.obtenerDatosHome (file:///C:/Users/moise/OneDrive/Documentos/GitHub/Control-Clientes/backend/controllers/HomeController.js:11:28)
+
+[2025-08-28T15:35:04.507Z] Error: No se pudo realizar la búsqueda en adeudo a
+    at Repositorio.BuscarConJoins (file:///C:/Users/moise/OneDrive/Documentos/GitHub/Control-Clientes/backend/repositories/globalPersistence.js:293:19)
+    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
+    at async HomeService.obtenerDatosHome (file:///C:/Users/moise/OneDrive/Documentos/GitHub/Control-Clientes/backend/services/HomeService.js:29:35)
+    at async HomeController.obtenerDatosHome (file:///C:/Users/moise/OneDrive/Documentos/GitHub/Control-Clientes/backend/controllers/HomeController.js:11:28)
+
+[2025-08-28T15:35:10.180Z] Error: No se pudo realizar la búsqueda en adeudo a
+    at Repositorio.BuscarConJoins (file:///C:/Users/moise/OneDrive/Documentos/GitHub/Control-Clientes/backend/repositories/globalPersistence.js:293:19)
+    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
+    at async HomeService.obtenerDatosHome (file:///C:/Users/moise/OneDrive/Documentos/GitHub/Control-Clientes/backend/services/HomeService.js:29:35)
+    at async HomeController.obtenerDatosHome (file:///C:/Users/moise/OneDrive/Documentos/GitHub/Control-Clientes/backend/controllers/HomeController.js:11:28)
+
+[2025-08-28T15:35:10.249Z] Error: No se pudo realizar la búsqueda en adeudo a
+    at Repositorio.BuscarConJoins (file:///C:/Users/moise/OneDrive/Documentos/GitHub/Control-Clientes/backend/repositories/globalPersistence.js:293:19)
+    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
+    at async HomeService.obtenerDatosHome (file:///C:/Users/moise/OneDrive/Documentos/GitHub/Control-Clientes/backend/services/HomeService.js:29:35)
+    at async HomeController.obtenerDatosHome (file:///C:/Users/moise/OneDrive/Documentos/GitHub/Control-Clientes/backend/controllers/HomeController.js:11:28)
+
+[2025-08-28T15:47:21.259Z] Error: No se pudo realizar la búsqueda en adeudo a
+    at Repositorio.BuscarConJoins (file:///C:/Users/moise/OneDrive/Documentos/GitHub/Control-Clientes/backend/repositories/globalPersistence.js:293:19)
+    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
+    at async HomeService.obtenerDatosHome (file:///C:/Users/moise/OneDrive/Documentos/GitHub/Control-Clientes/backend/services/HomeService.js:29:35)
+    at async HomeController.obtenerDatosHome (file:///C:/Users/moise/OneDrive/Documentos/GitHub/Control-Clientes/backend/controllers/HomeController.js:11:28)
+
+[2025-08-28T15:47:21.310Z] Error: No se pudo realizar la búsqueda en adeudo a
+    at Repositorio.BuscarConJoins (file:///C:/Users/moise/OneDrive/Documentos/GitHub/Control-Clientes/backend/repositories/globalPersistence.js:293:19)
+    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
+    at async HomeService.obtenerDatosHome (file:///C:/Users/moise/OneDrive/Documentos/GitHub/Control-Clientes/backend/services/HomeService.js:29:35)
+    at async HomeController.obtenerDatosHome (file:///C:/Users/moise/OneDrive/Documentos/GitHub/Control-Clientes/backend/controllers/HomeController.js:11:28)
+
+[2025-08-28T15:48:06.677Z] Error: No se pudo realizar la búsqueda en adeudo a
+    at Repositorio.BuscarConJoins (file:///C:/Users/moise/OneDrive/Documentos/GitHub/Control-Clientes/backend/repositories/globalPersistence.js:293:19)
+    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
+    at async HomeService.obtenerDatosHome (file:///C:/Users/moise/OneDrive/Documentos/GitHub/Control-Clientes/backend/services/HomeService.js:29:35)
+    at async HomeController.obtenerDatosHome (file:///C:/Users/moise/OneDrive/Documentos/GitHub/Control-Clientes/backend/controllers/HomeController.js:11:28)
+
+[2025-08-28T15:48:06.737Z] Error: No se pudo realizar la búsqueda en adeudo a
+    at Repositorio.BuscarConJoins (file:///C:/Users/moise/OneDrive/Documentos/GitHub/Control-Clientes/backend/repositories/globalPersistence.js:293:19)
+    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
+    at async HomeService.obtenerDatosHome (file:///C:/Users/moise/OneDrive/Documentos/GitHub/Control-Clientes/backend/services/HomeService.js:29:35)
+    at async HomeController.obtenerDatosHome (file:///C:/Users/moise/OneDrive/Documentos/GitHub/Control-Clientes/backend/controllers/HomeController.js:11:28)
+
+[2025-08-28T16:11:16.706Z] Error: No se pudo realizar la búsqueda en adeudo a
+    at Repositorio.BuscarConJoins (file:///C:/Users/moise/OneDrive/Documentos/GitHub/Control-Clientes/backend/repositories/globalPersistence.js:293:19)
+    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
+    at async HomeService.obtenerDatosHome (file:///C:/Users/moise/OneDrive/Documentos/GitHub/Control-Clientes/backend/services/HomeService.js:29:35)
+    at async HomeController.obtenerDatosHome (file:///C:/Users/moise/OneDrive/Documentos/GitHub/Control-Clientes/backend/controllers/HomeController.js:11:28)
+
+[2025-08-28T16:11:16.760Z] Error: No se pudo realizar la búsqueda en adeudo a
+    at Repositorio.BuscarConJoins (file:///C:/Users/moise/OneDrive/Documentos/GitHub/Control-Clientes/backend/repositories/globalPersistence.js:293:19)
+    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
+    at async HomeService.obtenerDatosHome (file:///C:/Users/moise/OneDrive/Documentos/GitHub/Control-Clientes/backend/services/HomeService.js:29:35)
+    at async HomeController.obtenerDatosHome (file:///C:/Users/moise/OneDrive/Documentos/GitHub/Control-Clientes/backend/controllers/HomeController.js:11:28)
+
+[2025-09-22T01:16:43.235Z] ReferenceError: empresasRoutes is not defined
+    at file:///C:/Users/moise/OneDrive/Documentos/GitHub/Control-Clientes/backend/app.js:38:26
+    at ModuleJob.run (node:internal/modules/esm/module_job:222:25)
+    at async ModuleLoader.import (node:internal/modules/esm/loader:323:24)
+    at async loadESM (node:internal/process/esm_loader:28:7)
+    at async handleMainPromise (node:internal/modules/run_main:113:12)
+
+[2025-09-22T01:17:17.775Z] Error: No se pudo realizar la búsqueda en adeudo a
+    at Repositorio.BuscarConJoins (file:///C:/Users/moise/OneDrive/Documentos/GitHub/Control-Clientes/backend/repositories/globalPersistence.js:293:19)
+    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
+    at async HomeService.obtenerDatosHome (file:///C:/Users/moise/OneDrive/Documentos/GitHub/Control-Clientes/backend/services/HomeService.js:29:35)
+    at async HomeController.obtenerDatosHome (file:///C:/Users/moise/OneDrive/Documentos/GitHub/Control-Clientes/backend/controllers/HomeController.js:11:28)
+
+[2025-09-22T01:17:17.831Z] Error: No se pudo realizar la búsqueda en adeudo a
+    at Repositorio.BuscarConJoins (file:///C:/Users/moise/OneDrive/Documentos/GitHub/Control-Clientes/backend/repositories/globalPersistence.js:293:19)
+    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
+    at async HomeService.obtenerDatosHome (file:///C:/Users/moise/OneDrive/Documentos/GitHub/Control-Clientes/backend/services/HomeService.js:29:35)
+    at async HomeController.obtenerDatosHome (file:///C:/Users/moise/OneDrive/Documentos/GitHub/Control-Clientes/backend/controllers/HomeController.js:11:28)
+
