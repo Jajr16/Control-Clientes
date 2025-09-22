@@ -211,3 +211,93 @@
     at async HomeService.obtenerDatosHome (file:///C:/Users/moise/OneDrive/Documentos/GitHub/Control-Clientes/backend/services/HomeService.js:29:35)
     at async HomeController.obtenerDatosHome (file:///C:/Users/moise/OneDrive/Documentos/GitHub/Control-Clientes/backend/controllers/HomeController.js:11:28)
 
+[2025-09-22T02:39:06.666Z] Error: No se pudo agregar el cliente
+    at ClienteService.createCliente (file:///C:/Users/moise/OneDrive/Documentos/GitHub/Control-Clientes/backend/services/ClienteService.js:48:19)
+    at ClienteController.createCliente (file:///C:/Users/moise/OneDrive/Documentos/GitHub/Control-Clientes/backend/controllers/ClienteController.js:37:47)
+    at Layer.handle [as handle_request] (C:\Users\moise\OneDrive\Documentos\GitHub\Control-Clientes\backend\node_modules\express\lib\router\layer.js:95:5)
+    at next (C:\Users\moise\OneDrive\Documentos\GitHub\Control-Clientes\backend\node_modules\express\lib\router\route.js:149:13)
+    at Route.dispatch (C:\Users\moise\OneDrive\Documentos\GitHub\Control-Clientes\backend\node_modules\express\lib\router\route.js:119:3)
+    at Layer.handle [as handle_request] (C:\Users\moise\OneDrive\Documentos\GitHub\Control-Clientes\backend\node_modules\express\lib\router\layer.js:95:5)
+    at C:\Users\moise\OneDrive\Documentos\GitHub\Control-Clientes\backend\node_modules\express\lib\router\index.js:284:15
+    at Function.process_params (C:\Users\moise\OneDrive\Documentos\GitHub\Control-Clientes\backend\node_modules\express\lib\router\index.js:346:12)
+    at next (C:\Users\moise\OneDrive\Documentos\GitHub\Control-Clientes\backend\node_modules\express\lib\router\index.js:280:10)
+    at Function.handle (C:\Users\moise\OneDrive\Documentos\GitHub\Control-Clientes\backend\node_modules\express\lib\router\index.js:175:3)
+    at router (C:\Users\moise\OneDrive\Documentos\GitHub\Control-Clientes\backend\node_modules\express\lib\router\index.js:47:12)
+    at Layer.handle [as handle_request] (C:\Users\moise\OneDrive\Documentos\GitHub\Control-Clientes\backend\node_modules\express\lib\router\layer.js:95:5)
+    at trim_prefix (C:\Users\moise\OneDrive\Documentos\GitHub\Control-Clientes\backend\node_modules\express\lib\router\index.js:328:13)
+    at C:\Users\moise\OneDrive\Documentos\GitHub\Control-Clientes\backend\node_modules\express\lib\router\index.js:286:9
+    at Function.process_params (C:\Users\moise\OneDrive\Documentos\GitHub\Control-Clientes\backend\node_modules\express\lib\router\index.js:346:12)
+    at next (C:\Users\moise\OneDrive\Documentos\GitHub\Control-Clientes\backend\node_modules\express\lib\router\index.js:280:10)
+
+[2025-09-22T02:56:32.704Z] Error: No se pudo agregar el cliente
+    at ClienteService.createCliente (file:///C:/Users/moise/OneDrive/Documentos/GitHub/Control-Clientes/backend/services/ClienteService.js:48:19)
+    at ClienteController.createCliente (file:///C:/Users/moise/OneDrive/Documentos/GitHub/Control-Clientes/backend/controllers/ClienteController.js:37:47)
+    at Layer.handle [as handle_request] (C:\Users\moise\OneDrive\Documentos\GitHub\Control-Clientes\backend\node_modules\express\lib\router\layer.js:95:5)
+    at next (C:\Users\moise\OneDrive\Documentos\GitHub\Control-Clientes\backend\node_modules\express\lib\router\route.js:149:13)
+    at Route.dispatch (C:\Users\moise\OneDrive\Documentos\GitHub\Control-Clientes\backend\node_modules\express\lib\router\route.js:119:3)
+    at Layer.handle [as handle_request] (C:\Users\moise\OneDrive\Documentos\GitHub\Control-Clientes\backend\node_modules\express\lib\router\layer.js:95:5)
+    at C:\Users\moise\OneDrive\Documentos\GitHub\Control-Clientes\backend\node_modules\express\lib\router\index.js:284:15
+    at Function.process_params (C:\Users\moise\OneDrive\Documentos\GitHub\Control-Clientes\backend\node_modules\express\lib\router\index.js:346:12)
+    at next (C:\Users\moise\OneDrive\Documentos\GitHub\Control-Clientes\backend\node_modules\express\lib\router\index.js:280:10)
+    at Function.handle (C:\Users\moise\OneDrive\Documentos\GitHub\Control-Clientes\backend\node_modules\express\lib\router\index.js:175:3)
+    at router (C:\Users\moise\OneDrive\Documentos\GitHub\Control-Clientes\backend\node_modules\express\lib\router\index.js:47:12)
+    at Layer.handle [as handle_request] (C:\Users\moise\OneDrive\Documentos\GitHub\Control-Clientes\backend\node_modules\express\lib\router\layer.js:95:5)
+    at trim_prefix (C:\Users\moise\OneDrive\Documentos\GitHub\Control-Clientes\backend\node_modules\express\lib\router\index.js:328:13)
+    at C:\Users\moise\OneDrive\Documentos\GitHub\Control-Clientes\backend\node_modules\express\lib\router\index.js:286:9
+    at Function.process_params (C:\Users\moise\OneDrive\Documentos\GitHub\Control-Clientes\backend\node_modules\express\lib\router\index.js:346:12)
+    at next (C:\Users\moise\OneDrive\Documentos\GitHub\Control-Clientes\backend\node_modules\express\lib\router\index.js:280:10)
+
+[2025-09-22T03:00:17.556Z] Error: No se pudo agregar el cliente: this.repositories.direccion.Insertar is not a function
+    at ClienteService.createCliente (file:///C:/Users/moise/OneDrive/Documentos/GitHub/Control-Clientes/backend/services/ClienteService.js:71:19)
+    at ClienteController.createCliente (file:///C:/Users/moise/OneDrive/Documentos/GitHub/Control-Clientes/backend/controllers/ClienteController.js:37:47)
+    at Layer.handle [as handle_request] (C:\Users\moise\OneDrive\Documentos\GitHub\Control-Clientes\backend\node_modules\express\lib\router\layer.js:95:5)
+    at next (C:\Users\moise\OneDrive\Documentos\GitHub\Control-Clientes\backend\node_modules\express\lib\router\route.js:149:13)
+    at Route.dispatch (C:\Users\moise\OneDrive\Documentos\GitHub\Control-Clientes\backend\node_modules\express\lib\router\route.js:119:3)
+    at Layer.handle [as handle_request] (C:\Users\moise\OneDrive\Documentos\GitHub\Control-Clientes\backend\node_modules\express\lib\router\layer.js:95:5)
+    at C:\Users\moise\OneDrive\Documentos\GitHub\Control-Clientes\backend\node_modules\express\lib\router\index.js:284:15
+    at Function.process_params (C:\Users\moise\OneDrive\Documentos\GitHub\Control-Clientes\backend\node_modules\express\lib\router\index.js:346:12)
+    at next (C:\Users\moise\OneDrive\Documentos\GitHub\Control-Clientes\backend\node_modules\express\lib\router\index.js:280:10)
+    at Function.handle (C:\Users\moise\OneDrive\Documentos\GitHub\Control-Clientes\backend\node_modules\express\lib\router\index.js:175:3)
+    at router (C:\Users\moise\OneDrive\Documentos\GitHub\Control-Clientes\backend\node_modules\express\lib\router\index.js:47:12)
+    at Layer.handle [as handle_request] (C:\Users\moise\OneDrive\Documentos\GitHub\Control-Clientes\backend\node_modules\express\lib\router\layer.js:95:5)
+    at trim_prefix (C:\Users\moise\OneDrive\Documentos\GitHub\Control-Clientes\backend\node_modules\express\lib\router\index.js:328:13)
+    at C:\Users\moise\OneDrive\Documentos\GitHub\Control-Clientes\backend\node_modules\express\lib\router\index.js:286:9
+    at Function.process_params (C:\Users\moise\OneDrive\Documentos\GitHub\Control-Clientes\backend\node_modules\express\lib\router\index.js:346:12)
+    at next (C:\Users\moise\OneDrive\Documentos\GitHub\Control-Clientes\backend\node_modules\express\lib\router\index.js:280:10)
+
+[2025-09-22T03:03:41.688Z] Error: No se pudo agregar el cliente: pool.getConnection is not a function
+    at ClienteService.createCliente (file:///C:/Users/moise/OneDrive/Documentos/GitHub/Control-Clientes/backend/services/ClienteService.js:80:19)
+    at ClienteController.createCliente (file:///C:/Users/moise/OneDrive/Documentos/GitHub/Control-Clientes/backend/controllers/ClienteController.js:37:47)
+    at Layer.handle [as handle_request] (C:\Users\moise\OneDrive\Documentos\GitHub\Control-Clientes\backend\node_modules\express\lib\router\layer.js:95:5)
+    at next (C:\Users\moise\OneDrive\Documentos\GitHub\Control-Clientes\backend\node_modules\express\lib\router\route.js:149:13)
+    at Route.dispatch (C:\Users\moise\OneDrive\Documentos\GitHub\Control-Clientes\backend\node_modules\express\lib\router\route.js:119:3)
+    at Layer.handle [as handle_request] (C:\Users\moise\OneDrive\Documentos\GitHub\Control-Clientes\backend\node_modules\express\lib\router\layer.js:95:5)
+    at C:\Users\moise\OneDrive\Documentos\GitHub\Control-Clientes\backend\node_modules\express\lib\router\index.js:284:15
+    at Function.process_params (C:\Users\moise\OneDrive\Documentos\GitHub\Control-Clientes\backend\node_modules\express\lib\router\index.js:346:12)
+    at next (C:\Users\moise\OneDrive\Documentos\GitHub\Control-Clientes\backend\node_modules\express\lib\router\index.js:280:10)
+    at Function.handle (C:\Users\moise\OneDrive\Documentos\GitHub\Control-Clientes\backend\node_modules\express\lib\router\index.js:175:3)
+    at router (C:\Users\moise\OneDrive\Documentos\GitHub\Control-Clientes\backend\node_modules\express\lib\router\index.js:47:12)
+    at Layer.handle [as handle_request] (C:\Users\moise\OneDrive\Documentos\GitHub\Control-Clientes\backend\node_modules\express\lib\router\layer.js:95:5)
+    at trim_prefix (C:\Users\moise\OneDrive\Documentos\GitHub\Control-Clientes\backend\node_modules\express\lib\router\index.js:328:13)
+    at C:\Users\moise\OneDrive\Documentos\GitHub\Control-Clientes\backend\node_modules\express\lib\router\index.js:286:9
+    at Function.process_params (C:\Users\moise\OneDrive\Documentos\GitHub\Control-Clientes\backend\node_modules\express\lib\router\index.js:346:12)
+    at next (C:\Users\moise\OneDrive\Documentos\GitHub\Control-Clientes\backend\node_modules\express\lib\router\index.js:280:10)
+
+[2025-09-22T03:04:14.235Z] Error: No se pudo agregar el cliente: pool.getConnection is not a function
+    at ClienteService.createCliente (file:///C:/Users/moise/OneDrive/Documentos/GitHub/Control-Clientes/backend/services/ClienteService.js:80:19)
+    at ClienteController.createCliente (file:///C:/Users/moise/OneDrive/Documentos/GitHub/Control-Clientes/backend/controllers/ClienteController.js:37:47)
+    at Layer.handle [as handle_request] (C:\Users\moise\OneDrive\Documentos\GitHub\Control-Clientes\backend\node_modules\express\lib\router\layer.js:95:5)
+    at next (C:\Users\moise\OneDrive\Documentos\GitHub\Control-Clientes\backend\node_modules\express\lib\router\route.js:149:13)
+    at Route.dispatch (C:\Users\moise\OneDrive\Documentos\GitHub\Control-Clientes\backend\node_modules\express\lib\router\route.js:119:3)
+    at Layer.handle [as handle_request] (C:\Users\moise\OneDrive\Documentos\GitHub\Control-Clientes\backend\node_modules\express\lib\router\layer.js:95:5)
+    at C:\Users\moise\OneDrive\Documentos\GitHub\Control-Clientes\backend\node_modules\express\lib\router\index.js:284:15
+    at Function.process_params (C:\Users\moise\OneDrive\Documentos\GitHub\Control-Clientes\backend\node_modules\express\lib\router\index.js:346:12)
+    at next (C:\Users\moise\OneDrive\Documentos\GitHub\Control-Clientes\backend\node_modules\express\lib\router\index.js:280:10)
+    at Function.handle (C:\Users\moise\OneDrive\Documentos\GitHub\Control-Clientes\backend\node_modules\express\lib\router\index.js:175:3)
+    at router (C:\Users\moise\OneDrive\Documentos\GitHub\Control-Clientes\backend\node_modules\express\lib\router\index.js:47:12)
+    at Layer.handle [as handle_request] (C:\Users\moise\OneDrive\Documentos\GitHub\Control-Clientes\backend\node_modules\express\lib\router\layer.js:95:5)
+    at trim_prefix (C:\Users\moise\OneDrive\Documentos\GitHub\Control-Clientes\backend\node_modules\express\lib\router\index.js:328:13)
+    at C:\Users\moise\OneDrive\Documentos\GitHub\Control-Clientes\backend\node_modules\express\lib\router\index.js:286:9
+    at Function.process_params (C:\Users\moise\OneDrive\Documentos\GitHub\Control-Clientes\backend\node_modules\express\lib\router\index.js:346:12)
+    at next (C:\Users\moise\OneDrive\Documentos\GitHub\Control-Clientes\backend\node_modules\express\lib\router\index.js:280:10)
+

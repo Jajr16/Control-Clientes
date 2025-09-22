@@ -9,19 +9,19 @@ import {
 
 const router = express.Router();
 
-// Obtener todos los clientes (con toda su información relacionada)
+// Obtener todos los clientes
 router.get("/", getClientes);
 
-// Obtener un cliente específico por CIF (con toda su información)
+// Obtener un cliente específico por CIF
 router.get("/:cif", getClienteByCif);
 
-// Crear un nuevo cliente completo (empresa + propietario + dirección + dato registral)
+// Crear un nuevo cliente
 router.post("/", createCliente);
 
-// Actualizar un cliente completo
+// Actualizar un cliente
 router.put("/:cif", updateCliente);
 
-// Eliminar un cliente (con eliminación en cascada de sus relaciones)
+// Eliminar un cliente
 router.delete("/:cif", deleteCliente);
 
 export default router;
