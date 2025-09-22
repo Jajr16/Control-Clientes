@@ -5,12 +5,19 @@ import formatDate from '../validations/formatDate.js';
 
 class ClienteService extends BaseService {
     constructor() {
+        // Pasar todos los repositorios necesarios al constructor padre
         super({
             empresa: new Repositorio("empresa", "cif"),
             propietario: new Repositorio("propietario", "nie"),
             direccion: new Repositorio("direccion", "id"),
             datoRegistral: new Repositorio("dato_registral", "id_dr")
         });
+
+        // Verificar que todos los repositorios se inicializaron correctamente
+        console.log("Repositorios inicializados:", Object.keys(this.repositories));
+        for (const [key, repo] of Object.entries(this.repositories)) {
+            console.log(`${key} tiene método Insertar:`, typeof repo.Insertar === 'function');
+        }
     }
 
     async getClientes() {
@@ -21,10 +28,10 @@ class ClienteService extends BaseService {
                 { type: 'INNER', table: 'dato_registral dr', on: 'empresa.dato_registral = dr.id_dr' }
             ];
             const columnas = [
-                'empresa.clave', 'empresa.cif', 'empresa.nombre', 'p.nie', 
-                'p.nombre AS propietario', 'p.telefono', 'p.email', 
+                'empresa.clave', 'empresa.cif', 'empresa.nombre', 'p.nie',
+                'p.nombre AS propietario', 'p.telefono', 'p.email',
                 'd.calle', 'd.numero', 'd.piso', 'd.codigo_postal', 'd.localidad',
-                'dr.num_protocolo', 'dr.folio', 'dr.hoja', 'dr.inscripcion', 
+                'dr.num_protocolo', 'dr.folio', 'dr.hoja', 'dr.inscripcion',
                 'dr.notario', 'dr.fecha_inscripcion'
             ];
             return await this.repositories.empresa.BuscarConJoins(joins, {}, 'AND', columnas);
@@ -44,63 +51,89 @@ class ClienteService extends BaseService {
     }
 
     async createCliente(clienteData) {
-        let connection;
+        const client = await pool.connect();
+
         try {
-            connection = await pool.getConnection();
-            await connection.beginTransaction();
+            await client.query('BEGIN');
 
             const { empresa, propietario, direccion, datoRegistral } = clienteData;
 
-            // 1. Insertar dirección
-            const direccionInsertada = await this.repositories.direccion.Insertar(direccion, connection);
-            
-            // 2. Insertar propietario
-            const propietarioInsertado = await this.repositories.propietario.Insertar(propietario, connection);
-            
-            // 3. Insertar dato registral
-            const datoRegistralInsertado = await this.repositories.datoRegistral.Insertar(datoRegistral, connection);
-            
-            // 4. Preparar empresa con las referencias
+            console.log("Insertando dirección...");
+            const direccionInsertada = await this.repositories.direccion.insertar(direccion, client);
+            console.log("Dirección insertada:", direccionInsertada);
+
+            console.log("Insertando propietario...");
+            const propietarioInsertado = await this.repositories.propietario.insertar(propietario, client);
+            console.log("Propietario insertado:", propietarioInsertado);
+
+            console.log("Insertando dato registral...");
+            const datoRegistralInsertado = await this.repositories.datoRegistral.insertar(datoRegistral, client);
+            console.log("Dato registral insertado:", datoRegistralInsertado);
+
+            // Preparar empresa con las referencias
             const empresaCompleta = {
                 ...empresa,
-                direccion: direccionInsertada.insertId || direccionInsertada.id,
+                direccion: direccionInsertada.id,
                 propietario: propietario.nie,
-                dato_registral: datoRegistralInsertado.insertId || datoRegistralInsertado.id_dr
+                dato_registral: datoRegistralInsertado.id_dr
             };
-            
-            // 5. Insertar empresa
-            const result = await this.repositories.empresa.Insertar(empresaCompleta, connection);
-            
-            await connection.commit();
+
+            console.log("Insertando empresa...");
+            const result = await this.repositories.empresa.insertar(empresaCompleta, client);
+            console.log("Empresa insertada:", result);
+
+            await client.query('COMMIT');
             return result;
-            
+
         } catch (error) {
-            if (connection) await connection.rollback();
+            await client.query('ROLLBACK');
             console.error("Error detallado al crear cliente:", error);
             throw new Error("No se pudo agregar el cliente: " + error.message);
         } finally {
-            if (connection) connection.release();
+            client.release();
         }
     }
 
     async updateCliente(cif, cambios) {
-        try {
-            // Implementar lógica de actualización similar a createCliente
-            // pero con transacción y updates en lugar de inserts
-            return await this.repositories.empresa.Actualizar(cif, cambios);
-        } catch (error) {
-            console.error("Error al actualizar cliente:", error);
-            throw new Error("No se pudo actualizar el cliente");
-        }
+        return await this.withTransaction(async (client) => {
+            const { empresa, propietario, direccion, datoRegistral } = cambios;
+
+            // Si se proporcionan entidades relacionadas, actualizarlas
+            if (direccion && empresa.direccion) {
+                await this.repositories.direccion.actualizarPorId({ id: empresa.direccion }, direccion, client);
+            }
+
+            if (propietario && empresa.propietario) {
+                await this.repositories.propietario.actualizarPorId({ nie: empresa.propietario }, propietario, client);
+            }
+
+            if (datoRegistral && empresa.dato_registral) {
+                await this.repositories.datoRegistral.actualizarPorId({ id_dr: empresa.dato_registral }, datoRegistral, client);
+            }
+
+            // Actualizar empresa
+            return await this.repositories.empresa.actualizarPorId({ cif }, empresa, client);
+        });
     }
 
     async deleteCliente(cif) {
-        try {
-            return await this.repositories.empresa.Eliminar(cif);
-        } catch (error) {
-            console.error("Error al eliminar cliente:", error);
-            throw new Error("No se pudo eliminar el cliente");
-        }
+        return await this.withTransaction(async (client) => {
+            // Primero obtener la empresa para tener las referencias
+            const empresa = await this.repositories.empresa.ObtenerPorId({ cif }, client);
+
+            // Eliminar en orden inverso
+            const result = await this.repositories.empresa.eliminarPorId({ cif }, client);
+
+            if (empresa.dato_registral) {
+                await this.repositories.datoRegistral.eliminarPorId({ id_dr: empresa.dato_registral }, client);
+            }
+
+            if (empresa.direccion) {
+                await this.repositories.direccion.eliminarPorId({ id: empresa.direccion }, client);
+            }
+
+            return result;
+        });
     }
 }
 

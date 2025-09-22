@@ -33,7 +33,7 @@ const AgregarClientes = () => {
         if (!dirEmpresa.localidad) errores.localidad = "Localidad obligatoria";
         if (!dirEmpresa.numero) errores.numero = "Número obligatorio";
         if (!dirEmpresa.piso) errores.piso = "Piso obligatorio";
-        if (!dirEmpresa.cp) errores.cp = "CP obligatorio";
+        if (!dirEmpresa.codigo_postal) errores.codigo_postal = "CP obligatorio";
         if (!datosPropietario.nie) errores.nie = "NIE obligatorio";
         if (!datosPropietario.nombre) errores.propietarioNombre = "Nombre propietario obligatorio";
         if (!datosPropietario.email) errores.email = "Email obligatorio";
@@ -63,7 +63,7 @@ const AgregarClientes = () => {
         if (exito) {
             setMensaje("¡Cliente añadido correctamente!");
             setDatosEmpresa({ clave: "", cif: "", nombre: "", tel: "" });
-            setDirEmpresa({ calle: "", numero: "", piso: "", cp: "", localidad: "" });
+            setDirEmpresa({ calle: "", numero: "", piso: "", codigo_postal: "", localidad: "" });
             setDatoRegistralEmpresa({ num_protocolo: "", folio: "", hoja: "", inscripcion: "", notario: "", fecha_inscripcion: "" });
             setDatosPropietario({ nie: "", nombre: "", email: "", telefono: "" });
         } else {
