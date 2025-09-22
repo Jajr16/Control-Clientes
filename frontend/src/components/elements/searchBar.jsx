@@ -16,8 +16,7 @@ const ClientSearch = ({
         const fetchClients = async () => {
             const response = await fetch(`${API_URL}/${routeName}`);
             const data = await response.json();
-            console.log(data)
-            setClients(data);
+            setClients(data.data);
         };
 
         fetchClients();

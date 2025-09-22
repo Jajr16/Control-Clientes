@@ -31,7 +31,7 @@ const EmpresaForm = ({ empresa, setEmpresa, validationErrors = {} }) => {
                 </div>
                 <div className="flex justify-between">
                     <label htmlFor="TELEFONO">Teléfono:</label>
-                    <input id="TELEFONO" type="text" name="tel" maxLength={9}
+                    <input id="TELEFONO" type="text" name="tel" maxLength={10}
                         onChange={handleChange}
                         className={`w-full ml-2 mr-2 border rounded-md ${getError('tel') ? 'border-red-500' : 'border-gray-300'}`} />
                 </div>

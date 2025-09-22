@@ -12,6 +12,10 @@ import inmuebleRoutes from './routes/InmuebleRoutes.js'
 import clienteRouter from './routes/searchClientRoute.js'
 import adeudoRoutes from './routes/adeudoRoutes.js';
 import liquidacionRoutes from './routes/LiquidacionRoutes.js';
+import HomeRoutes from './routes/Home/homeRoutes.js'
+
+import './config/handleErrors.js'; 
+import { handleError } from './config/handleErrors.js';
 
 // Configurar dotenv para acceder a las variables de entorno
 dotenv.config();
@@ -39,5 +43,13 @@ app.use('/api/inmueble', inmuebleRoutes);
 app.use('/api/searchClients', clienteRouter);
 app.use('/api/adeudos', adeudoRoutes);
 app.use('/api/liquidaciones', liquidacionRoutes);
+app.use('/api/home', HomeRoutes);
+
+// Middleware global de errores
+app.use(async (err, req, res, next) => {
+    console.error(err); // log en consola
+    await handleError(err); // guarda en txt y manda correo
+    res.status(500).json({ message: "Ocurrió un error interno" });
+});
 
 export default app;

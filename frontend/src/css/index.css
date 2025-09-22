@@ -2,3 +2,23 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+/* Scroll padre café */
+.scroll-cafe {
+  @apply rounded-xl flex flex-col overflow-y-auto;
+  scrollbar-width: thin; /* Firefox */
+  scrollbar-color: white rgb(91,60,27); /* Firefox */
+}
+
+.scroll-cafe::-webkit-scrollbar {
+  width: 6px;
+}
+
+.scroll-cafe::-webkit-scrollbar-track {
+  border-radius: 9999px;
+}
+
+.scroll-cafe::-webkit-scrollbar-thumb {
+  background: white;
+  border-radius: 9999px;
+}

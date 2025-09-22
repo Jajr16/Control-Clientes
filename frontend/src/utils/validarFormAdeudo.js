@@ -17,8 +17,8 @@ export const validarAdeudo = (adeudoData) => {
     if (!adeudoData.num_factura)
         errors.push({ field: "num_factura", message: VALIDACIONES_FORMULARIO.REQUERIDO("Número de factura") });
 
-    if (!adeudoData.protocolo_entrada)
-        errors.push({ field: "protocolo_entrada", message: VALIDACIONES_FORMULARIO.REQUERIDO("Protocolo / Entrada") });
+    if (!adeudoData.num_protocolo)
+        errors.push({ field: "num_protocolo", message: VALIDACIONES_FORMULARIO.REQUERIDO("Protocolo / Entrada") });
 
     // Validación de campos numéricos
     const camposNumericos = [
