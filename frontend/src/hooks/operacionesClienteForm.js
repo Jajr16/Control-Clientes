@@ -131,10 +131,6 @@ export const manejarLogicaInmueble = () => {
         }
 
         try {
-            // Aquí se pueden agregar las llamadas a las APIs para registrar los datos del inmueble, proveedor, hipoteca y seguro
-            console.log(`Datos obtenidos del formulario: \n Inmueble: ${datosInmueble}\n Proveedor: ${datosProveedor}`);
-            console.log(`Datos Hipoteca: ${datosHipoteca}\n Seguro: ${datosSeguro}`);
-
             const nuevoInmueble = await addInmueble(datosInmueble);
             const nuevoProveedor = await addProveedor(datosProveedor);
             const nuevaHipoteca = await addHipoteca(datosHipoteca);

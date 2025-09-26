@@ -3,7 +3,6 @@ export const handleDeleteSelected = async () => {
 }
 
 export const handleRowSelected = async (numFactura, isChecked, selectedRows, editingRows, setEditingRows, setSelectedRows) => {
-    console.log(`Los editingRows son: ${[...editingRows]}`)
     const newSelectedRows = new Set(selectedRows)
     if (isChecked) {
         newSelectedRows.add(numFactura)

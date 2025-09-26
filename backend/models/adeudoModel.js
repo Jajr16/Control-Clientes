@@ -8,11 +8,12 @@ export const createTableAdeudo = async () => {
             proveedor VARCHAR(50) NOT NULL,
             ff DATE NOT NULL,
             importe NUMERIC NOT NULL,
-            iva NUMERIC NOT NULL,
-            retencion NUMERIC NOT NULL,
+            iva NUMERIC NOT NULL GENERATED ALWAYS AS (importe * 0.21) STORED,
+            retencion NUMERIC NOT NULL GENERATED ALWAYS AS (importe * 0.15) STORED,
             num_liquidacion INT,
             empresa_cif VARCHAR(9) NOT NULL,
             fecha_creacion TIMESTAMP DEFAULT NOW(),
+            estado VARCHAR(20) NOT NULL CHECK (estado IN ('LIQUIDACIÓN EN CURSO', 'PENDIENTE DE ENVIAR', 'ENVIADO AL CLIENTE', 'LIQUIDADO')) DEFAULT 'LIQUIDACIÓN EN CURSO',
             PRIMARY KEY (num_factura, empresa_cif),
             FOREIGN KEY (empresa_cif) REFERENCES empresa(cif)
                 ON DELETE CASCADE
@@ -62,8 +63,8 @@ export const createTableProtocolo = async () => {
         CREATE TABLE IF NOT EXISTS protocolo(
             num_factura VARCHAR(50),
             empresa_cif VARCHAR(9),
-            protocolo_entrada VARCHAR(50) NOT NULL,
-            cs_iva NUMERIC NOT NULL, 
+            num_protocolo VARCHAR(50) NOT NULL,
+            cs_iva NUMERIC NOT NULL DEFAULT 0, 
             PRIMARY KEY (num_factura, empresa_cif),
             FOREIGN KEY (num_factura, empresa_cif) REFERENCES adeudo(num_factura, empresa_cif)
                 ON DELETE CASCADE
@@ -80,24 +81,30 @@ export const createTableProtocolo = async () => {
     }
 }
 
-export const createTableAjuste = async () => {
+export const createTableEntrada_RMM = async () => {
     const query = `
-        CREATE TABLE IF NOT EXISTS ajuste(
-            num_factura VARCHAR(50),
-            empresa_cif VARCHAR(9),
-            diferencia NUMERIC NOT NULL,
-            PRIMARY KEY (num_factura, empresa_cif),
-            FOREIGN KEY (num_factura, empresa_cif) REFERENCES adeudo(num_factura, empresa_cif)
-                ON DELETE CASCADE
-                ON UPDATE CASCADE
+        CREATE TABLE IF NOT EXISTS entrada_rmm (
+            num_entrada VARCHAR(50) NOT NULL,
+            empresa_cif VARCHAR(9) NOT NULL,
+            anticipo_pagado NUMERIC DEFAULT 200.00,
+            fecha_anticipo DATE NOT NULL,
+            diferencia NUMERIC,
+            fecha_devolucion_diferencia DATE,
+            num_factura_final VARCHAR(50),
+            fecha_creacion TIMESTAMP DEFAULT NOW(),
+            PRIMARY KEY (num_entrada, empresa_cif),
+            FOREIGN KEY (empresa_cif) REFERENCES empresa(cif)
+                ON DELETE CASCADE ON UPDATE CASCADE,
+            FOREIGN KEY (num_factura_final, empresa_cif) REFERENCES adeudo(num_factura, empresa_cif)
+                ON DELETE CASCADE ON UPDATE CASCADE
         );
     `;
 
     try {
         await pool.query(query);
-        console.log('Tabla ajuste creada o ya existente');
+        console.log('Tabla "Entrada_RMM" creada o ya existente');
     } catch (error) {
-        console.error('Error al crear la tabla ajuste:', error);
+        console.error('Error al crear la tabla Entrada_RMM:', error);
         throw error;
     }
 }
@@ -107,6 +114,9 @@ export const createTableAnticipo = async () => {
         CREATE TABLE IF NOT EXISTS anticipo(
             empresa_cif VARCHAR(9) PRIMARY KEY,
             anticipo NUMERIC NOT NULL,
+            anticipo_original NUMERIC NOT NULL DEFAULT 0,
+            saldo_actual NUMERIC NOT NULL DEFAULT 0,
+            fecha_ultima_actualizacion TIMESTAMP DEFAULT NOW(),
             FOREIGN KEY (empresa_cif) REFERENCES empresa(cif)
                 ON DELETE CASCADE
                 ON UPDATE CASCADE
@@ -136,7 +146,7 @@ export const obtenerAdeudosPendientes = async (empresa_cif) => {
             a.iva,
             a.retencion,
             a.num_liquidacion,
-            COALESCE(p.protocolo_entrada, '') AS protocolo_entrada,
+            COALESCE(p.num_protocolo, '') AS num_protocolo,
             COALESCE(p.cs_iva, 0) AS cs_iva,
             (COALESCE(a.importe,0) + COALESCE(a.iva,0) - COALESCE(a.retencion,0) + COALESCE(p.cs_iva,0)) AS total,
             COALESCE(an.anticipo, 0) AS anticipo,
@@ -168,7 +178,7 @@ export const obtenerAdeudosLiquidados = async (empresa_cif) => {
             a.iva,
             a.retencion,
             a.num_liquidacion,
-            COALESCE(p.protocolo_entrada, '') AS protocolo_entrada,
+            COALESCE(p.num_protocolo, '') AS num_protocolo,
             COALESCE(p.cs_iva, 0) AS cs_iva,
             (COALESCE(a.importe,0) + COALESCE(a.iva,0) - COALESCE(a.retencion,0) + COALESCE(p.cs_iva,0)) AS total,
             COALESCE(an.anticipo, 0) AS anticipo,
@@ -204,7 +214,7 @@ export const obtenerTodosAdeudosPorEmpresa = async (empresa_cif) => {
             a.iva,
             a.retencion,
             a.num_liquidacion,
-            COALESCE(p.protocolo_entrada, '') AS protocolo_entrada,
+            COALESCE(p.num_protocolo, '') AS num_protocolo,
             COALESCE(p.cs_iva, 0) AS cs_iva,
             (COALESCE(a.importe,0) + COALESCE(a.iva,0) - COALESCE(a.retencion,0) + COALESCE(p.cs_iva,0)) AS total,
             COALESCE(an.anticipo, 0) AS anticipo,

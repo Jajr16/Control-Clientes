@@ -132,281 +132,1229 @@
     at AdeudoController.createRecord (file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/controllers/AdeudoController.js:131:44)
     at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
 
-[2025-08-28T15:35:04.446Z] Error: No se pudo realizar la búsqueda en adeudo a
-    at Repositorio.BuscarConJoins (file:///C:/Users/moise/OneDrive/Documentos/GitHub/Control-Clientes/backend/repositories/globalPersistence.js:293:19)
+[2025-08-27T17:47:22.180Z] Error: No se pudo realizar la búsqueda en honorario
+    at Repositorio.BuscarPorFiltros (file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/repositories/globalPersistence.js:215:19)
+    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at async file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/services/LiquidacionService.js:89:29
+    at async LiquidacionService.withTransaction (file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/services/BaseService.js:13:28)
+    at async LiquidacionService.crearLiquidacionFinal (file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/services/LiquidacionService.js:13:16)
+    at async LiquidacionController.createLiquidacion (file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/controllers/LiquidacionController.js:37:28)
+
+[2025-08-27T18:28:43.002Z] Error: No se pudo realizar la búsqueda en honorario
+    at Repositorio.BuscarPorFiltros (file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/repositories/globalPersistence.js:215:19)
+    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at async file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/services/LiquidacionService.js:89:29
+    at async LiquidacionService.withTransaction (file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/services/BaseService.js:13:28)
+    at async LiquidacionService.crearLiquidacionFinal (file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/services/LiquidacionService.js:13:16)
+    at async LiquidacionController.createLiquidacion (file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/controllers/LiquidacionController.js:37:28)
+
+[2025-08-27T18:30:22.181Z] Error: No se pudo realizar la búsqueda en empresa
+    at Repositorio.BuscarPorFiltros (file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/repositories/globalPersistence.js:215:19)
+    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at async file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/services/LiquidacionService.js:90:29
+    at async LiquidacionService.withTransaction (file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/services/BaseService.js:13:28)
+    at async LiquidacionService.crearLiquidacionFinal (file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/services/LiquidacionService.js:14:16)
+    at async LiquidacionController.createLiquidacion (file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/controllers/LiquidacionController.js:37:28)
+
+[2025-08-27T18:30:46.227Z] Error: No se pudo realizar la búsqueda en empresa
+    at Repositorio.BuscarPorFiltros (file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/repositories/globalPersistence.js:215:19)
+    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at async file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/services/LiquidacionService.js:90:29
+    at async LiquidacionService.withTransaction (file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/services/BaseService.js:13:28)
+    at async LiquidacionService.crearLiquidacionFinal (file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/services/LiquidacionService.js:14:16)
+    at async LiquidacionController.createLiquidacion (file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/controllers/LiquidacionController.js:37:28)
+
+[2025-08-27T18:31:25.707Z] TypeError: Cannot read properties of undefined (reading 'registrarMovimiento')
+    at file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/services/LiquidacionService.js:93:48
+    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at async LiquidacionService.withTransaction (file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/services/BaseService.js:13:28)
+    at async LiquidacionService.crearLiquidacionFinal (file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/services/LiquidacionService.js:14:16)
+    at async LiquidacionController.createLiquidacion (file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/controllers/LiquidacionController.js:37:28)
+
+[2025-08-26T04:07:40.117Z] Error: No se pudo realizar la búsqueda en adeudo a
+    at Repositorio.BuscarConJoins (file:///C:/Users/LuisValle/Desktop/Control-Clientes/backend/repositories/globalPersistence.js:293:19)
     at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
-    at async HomeService.obtenerDatosHome (file:///C:/Users/moise/OneDrive/Documentos/GitHub/Control-Clientes/backend/services/HomeService.js:29:35)
-    at async HomeController.obtenerDatosHome (file:///C:/Users/moise/OneDrive/Documentos/GitHub/Control-Clientes/backend/controllers/HomeController.js:11:28)
+    at async HomeService.obtenerDatosHome (file:///C:/Users/LuisValle/Desktop/Control-Clientes/backend/services/HomeService.js:29:35)
+    at async HomeController.obtenerDatosHome (file:///C:/Users/LuisValle/Desktop/Control-Clientes/backend/controllers/HomeController.js:11:28)
 
-[2025-08-28T15:35:04.507Z] Error: No se pudo realizar la búsqueda en adeudo a
-    at Repositorio.BuscarConJoins (file:///C:/Users/moise/OneDrive/Documentos/GitHub/Control-Clientes/backend/repositories/globalPersistence.js:293:19)
+[2025-08-26T04:07:40.230Z] Error: No se pudo realizar la búsqueda en adeudo a
+    at Repositorio.BuscarConJoins (file:///C:/Users/LuisValle/Desktop/Control-Clientes/backend/repositories/globalPersistence.js:293:19)
     at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
-    at async HomeService.obtenerDatosHome (file:///C:/Users/moise/OneDrive/Documentos/GitHub/Control-Clientes/backend/services/HomeService.js:29:35)
-    at async HomeController.obtenerDatosHome (file:///C:/Users/moise/OneDrive/Documentos/GitHub/Control-Clientes/backend/controllers/HomeController.js:11:28)
+    at async HomeService.obtenerDatosHome (file:///C:/Users/LuisValle/Desktop/Control-Clientes/backend/services/HomeService.js:29:35)
+    at async HomeController.obtenerDatosHome (file:///C:/Users/LuisValle/Desktop/Control-Clientes/backend/controllers/HomeController.js:11:28)
 
-[2025-08-28T15:35:10.180Z] Error: No se pudo realizar la búsqueda en adeudo a
-    at Repositorio.BuscarConJoins (file:///C:/Users/moise/OneDrive/Documentos/GitHub/Control-Clientes/backend/repositories/globalPersistence.js:293:19)
+[2025-08-28T17:03:30.778Z] Error: No se pudo realizar la búsqueda en adeudo a
+    at Repositorio.BuscarConJoins (file:///C:/Users/LuisValle/Desktop/Control-Clientes/backend/repositories/globalPersistence.js:293:19)
     at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
-    at async HomeService.obtenerDatosHome (file:///C:/Users/moise/OneDrive/Documentos/GitHub/Control-Clientes/backend/services/HomeService.js:29:35)
-    at async HomeController.obtenerDatosHome (file:///C:/Users/moise/OneDrive/Documentos/GitHub/Control-Clientes/backend/controllers/HomeController.js:11:28)
+    at async HomeService.obtenerDatosHome (file:///C:/Users/LuisValle/Desktop/Control-Clientes/backend/services/HomeService.js:29:35)
+    at async HomeController.obtenerDatosHome (file:///C:/Users/LuisValle/Desktop/Control-Clientes/backend/controllers/HomeController.js:11:28)
 
-[2025-08-28T15:35:10.249Z] Error: No se pudo realizar la búsqueda en adeudo a
-    at Repositorio.BuscarConJoins (file:///C:/Users/moise/OneDrive/Documentos/GitHub/Control-Clientes/backend/repositories/globalPersistence.js:293:19)
+[2025-08-28T17:03:30.895Z] Error: No se pudo realizar la búsqueda en adeudo a
+    at Repositorio.BuscarConJoins (file:///C:/Users/LuisValle/Desktop/Control-Clientes/backend/repositories/globalPersistence.js:293:19)
     at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
-    at async HomeService.obtenerDatosHome (file:///C:/Users/moise/OneDrive/Documentos/GitHub/Control-Clientes/backend/services/HomeService.js:29:35)
-    at async HomeController.obtenerDatosHome (file:///C:/Users/moise/OneDrive/Documentos/GitHub/Control-Clientes/backend/controllers/HomeController.js:11:28)
+    at async HomeService.obtenerDatosHome (file:///C:/Users/LuisValle/Desktop/Control-Clientes/backend/services/HomeService.js:29:35)
+    at async HomeController.obtenerDatosHome (file:///C:/Users/LuisValle/Desktop/Control-Clientes/backend/controllers/HomeController.js:11:28)
 
-[2025-08-28T15:47:21.259Z] Error: No se pudo realizar la búsqueda en adeudo a
-    at Repositorio.BuscarConJoins (file:///C:/Users/moise/OneDrive/Documentos/GitHub/Control-Clientes/backend/repositories/globalPersistence.js:293:19)
+[2025-08-28T17:03:36.704Z] error: no existe la columna p.empresa_cif
+    at C:\Users\LuisValle\Desktop\Control-Clientes\backend\node_modules\pg-pool\index.js:45:11
     at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
-    at async HomeService.obtenerDatosHome (file:///C:/Users/moise/OneDrive/Documentos/GitHub/Control-Clientes/backend/services/HomeService.js:29:35)
-    at async HomeController.obtenerDatosHome (file:///C:/Users/moise/OneDrive/Documentos/GitHub/Control-Clientes/backend/controllers/HomeController.js:11:28)
+    at async AdeudoService.obtenerTodosAdeudosPorEmpresa (file:///C:/Users/LuisValle/Desktop/Control-Clientes/backend/services/AdeudoService.js:89:24)
+    at async AdeudoController.getAdeudosByEmpresa (file:///C:/Users/LuisValle/Desktop/Control-Clientes/backend/controllers/AdeudoController.js:15:11)
 
-[2025-08-28T15:47:21.310Z] Error: No se pudo realizar la búsqueda en adeudo a
-    at Repositorio.BuscarConJoins (file:///C:/Users/moise/OneDrive/Documentos/GitHub/Control-Clientes/backend/repositories/globalPersistence.js:293:19)
+[2025-08-28T17:03:36.812Z] error: no existe la columna p.empresa_cif
+    at C:\Users\LuisValle\Desktop\Control-Clientes\backend\node_modules\pg-pool\index.js:45:11
     at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
-    at async HomeService.obtenerDatosHome (file:///C:/Users/moise/OneDrive/Documentos/GitHub/Control-Clientes/backend/services/HomeService.js:29:35)
-    at async HomeController.obtenerDatosHome (file:///C:/Users/moise/OneDrive/Documentos/GitHub/Control-Clientes/backend/controllers/HomeController.js:11:28)
+    at async AdeudoService.obtenerTodosAdeudosPorEmpresa (file:///C:/Users/LuisValle/Desktop/Control-Clientes/backend/services/AdeudoService.js:89:24)
+    at async AdeudoController.getAdeudosByEmpresa (file:///C:/Users/LuisValle/Desktop/Control-Clientes/backend/controllers/AdeudoController.js:15:11)
 
-[2025-08-28T15:48:06.677Z] Error: No se pudo realizar la búsqueda en adeudo a
-    at Repositorio.BuscarConJoins (file:///C:/Users/moise/OneDrive/Documentos/GitHub/Control-Clientes/backend/repositories/globalPersistence.js:293:19)
+[2025-08-28T17:03:36.912Z] error: no existe la columna p.empresa_cif
+    at C:\Users\LuisValle\Desktop\Control-Clientes\backend\node_modules\pg-pool\index.js:45:11
     at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
-    at async HomeService.obtenerDatosHome (file:///C:/Users/moise/OneDrive/Documentos/GitHub/Control-Clientes/backend/services/HomeService.js:29:35)
-    at async HomeController.obtenerDatosHome (file:///C:/Users/moise/OneDrive/Documentos/GitHub/Control-Clientes/backend/controllers/HomeController.js:11:28)
+    at async AdeudoService.obtenerTodosAdeudosPorEmpresa (file:///C:/Users/LuisValle/Desktop/Control-Clientes/backend/services/AdeudoService.js:89:24)
+    at async AdeudoController.getAdeudosByEmpresa (file:///C:/Users/LuisValle/Desktop/Control-Clientes/backend/controllers/AdeudoController.js:15:11)
 
-[2025-08-28T15:48:06.737Z] Error: No se pudo realizar la búsqueda en adeudo a
-    at Repositorio.BuscarConJoins (file:///C:/Users/moise/OneDrive/Documentos/GitHub/Control-Clientes/backend/repositories/globalPersistence.js:293:19)
+[2025-08-28T17:03:55.702Z] error: llave duplicada viola restricción de unicidad «adeudo_pkey»
+    at C:\Users\LuisValle\Desktop\Control-Clientes\backend\node_modules\pg\lib\client.js:545:17
     at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
-    at async HomeService.obtenerDatosHome (file:///C:/Users/moise/OneDrive/Documentos/GitHub/Control-Clientes/backend/services/HomeService.js:29:35)
-    at async HomeController.obtenerDatosHome (file:///C:/Users/moise/OneDrive/Documentos/GitHub/Control-Clientes/backend/controllers/HomeController.js:11:28)
+    at async Repositorio.insertar (file:///C:/Users/LuisValle/Desktop/Control-Clientes/backend/repositories/globalPersistence.js:43:28)
+    at async file:///C:/Users/LuisValle/Desktop/Control-Clientes/backend/services/AdeudoService.js:22:37
+    at async AdeudoService.withTransaction (file:///C:/Users/LuisValle/Desktop/Control-Clientes/backend/services/BaseService.js:13:28)
+    at async AdeudoService.insertarAdeudoCompleto (file:///C:/Users/LuisValle/Desktop/Control-Clientes/backend/services/AdeudoService.js:18:16)
+    at async AdeudoController.createAdeudo (file:///C:/Users/LuisValle/Desktop/Control-Clientes/backend/controllers/AdeudoController.js:57:22)
 
-[2025-08-28T16:11:16.706Z] Error: No se pudo realizar la búsqueda en adeudo a
-    at Repositorio.BuscarConJoins (file:///C:/Users/moise/OneDrive/Documentos/GitHub/Control-Clientes/backend/repositories/globalPersistence.js:293:19)
+[2025-08-28T17:04:18.446Z] error: no existe la columna «empresa_cif» en la relación «protocolo»
+    at C:\Users\LuisValle\Desktop\Control-Clientes\backend\node_modules\pg\lib\client.js:545:17
     at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
-    at async HomeService.obtenerDatosHome (file:///C:/Users/moise/OneDrive/Documentos/GitHub/Control-Clientes/backend/services/HomeService.js:29:35)
-    at async HomeController.obtenerDatosHome (file:///C:/Users/moise/OneDrive/Documentos/GitHub/Control-Clientes/backend/controllers/HomeController.js:11:28)
+    at async Repositorio.insertar (file:///C:/Users/LuisValle/Desktop/Control-Clientes/backend/repositories/globalPersistence.js:43:28)
+    at async file:///C:/Users/LuisValle/Desktop/Control-Clientes/backend/services/AdeudoService.js:27:17
+    at async AdeudoService.withTransaction (file:///C:/Users/LuisValle/Desktop/Control-Clientes/backend/services/BaseService.js:13:28)
+    at async AdeudoService.insertarAdeudoCompleto (file:///C:/Users/LuisValle/Desktop/Control-Clientes/backend/services/AdeudoService.js:18:16)
+    at async AdeudoController.createAdeudo (file:///C:/Users/LuisValle/Desktop/Control-Clientes/backend/controllers/AdeudoController.js:57:22)
 
-[2025-08-28T16:11:16.760Z] Error: No se pudo realizar la búsqueda en adeudo a
-    at Repositorio.BuscarConJoins (file:///C:/Users/moise/OneDrive/Documentos/GitHub/Control-Clientes/backend/repositories/globalPersistence.js:293:19)
+[2025-08-28T17:36:17.821Z] Error: No se pudo realizar la búsqueda en honorario
+    at Repositorio.BuscarPorFiltros (file:///C:/Users/LuisValle/Desktop/Control-Clientes/backend/repositories/globalPersistence.js:215:19)
     at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
-    at async HomeService.obtenerDatosHome (file:///C:/Users/moise/OneDrive/Documentos/GitHub/Control-Clientes/backend/services/HomeService.js:29:35)
-    at async HomeController.obtenerDatosHome (file:///C:/Users/moise/OneDrive/Documentos/GitHub/Control-Clientes/backend/controllers/HomeController.js:11:28)
+    at async file:///C:/Users/LuisValle/Desktop/Control-Clientes/backend/services/LiquidacionService.js:89:29
+    at async LiquidacionService.withTransaction (file:///C:/Users/LuisValle/Desktop/Control-Clientes/backend/services/BaseService.js:13:28)
+    at async LiquidacionService.crearLiquidacionFinal (file:///C:/Users/LuisValle/Desktop/Control-Clientes/backend/services/LiquidacionService.js:13:16)
+    at async LiquidacionController.createLiquidacion (file:///C:/Users/LuisValle/Desktop/Control-Clientes/backend/controllers/LiquidacionController.js:37:28)
 
-[2025-09-22T01:16:43.235Z] ReferenceError: empresasRoutes is not defined
-    at file:///C:/Users/moise/OneDrive/Documentos/GitHub/Control-Clientes/backend/app.js:38:26
-    at ModuleJob.run (node:internal/modules/esm/module_job:222:25)
-    at async ModuleLoader.import (node:internal/modules/esm/loader:323:24)
-    at async loadESM (node:internal/process/esm_loader:28:7)
-    at async handleMainPromise (node:internal/modules/run_main:113:12)
-
-[2025-09-22T01:17:17.775Z] Error: No se pudo realizar la búsqueda en adeudo a
-    at Repositorio.BuscarConJoins (file:///C:/Users/moise/OneDrive/Documentos/GitHub/Control-Clientes/backend/repositories/globalPersistence.js:293:19)
+[2025-08-28T17:41:19.277Z] Error: No se pudo realizar la búsqueda en honorario
+    at Repositorio.BuscarPorFiltros (file:///C:/Users/LuisValle/Desktop/Control-Clientes/backend/repositories/globalPersistence.js:215:19)
     at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
-    at async HomeService.obtenerDatosHome (file:///C:/Users/moise/OneDrive/Documentos/GitHub/Control-Clientes/backend/services/HomeService.js:29:35)
-    at async HomeController.obtenerDatosHome (file:///C:/Users/moise/OneDrive/Documentos/GitHub/Control-Clientes/backend/controllers/HomeController.js:11:28)
+    at async file:///C:/Users/LuisValle/Desktop/Control-Clientes/backend/services/LiquidacionService.js:89:29
+    at async LiquidacionService.withTransaction (file:///C:/Users/LuisValle/Desktop/Control-Clientes/backend/services/BaseService.js:13:28)
+    at async LiquidacionService.crearLiquidacionFinal (file:///C:/Users/LuisValle/Desktop/Control-Clientes/backend/services/LiquidacionService.js:13:16)
+    at async LiquidacionController.createLiquidacion (file:///C:/Users/LuisValle/Desktop/Control-Clientes/backend/controllers/LiquidacionController.js:37:28)
 
-[2025-09-22T01:17:17.831Z] Error: No se pudo realizar la búsqueda en adeudo a
-    at Repositorio.BuscarConJoins (file:///C:/Users/moise/OneDrive/Documentos/GitHub/Control-Clientes/backend/repositories/globalPersistence.js:293:19)
+[2025-08-28T17:54:19.142Z] error: el valor es demasiado largo para el tipo character varying(50)
+    at C:\Users\LuisValle\Desktop\Control-Clientes\backend\node_modules\pg\lib\client.js:545:17
     at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
-    at async HomeService.obtenerDatosHome (file:///C:/Users/moise/OneDrive/Documentos/GitHub/Control-Clientes/backend/services/HomeService.js:29:35)
-    at async HomeController.obtenerDatosHome (file:///C:/Users/moise/OneDrive/Documentos/GitHub/Control-Clientes/backend/controllers/HomeController.js:11:28)
+    at async file:///C:/Users/LuisValle/Desktop/Control-Clientes/backend/services/LiquidacionService.js:107:17
+    at async LiquidacionService.withTransaction (file:///C:/Users/LuisValle/Desktop/Control-Clientes/backend/services/BaseService.js:13:28)
+    at async LiquidacionService.crearLiquidacionFinal (file:///C:/Users/LuisValle/Desktop/Control-Clientes/backend/services/LiquidacionService.js:13:16)
+    at async LiquidacionController.createLiquidacion (file:///C:/Users/LuisValle/Desktop/Control-Clientes/backend/controllers/LiquidacionController.js:37:28)
 
-[2025-09-22T02:39:06.666Z] Error: No se pudo agregar el cliente
-    at ClienteService.createCliente (file:///C:/Users/moise/OneDrive/Documentos/GitHub/Control-Clientes/backend/services/ClienteService.js:48:19)
-    at ClienteController.createCliente (file:///C:/Users/moise/OneDrive/Documentos/GitHub/Control-Clientes/backend/controllers/ClienteController.js:37:47)
-    at Layer.handle [as handle_request] (C:\Users\moise\OneDrive\Documentos\GitHub\Control-Clientes\backend\node_modules\express\lib\router\layer.js:95:5)
-    at next (C:\Users\moise\OneDrive\Documentos\GitHub\Control-Clientes\backend\node_modules\express\lib\router\route.js:149:13)
-    at Route.dispatch (C:\Users\moise\OneDrive\Documentos\GitHub\Control-Clientes\backend\node_modules\express\lib\router\route.js:119:3)
-    at Layer.handle [as handle_request] (C:\Users\moise\OneDrive\Documentos\GitHub\Control-Clientes\backend\node_modules\express\lib\router\layer.js:95:5)
-    at C:\Users\moise\OneDrive\Documentos\GitHub\Control-Clientes\backend\node_modules\express\lib\router\index.js:284:15
-    at Function.process_params (C:\Users\moise\OneDrive\Documentos\GitHub\Control-Clientes\backend\node_modules\express\lib\router\index.js:346:12)
-    at next (C:\Users\moise\OneDrive\Documentos\GitHub\Control-Clientes\backend\node_modules\express\lib\router\index.js:280:10)
-    at Function.handle (C:\Users\moise\OneDrive\Documentos\GitHub\Control-Clientes\backend\node_modules\express\lib\router\index.js:175:3)
-    at router (C:\Users\moise\OneDrive\Documentos\GitHub\Control-Clientes\backend\node_modules\express\lib\router\index.js:47:12)
-    at Layer.handle [as handle_request] (C:\Users\moise\OneDrive\Documentos\GitHub\Control-Clientes\backend\node_modules\express\lib\router\layer.js:95:5)
-    at trim_prefix (C:\Users\moise\OneDrive\Documentos\GitHub\Control-Clientes\backend\node_modules\express\lib\router\index.js:328:13)
-    at C:\Users\moise\OneDrive\Documentos\GitHub\Control-Clientes\backend\node_modules\express\lib\router\index.js:286:9
-    at Function.process_params (C:\Users\moise\OneDrive\Documentos\GitHub\Control-Clientes\backend\node_modules\express\lib\router\index.js:346:12)
-    at next (C:\Users\moise\OneDrive\Documentos\GitHub\Control-Clientes\backend\node_modules\express\lib\router\index.js:280:10)
-
-[2025-09-22T02:56:32.704Z] Error: No se pudo agregar el cliente
-    at ClienteService.createCliente (file:///C:/Users/moise/OneDrive/Documentos/GitHub/Control-Clientes/backend/services/ClienteService.js:48:19)
-    at ClienteController.createCliente (file:///C:/Users/moise/OneDrive/Documentos/GitHub/Control-Clientes/backend/controllers/ClienteController.js:37:47)
-    at Layer.handle [as handle_request] (C:\Users\moise\OneDrive\Documentos\GitHub\Control-Clientes\backend\node_modules\express\lib\router\layer.js:95:5)
-    at next (C:\Users\moise\OneDrive\Documentos\GitHub\Control-Clientes\backend\node_modules\express\lib\router\route.js:149:13)
-    at Route.dispatch (C:\Users\moise\OneDrive\Documentos\GitHub\Control-Clientes\backend\node_modules\express\lib\router\route.js:119:3)
-    at Layer.handle [as handle_request] (C:\Users\moise\OneDrive\Documentos\GitHub\Control-Clientes\backend\node_modules\express\lib\router\layer.js:95:5)
-    at C:\Users\moise\OneDrive\Documentos\GitHub\Control-Clientes\backend\node_modules\express\lib\router\index.js:284:15
-    at Function.process_params (C:\Users\moise\OneDrive\Documentos\GitHub\Control-Clientes\backend\node_modules\express\lib\router\index.js:346:12)
-    at next (C:\Users\moise\OneDrive\Documentos\GitHub\Control-Clientes\backend\node_modules\express\lib\router\index.js:280:10)
-    at Function.handle (C:\Users\moise\OneDrive\Documentos\GitHub\Control-Clientes\backend\node_modules\express\lib\router\index.js:175:3)
-    at router (C:\Users\moise\OneDrive\Documentos\GitHub\Control-Clientes\backend\node_modules\express\lib\router\index.js:47:12)
-    at Layer.handle [as handle_request] (C:\Users\moise\OneDrive\Documentos\GitHub\Control-Clientes\backend\node_modules\express\lib\router\layer.js:95:5)
-    at trim_prefix (C:\Users\moise\OneDrive\Documentos\GitHub\Control-Clientes\backend\node_modules\express\lib\router\index.js:328:13)
-    at C:\Users\moise\OneDrive\Documentos\GitHub\Control-Clientes\backend\node_modules\express\lib\router\index.js:286:9
-    at Function.process_params (C:\Users\moise\OneDrive\Documentos\GitHub\Control-Clientes\backend\node_modules\express\lib\router\index.js:346:12)
-    at next (C:\Users\moise\OneDrive\Documentos\GitHub\Control-Clientes\backend\node_modules\express\lib\router\index.js:280:10)
-
-[2025-09-22T03:00:17.556Z] Error: No se pudo agregar el cliente: this.repositories.direccion.Insertar is not a function
-    at ClienteService.createCliente (file:///C:/Users/moise/OneDrive/Documentos/GitHub/Control-Clientes/backend/services/ClienteService.js:71:19)
-    at ClienteController.createCliente (file:///C:/Users/moise/OneDrive/Documentos/GitHub/Control-Clientes/backend/controllers/ClienteController.js:37:47)
-    at Layer.handle [as handle_request] (C:\Users\moise\OneDrive\Documentos\GitHub\Control-Clientes\backend\node_modules\express\lib\router\layer.js:95:5)
-    at next (C:\Users\moise\OneDrive\Documentos\GitHub\Control-Clientes\backend\node_modules\express\lib\router\route.js:149:13)
-    at Route.dispatch (C:\Users\moise\OneDrive\Documentos\GitHub\Control-Clientes\backend\node_modules\express\lib\router\route.js:119:3)
-    at Layer.handle [as handle_request] (C:\Users\moise\OneDrive\Documentos\GitHub\Control-Clientes\backend\node_modules\express\lib\router\layer.js:95:5)
-    at C:\Users\moise\OneDrive\Documentos\GitHub\Control-Clientes\backend\node_modules\express\lib\router\index.js:284:15
-    at Function.process_params (C:\Users\moise\OneDrive\Documentos\GitHub\Control-Clientes\backend\node_modules\express\lib\router\index.js:346:12)
-    at next (C:\Users\moise\OneDrive\Documentos\GitHub\Control-Clientes\backend\node_modules\express\lib\router\index.js:280:10)
-    at Function.handle (C:\Users\moise\OneDrive\Documentos\GitHub\Control-Clientes\backend\node_modules\express\lib\router\index.js:175:3)
-    at router (C:\Users\moise\OneDrive\Documentos\GitHub\Control-Clientes\backend\node_modules\express\lib\router\index.js:47:12)
-    at Layer.handle [as handle_request] (C:\Users\moise\OneDrive\Documentos\GitHub\Control-Clientes\backend\node_modules\express\lib\router\layer.js:95:5)
-    at trim_prefix (C:\Users\moise\OneDrive\Documentos\GitHub\Control-Clientes\backend\node_modules\express\lib\router\index.js:328:13)
-    at C:\Users\moise\OneDrive\Documentos\GitHub\Control-Clientes\backend\node_modules\express\lib\router\index.js:286:9
-    at Function.process_params (C:\Users\moise\OneDrive\Documentos\GitHub\Control-Clientes\backend\node_modules\express\lib\router\index.js:346:12)
-    at next (C:\Users\moise\OneDrive\Documentos\GitHub\Control-Clientes\backend\node_modules\express\lib\router\index.js:280:10)
-
-[2025-09-22T03:03:41.688Z] Error: No se pudo agregar el cliente: pool.getConnection is not a function
-    at ClienteService.createCliente (file:///C:/Users/moise/OneDrive/Documentos/GitHub/Control-Clientes/backend/services/ClienteService.js:80:19)
-    at ClienteController.createCliente (file:///C:/Users/moise/OneDrive/Documentos/GitHub/Control-Clientes/backend/controllers/ClienteController.js:37:47)
-    at Layer.handle [as handle_request] (C:\Users\moise\OneDrive\Documentos\GitHub\Control-Clientes\backend\node_modules\express\lib\router\layer.js:95:5)
-    at next (C:\Users\moise\OneDrive\Documentos\GitHub\Control-Clientes\backend\node_modules\express\lib\router\route.js:149:13)
-    at Route.dispatch (C:\Users\moise\OneDrive\Documentos\GitHub\Control-Clientes\backend\node_modules\express\lib\router\route.js:119:3)
-    at Layer.handle [as handle_request] (C:\Users\moise\OneDrive\Documentos\GitHub\Control-Clientes\backend\node_modules\express\lib\router\layer.js:95:5)
-    at C:\Users\moise\OneDrive\Documentos\GitHub\Control-Clientes\backend\node_modules\express\lib\router\index.js:284:15
-    at Function.process_params (C:\Users\moise\OneDrive\Documentos\GitHub\Control-Clientes\backend\node_modules\express\lib\router\index.js:346:12)
-    at next (C:\Users\moise\OneDrive\Documentos\GitHub\Control-Clientes\backend\node_modules\express\lib\router\index.js:280:10)
-    at Function.handle (C:\Users\moise\OneDrive\Documentos\GitHub\Control-Clientes\backend\node_modules\express\lib\router\index.js:175:3)
-    at router (C:\Users\moise\OneDrive\Documentos\GitHub\Control-Clientes\backend\node_modules\express\lib\router\index.js:47:12)
-    at Layer.handle [as handle_request] (C:\Users\moise\OneDrive\Documentos\GitHub\Control-Clientes\backend\node_modules\express\lib\router\layer.js:95:5)
-    at trim_prefix (C:\Users\moise\OneDrive\Documentos\GitHub\Control-Clientes\backend\node_modules\express\lib\router\index.js:328:13)
-    at C:\Users\moise\OneDrive\Documentos\GitHub\Control-Clientes\backend\node_modules\express\lib\router\index.js:286:9
-    at Function.process_params (C:\Users\moise\OneDrive\Documentos\GitHub\Control-Clientes\backend\node_modules\express\lib\router\index.js:346:12)
-    at next (C:\Users\moise\OneDrive\Documentos\GitHub\Control-Clientes\backend\node_modules\express\lib\router\index.js:280:10)
-
-[2025-09-22T03:04:14.235Z] Error: No se pudo agregar el cliente: pool.getConnection is not a function
-    at ClienteService.createCliente (file:///C:/Users/moise/OneDrive/Documentos/GitHub/Control-Clientes/backend/services/ClienteService.js:80:19)
-    at ClienteController.createCliente (file:///C:/Users/moise/OneDrive/Documentos/GitHub/Control-Clientes/backend/controllers/ClienteController.js:37:47)
-    at Layer.handle [as handle_request] (C:\Users\moise\OneDrive\Documentos\GitHub\Control-Clientes\backend\node_modules\express\lib\router\layer.js:95:5)
-    at next (C:\Users\moise\OneDrive\Documentos\GitHub\Control-Clientes\backend\node_modules\express\lib\router\route.js:149:13)
-    at Route.dispatch (C:\Users\moise\OneDrive\Documentos\GitHub\Control-Clientes\backend\node_modules\express\lib\router\route.js:119:3)
-    at Layer.handle [as handle_request] (C:\Users\moise\OneDrive\Documentos\GitHub\Control-Clientes\backend\node_modules\express\lib\router\layer.js:95:5)
-    at C:\Users\moise\OneDrive\Documentos\GitHub\Control-Clientes\backend\node_modules\express\lib\router\index.js:284:15
-    at Function.process_params (C:\Users\moise\OneDrive\Documentos\GitHub\Control-Clientes\backend\node_modules\express\lib\router\index.js:346:12)
-    at next (C:\Users\moise\OneDrive\Documentos\GitHub\Control-Clientes\backend\node_modules\express\lib\router\index.js:280:10)
-    at Function.handle (C:\Users\moise\OneDrive\Documentos\GitHub\Control-Clientes\backend\node_modules\express\lib\router\index.js:175:3)
-    at router (C:\Users\moise\OneDrive\Documentos\GitHub\Control-Clientes\backend\node_modules\express\lib\router\index.js:47:12)
-    at Layer.handle [as handle_request] (C:\Users\moise\OneDrive\Documentos\GitHub\Control-Clientes\backend\node_modules\express\lib\router\layer.js:95:5)
-    at trim_prefix (C:\Users\moise\OneDrive\Documentos\GitHub\Control-Clientes\backend\node_modules\express\lib\router\index.js:328:13)
-    at C:\Users\moise\OneDrive\Documentos\GitHub\Control-Clientes\backend\node_modules\express\lib\router\index.js:286:9
-    at Function.process_params (C:\Users\moise\OneDrive\Documentos\GitHub\Control-Clientes\backend\node_modules\express\lib\router\index.js:346:12)
-    at next (C:\Users\moise\OneDrive\Documentos\GitHub\Control-Clientes\backend\node_modules\express\lib\router\index.js:280:10)
-
-[2025-09-22T03:06:24.742Z] Error: No se pudo realizar la búsqueda en adeudo a
-    at Repositorio.BuscarConJoins (file:///C:/Users/moise/OneDrive/Documentos/GitHub/Control-Clientes/backend/repositories/globalPersistence.js:293:19)
+[2025-08-28T17:56:21.262Z] error: el valor es demasiado largo para el tipo character varying(50)
+    at C:\Users\LuisValle\Desktop\Control-Clientes\backend\node_modules\pg\lib\client.js:545:17
     at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
-    at async HomeService.obtenerDatosHome (file:///C:/Users/moise/OneDrive/Documentos/GitHub/Control-Clientes/backend/services/HomeService.js:29:35)
-    at async HomeController.obtenerDatosHome (file:///C:/Users/moise/OneDrive/Documentos/GitHub/Control-Clientes/backend/controllers/HomeController.js:11:28)
+    at async file:///C:/Users/LuisValle/Desktop/Control-Clientes/backend/services/LiquidacionService.js:99:17
+    at async LiquidacionService.withTransaction (file:///C:/Users/LuisValle/Desktop/Control-Clientes/backend/services/BaseService.js:13:28)
+    at async LiquidacionService.crearLiquidacionFinal (file:///C:/Users/LuisValle/Desktop/Control-Clientes/backend/services/LiquidacionService.js:13:16)
+    at async LiquidacionController.createLiquidacion (file:///C:/Users/LuisValle/Desktop/Control-Clientes/backend/controllers/LiquidacionController.js:37:28)
 
-[2025-09-22T03:06:24.797Z] Error: No se pudo realizar la búsqueda en adeudo a
-    at Repositorio.BuscarConJoins (file:///C:/Users/moise/OneDrive/Documentos/GitHub/Control-Clientes/backend/repositories/globalPersistence.js:293:19)
+[2025-09-10T00:28:48.658Z] error: no existe la columna aj.empresa_cif
+    at C:\Users\LuisValle\Desktop\Control-Clientes\backend\node_modules\pg-pool\index.js:45:11
     at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
-    at async HomeService.obtenerDatosHome (file:///C:/Users/moise/OneDrive/Documentos/GitHub/Control-Clientes/backend/services/HomeService.js:29:35)
-    at async HomeController.obtenerDatosHome (file:///C:/Users/moise/OneDrive/Documentos/GitHub/Control-Clientes/backend/controllers/HomeController.js:11:28)
+    at async AdeudoService.obtenerTodosAdeudosPorEmpresa (file:///C:/Users/LuisValle/Desktop/Control-Clientes/backend/services/AdeudoService.js:87:24)
+    at async AdeudoController.getAdeudosByEmpresa (file:///C:/Users/LuisValle/Desktop/Control-Clientes/backend/controllers/AdeudoController.js:15:11)
 
-[2025-09-22T03:23:09.921Z] Error: No se pudo agregar el cliente: pool.getConnection is not a function
-    at ClienteService.createCliente (file:///C:/Users/moise/OneDrive/Documentos/GitHub/Control-Clientes/backend/services/ClienteService.js:80:19)
-    at ClienteController.createCliente (file:///C:/Users/moise/OneDrive/Documentos/GitHub/Control-Clientes/backend/controllers/ClienteController.js:37:47)
-    at Layer.handle [as handle_request] (C:\Users\moise\OneDrive\Documentos\GitHub\Control-Clientes\backend\node_modules\express\lib\router\layer.js:95:5)
-    at next (C:\Users\moise\OneDrive\Documentos\GitHub\Control-Clientes\backend\node_modules\express\lib\router\route.js:149:13)
-    at Route.dispatch (C:\Users\moise\OneDrive\Documentos\GitHub\Control-Clientes\backend\node_modules\express\lib\router\route.js:119:3)
-    at Layer.handle [as handle_request] (C:\Users\moise\OneDrive\Documentos\GitHub\Control-Clientes\backend\node_modules\express\lib\router\layer.js:95:5)
-    at C:\Users\moise\OneDrive\Documentos\GitHub\Control-Clientes\backend\node_modules\express\lib\router\index.js:284:15
-    at Function.process_params (C:\Users\moise\OneDrive\Documentos\GitHub\Control-Clientes\backend\node_modules\express\lib\router\index.js:346:12)
-    at next (C:\Users\moise\OneDrive\Documentos\GitHub\Control-Clientes\backend\node_modules\express\lib\router\index.js:280:10)
-    at Function.handle (C:\Users\moise\OneDrive\Documentos\GitHub\Control-Clientes\backend\node_modules\express\lib\router\index.js:175:3)
-    at router (C:\Users\moise\OneDrive\Documentos\GitHub\Control-Clientes\backend\node_modules\express\lib\router\index.js:47:12)
-    at Layer.handle [as handle_request] (C:\Users\moise\OneDrive\Documentos\GitHub\Control-Clientes\backend\node_modules\express\lib\router\layer.js:95:5)
-    at trim_prefix (C:\Users\moise\OneDrive\Documentos\GitHub\Control-Clientes\backend\node_modules\express\lib\router\index.js:328:13)
-    at C:\Users\moise\OneDrive\Documentos\GitHub\Control-Clientes\backend\node_modules\express\lib\router\index.js:286:9
-    at Function.process_params (C:\Users\moise\OneDrive\Documentos\GitHub\Control-Clientes\backend\node_modules\express\lib\router\index.js:346:12)
-    at next (C:\Users\moise\OneDrive\Documentos\GitHub\Control-Clientes\backend\node_modules\express\lib\router\index.js:280:10)
-
-[2025-09-22T03:27:07.163Z] Error: No se pudo agregar el cliente: pool.getConnection is not a function
-    at ClienteService.createCliente (file:///C:/Users/moise/OneDrive/Documentos/GitHub/Control-Clientes/backend/services/ClienteService.js:80:19)
-    at ClienteController.createCliente (file:///C:/Users/moise/OneDrive/Documentos/GitHub/Control-Clientes/backend/controllers/ClienteController.js:37:47)
-    at Layer.handle [as handle_request] (C:\Users\moise\OneDrive\Documentos\GitHub\Control-Clientes\backend\node_modules\express\lib\router\layer.js:95:5)
-    at next (C:\Users\moise\OneDrive\Documentos\GitHub\Control-Clientes\backend\node_modules\express\lib\router\route.js:149:13)
-    at Route.dispatch (C:\Users\moise\OneDrive\Documentos\GitHub\Control-Clientes\backend\node_modules\express\lib\router\route.js:119:3)
-    at Layer.handle [as handle_request] (C:\Users\moise\OneDrive\Documentos\GitHub\Control-Clientes\backend\node_modules\express\lib\router\layer.js:95:5)
-    at C:\Users\moise\OneDrive\Documentos\GitHub\Control-Clientes\backend\node_modules\express\lib\router\index.js:284:15
-    at Function.process_params (C:\Users\moise\OneDrive\Documentos\GitHub\Control-Clientes\backend\node_modules\express\lib\router\index.js:346:12)
-    at next (C:\Users\moise\OneDrive\Documentos\GitHub\Control-Clientes\backend\node_modules\express\lib\router\index.js:280:10)
-    at Function.handle (C:\Users\moise\OneDrive\Documentos\GitHub\Control-Clientes\backend\node_modules\express\lib\router\index.js:175:3)
-    at router (C:\Users\moise\OneDrive\Documentos\GitHub\Control-Clientes\backend\node_modules\express\lib\router\index.js:47:12)
-    at Layer.handle [as handle_request] (C:\Users\moise\OneDrive\Documentos\GitHub\Control-Clientes\backend\node_modules\express\lib\router\layer.js:95:5)
-    at trim_prefix (C:\Users\moise\OneDrive\Documentos\GitHub\Control-Clientes\backend\node_modules\express\lib\router\index.js:328:13)
-    at C:\Users\moise\OneDrive\Documentos\GitHub\Control-Clientes\backend\node_modules\express\lib\router\index.js:286:9
-    at Function.process_params (C:\Users\moise\OneDrive\Documentos\GitHub\Control-Clientes\backend\node_modules\express\lib\router\index.js:346:12)
-    at next (C:\Users\moise\OneDrive\Documentos\GitHub\Control-Clientes\backend\node_modules\express\lib\router\index.js:280:10)
-
-[2025-09-22T03:27:39.029Z] Error: No se pudo agregar el cliente: pool.getConnection is not a function
-    at ClienteService.createCliente (file:///C:/Users/moise/OneDrive/Documentos/GitHub/Control-Clientes/backend/services/ClienteService.js:80:19)
-    at ClienteController.createCliente (file:///C:/Users/moise/OneDrive/Documentos/GitHub/Control-Clientes/backend/controllers/ClienteController.js:37:47)
-    at Layer.handle [as handle_request] (C:\Users\moise\OneDrive\Documentos\GitHub\Control-Clientes\backend\node_modules\express\lib\router\layer.js:95:5)
-    at next (C:\Users\moise\OneDrive\Documentos\GitHub\Control-Clientes\backend\node_modules\express\lib\router\route.js:149:13)
-    at Route.dispatch (C:\Users\moise\OneDrive\Documentos\GitHub\Control-Clientes\backend\node_modules\express\lib\router\route.js:119:3)
-    at Layer.handle [as handle_request] (C:\Users\moise\OneDrive\Documentos\GitHub\Control-Clientes\backend\node_modules\express\lib\router\layer.js:95:5)
-    at C:\Users\moise\OneDrive\Documentos\GitHub\Control-Clientes\backend\node_modules\express\lib\router\index.js:284:15
-    at Function.process_params (C:\Users\moise\OneDrive\Documentos\GitHub\Control-Clientes\backend\node_modules\express\lib\router\index.js:346:12)
-    at next (C:\Users\moise\OneDrive\Documentos\GitHub\Control-Clientes\backend\node_modules\express\lib\router\index.js:280:10)
-    at Function.handle (C:\Users\moise\OneDrive\Documentos\GitHub\Control-Clientes\backend\node_modules\express\lib\router\index.js:175:3)
-    at router (C:\Users\moise\OneDrive\Documentos\GitHub\Control-Clientes\backend\node_modules\express\lib\router\index.js:47:12)
-    at Layer.handle [as handle_request] (C:\Users\moise\OneDrive\Documentos\GitHub\Control-Clientes\backend\node_modules\express\lib\router\layer.js:95:5)
-    at trim_prefix (C:\Users\moise\OneDrive\Documentos\GitHub\Control-Clientes\backend\node_modules\express\lib\router\index.js:328:13)
-    at C:\Users\moise\OneDrive\Documentos\GitHub\Control-Clientes\backend\node_modules\express\lib\router\index.js:286:9
-    at Function.process_params (C:\Users\moise\OneDrive\Documentos\GitHub\Control-Clientes\backend\node_modules\express\lib\router\index.js:346:12)
-    at next (C:\Users\moise\OneDrive\Documentos\GitHub\Control-Clientes\backend\node_modules\express\lib\router\index.js:280:10)
-
-[2025-09-22T03:31:02.002Z] Error: No se pudo agregar el cliente: pool.getConnection is not a function
-    at ClienteService.createCliente (file:///C:/Users/moise/OneDrive/Documentos/GitHub/Control-Clientes/backend/services/ClienteService.js:80:19)
-    at ClienteController.createCliente (file:///C:/Users/moise/OneDrive/Documentos/GitHub/Control-Clientes/backend/controllers/ClienteController.js:37:47)
-    at Layer.handle [as handle_request] (C:\Users\moise\OneDrive\Documentos\GitHub\Control-Clientes\backend\node_modules\express\lib\router\layer.js:95:5)
-    at next (C:\Users\moise\OneDrive\Documentos\GitHub\Control-Clientes\backend\node_modules\express\lib\router\route.js:149:13)
-    at Route.dispatch (C:\Users\moise\OneDrive\Documentos\GitHub\Control-Clientes\backend\node_modules\express\lib\router\route.js:119:3)
-    at Layer.handle [as handle_request] (C:\Users\moise\OneDrive\Documentos\GitHub\Control-Clientes\backend\node_modules\express\lib\router\layer.js:95:5)
-    at C:\Users\moise\OneDrive\Documentos\GitHub\Control-Clientes\backend\node_modules\express\lib\router\index.js:284:15
-    at Function.process_params (C:\Users\moise\OneDrive\Documentos\GitHub\Control-Clientes\backend\node_modules\express\lib\router\index.js:346:12)
-    at next (C:\Users\moise\OneDrive\Documentos\GitHub\Control-Clientes\backend\node_modules\express\lib\router\index.js:280:10)
-    at Function.handle (C:\Users\moise\OneDrive\Documentos\GitHub\Control-Clientes\backend\node_modules\express\lib\router\index.js:175:3)
-    at router (C:\Users\moise\OneDrive\Documentos\GitHub\Control-Clientes\backend\node_modules\express\lib\router\index.js:47:12)
-    at Layer.handle [as handle_request] (C:\Users\moise\OneDrive\Documentos\GitHub\Control-Clientes\backend\node_modules\express\lib\router\layer.js:95:5)
-    at trim_prefix (C:\Users\moise\OneDrive\Documentos\GitHub\Control-Clientes\backend\node_modules\express\lib\router\index.js:328:13)
-    at C:\Users\moise\OneDrive\Documentos\GitHub\Control-Clientes\backend\node_modules\express\lib\router\index.js:286:9
-    at Function.process_params (C:\Users\moise\OneDrive\Documentos\GitHub\Control-Clientes\backend\node_modules\express\lib\router\index.js:346:12)
-    at next (C:\Users\moise\OneDrive\Documentos\GitHub\Control-Clientes\backend\node_modules\express\lib\router\index.js:280:10)
-
-[2025-09-22T03:38:43.154Z] Error: No se pudo agregar el cliente: this.repositories.direccion.Insertar is not a function
-    at ClienteService.createCliente (file:///C:/Users/moise/OneDrive/Documentos/GitHub/Control-Clientes/backend/services/ClienteService.js:84:19)
+[2025-09-10T00:28:52.117Z] error: no existe la columna aj.empresa_cif
+    at C:\Users\LuisValle\Desktop\Control-Clientes\backend\node_modules\pg-pool\index.js:45:11
     at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
-    at async ClienteController.createCliente (file:///C:/Users/moise/OneDrive/Documentos/GitHub/Control-Clientes/backend/controllers/ClienteController.js:37:28)
+    at async AdeudoService.obtenerTodosAdeudosPorEmpresa (file:///C:/Users/LuisValle/Desktop/Control-Clientes/backend/services/AdeudoService.js:87:24)
+    at async AdeudoController.getAdeudosByEmpresa (file:///C:/Users/LuisValle/Desktop/Control-Clientes/backend/controllers/AdeudoController.js:15:11)
 
-[2025-09-22T03:47:00.634Z] Error: No se pudo agregar el cliente: no existe la columna «cp» en la relación «direccion»
-    at ClienteService.createCliente (file:///C:/Users/moise/OneDrive/Documentos/GitHub/Control-Clientes/backend/services/ClienteService.js:91:19)
+[2025-09-10T00:28:56.165Z] error: no existe la columna aj.empresa_cif
+    at C:\Users\LuisValle\Desktop\Control-Clientes\backend\node_modules\pg-pool\index.js:45:11
     at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
-    at async ClienteController.createCliente (file:///C:/Users/moise/OneDrive/Documentos/GitHub/Control-Clientes/backend/controllers/ClienteController.js:37:28)
+    at async AdeudoService.obtenerTodosAdeudosPorEmpresa (file:///C:/Users/LuisValle/Desktop/Control-Clientes/backend/services/AdeudoService.js:87:24)
+    at async AdeudoController.getAdeudosByEmpresa (file:///C:/Users/LuisValle/Desktop/Control-Clientes/backend/controllers/AdeudoController.js:15:11)
 
-[2025-09-22T03:48:02.278Z] Error: No se pudo agregar el cliente: no existe la columna «cp» en la relación «direccion»
-    at ClienteService.createCliente (file:///C:/Users/moise/OneDrive/Documentos/GitHub/Control-Clientes/backend/services/ClienteService.js:91:19)
+[2025-09-10T00:29:01.003Z] error: no existe la columna aj.empresa_cif
+    at C:\Users\LuisValle\Desktop\Control-Clientes\backend\node_modules\pg-pool\index.js:45:11
     at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
-    at async ClienteController.createCliente (file:///C:/Users/moise/OneDrive/Documentos/GitHub/Control-Clientes/backend/controllers/ClienteController.js:37:28)
+    at async AdeudoService.obtenerTodosAdeudosPorEmpresa (file:///C:/Users/LuisValle/Desktop/Control-Clientes/backend/services/AdeudoService.js:87:24)
+    at async AdeudoController.getAdeudosByEmpresa (file:///C:/Users/LuisValle/Desktop/Control-Clientes/backend/controllers/AdeudoController.js:15:11)
 
-[2025-09-22T03:50:59.259Z] Error: No se pudo agregar el cliente: no existe la columna «cp» en la relación «direccion»
-    at ClienteService.createCliente (file:///C:/Users/moise/OneDrive/Documentos/GitHub/Control-Clientes/backend/services/ClienteService.js:91:19)
+[2025-09-10T00:29:01.138Z] error: no existe la columna aj.empresa_cif
+    at C:\Users\LuisValle\Desktop\Control-Clientes\backend\node_modules\pg-pool\index.js:45:11
     at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
-    at async ClienteController.createCliente (file:///C:/Users/moise/OneDrive/Documentos/GitHub/Control-Clientes/backend/controllers/ClienteController.js:37:28)
+    at async AdeudoService.obtenerTodosAdeudosPorEmpresa (file:///C:/Users/LuisValle/Desktop/Control-Clientes/backend/services/AdeudoService.js:87:24)
+    at async AdeudoController.getAdeudosByEmpresa (file:///C:/Users/LuisValle/Desktop/Control-Clientes/backend/controllers/AdeudoController.js:15:11)
 
-[2025-09-22T03:54:57.784Z] Error: No se pudo agregar el cliente: el valor es demasiado largo para el tipo character varying(9)
-    at ClienteService.createCliente (file:///C:/Users/moise/OneDrive/Documentos/GitHub/Control-Clientes/backend/services/ClienteService.js:102:19)
+[2025-09-10T00:29:01.270Z] error: no existe la columna aj.empresa_cif
+    at C:\Users\LuisValle\Desktop\Control-Clientes\backend\node_modules\pg-pool\index.js:45:11
     at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
-    at async ClienteController.createCliente (file:///C:/Users/moise/OneDrive/Documentos/GitHub/Control-Clientes/backend/controllers/ClienteController.js:37:28)
+    at async AdeudoService.obtenerTodosAdeudosPorEmpresa (file:///C:/Users/LuisValle/Desktop/Control-Clientes/backend/services/AdeudoService.js:87:24)
+    at async AdeudoController.getAdeudosByEmpresa (file:///C:/Users/LuisValle/Desktop/Control-Clientes/backend/controllers/AdeudoController.js:15:11)
+
+[2025-09-10T00:30:14.760Z] error: no existe la columna aj.empresa_cif
+    at C:\Users\LuisValle\Desktop\Control-Clientes\backend\node_modules\pg-pool\index.js:45:11
+    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
+    at async AdeudoService.obtenerTodosAdeudosPorEmpresa (file:///C:/Users/LuisValle/Desktop/Control-Clientes/backend/services/AdeudoService.js:87:24)
+    at async AdeudoController.getAdeudosByEmpresa (file:///C:/Users/LuisValle/Desktop/Control-Clientes/backend/controllers/AdeudoController.js:15:11)
+
+[2025-09-10T00:30:37.950Z] error: no existe la columna a.fecha_creacion
+    at C:\Users\LuisValle\Desktop\Control-Clientes\backend\node_modules\pg-pool\index.js:45:11
+    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
+    at async AdeudoService.obtenerTodosAdeudosPorEmpresa (file:///C:/Users/LuisValle/Desktop/Control-Clientes/backend/services/AdeudoService.js:87:24)
+    at async AdeudoController.getAdeudosByEmpresa (file:///C:/Users/LuisValle/Desktop/Control-Clientes/backend/controllers/AdeudoController.js:15:11)
+
+[2025-09-10T00:31:46.077Z] error: no existe la columna aj.empresa_cif
+    at C:\Users\LuisValle\Desktop\Control-Clientes\backend\node_modules\pg-pool\index.js:45:11
+    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
+    at async AdeudoService.obtenerTodosAdeudosPorEmpresa (file:///C:/Users/LuisValle/Desktop/Control-Clientes/backend/services/AdeudoService.js:87:24)
+    at async AdeudoController.getAdeudosByEmpresa (file:///C:/Users/LuisValle/Desktop/Control-Clientes/backend/controllers/AdeudoController.js:15:11)
+
+[2025-09-10T00:31:46.234Z] error: no existe la columna aj.empresa_cif
+    at C:\Users\LuisValle\Desktop\Control-Clientes\backend\node_modules\pg-pool\index.js:45:11
+    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
+    at async AdeudoService.obtenerTodosAdeudosPorEmpresa (file:///C:/Users/LuisValle/Desktop/Control-Clientes/backend/services/AdeudoService.js:87:24)
+    at async AdeudoController.getAdeudosByEmpresa (file:///C:/Users/LuisValle/Desktop/Control-Clientes/backend/controllers/AdeudoController.js:15:11)
+
+[2025-09-10T00:31:46.358Z] error: no existe la columna aj.empresa_cif
+    at C:\Users\LuisValle\Desktop\Control-Clientes\backend\node_modules\pg-pool\index.js:45:11
+    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
+    at async AdeudoService.obtenerTodosAdeudosPorEmpresa (file:///C:/Users/LuisValle/Desktop/Control-Clientes/backend/services/AdeudoService.js:87:24)
+    at async AdeudoController.getAdeudosByEmpresa (file:///C:/Users/LuisValle/Desktop/Control-Clientes/backend/controllers/AdeudoController.js:15:11)
+
+[2025-09-15T21:15:43.884Z] error: no existe la relación «ajuste»
+    at C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\pg-pool\index.js:45:11
+    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at async AdeudoService.obtenerTodosAdeudosPorEmpresa (file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/services/AdeudoService.js:87:24)
+    at async AdeudoController.getAdeudosByEmpresa (file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/controllers/AdeudoController.js:15:11)
+
+[2025-09-15T21:15:44.964Z] error: no existe la relación «ajuste»
+    at C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\pg-pool\index.js:45:11
+    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at async AdeudoService.obtenerTodosAdeudosPorEmpresa (file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/services/AdeudoService.js:87:24)
+    at async AdeudoController.getAdeudosByEmpresa (file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/controllers/AdeudoController.js:15:11)
+
+[2025-09-15T21:15:46.320Z] error: no existe la relación «ajuste»
+    at C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\pg-pool\index.js:45:11
+    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at async AdeudoService.obtenerTodosAdeudosPorEmpresa (file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/services/AdeudoService.js:87:24)
+    at async AdeudoController.getAdeudosByEmpresa (file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/controllers/AdeudoController.js:15:11)
+
+[2025-09-15T21:15:52.312Z] error: no existe la relación «ajuste»
+    at C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\pg-pool\index.js:45:11
+    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at async AdeudoService.obtenerTodosAdeudosPorEmpresa (file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/services/AdeudoService.js:87:24)
+    at async AdeudoController.getAdeudosByEmpresa (file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/controllers/AdeudoController.js:15:11)
+
+[2025-09-15T21:15:52.376Z] error: no existe la relación «ajuste»
+    at C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\pg-pool\index.js:45:11
+    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at async AdeudoService.obtenerTodosAdeudosPorEmpresa (file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/services/AdeudoService.js:87:24)
+    at async AdeudoController.getAdeudosByEmpresa (file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/controllers/AdeudoController.js:15:11)
+
+[2025-09-15T21:15:52.440Z] error: no existe la relación «ajuste»
+    at C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\pg-pool\index.js:45:11
+    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at async AdeudoService.obtenerTodosAdeudosPorEmpresa (file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/services/AdeudoService.js:87:24)
+    at async AdeudoController.getAdeudosByEmpresa (file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/controllers/AdeudoController.js:15:11)
+
+[2025-09-15T21:18:03.943Z] error: el valor nulo en la columna «estado» de la relación «adeudo» viola la restricción de no nulo
+    at C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\pg\lib\client.js:545:17
+    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at async Repositorio.insertar (file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/repositories/globalPersistence.js:43:28)
+    at async file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/services/AdeudoService.js:21:37
+    at async AdeudoService.withTransaction (file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/services/BaseService.js:13:28)
+    at async AdeudoService.insertarAdeudoCompleto (file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/services/AdeudoService.js:19:16)
+    at async AdeudoController.createAdeudo (file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/controllers/AdeudoController.js:57:22)
+
+[2025-09-15T21:19:03.047Z] error: no existe la columna «num_protocolo» en la relación «protocolo»
+    at C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\pg\lib\client.js:545:17
+    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at async Repositorio.insertar (file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/repositories/globalPersistence.js:43:28)
+    at async file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/services/AdeudoService.js:25:17
+    at async AdeudoService.withTransaction (file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/services/BaseService.js:13:28)
+    at async AdeudoService.insertarAdeudoCompleto (file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/services/AdeudoService.js:19:16)
+    at async AdeudoController.createAdeudo (file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/controllers/AdeudoController.js:57:22)
+
+[2025-09-15T21:20:08.068Z] error: no existe la relación «ajuste»
+    at C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\pg-pool\index.js:45:11
+    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at async AdeudoService.obtenerTodosAdeudosPorEmpresa (file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/services/AdeudoService.js:87:24)
+    at async AdeudoController.getAdeudosByEmpresa (file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/controllers/AdeudoController.js:15:11)
+
+[2025-09-15T21:20:08.138Z] error: no existe la relación «ajuste»
+    at C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\pg-pool\index.js:45:11
+    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at async AdeudoService.obtenerTodosAdeudosPorEmpresa (file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/services/AdeudoService.js:87:24)
+    at async AdeudoController.getAdeudosByEmpresa (file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/controllers/AdeudoController.js:15:11)
+
+[2025-09-15T21:20:08.200Z] error: no existe la relación «ajuste»
+    at C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\pg-pool\index.js:45:11
+    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at async AdeudoService.obtenerTodosAdeudosPorEmpresa (file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/services/AdeudoService.js:87:24)
+    at async AdeudoController.getAdeudosByEmpresa (file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/controllers/AdeudoController.js:15:11)
+
+[2025-09-15T21:20:09.429Z] error: no existe la relación «ajuste»
+    at C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\pg-pool\index.js:45:11
+    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at async AdeudoService.obtenerTodosAdeudosPorEmpresa (file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/services/AdeudoService.js:87:24)
+    at async AdeudoController.getAdeudosByEmpresa (file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/controllers/AdeudoController.js:15:11)
+
+[2025-09-15T21:20:09.491Z] error: no existe la relación «ajuste»
+    at C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\pg-pool\index.js:45:11
+    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at async AdeudoService.obtenerTodosAdeudosPorEmpresa (file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/services/AdeudoService.js:87:24)
+    at async AdeudoController.getAdeudosByEmpresa (file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/controllers/AdeudoController.js:15:11)
+
+[2025-09-15T21:20:09.552Z] error: no existe la relación «ajuste»
+    at C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\pg-pool\index.js:45:11
+    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at async AdeudoService.obtenerTodosAdeudosPorEmpresa (file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/services/AdeudoService.js:87:24)
+    at async AdeudoController.getAdeudosByEmpresa (file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/controllers/AdeudoController.js:15:11)
+
+[2025-09-15T21:20:10.346Z] error: no existe la relación «ajuste»
+    at C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\pg-pool\index.js:45:11
+    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at async AdeudoService.obtenerTodosAdeudosPorEmpresa (file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/services/AdeudoService.js:87:24)
+    at async AdeudoController.getAdeudosByEmpresa (file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/controllers/AdeudoController.js:15:11)
+
+[2025-09-15T21:20:10.415Z] error: no existe la relación «ajuste»
+    at C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\pg-pool\index.js:45:11
+    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at async AdeudoService.obtenerTodosAdeudosPorEmpresa (file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/services/AdeudoService.js:87:24)
+    at async AdeudoController.getAdeudosByEmpresa (file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/controllers/AdeudoController.js:15:11)
+
+[2025-09-15T21:20:10.472Z] error: no existe la relación «ajuste»
+    at C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\pg-pool\index.js:45:11
+    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at async AdeudoService.obtenerTodosAdeudosPorEmpresa (file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/services/AdeudoService.js:87:24)
+    at async AdeudoController.getAdeudosByEmpresa (file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/controllers/AdeudoController.js:15:11)
+
+[2025-09-15T21:21:24.690Z] error: error de sintaxis en o cerca de «FROM»
+    at C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\pg-pool\index.js:45:11
+    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at async AdeudoService.obtenerTodosAdeudosPorEmpresa (file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/services/AdeudoService.js:82:24)
+    at async AdeudoController.getAdeudosByEmpresa (file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/controllers/AdeudoController.js:15:11)
+
+[2025-09-15T21:21:24.748Z] error: error de sintaxis en o cerca de «FROM»
+    at C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\pg-pool\index.js:45:11
+    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at async AdeudoService.obtenerTodosAdeudosPorEmpresa (file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/services/AdeudoService.js:82:24)
+    at async AdeudoController.getAdeudosByEmpresa (file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/controllers/AdeudoController.js:15:11)
+
+[2025-09-15T21:21:24.800Z] error: error de sintaxis en o cerca de «FROM»
+    at C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\pg-pool\index.js:45:11
+    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at async AdeudoService.obtenerTodosAdeudosPorEmpresa (file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/services/AdeudoService.js:82:24)
+    at async AdeudoController.getAdeudosByEmpresa (file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/controllers/AdeudoController.js:15:11)
+
+[2025-09-16T00:11:36.553Z] error: structure of query does not match function result type
+    at C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\pg-pool\index.js:45:11
+    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at async AdeudoService.obtenerTodosAdeudosPorEmpresaAgrupados (file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/services/AdeudoService.js:150:24)
+    at async AdeudoController.getAdeudosByEmpresa (file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/controllers/AdeudoController.js:18:18)
+
+[2025-09-16T00:11:37.867Z] error: structure of query does not match function result type
+    at C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\pg-pool\index.js:45:11
+    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at async AdeudoService.obtenerTodosAdeudosPorEmpresaAgrupados (file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/services/AdeudoService.js:150:24)
+    at async AdeudoController.getAdeudosByEmpresa (file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/controllers/AdeudoController.js:18:18)
+
+[2025-09-16T00:14:39.255Z] error: structure of query does not match function result type
+    at C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\pg-pool\index.js:45:11
+    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at async AdeudoService.obtenerTodosAdeudosPorEmpresaAgrupados (file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/services/AdeudoService.js:150:24)
+    at async AdeudoController.getAdeudosByEmpresa (file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/controllers/AdeudoController.js:18:18)
+
+[2025-09-16T00:20:18.558Z] error: structure of query does not match function result type
+    at C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\pg-pool\index.js:45:11
+    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at async AdeudoService.obtenerTodosAdeudosPorEmpresaAgrupados (file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/services/AdeudoService.js:150:24)
+    at async AdeudoController.getAdeudosByEmpresa (file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/controllers/AdeudoController.js:18:18)
+
+[2025-09-16T00:21:53.451Z] error: structure of query does not match function result type
+    at C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\pg-pool\index.js:45:11
+    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at async AdeudoService.obtenerTodosAdeudosPorEmpresaAgrupados (file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/services/AdeudoService.js:150:24)
+    at async AdeudoController.getAdeudosByEmpresa (file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/controllers/AdeudoController.js:19:18)
+
+[2025-09-16T00:24:42.223Z] error: structure of query does not match function result type
+    at C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\pg-pool\index.js:45:11
+    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at async AdeudoService.obtenerTodosAdeudosPorEmpresaAgrupados (file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/services/AdeudoService.js:150:24)
+    at async AdeudoController.getAdeudosByEmpresa (file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/controllers/AdeudoController.js:19:18)
+
+[2025-09-16T00:25:21.206Z] error: structure of query does not match function result type
+    at C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\pg-pool\index.js:45:11
+    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at async AdeudoService.obtenerTodosAdeudosPorEmpresaAgrupados (file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/services/AdeudoService.js:150:24)
+    at async AdeudoController.getAdeudosByEmpresa (file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/controllers/AdeudoController.js:19:18)
+
+[2025-09-16T00:27:50.741Z] error: structure of query does not match function result type
+    at C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\pg-pool\index.js:45:11
+    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at async AdeudoService.obtenerTodosAdeudosPorEmpresaAgrupados (file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/services/AdeudoService.js:150:24)
+    at async AdeudoController.getAdeudosByEmpresa (file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/controllers/AdeudoController.js:19:18)
+
+[2025-09-16T00:29:02.655Z] error: structure of query does not match function result type
+    at C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\pg-pool\index.js:45:11
+    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at async AdeudoService.obtenerTodosAdeudosPorEmpresaAgrupados (file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/services/AdeudoService.js:151:24)
+    at async AdeudoController.getAdeudosByEmpresa (file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/controllers/AdeudoController.js:18:18)
+
+[2025-09-16T00:35:02.277Z] error: el valor nulo en la columna «num_protocolo» de la relación «protocolo» viola la restricción de no nulo
+    at C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\pg\lib\client.js:545:17
+    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at async Repositorio.insertar (file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/repositories/globalPersistence.js:43:28)
+    at async file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/services/AdeudoService.js:25:17
+    at async AdeudoService.withTransaction (file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/services/BaseService.js:13:28)
+    at async AdeudoService.insertarAdeudoCompleto (file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/services/AdeudoService.js:19:16)
+    at async AdeudoController.createAdeudo (file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/controllers/AdeudoController.js:65:22)
+
+[2025-09-16T00:37:47.512Z] error: el valor nulo en la columna «num_protocolo» de la relación «protocolo» viola la restricción de no nulo
+    at C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\pg\lib\client.js:545:17
+    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at async Repositorio.insertar (file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/repositories/globalPersistence.js:43:28)
+    at async file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/services/AdeudoService.js:25:17
+    at async AdeudoService.withTransaction (file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/services/BaseService.js:13:28)
+    at async AdeudoService.insertarAdeudoCompleto (file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/services/AdeudoService.js:19:16)
+    at async AdeudoController.createAdeudo (file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/controllers/AdeudoController.js:67:22)
+
+[2025-09-16T00:40:24.074Z] error: el valor nulo en la columna «num_protocolo» de la relación «protocolo» viola la restricción de no nulo
+    at C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\pg\lib\client.js:545:17
+    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at async Repositorio.insertar (file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/repositories/globalPersistence.js:43:28)
+    at async file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/services/AdeudoService.js:25:17
+    at async AdeudoService.withTransaction (file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/services/BaseService.js:13:28)
+    at async AdeudoService.insertarAdeudoCompleto (file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/services/AdeudoService.js:19:16)
+    at async AdeudoController.createAdeudo (file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/controllers/AdeudoController.js:67:22)
+
+[2025-09-16T00:40:38.150Z] error: el valor nulo en la columna «num_protocolo» de la relación «protocolo» viola la restricción de no nulo
+    at C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\pg\lib\client.js:545:17
+    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at async Repositorio.insertar (file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/repositories/globalPersistence.js:43:28)
+    at async file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/services/AdeudoService.js:25:17
+    at async AdeudoService.withTransaction (file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/services/BaseService.js:13:28)
+    at async AdeudoService.insertarAdeudoCompleto (file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/services/AdeudoService.js:19:16)
+    at async AdeudoController.createAdeudo (file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/controllers/AdeudoController.js:68:22)
+
+[2025-09-17T00:35:52.942Z] error: el valor nulo en la columna «cs_iva» de la relación «protocolo» viola la restricción de no nulo
+    at C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\pg\lib\client.js:545:17
+    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at async Repositorio.insertar (file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/repositories/globalPersistence.js:43:28)
+    at async file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/services/AdeudoService.js:298:29
+    at async Promise.all (index 0)
+    at async file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/services/AdeudoService.js:290:17
+    at async AdeudoService.withTransaction (file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/services/BaseService.js:13:28)
+    at async AdeudoService.updateAdeudos (file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/services/AdeudoService.js:267:16)
+    at async AdeudoController.updateAdeudos (file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/controllers/AdeudoController.js:112:22)
+
+[2025-09-17T02:18:56.273Z] error: no se puede insertar un valor no-predeterminado en la columna «iva»
+    at C:\Users\LuisValle\Desktop\Control-Clientes\backend\node_modules\pg\lib\client.js:545:17
+    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
+    at async Repositorio.insertar (file:///C:/Users/LuisValle/Desktop/Control-Clientes/backend/repositories/globalPersistence.js:43:28)
+    at async file:///C:/Users/LuisValle/Desktop/Control-Clientes/backend/services/AdeudoService.js:21:37
+    at async AdeudoService.withTransaction (file:///C:/Users/LuisValle/Desktop/Control-Clientes/backend/services/BaseService.js:13:28)
+    at async AdeudoService.insertarAdeudoCompleto (file:///C:/Users/LuisValle/Desktop/Control-Clientes/backend/services/AdeudoService.js:19:16)
+    at async AdeudoController.createAdeudo (file:///C:/Users/LuisValle/Desktop/Control-Clientes/backend/controllers/AdeudoController.js:65:22)
+
+[2025-09-17T02:19:59.204Z] error: no se puede insertar un valor no-predeterminado en la columna «iva»
+    at C:\Users\LuisValle\Desktop\Control-Clientes\backend\node_modules\pg\lib\client.js:545:17
+    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
+    at async Repositorio.insertar (file:///C:/Users/LuisValle/Desktop/Control-Clientes/backend/repositories/globalPersistence.js:43:28)
+    at async file:///C:/Users/LuisValle/Desktop/Control-Clientes/backend/services/AdeudoService.js:21:37
+    at async AdeudoService.withTransaction (file:///C:/Users/LuisValle/Desktop/Control-Clientes/backend/services/BaseService.js:13:28)
+    at async AdeudoService.insertarAdeudoCompleto (file:///C:/Users/LuisValle/Desktop/Control-Clientes/backend/services/AdeudoService.js:19:16)
+    at async AdeudoController.createAdeudo (file:///C:/Users/LuisValle/Desktop/Control-Clientes/backend/controllers/AdeudoController.js:65:22)
+
+[2025-09-17T02:25:34.832Z] error: no se puede insertar un valor no-predeterminado en la columna «iva»
+    at C:\Users\LuisValle\Desktop\Control-Clientes\backend\node_modules\pg\lib\client.js:545:17
+    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
+    at async Repositorio.insertar (file:///C:/Users/LuisValle/Desktop/Control-Clientes/backend/repositories/globalPersistence.js:43:28)
+    at async file:///C:/Users/LuisValle/Desktop/Control-Clientes/backend/services/AdeudoService.js:21:37
+    at async AdeudoService.withTransaction (file:///C:/Users/LuisValle/Desktop/Control-Clientes/backend/services/BaseService.js:13:28)
+    at async AdeudoService.insertarAdeudoCompleto (file:///C:/Users/LuisValle/Desktop/Control-Clientes/backend/services/AdeudoService.js:19:16)
+    at async AdeudoController.createAdeudo (file:///C:/Users/LuisValle/Desktop/Control-Clientes/backend/controllers/AdeudoController.js:65:22)
+
+[2025-09-17T02:27:13.388Z] error: no se puede insertar un valor no-predeterminado en la columna «iva»
+    at C:\Users\LuisValle\Desktop\Control-Clientes\backend\node_modules\pg\lib\client.js:545:17
+    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
+    at async Repositorio.insertar (file:///C:/Users/LuisValle/Desktop/Control-Clientes/backend/repositories/globalPersistence.js:43:28)
+    at async file:///C:/Users/LuisValle/Desktop/Control-Clientes/backend/services/AdeudoService.js:21:37
+    at async AdeudoService.withTransaction (file:///C:/Users/LuisValle/Desktop/Control-Clientes/backend/services/BaseService.js:13:28)
+    at async AdeudoService.insertarAdeudoCompleto (file:///C:/Users/LuisValle/Desktop/Control-Clientes/backend/services/AdeudoService.js:19:16)
+    at async AdeudoController.createAdeudo (file:///C:/Users/LuisValle/Desktop/Control-Clientes/backend/controllers/AdeudoController.js:65:22)
+
+[2025-09-17T02:30:32.251Z] error: no se puede insertar un valor no-predeterminado en la columna «iva»
+    at C:\Users\LuisValle\Desktop\Control-Clientes\backend\node_modules\pg\lib\client.js:545:17
+    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
+    at async Repositorio.insertar (file:///C:/Users/LuisValle/Desktop/Control-Clientes/backend/repositories/globalPersistence.js:43:28)
+    at async file:///C:/Users/LuisValle/Desktop/Control-Clientes/backend/services/AdeudoService.js:21:37
+    at async AdeudoService.withTransaction (file:///C:/Users/LuisValle/Desktop/Control-Clientes/backend/services/BaseService.js:13:28)
+    at async AdeudoService.insertarAdeudoCompleto (file:///C:/Users/LuisValle/Desktop/Control-Clientes/backend/services/AdeudoService.js:19:16)
+    at async AdeudoController.createAdeudo (file:///C:/Users/LuisValle/Desktop/Control-Clientes/backend/controllers/AdeudoController.js:65:22)
+
+[2025-09-17T02:42:11.448Z] error: no existe la función obtener_adeudos_por_empresa(unknown)
+    at C:\Users\LuisValle\Desktop\Control-Clientes\backend\node_modules\pg-pool\index.js:45:11
+    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
+    at async AdeudoService.obtenerTodosAdeudosPorEmpresaAgrupados (file:///C:/Users/LuisValle/Desktop/Control-Clientes/backend/services/AdeudoService.js:158:20)
+    at async AdeudoController.getAdeudosByEmpresa (file:///C:/Users/LuisValle/Desktop/Control-Clientes/backend/controllers/AdeudoController.js:18:18)
+
+[2025-09-17T02:45:32.277Z] error: no existe la función obtener_adeudos_por_empresa(unknown)
+    at C:\Users\LuisValle\Desktop\Control-Clientes\backend\node_modules\pg-pool\index.js:45:11
+    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
+    at async AdeudoService.obtenerTodosAdeudosPorEmpresaAgrupados (file:///C:/Users/LuisValle/Desktop/Control-Clientes/backend/services/AdeudoService.js:158:20)
+    at async AdeudoController.getAdeudosByEmpresa (file:///C:/Users/LuisValle/Desktop/Control-Clientes/backend/controllers/AdeudoController.js:18:18)
+
+[2025-09-18T18:36:41.542Z] Error: Error de validación en factura NN3: "anticipo_pagado" is not allowed
+    at AdeudoService.updateAdeudos (file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/services/AdeudoService.js:251:24)
+    at AdeudoController.updateAdeudos (file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/controllers/AdeudoController.js:109:41)
+    at Layer.handle [as handle_request] (C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\express\lib\router\layer.js:95:5)
+    at next (C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\express\lib\router\route.js:149:13)
+    at Route.dispatch (C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\express\lib\router\route.js:119:3)
+    at Layer.handle [as handle_request] (C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\express\lib\router\layer.js:95:5)
+    at C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\express\lib\router\index.js:284:15
+    at Function.process_params (C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\express\lib\router\index.js:346:12)
+    at next (C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\express\lib\router\index.js:280:10)
+    at Function.handle (C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\express\lib\router\index.js:175:3)
+    at router (C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\express\lib\router\index.js:47:12)
+    at Layer.handle [as handle_request] (C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\express\lib\router\layer.js:95:5)
+    at trim_prefix (C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\express\lib\router\index.js:328:13)
+    at C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\express\lib\router\index.js:286:9
+    at Function.process_params (C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\express\lib\router\index.js:346:12)
+    at next (C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\express\lib\router\index.js:280:10)
+
+[2025-09-18T18:40:10.558Z] Error: No se pudo actualizar en adeudo
+    at Repositorio.actualizarPorId (file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/repositories/globalPersistence.js:153:19)
+    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at async file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/services/AdeudoService.js:315:13
+    at async Promise.all (index 0)
+    at async file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/services/AdeudoService.js:305:9
+    at async AdeudoService.withTransaction (file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/services/BaseService.js:13:28)
+    at async AdeudoService.updateAdeudos (file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/services/AdeudoService.js:259:12)
+    at async AdeudoController.updateAdeudos (file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/controllers/AdeudoController.js:109:22)
+
+[2025-09-18T18:46:14.201Z] Error: No se pudo actualizar en adeudo
+    at Repositorio.actualizarPorId (file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/repositories/globalPersistence.js:153:19)
+    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at async file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/services/AdeudoService.js:315:13
+    at async Promise.all (index 0)
+    at async file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/services/AdeudoService.js:305:9
+    at async AdeudoService.withTransaction (file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/services/BaseService.js:13:28)
+    at async AdeudoService.updateAdeudos (file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/services/AdeudoService.js:259:12)
+    at async AdeudoController.updateAdeudos (file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/controllers/AdeudoController.js:109:22)
+
+[2025-09-18T18:46:48.695Z] Error: num_factura es obligatorio en cambios_protocolo
+    at AdeudoService.updateAdeudos (file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/services/AdeudoService.js:256:31)
+    at AdeudoController.updateAdeudos (file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/controllers/AdeudoController.js:109:41)
+    at Layer.handle [as handle_request] (C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\express\lib\router\layer.js:95:5)
+    at next (C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\express\lib\router\route.js:149:13)
+    at Route.dispatch (C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\express\lib\router\route.js:119:3)
+    at Layer.handle [as handle_request] (C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\express\lib\router\layer.js:95:5)
+    at C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\express\lib\router\index.js:284:15
+    at Function.process_params (C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\express\lib\router\index.js:346:12)
+    at next (C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\express\lib\router\index.js:280:10)
+    at Function.handle (C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\express\lib\router\index.js:175:3)
+    at router (C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\express\lib\router\index.js:47:12)
+    at Layer.handle [as handle_request] (C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\express\lib\router\layer.js:95:5)
+    at trim_prefix (C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\express\lib\router\index.js:328:13)
+    at C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\express\lib\router\index.js:286:9
+    at Function.process_params (C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\express\lib\router\index.js:346:12)
+    at next (C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\express\lib\router\index.js:280:10)
+
+[2025-09-18T18:56:34.963Z] Error: num_factura es obligatorio en cambios_protocolo
+    at AdeudoService.updateAdeudos (file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/services/AdeudoService.js:256:31)
+    at AdeudoController.updateAdeudos (file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/controllers/AdeudoController.js:109:41)
+    at Layer.handle [as handle_request] (C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\express\lib\router\layer.js:95:5)
+    at next (C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\express\lib\router\route.js:149:13)
+    at Route.dispatch (C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\express\lib\router\route.js:119:3)
+    at Layer.handle [as handle_request] (C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\express\lib\router\layer.js:95:5)
+    at C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\express\lib\router\index.js:284:15
+    at Function.process_params (C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\express\lib\router\index.js:346:12)
+    at next (C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\express\lib\router\index.js:280:10)
+    at Function.handle (C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\express\lib\router\index.js:175:3)
+    at router (C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\express\lib\router\index.js:47:12)
+    at Layer.handle [as handle_request] (C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\express\lib\router\layer.js:95:5)
+    at trim_prefix (C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\express\lib\router\index.js:328:13)
+    at C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\express\lib\router\index.js:286:9
+    at Function.process_params (C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\express\lib\router\index.js:346:12)
+    at next (C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\express\lib\router\index.js:280:10)
+
+[2025-09-18T18:57:26.097Z] Error: No se pudo actualizar en adeudo
+    at Repositorio.actualizarPorId (file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/repositories/globalPersistence.js:153:19)
+    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at async file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/services/AdeudoService.js:315:13
+    at async Promise.all (index 0)
+    at async file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/services/AdeudoService.js:305:9
+    at async AdeudoService.withTransaction (file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/services/BaseService.js:13:28)
+    at async AdeudoService.updateAdeudos (file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/services/AdeudoService.js:259:12)
+    at async AdeudoController.updateAdeudos (file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/controllers/AdeudoController.js:109:22)
+
+[2025-09-18T21:14:41.000Z] Error: Error de validación en factura null: "num_factura_original" must be a string
+    at AdeudoService.updateAdeudos (file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/services/AdeudoService.js:253:24)
+    at AdeudoController.updateAdeudos (file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/controllers/AdeudoController.js:109:41)
+    at Layer.handle [as handle_request] (C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\express\lib\router\layer.js:95:5)
+    at next (C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\express\lib\router\route.js:149:13)
+    at Route.dispatch (C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\express\lib\router\route.js:119:3)
+    at Layer.handle [as handle_request] (C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\express\lib\router\layer.js:95:5)
+    at C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\express\lib\router\index.js:284:15
+    at Function.process_params (C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\express\lib\router\index.js:346:12)
+    at next (C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\express\lib\router\index.js:280:10)
+    at Function.handle (C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\express\lib\router\index.js:175:3)
+    at router (C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\express\lib\router\index.js:47:12)
+    at Layer.handle [as handle_request] (C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\express\lib\router\layer.js:95:5)
+    at trim_prefix (C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\express\lib\router\index.js:328:13)
+    at C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\express\lib\router\index.js:286:9
+    at Function.process_params (C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\express\lib\router\index.js:346:12)
+    at next (C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\express\lib\router\index.js:280:10)
+
+[2025-09-18T21:18:04.010Z] Error: Error de validación en factura null: "num_factura_original" must be a string
+    at AdeudoService.updateAdeudos (file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/services/AdeudoService.js:256:24)
+    at AdeudoController.updateAdeudos (file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/controllers/AdeudoController.js:109:41)
+    at Layer.handle [as handle_request] (C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\express\lib\router\layer.js:95:5)
+    at next (C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\express\lib\router\route.js:149:13)
+    at Route.dispatch (C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\express\lib\router\route.js:119:3)
+    at Layer.handle [as handle_request] (C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\express\lib\router\layer.js:95:5)
+    at C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\express\lib\router\index.js:284:15
+    at Function.process_params (C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\express\lib\router\index.js:346:12)
+    at next (C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\express\lib\router\index.js:280:10)
+    at Function.handle (C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\express\lib\router\index.js:175:3)
+    at router (C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\express\lib\router\index.js:47:12)
+    at Layer.handle [as handle_request] (C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\express\lib\router\layer.js:95:5)
+    at trim_prefix (C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\express\lib\router\index.js:328:13)
+    at C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\express\lib\router\index.js:286:9
+    at Function.process_params (C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\express\lib\router\index.js:346:12)
+    at next (C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\express\lib\router\index.js:280:10)
+
+[2025-09-18T21:59:50.259Z] Error: Error de validación en factura NF1: "concepto" is required
+    at AdeudoService.updateAdeudos (file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/services/AdeudoService.js:254:24)
+    at AdeudoController.updateAdeudos (file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/controllers/AdeudoController.js:109:41)
+    at Layer.handle [as handle_request] (C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\express\lib\router\layer.js:95:5)
+    at next (C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\express\lib\router\route.js:149:13)
+    at Route.dispatch (C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\express\lib\router\route.js:119:3)
+    at Layer.handle [as handle_request] (C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\express\lib\router\layer.js:95:5)
+    at C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\express\lib\router\index.js:284:15
+    at Function.process_params (C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\express\lib\router\index.js:346:12)
+    at next (C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\express\lib\router\index.js:280:10)
+    at Function.handle (C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\express\lib\router\index.js:175:3)
+    at router (C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\express\lib\router\index.js:47:12)
+    at Layer.handle [as handle_request] (C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\express\lib\router\layer.js:95:5)
+    at trim_prefix (C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\express\lib\router\index.js:328:13)
+    at C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\express\lib\router\index.js:286:9
+    at Function.process_params (C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\express\lib\router\index.js:346:12)
+    at next (C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\express\lib\router\index.js:280:10)
+
+[2025-09-18T22:06:45.802Z] Error: Error de validación en factura NF1: "concepto" is required
+    at AdeudoService.updateAdeudos (file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/services/AdeudoService.js:254:24)
+    at AdeudoController.updateAdeudos (file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/controllers/AdeudoController.js:109:41)
+    at Layer.handle [as handle_request] (C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\express\lib\router\layer.js:95:5)
+    at next (C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\express\lib\router\route.js:149:13)
+    at Route.dispatch (C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\express\lib\router\route.js:119:3)
+    at Layer.handle [as handle_request] (C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\express\lib\router\layer.js:95:5)
+    at C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\express\lib\router\index.js:284:15
+    at Function.process_params (C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\express\lib\router\index.js:346:12)
+    at next (C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\express\lib\router\index.js:280:10)
+    at Function.handle (C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\express\lib\router\index.js:175:3)
+    at router (C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\express\lib\router\index.js:47:12)
+    at Layer.handle [as handle_request] (C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\express\lib\router\layer.js:95:5)
+    at trim_prefix (C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\express\lib\router\index.js:328:13)
+    at C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\express\lib\router\index.js:286:9
+    at Function.process_params (C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\express\lib\router\index.js:346:12)
+    at next (C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\express\lib\router\index.js:280:10)
+
+[2025-09-18T22:07:27.754Z] Error: Error de validación en factura NF1: "concepto" is required
+    at AdeudoService.updateAdeudos (file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/services/AdeudoService.js:254:24)
+    at AdeudoController.updateAdeudos (file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/controllers/AdeudoController.js:109:41)
+    at Layer.handle [as handle_request] (C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\express\lib\router\layer.js:95:5)
+    at next (C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\express\lib\router\route.js:149:13)
+    at Route.dispatch (C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\express\lib\router\route.js:119:3)
+    at Layer.handle [as handle_request] (C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\express\lib\router\layer.js:95:5)
+    at C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\express\lib\router\index.js:284:15
+    at Function.process_params (C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\express\lib\router\index.js:346:12)
+    at next (C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\express\lib\router\index.js:280:10)
+    at Function.handle (C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\express\lib\router\index.js:175:3)
+    at router (C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\express\lib\router\index.js:47:12)
+    at Layer.handle [as handle_request] (C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\express\lib\router\layer.js:95:5)
+    at trim_prefix (C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\express\lib\router\index.js:328:13)
+    at C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\express\lib\router\index.js:286:9
+    at Function.process_params (C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\express\lib\router\index.js:346:12)
+    at next (C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\express\lib\router\index.js:280:10)
+
+[2025-09-18T22:09:38.594Z] Error: Error de validación en factura NF1: "proveedor" is required
+    at AdeudoService.updateAdeudos (file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/services/AdeudoService.js:254:24)
+    at AdeudoController.updateAdeudos (file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/controllers/AdeudoController.js:109:41)
+    at Layer.handle [as handle_request] (C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\express\lib\router\layer.js:95:5)
+    at next (C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\express\lib\router\route.js:149:13)
+    at Route.dispatch (C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\express\lib\router\route.js:119:3)
+    at Layer.handle [as handle_request] (C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\express\lib\router\layer.js:95:5)
+    at C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\express\lib\router\index.js:284:15
+    at Function.process_params (C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\express\lib\router\index.js:346:12)
+    at next (C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\express\lib\router\index.js:280:10)
+    at Function.handle (C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\express\lib\router\index.js:175:3)
+    at router (C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\express\lib\router\index.js:47:12)
+    at Layer.handle [as handle_request] (C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\express\lib\router\layer.js:95:5)
+    at trim_prefix (C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\express\lib\router\index.js:328:13)
+    at C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\express\lib\router\index.js:286:9
+    at Function.process_params (C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\express\lib\router\index.js:346:12)
+    at next (C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\express\lib\router\index.js:280:10)
+
+[2025-09-18T22:11:54.581Z] Error: Error de validación en factura NF1: "proveedor" is required
+    at AdeudoService.updateAdeudos (file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/services/AdeudoService.js:254:24)
+    at AdeudoController.updateAdeudos (file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/controllers/AdeudoController.js:109:41)
+    at Layer.handle [as handle_request] (C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\express\lib\router\layer.js:95:5)
+    at next (C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\express\lib\router\route.js:149:13)
+    at Route.dispatch (C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\express\lib\router\route.js:119:3)
+    at Layer.handle [as handle_request] (C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\express\lib\router\layer.js:95:5)
+    at C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\express\lib\router\index.js:284:15
+    at Function.process_params (C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\express\lib\router\index.js:346:12)
+    at next (C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\express\lib\router\index.js:280:10)
+    at Function.handle (C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\express\lib\router\index.js:175:3)
+    at router (C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\express\lib\router\index.js:47:12)
+    at Layer.handle [as handle_request] (C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\express\lib\router\layer.js:95:5)
+    at trim_prefix (C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\express\lib\router\index.js:328:13)
+    at C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\express\lib\router\index.js:286:9
+    at Function.process_params (C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\express\lib\router\index.js:346:12)
+    at next (C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\express\lib\router\index.js:280:10)
+
+[2025-09-18T22:12:51.648Z] Error: Error de validación en factura (nuevo): "proveedor" is required
+    at AdeudoService.updateAdeudos (file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/services/AdeudoService.js:254:24)
+    at AdeudoController.updateAdeudos (file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/controllers/AdeudoController.js:109:41)
+    at Layer.handle [as handle_request] (C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\express\lib\router\layer.js:95:5)
+    at next (C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\express\lib\router\route.js:149:13)
+    at Route.dispatch (C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\express\lib\router\route.js:119:3)
+    at Layer.handle [as handle_request] (C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\express\lib\router\layer.js:95:5)
+    at C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\express\lib\router\index.js:284:15
+    at Function.process_params (C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\express\lib\router\index.js:346:12)
+    at next (C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\express\lib\router\index.js:280:10)
+    at Function.handle (C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\express\lib\router\index.js:175:3)
+    at router (C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\express\lib\router\index.js:47:12)
+    at Layer.handle [as handle_request] (C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\express\lib\router\layer.js:95:5)
+    at trim_prefix (C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\express\lib\router\index.js:328:13)
+    at C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\express\lib\router\index.js:286:9
+    at Function.process_params (C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\express\lib\router\index.js:346:12)
+    at next (C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\express\lib\router\index.js:280:10)
+
+[2025-09-18T22:19:02.338Z] TypeError: object is not iterable (cannot read property Symbol(Symbol.iterator))
+    at file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/services/AdeudoService.js:339:58
+    at Array.map (<anonymous>)
+    at file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/services/AdeudoService.js:330:22
+    at AdeudoService.withTransaction (file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/services/BaseService.js:13:34)
+    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at async AdeudoService.updateAdeudos (file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/services/AdeudoService.js:267:12)
+    at async AdeudoController.updateAdeudos (file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/controllers/AdeudoController.js:109:22)
+
+[2025-09-18T22:19:40.380Z] TypeError: object is not iterable (cannot read property Symbol(Symbol.iterator))
+    at file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/services/AdeudoService.js:339:58
+    at Array.map (<anonymous>)
+    at file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/services/AdeudoService.js:330:22
+    at AdeudoService.withTransaction (file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/services/BaseService.js:13:34)
+    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at async AdeudoService.updateAdeudos (file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/services/AdeudoService.js:267:12)
+    at async AdeudoController.updateAdeudos (file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/controllers/AdeudoController.js:109:22)
+
+[2025-09-18T22:20:26.690Z] Error: Error de validación en factura (nuevo): "proveedor" is required
+    at AdeudoService.updateAdeudos (file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/services/AdeudoService.js:254:24)
+    at AdeudoController.updateAdeudos (file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/controllers/AdeudoController.js:109:41)
+    at Layer.handle [as handle_request] (C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\express\lib\router\layer.js:95:5)
+    at next (C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\express\lib\router\route.js:149:13)
+    at Route.dispatch (C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\express\lib\router\route.js:119:3)
+    at Layer.handle [as handle_request] (C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\express\lib\router\layer.js:95:5)
+    at C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\express\lib\router\index.js:284:15
+    at Function.process_params (C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\express\lib\router\index.js:346:12)
+    at next (C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\express\lib\router\index.js:280:10)
+    at Function.handle (C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\express\lib\router\index.js:175:3)
+    at router (C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\express\lib\router\index.js:47:12)
+    at Layer.handle [as handle_request] (C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\express\lib\router\layer.js:95:5)
+    at trim_prefix (C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\express\lib\router\index.js:328:13)
+    at C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\express\lib\router\index.js:286:9
+    at Function.process_params (C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\express\lib\router\index.js:346:12)
+    at next (C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\express\lib\router\index.js:280:10)
+
+[2025-09-18T22:22:10.297Z] TypeError: object is not iterable (cannot read property Symbol(Symbol.iterator))
+    at file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/services/AdeudoService.js:339:58
+    at Array.map (<anonymous>)
+    at file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/services/AdeudoService.js:330:22
+    at AdeudoService.withTransaction (file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/services/BaseService.js:13:34)
+    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at async AdeudoService.updateAdeudos (file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/services/AdeudoService.js:267:12)
+    at async AdeudoController.updateAdeudos (file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/controllers/AdeudoController.js:109:22)
+
+[2025-09-18T22:31:14.438Z] TypeError: object is not iterable (cannot read property Symbol(Symbol.iterator))
+    at file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/services/AdeudoService.js:339:58
+    at Array.map (<anonymous>)
+    at file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/services/AdeudoService.js:330:22
+    at AdeudoService.withTransaction (file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/services/BaseService.js:13:34)
+    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at async AdeudoService.updateAdeudos (file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/services/AdeudoService.js:267:12)
+    at async AdeudoController.updateAdeudos (file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/controllers/AdeudoController.js:109:22)
+
+[2025-09-18T22:36:37.309Z] error: el valor nulo en la columna «empresa_cif» de la relación «adeudo» viola la restricción de no nulo
+    at C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\pg\lib\client.js:545:17
+    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at async Repositorio.insertar (file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/repositories/globalPersistence.js:43:28)
+    at async file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/services/AdeudoService.js:336:15
+    at async Promise.all (index 0)
+    at async file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/services/AdeudoService.js:329:9
+    at async AdeudoService.withTransaction (file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/services/BaseService.js:13:28)
+    at async AdeudoService.updateAdeudos (file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/services/AdeudoService.js:267:12)
+    at async AdeudoController.updateAdeudos (file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/controllers/AdeudoController.js:109:22)
+
+[2025-09-18T22:48:17.305Z] Error: Error de validación en factura (nuevo): "num_entrada_original" is not allowed
+    at AdeudoService.updateAdeudos (file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/services/AdeudoService.js:254:24)
+    at AdeudoController.updateAdeudos (file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/controllers/AdeudoController.js:109:41)
+    at Layer.handle [as handle_request] (C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\express\lib\router\layer.js:95:5)
+    at next (C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\express\lib\router\route.js:149:13)
+    at Route.dispatch (C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\express\lib\router\route.js:119:3)
+    at Layer.handle [as handle_request] (C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\express\lib\router\layer.js:95:5)
+    at C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\express\lib\router\index.js:284:15
+    at Function.process_params (C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\express\lib\router\index.js:346:12)
+    at next (C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\express\lib\router\index.js:280:10)
+    at Function.handle (C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\express\lib\router\index.js:175:3)
+    at router (C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\express\lib\router\index.js:47:12)
+    at Layer.handle [as handle_request] (C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\express\lib\router\layer.js:95:5)
+    at trim_prefix (C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\express\lib\router\index.js:328:13)
+    at C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\express\lib\router\index.js:286:9
+    at Function.process_params (C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\express\lib\router\index.js:346:12)
+    at next (C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\express\lib\router\index.js:280:10)
+
+[2025-09-18T22:50:32.809Z] error: no existe la columna «num_entrada_original» en la relación «adeudo»
+    at C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\pg\lib\client.js:545:17
+    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at async Repositorio.insertar (file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/repositories/globalPersistence.js:43:28)
+    at async file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/services/AdeudoService.js:337:15
+    at async Promise.all (index 0)
+    at async file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/services/AdeudoService.js:329:9
+    at async AdeudoService.withTransaction (file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/services/BaseService.js:13:28)
+    at async AdeudoService.updateAdeudos (file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/services/AdeudoService.js:267:12)
+    at async AdeudoController.updateAdeudos (file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/controllers/AdeudoController.js:109:22)
+
+[2025-09-18T22:52:12.853Z] ReferenceError: num_entrada_original is not defined
+    at file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/services/AdeudoService.js:342:32
+    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at async Promise.all (index 0)
+    at async file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/services/AdeudoService.js:330:9
+    at async AdeudoService.withTransaction (file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/services/BaseService.js:13:28)
+    at async AdeudoService.updateAdeudos (file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/services/AdeudoService.js:268:12)
+    at async AdeudoController.updateAdeudos (file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/controllers/AdeudoController.js:109:22)
+
+[2025-09-18T22:58:23.281Z] ReferenceError: num_factura is not defined
+    at file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/services/AdeudoService.js:343:38
+    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at async Promise.all (index 0)
+    at async file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/services/AdeudoService.js:330:9
+    at async AdeudoService.withTransaction (file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/services/BaseService.js:13:28)
+    at async AdeudoService.updateAdeudos (file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/services/AdeudoService.js:268:12)
+    at async AdeudoController.updateAdeudos (file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/controllers/AdeudoController.js:109:22)
+
+[2025-09-18T23:26:45.755Z] Error: num_factura es obligatorio en entrada_RMM
+    at AdeudoService.updateAdeudos (file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/services/AdeudoService.js:265:40)
+    at AdeudoController.updateAdeudos (file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/controllers/AdeudoController.js:109:41)
+    at Layer.handle [as handle_request] (C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\express\lib\router\layer.js:95:5)
+    at next (C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\express\lib\router\route.js:149:13)
+    at Route.dispatch (C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\express\lib\router\route.js:119:3)
+    at Layer.handle [as handle_request] (C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\express\lib\router\layer.js:95:5)
+    at C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\express\lib\router\index.js:284:15
+    at Function.process_params (C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\express\lib\router\index.js:346:12)
+    at next (C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\express\lib\router\index.js:280:10)
+    at Function.handle (C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\express\lib\router\index.js:175:3)
+    at router (C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\express\lib\router\index.js:47:12)
+    at Layer.handle [as handle_request] (C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\express\lib\router\layer.js:95:5)
+    at trim_prefix (C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\express\lib\router\index.js:328:13)
+    at C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\express\lib\router\index.js:286:9
+    at Function.process_params (C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\express\lib\router\index.js:346:12)
+    at next (C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\express\lib\router\index.js:280:10)
+
+[2025-09-18T23:29:01.974Z] Error: num_factura es obligatorio en entrada_RMM
+    at AdeudoService.updateAdeudos (file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/services/AdeudoService.js:265:40)
+    at AdeudoController.updateAdeudos (file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/controllers/AdeudoController.js:109:41)
+    at Layer.handle [as handle_request] (C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\express\lib\router\layer.js:95:5)
+    at next (C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\express\lib\router\route.js:149:13)
+    at Route.dispatch (C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\express\lib\router\route.js:119:3)
+    at Layer.handle [as handle_request] (C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\express\lib\router\layer.js:95:5)
+    at C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\express\lib\router\index.js:284:15
+    at Function.process_params (C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\express\lib\router\index.js:346:12)
+    at next (C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\express\lib\router\index.js:280:10)
+    at Function.handle (C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\express\lib\router\index.js:175:3)
+    at router (C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\express\lib\router\index.js:47:12)
+    at Layer.handle [as handle_request] (C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\express\lib\router\layer.js:95:5)
+    at trim_prefix (C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\express\lib\router\index.js:328:13)
+    at C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\express\lib\router\index.js:286:9
+    at Function.process_params (C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\express\lib\router\index.js:346:12)
+    at next (C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\express\lib\router\index.js:280:10)
+
+[2025-09-18T23:47:53.416Z] Error: num_factura es obligatorio en entrada_RMM
+    at AdeudoService.updateAdeudos (file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/services/AdeudoService.js:265:40)
+    at AdeudoController.updateAdeudos (file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/controllers/AdeudoController.js:109:41)
+    at Layer.handle [as handle_request] (C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\express\lib\router\layer.js:95:5)
+    at next (C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\express\lib\router\route.js:149:13)
+    at Route.dispatch (C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\express\lib\router\route.js:119:3)
+    at Layer.handle [as handle_request] (C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\express\lib\router\layer.js:95:5)
+    at C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\express\lib\router\index.js:284:15
+    at Function.process_params (C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\express\lib\router\index.js:346:12)
+    at next (C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\express\lib\router\index.js:280:10)
+    at Function.handle (C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\express\lib\router\index.js:175:3)
+    at router (C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\express\lib\router\index.js:47:12)
+    at Layer.handle [as handle_request] (C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\express\lib\router\layer.js:95:5)
+    at trim_prefix (C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\express\lib\router\index.js:328:13)
+    at C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\express\lib\router\index.js:286:9
+    at Function.process_params (C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\express\lib\router\index.js:346:12)
+    at next (C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\express\lib\router\index.js:280:10)
+
+[2025-09-19T00:04:00.048Z] Error: num_factura es obligatorio en entrada_RMM
+    at AdeudoService.updateAdeudos (file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/services/AdeudoService.js:265:40)
+    at AdeudoController.updateAdeudos (file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/controllers/AdeudoController.js:109:41)
+    at Layer.handle [as handle_request] (C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\express\lib\router\layer.js:95:5)
+    at next (C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\express\lib\router\route.js:149:13)
+    at Route.dispatch (C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\express\lib\router\route.js:119:3)
+    at Layer.handle [as handle_request] (C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\express\lib\router\layer.js:95:5)
+    at C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\express\lib\router\index.js:284:15
+    at Function.process_params (C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\express\lib\router\index.js:346:12)
+    at next (C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\express\lib\router\index.js:280:10)
+    at Function.handle (C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\express\lib\router\index.js:175:3)
+    at router (C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\express\lib\router\index.js:47:12)
+    at Layer.handle [as handle_request] (C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\express\lib\router\layer.js:95:5)
+    at trim_prefix (C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\express\lib\router\index.js:328:13)
+    at C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\express\lib\router\index.js:286:9
+    at Function.process_params (C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\express\lib\router\index.js:346:12)
+    at next (C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\express\lib\router\index.js:280:10)
+
+[2025-09-19T00:04:04.477Z] Error: num_factura es obligatorio en entrada_RMM
+    at AdeudoService.updateAdeudos (file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/services/AdeudoService.js:265:40)
+    at AdeudoController.updateAdeudos (file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/controllers/AdeudoController.js:109:41)
+    at Layer.handle [as handle_request] (C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\express\lib\router\layer.js:95:5)
+    at next (C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\express\lib\router\route.js:149:13)
+    at Route.dispatch (C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\express\lib\router\route.js:119:3)
+    at Layer.handle [as handle_request] (C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\express\lib\router\layer.js:95:5)
+    at C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\express\lib\router\index.js:284:15
+    at Function.process_params (C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\express\lib\router\index.js:346:12)
+    at next (C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\express\lib\router\index.js:280:10)
+    at Function.handle (C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\express\lib\router\index.js:175:3)
+    at router (C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\express\lib\router\index.js:47:12)
+    at Layer.handle [as handle_request] (C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\express\lib\router\layer.js:95:5)
+    at trim_prefix (C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\express\lib\router\index.js:328:13)
+    at C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\express\lib\router\index.js:286:9
+    at Function.process_params (C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\express\lib\router\index.js:346:12)
+    at next (C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\express\lib\router\index.js:280:10)
+
+[2025-09-19T00:08:10.489Z] Error: Error de validación en factura NN1: "concepto" is required
+    at AdeudoService.updateAdeudos (file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/services/AdeudoService.js:255:24)
+    at AdeudoController.updateAdeudos (file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/controllers/AdeudoController.js:109:41)
+    at Layer.handle [as handle_request] (C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\express\lib\router\layer.js:95:5)
+    at next (C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\express\lib\router\route.js:149:13)
+    at Route.dispatch (C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\express\lib\router\route.js:119:3)
+    at Layer.handle [as handle_request] (C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\express\lib\router\layer.js:95:5)
+    at C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\express\lib\router\index.js:284:15
+    at Function.process_params (C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\express\lib\router\index.js:346:12)
+    at next (C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\express\lib\router\index.js:280:10)
+    at Function.handle (C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\express\lib\router\index.js:175:3)
+    at router (C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\express\lib\router\index.js:47:12)
+    at Layer.handle [as handle_request] (C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\express\lib\router\layer.js:95:5)
+    at trim_prefix (C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\express\lib\router\index.js:328:13)
+    at C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\express\lib\router\index.js:286:9
+    at Function.process_params (C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\express\lib\router\index.js:346:12)
+    at next (C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\express\lib\router\index.js:280:10)
+
+[2025-09-19T00:09:25.888Z] Error: Error de validación en factura NN1: "num_factura_original" is required
+    at AdeudoService.updateAdeudos (file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/services/AdeudoService.js:255:24)
+    at AdeudoController.updateAdeudos (file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/controllers/AdeudoController.js:109:41)
+    at Layer.handle [as handle_request] (C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\express\lib\router\layer.js:95:5)
+    at next (C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\express\lib\router\route.js:149:13)
+    at Route.dispatch (C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\express\lib\router\route.js:119:3)
+    at Layer.handle [as handle_request] (C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\express\lib\router\layer.js:95:5)
+    at C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\express\lib\router\index.js:284:15
+    at Function.process_params (C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\express\lib\router\index.js:346:12)
+    at next (C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\express\lib\router\index.js:280:10)
+    at Function.handle (C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\express\lib\router\index.js:175:3)
+    at router (C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\express\lib\router\index.js:47:12)
+    at Layer.handle [as handle_request] (C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\express\lib\router\layer.js:95:5)
+    at trim_prefix (C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\express\lib\router\index.js:328:13)
+    at C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\express\lib\router\index.js:286:9
+    at Function.process_params (C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\express\lib\router\index.js:346:12)
+    at next (C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\express\lib\router\index.js:280:10)
+
+[2025-09-19T00:10:27.310Z] Error: Error de validación en factura NN1: "value" must be of type object
+    at AdeudoService.updateAdeudos (file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/services/AdeudoService.js:255:24)
+    at AdeudoController.updateAdeudos (file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/controllers/AdeudoController.js:109:41)
+    at Layer.handle [as handle_request] (C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\express\lib\router\layer.js:95:5)
+    at next (C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\express\lib\router\route.js:149:13)
+    at Route.dispatch (C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\express\lib\router\route.js:119:3)
+    at Layer.handle [as handle_request] (C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\express\lib\router\layer.js:95:5)
+    at C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\express\lib\router\index.js:284:15
+    at Function.process_params (C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\express\lib\router\index.js:346:12)
+    at next (C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\express\lib\router\index.js:280:10)
+    at Function.handle (C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\express\lib\router\index.js:175:3)
+    at router (C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\express\lib\router\index.js:47:12)
+    at Layer.handle [as handle_request] (C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\express\lib\router\layer.js:95:5)
+    at trim_prefix (C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\express\lib\router\index.js:328:13)
+    at C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\express\lib\router\index.js:286:9
+    at Function.process_params (C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\express\lib\router\index.js:346:12)
+    at next (C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\express\lib\router\index.js:280:10)
+
+[2025-09-19T00:11:05.581Z] Error: Error de validación en factura NN1: "value" must be of type object
+    at AdeudoService.updateAdeudos (file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/services/AdeudoService.js:255:24)
+    at AdeudoController.updateAdeudos (file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/controllers/AdeudoController.js:109:41)
+    at Layer.handle [as handle_request] (C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\express\lib\router\layer.js:95:5)
+    at next (C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\express\lib\router\route.js:149:13)
+    at Route.dispatch (C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\express\lib\router\route.js:119:3)
+    at Layer.handle [as handle_request] (C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\express\lib\router\layer.js:95:5)
+    at C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\express\lib\router\index.js:284:15
+    at Function.process_params (C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\express\lib\router\index.js:346:12)
+    at next (C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\express\lib\router\index.js:280:10)
+    at Function.handle (C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\express\lib\router\index.js:175:3)
+    at router (C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\express\lib\router\index.js:47:12)
+    at Layer.handle [as handle_request] (C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\express\lib\router\layer.js:95:5)
+    at trim_prefix (C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\express\lib\router\index.js:328:13)
+    at C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\express\lib\router\index.js:286:9
+    at Function.process_params (C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\express\lib\router\index.js:346:12)
+    at next (C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\express\lib\router\index.js:280:10)
+
+[2025-09-19T00:12:14.686Z] Error: Error de validación en factura NN1: "num_factura_original" is required
+    at AdeudoService.updateAdeudos (file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/services/AdeudoService.js:255:24)
+    at AdeudoController.updateAdeudos (file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/controllers/AdeudoController.js:109:41)
+    at Layer.handle [as handle_request] (C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\express\lib\router\layer.js:95:5)
+    at next (C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\express\lib\router\route.js:149:13)
+    at Route.dispatch (C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\express\lib\router\route.js:119:3)
+    at Layer.handle [as handle_request] (C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\express\lib\router\layer.js:95:5)
+    at C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\express\lib\router\index.js:284:15
+    at Function.process_params (C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\express\lib\router\index.js:346:12)
+    at next (C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\express\lib\router\index.js:280:10)
+    at Function.handle (C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\express\lib\router\index.js:175:3)
+    at router (C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\express\lib\router\index.js:47:12)
+    at Layer.handle [as handle_request] (C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\express\lib\router\layer.js:95:5)
+    at trim_prefix (C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\express\lib\router\index.js:328:13)
+    at C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\express\lib\router\index.js:286:9
+    at Function.process_params (C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\express\lib\router\index.js:346:12)
+    at next (C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\express\lib\router\index.js:280:10)
+
+[2025-09-19T00:13:30.229Z] ReferenceError: Cannot access 'num_factura_original' before initialization
+    at AdeudoService.updateAdeudos (file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/services/AdeudoService.js:252:22)
+    at AdeudoController.updateAdeudos (file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/controllers/AdeudoController.js:109:41)
+    at Layer.handle [as handle_request] (C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\express\lib\router\layer.js:95:5)
+    at next (C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\express\lib\router\route.js:149:13)
+    at Route.dispatch (C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\express\lib\router\route.js:119:3)
+    at Layer.handle [as handle_request] (C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\express\lib\router\layer.js:95:5)
+    at C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\express\lib\router\index.js:284:15
+    at Function.process_params (C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\express\lib\router\index.js:346:12)
+    at next (C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\express\lib\router\index.js:280:10)
+    at Function.handle (C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\express\lib\router\index.js:175:3)
+    at router (C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\express\lib\router\index.js:47:12)
+    at Layer.handle [as handle_request] (C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\express\lib\router\layer.js:95:5)
+    at trim_prefix (C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\express\lib\router\index.js:328:13)
+    at C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\express\lib\router\index.js:286:9
+    at Function.process_params (C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\express\lib\router\index.js:346:12)
+    at next (C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\express\lib\router\index.js:280:10)
+
+[2025-09-20T23:58:08.049Z] Error: Entrada RMM no encontrada
+    at file:///C:/Users/LuisValle/Desktop/Control-Clientes/backend/services/AdeudoService.js:109:23
+    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
+    at async AdeudoService.withTransaction (file:///C:/Users/LuisValle/Desktop/Control-Clientes/backend/services/BaseService.js:13:28)
+    at async AdeudoService.finalizarRmmYCrearAdeudo (file:///C:/Users/LuisValle/Desktop/Control-Clientes/backend/services/AdeudoService.js:106:12)
+    at async AdeudoController.finalizarRmm (file:///C:/Users/LuisValle/Desktop/Control-Clientes/backend/controllers/AdeudoController.js:103:22)
+
+[2025-09-21T01:50:56.535Z] ReferenceError: entradaRmmSchema is not defined
+    at AdeudoService.crearEntradaRmmPendiente (file:///C:/Users/LuisValle/Desktop/Control-Clientes/backend/services/AdeudoService.js:66:32)
+    at AdeudoController.crearEntradaRmmPendiente (file:///C:/Users/LuisValle/Desktop/Control-Clientes/backend/controllers/AdeudoController.js:127:39)
+    at Layer.handle [as handle_request] (C:\Users\LuisValle\Desktop\Control-Clientes\backend\node_modules\express\lib\router\layer.js:95:5)
+    at next (C:\Users\LuisValle\Desktop\Control-Clientes\backend\node_modules\express\lib\router\route.js:149:13)
+    at Route.dispatch (C:\Users\LuisValle\Desktop\Control-Clientes\backend\node_modules\express\lib\router\route.js:119:3)
+    at Layer.handle [as handle_request] (C:\Users\LuisValle\Desktop\Control-Clientes\backend\node_modules\express\lib\router\layer.js:95:5)
+    at C:\Users\LuisValle\Desktop\Control-Clientes\backend\node_modules\express\lib\router\index.js:284:15
+    at Function.process_params (C:\Users\LuisValle\Desktop\Control-Clientes\backend\node_modules\express\lib\router\index.js:346:12)
+    at next (C:\Users\LuisValle\Desktop\Control-Clientes\backend\node_modules\express\lib\router\index.js:280:10)
+    at Function.handle (C:\Users\LuisValle\Desktop\Control-Clientes\backend\node_modules\express\lib\router\index.js:175:3)
+    at router (C:\Users\LuisValle\Desktop\Control-Clientes\backend\node_modules\express\lib\router\index.js:47:12)
+    at Layer.handle [as handle_request] (C:\Users\LuisValle\Desktop\Control-Clientes\backend\node_modules\express\lib\router\layer.js:95:5)
+    at trim_prefix (C:\Users\LuisValle\Desktop\Control-Clientes\backend\node_modules\express\lib\router\index.js:328:13)
+    at C:\Users\LuisValle\Desktop\Control-Clientes\backend\node_modules\express\lib\router\index.js:286:9
+    at Function.process_params (C:\Users\LuisValle\Desktop\Control-Clientes\backend\node_modules\express\lib\router\index.js:346:12)
+    at next (C:\Users\LuisValle\Desktop\Control-Clientes\backend\node_modules\express\lib\router\index.js:280:10)
+
+[2025-09-21T01:58:13.627Z] ReferenceError: finalizarRmmSchema is not defined
+    at AdeudoService.finalizarRmmYCrearAdeudo (file:///C:/Users/LuisValle/Desktop/Control-Clientes/backend/services/AdeudoService.js:105:32)
+    at AdeudoController.finalizarRmm (file:///C:/Users/LuisValle/Desktop/Control-Clientes/backend/controllers/AdeudoController.js:202:39)
+    at Layer.handle [as handle_request] (C:\Users\LuisValle\Desktop\Control-Clientes\backend\node_modules\express\lib\router\layer.js:95:5)
+    at next (C:\Users\LuisValle\Desktop\Control-Clientes\backend\node_modules\express\lib\router\route.js:149:13)
+    at Route.dispatch (C:\Users\LuisValle\Desktop\Control-Clientes\backend\node_modules\express\lib\router\route.js:119:3)
+    at Layer.handle [as handle_request] (C:\Users\LuisValle\Desktop\Control-Clientes\backend\node_modules\express\lib\router\layer.js:95:5)
+    at C:\Users\LuisValle\Desktop\Control-Clientes\backend\node_modules\express\lib\router\index.js:284:15
+    at Function.process_params (C:\Users\LuisValle\Desktop\Control-Clientes\backend\node_modules\express\lib\router\index.js:346:12)
+    at next (C:\Users\LuisValle\Desktop\Control-Clientes\backend\node_modules\express\lib\router\index.js:280:10)
+    at Function.handle (C:\Users\LuisValle\Desktop\Control-Clientes\backend\node_modules\express\lib\router\index.js:175:3)
+    at router (C:\Users\LuisValle\Desktop\Control-Clientes\backend\node_modules\express\lib\router\index.js:47:12)
+    at Layer.handle [as handle_request] (C:\Users\LuisValle\Desktop\Control-Clientes\backend\node_modules\express\lib\router\layer.js:95:5)
+    at trim_prefix (C:\Users\LuisValle\Desktop\Control-Clientes\backend\node_modules\express\lib\router\index.js:328:13)
+    at C:\Users\LuisValle\Desktop\Control-Clientes\backend\node_modules\express\lib\router\index.js:286:9
+    at Function.process_params (C:\Users\LuisValle\Desktop\Control-Clientes\backend\node_modules\express\lib\router\index.js:346:12)
+    at next (C:\Users\LuisValle\Desktop\Control-Clientes\backend\node_modules\express\lib\router\index.js:280:10)
+
+[2025-09-21T02:00:55.498Z] ReferenceError: value is not defined
+    at file:///C:/Users/LuisValle/Desktop/Control-Clientes/backend/services/AdeudoService.js:114:24
+    at AdeudoService.withTransaction (file:///C:/Users/LuisValle/Desktop/Control-Clientes/backend/services/BaseService.js:13:34)
+    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
+    at async AdeudoService.finalizarRmmYCrearAdeudo (file:///C:/Users/LuisValle/Desktop/Control-Clientes/backend/services/AdeudoService.js:111:14)
+    at async AdeudoController.finalizarRmm (file:///C:/Users/LuisValle/Desktop/Control-Clientes/backend/controllers/AdeudoController.js:202:20)
+
+[2025-09-21T02:16:02.255Z] error: cláusula UNION/INTERSECT/EXCEPT ORDER BY no válida
+    at C:\Users\LuisValle\Desktop\Control-Clientes\backend\node_modules\pg-pool\index.js:45:11
+    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
+    at async AdeudoService.obtenerTodosAdeudosPorEmpresa (file:///C:/Users/LuisValle/Desktop/Control-Clientes/backend/services/AdeudoService.js:342:18)
+    at async AdeudoController.getAdeudosByEmpresa (file:///C:/Users/LuisValle/Desktop/Control-Clientes/backend/controllers/AdeudoController.js:22:13)
+
+[2025-09-21T02:16:02.438Z] error: cláusula UNION/INTERSECT/EXCEPT ORDER BY no válida
+    at C:\Users\LuisValle\Desktop\Control-Clientes\backend\node_modules\pg-pool\index.js:45:11
+    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
+    at async AdeudoService.obtenerTodosAdeudosPorEmpresa (file:///C:/Users/LuisValle/Desktop/Control-Clientes/backend/services/AdeudoService.js:342:18)
+    at async AdeudoController.getAdeudosByEmpresa (file:///C:/Users/LuisValle/Desktop/Control-Clientes/backend/controllers/AdeudoController.js:22:13)
+
+[2025-09-21T02:16:29.018Z] error: cláusula UNION/INTERSECT/EXCEPT ORDER BY no válida
+    at C:\Users\LuisValle\Desktop\Control-Clientes\backend\node_modules\pg-pool\index.js:45:11
+    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
+    at async AdeudoService.obtenerTodosAdeudosPorEmpresa (file:///C:/Users/LuisValle/Desktop/Control-Clientes/backend/services/AdeudoService.js:342:18)
+    at async AdeudoController.getAdeudosByEmpresa (file:///C:/Users/LuisValle/Desktop/Control-Clientes/backend/controllers/AdeudoController.js:22:13)
+
+[2025-09-21T02:16:29.179Z] error: cláusula UNION/INTERSECT/EXCEPT ORDER BY no válida
+    at C:\Users\LuisValle\Desktop\Control-Clientes\backend\node_modules\pg-pool\index.js:45:11
+    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
+    at async AdeudoService.obtenerTodosAdeudosPorEmpresa (file:///C:/Users/LuisValle/Desktop/Control-Clientes/backend/services/AdeudoService.js:342:18)
+    at async AdeudoController.getAdeudosByEmpresa (file:///C:/Users/LuisValle/Desktop/Control-Clientes/backend/controllers/AdeudoController.js:22:13)
+
+[2025-09-21T02:16:34.178Z] error: cláusula UNION/INTERSECT/EXCEPT ORDER BY no válida
+    at C:\Users\LuisValle\Desktop\Control-Clientes\backend\node_modules\pg-pool\index.js:45:11
+    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
+    at async AdeudoService.obtenerTodosAdeudosPorEmpresa (file:///C:/Users/LuisValle/Desktop/Control-Clientes/backend/services/AdeudoService.js:342:18)
+    at async AdeudoController.getAdeudosByEmpresa (file:///C:/Users/LuisValle/Desktop/Control-Clientes/backend/controllers/AdeudoController.js:22:13)
+
+[2025-09-21T02:16:34.324Z] error: cláusula UNION/INTERSECT/EXCEPT ORDER BY no válida
+    at C:\Users\LuisValle\Desktop\Control-Clientes\backend\node_modules\pg-pool\index.js:45:11
+    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
+    at async AdeudoService.obtenerTodosAdeudosPorEmpresa (file:///C:/Users/LuisValle/Desktop/Control-Clientes/backend/services/AdeudoService.js:342:18)
+    at async AdeudoController.getAdeudosByEmpresa (file:///C:/Users/LuisValle/Desktop/Control-Clientes/backend/controllers/AdeudoController.js:22:13)
+
+[2025-09-21T02:46:53.658Z] error: no existe la función calcular_saldo_empresa(unknown)
+    at C:\Users\LuisValle\Desktop\Control-Clientes\backend\node_modules\pg-pool\index.js:45:11
+    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
+    at async AdeudoService.obtenerSaldoEmpresa (file:///C:/Users/LuisValle/Desktop/Control-Clientes/backend/services/AdeudoService.js:50:20)
+    at async AdeudoService.obtenerTodosAdeudosPorEmpresa (file:///C:/Users/LuisValle/Desktop/Control-Clientes/backend/services/AdeudoService.js:412:23)
+    at async AdeudoController.getAdeudosByEmpresa (file:///C:/Users/LuisValle/Desktop/Control-Clientes/backend/controllers/AdeudoController.js:22:13)
+
+[2025-09-21T02:46:53.816Z] error: no existe la función calcular_saldo_empresa(unknown)
+    at C:\Users\LuisValle\Desktop\Control-Clientes\backend\node_modules\pg-pool\index.js:45:11
+    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
+    at async AdeudoService.obtenerSaldoEmpresa (file:///C:/Users/LuisValle/Desktop/Control-Clientes/backend/services/AdeudoService.js:50:20)
+    at async AdeudoService.obtenerTodosAdeudosPorEmpresa (file:///C:/Users/LuisValle/Desktop/Control-Clientes/backend/services/AdeudoService.js:412:23)
+    at async AdeudoController.getAdeudosByEmpresa (file:///C:/Users/LuisValle/Desktop/Control-Clientes/backend/controllers/AdeudoController.js:22:13)
+
+[2025-09-21T02:56:01.671Z] error: no existe la función obtener_adeudos_con_rmm_por_empresa(unknown)
+    at C:\Users\LuisValle\Desktop\Control-Clientes\backend\node_modules\pg-pool\index.js:45:11
+    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
+    at async AdeudoService.obtenerTodosAdeudosPorEmpresaAgrupados (file:///C:/Users/LuisValle/Desktop/Control-Clientes/backend/services/AdeudoService.js:487:20)
+    at async AdeudoController.getAdeudosByEmpresa (file:///C:/Users/LuisValle/Desktop/Control-Clientes/backend/controllers/AdeudoController.js:18:18)
+
+[2025-09-21T02:58:45.225Z] error: la referencia a la columna «num_liquidacion» es ambigua
+    at C:\Users\LuisValle\Desktop\Control-Clientes\backend\node_modules\pg-pool\index.js:45:11
+    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
+    at async AdeudoService.obtenerTodosAdeudosPorEmpresaAgrupados (file:///C:/Users/LuisValle/Desktop/Control-Clientes/backend/services/AdeudoService.js:487:20)
+    at async AdeudoController.getAdeudosByEmpresa (file:///C:/Users/LuisValle/Desktop/Control-Clientes/backend/controllers/AdeudoController.js:18:18)
+
+[2025-09-21T03:03:58.160Z] error: los tipos numeric y date no son coincidentes en UNION
+    at C:\Users\LuisValle\Desktop\Control-Clientes\backend\node_modules\pg-pool\index.js:45:11
+    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
+    at async AdeudoService.obtenerTodosAdeudosPorEmpresaAgrupados (file:///C:/Users/LuisValle/Desktop/Control-Clientes/backend/services/AdeudoService.js:487:20)
+    at async AdeudoController.getAdeudosByEmpresa (file:///C:/Users/LuisValle/Desktop/Control-Clientes/backend/controllers/AdeudoController.js:18:18)
+
+[2025-09-21T04:30:53.308Z] error: SELECT ... INTO no está permitido aquí
+    at C:\Users\LuisValle\Desktop\Control-Clientes\backend\node_modules\pg-pool\index.js:45:11
+    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
+    at async AdeudoService.obtenerSaldoEmpresa (file:///C:/Users/LuisValle/Desktop/Control-Clientes/backend/services/AdeudoService.js:50:20)
+    at async AdeudoService.obtenerTodosAdeudosPorEmpresaAgrupados (file:///C:/Users/LuisValle/Desktop/Control-Clientes/backend/services/AdeudoService.js:505:23)
+    at async AdeudoController.getAdeudosByEmpresa (file:///C:/Users/LuisValle/Desktop/Control-Clientes/backend/controllers/AdeudoController.js:18:18)
+
+[2025-09-21T04:31:11.414Z] error: SELECT ... INTO no está permitido aquí
+    at C:\Users\LuisValle\Desktop\Control-Clientes\backend\node_modules\pg-pool\index.js:45:11
+    at process.processTicksAndRejections (node:internal/process/task_queues:95:5)
+    at async AdeudoService.obtenerSaldoEmpresa (file:///C:/Users/LuisValle/Desktop/Control-Clientes/backend/services/AdeudoService.js:50:20)
+    at async AdeudoService.obtenerTodosAdeudosPorEmpresaAgrupados (file:///C:/Users/LuisValle/Desktop/Control-Clientes/backend/services/AdeudoService.js:505:23)
+    at async AdeudoController.getAdeudosByEmpresa (file:///C:/Users/LuisValle/Desktop/Control-Clientes/backend/controllers/AdeudoController.js:18:18)
+
+[2025-09-21T03:46:34.910Z] Error: No se pudo eliminar en adeudo
+    at Repositorio.eliminarPorId (file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/repositories/globalPersistence.js:181:19)
+    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at async file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/services/AdeudoService.js:574:24
+    at async Promise.all (index 0)
+    at async file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/services/AdeudoService.js:566:7
+    at async AdeudoService.withTransaction (file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/services/BaseService.js:13:28)
+    at async AdeudoService.deleteAdeudos (file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/services/AdeudoService.js:565:12)
+    at async AdeudoController.deleteAdeudos (file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/controllers/AdeudoController.js:118:22)
+
+[2025-09-21T04:06:04.563Z] Error: Error de validación en factura (nuevo): "ff" must be a string
+    at AdeudoService.updateAdeudos (file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/services/AdeudoService.js:371:24)
+    at AdeudoController.updateAdeudos (file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/controllers/AdeudoController.js:109:41)
+    at Layer.handle [as handle_request] (C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\express\lib\router\layer.js:95:5)
+    at next (C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\express\lib\router\route.js:149:13)
+    at Route.dispatch (C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\express\lib\router\route.js:119:3)
+    at Layer.handle [as handle_request] (C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\express\lib\router\layer.js:95:5)
+    at C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\express\lib\router\index.js:284:15
+    at Function.process_params (C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\express\lib\router\index.js:346:12)
+    at next (C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\express\lib\router\index.js:280:10)
+    at Function.handle (C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\express\lib\router\index.js:175:3)
+    at router (C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\express\lib\router\index.js:47:12)
+    at Layer.handle [as handle_request] (C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\express\lib\router\layer.js:95:5)
+    at trim_prefix (C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\express\lib\router\index.js:328:13)
+    at C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\express\lib\router\index.js:286:9
+    at Function.process_params (C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\express\lib\router\index.js:346:12)
+    at next (C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\express\lib\router\index.js:280:10)
+
+[2025-09-21T04:16:19.943Z] Error: Error de validación en factura (nuevo): "ff" must be a string
+    at AdeudoService.updateAdeudos (file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/services/AdeudoService.js:371:24)
+    at AdeudoController.updateAdeudos (file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/controllers/AdeudoController.js:109:41)
+    at Layer.handle [as handle_request] (C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\express\lib\router\layer.js:95:5)
+    at next (C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\express\lib\router\route.js:149:13)
+    at Route.dispatch (C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\express\lib\router\route.js:119:3)
+    at Layer.handle [as handle_request] (C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\express\lib\router\layer.js:95:5)
+    at C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\express\lib\router\index.js:284:15
+    at Function.process_params (C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\express\lib\router\index.js:346:12)
+    at next (C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\express\lib\router\index.js:280:10)
+    at Function.handle (C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\express\lib\router\index.js:175:3)
+    at router (C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\express\lib\router\index.js:47:12)
+    at Layer.handle [as handle_request] (C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\express\lib\router\layer.js:95:5)
+    at trim_prefix (C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\express\lib\router\index.js:328:13)
+    at C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\express\lib\router\index.js:286:9
+    at Function.process_params (C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\express\lib\router\index.js:346:12)
+    at next (C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\express\lib\router\index.js:280:10)
+
+[2025-09-21T04:54:00.998Z] Error: Error de validación en factura (nuevo): "num_factura_original" is not allowed
+    at AdeudoService.updateAdeudos (file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/services/AdeudoService.js:625:24)
+    at AdeudoController.updateAdeudos (file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/controllers/AdeudoController.js:288:41)
+    at Layer.handle [as handle_request] (C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\express\lib\router\layer.js:95:5)
+    at next (C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\express\lib\router\route.js:149:13)
+    at Route.dispatch (C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\express\lib\router\route.js:119:3)
+    at Layer.handle [as handle_request] (C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\express\lib\router\layer.js:95:5)
+    at C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\express\lib\router\index.js:284:15
+    at Function.process_params (C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\express\lib\router\index.js:346:12)
+    at next (C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\express\lib\router\index.js:280:10)
+    at Function.handle (C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\express\lib\router\index.js:175:3)
+    at router (C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\express\lib\router\index.js:47:12)
+    at Layer.handle [as handle_request] (C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\express\lib\router\layer.js:95:5)
+    at trim_prefix (C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\express\lib\router\index.js:328:13)
+    at C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\express\lib\router\index.js:286:9
+    at Function.process_params (C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\express\lib\router\index.js:346:12)
+    at next (C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\express\lib\router\index.js:280:10)
+
+[2025-09-21T04:58:04.710Z] error: el valor nulo en la columna «num_factura» de la relación «adeudo» viola la restricción de no nulo
+    at C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\pg\lib\client.js:545:17
+    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at async Repositorio.insertar (file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/repositories/globalPersistence.js:43:28)
+    at async file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/services/AdeudoService.js:741:15
+    at async Promise.all (index 0)
+    at async file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/services/AdeudoService.js:702:9
+    at async AdeudoService.withTransaction (file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/services/BaseService.js:13:28)
+    at async AdeudoService.updateAdeudos (file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/services/AdeudoService.js:640:12)
+    at async AdeudoController.updateAdeudos (file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/controllers/AdeudoController.js:288:22)
 

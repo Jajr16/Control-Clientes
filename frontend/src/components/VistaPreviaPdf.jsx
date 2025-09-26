@@ -3,7 +3,7 @@ import { obtenerDatosCalculados, formatearFecha } from '../utils/calculations';
 
 const rowKey = (a) => {
   const nf = a.num_factura ?? a.numfactura ?? '';
-  const pe = a.protocolo_entrada ?? a.protocolo ?? '';
+  const pe = a.num_protocolo ?? a.protocolo ?? '';
   const ff = a.ff ?? a.fecha ?? '';
   return `${String(nf)}|${String(pe)}|${String(ff)}`;
 };
@@ -17,6 +17,7 @@ const VistaPreviaPdf = ({
   honorariosSinIVA,
   empresasDisponibles,
   onConfirmarDescarga,
+  anticipoP,
 }) => {
   if (!mostrarVistaPrevia) return null;
 
@@ -52,9 +53,9 @@ const VistaPreviaPdf = ({
 
   // Anticipo proveniente de la propia lista (inyectado en fetch) o del cálculo
   const anticipo = Number(
-    (adeudosFiltrados[0]?.anticipo) ??
-    (Array.isArray(adeudosList) && adeudosList[0]?.anticipo) ??
-    datos?.anticipo ??
+    (anticipoP) ??
+    (Array.isArray(adeudosList) && anticipoP) ??
+    anticipoP ??
     0
   );
 
@@ -136,7 +137,7 @@ const VistaPreviaPdf = ({
                         <th className="border border-blue-500 p-3 text-left text-sm font-semibold">Concepto</th>
                         <th className="border border-blue-500 p-3 text-left text-sm font-semibold">Proveedor</th>
                         <th className="border border-blue-500 p-3 text-left text-sm font-semibold">N° Factura</th>
-                        <th className="border border-blue-500 p-3 text-right text-sm font-semibold">Importe (€)</th>
+                        <th className="border border-blue-500 p-3 text-right text-sm font-semibold">Base Imponible (€)</th>
                         <th className="border border-blue-500 p-3 text-right text-sm font-semibold">IVA (€)</th>
                         <th className="border border-blue-500 p-3 text-right text-sm font-semibold">Retención (€)</th>
                         <th className="border border-blue-500 p-3 text-right text-sm font-semibold">Total (€)</th>

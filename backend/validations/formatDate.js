@@ -1,10 +1,10 @@
 const formatDate = (date) => {
     if (!date) return null;
-    return new Date(date).toLocaleDateString("es-ES", {
-        day: "2-digit",
-        month: "2-digit",
-        year: "numeric"
-    });
+    const d = new Date(date);
+    const year = d.getFullYear();
+    const month = String(d.getMonth() + 1).padStart(2, "0"); // meses van de 0-11
+    const day = String(d.getDate()).padStart(2, "0");
+    return `${year}-${month}-${day}`;
 };
 
 export default formatDate;

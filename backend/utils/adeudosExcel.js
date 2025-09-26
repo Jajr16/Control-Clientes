@@ -3,9 +3,9 @@ import { parseFecha } from './fechaFormato.js';
 
 export function historicoExcel(data) {
     console.log(data)
-    const anticipoValor = parseFloat(data.anticipo?.anticipo ?? 0);
+    const anticipo = data.anticipo
     const nombreEmpresa = data.nombreEmpresa;
-    const adeudosLista = data.adeudos;
+    const adeudosLista = data.liquidaciones;
 
     const workbook = new exceljs.Workbook()
     const hoy = new Date();
@@ -25,15 +25,9 @@ export function historicoExcel(data) {
     titulo.alignment = { vertical: "middle", horizontal: 'center' };
     titulo.font = { size: 16, bold: true, color: { argb: "FFFFFFFF" } }
 
-    // Ordenar por fecha
-    adeudosLista.sort((a, b) => parseFecha(a.ff) - parseFecha(b.ff));
-
-    const fechaMasVieja = adeudosLista[0].ff;
-    const fechaMasReciente = adeudosLista[adeudosLista.length - 1].ff;
-
     worksheet.mergeCells('A2:K2')
     const periodo = worksheet.getCell('A2')
-    periodo.value = `Adeudos a Finatech de ${fechaMasVieja} a ${fechaMasReciente}`
+    periodo.value = `Adeudos a Finatech de ${data.fechas.f_inicio} a ${data.fechas.f_fin}`
     periodo.alignment = { vertical: "middle", horizontal: "center" }
     periodo.font = { size: 12, bold: true, color: { argb: "FFFFFFFF" } }
     periodo.fill = {
@@ -42,76 +36,30 @@ export function historicoExcel(data) {
         fgColor: { argb: '5b3c1b' }
     }
 
-
-    // Agrupar adeudos por número de liquidación
-    const adeudosAgrupados = {};
-
-    adeudosLista.forEach(adeudo => {
-        const numLiquidacion = adeudo.num_liquidacion || 'SIN_LIQUIDACION';
-
-        if (!adeudosAgrupados[numLiquidacion]) {
-            adeudosAgrupados[numLiquidacion] = {
-                adeudos: [],
-                totales: {
-                    importe: 0,
-                    iva: 0,
-                    retencion: 0,
-                    cs_iva: 0,
-                    total: 0
-                },
-                // Los honorarios son únicos por liquidación, no se suman
-                honorarios: {
-                    base: parseFloat(adeudo.honorarios_base || 0),
-                    iva: parseFloat(adeudo.honorarios_iva || 0)
-                }
-            };
-        }
-
-        // Agregar adeudo al grupo
-        adeudosAgrupados[numLiquidacion].adeudos.push(adeudo);
-
-        // Calcular totales del grupo (sin honorarios)
-        const totales = adeudosAgrupados[numLiquidacion].totales;
-        totales.importe += parseFloat(adeudo.importe || 0);
-        totales.iva += parseFloat(adeudo.iva || 0);
-        totales.retencion += parseFloat(adeudo.retencion || 0);
-        totales.cs_iva += parseFloat(adeudo.cs_iva || 0);
-
-        // Actualizar honorarios solo si el adeudo actual tiene honorarios diferentes de 0
-        if (parseFloat(adeudo.honorarios_base || 0) > 0) {
-            adeudosAgrupados[numLiquidacion].honorarios.base = parseFloat(adeudo.honorarios_base);
-        }
-        if (parseFloat(adeudo.honorarios_iva || 0) > 0) {
-            adeudosAgrupados[numLiquidacion].honorarios.iva = parseFloat(adeudo.honorarios_iva);
-        }
-    });
-
     // Crear encabezados de tabla
     let currentRow = 3;
     let filasConTotales = []; // Para guardar las filas que tienen totales
 
     // Procesar cada grupo de liquidación
-    Object.keys(adeudosAgrupados).forEach((numLiquidacion, grupoIndex) => {
-        const grupo = adeudosAgrupados[numLiquidacion];
+    adeudosLista.forEach((datosAdeudos, index) => {
+        console.log('Index: ' + index + ': Datos:', datosAdeudos)
 
         // Título del grupo de liquidación (solo si hay múltiples liquidaciones)
-        if (Object.keys(adeudosAgrupados).length > 1) {
-            worksheet.mergeCells(`A${currentRow}:K${currentRow}`);
-            const tituloGrupo = worksheet.getCell(`A${currentRow}`);
-            tituloGrupo.value = numLiquidacion === 'SIN_LIQUIDACION' ?
-                'ADEUDOS SIN LIQUIDACIÓN' :
-                `LIQUIDACIÓN N° ${numLiquidacion}`;
-            tituloGrupo.font = { bold: true, size: 12 };
-            tituloGrupo.alignment = { horizontal: 'center' };
-            tituloGrupo.fill = {
-                type: 'pattern',
-                pattern: 'solid',
-                fgColor: { argb: 'dad7cc' }
-            };
-            currentRow++;
-        }
+        worksheet.mergeCells(`A${currentRow}:K${currentRow}`);
+        const tituloGrupo = worksheet.getCell(`A${currentRow}`);
+        tituloGrupo.value = datosAdeudos.num_liquidacion === 'pendientes' ?
+            'ADEUDOS SIN LIQUIDACIÓN' :
+            `LIQUIDACIÓN N° ${index}`;
+        tituloGrupo.font = { bold: true, size: 12 };
+        tituloGrupo.alignment = { horizontal: 'center' };
+        tituloGrupo.fill = {
+            type: 'pattern',
+            pattern: 'solid',
+            fgColor: { argb: 'dad7cc' }
+        };
+        currentRow++;
 
-        const headers = ['Concepto', 'Proveedor', 'Fecha', 'Num Factura', 'Protocolo/Entrada', 'Importe', 'IVA', 'Retención', 'CS IVA', 'Total', 'Diferencia'];
+        const headers = ['Concepto', 'Proveedor', 'Fecha', 'Num. Factura', 'Protocolo/Entrada', 'Base imponible', 'IVA', 'Retención', 'CS IVA', 'Total', 'Diferencia'];
         headers.forEach((header, index) => {
             const cell = worksheet.getCell(currentRow, index + 1);
             cell.value = header;
@@ -127,13 +75,13 @@ export function historicoExcel(data) {
         currentRow++;
 
         // Mostrar adeudos del grupo
-        grupo.adeudos.forEach(adeudo => {
+        datosAdeudos.adeudos.forEach(adeudo => {
             const rowData = [
                 adeudo.concepto,
                 adeudo.proveedor,
                 adeudo.ff,
-                adeudo.num_factura,
-                adeudo.protocolo_entrada,
+                adeudo.num_factura || '-',
+                adeudo.num_protocolo || adeudo.num_entrada || '-',
                 parseFloat(adeudo.importe || 0).toFixed(2),
                 parseFloat(adeudo.iva || 0).toFixed(2),
                 parseFloat(adeudo.retencion || 0).toFixed(2),
@@ -204,7 +152,7 @@ export function historicoExcel(data) {
         }
 
         // Solo suma de la columna Total (columna 10)
-        const startRow = currentRow - grupo.adeudos.length;
+        const startRow = currentRow - datosAdeudos.adeudos.length;
         const endRow = currentRow - 1;
 
         const totalCell = worksheet.getCell(currentRow, 10);
@@ -218,12 +166,12 @@ export function historicoExcel(data) {
         currentRow++;
 
         // Guardar la fila del total que no tiene liquidación
-        if (numLiquidacion === 'SIN_LIQUIDACION') {
+        if (datosAdeudos.num_liquidacion === 'pendientes') {
             filasConTotales.push(currentRow - 1);
         }
 
         // Mostrar honorarios si existen
-        if (grupo.honorarios.base > 0 || grupo.honorarios.iva > 0) {
+        if (datosAdeudos.honorarios.base > 0 || datosAdeudos.honorarios.iva > 0) {
             worksheet.mergeCells(`G${currentRow}:I${currentRow}`);
             const honCell = worksheet.getCell(currentRow, 9);
             honCell.value = 'Honorarios FINATECH (IVA incluido):';
@@ -239,7 +187,7 @@ export function historicoExcel(data) {
                 };
             }
 
-            const totalHonorarios = grupo.honorarios.base + grupo.honorarios.iva;
+            const totalHonorarios = datosAdeudos.honorarios.base + datosAdeudos.honorarios.iva;
             const honValueCell = worksheet.getCell(currentRow, 10);
             honValueCell.value = totalHonorarios.toFixed(2);
             honValueCell.font = { bold: true };
@@ -331,7 +279,8 @@ export function historicoExcel(data) {
     currentRow++;
 
     // Anticipo
-    if (anticipoValor > 0) {
+    console.log('ANTICIPO DATOS', anticipo)
+    if (anticipo.anticipo_original > 0) {
         worksheet.mergeCells(`H${currentRow}:I${currentRow}`);
         const anticipoLabel = worksheet.getCell(currentRow, 9);
         anticipoLabel.value = 'Anticipo por el cliente:';
@@ -339,7 +288,7 @@ export function historicoExcel(data) {
         anticipoLabel.alignment = { horizontal: 'right' };
 
         const anticipoValueCell = worksheet.getCell(currentRow, 10);
-        anticipoValueCell.value = `-${anticipoValor.toFixed(2)}`;
+        anticipoValueCell.value = `${anticipo.anticipo_original.toFixed(2)}`;
         anticipoValueCell.font = { bold: true };
         anticipoValueCell.alignment = { horizontal: 'right' };
         anticipoValueCell.numFmt = '#,##0.00';
@@ -363,22 +312,21 @@ export function historicoExcel(data) {
         adeudoPendienteLabel.alignment = { horizontal: 'right' };
 
         const adeudoPendienteValue = worksheet.getCell(currentRow, 10);
-        adeudoPendienteValue.value = {
-            formula: `${worksheet.getColumn(10).letter}${currentRow - 2}+${worksheet.getColumn(10).letter}${currentRow - 1}`
-        };
+        adeudoPendienteValue.value = `${anticipo.debe_empresa.toFixed(2)}`;
         adeudoPendienteValue.font = { bold: true, size: 12 };
         adeudoPendienteValue.alignment = { horizontal: 'right' };
         adeudoPendienteValue.numFmt = '#,##0.00';
+        
+        for (let col = 8; col <= 10; col++) { // H, I, J
+            worksheet.getCell(currentRow, col).border = {
+                top: { style: 'thin' },
+                left: { style: 'thin' },
+                bottom: { style: 'thin' },
+                right: { style: 'thin' }
+            };
+        }
     }
 
-    for (let col = 8; col <= 10; col++) { // H, I, J
-        worksheet.getCell(currentRow, col).border = {
-            top: { style: 'thin' },
-            left: { style: 'thin' },
-            bottom: { style: 'thin' },
-            right: { style: 'thin' }
-        };
-    }
 
     // Ajustar ancho de columnas
     worksheet.columns.forEach((column, index) => {
@@ -401,8 +349,6 @@ export function historicoExcel(data) {
             }
         });
     });
-
-    console.log('Adeudos agrupados por liquidación:', adeudosAgrupados);
 
     return workbook;
 }

@@ -9,7 +9,7 @@ export const normalizeAdeudoForPdf = (a) => {
     ff: rawFecha,
     fecha_str: date && !isNaN(date) ? date.toLocaleDateString('es-ES') : '',
     num_factura: a.num_factura ?? a.numfactura ?? a.num ?? '',
-    protocolo_entrada: a.protocolo_entrada ?? a.protocolo ?? a.protocoloentrada ?? '',
+    num_protocolo: a.num_protocolo ?? a.protocolo ?? a.protocoloentrada ?? '',
     importe: toNum(a.importe),
     iva: toNum(a.iva),
     retencion: toNum(a.retencion),

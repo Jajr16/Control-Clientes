@@ -5,7 +5,8 @@ import Repositorio from '../repositories/globalPersistence.js';
 class LiquidacionService extends BaseService {
     constructor() {
         super({
-            honorario: new Repositorio('honorario', ['empresa_cif', 'num_liquidacion'])
+            honorario: new Repositorio('honorario', ['empresa_cif', 'num_liquidacion']),
+            empresa: new Repositorio('empresa', 'cif')
         });
     }
 
@@ -52,9 +53,12 @@ class LiquidacionService extends BaseService {
             // 5. Actualizar adeudos
             if (facturasPendientes.length > 0) {
                 const updateAdeudosQuery = `
-                    UPDATE adeudo 
-                    SET num_liquidacion = $1 
-                    WHERE num_factura = ANY($2::varchar[]) AND empresa_cif = $3 AND num_liquidacion IS NULL
+                    UPDATE adeudo
+                    SET num_liquidacion = $1,
+                        estado = 'PENDIENTE DE ENVIAR'
+                    WHERE num_factura = ANY($2::varchar[])
+                    AND empresa_cif = $3
+                    AND num_liquidacion IS NULL
                 `;
                 
                 const updateResult = await client.query(updateAdeudosQuery, [
@@ -86,10 +90,10 @@ class LiquidacionService extends BaseService {
 
             const resumenResult = await client.query(resumenQuery, [num_liquidacion, empresa_cif]);
 
-            const empresa = await this.repositories.honorario.BuscarPorFiltros({ empresa_cif: empresa_cif }, ['nombre'])
+            const empresa = await this.repositories.empresa.BuscarPorFiltros({ cif: empresa_cif }, ['nombre'])
 
             if (empresa.length > 0) {
-                await this.repositories.adeudo.registrarMovimiento({ accion: `Se hizo una liquidación para los adeudos de:
+                await this.repositories.honorario.registrarMovimiento({ accion: `Se hizo una liquidación para los adeudos de:
                     ${empresa[0].nombre}`, datos: {empresa_cif, honorarios_sin_iva} }, client)
             } else {
                 console.log('No se encontró la empresa')
@@ -143,7 +147,7 @@ class LiquidacionService extends BaseService {
                 a.retencion,
                 a.num_liquidacion,
                 a.empresa_cif,
-                COALESCE(p.protocolo_entrada, '') AS protocolo_entrada,
+                COALESCE(p.num_protocolo, '') AS num_protocolo,
                 COALESCE(p.cs_iva, 0) AS cs_iva,
                 (a.importe + a.iva - a.retencion + COALESCE(p.cs_iva, 0)) AS total
             FROM adeudo a
