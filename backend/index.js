@@ -1,4 +1,5 @@
 import app from './app.js';
+import { poblarDatos } from './utils/seed.js';
 import { connectDB } from './config/db.js'; 
 import { createTableDireccion } from './models/direccionModel.js'
 import { createTableDatoRegistral } from './models/datoRegistralModel.js'
@@ -41,6 +42,10 @@ const iniciarServidor = async () => {
         await createTableEntrada_RMM();
         await createTableAnticipo();
         await createTableMovimiento();
+
+        if (process.env.POBLAR_DB === 'true') {
+            await poblarDatos();
+        }
 
         app.listen(PORT, () => {
             console.log(`Servidor corriendo en http://localhost:${PORT}`);
