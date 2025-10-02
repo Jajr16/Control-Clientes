@@ -614,6 +614,7 @@ class AdeudoService extends BaseService {
     const cambiosProtocolo = data.cambios_protocolo || [];
     const setAdeudos = data.cambios_filas || [];
     const entradaRMM = data.cambios_RMM || [];
+    const cambioEstado = data.cambio_estado || null;
 
     if (anticipoUnico !== undefined && anticipoUnico !== null && isNaN(Number(anticipoUnico))) {
       throw new Error("El anticipo debe ser un número válido");
@@ -768,10 +769,10 @@ class AdeudoService extends BaseService {
               if (adeudoActual && adeudoActual.proveedor === 'Registro Mercantil de Madrid') {
                 // Buscar si hay entrada RMM relacionada por num_factura_final
                 const query = `
-                SELECT num_entrada, anticipo_pagado, diferencia 
-                FROM entrada_rmm 
-                WHERE num_factura_final = $1 AND empresa_cif = $2
-              `;
+                  SELECT num_entrada, anticipo_pagado, diferencia 
+                  FROM entrada_rmm 
+                  WHERE num_factura_final = $1 AND empresa_cif = $2
+                `;
                 const result = await client.query(query, [num_factura_original, empresa_cif]);
 
                 if (result.rows.length > 0) {
@@ -807,7 +808,7 @@ class AdeudoService extends BaseService {
         console.log("ADEUDOS ACTUALIZADOS");
       }
 
-      // c) EntradaRMM
+      // d) EntradaRMM
       if (entradaRMM.length > 0) {
         await Promise.all(
           entradaRMM.map(async (entrada) => {
@@ -860,6 +861,25 @@ class AdeudoService extends BaseService {
             }
           })
         );
+      }
+
+      // e) Cambio de estados
+      if (cambioEstado) {
+        const { num_liquidacion, nuevo_estado } = cambioEstado;
+        let query, params;
+
+        if (num_liquidacion === null || num_liquidacion === undefined) {
+          // Actualizar pendientes
+          query = `UPDATE adeudo SET estado = $1 WHERE empresa_cif = $2 AND num_liquidacion IS NULL`;
+          params = [nuevo_estado, empresa_cif];
+        } else {
+          // Actualizar liquidación específica
+          query = `UPDATE adeudo SET estado = $1 WHERE empresa_cif = $2 AND num_liquidacion = $3`;
+          params = [nuevo_estado, empresa_cif, num_liquidacion];
+        }
+
+        const result = await client.query(query, params);
+        console.log(`✅ Estado actualizado: ${result.rowCount} registros afectados`);
       }
 
       // Registrar movimiento

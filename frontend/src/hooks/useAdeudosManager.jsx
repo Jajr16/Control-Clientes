@@ -210,6 +210,7 @@ export const useAdeudosManager = () => {
                 anticipo_unico: anticipoUnico === "" || anticipoUnico === "0" ? null : parseFloat(anticipoUnico)
             } : {};
             const cambiosRMM = [];
+            const cambiosEstado = [];
 
             console.log("Anticipo cambios:", cambiosAnticipo);
 
@@ -272,6 +273,16 @@ export const useAdeudosManager = () => {
                             return
                         }
 
+                        if (key === 'estado') {
+                            if (row[key] !== original[key]) {
+                                cambiosEstado.push({
+                                    num_liquidacion: row.num_liquidacion,
+                                    nuevo_estado: row[key]
+                                });
+                            }
+                            return;
+                        }
+
                         if (row[key] !== original[key]) {
                             console.log(`Cambio detectado en ${key}: ${original[key]} -> ${row[key]}`);
                             cambios[key] = row[key];
@@ -286,12 +297,12 @@ export const useAdeudosManager = () => {
                             return {
                                 num_factura_original: original.num_factura,
                                 concepto: row.concepto,
-                                proveedor: row.proveedor, 
+                                proveedor: row.proveedor,
                                 ff: row.ff,
                                 num_factura: row.num_factura,
                                 importe: row.importe,
                                 num_entrada_original: row.num_protocolo || row.num_entrada,
-                                ...cambios 
+                                ...cambios
                             };
                         } else {
                             // Si ya tenía num_factura, solo enviar los cambios normales
@@ -312,16 +323,39 @@ export const useAdeudosManager = () => {
                 })
                 .filter(Boolean);
 
+            const estadosPorLiquidacion = {};
+            for (const cambio of cambiosEstado) {
+                const key = cambio.num_liquidacion || 'pendientes';
+
+                if (estadosPorLiquidacion[key] && estadosPorLiquidacion[key] !== cambio.nuevo_estado) {
+                    alert(`Error: Hay estados diferentes para la misma liquidación (${key}). Todos los adeudos de una liquidación deben tener el mismo estado. Por favor, verifica tus cambios.`);
+                    return;
+                }
+
+                estadosPorLiquidacion[key] = cambio.nuevo_estado;
+            }
+
+            let cambioEstadoFinal = null;
+            if (cambiosEstado.length > 0) {
+                const primerCambio = cambiosEstado[0];
+                cambioEstadoFinal = {
+                    num_liquidacion: primerCambio.num_liquidacion || null,
+                    nuevo_estado: primerCambio.nuevo_estado
+                };
+            }
+
             console.log("cambiosFilas final:", cambiosFilas);
             console.log("cambiosProtocolo:", cambiosProtocolo);
             console.log("cambiosRMM:", cambiosRMM);
+            console.log("cambiosRMM:", estadosPorLiquidacion);
 
             const payload = {
                 empresa_cif: selectedClient?.cif,
                 ...cambiosAnticipo,
                 ...(cambiosFilas.length > 0 && { cambios_filas: cambiosFilas }),
                 ...(cambiosRMM.length > 0 && { cambios_RMM: agruparRmmPorEntrada(cambiosRMM) }),
-                ...(cambiosProtocolo.length > 0 && { cambios_protocolo: agruparProtocoloPorFactura(cambiosProtocolo) })
+                ...(cambiosProtocolo.length > 0 && { cambios_protocolo: agruparProtocoloPorFactura(cambiosProtocolo) }),
+                ...(cambioEstadoFinal && { cambio_estado: cambioEstadoFinal })
             };
 
             console.log("PAYLOAD FINAL:", payload);

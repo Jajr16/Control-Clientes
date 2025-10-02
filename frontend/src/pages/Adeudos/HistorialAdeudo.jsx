@@ -466,16 +466,35 @@ const Historico = () => {
                                                             <span className="whitespace-nowrap">{formatCurrency(row.total)}</span>
                                                         </td>
                                                         <td className="px-2 sm:px-4 py-2 sm:py-3 text-center border-b">
-                                                            <span className={`inline-flex px-2 py-1 text-xs font-semibold rounded-full ${row.estado === 'LIQUIDACIÓN EN CURSO'
-                                                                ? 'bg-amber-100 text-amber-800'
-                                                                : row.estado === 'PENDIENTE DE ENVIAR'
-                                                                    ? 'bg-blue-100 text-blue-800'
-                                                                    : row.estado === 'ENVIADO AL CLIENTE'
-                                                                        ? 'bg-violet-100 text-violet-800'
-                                                                        : 'bg-emerald-100 text-emerald-800'
-                                                                }`}>
-                                                                {row.estado}
-                                                            </span>
+                                                            {isEditing ? (
+                                                                <select
+                                                                    className={`inline-flex px-2 py-1 text-xs font-semibold rounded-full ${row.estado === 'LIQUIDACIÓN EN CURSO'
+                                                                        ? 'bg-amber-100 text-amber-800'
+                                                                        : row.estado === 'PENDIENTE DE ENVIAR'
+                                                                            ? 'bg-blue-100 text-blue-800'
+                                                                            : row.estado === 'ENVIADO AL CLIENTE'
+                                                                                ? 'bg-violet-100 text-violet-800'
+                                                                                : 'bg-emerald-100 text-emerald-800'
+                                                                        }`}
+                                                                    onChange={(e) => handleCellChange(index, 'estado', e.target.value)}
+                                                                >
+                                                                    <option value="LIQUIDACIÓN EN CURSO">LIQUIDACIÓN EN CURSO</option>
+                                                                    <option value="PENDIENTE DE ENVIAR">PENDIENTE DE ENVIAR</option>
+                                                                    <option value="ENVIADO AL CLIENTE">ENVIADO AL CLIENTE</option>
+                                                                    <option value="LIQUIDADO">LIQUIDADO</option>
+                                                                </select>
+                                                            ) : (
+                                                                <span className={`inline-flex px-2 py-1 text-xs font-semibold rounded-full ${row.estado === 'LIQUIDACIÓN EN CURSO'
+                                                                    ? 'bg-amber-100 text-amber-800'
+                                                                    : row.estado === 'PENDIENTE DE ENVIAR'
+                                                                        ? 'bg-blue-100 text-blue-800'
+                                                                        : row.estado === 'ENVIADO AL CLIENTE'
+                                                                            ? 'bg-violet-100 text-violet-800'
+                                                                            : 'bg-emerald-100 text-emerald-800'
+                                                                    }`}>
+                                                                    {row.estado}
+                                                                </span>
+                                                            )}
                                                         </td>
                                                         {showRMM && (
                                                             <td className="px-2 py-2 text-center border-b">
@@ -598,7 +617,7 @@ const Historico = () => {
                                     {/* Información del Saldo */}
                                     {selectedClient && (saldoInfo || anticipoGeneral) && (
                                         // <div className="mb-4 bg-white rounded-lg border-2 border-gray-200 p-4 flex-shrink-0">
-                                            <SaldoInfo saldoInfo={saldoInfo} anticipoGeneral={anticipoGeneral} />
+                                        <SaldoInfo saldoInfo={saldoInfo} anticipoGeneral={anticipoGeneral} />
                                         // </div>
                                     )}
                                     <div className="mt-2 text-center">
