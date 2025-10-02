@@ -6,27 +6,40 @@ export const toArray = (x) =>
 
 // Función para obtener datos calculados
 export const obtenerDatosCalculados = (empresaCif, adeudos, honorariosSinIVA = 0, empresasDisponibles = []) => {
-  // Filtrar solo adeudos de la empresa y que estén pendientes
-  const adeudosFiltrados = adeudos.filter(a => 
-    a.empresa_cif === empresaCif && 
-    (!a.num_liquidacion || a.estado === 'PENDIENTE')
-  );
-  
+  // Filtrar solo adeudos de la empresa y pendientes
+  const adeudosFiltrados = (Array.isArray(adeudos) ? adeudos : []).filter(a => {
+    const esDeEmpresa =
+      String(a?.empresa_cif || '').trim().toLowerCase() === String(empresaCif || '').trim().toLowerCase();
+
+    const estado = String(a?.estado || '').toLowerCase();
+    const numLiq = a?.num_liquidacion;
+
+    // pendiente si dice "pendiente" o no tiene num_liquidacion y no está marcado como liquidado
+    const esPendiente = estado === 'pendiente' || (!numLiq && estado !== 'liquidado');
+
+    return esDeEmpresa && esPendiente;
+  });
+
   const empresaNombre = empresasDisponibles.find(e => e.cif === empresaCif)?.nombre || empresaCif;
-  
-  // Calcular totales
-  const totalImporte = adeudosFiltrados.reduce((acc, a) => acc + Number(a.importe || 0), 0);
-  const totalIVA = adeudosFiltrados.reduce((acc, a) => acc + Number(a.iva || 0), 0);
-  const totalRetencion = adeudosFiltrados.reduce((acc, a) => acc + Number(a.retencion || 0), 0);
-  const totalConceptosSinIVA = adeudosFiltrados.reduce((acc, a) => acc + Number(a.cs_iva || 0), 0);
-  const totalFacturas = adeudosFiltrados.reduce((acc, a) => acc + Number(a.total || 0), 0);
-  
+
+  // Totales
+  const totalImporte          = adeudosFiltrados.reduce((acc, a) => acc + Number(a?.importe   || 0), 0);
+  const totalIVA              = adeudosFiltrados.reduce((acc, a) => acc + Number(a?.iva       || 0), 0);
+  const totalRetencion        = adeudosFiltrados.reduce((acc, a) => acc + Number(a?.retencion || 0), 0);
+  const totalConceptosSinIVA  = adeudosFiltrados.reduce((acc, a) => acc + Number(a?.cs_iva    || 0), 0);
+  const totalFacturas         = adeudosFiltrados.reduce((acc, a) => acc + Number(a?.total     || 0), 0);
+
   // Honorarios
-  const honorariosConIVA = Number(honorariosSinIVA || 0) * 1.21;
-  const anticipo = Number(adeudosFiltrados[0]?.anticipo || 0);
-  
-  // Adeudo pendiente
-  const adeudoPendiente = totalFacturas + honorariosConIVA - anticipo;
+  const honorariosBase = Number(honorariosSinIVA || 0);
+  const honorariosConIVA = honorariosBase * 1.21;
+
+  // Anticipo: prioriza el que venga en alguna fila; si no, 0
+  const anticipoFila = adeudosFiltrados.find(x => x?.anticipo != null)?.anticipo;
+  const anticipo = Number.isFinite(Number(anticipoFila)) ? Number(anticipoFila) : 0;
+
+  // Adeudo pendiente (clamp a 0 si negativo)
+  let adeudoPendiente = totalFacturas + honorariosConIVA - anticipo;
+  adeudoPendiente = adeudoPendiente < 0 ? 0 : adeudoPendiente;
 
   // Fechas
   const fechas = adeudosFiltrados
@@ -42,15 +55,16 @@ export const obtenerDatosCalculados = (empresaCif, adeudos, honorariosSinIVA = 0
     totalRetencion,
     totalConceptosSinIVA,
     totalFacturas,
-    honorariosSinIVA: Number(honorariosSinIVA || 0),
+    honorariosSinIVA: honorariosBase,
     honorariosConIVA,
     anticipo,
     adeudoPendiente,
     fechas,
-    fechaDesde: fechas.length > 0 ? fechas[0] : null,
-    fechaHasta: fechas.length > 0 ? fechas[fechas.length - 1] : null
+    fechaDesde: fechas[0] || null,
+    fechaHasta: fechas[fechas.length - 1] || null
   };
 };
+
 
 // Función para formatear fechas
 export const formatearFecha = (fecha) => {

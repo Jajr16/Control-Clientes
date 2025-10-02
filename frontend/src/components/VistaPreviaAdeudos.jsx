@@ -174,7 +174,7 @@ const VistaPreviaAdeudos = ({
             <td colSpan={10} className="text-right pr-2 border">
               Adeudo con LIQUIDACIÓN EN CURSO (solo facturas con LIQUIDACIÓN EN CURSO):
             </td>
-            <td className="border">{adeudoPendiente}</td>
+            <td className="border">{Math.max(adeudoPendiente, 0).toFixed(2)}</td>
           </tr>
         </tbody>
       </table>

@@ -52,12 +52,13 @@ const VistaPreviaPdf = ({
   const totalFacturas  = adeudosFiltrados.reduce((acc, a) => acc + Number(a.total || 0), 0);
 
   // Anticipo proveniente de la propia lista (inyectado en fetch) o del cálculo
-  const anticipo = Number(
-    (anticipoP) ??
-    (Array.isArray(adeudosList) && anticipoP) ??
-    anticipoP ??
-    0
-  );
+  const anticipo = (() => {
+    const fromRow = (Array.isArray(adeudosList)
+      ? adeudosList.find(x => x && x.anticipo != null)?.anticipo
+      : null);
+    const n = Number(fromRow);
+    return Number.isFinite(n) ? n : Number(anticipoP || 0);
+  })();
 
   const honorariosBase = Number(honorariosSinIVA || 0);
   const honorariosIVA  = honorariosBase * 0.21;
