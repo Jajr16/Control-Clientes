@@ -468,6 +468,7 @@ const Historico = () => {
                                                         <td className="px-2 sm:px-4 py-2 sm:py-3 text-center border-b">
                                                             {isEditing ? (
                                                                 <select
+                                                                    value={row.estado}
                                                                     className={`inline-flex px-2 py-1 text-xs font-semibold rounded-full ${row.estado === 'LIQUIDACIÓN EN CURSO'
                                                                         ? 'bg-amber-100 text-amber-800'
                                                                         : row.estado === 'PENDIENTE DE ENVIAR'
