@@ -54,8 +54,8 @@ const AgregarAdeudo = () => {
         const data = await resp.json();
         const d = data?.data;
 
-        setAnticipo(d?.anticipo?.anticipo ?? 0);
-
+        setAnticipo(d?.anticipo?.anticipo_original ?? 0);
+        
         const adeudos =
             Array.isArray(d?.adeudos) ? d.adeudos :
             Array.isArray(d?.data) ? d.data :
