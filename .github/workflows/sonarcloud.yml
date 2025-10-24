@@ -4,6 +4,7 @@ on:
   push:
     branches:
       - main
+      - historico_adeudo
   pull_request:
     types: [opened, synchronize, reopened]
 
