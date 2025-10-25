@@ -65,6 +65,8 @@ const VistaPreviaAdeudos = ({
     </span>
   );
 
+  const adeudoPendienteNum = Math.max(totalPend - anticipo, 0);
+
   const renderResumenEstados = () => {
     if (resumen.total === 0) return null;
     return (
@@ -174,7 +176,7 @@ const VistaPreviaAdeudos = ({
             <td colSpan={10} className="text-right pr-2 border">
               Adeudo con LIQUIDACIÓN EN CURSO (solo facturas con LIQUIDACIÓN EN CURSO):
             </td>
-            <td className="border">{adeudoPendiente}</td>
+            <td className="border">{adeudoPendienteNum.toFixed(2)}</td>
           </tr>
         </tbody>
       </table>

@@ -483,107 +483,142 @@ class AdeudoService extends BaseService {
   }
 
   async obtenerTodosAdeudosPorEmpresaAgrupados(empresa_cif) {
-    const query = `SELECT * FROM obtener_adeudos_con_rmm_por_empresa($1)`;
-    const result = await pool.query(query, [empresa_cif]);
+  const query = `SELECT * FROM obtener_adeudos_con_rmm_por_empresa($1)`;
+  const result = await pool.query(query, [empresa_cif]);
 
-    const queryHonorarios = `
-        SELECT 
-            num_liquidacion,
-            honorario,
-            iva,
-            (honorario + iva) as total_honorarios,
-            num_factura,
-            fecha_creacion
-        FROM honorario 
-        WHERE empresa_cif = $1
-        ORDER BY num_liquidacion DESC
-    `;
+  const queryHonorarios = `
+    SELECT 
+      num_liquidacion,
+      honorario,
+      iva,
+      (honorario + iva) as total_honorarios,
+      num_factura,
+      fecha_creacion
+    FROM honorario 
+    WHERE empresa_cif = $1
+    ORDER BY num_liquidacion DESC
+  `;
+  const honorariosResult = await pool.query(queryHonorarios, [empresa_cif]);
 
-    const honorariosResult = await pool.query(queryHonorarios, [empresa_cif]);
+  // Saldo / anticipo
+  const saldoInfo = await this.obtenerSaldoEmpresa(empresa_cif);
+  const anticipo_original = Number(saldoInfo?.anticipo_original || 0);
+  const anticipo_restante = Number(saldoInfo?.saldo_actual || 0);
 
-    // Obtener información completa del saldo
-    const saldoInfo = await this.obtenerSaldoEmpresa(empresa_cif);
-
-    const honorariosPorLiquidacion = {};
-    honorariosResult.rows.forEach(row => {
-      const numLiq = parseInt(row.num_liquidacion);
-      honorariosPorLiquidacion[numLiq] = {
-        base: parseFloat(row.honorario) || 0,
-        iva: parseFloat(row.iva) || 0,
-        total: parseFloat(row.total_honorarios) || 0,
-        num_factura: row.num_factura,
-        fecha_creacion: row.fecha_creacion
-      };
-    });
-
-    const anticipo = {
-      empresa_cif,
-      anticipo: saldoInfo.saldo_actual, // Para compatibilidad
-      anticipo_original: saldoInfo.anticipo_original,
-      saldo_actual: saldoInfo.saldo_actual,
-      total_adeudos: saldoInfo.total_adeudos,
-      total_honorarios: saldoInfo.total_honorarios,
-      total_general: saldoInfo.total_general,
-      debe_empresa: saldoInfo.debe_empresa,
-      estado: saldoInfo.estado
+  // Map de honorarios por nº liquidación
+  const honorariosPorLiquidacion = {};
+  honorariosResult.rows.forEach(row => {
+    const numLiq = parseInt(row.num_liquidacion);
+    honorariosPorLiquidacion[numLiq] = {
+      base: parseFloat(row.honorario) || 0,
+      iva: parseFloat(row.iva) || 0,
+      total: parseFloat(row.total_honorarios) || 0,
+      num_factura: row.num_factura,
+      fecha_creacion: row.fecha_creacion
     };
+  });
 
-    const adeudos = result.rows.map(row => ({
-      ...row,
-      fecha_anticipo: formatDate(row.fecha_anticipo),
-      fecha_devolucion_diferencia: formatDate(row.fecha_devolucion_diferencia),
-      ff: formatDate(row.ff),
-      fecha_liquidacion: formatDate(row.fecha_liquidacion)
-    }));
+  // Normaliza fechas
+  const adeudos = result.rows.map(row => ({
+    ...row,
+    fecha_anticipo: formatDate(row.fecha_anticipo),
+    fecha_devolucion_diferencia: formatDate(row.fecha_devolucion_diferencia),
+    ff: formatDate(row.ff),
+    fecha_liquidacion: formatDate(row.fecha_liquidacion)
+  }));
 
-    const adeudosAgrupados = {};
-    adeudos.forEach(adeudo => {
-      const liquidacion = adeudo.num_liquidacion || 'pendientes';
-      if (!adeudosAgrupados[liquidacion]) {
-        adeudosAgrupados[liquidacion] = {
-          num_liquidacion: liquidacion,
-          adeudos: [],
-          resumen: {
-            total: 0,
-            importe_total: 0,
-            iva_total: 0,
-            retencion_total: 0,
-            total_general: 0
-          },
-          // Obtener honorarios del mapa (CORREGIDO: usar parseInt)
-          honorarios: liquidacion !== 'pendientes' && honorariosPorLiquidacion[parseInt(liquidacion)]
+  // Agrupar por liquidación
+  const adeudosAgrupados = {};
+  adeudos.forEach(adeudo => {
+    const liquidacion = adeudo.num_liquidacion || 'pendientes';
+    if (!adeudosAgrupados[liquidacion]) {
+      adeudosAgrupados[liquidacion] = {
+        num_liquidacion: liquidacion,
+        adeudos: [],
+        resumen: {
+          total: 0,
+          importe_total: 0,
+          iva_total: 0,
+          retencion_total: 0,
+          total_general: 0
+        },
+        honorarios:
+          liquidacion !== 'pendientes' && honorariosPorLiquidacion[parseInt(liquidacion)]
             ? honorariosPorLiquidacion[parseInt(liquidacion)]
             : { base: 0, iva: 0, total: 0, num_factura: null, fecha_creacion: null }
-        };
-      }
+      };
+    }
 
-      adeudosAgrupados[liquidacion].adeudos.push(adeudo);
-      const r = adeudosAgrupados[liquidacion].resumen;
-      r.total++;
-      r.importe_total += parseFloat(adeudo.importe) || 0;
-      r.iva_total += parseFloat(adeudo.iva) || 0;
-      r.retencion_total += parseFloat(adeudo.retencion) || 0;
-      r.total_general += parseFloat(adeudo.total) || 0;
-    });
+    adeudosAgrupados[liquidacion].adeudos.push(adeudo);
+    const r = adeudosAgrupados[liquidacion].resumen;
+    r.total++;
+    r.importe_total   += parseFloat(adeudo.importe)   || 0;
+    r.iva_total       += parseFloat(adeudo.iva)       || 0;
+    r.retencion_total += parseFloat(adeudo.retencion) || 0;
+    r.total_general   += parseFloat(adeudo.total)     || 0;
+  });
 
-    // Orden: pendientes primero, luego num_liquidacion desc
-    const liquidacionesOrdenadas = Object.keys(adeudosAgrupados).sort((a, b) => {
-      if (a === 'pendientes') return -1;
-      if (b === 'pendientes') return 1;
-      return parseInt(b) - parseInt(a);
-    });
+  // Orden: pendientes primero, luego desc
+  const liquidacionesOrdenadas = Object.keys(adeudosAgrupados).sort((a, b) => {
+    if (a === 'pendientes') return -1;
+    if (b === 'pendientes') return 1;
+    return parseInt(b) - parseInt(a);
+  });
+  const liquidaciones = liquidacionesOrdenadas.map(k => adeudosAgrupados[k]);
 
-    const liquidaciones = liquidacionesOrdenadas.map(k => adeudosAgrupados[k]);
+  // --- NUEVO: resumen sólo de pendientes (para vista/preview) ---
+  const bloquePendientes = adeudosAgrupados['pendientes'] || {
+    resumen: { importe_total: 0, iva_total: 0, retencion_total: 0, total_general: 0 },
+    honorarios: { total: 0 }
+  };
+  const total_facturas_pendientes = Number(bloquePendientes.resumen.total_general || 0);
 
-    const resumenGeneral = {
-      ...this._calcularResumen(adeudos),
-      saldo_info: saldoInfo,
-      total_honorarios: saldoInfo.total_honorarios,
-      total_general: saldoInfo.total_general
-    };
+  // Honorarios para PDF (si usas los de la liquidación final, déjalos en 0 aquí;
+  // si quieres sumarlos en la vista de liquidación final, se calculan en ese flujo)
+  const honorarios_pdf = 0;
 
-    return { anticipo, liquidaciones, resumen: resumenGeneral };
-  }
+  // Anticipo “para PDF” = original (congelado)
+  const anticipo_para_pdf = anticipo_original;
+
+  // Adeudo pendiente para PDF, clamp >= 0
+  const adeudo_pendiente_pdf = Math.max(0, total_facturas_pendientes + honorarios_pdf - anticipo_para_pdf);
+
+  // Resumen general (como ya tenías) + extras
+  const resumenGeneral = {
+    ...this._calcularResumen(adeudos),
+    saldo_info: saldoInfo,
+    total_honorarios: saldoInfo.total_honorarios,
+    total_general: saldoInfo.total_general,
+
+    // NUEVO: bloque específico para la vista/pdf
+    resumen_pendientes: {
+      total_facturas: total_facturas_pendientes,
+      honorarios: honorarios_pdf,
+      anticipo_para_pdf,             // <- usar en PDF
+      adeudo_pendiente_pdf           // <- ya calculado y clamp ≥ 0
+    }
+  };
+
+  // Objeto anticipo completo y explícito
+  const anticipo = {
+    empresa_cif,
+    anticipo: anticipo_restante,          // compat (saldo_actual)
+    anticipo_original,                    // << el que quieres para PDF
+    saldo_actual: anticipo_restante,      // alias
+    total_adeudos: saldoInfo.total_adeudos,
+    total_honorarios: saldoInfo.total_honorarios,
+    total_general: saldoInfo.total_general,
+    debe_empresa: saldoInfo.debe_empresa,
+    estado: saldoInfo.estado,
+
+    // Sugerencias de consumo en front:
+    anticipo_para_pdf: anticipo_para_pdf, // usa esto en PDF
+    anticipo_para_vista: anticipo_restante
+  };
+
+  return { anticipo, liquidaciones, resumen: resumenGeneral };
+}
+
 
   async verificarAdeudosPendientes(empresa_cif) {
     const query = `
@@ -614,6 +649,7 @@ class AdeudoService extends BaseService {
     const cambiosProtocolo = data.cambios_protocolo || [];
     const setAdeudos = data.cambios_filas || [];
     const entradaRMM = data.cambios_RMM || [];
+    const cambioEstado = data.cambio_estado || null;
 
     if (anticipoUnico !== undefined && anticipoUnico !== null && isNaN(Number(anticipoUnico))) {
       throw new Error("El anticipo debe ser un número válido");
@@ -768,10 +804,10 @@ class AdeudoService extends BaseService {
               if (adeudoActual && adeudoActual.proveedor === 'Registro Mercantil de Madrid') {
                 // Buscar si hay entrada RMM relacionada por num_factura_final
                 const query = `
-                SELECT num_entrada, anticipo_pagado, diferencia 
-                FROM entrada_rmm 
-                WHERE num_factura_final = $1 AND empresa_cif = $2
-              `;
+                  SELECT num_entrada, anticipo_pagado, diferencia 
+                  FROM entrada_rmm 
+                  WHERE num_factura_final = $1 AND empresa_cif = $2
+                `;
                 const result = await client.query(query, [num_factura_original, empresa_cif]);
 
                 if (result.rows.length > 0) {
@@ -807,7 +843,7 @@ class AdeudoService extends BaseService {
         console.log("ADEUDOS ACTUALIZADOS");
       }
 
-      // c) EntradaRMM
+      // d) EntradaRMM
       if (entradaRMM.length > 0) {
         await Promise.all(
           entradaRMM.map(async (entrada) => {
@@ -860,6 +896,25 @@ class AdeudoService extends BaseService {
             }
           })
         );
+      }
+
+      // e) Cambio de estados
+      if (cambioEstado) {
+        const { num_liquidacion, nuevo_estado } = cambioEstado;
+        let query, params;
+
+        if (num_liquidacion === null || num_liquidacion === undefined) {
+          // Actualizar pendientes
+          query = `UPDATE adeudo SET estado = $1 WHERE empresa_cif = $2 AND num_liquidacion IS NULL`;
+          params = [nuevo_estado, empresa_cif];
+        } else {
+          // Actualizar liquidación específica
+          query = `UPDATE adeudo SET estado = $1 WHERE empresa_cif = $2 AND num_liquidacion = $3`;
+          params = [nuevo_estado, empresa_cif, num_liquidacion];
+        }
+
+        const result = await client.query(query, params);
+        console.log(`✅ Estado actualizado: ${result.rowCount} registros afectados`);
       }
 
       // Registrar movimiento

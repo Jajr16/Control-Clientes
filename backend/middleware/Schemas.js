@@ -3,7 +3,8 @@ import Joi from "joi";
 
 export const adeudoInsertSchema = Joi.object({
     concepto: Joi.string().min(1).optional(),
-    proveedor: Joi.string().min(1).optional(), 
+    proveedor: Joi.string().min(1).optional(),
+    estado: Joi.string().min(1).optional(),
     ff: Joi.string().min(1).optional(),
     num_factura: Joi.string().min(1).optional(),
     importe: Joi.number().optional(),

@@ -155,7 +155,7 @@ const puedeGenerarLiquidacion = (empresaCif) => {
         honorariosSinIVA={honorariosSinIVA}
         empresasDisponibles={empresasDisponibles}
         onConfirmarDescarga={onConfirmarDescarga}
-        anticipoP={anticipo}
+        anticipoP={anticipo?.anticipo_original ?? anticipo?.anticipo_para_pdf ?? 0}
       />
     </div>
   );

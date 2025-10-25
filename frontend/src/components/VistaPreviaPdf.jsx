@@ -17,15 +17,14 @@ const VistaPreviaPdf = ({
   honorariosSinIVA,
   empresasDisponibles,
   onConfirmarDescarga,
-  anticipoP,
+  anticipoP,            // <-- pásame aquí el anticipo ORIGINAL (anticipo_para_pdf)
 }) => {
   if (!mostrarVistaPrevia) return null;
 
-  // Helpers coherentes con el resto de la app
   const matchEmpresa = (empresaId) => (a) => {
     const cif = a?.empresa_cif ?? a?.cif ?? a?.empresaCif ?? a?.empresa;
     if (!empresaId) return false;
-    if (!cif) return true; // si falta el cif en el registro, lo contamos para la empresa actual
+    if (!cif) return true;
     return String(cif).trim().toLowerCase() === String(empresaId).trim().toLowerCase();
   };
 
@@ -34,41 +33,52 @@ const VistaPreviaPdf = ({
     const rawNum = a?.num_liquidacion ?? a?.numeroLiquidacion ?? a?.liquidacion;
     const tieneNum = rawNum !== null && rawNum !== undefined && String(rawNum).trim() !== '';
     const numOk = tieneNum && !isNaN(Number(rawNum)) && Number(rawNum) > 0;
-    // PENDIENTE si está marcado como tal o si no tiene num_liquidacion válido y no está marcado como LIQUIDADO
     return estado === 'pendiente' || (!numOk && estado !== 'liquidado');
   };
 
-  // Calcula base con tu util (empresa, nombres, anticipo, etc.)
-  const datos = obtenerDatosCalculados(empresaCif, adeudosList, honorariosSinIVA, empresasDisponibles);
+// DEBUG: Verificar qué anticipo llega
+  console.log('🔍 VistaPreviaPdf - Anticipo recibido:', {
+    anticipoP,
+    tipo: typeof anticipoP,
+    esNaN: isNaN(anticipoP)
+  });
 
-  // Forzamos las filas a mostrar SOLO los pendientes de la empresa
+  // Usa SIEMPRE el anticipo ORIGINAL que te llega por prop (anticipoP)
+  const datos = obtenerDatosCalculados(
+    empresaCif,
+    adeudosList,
+    honorariosSinIVA,
+    empresasDisponibles,
+    anticipoP // <-- override anticipo para PDF
+  );
+
   const base = Array.isArray(adeudosList) ? adeudosList : [];
   const adeudosFiltrados = base.filter(matchEmpresa(empresaCif)).filter(isPendiente);
 
-  // Recalcular subtotales para lo que se pinta en la tabla
   const totalImporte   = adeudosFiltrados.reduce((acc, a) => acc + Number(a.importe || 0), 0);
   const totalIVA       = adeudosFiltrados.reduce((acc, a) => acc + Number(a.iva || 0), 0);
   const totalRetencion = adeudosFiltrados.reduce((acc, a) => acc + Number(a.retencion || 0), 0);
   const totalFacturas  = adeudosFiltrados.reduce((acc, a) => acc + Number(a.total || 0), 0);
 
-  // Anticipo proveniente de la propia lista (inyectado en fetch) o del cálculo
-  const anticipo = Number(
-    (anticipoP) ??
-    (Array.isArray(adeudosList) && anticipoP) ??
-    anticipoP ??
-    0
-  );
+  // Anticipo para PDF - ASEGURAR que sea el valor correcto
+  const anticipo = Number(anticipoP || 0);
+  
+  console.log('💰 VistaPreviaPdf - Valores calculados:', {
+    anticipo,
+    totalFacturas,
+    honorariosSinIVA,
+    datos_anticipo: datos.anticipo
+  });
 
   const honorariosBase = Number(honorariosSinIVA || 0);
   const honorariosIVA  = honorariosBase * 0.21;
   const honorariosTot  = honorariosBase + honorariosIVA;
 
-  // Adeudo pendiente para el documento (borrador: sin honorarios; liquidación: con honorarios)
+  // Si quieres clamp ≥ 0, envuelve con Math.max(…, 0)
   const adeudoPendiente = tipoPdf === 'liquidacion'
-    ? totalFacturas + honorariosTot - anticipo
-    : totalFacturas - anticipo;
+    ? (totalFacturas + honorariosTot - anticipo)
+    : (totalFacturas - anticipo);
 
-  // Fechas desde/hasta (con lo que se está mostrando)
   const fechasValidas = adeudosFiltrados
     .map(a => new Date(a.ff))
     .filter(d => !isNaN(d.getTime()))

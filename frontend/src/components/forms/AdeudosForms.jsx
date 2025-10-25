@@ -14,6 +14,15 @@ const AdeudosForm = ({
 }) => {
   const h = useAdeudos({ empresa, setEmpresa, adeudosGuardados, setAdeudosGuardados, setVistaPrevia });
 
+  // CORRECCIÓN: Extraer anticipo_original o usar el número directamente
+  const anticipoOriginal = React.useMemo(() => {
+    if (typeof anticipo === 'number') {
+      console.warn('ANTICIPO LLEGÓ COMO NÚMERO, debería ser un objeto con anticipo_original');
+      return anticipo; // Usar el número directamente como fallback
+    }
+    return anticipo?.anticipo_original ?? anticipo?.anticipo_para_pdf ?? 0;
+  }, [anticipo]);
+
   // NUEVO: estado local para los campos de entrada_rmm (frontend)
   const [rmm, setRmm] = React.useState({
     num_entrada: "",
@@ -52,7 +61,7 @@ const AdeudosForm = ({
         onGenerarPdf={h.handleGenerarPdfBorrador}
         onVolver={h.volverFormularioPrincipal}
         onConfirmarDescarga={h.confirmarDescargaPdf}
-        anticipo={anticipo}
+        anticipo={{ anticipo_original: anticipoOriginal }}
       />
     );
   }
@@ -71,7 +80,7 @@ const AdeudosForm = ({
         onVerPrevia={h.handleVerPreviaLiquidacion}
         onVolver={h.volverFormularioPrincipal}
         onConfirmarDescarga={h.confirmarDescargaPdf}
-        anticipo={anticipo}
+        anticipo={{ anticipo_original: anticipoOriginal }}
       />
     );
   }

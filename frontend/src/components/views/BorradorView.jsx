@@ -126,16 +126,16 @@ const BorradorView = ({
         </div>
       )}
       <VistaPreviaPdf
-  mostrarVistaPrevia={mostrarVistaPreviaPdf}
-  setMostrarVistaPrevia={setMostrarVistaPreviaPdf}
-  tipoPdf="borrador"
-  empresaCif={empresaSeleccionada}
-  adeudosList={adeudosList}
-  honorariosSinIVA={0}              // no se usa en borrador
-  empresasDisponibles={empresasDisponibles}
-  onConfirmarDescarga={onConfirmarDescarga}
-  anticipoP={anticipo}
-/>
+        mostrarVistaPrevia={mostrarVistaPreviaPdf}
+        setMostrarVistaPrevia={setMostrarVistaPreviaPdf}
+        tipoPdf="borrador"
+        empresaCif={empresaSeleccionada}
+        adeudosList={adeudosList}
+        honorariosSinIVA={0}
+        empresasDisponibles={empresasDisponibles}
+        onConfirmarDescarga={onConfirmarDescarga}
+        anticipoP={anticipo?.anticipo_original ?? anticipo?.anticipo_para_pdf ?? 0}
+      />
     </div>
   );
 };
