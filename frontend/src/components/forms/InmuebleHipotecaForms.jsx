@@ -1,46 +1,15 @@
-import React from "react";
+import { X } from "lucide-react";
 
-const InmuebleHipotecaForm = ({ inmuebleHipoteca = {}, setInmuebleHipoteca, validationErrors = {} }) => {
-
-    const getError = (field) => validationErrors[field];
-
-    const handleChange = (e) => {
-        const { name, value } = e.target;
-        setInmuebleHipoteca({
-            ...inmuebleHipoteca,
-            [name]: value
-        });
-    };
-
-    return (
-        <div className="mb-6">
-            <div className="grid grid-cols-2 m-3">
-                <div className="flex justify-between">
-                    <label htmlFor="clave_catastral">Clave Catastral:</label>
-                    <input
-                        id="clave_catastral"
-                        type="text"
-                        name="clave_catastral"
-                        maxLength={25}
-                        value={inmuebleHipoteca.clave_catastral || ""}
-                        onChange={handleChange}
-                        className={`w-full ml-2 mr-2 border rounded-md ${getError('clave_catastral') ? 'border-red-500' : 'border-gray-300'}`}
-                    />
-                </div>
-                <div className="flex justify-between">
-                    <label htmlFor="id_hipoteca">ID de Hipoteca:</label>
-                    <input
-                        id="id_hipoteca"
-                        type="number"
-                        name="id_hipoteca"
-                        value={inmuebleHipoteca.id_hipoteca || ""}
-                        onChange={handleChange}
-                        className={`w-full ml-2 mr-2 border rounded-md ${getError('id_hipoteca') ? 'border-red-500' : 'border-gray-300'}`}
-                    />
-                </div>
-            </div>
-        </div>
-    );
-};
+const InmuebleHipotecaForm = ({ hipoteca, setHipoteca, onRemove }) => (
+    <div className="border rounded p-3 bg-gray-50 relative">
+        <button onClick={onRemove} className="absolute top-2 right-2 text-red-500 hover:text-red-700">
+            <X className="w-4 h-4" />
+        </button>
+        <input className="w-full border p-2 rounded mb-2" placeholder="Banco" onChange={e => setHipoteca({ ...hipoteca, banco: e.target.value })} />
+        <input className="w-full border p-2 rounded" placeholder="Prestamo" onChange={e => setHipoteca({ ...hipoteca, prestamo: e.target.value })} />
+        <input className="w-full border p-2 rounded" placeholder="Fecha_hipoteca" onChange={e => setHipoteca({ ...hipoteca, fecha_hipoteca: e.target.value })} />
+        <input className="w-full border p-2 rounded" placeholder="cuota" onChange={e => setHipoteca({ ...hipoteca, cuota: e.target.value })} />
+    </div>
+);
 
 export default InmuebleHipotecaForm;

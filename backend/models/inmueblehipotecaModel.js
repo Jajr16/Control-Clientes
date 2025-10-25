@@ -6,6 +6,7 @@ export const createTableInmuebleHipoteca = async () => {
             CREATE TABLE IF NOT EXISTS inmueble_hipoteca(
                 clave_catastral VARCHAR(25),
                 id_hipoteca INTEGER, 
+                PRIMARY KEY (clave_catastral, id_hipoteca),
                 FOREIGN KEY (clave_catastral) REFERENCES inmueble(clave_catastral)
                 ON DELETE CASCADE ON UPDATE CASCADE,
                 FOREIGN KEY (id_hipoteca) REFERENCES hipoteca(id) 

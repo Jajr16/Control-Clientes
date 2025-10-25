@@ -1,47 +1,16 @@
-import React from "react";
+import { X } from "lucide-react";
 
-const InmuebleSeguroForm = ({ inmuebleSeguro = {}, setInmuebleSeguro, validationErrors = {} }) => {
-
-    const getError = (field) => validationErrors[field];
-
-    const handleChange = (e) => {
-        const { name, value } = e.target;
-        setInmuebleSeguro({
-            ...inmuebleSeguro,
-            [name]: value
-        });
-    };
-
-    return (
-        <div className="mb-6">
-            <div className="grid grid-cols-2 m-3">
-                <div className="flex justify-between">
-                    <label htmlFor="clave_catastral">Clave Catastral:</label>
-                    <input
-                        id="clave_catastral"
-                        type="text"
-                        name="clave_catastral"
-                        maxLength={25}
-                        value={inmuebleSeguro.clave_catastral || ""}
-                        onChange={handleChange}
-                        className={`w-full ml-2 mr-2 border rounded-md ${getError('clave_catastral') ? 'border-red-500' : 'border-gray-300'}`}
-                    />
-                </div>
-                <div className="flex justify-between">
-                    <label htmlFor="empresa_seguro">Empresa Seguro:</label>
-                    <input
-                        id="empresa_seguro"
-                        type="text"
-                        name="empresa_seguro"
-                        maxLength={300}
-                        value={inmuebleSeguro.empresa_seguro || ""}
-                        onChange={handleChange}
-                        className={`w-full ml-2 mr-2 border rounded-md ${getError('empresa_seguro') ? 'border-red-500' : 'border-gray-300'}`}
-                    />
-                </div>
-            </div>
-        </div>
-    );
-};
+const InmuebleSeguroForm = ({ seguro, setSeguro, onRemove }) => (
+    <div className="border rounded p-3 bg-gray-50 relative">
+        <button onClick={onRemove} className="absolute top-2 right-2 text-red-500 hover:text-red-700">
+            <X className="w-4 h-4" />
+        </button>
+        <input className="w-full border p-2 rounded mb-2" placeholder="Aseguradora" onChange={e => setSeguro({ ...seguro, aseguradora: e.target.value })} />
+        <input className="w-full border p-2 rounded" placeholder="Seguro de..." onChange={e => setSeguro({ ...seguro, tipo_seguro: e.target.value })} />
+        <input className="w-full border p-2 rounded" placeholder="Teléfono" onChange={e => setSeguro({ ...seguro, telefono_seguro: e.target.value })} />
+        <input className="w-full border p-2 rounded" placeholder="Email seguro" onChange={e => setSeguro({ ...seguro, email_seguro: e.target.value })} />
+        <input className="w-full border p-2 rounded" placeholder="Póliza" onChange={e => setSeguro({ ...seguro, poliza: e.target.value })} />
+    </div>
+);
 
 export default InmuebleSeguroForm;

@@ -1,57 +1,43 @@
-import React from "react";
+import DatoRegistralForm from "../../components/forms/DatoRegistralForms.jsx";
+import DireccionForm from "../../components/forms/DireccionForms.jsx";
 
-const InmuebleForm = ({ inmueble, setInmueble, validationErrors = {} }) => {
-
-    const getError = (field) => validationErrors[field];
-
-    const handleChange = (e) => {
-        const { name, value } = e.target;
+const InmuebleForm = ({ inmueble, setInmueble }) => {
+    const actualizarDireccion = (nuevaDireccion) => {
         setInmueble({
             ...inmueble,
-            [name]: value
+            dirInmueble: nuevaDireccion
+        })
+    }
+
+    const actualizarDatoRegistral = (nuevoDatoRegistral) => {
+        setInmueble({
+            ...inmueble,
+            datoRegistralInmueble: nuevoDatoRegistral
         });
     };
 
     return (
-        <div className="mb-6">
-            <div className="grid grid-cols-3 m-3">
-                <div className="flex justify-between">
-                    <label htmlFor="clave_catastral">Clave Catastral:</label>
-                    <input
-                        id="clave_catastral"
-                        type="text"
-                        name="clave_catastral"
-                        maxLength={25}
-                        value={inmueble.clave_catastral || ""}
-                        onChange={handleChange}
-                        className={`w-full ml-2 mr-2 border rounded-md ${getError('clave_catastral') ? 'border-red-500' : 'border-gray-300'}`}
-                    />
-                </div>
-                <div className="flex justify-between">
-                    <label htmlFor="direccion">Dirección:</label>
-                    <input
-                        id="direccion"
-                        type="number"
-                        name="direccion"
-                        value={inmueble.direccion || ""}
-                        onChange={handleChange}
-                        className={`w-full ml-2 mr-2 border rounded-md ${getError('direccion') ? 'border-red-500' : 'border-gray-300'}`}
-                    />
-                </div>
-                <div className="flex justify-between">
-                    <label htmlFor="dato_registral">Dato Registral:</label>
-                    <input
-                        id="dato_registral"
-                        type="number"
-                        name="dato_registral"
-                        value={inmueble.dato_registral || ""}
-                        onChange={handleChange}
-                        className={`w-full ml-2 mr-2 border rounded-md ${getError('dato_registral') ? 'border-red-500' : 'border-gray-300'}`}
-                    />
-                </div>
+        <div className="space-y-2">
+            <input className="w-full border p-2 rounded" placeholder="Referencia catastral *" onChange={e => setInmueble({ ...inmueble, referencia: e.target.value })} />
+            <div>
+                <h4 className="font-semibold mb-2">Dirección del Inmueble *</h4>
+                <DireccionForm
+                    direccion={inmueble.dirInmueble || {}}
+                    setDireccion={actualizarDireccion}
+                />
+            </div>
+
+            <hr className="my-4" />
+
+            <div>
+                <h4 className="font-semibold mb-2">Datos Registrales del Inmueble *</h4>
+                <DatoRegistralForm 
+                    datoRegistral={inmueble.datoRegistralInmueble || {}} 
+                    setDatoRegistral={actualizarDatoRegistral}
+                />
             </div>
         </div>
-    );
+    )
 };
 
 export default InmuebleForm;

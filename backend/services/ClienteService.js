@@ -4,8 +4,24 @@ import Repositorio from "../repositories/globalPersistence.js";
 class ClienteService extends BaseService {
     constructor() {
         super({
-            empresa: new Repositorio("empresa", "cif")
+            propietario: new Repositorio('propietario', 'nie'),
+            direccion: new Repositorio('direccion', 'id'),
+            datoRegistral: new Repositorio('dato_registral', 'id_dr'),
+            empresa: new Repositorio("empresa", "cif"),
         });
+    }
+
+    async crearCliente(clienteCompleto) {
+        const cliente = clienteCompleto.cliente
+        const inmueble = clienteCompleto.inmueble || null
+
+        if (!cliente?.empresa || !cliente?.direccion || !cliente?.datoRegistral || !cliente?.propietario) {
+            throw new Error('Datos del cliente incompletos.')
+        }
+
+        return await this.withTransaction(async (cliente) => {
+
+        })
     }
 
     async infoClientes() {
@@ -17,10 +33,10 @@ class ClienteService extends BaseService {
             ];
 
             const columnas = [
-                'empresa.clave', 'empresa.cif', 'empresa.nombre', 'p.nie', 
-                'p.nombre AS propietario', 'p.telefono', 'p.email', 
+                'empresa.clave', 'empresa.cif', 'empresa.nombre', 'p.nie',
+                'p.nombre AS propietario', 'p.telefono', 'p.email',
                 'd.calle', 'd.numero', 'd.piso', 'd.codigo_postal', 'd.localidad',
-                'dr.num_protocolo', 'dr.folio', 'dr.hoja', 'dr.inscripcion', 
+                'dr.num_protocolo', 'dr.folio', 'dr.hoja', 'dr.inscripcion',
                 'dr.notario', 'dr.fecha_inscripcion'
             ];
 

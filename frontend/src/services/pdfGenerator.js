@@ -1,5 +1,6 @@
-import * as pdfMake from "pdfmake/build/pdfmake";
-import * as pdfFonts from "pdfmake/build/vfs_fonts";
+import pdfMake from "pdfmake/build/pdfmake.js";
+import pdfFonts from "pdfmake/build/vfs_fonts.js";
+
 pdfMake.vfs = pdfFonts.vfs;
 
 import { obtenerDatosCalculados, formatearFecha } from '../utils/calculations';

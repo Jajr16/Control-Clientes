@@ -6,6 +6,17 @@ class ClienteController extends BaseController {
         super(new ClienteService());
     }
 
+    async createCliente(req, res) {
+        try {
+            const { datosCliente } = req.body
+
+            const result = await this.service.crearCliente(datosCliente)
+            return this.sendSuccess(res, result, 'Cliente creado correctamente', 201);
+        } catch (error) {
+            return this.handleError(error, res, "Error al agregar un nuevo cliente")
+        }
+    }
+
     async infoClientes(req, res) {
         try {
             const result = await this.service.infoClientes();
@@ -20,3 +31,4 @@ const clienteController = new ClienteController();
 export default clienteController;
 
 export const getInfoClientes = clienteController.infoClientes.bind(clienteController)
+export const createCliente = clienteController.createCliente.bind(clienteController)

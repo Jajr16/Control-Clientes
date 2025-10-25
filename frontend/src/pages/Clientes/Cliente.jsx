@@ -52,7 +52,7 @@ const Cliente = () => {
             <div className={`flex-shrink-0 ${selectedClient ? "w-[30%]" : "w-full"} p-2 flex`}>
                 <ClientSearch
                     onSelectClient={(c) => setSelectedClient(c)}
-                    routeName={'searchClients'}
+                    routeName={'cliente'}
                     fieldsToInclude={[
                         "cif", "nombre", "clave", "nie", "propietario", "telefono", "email",
                         "calle", "numero", "piso", "codigo_postal", "localidad",

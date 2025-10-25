@@ -9,7 +9,7 @@ import direccionRoutes from './routes/direccionRoutes.js';
 import propietarioRoutes from './routes/propietarioRoutes.js';
 import datoRegistralRoutes from './routes/datoRegistralRoutes.js';
 import inmuebleRoutes from './routes/InmuebleRoutes.js'
-import clienteRouter from './routes/searchClientRoute.js'
+import clienteRouter from './routes/Clientes/clienteRoutes.js'
 import adeudoRoutes from './routes/adeudoRoutes.js';
 import liquidacionRoutes from './routes/LiquidacionRoutes.js';
 import HomeRoutes from './routes/Home/homeRoutes.js'
@@ -40,7 +40,7 @@ app.use('/api/direcciones', direccionRoutes);
 app.use('/api/propietario', propietarioRoutes);
 app.use('/api/datoRegistral', datoRegistralRoutes);
 app.use('/api/inmueble', inmuebleRoutes);
-app.use('/api/searchClients', clienteRouter);
+app.use('/api/cliente', clienteRouter);
 app.use('/api/adeudos', adeudoRoutes);
 app.use('/api/liquidaciones', liquidacionRoutes);
 app.use('/api/home', HomeRoutes);
