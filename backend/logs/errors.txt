@@ -1358,3 +1358,299 @@
     at async AdeudoService.updateAdeudos (file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/services/AdeudoService.js:640:12)
     at async AdeudoController.updateAdeudos (file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/controllers/AdeudoController.js:288:22)
 
+[2025-09-27T03:01:45.050Z] Error: No se pueden insertar datos vacíos.
+    at Repositorio.insertar (file:///C:/Users/aleja/OneDrive/Desktop/PROYECTO/backend/repositories/globalPersistence.js:23:19)
+    at file:///C:/Users/aleja/OneDrive/Desktop/PROYECTO/backend/services/InmuebleService.js:20:73
+    at InmuebleService.withTransaction (file:///C:/Users/aleja/OneDrive/Desktop/PROYECTO/backend/services/BaseService.js:13:34)
+    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at async InmuebleService.nuevoInmueble (file:///C:/Users/aleja/OneDrive/Desktop/PROYECTO/backend/services/InmuebleService.js:18:16)
+    at async InmuebleController.insertar (file:///C:/Users/aleja/OneDrive/Desktop/PROYECTO/backend/controllers/InmuebleController.js:11:28)
+
+[2025-09-27T03:01:51.137Z] Error: No se pueden insertar datos vacíos.
+    at Repositorio.insertar (file:///C:/Users/aleja/OneDrive/Desktop/PROYECTO/backend/repositories/globalPersistence.js:23:19)
+    at file:///C:/Users/aleja/OneDrive/Desktop/PROYECTO/backend/services/InmuebleService.js:20:73
+    at InmuebleService.withTransaction (file:///C:/Users/aleja/OneDrive/Desktop/PROYECTO/backend/services/BaseService.js:13:34)
+    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at async InmuebleService.nuevoInmueble (file:///C:/Users/aleja/OneDrive/Desktop/PROYECTO/backend/services/InmuebleService.js:18:16)
+    at async InmuebleController.insertar (file:///C:/Users/aleja/OneDrive/Desktop/PROYECTO/backend/controllers/InmuebleController.js:11:28)
+
+[2025-09-27T03:02:16.176Z] error: error de sintaxis en o cerca de «0»
+    at C:\Users\aleja\OneDrive\Desktop\PROYECTO\backend\node_modules\pg\lib\client.js:545:17
+    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at async Repositorio.insertar (file:///C:/Users/aleja/OneDrive/Desktop/PROYECTO/backend/repositories/globalPersistence.js:43:28)
+    at async file:///C:/Users/aleja/OneDrive/Desktop/PROYECTO/backend/services/InmuebleService.js:20:35
+    at async InmuebleService.withTransaction (file:///C:/Users/aleja/OneDrive/Desktop/PROYECTO/backend/services/BaseService.js:13:28)
+    at async InmuebleService.nuevoInmueble (file:///C:/Users/aleja/OneDrive/Desktop/PROYECTO/backend/services/InmuebleService.js:18:16)
+    at async InmuebleController.insertar (file:///C:/Users/aleja/OneDrive/Desktop/PROYECTO/backend/controllers/InmuebleController.js:11:28)
+
+[2025-09-27T03:04:28.336Z] error: error de sintaxis en o cerca de «0»
+    at C:\Users\aleja\OneDrive\Desktop\PROYECTO\backend\node_modules\pg\lib\client.js:545:17
+    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at async Repositorio.insertar (file:///C:/Users/aleja/OneDrive/Desktop/PROYECTO/backend/repositories/globalPersistence.js:43:28)
+    at async file:///C:/Users/aleja/OneDrive/Desktop/PROYECTO/backend/services/InmuebleService.js:20:35
+    at async InmuebleService.withTransaction (file:///C:/Users/aleja/OneDrive/Desktop/PROYECTO/backend/services/BaseService.js:13:28)
+    at async InmuebleService.nuevoInmueble (file:///C:/Users/aleja/OneDrive/Desktop/PROYECTO/backend/services/InmuebleService.js:18:16)
+    at async InmuebleController.insertar (file:///C:/Users/aleja/OneDrive/Desktop/PROYECTO/backend/controllers/InmuebleController.js:11:28)
+
+[2025-09-27T03:05:18.385Z] error: error de sintaxis en o cerca de «0»
+    at C:\Users\aleja\OneDrive\Desktop\PROYECTO\backend\node_modules\pg\lib\client.js:545:17
+    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at async Repositorio.insertar (file:///C:/Users/aleja/OneDrive/Desktop/PROYECTO/backend/repositories/globalPersistence.js:43:28)
+    at async file:///C:/Users/aleja/OneDrive/Desktop/PROYECTO/backend/services/InmuebleService.js:20:35
+    at async InmuebleService.withTransaction (file:///C:/Users/aleja/OneDrive/Desktop/PROYECTO/backend/services/BaseService.js:13:28)
+    at async InmuebleService.nuevoInmueble (file:///C:/Users/aleja/OneDrive/Desktop/PROYECTO/backend/services/InmuebleService.js:18:16)
+    at async InmuebleController.insertar (file:///C:/Users/aleja/OneDrive/Desktop/PROYECTO/backend/controllers/InmuebleController.js:11:28)
+
+[2025-09-27T03:05:26.466Z] error: error de sintaxis en o cerca de «0»
+    at C:\Users\aleja\OneDrive\Desktop\PROYECTO\backend\node_modules\pg\lib\client.js:545:17
+    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at async Repositorio.insertar (file:///C:/Users/aleja/OneDrive/Desktop/PROYECTO/backend/repositories/globalPersistence.js:43:28)
+    at async file:///C:/Users/aleja/OneDrive/Desktop/PROYECTO/backend/services/InmuebleService.js:20:35
+    at async InmuebleService.withTransaction (file:///C:/Users/aleja/OneDrive/Desktop/PROYECTO/backend/services/BaseService.js:13:28)
+    at async InmuebleService.nuevoInmueble (file:///C:/Users/aleja/OneDrive/Desktop/PROYECTO/backend/services/InmuebleService.js:18:16)
+    at async InmuebleController.insertar (file:///C:/Users/aleja/OneDrive/Desktop/PROYECTO/backend/controllers/InmuebleController.js:11:28)
+
+[2025-09-27T03:06:21.245Z] error: error de sintaxis en o cerca de «0»
+    at C:\Users\aleja\OneDrive\Desktop\PROYECTO\backend\node_modules\pg\lib\client.js:545:17
+    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at async Repositorio.insertar (file:///C:/Users/aleja/OneDrive/Desktop/PROYECTO/backend/repositories/globalPersistence.js:43:28)
+    at async file:///C:/Users/aleja/OneDrive/Desktop/PROYECTO/backend/services/InmuebleService.js:20:35
+    at async InmuebleService.withTransaction (file:///C:/Users/aleja/OneDrive/Desktop/PROYECTO/backend/services/BaseService.js:13:28)
+    at async InmuebleService.nuevoInmueble (file:///C:/Users/aleja/OneDrive/Desktop/PROYECTO/backend/services/InmuebleService.js:18:16)
+    at async InmuebleController.insertar (file:///C:/Users/aleja/OneDrive/Desktop/PROYECTO/backend/controllers/InmuebleController.js:11:28)
+
+[2025-09-27T03:06:56.736Z] error: error de sintaxis en o cerca de «0»
+    at C:\Users\aleja\OneDrive\Desktop\PROYECTO\backend\node_modules\pg\lib\client.js:545:17
+    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at async Repositorio.insertar (file:///C:/Users/aleja/OneDrive/Desktop/PROYECTO/backend/repositories/globalPersistence.js:43:28)
+    at async file:///C:/Users/aleja/OneDrive/Desktop/PROYECTO/backend/services/InmuebleService.js:20:35
+    at async InmuebleService.withTransaction (file:///C:/Users/aleja/OneDrive/Desktop/PROYECTO/backend/services/BaseService.js:13:28)
+    at async InmuebleService.nuevoInmueble (file:///C:/Users/aleja/OneDrive/Desktop/PROYECTO/backend/services/InmuebleService.js:18:16)
+    at async InmuebleController.insertar (file:///C:/Users/aleja/OneDrive/Desktop/PROYECTO/backend/controllers/InmuebleController.js:11:28)
+
+[2025-09-27T03:11:30.927Z] Error: No se pueden insertar datos vacíos.
+    at Repositorio.insertar (file:///C:/Users/aleja/OneDrive/Desktop/PROYECTO/backend/repositories/globalPersistence.js:23:19)
+    at file:///C:/Users/aleja/OneDrive/Desktop/PROYECTO/backend/services/InmuebleService.js:20:73
+    at InmuebleService.withTransaction (file:///C:/Users/aleja/OneDrive/Desktop/PROYECTO/backend/services/BaseService.js:13:34)
+    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at async InmuebleService.nuevoInmueble (file:///C:/Users/aleja/OneDrive/Desktop/PROYECTO/backend/services/InmuebleService.js:18:16)
+    at async InmuebleController.insertar (file:///C:/Users/aleja/OneDrive/Desktop/PROYECTO/backend/controllers/InmuebleController.js:11:28)
+
+[2025-09-28T02:43:11.117Z] error: no existe la función obtener_adeudos_con_rmm_por_empresa(unknown)
+    at C:\Users\aleja\OneDrive\Desktop\PROYECTO\backend\node_modules\pg-pool\index.js:45:11
+    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at async AdeudoService.obtenerTodosAdeudosPorEmpresaAgrupados (file:///C:/Users/aleja/OneDrive/Desktop/PROYECTO/backend/services/AdeudoService.js:487:20)
+    at async AdeudoController.getAdeudosByEmpresa (file:///C:/Users/aleja/OneDrive/Desktop/PROYECTO/backend/controllers/AdeudoController.js:18:18)
+
+[2025-09-28T02:43:13.127Z] error: no existe la función obtener_adeudos_con_rmm_por_empresa(unknown)
+    at C:\Users\aleja\OneDrive\Desktop\PROYECTO\backend\node_modules\pg-pool\index.js:45:11
+    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at async AdeudoService.obtenerTodosAdeudosPorEmpresaAgrupados (file:///C:/Users/aleja/OneDrive/Desktop/PROYECTO/backend/services/AdeudoService.js:487:20)
+    at async AdeudoController.getAdeudosByEmpresa (file:///C:/Users/aleja/OneDrive/Desktop/PROYECTO/backend/controllers/AdeudoController.js:18:18)
+
+[2025-09-28T02:43:14.550Z] error: no existe la función obtener_adeudos_con_rmm_por_empresa(unknown)
+    at C:\Users\aleja\OneDrive\Desktop\PROYECTO\backend\node_modules\pg-pool\index.js:45:11
+    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at async AdeudoService.obtenerTodosAdeudosPorEmpresaAgrupados (file:///C:/Users/aleja/OneDrive/Desktop/PROYECTO/backend/services/AdeudoService.js:487:20)
+    at async AdeudoController.getAdeudosByEmpresa (file:///C:/Users/aleja/OneDrive/Desktop/PROYECTO/backend/controllers/AdeudoController.js:18:18)
+
+[2025-09-28T02:43:16.153Z] error: no existe la función obtener_adeudos_con_rmm_por_empresa(unknown)
+    at C:\Users\aleja\OneDrive\Desktop\PROYECTO\backend\node_modules\pg-pool\index.js:45:11
+    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at async AdeudoService.obtenerTodosAdeudosPorEmpresaAgrupados (file:///C:/Users/aleja/OneDrive/Desktop/PROYECTO/backend/services/AdeudoService.js:487:20)
+    at async AdeudoController.getAdeudosByEmpresa (file:///C:/Users/aleja/OneDrive/Desktop/PROYECTO/backend/controllers/AdeudoController.js:18:18)
+
+[2025-09-28T02:43:18.861Z] error: no existe la función obtener_adeudos_con_rmm_por_empresa(unknown)
+    at C:\Users\aleja\OneDrive\Desktop\PROYECTO\backend\node_modules\pg-pool\index.js:45:11
+    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at async AdeudoService.obtenerTodosAdeudosPorEmpresaAgrupados (file:///C:/Users/aleja/OneDrive/Desktop/PROYECTO/backend/services/AdeudoService.js:487:20)
+    at async AdeudoController.getAdeudosByEmpresa (file:///C:/Users/aleja/OneDrive/Desktop/PROYECTO/backend/controllers/AdeudoController.js:18:18)
+
+[2025-09-28T02:43:20.635Z] error: no existe la función obtener_adeudos_con_rmm_por_empresa(unknown)
+    at C:\Users\aleja\OneDrive\Desktop\PROYECTO\backend\node_modules\pg-pool\index.js:45:11
+    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at async AdeudoService.obtenerTodosAdeudosPorEmpresaAgrupados (file:///C:/Users/aleja/OneDrive/Desktop/PROYECTO/backend/services/AdeudoService.js:487:20)
+    at async AdeudoController.getAdeudosByEmpresa (file:///C:/Users/aleja/OneDrive/Desktop/PROYECTO/backend/controllers/AdeudoController.js:18:18)
+
+[2025-10-06T02:54:39.139Z] ReferenceError: pool is not defined
+    at file:///C:/Users/aleja/OneDrive/Desktop/PROYECTO/backend/services/inmuebleService.js:146:27
+    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at async InmuebleService.withTransaction (file:///C:/Users/aleja/OneDrive/Desktop/PROYECTO/backend/services/BaseService.js:13:28)
+    at async InmuebleService.updateSeguro (file:///C:/Users/aleja/OneDrive/Desktop/PROYECTO/backend/services/inmuebleService.js:129:12)
+    at async InmuebleController.updateSeguro (file:///C:/Users/aleja/OneDrive/Desktop/PROYECTO/backend/controllers/InmuebleController.js:51:24)
+
+[2025-10-06T02:54:53.674Z] ReferenceError: pool is not defined
+    at file:///C:/Users/aleja/OneDrive/Desktop/PROYECTO/backend/services/inmuebleService.js:146:27
+    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at async InmuebleService.withTransaction (file:///C:/Users/aleja/OneDrive/Desktop/PROYECTO/backend/services/BaseService.js:13:28)
+    at async InmuebleService.updateSeguro (file:///C:/Users/aleja/OneDrive/Desktop/PROYECTO/backend/services/inmuebleService.js:129:12)
+    at async InmuebleController.updateSeguro (file:///C:/Users/aleja/OneDrive/Desktop/PROYECTO/backend/controllers/InmuebleController.js:51:24)
+
+[2025-10-11T21:57:27.998Z] TypeError: Cannot read properties of undefined (reading 'bind')
+    at file:///C:/Users/aleja/OneDrive/Desktop/PROYECTO/backend/routes/InmuebleRoutes.js:15:72
+    at ModuleJob.run (node:internal/modules/esm/module_job:345:25)
+    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at async onImport.tracePromise.__proto__ (node:internal/modules/esm/loader:665:26)
+    at async asyncRunEntryPointWithESMLoader (node:internal/modules/run_main:117:5)
+
+[2025-10-11T21:59:16.251Z] TypeError: Cannot read properties of undefined (reading 'bind')
+    at file:///C:/Users/aleja/OneDrive/Desktop/PROYECTO/backend/routes/InmuebleRoutes.js:15:72
+    at ModuleJob.run (node:internal/modules/esm/module_job:345:25)
+    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at async onImport.tracePromise.__proto__ (node:internal/modules/esm/loader:665:26)
+    at async asyncRunEntryPointWithESMLoader (node:internal/modules/run_main:117:5)
+
+[2025-10-11T22:03:20.916Z] TypeError: Cannot read properties of undefined (reading 'bind')
+    at file:///C:/Users/aleja/OneDrive/Desktop/PROYECTO/backend/routes/InmuebleRoutes.js:15:72
+    at ModuleJob.run (node:internal/modules/esm/module_job:345:25)
+    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at async onImport.tracePromise.__proto__ (node:internal/modules/esm/loader:665:26)
+    at async asyncRunEntryPointWithESMLoader (node:internal/modules/run_main:117:5)
+
+[2025-10-11T22:04:19.396Z] Error: listen EADDRINUSE: address already in use :::3000
+    at Server.setupListenHandle [as _listen2] (node:net:1940:16)
+    at listenInCluster (node:net:1997:12)
+    at Server.listen (node:net:2102:7)
+    at Function.listen (C:\Users\aleja\OneDrive\Desktop\PROYECTO\backend\node_modules\express\lib\application.js:635:24)
+    at iniciarServidor (file:///C:/Users/aleja/OneDrive/Desktop/PROYECTO/backend/index.js:50:13)
+    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+
+[2025-10-11T22:13:31.397Z] Error: Proveedor no encontrado para este inmueble
+    at file:///C:/Users/aleja/OneDrive/Desktop/PROYECTO/backend/services/inmuebleService.js:91:23
+    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at async InmuebleService.withTransaction (file:///C:/Users/aleja/OneDrive/Desktop/PROYECTO/backend/services/BaseService.js:13:28)
+    at async InmuebleService.updateProveedor (file:///C:/Users/aleja/OneDrive/Desktop/PROYECTO/backend/services/inmuebleService.js:84:16)
+    at async InmuebleController.updateProveedor (file:///C:/Users/aleja/OneDrive/Desktop/PROYECTO/backend/controllers/InmuebleController.js:72:24)
+
+[2025-10-11T22:14:16.871Z] Error: Proveedor no encontrado para este inmueble
+    at file:///C:/Users/aleja/OneDrive/Desktop/PROYECTO/backend/services/inmuebleService.js:91:23
+    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at async InmuebleService.withTransaction (file:///C:/Users/aleja/OneDrive/Desktop/PROYECTO/backend/services/BaseService.js:13:28)
+    at async InmuebleService.updateProveedor (file:///C:/Users/aleja/OneDrive/Desktop/PROYECTO/backend/services/inmuebleService.js:84:16)
+    at async InmuebleController.updateProveedor (file:///C:/Users/aleja/OneDrive/Desktop/PROYECTO/backend/controllers/InmuebleController.js:72:24)
+
+[2025-10-11T22:27:38.986Z] TypeError: Cannot read properties of undefined (reading 'bind')
+    at file:///C:/Users/aleja/OneDrive/Desktop/PROYECTO/backend/routes/InmuebleRoutes.js:16:79
+    at ModuleJob.run (node:internal/modules/esm/module_job:345:25)
+    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at async onImport.tracePromise.__proto__ (node:internal/modules/esm/loader:665:26)
+    at async asyncRunEntryPointWithESMLoader (node:internal/modules/run_main:117:5)
+
+[2025-10-11T22:28:40.890Z] TypeError: Cannot read properties of undefined (reading 'bind')
+    at file:///C:/Users/aleja/OneDrive/Desktop/PROYECTO/backend/routes/InmuebleRoutes.js:17:79
+    at ModuleJob.run (node:internal/modules/esm/module_job:345:25)
+    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at async onImport.tracePromise.__proto__ (node:internal/modules/esm/loader:665:26)
+    at async asyncRunEntryPointWithESMLoader (node:internal/modules/run_main:117:5)
+
+[2025-10-11T22:31:31.102Z] error: la sintaxis de entrada no es válida para tipo integer: «undefined»
+    at C:\Users\aleja\OneDrive\Desktop\PROYECTO\backend\node_modules\pg\lib\client.js:545:17
+    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at async file:///C:/Users/aleja/OneDrive/Desktop/PROYECTO/backend/services/inmuebleService.js:182:36
+    at async InmuebleService.withTransaction (file:///C:/Users/aleja/OneDrive/Desktop/PROYECTO/backend/services/BaseService.js:13:28)
+    at async InmuebleService.updateHipoteca (file:///C:/Users/aleja/OneDrive/Desktop/PROYECTO/backend/services/inmuebleService.js:181:16)
+    at async InmuebleController.updateHipoteca (file:///C:/Users/aleja/OneDrive/Desktop/PROYECTO/backend/controllers/InmuebleController.js:62:24)
+
+[2025-10-11T22:41:54.438Z] error: la sintaxis de entrada no es válida para tipo integer: «undefined»
+    at C:\Users\aleja\OneDrive\Desktop\PROYECTO\backend\node_modules\pg\lib\client.js:545:17
+    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at async file:///C:/Users/aleja/OneDrive/Desktop/PROYECTO/backend/services/inmuebleService.js:182:36
+    at async InmuebleService.withTransaction (file:///C:/Users/aleja/OneDrive/Desktop/PROYECTO/backend/services/BaseService.js:13:28)
+    at async InmuebleService.updateHipoteca (file:///C:/Users/aleja/OneDrive/Desktop/PROYECTO/backend/services/inmuebleService.js:181:16)
+    at async InmuebleController.updateHipoteca (file:///C:/Users/aleja/OneDrive/Desktop/PROYECTO/backend/controllers/InmuebleController.js:62:24)
+
+[2025-10-11T22:48:09.852Z] error: la sintaxis de entrada no es válida para tipo integer: «undefined»
+    at C:\Users\aleja\OneDrive\Desktop\PROYECTO\backend\node_modules\pg\lib\client.js:545:17
+    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at async file:///C:/Users/aleja/OneDrive/Desktop/PROYECTO/backend/services/inmuebleService.js:182:36
+    at async InmuebleService.withTransaction (file:///C:/Users/aleja/OneDrive/Desktop/PROYECTO/backend/services/BaseService.js:13:28)
+    at async InmuebleService.updateHipoteca (file:///C:/Users/aleja/OneDrive/Desktop/PROYECTO/backend/services/inmuebleService.js:181:16)
+    at async InmuebleController.updateHipoteca (file:///C:/Users/aleja/OneDrive/Desktop/PROYECTO/backend/controllers/InmuebleController.js:62:24)
+
+[2025-10-11T22:50:10.519Z] Error: Proveedor no encontrado para este inmueble
+    at file:///C:/Users/aleja/OneDrive/Desktop/PROYECTO/backend/services/inmuebleService.js:91:23
+    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at async InmuebleService.withTransaction (file:///C:/Users/aleja/OneDrive/Desktop/PROYECTO/backend/services/BaseService.js:13:28)
+    at async InmuebleService.updateProveedor (file:///C:/Users/aleja/OneDrive/Desktop/PROYECTO/backend/services/inmuebleService.js:84:16)
+    at async InmuebleController.updateProveedor (file:///C:/Users/aleja/OneDrive/Desktop/PROYECTO/backend/controllers/InmuebleController.js:72:24)
+
+[2025-10-11T23:21:13.538Z] error: falta una entrada para la tabla «p» en la cláusula FROM
+    at C:\Users\aleja\OneDrive\Desktop\PROYECTO\backend\node_modules\pg\lib\client.js:545:17
+    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at async file:///C:/Users/aleja/OneDrive/Desktop/PROYECTO/backend/services/inmuebleService.js:85:37
+    at async InmuebleService.withTransaction (file:///C:/Users/aleja/OneDrive/Desktop/PROYECTO/backend/services/BaseService.js:13:28)
+    at async InmuebleService.updateProveedor (file:///C:/Users/aleja/OneDrive/Desktop/PROYECTO/backend/services/inmuebleService.js:84:16)
+    at async InmuebleController.updateProveedor (file:///C:/Users/aleja/OneDrive/Desktop/PROYECTO/backend/controllers/InmuebleController.js:72:24)
+
+[2025-10-11T23:24:57.609Z] Error: Proveedor "undefined" no encontrado para este inmueble
+    at file:///C:/Users/aleja/OneDrive/Desktop/PROYECTO/backend/services/inmuebleService.js:105:23
+    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at async InmuebleService.withTransaction (file:///C:/Users/aleja/OneDrive/Desktop/PROYECTO/backend/services/BaseService.js:13:28)
+    at async InmuebleService.updateProveedor (file:///C:/Users/aleja/OneDrive/Desktop/PROYECTO/backend/services/inmuebleService.js:87:16)
+    at async InmuebleController.updateProveedor (file:///C:/Users/aleja/OneDrive/Desktop/PROYECTO/backend/controllers/InmuebleController.js:72:24)
+
+[2025-10-11T23:25:13.554Z] Error: Proveedor "PROV-309" no encontrado para este inmueble
+    at file:///C:/Users/aleja/OneDrive/Desktop/PROYECTO/backend/services/inmuebleService.js:105:23
+    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at async InmuebleService.withTransaction (file:///C:/Users/aleja/OneDrive/Desktop/PROYECTO/backend/services/BaseService.js:13:28)
+    at async InmuebleService.updateProveedor (file:///C:/Users/aleja/OneDrive/Desktop/PROYECTO/backend/services/inmuebleService.js:87:16)
+    at async InmuebleController.updateProveedor (file:///C:/Users/aleja/OneDrive/Desktop/PROYECTO/backend/controllers/InmuebleController.js:72:24)
+
+[2025-10-12T00:21:27.018Z] error: la sintaxis de entrada no es válida para tipo integer: «10x»
+    at C:\Users\aleja\OneDrive\Desktop\PROYECTO\backend\node_modules\pg\lib\client.js:545:17
+    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at async file:///C:/Users/aleja/OneDrive/Desktop/PROYECTO/backend/services/inmuebleService.js:142:33
+    at async InmuebleService.withTransaction (file:///C:/Users/aleja/OneDrive/Desktop/PROYECTO/backend/services/BaseService.js:13:28)
+    at async InmuebleService.updateDatosRegistrales (file:///C:/Users/aleja/OneDrive/Desktop/PROYECTO/backend/services/inmuebleService.js:130:16)
+    at async InmuebleController.updateDatosRegistrales (file:///C:/Users/aleja/OneDrive/Desktop/PROYECTO/backend/controllers/InmuebleController.js:82:24)
+
+[2025-10-12T00:33:20.387Z] Error: Hipoteca del banco "undefined" no encontrada para este inmueble
+    at file:///C:/Users/aleja/OneDrive/Desktop/PROYECTO/backend/services/inmuebleService.js:211:23
+    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at async InmuebleService.withTransaction (file:///C:/Users/aleja/OneDrive/Desktop/PROYECTO/backend/services/BaseService.js:13:28)
+    at async InmuebleService.updateHipoteca (file:///C:/Users/aleja/OneDrive/Desktop/PROYECTO/backend/services/inmuebleService.js:193:16)
+    at async InmuebleController.updateHipoteca (file:///C:/Users/aleja/OneDrive/Desktop/PROYECTO/backend/controllers/InmuebleController.js:62:24)
+
+[2025-10-12T00:33:28.356Z] Error: Hipoteca del banco "undefined" no encontrada para este inmueble
+    at file:///C:/Users/aleja/OneDrive/Desktop/PROYECTO/backend/services/inmuebleService.js:211:23
+    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at async InmuebleService.withTransaction (file:///C:/Users/aleja/OneDrive/Desktop/PROYECTO/backend/services/BaseService.js:13:28)
+    at async InmuebleService.updateHipoteca (file:///C:/Users/aleja/OneDrive/Desktop/PROYECTO/backend/services/inmuebleService.js:193:16)
+    at async InmuebleController.updateHipoteca (file:///C:/Users/aleja/OneDrive/Desktop/PROYECTO/backend/controllers/InmuebleController.js:62:24)
+
+[2025-10-12T00:33:36.650Z] error: llave duplicada viola restricción de unicidad «unique_dato_registral»
+    at C:\Users\aleja\OneDrive\Desktop\PROYECTO\backend\node_modules\pg\lib\client.js:545:17
+    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at async file:///C:/Users/aleja/OneDrive/Desktop/PROYECTO/backend/services/inmuebleService.js:142:33
+    at async InmuebleService.withTransaction (file:///C:/Users/aleja/OneDrive/Desktop/PROYECTO/backend/services/BaseService.js:13:28)
+    at async InmuebleService.updateDatosRegistrales (file:///C:/Users/aleja/OneDrive/Desktop/PROYECTO/backend/services/inmuebleService.js:130:16)
+    at async InmuebleController.updateDatosRegistrales (file:///C:/Users/aleja/OneDrive/Desktop/PROYECTO/backend/controllers/InmuebleController.js:82:24)
+
+[2025-10-25T16:27:07.429Z] Error: Hipoteca del banco "2" no encontrada para este inmueble
+    at file:///C:/Users/aleja/OneDrive/Desktop/PROYECTO/backend/services/inmuebleService.js:209:23
+    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at async InmuebleService.withTransaction (file:///C:/Users/aleja/OneDrive/Desktop/PROYECTO/backend/services/BaseService.js:13:28)
+    at async InmuebleService.updateHipoteca (file:///C:/Users/aleja/OneDrive/Desktop/PROYECTO/backend/services/inmuebleService.js:192:16)
+    at async InmuebleController.updateHipoteca (file:///C:/Users/aleja/OneDrive/Desktop/PROYECTO/backend/controllers/InmuebleController.js:62:24)
+
+[2025-10-25T16:41:34.662Z] Error: Hipoteca del banco "1" no encontrada para este inmueble
+    at file:///C:/Users/aleja/OneDrive/Desktop/PROYECTO/backend/services/inmuebleService.js:209:23
+    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at async InmuebleService.withTransaction (file:///C:/Users/aleja/OneDrive/Desktop/PROYECTO/backend/services/BaseService.js:13:28)
+    at async InmuebleService.updateHipoteca (file:///C:/Users/aleja/OneDrive/Desktop/PROYECTO/backend/services/inmuebleService.js:192:16)
+    at async InmuebleController.updateHipoteca (file:///C:/Users/aleja/OneDrive/Desktop/PROYECTO/backend/controllers/InmuebleController.js:62:24)
+
+[2025-10-25T16:46:58.757Z] Error: Hipoteca del banco "1" no encontrada para este inmueble
+    at file:///C:/Users/aleja/OneDrive/Desktop/PROYECTO/backend/services/inmuebleService.js:209:23
+    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at async InmuebleService.withTransaction (file:///C:/Users/aleja/OneDrive/Desktop/PROYECTO/backend/services/BaseService.js:13:28)
+    at async InmuebleService.updateHipoteca (file:///C:/Users/aleja/OneDrive/Desktop/PROYECTO/backend/services/inmuebleService.js:192:16)
+    at async InmuebleController.updateHipoteca (file:///C:/Users/aleja/OneDrive/Desktop/PROYECTO/backend/controllers/InmuebleController.js:62:24)
+
+[2025-10-25T16:47:11.659Z] Error: Hipoteca del banco "1" no encontrada para este inmueble
+    at file:///C:/Users/aleja/OneDrive/Desktop/PROYECTO/backend/services/inmuebleService.js:209:23
+    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at async InmuebleService.withTransaction (file:///C:/Users/aleja/OneDrive/Desktop/PROYECTO/backend/services/BaseService.js:13:28)
+    at async InmuebleService.updateHipoteca (file:///C:/Users/aleja/OneDrive/Desktop/PROYECTO/backend/services/inmuebleService.js:192:16)
+    at async InmuebleController.updateHipoteca (file:///C:/Users/aleja/OneDrive/Desktop/PROYECTO/backend/controllers/InmuebleController.js:62:24)
+
