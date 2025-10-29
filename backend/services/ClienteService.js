@@ -12,15 +12,16 @@ class ClienteService extends BaseService {
     }
 
     async crearCliente(clienteCompleto) {
+        console.log(clienteCompleto)
         const cliente = clienteCompleto.cliente
-        const inmueble = clienteCompleto.inmueble || null
+        const inmueble = clienteCompleto.inmuebles || null
 
         if (!cliente?.empresa || !cliente?.direccion || !cliente?.datoRegistral || !cliente?.propietario) {
             throw new Error('Datos del cliente incompletos.')
         }
 
-        return await this.withTransaction(async (cliente) => {
-
+        return await this.withTransaction(async (clienteBD) => {
+            
         })
     }
 

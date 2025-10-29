@@ -22,6 +22,7 @@ const AddClientesPage = () => {
         dirEmpresa, setDirEmpresa,
         datoRegistralEmpresa, setDatoRegistralEmpresa,
         datosPropietario, setDatosPropietario,
+        erroresValidacion,
         manejarFormularioCliente
     } = manejarLogicaCliente();
 
@@ -164,12 +165,12 @@ const AddClientesPage = () => {
         setMensaje({ tipo: 'success', texto: '¡Cliente guardado exitosamente!' });
 
         // Limpiar formulario
-        setDatosEmpresa({});
-        setDirEmpresa({});
-        setDatoRegistralEmpresa({});
-        setDatosPropietario({});
-        setInmuebles([]);
-        setErrores({});
+        // setDatosEmpresa({});
+        // setDirEmpresa({});
+        // setDatoRegistralEmpresa({});
+        // setDatosPropietario({});
+        // setInmuebles([]);
+        // setErrores({});
     };
 
     return (
@@ -198,12 +199,20 @@ const AddClientesPage = () => {
                                 <Building className="w-5 h-5" />
                                 Empresa <span className="text-red-500">*</span>
                             </h3>
-                            {errores.empresa && <p className="text-red-500 text-sm mb-2">{errores.empresa}</p>}
-                            <EmpresaForm empresa={datosEmpresa} setEmpresa={setDatosEmpresa} />
+                            
+                            <EmpresaForm
+                                empresa={datosEmpresa}
+                                setEmpresa={setDatosEmpresa}
+                                errores={erroresValidacion}
+                            />
 
                             <h3 className="font-semibold text-lg mt-6 mb-3">Dirección <span className="text-red-500">*</span></h3>
-                            {errores.direccion && <p className="text-red-500 text-sm mb-2">{errores.direccion}</p>}
-                            <DireccionForm direccion={dirEmpresa} setDireccion={setDirEmpresa} />
+                            
+                            <DireccionForm
+                                direccion={dirEmpresa}
+                                setDireccion={setDirEmpresa}
+                                errores={erroresValidacion}
+                            />
                         </div>
                     </div>
 
@@ -211,8 +220,12 @@ const AddClientesPage = () => {
                     <div className="space-y-4">
                         <div className="border rounded-lg p-4">
                             <h3 className="font-semibold text-lg mb-3">Propietario <span className="text-red-500">*</span></h3>
-                            {errores.propietario && <p className="text-red-500 text-sm mb-2">{errores.propietario}</p>}
-                            <PropietarioForm propietario={datosPropietario} setPropietario={setDatosPropietario} />
+                            
+                            <PropietarioForm
+                                propietario={datosPropietario}
+                                setPropietario={setDatosPropietario}
+                                errores={erroresValidacion}
+                            />
                         </div>
                     </div>
 
@@ -223,8 +236,12 @@ const AddClientesPage = () => {
                                 <FileText className="w-5 h-5" />
                                 Datos Registrales de la Empresa <span className="text-red-500">*</span>
                             </h3>
-                            {errores.datoRegistral && <p className="text-red-500 text-sm mb-2">{errores.datoRegistral}</p>}
-                            <DatoRegistralForm datoRegistral={datoRegistralEmpresa} setDatoRegistral={setDatoRegistralEmpresa} />
+                            
+                            <DatoRegistralForm
+                                datoRegistral={datoRegistralEmpresa}
+                                setDatoRegistral={setDatoRegistralEmpresa}
+                                errores={erroresValidacion}
+                            />
                         </div>
                     </div>
                 </div>
@@ -290,9 +307,12 @@ const AddClientesPage = () => {
                                     {/* Datos del inmueble */}
                                     <div className="border rounded-lg p-4 bg-blue-50">
                                         <h4 className="font-semibold mb-3">Datos Registrales <span className="text-red-500">*</span></h4>
+                                        
                                         <InmuebleForm
                                             inmueble={inmueble.datosInmueble}
                                             setInmueble={(datos) => actualizarInmueble(inmueble.id, 'datosInmueble', datos)}
+                                            errores={erroresValidacion}
+                                            indice={idx}
                                         />
                                     </div>
 
@@ -311,12 +331,15 @@ const AddClientesPage = () => {
                                             </button>
                                         </div>
                                         <div className="space-y-2">
-                                            {inmueble.proveedores.map(proveedor => (
+                                            {inmueble.proveedores.map((proveedor, provIdx) => (
                                                 <InmuebleProveedorForm
                                                     key={proveedor.id}
                                                     proveedor={proveedor}
                                                     setProveedor={(datos) => actualizarItem(inmueble.id, 'proveedores', proveedor.id, datos)}
                                                     onRemove={() => eliminarItem(inmueble.id, 'proveedores', proveedor.id)}
+                                                    errores={erroresValidacion}
+                                                    inmuebleIdx={idx}
+                                                    proveedorIdx={provIdx}
                                                 />
                                             ))}
                                         </div>
@@ -337,12 +360,15 @@ const AddClientesPage = () => {
                                             </button>
                                         </div>
                                         <div className="space-y-2">
-                                            {inmueble.hipotecas.map(hipoteca => (
+                                            {inmueble.hipotecas.map((hipoteca, hipidx) => (
                                                 <InmuebleHipotecaForm
                                                     key={hipoteca.id}
                                                     hipoteca={hipoteca}
                                                     setHipoteca={(datos) => actualizarItem(inmueble.id, 'hipotecas', hipoteca.id, datos)}
                                                     onRemove={() => eliminarItem(inmueble.id, 'hipotecas', hipoteca.id)}
+                                                    errores={erroresValidacion}
+                                                    inmuebleIdx={idx}
+                                                    hipotecaIdx={hipidx}
                                                 />
                                             ))}
                                         </div>
@@ -363,12 +389,15 @@ const AddClientesPage = () => {
                                             </button>
                                         </div>
                                         <div className="space-y-2">
-                                            {inmueble.seguros.map(seguro => (
+                                            {inmueble.seguros.map((seguro, segidx) => (
                                                 <InmuebleSeguroForm
                                                     key={seguro.id}
                                                     seguro={seguro}
                                                     setSeguro={(datos) => actualizarItem(inmueble.id, 'seguros', seguro.id, datos)}
                                                     onRemove={() => eliminarItem(inmueble.id, 'seguros', seguro.id)}
+                                                    errores={erroresValidacion}
+                                                    inmuebleIdx={idx}
+                                                    seguroIdx={segidx}
                                                 />
                                             ))}
                                         </div>

@@ -8,7 +8,7 @@ class ClienteController extends BaseController {
 
     async createCliente(req, res) {
         try {
-            const { datosCliente } = req.body
+            const datosCliente = req.body
 
             const result = await this.service.crearCliente(datosCliente)
             return this.sendSuccess(res, result, 'Cliente creado correctamente', 201);

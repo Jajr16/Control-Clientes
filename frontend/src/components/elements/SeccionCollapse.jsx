@@ -13,6 +13,8 @@ export const SeccionColapsable = ({ titulo, icono: Icono, children, abierto, onT
             </div>
             {abierto ? <ChevronUp className="w-5 h-5" /> : <ChevronDown className="w-5 h-5" />}
         </button>
-        {abierto && <div className="p-4">{children}</div>}
+        <div className={`p-4 ${abierto ? 'block' : 'hidden'}`}>
+            {children}
+        </div>
     </div>
 );

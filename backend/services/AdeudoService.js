@@ -2,7 +2,7 @@ import { BaseService } from './BaseService.js';
 import Repositorio from "../repositories/globalPersistence.js";
 import { pool } from "../config/db.js";
 import formatDate from '../validations/formatDate.js';
-import { adeudoInsertSchema, adeudoUpdateSchema } from '../middleware/Schemas.js'
+import { adeudoInsertSchema, adeudoUpdateSchema } from '../schemas/adeudoSchema.js'
 import { historicoExcel } from '../utils/adeudosExcel.js';
 
 // Helper para eliminar columnas generadas

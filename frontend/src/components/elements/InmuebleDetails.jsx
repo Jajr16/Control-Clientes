@@ -12,14 +12,10 @@ import {
     deleteInmueble 
 } from "../../api/moduloInmuebles/inmueble";
 import {
-<<<<<<< HEAD
-    ClipboardDocumentListIcon, ShieldCheckIcon, BuildingOfficeIcon, PhoneIcon, AtSymbolIcon
-=======
     MapPinIcon, IdentificationIcon, ClipboardDocumentListIcon, ShieldCheckIcon,
     LifebuoyIcon, BuildingOfficeIcon, PhoneIcon, AtSymbolIcon, CurrencyEuroIcon,
     CalendarDaysIcon, ChevronDownIcon, ChevronRightIcon, PencilIcon, CheckIcon, XMarkIcon,
     TrashIcon
->>>>>>> main
 } from "@heroicons/react/24/solid";
 
 const InmuebleDetails = ({ 

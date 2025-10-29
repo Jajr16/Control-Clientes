@@ -4,7 +4,7 @@ import ClientDetails from "../../components/elements/ClienteDetails";
 import InmueblesList from "../../components/elements/InmueblesList";
 import InmuebleDetails from "../../components/elements/InmuebleDetails";
 import { getInmuebles, deleteInmueble } from "../../api/moduloInmuebles/inmueble";
-import { UserPlusIcon, PencilIcon, TrashIcon } from "@heroicons/react/24/solid";
+import { UserPlusIcon, BuildingOfficeIcon } from "@heroicons/react/24/solid";
 import { Link } from "react-router-dom";
 
 const Cliente = () => {
@@ -94,13 +94,8 @@ const Cliente = () => {
             {/* Barra de búsqueda - altura fija */}
             <div className={`flex-shrink-0 ${selectedClient ? "w-[30%]" : "w-full"} p-2 flex`}>
                 <ClientSearch
-<<<<<<< HEAD
                     onSelectClient={(c) => setSelectedClient(c)}
                     routeName={'cliente'}
-=======
-                    onSelectClient={handleSelectClient}
-                    routeName={'searchClients'}
->>>>>>> main
                     fieldsToInclude={[
                         "cif", "nombre", "clave", "nie", "propietario", "telefono", "email",
                         "calle", "numero", "piso", "codigo_postal", "localidad",

@@ -1,23 +1,3 @@
-<<<<<<< HEAD
-import axios from "axios";
-
-const API_URL = import.meta.env.VITE_API_URL;
-
-export const getInmuebles = async (cif) => {
-    const res = await axios.get(`${API_URL}/inmueble/inmueblesList/${cif}`);
-    return res.data;
-};
-
-export const getInmuebleDetails = async (cc) => {
-    const res = await axios.get(`${API_URL}/inmueble/inmueblesProveedoresSeguros/${cc}`);
-    return res.data;
-};
-
-export const getInmuebleHipotecas = async (cc) => {
-    const res = await axios.get(`${API_URL}/inmueble/hipotecas/${cc}`)
-    return res.data;
-}
-=======
 import axios from "axios";
 
 const API_URL = import.meta.env.VITE_API_URL;
@@ -101,4 +81,3 @@ export const deleteHipoteca = async (claveCatastral, idHipoteca) => {
     const res = await axios.delete(`${API_URL}/inmueble/hipoteca/${claveCatastral}/${idHipoteca}`);
     return res.data;
 };
->>>>>>> main

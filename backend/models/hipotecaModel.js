@@ -5,10 +5,10 @@ export const createTableHipoteca = async () => {
         await pool.query(`
             CREATE TABLE IF NOT EXISTS hipoteca(
                 id SERIAL PRIMARY KEY,
-                prestamo INTEGER,
+                prestamo FLOAT,
                 banco_prestamo VARCHAR(255),
                 fecha_hipoteca DATE,
-                cuota_hipoteca INTEGER
+                cuota_hipoteca FLOAT
             );
         `)
         console.log("Tabla 'hipoteca' creada")
