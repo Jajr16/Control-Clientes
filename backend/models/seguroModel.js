@@ -4,11 +4,11 @@ export const createTableSeguro = async () => {
     try {
         await pool.query(`
             CREATE TABLE IF NOT EXISTS seguro(
-                empresa_seguro VARCHAR(300) PRIMARY KEY,
+                empresa_seguro VARCHAR(300),
                 tipo_seguro VARCHAR(50),
                 telefono VARCHAR(9),
                 email VARCHAR(255),
-                poliza VARCHAR(255)
+                poliza VARCHAR(255) PRIMARY KEY
             );    
         `)
         console.log("Tabla 'seguro' creada")

@@ -1,27 +1,78 @@
 import { BaseService } from './BaseService.js';
-import Repositorio from "../repositories/globalPersistence.js";
+import InmuebleService from './inmuebleService.js';
+import DatoRegistralService from './DatoRegistralService.js';
+import DireccionService from './DireccionService.js';
+import EmpresaService from './EmpresaService.js';
+import PropietarioService from './PropietarioService.js';
+import MovimientoService from './MovimientoService.js';
+import Repositorio from '../repositories/globalPersistence.js';
 
 class ClienteService extends BaseService {
     constructor() {
         super({
-            propietario: new Repositorio('propietario', 'nie'),
-            direccion: new Repositorio('direccion', 'id'),
-            datoRegistral: new Repositorio('dato_registral', 'id_dr'),
-            empresa: new Repositorio("empresa", "cif"),
+            empresaInmueble: new Repositorio('empresa_inmueble', ['cif', 'clave_catastral'])
         });
+        this.inmuebleService = new InmuebleService();
+        this.datoRegistralService = new DatoRegistralService();
+        this.direccionService = new DireccionService();
+        this.empresaService = new EmpresaService();
+        this.propietarioService = new PropietarioService();
+        this.movimientoService = new MovimientoService();
     }
 
     async crearCliente(clienteCompleto) {
         console.log(clienteCompleto)
         const cliente = clienteCompleto.cliente
-        const inmueble = clienteCompleto.inmuebles || null
+        const inmuebles = clienteCompleto.inmuebles || null
 
         if (!cliente?.empresa || !cliente?.direccion || !cliente?.datoRegistral || !cliente?.propietario) {
             throw new Error('Datos del cliente incompletos.')
         }
 
         return await this.withTransaction(async (clienteBD) => {
+            // INSERTAR DATO REGISTRAL
+            const dato_registral = await this.datoRegistralService.crearDatoRegistral(cliente.datoRegistral, clienteBD);
+            //INSERTAR DIRECCION
+            const { cp, ...direccionData } = cliente.direccion;
+            const direccion = await this.direccionService.crearDireccion({ ...direccionData, codigo_postal: cp }, clienteBD)
+            // INSERTAR PROPIETARIO
+            const propietario = await this.propietarioService.crearPropietario(cliente.propietario, clienteBD)
+            // INSERTAR EMPRESA
+            const { tel, ...empresaData } = cliente.empresa
+            const empresa = await this.empresaService.crearEmpresa({
+                ...empresaData, 
+                telefono: tel, 
+                direccion: direccion.id,
+                dato_registral: dato_registral.id, 
+                propietario: cliente.propietario.nie
+            }, clienteBD);
+
+            // SI VIENEN INMUEBLES
+            if (inmuebles && inmuebles.length > 0) {
+                for (const inmueble of inmuebles) {
+                    const nuevoInmueble = await this.inmuebleService.nuevoInmueble(inmueble, clienteBD);
+                    await this.repositories.empresaInmueble.insertar({
+                        cif: empresa.cif,
+                        clave_catastral: nuevoInmueble.data.clave_catastral,
+                        valor_adquisicion: inmueble.datosInmueble.valor_adquisicion,
+                        fecha_adquisicion: inmueble.datosInmueble.fecha_adquisicion
+                    }, clienteBD);
+                }
+            }
             
+            // Registrar movimiento
+            await this.movimientoService.crearMovimiento({
+                accion: 'Se agregó el cliente: ' + cliente.empresa.nombre,
+                datos: {
+                    empresa: cliente.empresa.cif,
+                    propietario: cliente.propietario.nie
+                }
+            }, clienteBD);
+
+            return {
+                success: true,
+                message: 'Cliente dado de alta correctamente'
+            }
         })
     }
 

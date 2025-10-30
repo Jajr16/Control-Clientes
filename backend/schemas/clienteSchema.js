@@ -45,7 +45,9 @@ const datoRegistralSchema = Joi.object({
 
 // REFERENCIA
 const datosInmuebleSchema = Joi.object({
-    referencia: Joi.string().min(1).required().messages(mensajesES).label('Referencia'),
+    clave_catastral: Joi.string().min(1).required().messages(mensajesES).label('Clave Catastral'),
+    valor_adquisicion: Joi.number().positive().required().messages(mensajesES).label('Valor de adquisición'),
+    fecha_adquisicion: Joi.date().iso().required().messages(mensajesES).label('Fecha de adquisición'),
     datoRegistralInmueble: datoRegistralSchema.required().messages(mensajesES).label('Datos registrales del inmueble'),
     dirInmueble: direccionSchema.required().messages(mensajesES).label('Dirección del inmueble')
 });

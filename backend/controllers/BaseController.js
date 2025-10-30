@@ -11,7 +11,7 @@ export class BaseController {
         
         const errorMap = {
             '23505': { status: 409, message: 'Recurso duplicado' },
-            '23503': { status: 400, message: 'Referencia inválida' },
+            '23503': { status: 400, message: 'Clave Catastral inválida' },
             '23502': { status: 400, message: 'Campo requerido faltante' }
         };
 

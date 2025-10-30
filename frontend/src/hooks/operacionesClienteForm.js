@@ -28,15 +28,9 @@ export const manejarLogicaCliente = () => {
             setErroresValidacion({});
             
             const response = await clienteNuevo(datosCliente);
+            console.log(response)
 
-            // Éxito
-            Swal.fire({
-                icon: 'success',
-                title: '¡Cliente creado!',
-                text: response.data.message || 'El cliente se creó correctamente'
-            });
-
-            return true;
+            return response;
 
         } catch (error) {
             console.log(error);
@@ -57,7 +51,7 @@ export const manejarLogicaCliente = () => {
                 Swal.fire({
                     icon: 'error',
                     title: 'Error inesperado',
-                    text: datosError?.message || error.message || 'Ocurrió un error'
+                    text: datosError?.error || datosError?.message || error.message || 'Ocurrió un error'
                 });
             }
 

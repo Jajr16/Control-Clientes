@@ -13,6 +13,17 @@ class Repositorio {
     }
 
     /**
+     * Función en la que compara si las llaves primarias que se le pasan a las funciones coincide con las llaves primarias definidas en sus clases
+     * 
+     * @param {*} claves Llaves primarias de la tabla
+     * @returns Boleano
+     */
+    _validarClaves(claves) {
+        return Object.keys(claves).length === this.clavesPrimarias.length &&
+            this.clavesPrimarias.every(k => claves.hasOwnProperty(k));
+    }
+
+    /**
      * Método para insertar nuevos registros a la tabla especificada en el constructor
      * 
      * @param {*} datos Datos a enviar que se insertarán en la tabla establecida en el constructor 
@@ -54,15 +65,14 @@ class Repositorio {
      * 
      * @returns Respuesta SQL con todos los registros en la tabla
      */
-    async ObtenerTodos() {
+    async ObtenerTodos(client = null) {
+        const queryClient = client || pool;
         try {
-            const query = `SELECT * FROM ${this.tabla};`
-            const result = await pool.query(query)
-
-            return result.rows
+            const result = await queryClient.query(`SELECT * FROM ${this.tabla};`);
+            return result.rows;
         } catch (error) {
-            console.error(`Error al obtener los registros de la tabla ${this.tabla}:`, error)
-            throw new Error(`No se pudieron obtener los registros de ${this.tabla}`)
+            console.error(`Error al obtener registros de ${this.tabla}:`, error);
+            throw new Error(`No se pudieron obtener los registros de ${this.tabla}`);
         }
     }
 
@@ -72,21 +82,22 @@ class Repositorio {
      * @param {*} claves Llave primaria de la tabla
      * @returns Respuesta SQL con los registros guardados en la tabla
      */
-    async ObtenerPorId(claves) {
+    async ObtenerPorId(claves, client = null) {
         if (!this._validarClaves(claves)) {
             throw new Error(`Las claves proporcionadas no coinciden con ${this.clavesPrimarias.join(', ')}`);
         }
 
+        const queryClient = client || pool;
         // Recorre cada valor para hacer la notación de las condiciones de los valores dentro de una consulta
         const condiciones = this.clavesPrimarias.map((clave, index) => `${clave} = $${index + 1}`).join(' AND ');
         const valores = this.clavesPrimarias.map(clave => claves[clave]); // Obtiene los valores del diccionario de claves (llaves primarias)
 
         try {
-            const query = `SELECT * FROM ${this.tabla} WHERE ${condiciones}`
-            const result = await pool.query(query, valores)
-            return result.rows[0] || null
+            const query = `SELECT * FROM ${this.tabla} WHERE ${condiciones}`;
+            const result = await queryClient.query(query, valores);
+            return result.rows[0] || null;
         } catch (error) {
-            console.error(`Error al obtener el registro en ${this.tabla}: `, error)
+            console.error(`Error al obtener registro en ${this.tabla}:`, error);
             throw new Error(`Error al obtener el registro en ${this.tabla}`);
         }
     }
@@ -98,22 +109,23 @@ class Repositorio {
      * @returns Respuesta SQL con confirmación de si existe un registro o no
      * 
      */
-    async ExistePorId(claves) {
+    async ExistePorId(claves, client = null) {
         if (!this._validarClaves(claves)) {
             throw new Error(`Las claves proporcionadas no coinciden con ${this.clavesPrimarias.join(', ')}`);
         }
 
+        const queryClient = client || pool;
         // Recorre cada valor para hacer la notación de las condiciones de los valores dentro de una consulta
         const condiciones = this.clavesPrimarias.map((clave, index) => `${clave} = $${index + 1}`).join(' AND ');
         const valores = this.clavesPrimarias.map(clave => claves[clave]); // Obtiene los valores del diccionario de claves (llaves primarias)
 
         try {
-            const query = `SELECT 1 FROM ${this.tabla} WHERE ${condiciones}`
-            const result = await pool.query(query, valores);
+            const query = `SELECT 1 FROM ${this.tabla} WHERE ${condiciones}`;
+            const result = await queryClient.query(query, valores);
             return result.rowCount > 0;
         } catch (error) {
-            console.error(`Error al obtener el registro en ${this.tabla}: `, error)
-            throw new Error(`Error al obtener el registro en ${this.tabla}`);
+            console.error(`Error al verificar existencia en ${this.tabla}:`, error);
+            throw new Error(`Error al verificar existencia en ${this.tabla}`);
         }
     }
 
@@ -189,7 +201,8 @@ class Repositorio {
      * @param {*} columnasSeleccionadas Columnas que queremos obtener
      * @returns 
      */
-    async BuscarPorFiltros(filtros = {}, columnasSeleccionadas = []) {
+    async BuscarPorFiltros(filtros = {}, columnasSeleccionadas = [], client = null) {
+        const queryClient = client || pool;
         const tieneFiltros = filtros && Object.keys(filtros).length > 0;
         const columnasQuery = columnasSeleccionadas.length > 0
             ? columnasSeleccionadas.join(', ')
@@ -201,14 +214,20 @@ class Repositorio {
         if (tieneFiltros) {
             const columnas = Object.keys(filtros);
             const condiciones = columnas
-                .map((col, index) => `${col} = $${index + 1}`)
+                .map((col, index) => {
+                    // Si el valor es string usamos ILIKE para ignorar mayúsculas
+                    const valor = filtros[col];
+                    if (typeof valor === 'string') return `${col} ILIKE $${index + 1}`;
+                    return `${col} = $${index + 1}`;
+                })
                 .join(' AND ');
-            valores = Object.values(filtros);
+
+            valores = Object.values(filtros).map(val => typeof val === 'string' ? val : val);
             query += ` WHERE ${condiciones}`;
         }
 
         try {
-            const result = await pool.query(query, valores);
+            const result = await queryClient.query(query, valores);
             return result.rows;
         } catch (error) {
             console.error(`Error al buscar en ${this.tabla} con filtros:`, error);
@@ -224,7 +243,9 @@ class Repositorio {
      * @param {*} columnasSeleccionadas Columnas que queremos que se muestren
      * @returns 
      */
-    async BuscarConJoins(joins = [], filtros = {}, operador = 'AND', columnasSeleccionadas = []) {
+    async BuscarConJoins(joins = [], filtros = {}, operador = 'AND', columnasSeleccionadas = [], client = null) {
+        const queryClient = client || pool;
+
         if (!Array.isArray(joins)) {
             joins = [joins];
         }
@@ -286,23 +307,12 @@ class Repositorio {
         `;
 
         try {
-            const result = await pool.query(query, valores);
+            const result = await queryClient.query(query, valores);
             return result.rows;
         } catch (error) {
             console.error(`Error al buscar en ${this.tabla} con JOINs:`, error);
             throw new Error(`No se pudo realizar la búsqueda en ${this.tabla}`);
         }
-    }
-
-    /**
-     * Función en la que compara si las llaves primarias que se le pasan a las funciones coincide con las llaves primarias definidas en sus clases
-     * 
-     * @param {*} claves Llaves primarias de la tabla
-     * @returns Boleano
-     */
-    _validarClaves(claves) {
-        return Object.keys(claves).length === this.clavesPrimarias.length &&
-            this.clavesPrimarias.every(k => claves.hasOwnProperty(k));
     }
 
     async registrarMovimiento({ accion, datos, }, client = null) {

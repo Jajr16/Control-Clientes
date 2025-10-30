@@ -5,11 +5,11 @@ export const createTableInmuebleSeguro = async () => {
         await pool.query(`
             CREATE TABLE IF NOT EXISTS inmueble_seguro(
                 clave_catastral VARCHAR(25),
-                empresa_seguro VARCHAR(300),
-                PRIMARY KEY (clave_catastral, empresa_seguro),
+                poliza VARCHAR(255),
+                PRIMARY KEY (clave_catastral, poliza),
                 FOREIGN KEY (clave_catastral) REFERENCES inmueble(clave_catastral)
                 ON DELETE CASCADE ON UPDATE CASCADE,
-                FOREIGN KEY (empresa_seguro) REFERENCES seguro(empresa_seguro)
+                FOREIGN KEY (poliza) REFERENCES seguro(poliza)
                 ON DELETE CASCADE ON UPDATE CASCADE
             );
         `)

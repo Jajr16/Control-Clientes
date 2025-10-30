@@ -14,6 +14,7 @@ import { manejarLogicaCliente } from "../../hooks/operacionesClienteForm.js";
 
 import { limpiarDatosVacios } from '../../utils/limpiarDatos.js';
 
+import Swal from 'sweetalert2';
 
 const AddClientesPage = () => {
 
@@ -160,18 +161,113 @@ const AddClientesPage = () => {
 
         console.log('Datos a guardar:', datosLimpios);
 
-        const exito = await manejarFormularioCliente(datosLimpios);
+        const response = await manejarFormularioCliente(datosLimpios);
 
-        setMensaje({ tipo: 'success', texto: '¡Cliente guardado exitosamente!' });
-
-        // Limpiar formulario
-        // setDatosEmpresa({});
-        // setDirEmpresa({});
-        // setDatoRegistralEmpresa({});
-        // setDatosPropietario({});
-        // setInmuebles([]);
-        // setErrores({});
+        Swal.fire({
+            icon: 'success',
+            title: '¡Cliente creado!',
+            text: response.data.message || 'El cliente se creó correctamente',
+            confirmButtonText: 'OK'
+        }).then((result) => {
+            if (result.isConfirmed) {
+                // Limpiar formulario
+                setDatosEmpresa({});
+                setDirEmpresa({});
+                setDatoRegistralEmpresa({});
+                setDatosPropietario({});
+                setInmuebles([]);
+                setErrores({});
+            }
+        });
     };
+
+    useEffect(() => {
+        // Datos iniciales de ejemplo
+        const empresaDemo = {
+            cif: "ABC123456",
+            nombre: "Empresa Demo S.A.",
+            tel: "555478512",
+            clave: "DEM"
+        };
+
+        const direccionDemo = {
+            calle: "Av. Reforma",
+            numero: "123",
+            piso: "4",
+            cp: "06000",
+            localidad: "Ciudad de México"
+        };
+
+        const datoRegistralDemo = {
+            num_protocolo: "45678",
+            folio: "2025",
+            hoja: "01",
+            inscripcion: "12345",
+            notario: "Lic. Juan Pérez",
+            fecha_inscripcion: "2025-10-29"
+        };
+
+        const propietarioDemo = {
+            nie: "X9876543B",
+            nombre: "José Alfredo Jiménez Rodríguez",
+            email: "jajr0316@gmail.com",
+            telefono: "551245678"
+        };
+
+        // Llenar estados del formulario
+        setDatosEmpresa(empresaDemo);
+        setDirEmpresa(direccionDemo);
+        setDatoRegistralEmpresa(datoRegistralDemo);
+        setDatosPropietario(propietarioDemo);
+
+        // Si quieres también agregar un inmueble demo automáticamente:
+        const inmuebleDemo = {
+            id: Date.now(),
+            datosInmueble: {
+                clave_catastral: "CP3344",
+                valor_adquisicion: 40000,
+                fecha_adquisicion: "2025-10-29",
+                datoRegistralInmueble: {
+                    num_protocolo: "78910",
+                    folio: "890",
+                    hoja: "02",
+                    inscripcion: "45678",
+                    notario: "Lic. Laura Gómez",
+                    fecha_inscripcion: "2025-10-29"
+                },
+                dirInmueble: {
+                    calle: "Calle de los Rosales",
+                    numero: "25",
+                    piso: 2,
+                    cp: "28040",
+                    localidad: "Madrid"
+                }
+            },
+            proveedores: [
+                { clave_proveedor: 'c1', nombre: 'Pedrito Sola', servicio: 'Agua', tel_proveedor: '412578631', email_proveedor: 'ps@gmail.com' }
+            ],
+            hipotecas: [
+                {
+                    prestamo: 10000,
+                    banco: 'Banorte',
+                    cuota: 45.2,
+                    fecha_hipoteca: '2025-10-29'
+                }
+            ],
+            seguros: [
+                {
+                    aseguradora: 'Panchitos',
+                    tipo_seguro: 'Luz',
+                    poliza: '14',
+                    telefono_seguro: '854216795',
+                    email_seguro: 'LuzPanchito@gmail.com'
+                }
+            ]
+        };
+
+        setInmuebles([inmuebleDemo]);
+
+    }, []);
 
     return (
         <div className="max-w-7xl mx-auto p-6 bg-white">
@@ -199,7 +295,7 @@ const AddClientesPage = () => {
                                 <Building className="w-5 h-5" />
                                 Empresa <span className="text-red-500">*</span>
                             </h3>
-                            
+
                             <EmpresaForm
                                 empresa={datosEmpresa}
                                 setEmpresa={setDatosEmpresa}
@@ -207,7 +303,7 @@ const AddClientesPage = () => {
                             />
 
                             <h3 className="font-semibold text-lg mt-6 mb-3">Dirección <span className="text-red-500">*</span></h3>
-                            
+
                             <DireccionForm
                                 direccion={dirEmpresa}
                                 setDireccion={setDirEmpresa}
@@ -220,7 +316,7 @@ const AddClientesPage = () => {
                     <div className="space-y-4">
                         <div className="border rounded-lg p-4">
                             <h3 className="font-semibold text-lg mb-3">Propietario <span className="text-red-500">*</span></h3>
-                            
+
                             <PropietarioForm
                                 propietario={datosPropietario}
                                 setPropietario={setDatosPropietario}
@@ -236,7 +332,7 @@ const AddClientesPage = () => {
                                 <FileText className="w-5 h-5" />
                                 Datos Registrales de la Empresa <span className="text-red-500">*</span>
                             </h3>
-                            
+
                             <DatoRegistralForm
                                 datoRegistral={datoRegistralEmpresa}
                                 setDatoRegistral={setDatoRegistralEmpresa}
@@ -283,8 +379,8 @@ const AddClientesPage = () => {
                                 >
                                     <Home className="w-5 h-5" />
                                     <span className="font-semibold">Inmueble {idx + 1}</span>
-                                    {inmueble.datosInmueble?.referencia && (
-                                        <span className="text-sm text-gray-500">- {inmueble.datosInmueble.referencia}</span>
+                                    {inmueble.datosInmueble?.clave_catastral && (
+                                        <span className="text-sm text-gray-500">- {inmueble.datosInmueble.clave_catastral}</span>
                                     )}
                                 </button>
                                 <div className="flex items-center gap-2">
@@ -306,8 +402,8 @@ const AddClientesPage = () => {
                                 <div className="p-4 space-y-6">
                                     {/* Datos del inmueble */}
                                     <div className="border rounded-lg p-4 bg-blue-50">
-                                        <h4 className="font-semibold mb-3">Datos Registrales <span className="text-red-500">*</span></h4>
-                                        
+                                        <h4 className="font-semibold mb-3">Datos Inmueble <span className="text-red-500">*</span></h4>
+
                                         <InmuebleForm
                                             inmueble={inmueble.datosInmueble}
                                             setInmueble={(datos) => actualizarInmueble(inmueble.id, 'datosInmueble', datos)}

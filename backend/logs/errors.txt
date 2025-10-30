@@ -1445,3 +1445,407 @@
     at trim_prefix (C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\express\lib\router\index.js:328:13)
     at C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\express\lib\router\index.js:286:9
 
+[2025-10-29T20:53:06.548Z] error: llave duplicada viola restricción de unicidad «dato_registral_pkey»
+    at C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\pg\lib\client.js:545:17
+    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at async Repositorio.insertar (file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/repositories/globalPersistence.js:43:28)
+    at async file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/services/ClienteService.js:28:36
+    at async ClienteService.withTransaction (file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/services/BaseService.js:13:28)
+    at async ClienteService.crearCliente (file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/services/ClienteService.js:26:16)
+    at async ClienteController.createCliente (file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/controllers/ClienteController.js:13:28)
+
+[2025-10-29T22:19:26.782Z] TypeError: Cannot read properties of undefined (reading 'insertar')
+    at file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/services/ClienteService.js:29:74
+    at ClienteService.withTransaction (file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/services/BaseService.js:13:34)
+    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at async ClienteService.crearCliente (file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/services/ClienteService.js:27:16)
+    at async ClienteController.createCliente (file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/controllers/ClienteController.js:13:28)
+
+[2025-10-29T23:34:53.075Z] Error: No se pudo obtener la información de los clientes
+    at ClienteService.infoClientes (file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/services/ClienteService.js:87:19)
+    at ClienteController.infoClientes (file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/controllers/ClienteController.js:22:47)
+    at Layer.handle [as handle_request] (C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\express\lib\router\layer.js:95:5)
+    at next (C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\express\lib\router\route.js:149:13)
+    at Route.dispatch (C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\express\lib\router\route.js:119:3)
+    at Layer.handle [as handle_request] (C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\express\lib\router\layer.js:95:5)
+    at C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\express\lib\router\index.js:284:15
+    at Function.process_params (C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\express\lib\router\index.js:346:12)
+    at next (C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\express\lib\router\index.js:280:10)
+    at Function.handle (C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\express\lib\router\index.js:175:3)
+    at router (C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\express\lib\router\index.js:47:12)
+    at Layer.handle [as handle_request] (C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\express\lib\router\layer.js:95:5)
+    at trim_prefix (C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\express\lib\router\index.js:328:13)
+    at C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\express\lib\router\index.js:286:9
+    at Function.process_params (C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\express\lib\router\index.js:346:12)
+    at next (C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\express\lib\router\index.js:280:10)
+
+[2025-10-29T23:34:53.115Z] Error: No se pudo obtener la información de los clientes
+    at ClienteService.infoClientes (file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/services/ClienteService.js:87:19)
+    at ClienteController.infoClientes (file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/controllers/ClienteController.js:22:47)
+    at Layer.handle [as handle_request] (C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\express\lib\router\layer.js:95:5)
+    at next (C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\express\lib\router\route.js:149:13)
+    at Route.dispatch (C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\express\lib\router\route.js:119:3)
+    at Layer.handle [as handle_request] (C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\express\lib\router\layer.js:95:5)
+    at C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\express\lib\router\index.js:284:15
+    at Function.process_params (C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\express\lib\router\index.js:346:12)
+    at next (C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\express\lib\router\index.js:280:10)
+    at Function.handle (C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\express\lib\router\index.js:175:3)
+    at router (C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\express\lib\router\index.js:47:12)
+    at Layer.handle [as handle_request] (C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\express\lib\router\layer.js:95:5)
+    at trim_prefix (C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\express\lib\router\index.js:328:13)
+    at C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\express\lib\router\index.js:286:9
+    at Function.process_params (C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\express\lib\router\index.js:346:12)
+    at next (C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\express\lib\router\index.js:280:10)
+
+[2025-10-29T23:58:36.268Z] TypeError: this.repositories.datoRegistral.BuscarPorFiltro is not a function
+    at DatoRegistralService.crearDatoRegistral (file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/services/DatoRegistralService.js:12:65)
+    at file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/services/ClienteService.js:31:68
+    at ClienteService.withTransaction (file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/services/BaseService.js:13:34)
+    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at async ClienteService.crearCliente (file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/services/ClienteService.js:29:16)
+    at async ClienteController.createCliente (file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/controllers/ClienteController.js:13:28)
+
+[2025-10-30T01:28:15.333Z] Error: El dato registral ingresado ya existe
+    at DatoRegistralService.crearDatoRegistral (file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/services/DatoRegistralService.js:19:30)
+    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at async file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/services/ClienteService.js:31:36
+    at async ClienteService.withTransaction (file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/services/BaseService.js:13:28)
+    at async ClienteService.crearCliente (file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/services/ClienteService.js:29:16)
+    at async ClienteController.createCliente (file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/controllers/ClienteController.js:13:28)
+
+[2025-10-30T01:29:30.848Z] Error: El dato registral ingresado ya existe
+    at DatoRegistralService.crearDatoRegistral (file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/services/DatoRegistralService.js:19:30)
+    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at async file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/services/ClienteService.js:31:36
+    at async ClienteService.withTransaction (file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/services/BaseService.js:13:28)
+    at async ClienteService.crearCliente (file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/services/ClienteService.js:29:16)
+    at async ClienteController.createCliente (file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/controllers/ClienteController.js:13:28)
+
+[2025-10-30T01:30:56.730Z] Error: El dato registral ingresado ya existe
+    at DatoRegistralService.crearDatoRegistral (file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/services/DatoRegistralService.js:20:30)
+    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at async file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/services/ClienteService.js:31:36
+    at async ClienteService.withTransaction (file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/services/BaseService.js:13:28)
+    at async ClienteService.crearCliente (file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/services/ClienteService.js:29:16)
+    at async ClienteController.createCliente (file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/controllers/ClienteController.js:13:28)
+
+[2025-10-30T01:32:24.633Z] Error: El dato registral ingresado ya existe
+    at DatoRegistralService.crearDatoRegistral (file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/services/DatoRegistralService.js:20:30)
+    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at async file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/services/ClienteService.js:31:36
+    at async ClienteService.withTransaction (file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/services/BaseService.js:13:28)
+    at async ClienteService.crearCliente (file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/services/ClienteService.js:29:16)
+    at async ClienteController.createCliente (file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/controllers/ClienteController.js:13:28)
+
+[2025-10-30T01:33:06.392Z] Error: El dato registral ingresado ya existe
+    at DatoRegistralService.crearDatoRegistral (file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/services/DatoRegistralService.js:21:30)
+    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at async file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/services/ClienteService.js:31:36
+    at async ClienteService.withTransaction (file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/services/BaseService.js:13:28)
+    at async ClienteService.crearCliente (file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/services/ClienteService.js:29:16)
+    at async ClienteController.createCliente (file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/controllers/ClienteController.js:13:28)
+
+[2025-10-30T01:35:57.151Z] error: no existe la columna «cp» en la relación «direccion»
+    at C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\pg\lib\client.js:545:17
+    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at async Repositorio.insertar (file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/repositories/globalPersistence.js:54:28)
+    at async DireccionService.crearDireccion (file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/services/DireccionService.js:21:16)
+    at async file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/services/ClienteService.js:33:31
+    at async ClienteService.withTransaction (file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/services/BaseService.js:13:28)
+    at async ClienteService.crearCliente (file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/services/ClienteService.js:29:16)
+    at async ClienteController.createCliente (file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/controllers/ClienteController.js:13:28)
+
+[2025-10-30T01:37:02.446Z] error: no existe la columna «cp» en la relación «direccion»
+    at C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\pg\lib\client.js:545:17
+    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at async Repositorio.insertar (file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/repositories/globalPersistence.js:54:28)
+    at async DireccionService.crearDireccion (file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/services/DireccionService.js:22:16)
+    at async file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/services/ClienteService.js:33:31
+    at async ClienteService.withTransaction (file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/services/BaseService.js:13:28)
+    at async ClienteService.crearCliente (file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/services/ClienteService.js:29:16)
+    at async ClienteController.createCliente (file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/controllers/ClienteController.js:13:28)
+
+[2025-10-30T02:21:06.499Z] error: no existe la columna «tel» en la relación «empresa»
+    at C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\pg\lib\client.js:545:17
+    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at async Repositorio.insertar (file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/repositories/globalPersistence.js:54:28)
+    at async EmpresaService.crearEmpresa (file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/services/EmpresaService.js:15:16)
+    at async file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/services/ClienteService.js:38:29
+    at async ClienteService.withTransaction (file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/services/BaseService.js:13:28)
+    at async ClienteService.crearCliente (file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/services/ClienteService.js:29:16)
+    at async ClienteController.createCliente (file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/controllers/ClienteController.js:13:28)
+
+[2025-10-30T02:30:01.392Z] error: no existe la columna «empresadata» en la relación «empresa»
+    at C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\pg\lib\client.js:545:17
+    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at async Repositorio.insertar (file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/repositories/globalPersistence.js:54:28)
+    at async EmpresaService.crearEmpresa (file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/services/EmpresaService.js:15:16)
+    at async file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/services/ClienteService.js:42:29
+    at async ClienteService.withTransaction (file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/services/BaseService.js:13:28)
+    at async ClienteService.crearCliente (file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/services/ClienteService.js:32:16)
+    at async ClienteController.createCliente (file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/controllers/ClienteController.js:13:28)
+
+[2025-10-30T02:30:44.642Z] ReferenceError: client is not defined
+    at file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/services/ClienteService.js:53:94
+    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at async ClienteService.withTransaction (file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/services/BaseService.js:13:28)
+    at async ClienteService.crearCliente (file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/services/ClienteService.js:32:16)
+    at async ClienteController.createCliente (file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/controllers/ClienteController.js:13:28)
+
+[2025-10-30T02:31:33.006Z] TypeError: Cannot read properties of undefined (reading 'num_protocolo')
+    at DatoRegistralService.crearDatoRegistral (file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/services/DatoRegistralService.js:13:33)
+    at ejecutar (file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/services/inmuebleService.js:27:67)
+    at InmuebleService.nuevoInmueble (file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/services/inmuebleService.js:61:26)
+    at file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/services/ClienteService.js:53:70
+    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at async ClienteService.withTransaction (file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/services/BaseService.js:13:28)
+    at async ClienteService.crearCliente (file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/services/ClienteService.js:32:16)
+    at async ClienteController.createCliente (file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/controllers/ClienteController.js:13:28)
+
+[2025-10-30T02:33:09.002Z] TypeError: Cannot read properties of undefined (reading 'num_protocolo')
+    at DatoRegistralService.crearDatoRegistral (file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/services/DatoRegistralService.js:14:33)
+    at ejecutar (file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/services/inmuebleService.js:27:67)
+    at InmuebleService.nuevoInmueble (file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/services/inmuebleService.js:61:26)
+    at file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/services/ClienteService.js:53:70
+    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at async ClienteService.withTransaction (file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/services/BaseService.js:13:28)
+    at async ClienteService.crearCliente (file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/services/ClienteService.js:32:16)
+    at async ClienteController.createCliente (file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/controllers/ClienteController.js:13:28)
+
+[2025-10-30T02:33:25.152Z] TypeError: Cannot read properties of undefined (reading 'num_protocolo')
+    at DatoRegistralService.crearDatoRegistral (file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/services/DatoRegistralService.js:14:33)
+    at ejecutar (file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/services/inmuebleService.js:27:67)
+    at InmuebleService.nuevoInmueble (file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/services/inmuebleService.js:61:26)
+    at file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/services/ClienteService.js:53:70
+    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at async ClienteService.withTransaction (file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/services/BaseService.js:13:28)
+    at async ClienteService.crearCliente (file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/services/ClienteService.js:32:16)
+    at async ClienteController.createCliente (file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/controllers/ClienteController.js:13:28)
+
+[2025-10-30T02:34:50.225Z] TypeError: Cannot read properties of undefined (reading 'num_protocolo')
+    at DatoRegistralService.crearDatoRegistral (file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/services/DatoRegistralService.js:13:33)
+    at ejecutar (file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/services/inmuebleService.js:27:67)
+    at InmuebleService.nuevoInmueble (file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/services/inmuebleService.js:61:26)
+    at file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/services/ClienteService.js:53:70
+    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at async ClienteService.withTransaction (file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/services/BaseService.js:13:28)
+    at async ClienteService.crearCliente (file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/services/ClienteService.js:32:16)
+    at async ClienteController.createCliente (file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/controllers/ClienteController.js:13:28)
+
+[2025-10-30T02:35:28.314Z] TypeError: Cannot read properties of undefined (reading 'num_protocolo')
+    at DatoRegistralService.crearDatoRegistral (file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/services/DatoRegistralService.js:13:33)
+    at ejecutar (file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/services/inmuebleService.js:27:67)
+    at InmuebleService.nuevoInmueble (file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/services/inmuebleService.js:61:26)
+    at file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/services/ClienteService.js:54:70
+    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at async ClienteService.withTransaction (file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/services/BaseService.js:13:28)
+    at async ClienteService.crearCliente (file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/services/ClienteService.js:32:16)
+    at async ClienteController.createCliente (file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/controllers/ClienteController.js:13:28)
+
+[2025-10-30T02:39:23.131Z] TypeError: Cannot read properties of undefined (reading 'num_protocolo')
+    at DatoRegistralService.crearDatoRegistral (file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/services/DatoRegistralService.js:13:33)
+    at ejecutar (file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/services/inmuebleService.js:26:67)
+    at InmuebleService.nuevoInmueble (file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/services/inmuebleService.js:60:26)
+    at file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/services/ClienteService.js:54:70
+    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at async ClienteService.withTransaction (file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/services/BaseService.js:13:28)
+    at async ClienteService.crearCliente (file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/services/ClienteService.js:32:16)
+    at async ClienteController.createCliente (file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/controllers/ClienteController.js:13:28)
+
+[2025-10-30T02:42:19.917Z] error: no existe la columna «cp» en la relación «direccion»
+    at C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\pg\lib\client.js:545:17
+    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at async Repositorio.insertar (file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/repositories/globalPersistence.js:54:28)
+    at async DireccionService.crearDireccion (file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/services/DireccionService.js:22:16)
+    at async ejecutar (file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/services/inmuebleService.js:27:31)
+    at async InmuebleService.nuevoInmueble (file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/services/inmuebleService.js:60:20)
+    at async file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/services/ClienteService.js:54:43
+    at async ClienteService.withTransaction (file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/services/BaseService.js:13:28)
+    at async ClienteService.crearCliente (file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/services/ClienteService.js:32:16)
+    at async ClienteController.createCliente (file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/controllers/ClienteController.js:13:28)
+
+[2025-10-30T02:43:47.462Z] TypeError: this.repositories.proveedor.BuscarPorId is not a function
+    at ProveedorService.vincularProveedorAInmueble (file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/services/ProveedorService.js:20:59)
+    at ejecutar (file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/services/inmuebleService.js:40:49)
+    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at async InmuebleService.nuevoInmueble (file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/services/inmuebleService.js:61:20)
+    at async file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/services/ClienteService.js:54:43
+    at async ClienteService.withTransaction (file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/services/BaseService.js:13:28)
+    at async ClienteService.crearCliente (file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/services/ClienteService.js:32:16)
+    at async ClienteController.createCliente (file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/controllers/ClienteController.js:13:28)
+
+[2025-10-30T02:45:28.710Z] error: no existe la columna «clave_proveedor» en la relación «proveedor»
+    at C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\pg\lib\client.js:545:17
+    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at async Repositorio.insertar (file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/repositories/globalPersistence.js:54:28)
+    at async ProveedorService.vincularProveedorAInmueble (file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/services/ProveedorService.js:23:25)
+    at async ejecutar (file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/services/inmuebleService.js:40:21)
+    at async InmuebleService.nuevoInmueble (file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/services/inmuebleService.js:61:20)
+    at async file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/services/ClienteService.js:54:43
+    at async ClienteService.withTransaction (file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/services/BaseService.js:13:28)
+    at async ClienteService.crearCliente (file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/services/ClienteService.js:32:16)
+    at async ClienteController.createCliente (file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/controllers/ClienteController.js:13:28)
+
+[2025-10-30T02:47:55.798Z] error: no existe la columna «servicio» en la relación «proveedor»
+    at C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\pg\lib\client.js:545:17
+    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at async Repositorio.insertar (file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/repositories/globalPersistence.js:54:28)
+    at async ProveedorService.vincularProveedorAInmueble (file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/services/ProveedorService.js:23:25)
+    at async ejecutar (file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/services/inmuebleService.js:41:21)
+    at async InmuebleService.nuevoInmueble (file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/services/inmuebleService.js:62:20)
+    at async file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/services/ClienteService.js:54:43
+    at async ClienteService.withTransaction (file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/services/BaseService.js:13:28)
+    at async ClienteService.crearCliente (file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/services/ClienteService.js:32:16)
+    at async ClienteController.createCliente (file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/controllers/ClienteController.js:13:28)
+
+[2025-10-30T02:51:21.784Z] error: no existe la columna «banco» en la relación «hipoteca»
+    at C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\pg\lib\client.js:545:17
+    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at async Repositorio.insertar (file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/repositories/globalPersistence.js:54:28)
+    at async HipotecaService.vincularHipotecaAInmueble (file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/services/HipotecaService.js:16:31)
+    at async ejecutar (file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/services/inmuebleService.js:52:21)
+    at async InmuebleService.nuevoInmueble (file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/services/inmuebleService.js:67:20)
+    at async file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/services/ClienteService.js:54:43
+    at async ClienteService.withTransaction (file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/services/BaseService.js:13:28)
+    at async ClienteService.crearCliente (file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/services/ClienteService.js:32:16)
+    at async ClienteController.createCliente (file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/controllers/ClienteController.js:13:28)
+
+[2025-10-30T02:55:24.348Z] error: la sintaxis de entrada no es válida para tipo integer: «45.2»
+    at C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\pg\lib\client.js:545:17
+    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at async Repositorio.insertar (file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/repositories/globalPersistence.js:54:28)
+    at async HipotecaService.vincularHipotecaAInmueble (file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/services/HipotecaService.js:16:31)
+    at async ejecutar (file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/services/inmuebleService.js:52:21)
+    at async InmuebleService.nuevoInmueble (file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/services/inmuebleService.js:78:20)
+    at async file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/services/ClienteService.js:53:43
+    at async ClienteService.withTransaction (file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/services/BaseService.js:13:28)
+    at async ClienteService.crearCliente (file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/services/ClienteService.js:32:16)
+    at async ClienteController.createCliente (file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/controllers/ClienteController.js:13:28)
+
+[2025-10-30T02:56:51.890Z] TypeError: Cannot read properties of undefined (reading 'insertar')
+    at HipotecaService.vincularHipotecaAInmueble (file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/services/HipotecaService.js:23:50)
+    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at async ejecutar (file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/services/inmuebleService.js:52:21)
+    at async InmuebleService.nuevoInmueble (file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/services/inmuebleService.js:78:20)
+    at async file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/services/ClienteService.js:53:43
+    at async ClienteService.withTransaction (file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/services/BaseService.js:13:28)
+    at async ClienteService.crearCliente (file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/services/ClienteService.js:32:16)
+    at async ClienteController.createCliente (file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/controllers/ClienteController.js:13:28)
+
+[2025-10-30T02:58:12.628Z] TypeError: Cannot read properties of undefined (reading 'crearMovimiento')
+    at file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/services/ClienteService.js:64:42
+    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at async ClienteService.withTransaction (file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/services/BaseService.js:13:28)
+    at async ClienteService.crearCliente (file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/services/ClienteService.js:32:16)
+    at async ClienteController.createCliente (file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/controllers/ClienteController.js:13:28)
+
+[2025-10-30T03:06:13.335Z] Error: El dato registral ingresado ya existe
+    at DatoRegistralService.crearDatoRegistral (file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/services/DatoRegistralService.js:20:41)
+    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at async file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/services/ClienteService.js:34:36
+    at async ClienteService.withTransaction (file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/services/BaseService.js:13:28)
+    at async ClienteService.crearCliente (file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/services/ClienteService.js:32:16)
+    at async ClienteController.createCliente (file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/controllers/ClienteController.js:13:28)
+
+[2025-10-30T03:06:57.831Z] Error: El dato registral ingresado ya existe
+    at DatoRegistralService.crearDatoRegistral (file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/services/DatoRegistralService.js:20:41)
+    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at async file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/services/ClienteService.js:34:36
+    at async ClienteService.withTransaction (file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/services/BaseService.js:13:28)
+    at async ClienteService.crearCliente (file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/services/ClienteService.js:32:16)
+    at async ClienteController.createCliente (file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/controllers/ClienteController.js:13:28)
+
+[2025-10-30T03:08:45.669Z] Error: El dato registral ingresado ya existe
+    at DatoRegistralService.crearDatoRegistral (file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/services/DatoRegistralService.js:20:41)
+    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at async file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/services/ClienteService.js:34:36
+    at async ClienteService.withTransaction (file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/services/BaseService.js:13:28)
+    at async ClienteService.crearCliente (file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/services/ClienteService.js:32:16)
+    at async ClienteController.createCliente (file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/controllers/ClienteController.js:13:28)
+
+[2025-10-30T03:09:29.772Z] Error: No se pudo obtener la información de los clientes
+    at ClienteService.infoClientes (file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/services/ClienteService.js:98:19)
+    at ClienteController.infoClientes (file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/controllers/ClienteController.js:22:47)
+    at Layer.handle [as handle_request] (C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\express\lib\router\layer.js:95:5)
+    at next (C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\express\lib\router\route.js:149:13)
+    at Route.dispatch (C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\express\lib\router\route.js:119:3)
+    at Layer.handle [as handle_request] (C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\express\lib\router\layer.js:95:5)
+    at C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\express\lib\router\index.js:284:15
+    at Function.process_params (C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\express\lib\router\index.js:346:12)
+    at next (C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\express\lib\router\index.js:280:10)
+    at Function.handle (C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\express\lib\router\index.js:175:3)
+    at router (C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\express\lib\router\index.js:47:12)
+    at Layer.handle [as handle_request] (C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\express\lib\router\layer.js:95:5)
+    at trim_prefix (C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\express\lib\router\index.js:328:13)
+    at C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\express\lib\router\index.js:286:9
+    at Function.process_params (C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\express\lib\router\index.js:346:12)
+    at next (C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\express\lib\router\index.js:280:10)
+
+[2025-10-30T03:09:29.782Z] Error: No se pudo obtener la información de los clientes
+    at ClienteService.infoClientes (file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/services/ClienteService.js:98:19)
+    at ClienteController.infoClientes (file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/controllers/ClienteController.js:22:47)
+    at Layer.handle [as handle_request] (C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\express\lib\router\layer.js:95:5)
+    at next (C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\express\lib\router\route.js:149:13)
+    at Route.dispatch (C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\express\lib\router\route.js:119:3)
+    at Layer.handle [as handle_request] (C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\express\lib\router\layer.js:95:5)
+    at C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\express\lib\router\index.js:284:15
+    at Function.process_params (C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\express\lib\router\index.js:346:12)
+    at next (C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\express\lib\router\index.js:280:10)
+    at Function.handle (C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\express\lib\router\index.js:175:3)
+    at router (C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\express\lib\router\index.js:47:12)
+    at Layer.handle [as handle_request] (C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\express\lib\router\layer.js:95:5)
+    at trim_prefix (C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\express\lib\router\index.js:328:13)
+    at C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\express\lib\router\index.js:286:9
+    at Function.process_params (C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\express\lib\router\index.js:346:12)
+    at next (C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\express\lib\router\index.js:280:10)
+
+[2025-10-30T03:31:02.991Z] Error: No se pudo realizar la búsqueda en movimiento
+    at Repositorio.BuscarPorFiltros (file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/repositories/globalPersistence.js:236:19)
+    at HomeService.obtenerMovimientosRecientes (file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/services/HomeService.js:73:64)
+    at HomeService.obtenerDatosHome (file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/services/HomeService.js:61:40)
+    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at async HomeController.obtenerDatosHome (file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/controllers/HomeController.js:11:28)
+
+[2025-10-30T03:31:03.056Z] Error: No se pudo realizar la búsqueda en movimiento
+    at Repositorio.BuscarPorFiltros (file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/repositories/globalPersistence.js:236:19)
+    at HomeService.obtenerMovimientosRecientes (file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/services/HomeService.js:73:64)
+    at HomeService.obtenerDatosHome (file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/services/HomeService.js:61:40)
+    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at async HomeController.obtenerDatosHome (file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/controllers/HomeController.js:11:28)
+
+[2025-10-30T03:36:25.713Z] Error: No se pudo obtener la información de los clientes
+    at ClienteService.infoClientes (file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/services/ClienteService.js:98:19)
+    at ClienteController.infoClientes (file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/controllers/ClienteController.js:22:47)
+    at Layer.handle [as handle_request] (C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\express\lib\router\layer.js:95:5)
+    at next (C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\express\lib\router\route.js:149:13)
+    at Route.dispatch (C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\express\lib\router\route.js:119:3)
+    at Layer.handle [as handle_request] (C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\express\lib\router\layer.js:95:5)
+    at C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\express\lib\router\index.js:284:15
+    at Function.process_params (C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\express\lib\router\index.js:346:12)
+    at next (C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\express\lib\router\index.js:280:10)
+    at Function.handle (C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\express\lib\router\index.js:175:3)
+    at router (C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\express\lib\router\index.js:47:12)
+    at Layer.handle [as handle_request] (C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\express\lib\router\layer.js:95:5)
+    at trim_prefix (C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\express\lib\router\index.js:328:13)
+    at C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\express\lib\router\index.js:286:9
+    at Function.process_params (C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\express\lib\router\index.js:346:12)
+    at next (C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\express\lib\router\index.js:280:10)
+
+[2025-10-30T03:36:25.735Z] Error: No se pudo obtener la información de los clientes
+    at ClienteService.infoClientes (file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/services/ClienteService.js:98:19)
+    at ClienteController.infoClientes (file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/controllers/ClienteController.js:22:47)
+    at Layer.handle [as handle_request] (C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\express\lib\router\layer.js:95:5)
+    at next (C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\express\lib\router\route.js:149:13)
+    at Route.dispatch (C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\express\lib\router\route.js:119:3)
+    at Layer.handle [as handle_request] (C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\express\lib\router\layer.js:95:5)
+    at C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\express\lib\router\index.js:284:15
+    at Function.process_params (C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\express\lib\router\index.js:346:12)
+    at next (C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\express\lib\router\index.js:280:10)
+    at Function.handle (C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\express\lib\router\index.js:175:3)
+    at router (C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\express\lib\router\index.js:47:12)
+    at Layer.handle [as handle_request] (C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\express\lib\router\layer.js:95:5)
+    at trim_prefix (C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\express\lib\router\index.js:328:13)
+    at C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\express\lib\router\index.js:286:9
+    at Function.process_params (C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\express\lib\router\index.js:346:12)
+    at next (C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\express\lib\router\index.js:280:10)
+

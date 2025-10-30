@@ -483,10 +483,10 @@ class AdeudoService extends BaseService {
   }
 
   async obtenerTodosAdeudosPorEmpresaAgrupados(empresa_cif) {
-  const query = `SELECT * FROM obtener_adeudos_con_rmm_por_empresa($1)`;
-  const result = await pool.query(query, [empresa_cif]);
+    const query = `SELECT * FROM obtener_adeudos_con_rmm_por_empresa($1)`;
+    const result = await pool.query(query, [empresa_cif]);
 
-  const queryHonorarios = `
+    const queryHonorarios = `
     SELECT 
       num_liquidacion,
       honorario,
@@ -498,126 +498,126 @@ class AdeudoService extends BaseService {
     WHERE empresa_cif = $1
     ORDER BY num_liquidacion DESC
   `;
-  const honorariosResult = await pool.query(queryHonorarios, [empresa_cif]);
+    const honorariosResult = await pool.query(queryHonorarios, [empresa_cif]);
 
-  // Saldo / anticipo
-  const saldoInfo = await this.obtenerSaldoEmpresa(empresa_cif);
-  const anticipo_original = Number(saldoInfo?.anticipo_original || 0);
-  const anticipo_restante = Number(saldoInfo?.saldo_actual || 0);
+    // Saldo / anticipo
+    const saldoInfo = await this.obtenerSaldoEmpresa(empresa_cif);
+    const anticipo_original = Number(saldoInfo?.anticipo_original || 0);
+    const anticipo_restante = Number(saldoInfo?.saldo_actual || 0);
 
-  // Map de honorarios por nº liquidación
-  const honorariosPorLiquidacion = {};
-  honorariosResult.rows.forEach(row => {
-    const numLiq = parseInt(row.num_liquidacion);
-    honorariosPorLiquidacion[numLiq] = {
-      base: parseFloat(row.honorario) || 0,
-      iva: parseFloat(row.iva) || 0,
-      total: parseFloat(row.total_honorarios) || 0,
-      num_factura: row.num_factura,
-      fecha_creacion: row.fecha_creacion
-    };
-  });
-
-  // Normaliza fechas
-  const adeudos = result.rows.map(row => ({
-    ...row,
-    fecha_anticipo: formatDate(row.fecha_anticipo),
-    fecha_devolucion_diferencia: formatDate(row.fecha_devolucion_diferencia),
-    ff: formatDate(row.ff),
-    fecha_liquidacion: formatDate(row.fecha_liquidacion)
-  }));
-
-  // Agrupar por liquidación
-  const adeudosAgrupados = {};
-  adeudos.forEach(adeudo => {
-    const liquidacion = adeudo.num_liquidacion || 'pendientes';
-    if (!adeudosAgrupados[liquidacion]) {
-      adeudosAgrupados[liquidacion] = {
-        num_liquidacion: liquidacion,
-        adeudos: [],
-        resumen: {
-          total: 0,
-          importe_total: 0,
-          iva_total: 0,
-          retencion_total: 0,
-          total_general: 0
-        },
-        honorarios:
-          liquidacion !== 'pendientes' && honorariosPorLiquidacion[parseInt(liquidacion)]
-            ? honorariosPorLiquidacion[parseInt(liquidacion)]
-            : { base: 0, iva: 0, total: 0, num_factura: null, fecha_creacion: null }
+    // Map de honorarios por nº liquidación
+    const honorariosPorLiquidacion = {};
+    honorariosResult.rows.forEach(row => {
+      const numLiq = parseInt(row.num_liquidacion);
+      honorariosPorLiquidacion[numLiq] = {
+        base: parseFloat(row.honorario) || 0,
+        iva: parseFloat(row.iva) || 0,
+        total: parseFloat(row.total_honorarios) || 0,
+        num_factura: row.num_factura,
+        fecha_creacion: row.fecha_creacion
       };
-    }
+    });
 
-    adeudosAgrupados[liquidacion].adeudos.push(adeudo);
-    const r = adeudosAgrupados[liquidacion].resumen;
-    r.total++;
-    r.importe_total   += parseFloat(adeudo.importe)   || 0;
-    r.iva_total       += parseFloat(adeudo.iva)       || 0;
-    r.retencion_total += parseFloat(adeudo.retencion) || 0;
-    r.total_general   += parseFloat(adeudo.total)     || 0;
-  });
+    // Normaliza fechas
+    const adeudos = result.rows.map(row => ({
+      ...row,
+      fecha_anticipo: formatDate(row.fecha_anticipo),
+      fecha_devolucion_diferencia: formatDate(row.fecha_devolucion_diferencia),
+      ff: formatDate(row.ff),
+      fecha_liquidacion: formatDate(row.fecha_liquidacion)
+    }));
 
-  // Orden: pendientes primero, luego desc
-  const liquidacionesOrdenadas = Object.keys(adeudosAgrupados).sort((a, b) => {
-    if (a === 'pendientes') return -1;
-    if (b === 'pendientes') return 1;
-    return parseInt(b) - parseInt(a);
-  });
-  const liquidaciones = liquidacionesOrdenadas.map(k => adeudosAgrupados[k]);
+    // Agrupar por liquidación
+    const adeudosAgrupados = {};
+    adeudos.forEach(adeudo => {
+      const liquidacion = adeudo.num_liquidacion || 'pendientes';
+      if (!adeudosAgrupados[liquidacion]) {
+        adeudosAgrupados[liquidacion] = {
+          num_liquidacion: liquidacion,
+          adeudos: [],
+          resumen: {
+            total: 0,
+            importe_total: 0,
+            iva_total: 0,
+            retencion_total: 0,
+            total_general: 0
+          },
+          honorarios:
+            liquidacion !== 'pendientes' && honorariosPorLiquidacion[parseInt(liquidacion)]
+              ? honorariosPorLiquidacion[parseInt(liquidacion)]
+              : { base: 0, iva: 0, total: 0, num_factura: null, fecha_creacion: null }
+        };
+      }
 
-  // --- NUEVO: resumen sólo de pendientes (para vista/preview) ---
-  const bloquePendientes = adeudosAgrupados['pendientes'] || {
-    resumen: { importe_total: 0, iva_total: 0, retencion_total: 0, total_general: 0 },
-    honorarios: { total: 0 }
-  };
-  const total_facturas_pendientes = Number(bloquePendientes.resumen.total_general || 0);
+      adeudosAgrupados[liquidacion].adeudos.push(adeudo);
+      const r = adeudosAgrupados[liquidacion].resumen;
+      r.total++;
+      r.importe_total += parseFloat(adeudo.importe) || 0;
+      r.iva_total += parseFloat(adeudo.iva) || 0;
+      r.retencion_total += parseFloat(adeudo.retencion) || 0;
+      r.total_general += parseFloat(adeudo.total) || 0;
+    });
 
-  // Honorarios para PDF (si usas los de la liquidación final, déjalos en 0 aquí;
-  // si quieres sumarlos en la vista de liquidación final, se calculan en ese flujo)
-  const honorarios_pdf = 0;
+    // Orden: pendientes primero, luego desc
+    const liquidacionesOrdenadas = Object.keys(adeudosAgrupados).sort((a, b) => {
+      if (a === 'pendientes') return -1;
+      if (b === 'pendientes') return 1;
+      return parseInt(b) - parseInt(a);
+    });
+    const liquidaciones = liquidacionesOrdenadas.map(k => adeudosAgrupados[k]);
 
-  // Anticipo “para PDF” = original (congelado)
-  const anticipo_para_pdf = anticipo_original;
+    // --- NUEVO: resumen sólo de pendientes (para vista/preview) ---
+    const bloquePendientes = adeudosAgrupados['pendientes'] || {
+      resumen: { importe_total: 0, iva_total: 0, retencion_total: 0, total_general: 0 },
+      honorarios: { total: 0 }
+    };
+    const total_facturas_pendientes = Number(bloquePendientes.resumen.total_general || 0);
 
-  // Adeudo pendiente para PDF, clamp >= 0
-  const adeudo_pendiente_pdf = Math.max(0, total_facturas_pendientes + honorarios_pdf - anticipo_para_pdf);
+    // Honorarios para PDF (si usas los de la liquidación final, déjalos en 0 aquí;
+    // si quieres sumarlos en la vista de liquidación final, se calculan en ese flujo)
+    const honorarios_pdf = 0;
 
-  // Resumen general (como ya tenías) + extras
-  const resumenGeneral = {
-    ...this._calcularResumen(adeudos),
-    saldo_info: saldoInfo,
-    total_honorarios: saldoInfo.total_honorarios,
-    total_general: saldoInfo.total_general,
+    // Anticipo “para PDF” = original (congelado)
+    const anticipo_para_pdf = anticipo_original;
 
-    // NUEVO: bloque específico para la vista/pdf
-    resumen_pendientes: {
-      total_facturas: total_facturas_pendientes,
-      honorarios: honorarios_pdf,
-      anticipo_para_pdf,             // <- usar en PDF
-      adeudo_pendiente_pdf           // <- ya calculado y clamp ≥ 0
-    }
-  };
+    // Adeudo pendiente para PDF, clamp >= 0
+    const adeudo_pendiente_pdf = Math.max(0, total_facturas_pendientes + honorarios_pdf - anticipo_para_pdf);
 
-  // Objeto anticipo completo y explícito
-  const anticipo = {
-    empresa_cif,
-    anticipo: anticipo_restante,          // compat (saldo_actual)
-    anticipo_original,                    // << el que quieres para PDF
-    saldo_actual: anticipo_restante,      // alias
-    total_adeudos: saldoInfo.total_adeudos,
-    total_honorarios: saldoInfo.total_honorarios,
-    total_general: saldoInfo.total_general,
-    debe_empresa: saldoInfo.debe_empresa,
-    estado: saldoInfo.estado,
+    // Resumen general (como ya tenías) + extras
+    const resumenGeneral = {
+      ...this._calcularResumen(adeudos),
+      saldo_info: saldoInfo,
+      total_honorarios: saldoInfo.total_honorarios,
+      total_general: saldoInfo.total_general,
 
-    // Sugerencias de consumo en front:
-    anticipo_para_pdf: anticipo_para_pdf, // usa esto en PDF
-    anticipo_para_vista: anticipo_restante
-  };
+      // NUEVO: bloque específico para la vista/pdf
+      resumen_pendientes: {
+        total_facturas: total_facturas_pendientes,
+        honorarios: honorarios_pdf,
+        anticipo_para_pdf,             // <- usar en PDF
+        adeudo_pendiente_pdf           // <- ya calculado y clamp ≥ 0
+      }
+    };
 
-  return { anticipo, liquidaciones, resumen: resumenGeneral };
-}
+    // Objeto anticipo completo y explícito
+    const anticipo = {
+      empresa_cif,
+      anticipo: anticipo_restante,          // compat (saldo_actual)
+      anticipo_original,                    // << el que quieres para PDF
+      saldo_actual: anticipo_restante,      // alias
+      total_adeudos: saldoInfo.total_adeudos,
+      total_honorarios: saldoInfo.total_honorarios,
+      total_general: saldoInfo.total_general,
+      debe_empresa: saldoInfo.debe_empresa,
+      estado: saldoInfo.estado,
+
+      // Sugerencias de consumo en front:
+      anticipo_para_pdf: anticipo_para_pdf, // usa esto en PDF
+      anticipo_para_vista: anticipo_restante
+    };
+
+    return { anticipo, liquidaciones, resumen: resumenGeneral };
+  }
 
 
   async verificarAdeudosPendientes(empresa_cif) {

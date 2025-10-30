@@ -1,41 +1,83 @@
 import { BaseService } from './BaseService.js';
 import Repositorio from '../repositories/globalPersistence.js';
-import { pool } from '../config/db.js';
+import DatoRegistralService from './DatoRegistralService.js';
+import DireccionService from './DireccionService.js';
+import HipotecaService from './HipotecaService.js';
+import ProveedorService from './ProveedorService.js';
+import SeguroService from './SeguroService.js';
 
 class InmuebleService extends BaseService {
     constructor() {
         super({
-            inmueble: new Repositorio('inmueble', 'clave_catastral'),
-            direccion: new Repositorio('direccion', 'id'),
-            datoRegistral: new Repositorio('dato_registral', 'id_dr'),
-            empresaInmueble: new Repositorio('empresa_inmueble', ['cif', 'clave_catastral']),
-            inmuebleProveedor: new Repositorio('inmueble_proveedor', ['clave_catastral', 'clave']),
-            inmuebleSeguro: new Repositorio('inmueble_seguro', ['clave_catastral', 'empresa_seguro']),
-            hipoteca: new Repositorio('inmueble_hipoteca', ['clave_catastral', 'id_hipoteca'])
+            inmueble: new Repositorio('inmueble', 'clave_catastral')
         });
+
+        this.datoRegistralService = new DatoRegistralService();
+        this.direccionService = new DireccionService();
+        this.hipotecaService = new HipotecaService();
+        this.proveedorService = new ProveedorService();
+        this.seguroService = new SeguroService();
+
     }
 
-    async nuevoInmueble(datos) {
-        return await this.withTransaction(async (client) => {
-            const datoRegistral = await this.repositories.datoRegistral.insertar(datos.dato_registral, client);
-            console.log("Dato registral registrado");
-            
-            const direccion = await this.repositories.direccion.insertar(datos.direccion, client);
-            console.log("Dirección registrada");
-            
+    async nuevoInmueble(datos, client = null) {
+        const ejecutar = async (conn) => {
+            const datoRegistral = await this.datoRegistralService.crearDatoRegistral(datos.datosInmueble.datoRegistralInmueble, conn);
+            const { cp, ...direccionData } = datos.datosInmueble.dirInmueble
+            const direccion = await this.direccionService.crearDireccion({ ...direccionData, codigo_postal: cp }, conn);
+
             const inmuebleData = {
-                clave_catastral: datos.inmueble.clave_catastral,
+                clave_catastral: datos.datosInmueble.clave_catastral,
                 direccion: direccion.id,
                 dato_registral: datoRegistral.id_dr
             };
 
-            const resultado = await this.repositories.inmueble.insertar(inmuebleData, client);
-            
-            return { 
-                message: "Inmueble creado con éxito.", 
-                data: resultado 
-            };
-        });
+            const resultado = await this.repositories.inmueble.insertar(inmuebleData, conn);
+
+            if (datos.proveedores && datos.proveedores.length > 0) {
+                for (const proveedor of datos.proveedores) {
+                    await this.proveedorService.vincularProveedorAInmueble({
+                        clave: proveedor.clave_proveedor,
+                        nombre: proveedor.nombre,
+                        telefono: proveedor.tel_proveedor,
+                        email: proveedor.email_proveedor,
+                        tipo_servicio: proveedor.servicio
+                    }, datos.datosInmueble.clave_catastral, conn)
+                }
+            }
+
+            if (datos.hipotecas && datos.hipotecas.length > 0) {
+                for (const hipoteca of datos.hipotecas) {
+                    await this.hipotecaService.vincularHipotecaAInmueble({
+                        prestamo: hipoteca.prestamo,
+                        banco_prestamo: hipoteca.prestamo,
+                        fecha_hipoteca: hipoteca.fecha_hipoteca,
+                        cuota_hipoteca: hipoteca.cuota
+                    }, datos.datosInmueble.clave_catastral, client)
+                }
+            }
+
+            if (datos.seguros && datos.seguros.length > 0) {
+                for (const seguro of datos.seguros) {
+                    await this.seguroService.vincularSeguroAInmueble({
+                        empresa_seguro: seguro.aseguradora,
+                        tipo_seguro: seguro.tipo_seguro,
+                        telefono: seguro.telefono_seguro,
+                        email: seguro.email_seguro,
+                        poliza: seguro.poliza
+                    }, datos.datosInmueble.clave_catastral, client)
+                }
+            }
+
+            return { message: "Inmueble creado con éxito.", data: resultado };
+        };
+
+        // Si no viene un cliente transaccional, crea una transacción propia
+        if (client) {
+            return await ejecutar(client);
+        } else {
+            return await this.withTransaction(ejecutar);
+        }
     }
 
     // ======= ACTUALIZAR SEGURO =======
@@ -78,15 +120,15 @@ class InmuebleService extends BaseService {
 
     // ======= ACTUALIZAR PROVEEDORES =======
     async updateProveedor(claveCatastral, claveProveedor, nuevosDatos) {
-    console.log('🟢 Service - updateProveedor recibido:', { 
-        claveCatastral, 
-        claveProveedor, 
-        nuevosDatos 
-    });
+        console.log('🟢 Service - updateProveedor recibido:', {
+            claveCatastral,
+            claveProveedor,
+            nuevosDatos
+        });
 
         return await this.withTransaction(async (client) => {
             console.log('🔍 Buscando proveedor con:', { claveCatastral, claveProveedor });
-            
+
             const proveedorQuery = await client.query(
                 `SELECT proveedor.clave, proveedor.nombre
                 FROM inmueble_proveedor
@@ -183,10 +225,10 @@ class InmuebleService extends BaseService {
 
     // ========== ACTUALIZAR HIPOTECA ==========
     async updateHipoteca(claveCatastral, bancoPrestamo, nuevosDatos) {
-        console.log('🟢 Service - updateHipoteca recibido:', { 
-            claveCatastral, 
-            bancoPrestamo, 
-            nuevosDatos 
+        console.log('🟢 Service - updateHipoteca recibido:', {
+            claveCatastral,
+            bancoPrestamo,
+            nuevosDatos
         });
 
         return await this.withTransaction(async (client) => {
@@ -253,7 +295,7 @@ class InmuebleService extends BaseService {
             }
 
             // Eliminar relaciones primero (debido a las constraints de clave foránea)
-            
+
             // 1. Eliminar hipotecas asociadas
             await client.query(
                 `DELETE FROM inmueble_hipoteca WHERE clave_catastral = $1`,
@@ -396,8 +438,8 @@ class InmuebleService extends BaseService {
             ];
 
             const proveedores = await this.repositories.inmuebleProveedor.BuscarConJoins(
-                joinsProveedor, 
-                { 'inmueble_proveedor.clave_catastral': claveCatastral }, 
+                joinsProveedor,
+                { 'inmueble_proveedor.clave_catastral': claveCatastral },
                 'AND',
                 ['p.clave', 'p.nombre', 'p.telefono', 'p.email', 'p.tipo_servicio']
             );
@@ -433,8 +475,8 @@ class InmuebleService extends BaseService {
 
             const columnas = [
                 'd.calle', 'd.numero', 'd.piso', 'd.codigo_postal', 'd.localidad',
-                'empresa_inmueble.clave_catastral', 'empresa_inmueble.valor_adquisicion', 
-                'empresa_inmueble.fecha_adquisicion', 'dr.num_protocolo', 'dr.folio', 
+                'empresa_inmueble.clave_catastral', 'empresa_inmueble.valor_adquisicion',
+                'empresa_inmueble.fecha_adquisicion', 'dr.num_protocolo', 'dr.folio',
                 'dr.hoja', 'dr.inscripcion', 'dr.notario', 'dr.fecha_inscripcion'
             ];
 
