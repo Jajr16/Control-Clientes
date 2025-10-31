@@ -178,7 +178,7 @@ class AdeudoService extends BaseService {
         // 2) 🔧 CÁLCULO CORREGIDO: anticipo_pagado - diferencia, luego calcular importe base
         const anticipo = parseFloat(rmm.anticipo_pagado || 200);
         const diferencia = parseFloat(rmm.diferencia || 0);
-        const totalFinal = anticipo - diferencia;  // Total final que debe cobrar
+        const totalFinal = anticipo + diferencia;  // Total final que debe cobrar
 
         // Calcular el importe base usando la fórmula: importe = total / (1 + 0.21 - 0.15)
         const importeBase = totalFinal / (1 + 0.21 - 0.15);
@@ -187,7 +187,7 @@ class AdeudoService extends BaseService {
           anticipo_pagado: anticipo,
           diferencia: diferencia,
           total_final: totalFinal,
-          formula_total: `${anticipo} - ${diferencia} = ${totalFinal}`,
+          formula_total: `${anticipo} + ${diferencia} = ${totalFinal}`,
           importe_base_calculado: importeBase,
           formula_importe: `${totalFinal} / (1 + 0.21 - 0.15) = ${importeBase}`,
           iva_calculado: importeBase * 0.21,
@@ -757,7 +757,7 @@ class AdeudoService extends BaseService {
                 if (entradaRmmData) {
                   const anticipoPagado = parseFloat(entradaRmmData.anticipo_pagado) || 0;
                   const diferencia = parseFloat(entradaRmmData.diferencia) || 0;
-                  const totalFinal = anticipoPagado - diferencia;  // CAMBIO: resta
+                  const totalFinal = anticipoPagado + diferencia;  // CAMBIO: resta
                   const importeCalculado = totalFinal / (1 + 0.21 - 0.15);
 
                   console.log(`🔧 Cálculo automático de importe RMM:`, {
@@ -814,7 +814,7 @@ class AdeudoService extends BaseService {
                   const entradaRmm = result.rows[0];
                   const anticipoPagado = parseFloat(entradaRmm.anticipo_pagado) || 0;
                   const diferencia = parseFloat(entradaRmm.diferencia) || 0;
-                  const total = anticipoPagado - diferencia;
+                  const total = anticipoPagado + diferencia;
 
                   const importeCalculado = total / (1 + 0.21 - 0.15);
 
@@ -871,7 +871,7 @@ class AdeudoService extends BaseService {
                 const entradaData = result.rows[0];
                 const anticipoPagado = parseFloat(entradaData.anticipo_pagado) || 200;
                 const diferencia = parseFloat(entradaData.diferencia) || 0;
-                const totalFinal = anticipoPagado - diferencia;  // CAMBIO: resta en lugar de suma
+                const totalFinal = anticipoPagado + diferencia;  // CAMBIO: resta en lugar de suma
                 const importeCalculado = totalFinal / (1 + 0.21 - 0.15);
 
                 console.log(`🔧 Recalculando importe RMM:`, {
@@ -881,7 +881,7 @@ class AdeudoService extends BaseService {
                   diferencia: diferencia,
                   total_final: totalFinal,  // CORREGIDO
                   importe_calculado: importeCalculado,
-                  formula: `(${anticipoPagado} - ${diferencia}) / (1 + 0.21 - 0.15) = ${importeCalculado}`
+                  formula: `(${anticipoPagado} + ${diferencia}) / (1 + 0.21 - 0.15) = ${importeCalculado}`
                 });
 
                 // Actualizar el importe del adeudo

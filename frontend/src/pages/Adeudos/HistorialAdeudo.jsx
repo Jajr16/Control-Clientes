@@ -2,11 +2,13 @@ import React, { useEffect, useState } from "react";
 import ClientSearch from "../../components/elements/searchBar";
 import { getAdeudoEmpresa, createExcel } from "../../api/moduloAdeudos/adeudos";
 import { CheckIcon, XMarkIcon, EditIcon, TrashIcon } from '../../components/common/Icons';
-import { useAdeudosManager } from '../../hooks/useAdeudosManager';
 import { ChevronDownIcon, ChevronUpIcon } from "@heroicons/react/24/solid";
 import { Extendible } from "../../components/elements/Historico/Expandible";
 import { InfoSaldo } from "../../components/elements/Historico/InfoSaldo";
 import { formatCurrency } from "../../hooks/Formateo";
+
+import { useAdeudosManager } from '../../hooks/useAdeudosManager';
+import { useAnticipoManager } from '../../hooks/useAnticipoManager';
 
 const Historico = () => {
     const [liquidaciones, setLiquidaciones] = useState([]);
@@ -16,35 +18,39 @@ const Historico = () => {
     const { saldoInfo, setSaldoInfo, SaldoInfo } = InfoSaldo();
 
     const {
-        // Estados
         selectedClient,
         setSelectedClient,
         editedRows,
         selectedRows,
         editingRows,
-        anticipoUnico,
-        hasChanges,
+        hasChanges: hasAdeudosChanges,
         isAllSelected,
         isIndeterminate,
-
-        // Funciones
         handleCellChange,
-        handleAnticipoChange,
         handleRowSelection,
         handleSelectAll,
         handleEditSelected,
         handleDeleteSelected,
-        handleSaveChanges,
-        handleCancelChanges,
+        handleSaveChanges: saveAdeudosChanges,
+        handleCancelChanges: cancelAdeudosChanges,
         resetState,
         initializeData
     } = useAdeudosManager();
 
     const {
-        // Estados
-        expandedRows,
+        anticipoActual,
+        hasAnticipoChanged,
+        initializeAnticipo,
+        handleAnticipoChange,
+        saveAnticipo,
+        cancelAnticipoChanges,
+        resetAnticipo
+    } = useAnticipoManager();
 
-        // Funciones
+    const hasChanges = hasAdeudosChanges || hasAnticipoChanged;
+
+    const {
+        expandedRows,
         isRMM,
         toggleExpansion
     } = Extendible();
@@ -52,6 +58,7 @@ const Historico = () => {
     useEffect(() => {
         if (!selectedClient) {
             resetState();
+            resetAnticipo();
             setLiquidaciones([]);
             setSelectedTab(0);
             setSaldoInfo(null);
@@ -73,14 +80,18 @@ const Historico = () => {
                 setSaldoInfo(response.data.resumen?.saldo_info || response.data.anticipo);
                 setSelectedTab(0);
 
-                // Inicializar con la primera pestaña si hay datos
+                // Inicializar anticipo independientemente
+                initializeAnticipo(response.data.anticipo);
+
+                // Inicializar adeudos solo si existen
                 if (response.data.liquidaciones.length > 0) {
-                    initializeData(response.data.liquidaciones[0].adeudos, response.data.anticipo);
+                    initializeData(response.data.liquidaciones[0].adeudos); // SIN segundo parámetro
                 }
 
             } catch (error) {
                 console.error("Error fetching historico adeudos:", error);
                 resetState();
+                resetAnticipo();
             }
         };
 
@@ -95,13 +106,12 @@ const Historico = () => {
 
         setSelectedTab(tabIndex);
         if (liquidaciones[tabIndex]) {
-            initializeData(liquidaciones[tabIndex].adeudos, anticipoGeneral);
+            initializeData(liquidaciones[tabIndex].adeudos);
         }
     };
 
     const currentLiquidacion = liquidaciones[selectedTab];
 
-    // Función para obtener el nombre de la pestaña
     const getTabName = (liquidacion) => {
         if (liquidacion.num_liquidacion === 'pendientes') {
             return 'Pendientes';
@@ -109,7 +119,6 @@ const Historico = () => {
         return `Liq. ${liquidacion.num_liquidacion}`;
     };
 
-    // Función para obtener el color de la pestaña
     const getTabColor = (liquidacion, isActive) => {
         if (liquidacion.num_liquidacion === 'pendientes') {
             return isActive
@@ -143,7 +152,7 @@ const Historico = () => {
                                 id="anticipo"
                                 type="number"
                                 step="0.01"
-                                value={anticipoUnico}
+                                value={anticipoActual}
                                 onChange={(e) => handleAnticipoChange(e.target.value)}
                                 className="border border-gray-300 rounded-md px-2 sm:px-3 py-1 w-24 sm:w-32 text-right text-sm"
                                 placeholder="0.00"
@@ -209,16 +218,33 @@ const Historico = () => {
                                 <div className="flex flex-wrap gap-2">
                                     <button
                                         onClick={async () => {
-                                            const success = await handleSaveChanges();
+                                            let success = true;
+
+                                            // Guardar adeudos si hay cambios
+                                            if (hasAdeudosChanges) {
+                                                success = await saveAdeudosChanges();
+                                            }
+
+                                            // Guardar anticipo si hay cambios
+                                            if (hasAnticipoChanged && success) {
+                                                const result = await saveAnticipo(selectedClient.cif);
+                                                if (!result.success) {
+                                                    alert(result.message);
+                                                    success = false;
+                                                }
+                                            }
+
+                                            // Refrescar datos si todo fue exitoso
                                             if (success) {
-                                                // Refrescar datos desde servidor
                                                 const response = await getAdeudoEmpresa(selectedClient.cif, { agrupado: true });
                                                 if (response.success) {
                                                     setLiquidaciones(response.data.liquidaciones);
                                                     setAnticipoGeneral(response.data.anticipo);
                                                     setSaldoInfo(response.data.resumen?.saldo_info || response.data.anticipo);
-                                                    // Reinicializar la pestaña actual con datos frescos
-                                                    initializeData(response.data.liquidaciones[selectedTab].adeudos, response.data.anticipo);
+                                                    initializeAnticipo(response.data.anticipo);
+                                                    if (response.data.liquidaciones[selectedTab]) {
+                                                        initializeData(response.data.liquidaciones[selectedTab].adeudos);
+                                                    }
                                                 }
                                             }
                                         }}
@@ -228,7 +254,10 @@ const Historico = () => {
                                         Guardar
                                     </button>
                                     <button
-                                        onClick={handleCancelChanges}
+                                        onClick={() => {
+                                            if (hasAdeudosChanges) cancelAdeudosChanges();
+                                            if (hasAnticipoChanged) cancelAnticipoChanges();
+                                        }}
                                         className="flex items-center px-3 sm:px-4 py-2 bg-red-600 text-white rounded-md hover:bg-red-700 transition-colors text-xs sm:text-sm"
                                     >
                                         <XMarkIcon className="w-3 h-3 sm:w-4 sm:h-4 mr-1" />
@@ -615,11 +644,8 @@ const Historico = () => {
                             {/* Resumen de totales compacto */}
                             {currentLiquidacion && (
                                 <div className="mt-4 bg-gray-50 p-3 rounded-lg flex-shrink-0">
-                                    {/* Información del Saldo */}
                                     {selectedClient && (saldoInfo || anticipoGeneral) && (
-                                        // <div className="mb-4 bg-white rounded-lg border-2 border-gray-200 p-4 flex-shrink-0">
                                         <SaldoInfo saldoInfo={saldoInfo} anticipoGeneral={anticipoGeneral} />
-                                        // </div>
                                     )}
                                     <div className="mt-2 text-center">
                                         <span className="text-xs text-gray-500">
@@ -631,9 +657,51 @@ const Historico = () => {
                         </div>
                     )}
 
+                    {/* Sección cuando NO hay adeudos pero SÍ hay cliente seleccionado */}
                     {selectedClient && liquidaciones.length === 0 && (
-                        <div className="text-center py-8 text-gray-500 flex-1 flex items-center justify-center">
-                            <p className="text-sm">Esta empresa no tiene adeudos.</p>
+                        <div className="flex-1 flex flex-col items-center justify-center py-8">
+                            {/* Mostrar anticipo incluso sin adeudos */}
+                            {(saldoInfo || anticipoGeneral) && (
+                                <div className="mb-6 bg-white rounded-lg border-2 border-gray-200 p-6 w-full max-w-4xl">
+                                    <SaldoInfo saldoInfo={saldoInfo} anticipoGeneral={anticipoGeneral} />
+                                </div>
+                            )}
+
+                            {/* Botones para guardar/cancelar cambios del anticipo */}
+                            {hasAnticipoChanged && (
+                                <div className="mb-6 flex gap-3">
+                                    <button
+                                        onClick={async () => {
+                                            const result = await saveAnticipo(selectedClient.cif);
+                                            if (result.success) {
+                                                alert(result.message);
+                                                // Refrescar datos
+                                                const response = await getAdeudoEmpresa(selectedClient.cif, { agrupado: true });
+                                                if (response.success) {
+                                                    setAnticipoGeneral(response.data.anticipo);
+                                                    setSaldoInfo(response.data.resumen?.saldo_info || response.data.anticipo);
+                                                    initializeAnticipo(response.data.anticipo);
+                                                }
+                                            } else {
+                                                alert(result.message);
+                                            }
+                                        }}
+                                        className="flex items-center px-4 py-2 bg-green-600 text-white rounded-md hover:bg-green-700 transition-colors text-sm"
+                                    >
+                                        <CheckIcon className="w-4 h-4 mr-2" />
+                                        Guardar Anticipo
+                                    </button>
+                                    <button
+                                        onClick={cancelAnticipoChanges}
+                                        className="flex items-center px-4 py-2 bg-red-600 text-white rounded-md hover:bg-red-700 transition-colors text-sm"
+                                    >
+                                        <XMarkIcon className="w-4 h-4 mr-2" />
+                                        Cancelar
+                                    </button>
+                                </div>
+                            )}
+
+                            <p className="text-sm text-gray-500">Esta empresa no tiene adeudos.</p>
                         </div>
                     )}
 

@@ -1,5 +1,12 @@
 CREATE OR REPLACE FUNCTION public.calcular_saldo_empresa(empresa_cif_param character varying)
-RETURNS TABLE(anticipo_original_result numeric, saldo_actual_result numeric, total_adeudos_result numeric, total_honorarios_result numeric, total_general_result numeric, debe_empresa_result numeric)
+RETURNS TABLE(
+    anticipo_original_result numeric,
+    saldo_actual_result numeric,
+    total_adeudos_result numeric,
+    total_honorarios_result numeric,
+    total_general_result numeric,
+    debe_empresa_result numeric
+)
 LANGUAGE plpgsql
 AS $function$
 DECLARE
@@ -11,73 +18,92 @@ BEGIN
     ) INTO anticipo_existe;
 
     IF anticipo_existe THEN
-        -- Si existe anticipo, hacer el cálculo completo
         RETURN QUERY
         WITH adeudos_totales AS (
             SELECT COALESCE(SUM(
-                COALESCE(a.importe, 0) + 
-                COALESCE(a.iva, 0) - 
-                COALESCE(a.retencion, 0) + 
+                COALESCE(a.importe, 0) +
+                COALESCE(a.iva, 0) -
+                COALESCE(a.retencion, 0) +
                 COALESCE(p.cs_iva, 0)
-            ), 0) as total_calculado
+            ), 0) AS total_calculado
             FROM adeudo a
-            LEFT JOIN protocolo p ON a.num_factura = p.num_factura AND a.empresa_cif = p.empresa_cif
+            LEFT JOIN protocolo p
+                ON a.num_factura = p.num_factura
+                AND a.empresa_cif = p.empresa_cif
             WHERE a.empresa_cif = empresa_cif_param
+              AND a.estado <> 'LIQUIDADO'
         ),
         honorarios_totales AS (
             SELECT COALESCE(SUM(
-                COALESCE(h.honorario, 0) + 
+                COALESCE(h.honorario, 0) +
                 COALESCE(h.iva, 0)
-            ), 0) as total_honorarios
+            ), 0) AS total_honorarios
             FROM honorario h
             WHERE h.empresa_cif = empresa_cif_param
+              AND EXISTS (
+                  SELECT 1
+                  FROM adeudo a2
+                  WHERE a2.num_liquidacion = h.num_liquidacion
+                    AND a2.estado <> 'LIQUIDADO'
+              )
         ),
         anticipo_info AS (
             SELECT 
-                COALESCE(a.anticipo_original, 0) as original_val,
-                COALESCE(a.anticipo, 0) as current_val
+                COALESCE(a.anticipo_original, 0) AS original_val,
+                COALESCE(a.anticipo, 0) AS current_val
             FROM anticipo a
             WHERE a.empresa_cif = empresa_cif_param
+            LIMIT 1
         )
         SELECT 
-            ai.original_val as anticipo_original_result,
-            GREATEST(0, ai.original_val - (at.total_calculado + ht.total_honorarios)) as saldo_actual_result,
-            at.total_calculado as total_adeudos_result,
-            ht.total_honorarios as total_honorarios_result,
-            (at.total_calculado + ht.total_honorarios) as total_general_result,
-            GREATEST(0, (at.total_calculado + ht.total_honorarios) - ai.original_val) as debe_empresa_result
+            ai.original_val AS anticipo_original_result,
+            GREATEST(0, ai.original_val - (at.total_calculado + ht.total_honorarios)) AS saldo_actual_result,
+            at.total_calculado AS total_adeudos_result,
+            ht.total_honorarios AS total_honorarios_result,
+            (at.total_calculado + ht.total_honorarios) AS total_general_result,
+            GREATEST(0, (at.total_calculado + ht.total_honorarios) - ai.original_val) AS debe_empresa_result
         FROM anticipo_info ai, adeudos_totales at, honorarios_totales ht;
+
     ELSE
-        -- Si no existe anticipo, devolver valores por defecto con cálculo de totales
         RETURN QUERY
         WITH totales_sin_anticipo AS (
             SELECT 
                 COALESCE(SUM(
-                    COALESCE(a.importe, 0) + 
-                    COALESCE(a.iva, 0) - 
-                    COALESCE(a.retencion, 0) + 
+                    COALESCE(a.importe, 0) +
+                    COALESCE(a.iva, 0) -
+                    COALESCE(a.retencion, 0) +
                     COALESCE(p.cs_iva, 0)
-                ), 0) as total_adeudos,
+                ), 0) AS total_adeudos,
                 COALESCE(SUM(
-                    COALESCE(h.honorario, 0) + 
+                    COALESCE(h.honorario, 0) +
                     COALESCE(h.iva, 0)
-                ), 0) as total_honorarios
+                ), 0) AS total_honorarios
             FROM adeudo a
-            LEFT JOIN protocolo p ON a.num_factura = p.num_factura AND a.empresa_cif = p.empresa_cif
-            LEFT JOIN honorario h ON h.empresa_cif = a.empresa_cif
+            LEFT JOIN protocolo p
+                ON a.num_factura = p.num_factura
+                AND a.empresa_cif = p.empresa_cif
+            LEFT JOIN honorario h
+                ON h.empresa_cif = a.empresa_cif
             WHERE a.empresa_cif = empresa_cif_param
+              AND a.estado <> 'LIQUIDADO'
+              AND EXISTS (
+                  SELECT 1
+                  FROM adeudo a2
+                  WHERE a2.num_liquidacion = h.num_liquidacion
+                    AND a2.estado <> 'LIQUIDADO'
+              )
         )
         SELECT 
-            0::NUMERIC as anticipo_original_result,
-            0::NUMERIC as saldo_actual_result,
-            tsa.total_adeudos as total_adeudos_result,
-            tsa.total_honorarios as total_honorarios_result,
-            (tsa.total_adeudos + tsa.total_honorarios) as total_general_result,
-            (tsa.total_adeudos + tsa.total_honorarios) as debe_empresa_result
+            0::NUMERIC AS anticipo_original_result,
+            0::NUMERIC AS saldo_actual_result,
+            tsa.total_adeudos AS total_adeudos_result,
+            tsa.total_honorarios AS total_honorarios_result,
+            (tsa.total_adeudos + tsa.total_honorarios) AS total_general_result,
+            (tsa.total_adeudos + tsa.total_honorarios) AS debe_empresa_result
         FROM totales_sin_anticipo tsa;
     END IF;
 END;
-$function$
+$function$;
 
 DROP TRIGGER IF EXISTS trigger_actualizar_saldo_insert ON adeudo;
 DROP TRIGGER IF EXISTS trigger_actualizar_saldo_update ON adeudo;

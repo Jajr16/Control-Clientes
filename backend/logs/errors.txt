@@ -1849,3 +1849,67 @@
     at Function.process_params (C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\express\lib\router\index.js:346:12)
     at next (C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\express\lib\router\index.js:280:10)
 
+[2025-10-30T14:15:47.628Z] Error: El dato registral ingresado ya existe
+    at DatoRegistralService.crearDatoRegistral (file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/services/DatoRegistralService.js:20:41)
+    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at async file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/services/ClienteService.js:34:36
+    at async ClienteService.withTransaction (file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/services/BaseService.js:13:28)
+    at async ClienteService.crearCliente (file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/services/ClienteService.js:32:16)
+    at async ClienteController.createCliente (file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/controllers/ClienteController.js:13:28)
+
+[2025-10-30T14:23:52.797Z] Error: El dato registral ingresado ya existe
+    at DatoRegistralService.crearDatoRegistral (file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/services/DatoRegistralService.js:20:41)
+    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at async file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/services/ClienteService.js:34:36
+    at async ClienteService.withTransaction (file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/services/BaseService.js:13:28)
+    at async ClienteService.crearCliente (file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/services/ClienteService.js:32:16)
+    at async ClienteController.createCliente (file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/controllers/ClienteController.js:13:28)
+
+[2025-10-30T14:24:24.609Z] Error: El propietario con NIE X9876543B ya existe
+    at PropietarioService.crearPropietario (file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/services/PropietarioService.js:13:30)
+    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at async file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/services/ClienteService.js:39:33
+    at async ClienteService.withTransaction (file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/services/BaseService.js:13:28)
+    at async ClienteService.crearCliente (file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/services/ClienteService.js:32:16)
+    at async ClienteController.createCliente (file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/controllers/ClienteController.js:13:28)
+
+[2025-10-30T14:27:23.641Z] Error: El dato registral ingresado ya existe
+    at DatoRegistralService.crearDatoRegistral (file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/services/DatoRegistralService.js:20:41)
+    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at async file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/services/ClienteService.js:34:36
+    at async ClienteService.withTransaction (file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/services/BaseService.js:13:28)
+    at async ClienteService.crearCliente (file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/services/ClienteService.js:32:16)
+    at async ClienteController.createCliente (file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/controllers/ClienteController.js:13:28)
+
+[2025-10-30T14:28:00.793Z] Error: El propietario con NIE X9876543B ya existe
+    at PropietarioService.crearPropietario (file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/services/PropietarioService.js:13:30)
+    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at async file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/services/ClienteService.js:39:33
+    at async ClienteService.withTransaction (file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/services/BaseService.js:13:28)
+    at async ClienteService.crearCliente (file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/services/ClienteService.js:32:16)
+    at async ClienteController.createCliente (file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/controllers/ClienteController.js:13:28)
+
+[2025-10-30T14:28:18.272Z] Error: La empresa con CIF ABC123456 ya existe
+    at EmpresaService.crearEmpresa (file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/services/EmpresaService.js:13:30)
+    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at async file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/services/ClienteService.js:42:29
+    at async ClienteService.withTransaction (file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/services/BaseService.js:13:28)
+    at async ClienteService.crearCliente (file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/services/ClienteService.js:32:16)
+    at async ClienteController.createCliente (file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/controllers/ClienteController.js:13:28)
+
+[2025-10-30T14:32:48.040Z] Error: El dato registral ingresado ya existe
+    at DatoRegistralService.crearDatoRegistral (file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/services/DatoRegistralService.js:20:41)
+    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at async file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/services/ClienteService.js:34:36
+    at async ClienteService.withTransaction (file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/services/BaseService.js:13:28)
+    at async ClienteService.crearCliente (file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/services/ClienteService.js:32:16)
+    at async ClienteController.createCliente (file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/controllers/ClienteController.js:13:28)
+
+[2025-10-30T14:33:05.121Z] Error: El propietario con NIE X9876543B ya existe
+    at PropietarioService.crearPropietario (file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/services/PropietarioService.js:13:30)
+    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at async file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/services/ClienteService.js:39:33
+    at async ClienteService.withTransaction (file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/services/BaseService.js:13:28)
+    at async ClienteService.crearCliente (file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/services/ClienteService.js:32:16)
+    at async ClienteController.createCliente (file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/controllers/ClienteController.js:13:28)
+
