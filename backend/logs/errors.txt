@@ -1,0 +1,10 @@
+[2025-11-14T01:22:56.809Z] Error: No se pudo actualizar en direccion
+    at Repositorio.actualizarPorId (file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/repositories/globalPersistence.js:165:19)
+    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at async ejecutar (file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/services/DireccionService.js:82:16)
+    at async DireccionService.actualizarDireccion (file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/services/DireccionService.js:90:16)
+    at async file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/services/ClienteService.js:167:17
+    at async ClienteService.withTransaction (file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/services/BaseService.js:13:28)
+    at async ClienteService.updateCliente (file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/services/ClienteService.js:84:16)
+    at async ClienteController.updateCliente (file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/controllers/ClienteController.js:32:24)
+
