@@ -25,6 +25,19 @@ class ClienteController extends BaseController {
             return this.handleError(error, res, "Error al obtener información de clientes");
         }
     }
+
+    async updateCliente(req, res) {
+    try {
+        const { cif } = req.params;
+        const result = await this.service.updateCliente(cif, req.body);
+        return this.sendSuccess(res, result, 'Cliente actualizado correctamente');
+    } catch (error) {
+        return this.handleError(error, res, "Error al actualizar el cliente");
+    }
+}
+
+    
+
 }
 
 const clienteController = new ClienteController();
@@ -32,3 +45,4 @@ export default clienteController;
 
 export const getInfoClientes = clienteController.infoClientes.bind(clienteController)
 export const createCliente = clienteController.createCliente.bind(clienteController)
+export const updateCliente = clienteController.updateCliente.bind(clienteController); // ← AGREGAR ESTA LÍNEA

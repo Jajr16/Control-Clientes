@@ -14,6 +14,26 @@ class PropietarioService extends BaseService {
 
         return await this.repositories.propietario.insertar(data, client);
     }
+
+    async actualizarPropietario(nie, nuevosDatos, client = null) {
+    const ejecutar = async (conn) => {
+        const propietarioExiste = await this.repositories.propietario.ExistePorId({ nie: nie }, conn);          
+        if (!propietarioExiste) {
+            throw new Error('Propietario no encontrado');
+        }
+        return await this.repositories.propietario.actualizarPorId(
+            { nie: nie },
+            nuevosDatos,
+            conn
+        );
+    };
+
+    if (client) {
+        return await ejecutar(client);
+    } else {
+        return await this.withTransaction(ejecutar);
+    }
+}
 }
 
 export default PropietarioService

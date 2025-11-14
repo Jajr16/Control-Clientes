@@ -308,6 +308,7 @@ class Repositorio {
 
         try {
             const result = await queryClient.query(query, valores);
+            console.log(`Query ejecutado en BuscarConJoins: ${query}` + ` con valores: ${valores}`);
             return result.rows;
         } catch (error) {
             console.error(`Error al buscar en ${this.tabla} con JOINs:`, error);

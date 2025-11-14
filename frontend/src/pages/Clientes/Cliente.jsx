@@ -3,7 +3,7 @@ import ClientSearch from "../../components/elements/searchBar";
 import ClientDetails from "../../components/elements/ClienteDetails";
 import InmueblesList from "../../components/elements/InmueblesList";
 import InmuebleDetails from "../../components/elements/InmuebleDetails";
-import { getInmuebles, deleteInmueble } from "../../api/moduloInmuebles/inmueble";
+import { getInmuebles, deleteInmueble, updateInmueble } from "../../api/moduloInmuebles/inmueble";
 import { UserPlusIcon, BuildingOfficeIcon } from "@heroicons/react/24/solid";
 import { Link } from "react-router-dom";
 
@@ -43,7 +43,7 @@ const Cliente = () => {
         };
 
         fetchInmuebles();
-    }, [selectedClient])
+    }, [selectedClient]);
 
     useEffect(() => {
         setProveedoresSegurosList(null);
@@ -57,22 +57,40 @@ const Cliente = () => {
         try {
             setLoading(true);
             await deleteInmueble(claveCatastral);
-            
-            // Actualizar la lista de inmuebles
+
             const response = await getInmuebles(selectedClient.cif);
             setInmueblesList(response.data);
-            
-            // Limpiar inmueble seleccionado si era el que se eliminó
+
             if (selectedInmueble && selectedInmueble.clave_catastral === claveCatastral) {
                 setSelectedInmueble(null);
                 setProveedoresSegurosList(null);
                 setHipotecas(null);
             }
-            
+
             alert('Inmueble eliminado correctamente');
         } catch (error) {
             console.error("Error al eliminar inmueble:", error);
             alert('Error al eliminar el inmueble: ' + (error.response?.data?.message || error.message));
+        } finally {
+            setLoading(false);
+        }
+    };
+
+    const handleEditInmueble = async (claveCatastral, updatedData) => {
+        try {
+            setLoading(true);
+            await updateInmueble(claveCatastral, updatedData);
+            const response = await getInmuebles(selectedClient.cif);
+            setInmueblesList(response.data);
+
+            if (selectedInmueble && selectedInmueble.clave_catastral === claveCatastral) {
+                setSelectedInmueble(updatedData);
+            }
+
+            alert('Inmueble actualizado correctamente');
+        } catch (error) {
+            console.error("Error al editar inmueble:", error);
+            alert('Error al editar el inmueble: ' + (error.response?.data?.message || error.message));
         } finally {
             setLoading(false);
         }
@@ -91,7 +109,7 @@ const Cliente = () => {
 
     return (
         <div className="h-full flex flex-col">
-            {/* Barra de búsqueda - altura fija */}
+            {/* Barra de búsqueda */}
             <div className={`flex-shrink-0 ${selectedClient ? "w-[30%]" : "w-full"} p-2 flex`}>
                 <ClientSearch
                     onSelectClient={(c) => setSelectedClient(c)}
@@ -114,7 +132,7 @@ const Cliente = () => {
                 )}
             </div>
 
-            {/* Loading overlay */}
+            {/* Overlay de carga */}
             {loading && (
                 <div className="absolute inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50">
                     <div className="bg-white p-4 rounded-lg">
@@ -124,29 +142,25 @@ const Cliente = () => {
                 </div>
             )}
 
-            {/* Contenido principal - altura flexible con scroll */}
+            {/* Contenido principal */}
             <div className="flex-1 relative">
-                {/* Imagen de fondo */}
                 <div className="absolute inset-0 opacity-30 flex justify-center items-center pointer-events-none">
                     <img src="/src/img/logoRecortado.png" className="h-full w-full object-contain" alt="logo" />
                 </div>
 
-                {/* Grid de contenido */}
                 <div className="h-full grid grid-cols-[30%_70%]">
-                    {/* Columna izquierda */}
                     <div className="flex flex-col">
                         {selectedClient && (
                             <>
-                                {/* ClientDetails - altura fija */}
                                 <div className="flex-shrink-0">
                                     <ClientDetails client={selectedClient} />
                                 </div>
-                                {/* InmueblesList - con scroll */}
                                 <div className="flex-1 min-h-0 overflow-y-auto">
-                                    <InmueblesList 
-                                        client={inmueblesList} 
+                                    <InmueblesList
+                                        client={inmueblesList}
                                         onSelectInmueble={handleSelectInmueble}
                                         onDeleteInmueble={handleDeleteInmueble}
+                                        onEditInmueble={handleEditInmueble}
                                         selectedInmueble={selectedInmueble}
                                     />
                                 </div>
@@ -154,21 +168,22 @@ const Cliente = () => {
                         )}
                     </div>
 
-                    {/* Columna derecha - con scroll */}
-                    <div className="overflow-y-auto">
-                        {selectedClient && (
-                            <InmuebleDetails 
-                                inmueble={selectedInmueble} 
-                                setProveedoresSegurosList={setProveedoresSegurosList} 
+                    <div className="overflow-y-auto p-2">
+                        {selectedClient && inmueblesList && inmueblesList.length > 0 ? (
+                            <InmuebleDetails
+                                inmueble={selectedInmueble}
+                                setProveedoresSegurosList={setProveedoresSegurosList}
                                 proveedoresList={proveedoresList}
-                                setHipotecas={setHipotecas} 
-                                HipotecasList={HipotecasList} 
+                                setHipotecas={setHipotecas}
+                                HipotecasList={HipotecasList}
+                                onInmuebleUpdated={setSelectedInmueble}
                             />
-                        )}
+                        ) : selectedClient && inmueblesList && inmueblesList.length === 0 ? (
+                            <div className="h-full border border-black"></div>
+                        ) : null}
                     </div>
                 </div>
 
-                {/* Mensaje cuando no hay cliente seleccionado */}
                 {!selectedClient && (
                     <div className="absolute inset-0 flex items-center justify-center">
                         <div className="text-center text-gray-500">
@@ -179,7 +194,6 @@ const Cliente = () => {
                     </div>
                 )}
 
-                {/* Mensaje cuando hay cliente pero no inmuebles */}
                 {selectedClient && inmueblesList && inmueblesList.length === 0 && (
                     <div className="absolute inset-0 flex items-center justify-center">
                         <div className="text-center text-gray-500">

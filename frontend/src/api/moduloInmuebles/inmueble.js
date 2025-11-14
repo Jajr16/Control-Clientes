@@ -58,6 +58,15 @@ export const updateDatosRegistrales = async (claveCatastral, datos) => {
     return res.data;
 };
 
+// ========== ACTUALIZAR INMUEBLE ==========
+export const updateInmueble = async (claveCatastral, datos) => {
+    const res = await axios.put(
+        `${API_URL}/inmueble/${claveCatastral}`,   
+        datos
+    );
+    return res.data;
+};
+
 // ========== ELIMINAR INMUEBLE ==========
 export const deleteInmueble = async (claveCatastral) => {
     const res = await axios.delete(`${API_URL}/inmueble/${claveCatastral}`);

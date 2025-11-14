@@ -65,14 +65,19 @@ export const poblarDatos = async () => {
         }
         
         console.log('Creando seguros...');
-        const segurosEmpresas = [];
+        const polizasSeguros = [];
         for (let i = 0; i < 5; i++) {
             const empresa = `Aseguradora Ficticia ${i + 1}`;
-            segurosEmpresas.push(empresa);
+            const poliza = `POL-${randomInt(1000, 9999)}`;
+            
+            polizasSeguros.push(poliza);
             await client.query(
-                `INSERT INTO seguro (empresa_seguro, tipo_seguro, telefono, email, poliza) VALUES ($1, $2, $3, $4, $5) ON CONFLICT (empresa_seguro) DO NOTHING`,
-                [empresa, randomItem(tiposSeguro), generarTelefono(), generarEmail(empresa), `POL-${randomInt(1000, 9999)}`]
+                `INSERT INTO seguro (empresa_seguro, tipo_seguro, telefono, email, poliza) 
+                VALUES ($1, $2, $3, $4, $5) 
+                ON CONFLICT (poliza) DO NOTHING`, 
+                [empresa, randomItem(tiposSeguro), generarTelefono(), generarEmail(empresa), poliza]
             );
+
         }
 
         console.log('Creando hipotecas...');
@@ -143,10 +148,10 @@ export const poblarDatos = async () => {
 
         console.log('Asignando seguros a inmuebles...');
          for(const clave of inmuebleClaves) {
-            const numSeguros = randomInt(0, 2); // 0 a 2 seguros por inmueble
-            const segurosSeleccionados = [...segurosEmpresas].sort(() => 0.5 - Math.random()).slice(0, numSeguros);
-             for(const segEmpresa of segurosSeleccionados) {
-                 await client.query(`INSERT INTO inmueble_seguro (clave_catastral, empresa_seguro) VALUES ($1, $2) ON CONFLICT DO NOTHING`, [clave, segEmpresa]);
+            const numSeguros = randomInt(1, 2); // 0 a 2 seguros por inmueble
+            const segurosSeleccionados = [...polizasSeguros].sort(() => 0.5 - Math.random()).slice(0, numSeguros);
+             for(const poliza of segurosSeleccionados) {
+                 await client.query(`INSERT INTO inmueble_seguro (clave_catastral, poliza) VALUES ($1, $2) ON CONFLICT DO NOTHING`, [clave, poliza]);
             }
         }
         
