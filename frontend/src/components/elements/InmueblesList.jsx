@@ -1,10 +1,11 @@
 import React, { useState, useEffect } from "react";
-import { TrashIcon } from "@heroicons/react/24/solid";
+import { TrashIcon, PencilIcon, CheckIcon, XMarkIcon } from "@heroicons/react/24/solid";
 
-const InmueblesList = ({ client, onSelectInmueble, onDeleteInmueble, selectedInmueble }) => {
+const InmueblesList = ({ client, onSelectInmueble, onDeleteInmueble, onEditInmueble, selectedInmueble }) => {
     const [isSelected, setSelected] = useState(null);
+    const [editingInmueble, setEditingInmueble] = useState(null);
+    const [editFormData, setEditFormData] = useState({});
 
-    // Sincronizar con el inmueble seleccionado desde el padre
     useEffect(() => {
         if (selectedInmueble) {
             setSelected(selectedInmueble.clave_catastral);
@@ -13,20 +14,21 @@ const InmueblesList = ({ client, onSelectInmueble, onDeleteInmueble, selectedInm
         }
     }, [selectedInmueble]);
 
-    // Resetear selección cuando cambia la lista de clientes
     useEffect(() => {
         setSelected(null);
+        setEditingInmueble(null);
     }, [client]);
 
     const handleSelect = (inmueble) => {
+        if (editingInmueble === inmueble.clave_catastral) return;
+        
         setSelected(inmueble.clave_catastral);
         onSelectInmueble(inmueble); 
     };
 
     const handleDelete = async (e, inmueble) => {
-        e.stopPropagation(); // Evita que se active el onClick del div
+        e.stopPropagation(); 
         
-        // Si el inmueble a eliminar es el que está seleccionado, limpiamos la selección primero
         if (isSelected === inmueble.clave_catastral) {
             setSelected(null);
         }
@@ -34,6 +36,35 @@ const InmueblesList = ({ client, onSelectInmueble, onDeleteInmueble, selectedInm
         if (onDeleteInmueble) {
             await onDeleteInmueble(inmueble.clave_catastral);
         }
+    };
+
+    const handleEdit = (e, inmueble) => {
+        e.stopPropagation();
+        setEditingInmueble(inmueble.clave_catastral);
+        setEditFormData({ ...inmueble });
+    };
+
+    const handleSaveEdit = async (e) => {
+        e.stopPropagation();
+        if (onEditInmueble && editingInmueble) {
+            await onEditInmueble(editingInmueble, editFormData);
+        }
+        setEditingInmueble(null);
+        setEditFormData({});
+    };
+
+    const handleCancelEdit = (e) => {
+        e.stopPropagation();
+        setEditingInmueble(null);
+        setEditFormData({});
+    };
+
+    const handleInputChange = (e, field) => {
+        const value = e.target.value;
+        setEditFormData(prev => ({
+            ...prev,
+            [field]: value
+        }));
     };
 
     const formatAddress = (inmueble) => {
@@ -51,9 +82,6 @@ const InmueblesList = ({ client, onSelectInmueble, onDeleteInmueble, selectedInm
         return (
             <div className="h-full flex flex-col p-2">
                 <div className="relative h-full flex flex-col border border-black p-2 overflow-y-auto">
-                    <div className="mb-2 text-sm text-gray-600">
-                        {client.length} inmueble{client.length !== 1 ? 's' : ''} encontrado{client.length !== 1 ? 's' : ''}
-                    </div>
                     
                     {client.length === 0 ? (
                         <div className="flex-1 flex items-center justify-center">
@@ -68,35 +96,140 @@ const InmueblesList = ({ client, onSelectInmueble, onDeleteInmueble, selectedInm
                                         isSelected === inmueble.clave_catastral 
                                             ? "bg-secondary-theme border-2 border-blue-500 shadow-md" 
                                             : "bg-options hover:bg-gray-100 hover:shadow-sm"
+                                    } ${
+                                        editingInmueble === inmueble.clave_catastral ? "bg-yellow-50 border-yellow-400" : ""
                                     }`}
                                     onClick={() => handleSelect(inmueble)}
                                 >
                                     <div className="flex justify-between items-start">
                                         <div className="flex-1">
-                                            <div className="font-semibold text-gray-800 mb-1">
-                                                {formatAddress(inmueble)}
-                                            </div>
-                                            {inmueble.clave_catastral && (
-                                                <div className="text-xs text-gray-600 mb-1">
-                                                    <strong>Clave:</strong> {inmueble.clave_catastral}
+                                            {editingInmueble === inmueble.clave_catastral ? (
+                                                // Formulario de edición
+                                                <div className="space-y-2">
+                                                    <div>
+                                                        <label className="text-xs text-gray-600">Calle:</label>
+                                                        <input
+                                                            type="text"
+                                                            value={editFormData.calle || ''}
+                                                            onChange={(e) => handleInputChange(e, 'calle')}
+                                                            className="w-full p-1 border border-gray-300 rounded text-sm"
+                                                            onClick={(e) => e.stopPropagation()}
+                                                        />
+                                                    </div>
+                                                    <div className="grid grid-cols-2 gap-2">
+                                                        <div>
+                                                            <label className="text-xs text-gray-600">Número:</label>
+                                                            <input
+                                                                type="text"
+                                                                value={editFormData.numero || ''}
+                                                                onChange={(e) => handleInputChange(e, 'numero')}
+                                                                className="w-full p-1 border border-gray-300 rounded text-sm"
+                                                                onClick={(e) => e.stopPropagation()}
+                                                            />
+                                                        </div>
+                                                        <div>
+                                                            <label className="text-xs text-gray-600">Piso:</label>
+                                                            <input
+                                                                type="text"
+                                                                value={editFormData.piso || ''}
+                                                                onChange={(e) => handleInputChange(e, 'piso')}
+                                                                className="w-full p-1 border border-gray-300 rounded text-sm"
+                                                                onClick={(e) => e.stopPropagation()}
+                                                            />
+                                                        </div>
+                                                    </div>
+                                                    <div className="grid grid-cols-2 gap-2">
+                                                        <div>
+                                                            <label className="text-xs text-gray-600">CP:</label>
+                                                            <input
+                                                                type="text"
+                                                                value={editFormData.codigo_postal || ''}
+                                                                onChange={(e) => handleInputChange(e, 'codigo_postal')}
+                                                                className="w-full p-1 border border-gray-300 rounded text-sm"
+                                                                onClick={(e) => e.stopPropagation()}
+                                                            />
+                                                        </div>
+                                                        <div>
+                                                            <label className="text-xs text-gray-600">Localidad:</label>
+                                                            <input
+                                                                type="text"
+                                                                value={editFormData.localidad || ''}
+                                                                onChange={(e) => handleInputChange(e, 'localidad')}
+                                                                className="w-full p-1 border border-gray-300 rounded text-sm"
+                                                                onClick={(e) => e.stopPropagation()}
+                                                            />
+                                                        </div>
+                                                    </div>
+                                                    <div>
+                                                        <label className="text-xs text-gray-600">Valor:</label>
+                                                        <input
+                                                            type="number"
+                                                            value={editFormData.valor_adquisicion || ''}
+                                                            onChange={(e) => handleInputChange(e, 'valor_adquisicion')}
+                                                            className="w-full p-1 border border-gray-300 rounded text-sm"
+                                                            onClick={(e) => e.stopPropagation()}
+                                                        />
+                                                    </div>
                                                 </div>
-                                            )}
-                                            {inmueble.valor_adquisicion && (
-                                                <div className="text-sm text-gray-700">
-                                                    <strong>Valor:</strong> {inmueble.valor_adquisicion?.toLocaleString('de-DE')} €
-                                                </div>
+                                            ) : (
+                                                // Vista normal
+                                                <>
+                                                    <div className="font-semibold text-gray-800 mb-1">
+                                                        {formatAddress(inmueble)}
+                                                    </div>
+                                                    {inmueble.clave_catastral && (
+                                                        <div className="text-xs text-gray-600 mb-1">
+                                                            <strong>Clave:</strong> {inmueble.clave_catastral}
+                                                        </div>
+                                                    )}
+                                                    {inmueble.valor_adquisicion && (
+                                                        <div className="text-sm text-gray-700">
+                                                            <strong>Valor:</strong> {inmueble.valor_adquisicion?.toLocaleString('de-DE')} €
+                                                        </div>
+                                                    )}
+                                                </>
                                             )}
                                         </div>
                                         
-                                        {onDeleteInmueble && (
-                                            <button
-                                                onClick={(e) => handleDelete(e, inmueble)}
-                                                className="ml-2 p-2 text-red-500 hover:text-red-700 hover:bg-red-100 rounded transition-colors duration-200 flex-shrink-0"
-                                                title="Eliminar inmueble"
-                                            >
-                                                <TrashIcon className="h-4 w-4" />
-                                            </button>
-                                        )}
+                                        <div className="flex space-x-1 ml-2">
+                                            {editingInmueble === inmueble.clave_catastral ? (
+                                                <>
+                                                    <button
+                                                        onClick={handleSaveEdit}
+                                                        className="p-2 text-green-500 hover:text-green-700 hover:bg-green-100 rounded transition-colors duration-200 flex-shrink-0"
+                                                        title="Guardar cambios"
+                                                    >
+                                                        <CheckIcon className="h-4 w-4" />
+                                                    </button>
+                                                    <button
+                                                        onClick={handleCancelEdit}
+                                                        className="p-2 text-gray-500 hover:text-gray-700 hover:bg-gray-100 rounded transition-colors duration-200 flex-shrink-0"
+                                                        title="Cancelar edición"
+                                                    >
+                                                        <XMarkIcon className="h-4 w-4" />
+                                                    </button>
+                                                </>
+                                            ) : (
+                                                <>
+                                                    <button
+                                                        onClick={(e) => handleEdit(e, inmueble)}
+                                                        className="p-2 text-blue-500 hover:text-blue-700 hover:bg-blue-100 rounded transition-colors duration-200 flex-shrink-0"
+                                                        title="Editar inmueble"
+                                                    >
+                                                        <PencilIcon className="h-4 w-4" />
+                                                    </button>
+                                                    {onDeleteInmueble && (
+                                                        <button
+                                                            onClick={(e) => handleDelete(e, inmueble)}
+                                                            className="p-2 text-red-500 hover:text-red-700 hover:bg-red-100 rounded transition-colors duration-200 flex-shrink-0"
+                                                            title="Eliminar inmueble"
+                                                        >
+                                                            <TrashIcon className="h-4 w-4" />
+                                                        </button>
+                                                    )}
+                                                </>
+                                            )}
+                                        </div>
                                     </div>
                                 </div>
                             ))}

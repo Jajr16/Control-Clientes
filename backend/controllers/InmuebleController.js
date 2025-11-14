@@ -86,11 +86,27 @@ class InmuebleController extends BaseController {
         }
     }
 
+
+// ========== ACTUALIZAR INMUEBLE ==========
+async updateInmueble(req, res) {
+    try {
+        const { claveCatastral } = req.params;
+        const result = await this.service.updateInmueble(claveCatastral, req.body);
+        return this.sendSuccess(res, result, 'Inmueble actualizado correctamente');
+    } catch (error) {
+        return this.handleError(error, res, "Error al actualizar el inmueble");
+    }
+}
+
     // ========== ELIMINAR INMUEBLE ==========
-    async deleteInmueble(req, res) {
+      async deleteInmueble(req, res) {
         try {
             const { claveCatastral } = req.params;
-            const result = await this.service.deleteInmueble(claveCatastral);
+            
+            // Opcional: aún permitir CIF manual
+            let cif = req.body?.cif || req.query?.cif;
+
+            const result = await this.service.deleteInmueble(claveCatastral, cif);
             return this.sendSuccess(res, result, 'Inmueble eliminado correctamente');
         } catch (error) {
             return this.handleError(error, res, "Error al eliminar el inmueble");

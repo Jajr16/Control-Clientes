@@ -11,6 +11,7 @@ router.get('/inmueblesProveedoresSeguros/:cc', inmuebleController.getProveedores
 router.get('/hipotecas/:cc', inmuebleController.getHipotecas.bind(inmuebleController));
 
 // Rutas para actualizar datos
+router.put('/:claveCatastral', inmuebleController.updateInmueble.bind(inmuebleController)); 
 router.put('/seguro/:cc/:empresaSeguro', inmuebleController.updateSeguro.bind(inmuebleController));
 router.put('/hipoteca/:cc/:idHipoteca', inmuebleController.updateHipoteca.bind(inmuebleController));
 router.put('/proveedor/:cc/:nombre', inmuebleController.updateProveedor.bind(inmuebleController));  
