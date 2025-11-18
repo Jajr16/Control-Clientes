@@ -14,9 +14,11 @@ const Cliente = () => {
     const [proveedoresList, setProveedoresSegurosList] = useState(null);
     const [HipotecasList, setHipotecas] = useState(null);
     const [loading, setLoading] = useState(false);
+    
+    // ✅ NUEVO: Estado para controlar si hay edición activa
+    const [isEditingInmueble, setIsEditingInmueble] = useState(false);
 
     useEffect(() => {
-        // Limpieza completa al cambiar de cliente
         const cleanup = () => {
             setInmueblesList(null);
             setSelectedInmueble(null);
@@ -103,8 +105,30 @@ const Cliente = () => {
         setHipotecas(null);
     };
 
+    // ✅ MODIFICADO: Validar antes de cambiar de inmueble
     const handleSelectInmueble = (inmueble) => {
+        // Si hay edición activa, confirmar antes de cambiar
+        if (isEditingInmueble) {
+            const confirmar = window.confirm(
+                '⚠️ Tienes cambios sin guardar\n\n' +
+                '¿Estás seguro de que quieres cambiar de inmueble?\n\n' +
+                'Se perderán todos los cambios no guardados.'
+            );
+            
+            if (!confirmar) {
+                return; // No cambiar de inmueble
+            }
+            
+            // Si confirma, resetear el estado de edición
+            setIsEditingInmueble(false);
+        }
+        
         setSelectedInmueble(inmueble);
+    };
+
+    // ✅ NUEVO: Callback para que InmuebleDetails notifique cambios en modo edición
+    const handleEditModeChange = (isEditing) => {
+        setIsEditingInmueble(isEditing);
     };
 
     return (
@@ -112,7 +136,7 @@ const Cliente = () => {
             {/* Barra de búsqueda */}
             <div className={`flex-shrink-0 ${selectedClient ? "w-[30%]" : "w-full"} p-2 flex`}>
                 <ClientSearch
-                    onSelectClient={(c) => setSelectedClient(c)}
+                    onSelectClient={handleSelectClient}
                     routeName={'cliente'}
                     fieldsToInclude={[
                         "cif", "nombre", "clave", "nie", "propietario", "telefono", "email",
@@ -162,6 +186,7 @@ const Cliente = () => {
                                         onDeleteInmueble={handleDeleteInmueble}
                                         onEditInmueble={handleEditInmueble}
                                         selectedInmueble={selectedInmueble}
+                                        isEditingActive={isEditingInmueble} // ✅ NUEVO
                                     />
                                 </div>
                             </>
@@ -177,6 +202,7 @@ const Cliente = () => {
                                 setHipotecas={setHipotecas}
                                 HipotecasList={HipotecasList}
                                 onInmuebleUpdated={setSelectedInmueble}
+                                onEditModeChange={handleEditModeChange} // ✅ NUEVO
                             />
                         ) : selectedClient && inmueblesList && inmueblesList.length === 0 ? (
                             <div className="h-full border border-black"></div>

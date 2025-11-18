@@ -8,3 +8,223 @@
     at async ClienteService.updateCliente (file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/services/ClienteService.js:84:16)
     at async ClienteController.updateCliente (file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/controllers/ClienteController.js:32:24)
 
+[2025-11-18T16:23:11.218Z] ReferenceError: consolelog is not defined
+    at InmuebleService.updateSeguro (file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/services/inmuebleService.js:89:9)
+    at InmuebleController.updateSeguro (file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/controllers/InmuebleController.js:52:43)
+    at Layer.handle [as handle_request] (C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\express\lib\router\layer.js:95:5)
+    at next (C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\express\lib\router\route.js:149:13)
+    at Route.dispatch (C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\express\lib\router\route.js:119:3)
+    at Layer.handle [as handle_request] (C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\express\lib\router\layer.js:95:5)
+    at C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\express\lib\router\index.js:284:15
+    at param (C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\express\lib\router\index.js:365:14)
+    at param (C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\express\lib\router\index.js:376:14)
+    at param (C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\express\lib\router\index.js:376:14)
+    at Function.process_params (C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\express\lib\router\index.js:421:3)
+    at next (C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\express\lib\router\index.js:280:10)
+    at Function.handle (C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\express\lib\router\index.js:175:3)
+    at router (C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\express\lib\router\index.js:47:12)
+    at Layer.handle [as handle_request] (C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\express\lib\router\layer.js:95:5)
+    at trim_prefix (C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\express\lib\router\index.js:328:13)
+
+[2025-11-18T16:50:09.615Z] Error: Inmueble no encontrado
+    at file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/services/DatoRegistralService.js:89:23
+    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at async DatoRegistralService.withTransaction (file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/services/BaseService.js:13:28)
+    at async DatoRegistralService.actualizarDatosRegistrales (file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/services/DatoRegistralService.js:78:16)
+    at async file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/services/inmuebleService.js:122:20
+    at async InmuebleService.withTransaction (file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/services/BaseService.js:13:28)
+    at async InmuebleService.updateDatosRegistrales (file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/services/inmuebleService.js:113:16)
+    at async InmuebleController.updateDatosRegistrales (file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/controllers/InmuebleController.js:82:24)
+
+[2025-11-18T16:54:29.036Z] Error: Inmueble no encontrado
+    at file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/services/DatoRegistralService.js:89:23
+    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at async DatoRegistralService.withTransaction (file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/services/BaseService.js:13:28)
+    at async DatoRegistralService.actualizarDatosRegistrales (file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/services/DatoRegistralService.js:78:16)
+    at async file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/services/inmuebleService.js:124:20
+    at async InmuebleService.withTransaction (file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/services/BaseService.js:13:28)
+    at async InmuebleService.updateDatosRegistrales (file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/services/inmuebleService.js:113:16)
+    at async InmuebleController.updateDatosRegistrales (file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/controllers/InmuebleController.js:82:24)
+
+[2025-11-18T16:56:19.882Z] Error: Inmueble no encontrado
+    at file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/services/DatoRegistralService.js:89:23
+    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at async DatoRegistralService.withTransaction (file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/services/BaseService.js:13:28)
+    at async DatoRegistralService.actualizarDatosRegistrales (file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/services/DatoRegistralService.js:78:16)
+    at async file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/services/inmuebleService.js:124:20
+    at async InmuebleService.withTransaction (file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/services/BaseService.js:13:28)
+    at async InmuebleService.updateDatosRegistrales (file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/services/inmuebleService.js:113:16)
+    at async InmuebleController.updateDatosRegistrales (file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/controllers/InmuebleController.js:82:24)
+
+[2025-11-18T16:59:49.538Z] Error: Inmueble no encontrado
+    at file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/services/DatoRegistralService.js:89:23
+    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at async DatoRegistralService.withTransaction (file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/services/BaseService.js:13:28)
+    at async DatoRegistralService.actualizarDatosRegistrales (file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/services/DatoRegistralService.js:78:16)
+    at async file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/services/inmuebleService.js:125:20
+    at async InmuebleService.withTransaction (file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/services/BaseService.js:13:28)
+    at async InmuebleService.updateDatosRegistrales (file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/services/inmuebleService.js:113:16)
+    at async InmuebleController.updateDatosRegistrales (file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/controllers/InmuebleController.js:82:24)
+
+[2025-11-18T17:21:20.491Z] ReferenceError: BaseService is not defined
+    at file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/services/SeguroService.js:1:44
+    at ModuleJob.run (node:internal/modules/esm/module_job:271:25)
+    at async onImport.tracePromise.__proto__ (node:internal/modules/esm/loader:547:26)
+    at async asyncRunEntryPointWithESMLoader (node:internal/modules/run_main:116:5)
+
+[2025-11-18T17:21:54.572Z] ReferenceError: BaseInmuebleRelationService is not defined
+    at new SeguroService (file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/services/SeguroService.js:11:29)
+    at new InmuebleService (file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/services/inmuebleService.js:24:30)
+    at new InmuebleController (file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/controllers/InmuebleController.js:6:15)
+    at file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/routes/InmuebleRoutes.js:5:28
+    at ModuleJob.run (node:internal/modules/esm/module_job:271:25)
+    at async onImport.tracePromise.__proto__ (node:internal/modules/esm/loader:547:26)
+    at async asyncRunEntryPointWithESMLoader (node:internal/modules/run_main:116:5)
+
+[2025-11-18T17:23:19.418Z] Error: No existe relación para POL-1072 en el inmueble 01234564211651790366AB
+    at file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/services/base/BaseInmuebleRelationService.js:37:23
+    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at async SeguroService.withTransaction (file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/services/BaseService.js:13:28)
+    at async BaseInmuebleRelationService.actualizar (file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/services/base/BaseInmuebleRelationService.js:31:16)
+    at async InmuebleService.updateSeguro (file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/services/inmuebleService.js:92:16)
+    at async InmuebleController.updateSeguro (file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/controllers/InmuebleController.js:52:24)
+
+[2025-11-18T17:23:39.561Z] Error: No existe relación para POL-1072 en el inmueble 01234566313909264569AB
+    at file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/services/base/BaseInmuebleRelationService.js:37:23
+    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at async SeguroService.withTransaction (file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/services/BaseService.js:13:28)
+    at async BaseInmuebleRelationService.actualizar (file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/services/base/BaseInmuebleRelationService.js:31:16)
+    at async InmuebleService.updateSeguro (file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/services/inmuebleService.js:92:16)
+    at async InmuebleController.updateSeguro (file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/controllers/InmuebleController.js:52:24)
+
+[2025-11-18T17:23:55.139Z] Error: No existe relación para POL-4903 en el inmueble 01234565911291976501AB
+    at file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/services/base/BaseInmuebleRelationService.js:37:23
+    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at async SeguroService.withTransaction (file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/services/BaseService.js:13:28)
+    at async BaseInmuebleRelationService.actualizar (file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/services/base/BaseInmuebleRelationService.js:31:16)
+    at async InmuebleService.updateSeguro (file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/services/inmuebleService.js:92:16)
+    at async InmuebleController.updateSeguro (file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/controllers/InmuebleController.js:52:24)
+
+[2025-11-18T17:26:11.437Z] TypeError: this.service.getInmuebleDetails is not a function
+    at InmuebleController.getInmuebleDetails (file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/controllers/InmuebleController.js:21:47)
+    at Layer.handle [as handle_request] (C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\express\lib\router\layer.js:95:5)
+    at next (C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\express\lib\router\route.js:149:13)
+    at Route.dispatch (C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\express\lib\router\route.js:119:3)
+    at Layer.handle [as handle_request] (C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\express\lib\router\layer.js:95:5)
+    at C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\express\lib\router\index.js:284:15
+    at param (C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\express\lib\router\index.js:365:14)
+    at param (C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\express\lib\router\index.js:376:14)
+    at Function.process_params (C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\express\lib\router\index.js:421:3)
+    at next (C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\express\lib\router\index.js:280:10)
+    at Function.handle (C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\express\lib\router\index.js:175:3)
+    at router (C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\express\lib\router\index.js:47:12)
+    at Layer.handle [as handle_request] (C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\express\lib\router\layer.js:95:5)
+    at trim_prefix (C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\express\lib\router\index.js:328:13)
+    at C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\express\lib\router\index.js:286:9
+    at Function.process_params (C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\express\lib\router\index.js:346:12)
+
+[2025-11-18T17:26:14.126Z] TypeError: this.service.getInmuebleDetails is not a function
+    at InmuebleController.getInmuebleDetails (file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/controllers/InmuebleController.js:21:47)
+    at Layer.handle [as handle_request] (C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\express\lib\router\layer.js:95:5)
+    at next (C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\express\lib\router\route.js:149:13)
+    at Route.dispatch (C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\express\lib\router\route.js:119:3)
+    at Layer.handle [as handle_request] (C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\express\lib\router\layer.js:95:5)
+    at C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\express\lib\router\index.js:284:15
+    at param (C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\express\lib\router\index.js:365:14)
+    at param (C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\express\lib\router\index.js:376:14)
+    at Function.process_params (C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\express\lib\router\index.js:421:3)
+    at next (C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\express\lib\router\index.js:280:10)
+    at Function.handle (C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\express\lib\router\index.js:175:3)
+    at router (C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\express\lib\router\index.js:47:12)
+    at Layer.handle [as handle_request] (C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\express\lib\router\layer.js:95:5)
+    at trim_prefix (C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\express\lib\router\index.js:328:13)
+    at C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\express\lib\router\index.js:286:9
+    at Function.process_params (C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\express\lib\router\index.js:346:12)
+
+[2025-11-18T17:31:55.805Z] TypeError: withTransaction is not a function
+    at BaseInmuebleRelationService.actualizar (file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/services/base/BaseInmuebleRelationService.js:31:22)
+    at SeguroService.actualizarSeguro (file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/services/SeguroService.js:21:54)
+    at file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/services/inmuebleService.js:104:45
+    at InmuebleService.withTransaction (file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/services/BaseService.js:13:34)
+    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at async InmuebleService.execWithClient (file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/services/BaseService.js:29:16)
+    at async InmuebleService._exec (file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/services/inmuebleService.js:32:41)
+    at async InmuebleService.updateSeguro (file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/services/inmuebleService.js:102:16)
+    at async InmuebleController.updateSeguro (file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/controllers/InmuebleController.js:52:24)
+
+[2025-11-18T17:37:26.306Z] TypeError: withTransaction is not a function
+    at BaseInmuebleRelationService.actualizar (file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/services/base/BaseInmuebleRelationService.js:31:22)
+    at SeguroService.actualizarSeguro (file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/services/SeguroService.js:21:54)
+    at file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/services/inmuebleService.js:104:45
+    at InmuebleService.withTransaction (file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/services/BaseService.js:13:34)
+    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at async InmuebleService.execWithClient (file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/services/BaseService.js:29:16)
+    at async InmuebleService._exec (file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/services/inmuebleService.js:32:41)
+    at async InmuebleService.updateSeguro (file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/services/inmuebleService.js:102:16)
+    at async InmuebleController.updateSeguro (file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/controllers/InmuebleController.js:52:24)
+
+[2025-11-18T17:51:32.443Z] Error: No se encontró la póliza POL-4903 para el inmueble fesfes21
+    at file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/services/SeguroService.js:39:23
+    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at async SeguroService.withTransaction (file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/services/BaseService.js:13:28)
+    at async SeguroService.actualizarSeguro (file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/services/SeguroService.js:30:16)
+    at async InmuebleService.updateSeguro (file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/services/inmuebleService.js:92:16)
+    at async InmuebleController.updateSeguro (file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/controllers/InmuebleController.js:52:24)
+
+[2025-11-18T17:54:27.047Z] Error: No se encontró la póliza POL-4903 para el inmueble cacacacaca
+    at file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/services/SeguroService.js:39:23
+    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at async SeguroService.withTransaction (file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/services/BaseService.js:13:28)
+    at async SeguroService.actualizarSeguro (file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/services/SeguroService.js:30:16)
+    at async InmuebleService.updateSeguro (file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/services/inmuebleService.js:92:16)
+    at async InmuebleController.updateSeguro (file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/controllers/InmuebleController.js:52:24)
+
+[2025-11-18T17:54:41.502Z] Error: No se encontró la póliza POL-4903 para el inmueble CA1
+    at file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/services/SeguroService.js:39:23
+    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at async SeguroService.withTransaction (file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/services/BaseService.js:13:28)
+    at async SeguroService.actualizarSeguro (file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/services/SeguroService.js:30:16)
+    at async InmuebleService.updateSeguro (file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/services/inmuebleService.js:92:16)
+    at async InmuebleController.updateSeguro (file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/controllers/InmuebleController.js:52:24)
+
+[2025-11-18T18:16:13.477Z] Error: No se pueden actualizar con datos vacíos.
+    at Repositorio.actualizarPorId (file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/repositories/globalPersistence.js:146:19)
+    at file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/services/DatoRegistralService.js:120:84
+    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at async DatoRegistralService.execWithClient (file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/services/BaseService.js:27:16)
+    at async DatoRegistralService.actualizarDatosRegistrales (file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/services/DatoRegistralService.js:77:16)
+    at async file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/services/inmuebleService.js:125:20
+    at async InmuebleService.withTransaction (file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/services/BaseService.js:13:28)
+    at async InmuebleService.updateDatosRegistrales (file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/services/inmuebleService.js:113:16)
+    at async InmuebleController.updateDatosRegistrales (file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/controllers/InmuebleController.js:82:24)
+
+[2025-11-18T18:21:09.970Z] ReferenceError: datoRegistralActualizado is not defined
+    at file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/services/DatoRegistralService.js:175:36
+    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at async DatoRegistralService.execWithClient (file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/services/BaseService.js:27:16)
+    at async DatoRegistralService.actualizarDatosRegistrales (file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/services/DatoRegistralService.js:77:16)
+    at async file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/services/inmuebleService.js:125:20
+    at async InmuebleService.withTransaction (file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/services/BaseService.js:13:28)
+    at async InmuebleService.updateDatosRegistrales (file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/services/inmuebleService.js:113:16)
+    at async InmuebleController.updateDatosRegistrales (file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/controllers/InmuebleController.js:82:24)
+
+[2025-11-18T18:22:37.245Z] Error: No se pudo actualizar en dato_registral
+    at Repositorio.actualizarPorId (file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/repositories/globalPersistence.js:165:19)
+    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at async file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/services/DatoRegistralService.js:122:44
+    at async DatoRegistralService.execWithClient (file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/services/BaseService.js:27:16)
+    at async DatoRegistralService.actualizarDatosRegistrales (file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/services/DatoRegistralService.js:77:16)
+    at async file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/services/inmuebleService.js:125:20
+    at async InmuebleService.withTransaction (file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/services/BaseService.js:13:28)
+    at async InmuebleService.updateDatosRegistrales (file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/services/inmuebleService.js:113:16)
+    at async InmuebleController.updateDatosRegistrales (file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/controllers/InmuebleController.js:82:24)
+
+[2025-11-18T18:23:39.799Z] Error: No se pudo actualizar en seguro
+    at Repositorio.actualizarPorId (file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/repositories/globalPersistence.js:165:19)
+    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at async file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/services/SeguroService.js:42:39
+    at async SeguroService.withTransaction (file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/services/BaseService.js:13:28)
+    at async SeguroService.actualizarSeguro (file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/services/SeguroService.js:30:16)
+    at async InmuebleService.updateSeguro (file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/services/inmuebleService.js:92:16)
+    at async InmuebleController.updateSeguro (file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/controllers/InmuebleController.js:52:24)
+

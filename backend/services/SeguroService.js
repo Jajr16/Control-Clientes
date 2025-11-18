@@ -11,7 +11,7 @@ export default class SeguroService extends BaseService {
 
     async vincularSeguroAInmueble(seguro, claveCatastral, client) {
         let existente = await this.repositories.seguro.ExistePorId({ poliza: seguro.poliza }, client);
-        
+
         if (!existente) {
             existente = await this.repositories.seguro.insertar(seguro, client);
         }
@@ -26,44 +26,71 @@ export default class SeguroService extends BaseService {
         return { success: true, message: `Seguro vinculado a ${claveCatastral}` };
     }
 
-    async actualizarSeguro(claveCatastral, poliza, nuevosDatos, client = null) {
-        return await this.withTransaction(async (conn) => {
-            const seguroExiste = await this.repositories.inmuebleSeguro.ExistePorId(
-                { 
-                    clave_catastral: claveCatastral, 
-                    poliza: poliza 
-                }, 
-                conn
-            );
-            if (!seguroExiste) {
-                throw new Error(`No se encontró la póliza ${poliza} para el inmueble ${claveCatastral}`);
-            }
-            
-            const seguroActualizado = await this.repositories.seguro.actualizarPorId(
-                { 
-                    poliza: poliza 
+    async actualizarSeguro(claveCatastral, polizaActual, nuevosDatos, client = null) {
+        return await this.execWithClient(async (conn) => {
+
+            const { poliza_nueva, ...restoDatos } = nuevosDatos;
+
+            // 1. Validar que exista el seguro actual
+            const existeActual = await this.repositories.inmuebleSeguro.ExistePorId(
+                {
+                    clave_catastral: claveCatastral,
+                    poliza: polizaActual
                 },
-                nuevosDatos,
                 conn
             );
-            
-            if (!seguroActualizado) {
-                throw new Error('No se pudo actualizar el seguro');
+
+            if (!existeActual) {
+                throw new Error(`No se encontró la póliza ${polizaActual} para el inmueble ${claveCatastral}`);
             }
-            return {
-                message: "Seguro actualizado correctamente",
-                data: seguroActualizado
+
+            // 2. Si viene una poliza_nueva, validar que no exista ya
+            if (poliza_nueva) {
+                const existeNueva = await this.repositories.inmuebleSeguro.ExistePorId(
+                    {
+                        clave_catastral: claveCatastral,
+                        poliza: poliza_nueva
+                    },
+                    conn
+                );
+
+                if (existeNueva) {
+                    throw new Error(`La nueva póliza ${poliza_nueva} ya existe para este inmueble.`);
+                }
+            }
+
+            // 3. Construir los datos a actualizar
+            const datosActualizados = {
+                ...restoDatos,
+                ...(poliza_nueva ? { poliza: poliza_nueva } : {})
             };
+
+            // 4. Realizar el update
+            const actualizado = await this.repositories.seguro.actualizarPorId(
+                { poliza: polizaActual },
+                datosActualizados,
+                conn
+            );
+
+            if (!actualizado) {
+                throw new Error(`No se pudo actualizar el seguro`);
+            }
+
+            return {
+                message: 'Seguro actualizado correctamente',
+                data: actualizado
+            };
+
         }, client);
     }
 
     async eliminarSeguro(claveCatastral, poliza, client = null) {
         return await this.withTransaction(async (conn) => {
             const relacionExiste = await this.repositories.inmuebleSeguro.ExistePorId(
-                { 
-                    clave_catastral: claveCatastral, 
-                    poliza: poliza 
-                }, 
+                {
+                    clave_catastral: claveCatastral,
+                    poliza: poliza
+                },
                 conn
             );
 
@@ -72,15 +99,15 @@ export default class SeguroService extends BaseService {
             }
 
             await this.repositories.inmuebleSeguro.eliminarPorId(
-                { 
-                    clave_catastral: claveCatastral, 
-                    poliza: poliza 
-                }, 
+                {
+                    clave_catastral: claveCatastral,
+                    poliza: poliza
+                },
                 conn
             );
 
             const otrosUsos = await this.repositories.inmuebleSeguro.BuscarPorFiltros(
-                { poliza: poliza }, 
+                { poliza: poliza },
                 [],
                 conn
             );
@@ -89,15 +116,15 @@ export default class SeguroService extends BaseService {
 
             if (!tieneOtrosUsos) {
                 await this.repositories.seguro.eliminarPorId(
-                    { poliza: poliza }, 
+                    { poliza: poliza },
                     conn
                 );
             }
 
             return {
                 message: "Seguro eliminado correctamente del inmueble",
-                data: { 
-                    clave_catastral: claveCatastral, 
+                data: {
+                    clave_catastral: claveCatastral,
                     poliza: poliza,
                     seguro_eliminado_completamente: !tieneOtrosUsos
                 }

@@ -21,4 +21,12 @@ export class BaseService {
             client.release();
         }
     }
+
+    async execWithClient(callback, client) {
+    if (client) {
+        return await callback(client);
+    } else {
+        return await this.withTransaction(callback);
+    }
+}
 }

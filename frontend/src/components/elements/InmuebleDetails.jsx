@@ -1,33 +1,33 @@
-import React, { useState, useEffect, useCallback, useMemo } from "react";
-import { 
-    getInmuebleDetails, 
-    getInmuebleHipotecas, 
-    updateSeguro, 
-    updateProveedor, 
-    updateDatosRegistrales, 
+import React, { useState, useEffect, useCallback } from "react";
+import {
+    getInmuebleDetails,
+    getInmuebleHipotecas,
+    updateSeguro,
+    updateProveedor,
+    updateDatosRegistrales,
     updateHipoteca,
     deleteSeguro,
     deleteProveedor,
     deleteHipoteca
 } from "../../api/moduloInmuebles/inmueble";
 import {
-    MapPinIcon, IdentificationIcon, ClipboardDocumentListIcon, ShieldCheckIcon,
-    LifebuoyIcon, BuildingOfficeIcon, PhoneIcon, AtSymbolIcon, CurrencyEuroIcon,
-    CalendarDaysIcon, ChevronDownIcon, ChevronRightIcon, PencilIcon, CheckIcon, XMarkIcon,
-    TrashIcon
+    ShieldCheckIcon, BuildingOfficeIcon, PhoneIcon, AtSymbolIcon,
+    ClipboardDocumentListIcon, ChevronDownIcon, ChevronRightIcon,
+    PencilIcon, CheckIcon, XMarkIcon, TrashIcon
 } from "@heroicons/react/24/solid";
 
-const EditableField = React.memo(({ 
-    value, 
-    onChange, 
-    type = "text", 
-    className = "", 
+// ============================================================
+// COMPONENTE: EditableField
+// ============================================================
+const EditableField = React.memo(({
+    value,
+    onChange,
+    type = "text",
+    className = "",
     isIdentifier = false,
     globalEditMode,
-    ...props 
+    ...props
 }) => {
-    const inputRef = React.useRef(null);
-
     const formatDateForInput = (dateValue) => {
         if (!dateValue) return '';
         try {
@@ -42,7 +42,7 @@ const EditableField = React.memo(({
         }
     };
 
-    if (!globalEditMode || isIdentifier) {
+    if (!globalEditMode) {
         if (type === "date" && value) {
             return <span className={className}>{new Date(value).toLocaleDateString('es-ES')}</span>;
         }
@@ -56,45 +56,56 @@ const EditableField = React.memo(({
 
     return (
         <input
-            ref={inputRef}
             type={type}
             value={displayValue}
             onChange={(e) => onChange(e.target.value)}
             onFocus={(e) => e.target.select()}
-            className={`border border-gray-300 rounded px-2 py-1 ${className} focus:outline-none focus:ring-2 focus:ring-blue-500`}
+            className={`border ${isIdentifier ? 'border-blue-400 bg-blue-50' : 'border-gray-300'} rounded px-2 py-1 ${className} focus:outline-none focus:ring-2 focus:ring-blue-500`}
             autoComplete="off"
             {...props}
         />
     );
-}, (prevProps, nextProps) => {
-    return prevProps.value === nextProps.value && 
-           prevProps.globalEditMode === nextProps.globalEditMode &&
-           prevProps.isIdentifier === nextProps.isIdentifier;
 });
 
 EditableField.displayName = 'EditableField';
 
-const InmuebleDetails = ({ 
-    inmueble, 
-    setProveedoresSegurosList, 
-    proveedoresList, 
-    setHipotecas, 
+// ============================================================
+// COMPONENTE PRINCIPAL: InmuebleDetails
+// ============================================================
+const InmuebleDetails = ({
+    inmueble,
+    setProveedoresSegurosList,
+    proveedoresList,
+    setHipotecas,
     HipotecasList,
-    onInmuebleUpdated
+    onInmuebleUpdated,
+    onEditModeChange
 }) => {
+    // ======== ESTADOS ========
     const [segurosCollapsed, setSegurosCollapsed] = useState(true);
     const [proveedoresCollapsed, setProveedoresCollapsed] = useState(true);
     const [hipotecasCollapsed, setHipotecasCollapsed] = useState(true);
     const [datosRegistralesCollapsed, setDatosRegistralesCollapsed] = useState(true);
-    
+
     const [globalEditMode, setGlobalEditMode] = useState(false);
     const [inmuebleLocal, setInmuebleLocal] = useState(inmueble);
 
+    // Estados de edición
     const [editSeguros, setEditSeguros] = useState([]);
     const [editProveedores, setEditProveedores] = useState([]);
     const [editDatosRegistrales, setEditDatosRegistrales] = useState({});
     const [editHipotecas, setEditHipotecas] = useState([]);
 
+    // ✅ NUEVO: Guardar valores originales completos
+    const [valoresOriginales, setValoresOriginales] = useState({
+        clave_catastral: null,
+        datosRegistrales: {},
+        seguros: [],
+        proveedores: [],
+        hipotecas: []
+    });
+
+    // ======== EFECTOS ========
     useEffect(() => {
         if (!globalEditMode) {
             setInmuebleLocal(inmueble);
@@ -102,120 +113,114 @@ const InmuebleDetails = ({
     }, [inmueble, globalEditMode]);
 
     useEffect(() => {
+        if (onEditModeChange) {
+            onEditModeChange(globalEditMode);
+        }
+    }, [globalEditMode, onEditModeChange]);
+
+    useEffect(() => {
         if (!inmuebleLocal) {
             setProveedoresSegurosList(null);
             return;
         }
 
-        async function fetchHipotecas(CC) {
+        async function fetchData() {
             try {
-                const response = await getInmuebleHipotecas(CC);
-                setHipotecas(response.data)
-                return response
+                const [proveedoresResponse, hipotecasResponse] = await Promise.all([
+                    getInmuebleDetails(inmuebleLocal.clave_catastral),
+                    getInmuebleHipotecas(inmuebleLocal.clave_catastral)
+                ]);
+
+                setProveedoresSegurosList(proveedoresResponse.data);
+                setHipotecas(hipotecasResponse.data);
             } catch (error) {
-                console.error("Error en fetchHipotecas:", error)
-                return null
+                console.error("Error cargando datos:", error);
             }
         }
 
-        async function fetchProveedoresSeguros(CC) {
-            try {
-                const response = await getInmuebleDetails(CC);
-                setProveedoresSegurosList(response.data);
-                return response;
-            } catch (error) {
-                console.error("Error en fetchProveedoresSeguros:", error);
-                return null;
-            }
-        }
-
-        fetchProveedoresSeguros(inmuebleLocal.clave_catastral);
-        fetchHipotecas(inmuebleLocal.clave_catastral);
+        fetchData();
     }, [inmuebleLocal?.clave_catastral, setProveedoresSegurosList, setHipotecas]);
 
-    // ✅ FUNCIONES DELETE OPTIMIZADAS
+    // ======== FUNCIONES DELETE ========
     const handleDeleteSeguro = useCallback(async (poliza, empresaSeguro) => {
-        if (!window.confirm(`¿Estás seguro de que quieres eliminar el seguro de ${empresaSeguro}?`)) {
-            return;
-        }
+        if (!window.confirm(`¿Eliminar el seguro de ${empresaSeguro}?`)) return;
 
         try {
             await deleteSeguro(inmuebleLocal.clave_catastral, poliza);
-            
+
             if (proveedoresList) {
-                const nuevosSeguros = proveedoresList.seguros.filter(
-                    seguro => seguro.poliza !== poliza
-                );
                 setProveedoresSegurosList({
                     ...proveedoresList,
-                    seguros: nuevosSeguros
+                    seguros: proveedoresList.seguros.filter(s => s.poliza !== poliza)
                 });
             }
-            
+
             alert('Seguro eliminado correctamente');
         } catch (error) {
             console.error('Error al eliminar seguro:', error);
-            alert('Error al eliminar el seguro: ' + (error.response?.data?.message || error.message));
+            alert('Error: ' + (error.response?.data?.message || error.message));
         }
     }, [inmuebleLocal?.clave_catastral, proveedoresList, setProveedoresSegurosList]);
 
     const handleDeleteProveedor = useCallback(async (claveProveedor, nombreProveedor) => {
-        if (!window.confirm(`¿Estás seguro de que quieres eliminar el proveedor ${nombreProveedor}?`)) {
-            return;
-        }
+        if (!window.confirm(`¿Eliminar el proveedor ${nombreProveedor}?`)) return;
 
         try {
             await deleteProveedor(inmuebleLocal.clave_catastral, claveProveedor);
-            
+
             if (proveedoresList) {
-                const nuevosProveedores = proveedoresList.proveedores.filter(
-                    proveedor => proveedor.clave !== claveProveedor
-                );
                 setProveedoresSegurosList({
                     ...proveedoresList,
-                    proveedores: nuevosProveedores
+                    proveedores: proveedoresList.proveedores.filter(p => p.clave !== claveProveedor)
                 });
             }
-            
+
             alert('Proveedor eliminado correctamente');
         } catch (error) {
             console.error('Error al eliminar proveedor:', error);
-            alert('Error al eliminar el proveedor: ' + (error.response?.data?.message || error.message));
+            alert('Error: ' + (error.response?.data?.message || error.message));
         }
     }, [inmuebleLocal?.clave_catastral, proveedoresList, setProveedoresSegurosList]);
 
     const handleDeleteHipoteca = useCallback(async (idHipoteca, bancoPrestamo) => {
-        if (!window.confirm(`¿Estás seguro de que quieres eliminar la hipoteca del banco ${bancoPrestamo}?`)) {
-            return;
-        }
+        if (!window.confirm(`¿Eliminar la hipoteca del banco ${bancoPrestamo}?`)) return;
 
         try {
             await deleteHipoteca(inmuebleLocal.clave_catastral, idHipoteca);
-            
+
             if (HipotecasList) {
-                const nuevasHipotecas = HipotecasList.filter(
-                    hipoteca => hipoteca.id !== idHipoteca
-                );
-                setHipotecas(nuevasHipotecas);
+                setHipotecas(HipotecasList.filter(h => h.id !== idHipoteca));
             }
-            
+
             alert('Hipoteca eliminada correctamente');
         } catch (error) {
             console.error('Error al eliminar hipoteca:', error);
-            alert('Error al eliminar la hipoteca: ' + (error.response?.data?.message || error.message));
+            alert('Error: ' + (error.response?.data?.message || error.message));
         }
     }, [inmuebleLocal?.clave_catastral, HipotecasList, setHipotecas]);
 
+    // ======== MODO EDICIÓN ========
     const startGlobalEdit = useCallback(() => {
         setGlobalEditMode(true);
-        
-        const nuevosSeguros = proveedoresList?.seguros ? proveedoresList.seguros.map(seguro => ({...seguro})) : [];
-        const nuevosProveedores = proveedoresList?.proveedores ? proveedoresList.proveedores.map(prov => ({...prov})) : [];
-        
+
+        const nuevosSeguros = proveedoresList?.seguros?.map(s => ({ ...s })) || [];
+        const nuevosProveedores = proveedoresList?.proveedores?.map(p => ({ ...p })) || [];
+        const nuevasHipotecas = HipotecasList?.map(h => ({ ...h })) || [];
+        const nuevosDatosRegistrales = inmuebleLocal ? { ...inmuebleLocal } : {};
+
         setEditSeguros(nuevosSeguros);
         setEditProveedores(nuevosProveedores);
-        setEditDatosRegistrales(inmuebleLocal ? { ...inmuebleLocal } : {});
-        setEditHipotecas(HipotecasList ? HipotecasList.map(hip => ({...hip})) : []);
+        setEditDatosRegistrales(nuevosDatosRegistrales);
+        setEditHipotecas(nuevasHipotecas);
+
+        // ✅ Guardar copias profundas de los valores originales
+        setValoresOriginales({
+            clave_catastral: inmuebleLocal?.clave_catastral || null,
+            datosRegistrales: JSON.parse(JSON.stringify(nuevosDatosRegistrales)),
+            seguros: JSON.parse(JSON.stringify(nuevosSeguros)),
+            proveedores: JSON.parse(JSON.stringify(nuevosProveedores)),
+            hipotecas: JSON.parse(JSON.stringify(nuevasHipotecas))
+        });
     }, [proveedoresList, inmuebleLocal, HipotecasList]);
 
     const cancelGlobalEdit = useCallback(() => {
@@ -224,62 +229,111 @@ const InmuebleDetails = ({
         setEditProveedores([]);
         setEditDatosRegistrales({});
         setEditHipotecas([]);
+        setValoresOriginales({
+            clave_catastral: null,
+            datosRegistrales: {},
+            seguros: [],
+            proveedores: [],
+            hipotecas: []
+        });
     }, []);
+
+    // ✅ FUNCIÓN AUXILIAR: Detectar cambios en un objeto
+    const detectarCambios = (original, editado, camposComparar) => {
+        const cambios = {};
+        for (const campo of camposComparar) {
+            if (editado[campo] !== original[campo]) {
+                cambios[campo] = editado[campo];
+            }
+        }
+        return cambios;
+    };
 
     const saveAllChanges = useCallback(async () => {
         try {
-            if (editDatosRegistrales) {
-                await updateDatosRegistrales(inmuebleLocal.clave_catastral, {
-                    num_protocolo: editDatosRegistrales.num_protocolo,
-                    folio: editDatosRegistrales.folio,
-                    hoja: editDatosRegistrales.hoja,
-                    inscripcion: editDatosRegistrales.inscripcion,
-                    notario: editDatosRegistrales.notario,
-                    fecha_inscripcion: editDatosRegistrales.fecha_inscripcion,
-                    valor_adquisicion: editDatosRegistrales.valor_adquisicion,
-                    fecha_adquisicion: editDatosRegistrales.fecha_adquisicion
-                });
+            let claveCatastralActual = valoresOriginales.clave_catastral;
 
-                const nuevoInmueble = {
-                    ...inmuebleLocal,
-                    ...editDatosRegistrales
-                };
+            // ✅ PASO 1: Actualizar DATOS REGISTRALES (incluye cambio de clave catastral)
+            const camposDR = ['num_protocolo', 'folio', 'hoja', 'inscripcion', 'notario',
+                'fecha_inscripcion', 'valor_adquisicion', 'fecha_adquisicion', 'clave_catastral'];
+
+            const cambiosDR = detectarCambios(valoresOriginales.datosRegistrales, editDatosRegistrales, camposDR);
+
+            if (Object.keys(cambiosDR).length > 0) {
+                console.log('Cambios en datos registrales detectados:', cambiosDR);
+
+                const datosRegistralesPayload = { ...cambiosDR };
+
+                // Si cambió la clave catastral, enviar como clave_catastral_nueva
+                if (cambiosDR.clave_catastral && cambiosDR.clave_catastral !== claveCatastralActual) {
+                    datosRegistralesPayload.clave_catastral_nueva = cambiosDR.clave_catastral;
+                    delete datosRegistralesPayload.clave_catastral;
+                }
+
+                await updateDatosRegistrales(claveCatastralActual, datosRegistralesPayload);
+
+                // ✅ Actualizar la clave catastral actual si cambió
+                if (cambiosDR.clave_catastral) {
+                    claveCatastralActual = cambiosDR.clave_catastral;
+                }
+
+                const nuevoInmueble = { ...inmuebleLocal, ...editDatosRegistrales };
                 setInmuebleLocal(nuevoInmueble);
-                
+
                 if (onInmuebleUpdated) {
                     onInmuebleUpdated(nuevoInmueble);
                 }
             }
 
-            // Guardar seguros
-            for (const seguro of editSeguros) {
-                await updateSeguro(inmuebleLocal.clave_catastral, seguro.poliza, {
-                    tipo_seguro: seguro.tipo_seguro,
-                    telefono: seguro.telefono,
-                    email: seguro.email,
-                    empresa_seguro: seguro.empresa_seguro,
-                    poliza: seguro.poliza
-                });
+            // ✅ PASO 2: Actualizar SEGUROS (con la clave catastral actualizada)
+            for (let i = 0; i < editSeguros.length; i++) {
+                const seguroEditado = editSeguros[i];
+                const seguroOriginal = valoresOriginales.seguros[i];
+
+                const camposSeguro = ['tipo_seguro', 'telefono', 'email', 'empresa_seguro', 'poliza'];
+                const cambiosSeguro = detectarCambios(seguroOriginal, seguroEditado, camposSeguro);
+
+                if (Object.keys(cambiosSeguro).length > 0) {
+                    console.log(`Cambios en seguro ${i}:`, cambiosSeguro);
+
+                    const seguroPayload = { ...cambiosSeguro };
+
+                    // Si cambió la póliza, enviar como poliza_nueva
+                    if (cambiosSeguro.poliza && cambiosSeguro.poliza !== seguroOriginal.poliza) {
+                        seguroPayload.poliza_nueva = cambiosSeguro.poliza;
+                        delete seguroPayload.poliza;
+                    }
+
+                    await updateSeguro(claveCatastralActual, seguroOriginal.poliza, seguroPayload);
+                }
             }
 
-            // Guardar proveedores
-            for (const proveedor of editProveedores) {
-                await updateProveedor(inmuebleLocal.clave_catastral, proveedor.clave, {
-                    tipo_servicio: proveedor.tipo_servicio,
-                    nombre: proveedor.nombre,
-                    telefono: proveedor.telefono,
-                    email: proveedor.email
-                });
+            // ✅ PASO 3: Actualizar PROVEEDORES
+            for (let i = 0; i < editProveedores.length; i++) {
+                const proveedorEditado = editProveedores[i];
+                const proveedorOriginal = valoresOriginales.proveedores[i];
+
+                const camposProveedor = ['tipo_servicio', 'nombre', 'telefono', 'email'];
+                const cambiosProveedor = detectarCambios(proveedorOriginal, proveedorEditado, camposProveedor);
+
+                if (Object.keys(cambiosProveedor).length > 0) {
+                    console.log(`Cambios en proveedor ${i}:`, cambiosProveedor);
+                    await updateProveedor(claveCatastralActual, proveedorOriginal.clave, cambiosProveedor);
+                }
             }
 
-            // Guardar hipotecas
-            for (const hipoteca of editHipotecas) {
-                await updateHipoteca(inmuebleLocal.clave_catastral, hipoteca.id, {
-                    banco_prestamo: hipoteca.banco_prestamo,
-                    prestamo: hipoteca.prestamo,
-                    fecha_hipoteca: hipoteca.fecha_hipoteca,
-                    cuota_hipoteca: hipoteca.cuota_hipoteca
-                });
+            // ✅ PASO 4: Actualizar HIPOTECAS
+            for (let i = 0; i < editHipotecas.length; i++) {
+                const hipotecaEditada = editHipotecas[i];
+                const hipotecaOriginal = valoresOriginales.hipotecas[i];
+
+                const camposHipoteca = ['banco_prestamo', 'prestamo', 'fecha_hipoteca', 'cuota_hipoteca'];
+                const cambiosHipoteca = detectarCambios(hipotecaOriginal, hipotecaEditada, camposHipoteca);
+
+                if (Object.keys(cambiosHipoteca).length > 0) {
+                    console.log(`Cambios en hipoteca ${i}:`, cambiosHipoteca);
+                    await updateHipoteca(claveCatastralActual, hipotecaOriginal.id, cambiosHipoteca);
+                }
             }
 
             // Actualizar estados locales
@@ -290,80 +344,80 @@ const InmuebleDetails = ({
                     proveedores: editProveedores
                 });
             }
-            
+
             if (HipotecasList) {
                 setHipotecas(editHipotecas);
             }
 
             setGlobalEditMode(false);
-            
-            // Usar setTimeout para mostrar el alert después de que React actualice
-            setTimeout(() => {
-                alert('Todos los cambios guardados correctamente');
-            }, 0);
-            
-        } catch (error) {
-            console.error('Error al guardar todos los cambios:', error);
-            setGlobalEditMode(false);
-            setTimeout(() => {
-                alert('Error al guardar: ' + (error.response?.data?.message || error.message));
-            }, 0);
-        }
-    }, [editDatosRegistrales, editSeguros, editProveedores, editHipotecas, inmuebleLocal, proveedoresList, HipotecasList, setProveedoresSegurosList, setHipotecas, onInmuebleUpdated]);
+            setValoresOriginales({
+                clave_catastral: null,
+                datosRegistrales: {},
+                seguros: [],
+                proveedores: [],
+                hipotecas: []
+            });
 
+            setTimeout(() => alert('Cambios guardados correctamente'), 0);
+
+        } catch (error) {
+            console.error('Error al guardar:', error);
+            setGlobalEditMode(false);
+            setTimeout(() => alert('Error: ' + (error.response?.data?.message || error.message)), 0);
+        }
+    }, [editDatosRegistrales, editSeguros, editProveedores, editHipotecas, inmuebleLocal,
+        proveedoresList, HipotecasList, valoresOriginales, setProveedoresSegurosList,
+        setHipotecas, onInmuebleUpdated]);
+
+    // ======== FUNCIONES DE ACTUALIZACIÓN DE CAMPOS ========
     const updateSeguroField = useCallback((index, field, value) => {
-        setEditSeguros(prev => 
-            prev.map((seguro, i) => 
+        setEditSeguros(prev =>
+            prev.map((seguro, i) =>
                 i === index ? { ...seguro, [field]: value } : seguro
             )
         );
     }, []);
 
     const updateProveedorField = useCallback((index, field, value) => {
-        setEditProveedores(prev => 
-            prev.map((proveedor, i) => 
+        setEditProveedores(prev =>
+            prev.map((proveedor, i) =>
                 i === index ? { ...proveedor, [field]: value } : proveedor
             )
         );
     }, []);
 
     const updateDatosRegistralesField = useCallback((field, value) => {
-        setEditDatosRegistrales(prev => ({
-            ...prev,
-            [field]: value
-        }));
+        setEditDatosRegistrales(prev => ({ ...prev, [field]: value }));
     }, []);
 
     const updateHipotecaField = useCallback((index, field, value) => {
-        setEditHipotecas(prev => 
-            prev.map((hipoteca, i) => 
+        setEditHipotecas(prev =>
+            prev.map((hipoteca, i) =>
                 i === index ? { ...hipoteca, [field]: value } : hipoteca
             )
         );
     }, []);
 
+    // ======== RENDER DE ENCABEZADOS COLAPSABLES ========
     const renderCollapsibleHeader = useCallback((title, count, isCollapsed, setCollapsed) => {
         const shouldShowToggle = count > 0;
-        
+
         return (
-            <div 
+            <div
                 className={`flex items-center justify-between mb-2 ${shouldShowToggle ? 'cursor-pointer hover:bg-gray-50 p-2 rounded' : ''}`}
                 onClick={shouldShowToggle ? () => setCollapsed(!isCollapsed) : undefined}
             >
                 <h4 className="text-xl font-bold">{title}</h4>
                 {shouldShowToggle && (
-                    <div className="flex items-center text-sm text-gray-600">
-                        {isCollapsed ? (
-                            <ChevronRightIcon className="h-5 w-5" />
-                        ) : (
-                            <ChevronDownIcon className="h-5 w-5" />
-                        )}
-                    </div>
+                    isCollapsed ?
+                        <ChevronRightIcon className="h-5 w-5" /> :
+                        <ChevronDownIcon className="h-5 w-5" />
                 )}
             </div>
         );
     }, []);
 
+    // ======== RENDER CONDICIONAL ========
     if (!inmuebleLocal) {
         return (
             <div className="absolute flex w-[68%] h-full p-2">
@@ -376,11 +430,12 @@ const InmuebleDetails = ({
         );
     }
 
+    // ======== RENDER PRINCIPAL ========
     return (
         <div className="absolute flex w-[68%] h-full p-2">
             <div className="w-full h-full flex flex-col border border-black">
-                
-                {/* BOTÓN DE EDITAR - Fijo arriba */}
+
+                {/* BOTÓN DE EDITAR */}
                 <div className="flex justify-end p-2 border-b border-gray-300">
                     {!globalEditMode ? (
                         <button
@@ -409,78 +464,81 @@ const InmuebleDetails = ({
                         </div>
                     )}
                 </div>
-                
-                {/* Contenido con scroll - Ocupa el resto del espacio */}
+
+                {/* CONTENIDO CON SCROLL */}
                 <div className="flex-1 p-3 bg-white overflow-y-auto">
                     <div className="flex flex-col space-y-4">
-                        
-                        {/* Contenedor de Seguros */}
+
+                        {/* SEGUROS */}
                         <div>
                             {renderCollapsibleHeader(
-                                "Seguros", 
-                                proveedoresList?.seguros?.length || 0, 
-                                segurosCollapsed, 
+                                "Seguros",
+                                proveedoresList?.seguros?.length || 0,
+                                segurosCollapsed,
                                 setSegurosCollapsed
                             )}
-                            
+
                             {proveedoresList?.seguros?.length === 0 ? (
-                                <div className="text-gray-600 italic ml-2">El inmueble no cuenta con ningún seguro.</div>
+                                <div className="text-gray-600 italic ml-2">Sin seguros registrados</div>
                             ) : (
                                 !segurosCollapsed && (
                                     <div className="space-y-2">
                                         {(globalEditMode ? editSeguros : proveedoresList?.seguros || []).map((seguro, index) => (
-                                            <div className="border border-black rounded-lg p-2" key={`seguro-${seguro.poliza}-${index}`}>
+                                            <div className="border border-black rounded-lg p-2" key={`seguro-${index}`}>
                                                 <div className="flex items-center justify-between">
                                                     <div className="flex-1 grid grid-cols-3 gap-2">
                                                         <div className="flex items-center bg-gray-100 p-2">
                                                             <ShieldCheckIcon className="h-5 w-5 mr-2" />
-                                                            <EditableField 
-                                                                value={seguro.tipo_seguro} 
+                                                            <EditableField
+                                                                value={seguro.tipo_seguro}
                                                                 onChange={(value) => updateSeguroField(index, 'tipo_seguro', value)}
                                                                 globalEditMode={globalEditMode}
                                                             />
                                                         </div>
                                                         <div className="flex items-center bg-gray-100 p-2">
                                                             <BuildingOfficeIcon className="h-5 w-5 mr-2" />
-                                                            <EditableField 
-                                                                value={seguro.empresa_seguro} 
+                                                            <EditableField
+                                                                value={seguro.empresa_seguro}
                                                                 onChange={(value) => updateSeguroField(index, 'empresa_seguro', value)}
                                                                 globalEditMode={globalEditMode}
                                                             />
                                                         </div>
                                                         <div className="flex items-center bg-gray-100 p-2">
                                                             <PhoneIcon className="h-5 w-5 mr-2" />
-                                                            <EditableField 
-                                                                value={seguro.telefono} 
+                                                            <EditableField
+                                                                value={seguro.telefono}
                                                                 onChange={(value) => updateSeguroField(index, 'telefono', value)}
                                                                 globalEditMode={globalEditMode}
                                                             />
                                                         </div>
                                                         <div className="flex items-center bg-gray-200 p-2">
                                                             <AtSymbolIcon className="h-5 w-5 mr-2" />
-                                                            <EditableField 
-                                                                value={seguro.email} 
+                                                            <EditableField
+                                                                value={seguro.email}
                                                                 onChange={(value) => updateSeguroField(index, 'email', value)}
                                                                 globalEditMode={globalEditMode}
                                                             />
                                                         </div>
-                                                        <div className="flex items-center bg-gray-200 p-2">
+                                                        <div className="flex items-center bg-gray-200 p-2 col-span-2">
                                                             <ClipboardDocumentListIcon className="h-5 w-5" />
-                                                            <b className="mr-2">POLIZA:</b> 
-                                                            <EditableField 
-                                                                value={seguro.poliza} 
+                                                            <b className="mr-2">POLIZA:</b>
+                                                            <EditableField
+                                                                value={seguro.poliza}
+                                                                onChange={(value) => updateSeguroField(index, 'poliza', value)}
                                                                 isIdentifier={true}
                                                                 globalEditMode={globalEditMode}
                                                             />
                                                         </div>
                                                     </div>
-                                                    <button
-                                                        onClick={() => handleDeleteSeguro(seguro.poliza, seguro.empresa_seguro)}
-                                                        className="ml-2 p-2 text-red-500 hover:text-red-700 hover:bg-red-100 rounded transition-colors duration-200"
-                                                        title="Eliminar seguro"
-                                                    >
-                                                        <TrashIcon className="h-4 w-4" />
-                                                    </button>
+                                                    {!globalEditMode && (
+                                                        <button
+                                                            onClick={() => handleDeleteSeguro(seguro.poliza, seguro.empresa_seguro)}
+                                                            className="ml-2 p-2 text-red-500 hover:text-red-700 hover:bg-red-100 rounded transition-colors duration-200"
+                                                            title="Eliminar seguro"
+                                                        >
+                                                            <TrashIcon className="h-4 w-4" />
+                                                        </button>
+                                                    )}
                                                 </div>
                                             </div>
                                         ))}
@@ -489,64 +547,66 @@ const InmuebleDetails = ({
                             )}
                         </div>
 
-                        {/* Contenedor de Proveedores */}
+                        {/* PROVEEDORES */}
                         <div>
                             {renderCollapsibleHeader(
-                                "Proveedores", 
-                                proveedoresList?.proveedores?.length || 0, 
-                                proveedoresCollapsed, 
+                                "Proveedores",
+                                proveedoresList?.proveedores?.length || 0,
+                                proveedoresCollapsed,
                                 setProveedoresCollapsed
                             )}
-                            
+
                             {proveedoresList?.proveedores?.length === 0 ? (
-                                <div className="text-gray-600 italic ml-2">El inmueble no cuenta con ningún proveedor.</div>
+                                <div className="text-gray-600 italic ml-2">Sin proveedores registrados</div>
                             ) : (
                                 !proveedoresCollapsed && (
                                     <div className="space-y-2">
                                         {(globalEditMode ? editProveedores : proveedoresList?.proveedores || []).map((proveedor, index) => (
-                                            <div className="border border-black rounded-lg p-2" key={`proveedor-${proveedor.clave}-${index}`}>
+                                            <div className="border border-black rounded-lg p-2" key={`proveedor-${index}`}>
                                                 <div className="flex items-center justify-between">
                                                     <div className="flex-1 grid grid-cols-2 gap-2">
                                                         <div className="flex items-center bg-gray-100 p-2">
                                                             <ShieldCheckIcon className="h-5 w-5 mr-2" />
-                                                            <EditableField 
-                                                                value={proveedor.tipo_servicio} 
+                                                            <EditableField
+                                                                value={proveedor.tipo_servicio}
                                                                 onChange={(value) => updateProveedorField(index, 'tipo_servicio', value)}
                                                                 globalEditMode={globalEditMode}
                                                             />
                                                         </div>
                                                         <div className="flex items-center bg-gray-100 p-2">
                                                             <BuildingOfficeIcon className="h-5 w-5 mr-2" />
-                                                            <EditableField 
-                                                                value={proveedor.nombre} 
+                                                            <EditableField
+                                                                value={proveedor.nombre}
                                                                 onChange={(value) => updateProveedorField(index, 'nombre', value)}
                                                                 globalEditMode={globalEditMode}
                                                             />
                                                         </div>
                                                         <div className="flex items-center bg-gray-100 p-2">
                                                             <PhoneIcon className="h-5 w-5 mr-2" />
-                                                            <EditableField 
-                                                                value={proveedor.telefono} 
+                                                            <EditableField
+                                                                value={proveedor.telefono}
                                                                 onChange={(value) => updateProveedorField(index, 'telefono', value)}
                                                                 globalEditMode={globalEditMode}
                                                             />
                                                         </div>
                                                         <div className="flex items-center bg-gray-200 p-2">
                                                             <AtSymbolIcon className="h-5 w-5 mr-2" />
-                                                            <EditableField 
-                                                                value={proveedor.email} 
+                                                            <EditableField
+                                                                value={proveedor.email}
                                                                 onChange={(value) => updateProveedorField(index, 'email', value)}
                                                                 globalEditMode={globalEditMode}
                                                             />
                                                         </div>
                                                     </div>
-                                                    <button
-                                                        onClick={() => handleDeleteProveedor(proveedor.clave, proveedor.nombre)}
-                                                        className="ml-2 p-2 text-red-500 hover:text-red-700 hover:bg-red-100 rounded transition-colors duration-200"
-                                                        title="Eliminar proveedor"
-                                                    >
-                                                        <TrashIcon className="h-4 w-4" />
-                                                    </button>
+                                                    {!globalEditMode && (
+                                                        <button
+                                                            onClick={() => handleDeleteProveedor(proveedor.clave, proveedor.nombre)}
+                                                            className="ml-2 p-2 text-red-500 hover:text-red-700 hover:bg-red-100 rounded transition-colors duration-200"
+                                                            title="Eliminar proveedor"
+                                                        >
+                                                            <TrashIcon className="h-4 w-4" />
+                                                        </button>
+                                                    )}
                                                 </div>
                                             </div>
                                         ))}
@@ -555,80 +615,81 @@ const InmuebleDetails = ({
                             )}
                         </div>
 
-                        {/* Datos Registrales */}
+                        {/* DATOS REGISTRALES */}
                         {inmuebleLocal && (
                             <div>
                                 {renderCollapsibleHeader(
-                                    "Datos Registrales", 
+                                    "Datos Registrales",
                                     1,
-                                    datosRegistralesCollapsed, 
+                                    datosRegistralesCollapsed,
                                     setDatosRegistralesCollapsed
                                 )}
-                                
+
                                 {!datosRegistralesCollapsed && (
                                     <div className="border border-black rounded-lg p-2">
                                         <div className="grid grid-cols-4 gap-2">
                                             <div className="flex items-center bg-gray-100 p-2">
                                                 <b className="mr-2">Clave catastral:</b>
-                                                <EditableField 
-                                                    value={inmuebleLocal.clave_catastral} 
+                                                <EditableField
+                                                    value={globalEditMode ? editDatosRegistrales.clave_catastral : inmuebleLocal.clave_catastral}
+                                                    onChange={(value) => updateDatosRegistralesField('clave_catastral', value)}
                                                     isIdentifier={true}
                                                     globalEditMode={globalEditMode}
                                                 />
                                             </div>
                                             <div className="flex items-center bg-gray-100 p-2">
                                                 <b className="mr-2">Protocolo:</b>
-                                                <EditableField 
-                                                    value={globalEditMode ? editDatosRegistrales.num_protocolo : inmuebleLocal.num_protocolo} 
+                                                <EditableField
+                                                    value={globalEditMode ? editDatosRegistrales.num_protocolo : inmuebleLocal.num_protocolo}
                                                     onChange={(value) => updateDatosRegistralesField('num_protocolo', value)}
                                                     globalEditMode={globalEditMode}
                                                 />
                                             </div>
                                             <div className="flex items-center bg-gray-100 p-2">
                                                 <b className="mr-2">Folio:</b>
-                                                <EditableField 
-                                                    value={globalEditMode ? editDatosRegistrales.folio : inmuebleLocal.folio} 
+                                                <EditableField
+                                                    value={globalEditMode ? editDatosRegistrales.folio : inmuebleLocal.folio}
                                                     onChange={(value) => updateDatosRegistralesField('folio', value)}
                                                     globalEditMode={globalEditMode}
                                                 />
                                             </div>
                                             <div className="flex items-center bg-gray-100 p-2">
                                                 <b className="mr-2">Hoja:</b>
-                                                <EditableField 
-                                                    value={globalEditMode ? editDatosRegistrales.hoja : inmuebleLocal.hoja} 
+                                                <EditableField
+                                                    value={globalEditMode ? editDatosRegistrales.hoja : inmuebleLocal.hoja}
                                                     onChange={(value) => updateDatosRegistralesField('hoja', value)}
                                                     globalEditMode={globalEditMode}
                                                 />
                                             </div>
                                             <div className="flex items-center bg-gray-200 p-2">
                                                 <b className="mr-2">Inscripción:</b>
-                                                <EditableField 
-                                                    value={globalEditMode ? editDatosRegistrales.inscripcion : inmuebleLocal.inscripcion} 
+                                                <EditableField
+                                                    value={globalEditMode ? editDatosRegistrales.inscripcion : inmuebleLocal.inscripcion}
                                                     onChange={(value) => updateDatosRegistralesField('inscripcion', value)}
                                                     globalEditMode={globalEditMode}
                                                 />
                                             </div>
                                             <div className="flex items-center bg-gray-200 p-2">
                                                 <b className="mr-2">Fecha Ins.:</b>
-                                                <EditableField 
-                                                    value={globalEditMode ? editDatosRegistrales.fecha_inscripcion : inmuebleLocal.fecha_inscripcion} 
+                                                <EditableField
+                                                    value={globalEditMode ? editDatosRegistrales.fecha_inscripcion : inmuebleLocal.fecha_inscripcion}
                                                     onChange={(value) => updateDatosRegistralesField('fecha_inscripcion', value)}
                                                     type="date"
                                                     globalEditMode={globalEditMode}
                                                 />
                                             </div>
                                             <div className="flex items-center bg-gray-200 p-2">
-                                                <b className="mr-2">Notario:</b> 
-                                                <EditableField 
-                                                    value={globalEditMode ? editDatosRegistrales.notario : inmuebleLocal.notario} 
+                                                <b className="mr-2">Notario:</b>
+                                                <EditableField
+                                                    value={globalEditMode ? editDatosRegistrales.notario : inmuebleLocal.notario}
                                                     onChange={(value) => updateDatosRegistralesField('notario', value)}
                                                     globalEditMode={globalEditMode}
                                                 />
                                             </div>
                                             <div className="flex items-center bg-gray-200 p-2">
                                                 <b className="mr-2">Fecha adquisición:</b>
-                                                <EditableField 
-                                                    value={globalEditMode ? editDatosRegistrales.fecha_adquisicion : inmuebleLocal.fecha_adquisicion} 
+                                                <EditableField
+                                                    value={globalEditMode ? editDatosRegistrales.fecha_adquisicion : inmuebleLocal.fecha_adquisicion}
                                                     onChange={(value) => updateDatosRegistralesField('fecha_adquisicion', value)}
                                                     type="date"
                                                     globalEditMode={globalEditMode}
@@ -636,8 +697,8 @@ const InmuebleDetails = ({
                                             </div>
                                             <div className="flex items-center bg-gray-200 p-2">
                                                 <b className="mr-2">Valor adquisición:</b>
-                                                <EditableField 
-                                                    value={globalEditMode ? editDatosRegistrales.valor_adquisicion : inmuebleLocal.valor_adquisicion} 
+                                                <EditableField
+                                                    value={globalEditMode ? editDatosRegistrales.valor_adquisicion : inmuebleLocal.valor_adquisicion}
                                                     onChange={(value) => updateDatosRegistralesField('valor_adquisicion', value)}
                                                     type="number"
                                                     globalEditMode={globalEditMode}
@@ -649,17 +710,17 @@ const InmuebleDetails = ({
                             </div>
                         )}
 
-                        {/* Hipotecas */}
+                        {/* HIPOTECAS */}
                         <div>
                             {renderCollapsibleHeader(
-                                "Hipotecas", 
-                                HipotecasList?.length || 0, 
-                                hipotecasCollapsed, 
+                                "Hipotecas",
+                                HipotecasList?.length || 0,
+                                hipotecasCollapsed,
                                 setHipotecasCollapsed
                             )}
-                            
+
                             {(HipotecasList === null || HipotecasList.length === 0) ? (
-                                <div className="text-gray-600 italic ml-2">El inmueble no tiene hipotecas.</div>
+                                <div className="text-gray-600 italic ml-2">Sin hipotecas registradas</div>
                             ) : (
                                 !hipotecasCollapsed && (
                                     <div className="space-y-2">
@@ -669,16 +730,16 @@ const InmuebleDetails = ({
                                                     <div className="flex-1 grid grid-cols-4 gap-2">
                                                         <div className="flex items-center bg-gray-100 p-2">
                                                             <b className="mr-2">Banco:</b>
-                                                            <EditableField 
-                                                                value={hipoteca.banco_prestamo} 
+                                                            <EditableField
+                                                                value={hipoteca.banco_prestamo}
                                                                 onChange={(value) => updateHipotecaField(index, 'banco_prestamo', value)}
                                                                 globalEditMode={globalEditMode}
                                                             />
                                                         </div>
                                                         <div className="flex items-center bg-gray-100 p-2">
                                                             <b className="mr-2">Prestamo:</b>
-                                                            <EditableField 
-                                                                value={hipoteca.prestamo} 
+                                                            <EditableField
+                                                                value={hipoteca.prestamo}
                                                                 onChange={(value) => updateHipotecaField(index, 'prestamo', value)}
                                                                 type="number"
                                                                 globalEditMode={globalEditMode}
@@ -686,8 +747,8 @@ const InmuebleDetails = ({
                                                         </div>
                                                         <div className="flex items-center bg-gray-200 p-2">
                                                             <b className="mr-2">Fecha Prestamo:</b>
-                                                            <EditableField 
-                                                                value={hipoteca.fecha_hipoteca} 
+                                                            <EditableField
+                                                                value={hipoteca.fecha_hipoteca}
                                                                 onChange={(value) => updateHipotecaField(index, 'fecha_hipoteca', value)}
                                                                 type="date"
                                                                 globalEditMode={globalEditMode}
@@ -695,21 +756,23 @@ const InmuebleDetails = ({
                                                         </div>
                                                         <div className="flex items-center bg-gray-100 p-2">
                                                             <b className="mr-2">Cuota:</b>
-                                                            <EditableField 
-                                                                value={hipoteca.cuota_hipoteca} 
+                                                            <EditableField
+                                                                value={hipoteca.cuota_hipoteca}
                                                                 onChange={(value) => updateHipotecaField(index, 'cuota_hipoteca', value)}
                                                                 type="number"
                                                                 globalEditMode={globalEditMode}
                                                             />
                                                         </div>
                                                     </div>
-                                                    <button
-                                                        onClick={() => handleDeleteHipoteca(hipoteca.id, hipoteca.banco_prestamo)}
-                                                        className="ml-2 p-2 text-red-500 hover:text-red-700 hover:bg-red-100 rounded transition-colors duration-200"
-                                                        title="Eliminar hipoteca"
-                                                    >
-                                                        <TrashIcon className="h-4 w-4" />
-                                                    </button>
+                                                    {!globalEditMode && (
+                                                        <button
+                                                            onClick={() => handleDeleteHipoteca(hipoteca.id, hipoteca.banco_prestamo)}
+                                                            className="ml-2 p-2 text-red-500 hover:text-red-700 hover:bg-red-100 rounded transition-colors duration-200"
+                                                            title="Eliminar hipoteca"
+                                                        >
+                                                            <TrashIcon className="h-4 w-4" />
+                                                        </button>
+                                                    )}
                                                 </div>
                                             </div>
                                         ))}

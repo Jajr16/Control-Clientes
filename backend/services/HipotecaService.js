@@ -56,7 +56,7 @@ export default class HipotecaService extends BaseService {
     }      
     
     async eliminarHipoteca(claveCatastral, idHipoteca, client = null) {
-        return await this.withTransaction(async (conn) => {
+        return await this.execWithClient(async (conn) => {
             const relacionExiste = await this.repositories.inmuebleHipoteca.ExistePorId(
                 { 
                     clave_catastral: claveCatastral, 

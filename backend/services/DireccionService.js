@@ -9,23 +9,24 @@ export default class DireccionService extends BaseService {
     }
 
     async crearDireccion(data, client = null) {
-        console.log(data)
-        const existente = await this.repositories.direccion.BuscarPorFiltros({
-            calle: data.calle, 
-            numero: data.numero,
-            piso: data.piso, 
-            codigo_postal: data.cp, 
-            localidad: data.localidad
-        }, 1, client);
-        if (existente.length > 0) throw new Error(`Esa dirección ya había sido registrada anteriormente.`);
+        return await this.execWithClient(async (conn) => {
+            const existente = await this.repositories.direccion.BuscarPorFiltros({
+                calle: data.calle,
+                numero: data.numero,
+                piso: data.piso,
+                codigo_postal: data.cp,
+                localidad: data.localidad
+            }, 1, client);
+            if (existente.length > 0) throw new Error(`Esa dirección ya había sido registrada anteriormente.`);
 
-        return await this.repositories.direccion.insertar(data, client);
+            return await this.repositories.direccion.insertar(data, conn);
+        }, client);
     }
 
     async eliminarDireccion(idDireccion, client = null) {
-        return await this.withTransaction(async (conn) => {
+        return await this.execWithClient(async (conn) => {
             const direccionExiste = await this.repositories.direccion.ExistePorId(
-                { id: idDireccion }, 
+                { id: idDireccion },
                 conn
             );
 
@@ -34,7 +35,7 @@ export default class DireccionService extends BaseService {
             }
 
             const otrosUsos = await this.repositories.inmueble.contar(
-                { direccion: idDireccion }, 
+                { direccion: idDireccion },
                 conn
             );
 
@@ -43,7 +44,7 @@ export default class DireccionService extends BaseService {
             }
 
             await this.repositories.direccion.eliminarPorId(
-                { id: idDireccion }, 
+                { id: idDireccion },
                 conn
             );
 
@@ -54,44 +55,21 @@ export default class DireccionService extends BaseService {
         }, client);
     }
 
-    // En DireccionService.js
     async actualizarDireccion(idDireccion, nuevosDatos, client = null) {
-        const ejecutar = async (conn) => {
+        return await this.execWithClient(async (conn) => {
+            //Verificar que la dirección existe
+            const direccionExiste = await this.repositories.direccion.ExistePorId({ id: idDireccion }, conn);
+            if (!direccionExiste) {
+                throw new Error('Dirección no encontrada');
+            }
+
             return await this.repositories.direccion.actualizarPorId(
                 { id: idDireccion },
                 nuevosDatos,
                 conn
             );
-        };
-
-        if (client) {
-            return await ejecutar(client);
-        } else {
-            return await this.withTransaction(ejecutar);
-        }
+        }, client);
     }
 
-    async actualizarDireccion(idDireccion, nuevosDatos, client = null) {
-    const ejecutar = async (conn) => {
-        //Verificar que la dirección existe
-        const direccionExiste = await this.repositories.direccion.ExistePorId({ id: idDireccion }, conn);
-        if (!direccionExiste) {
-            throw new Error('Dirección no encontrada');
-        }
-        
-        return await this.repositories.direccion.actualizarPorId(
-            { id: idDireccion },
-            nuevosDatos,
-            conn
-        );
-    };
 
-    if (client) {
-        return await ejecutar(client);
-    } else {
-        return await this.withTransaction(ejecutar);
-    }
-}
-
-    
 }

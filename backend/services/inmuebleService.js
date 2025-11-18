@@ -85,6 +85,10 @@ class InmuebleService extends BaseService {
 
     // ======= ACTUALIZAR SEGURO =======
     async updateSeguro(claveCatastral, poliza, nuevosDatos) {
+        console.log("============== AQUI EMPIEZA A EDITAR SEGURO ==============")
+        console.log(claveCatastral)
+        console.log(poliza)
+        console.log(nuevosDatos)
         return await this.seguroService.actualizarSeguro(
             claveCatastral, 
             poliza, 
@@ -103,10 +107,27 @@ class InmuebleService extends BaseService {
 
     // ========== ACTUALIZAR DATOS REGISTRALES ==========
     async updateDatosRegistrales(claveCatastral, nuevosDatos) {
-        return await this.datoRegistralService.actualizarDatosRegistrales(
-            claveCatastral,
-            nuevosDatos
-        );
+        console.log("============== AQUI EMPIEZA A EDITAR DATO REGISTRAL ==============")
+        console.log(claveCatastral)
+        console.log(nuevosDatos)
+        return await this.withTransaction(async (conn) => {
+            if (nuevosDatos.clave_catastral_nueva) {
+                const inmuebleCC = await this.repositories.inmueble.actualizarPorId({ clave_catastral: claveCatastral }, 
+                    { clave_catastral: nuevosDatos.clave_catastral_nueva }, conn)
+
+                
+                console.log('AQUI ESTÁ ACTUALIZANDO LA CC')
+                console.log(inmuebleCC)
+                
+                claveCatastral = inmuebleCC.clave_catastral
+            }
+            
+            return await this.datoRegistralService.actualizarDatosRegistrales(
+                claveCatastral,
+                nuevosDatos,
+                conn
+            );
+        })
     }
 
     // ========== ACTUALIZAR HIPOTECA ==========

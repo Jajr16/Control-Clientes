@@ -11,80 +11,79 @@ export default class DatoRegistralService extends BaseService {
     }
 
     async crearDatoRegistral(data, client = null) {
-        const existente = await this.repositories.datoRegistral.BuscarPorFiltros({
-            num_protocolo: data.num_protocolo,
-            folio: data.folio,
-            hoja: data.hoja,
-            inscripcion: data.inscripcion,
-            fecha_inscripcion: data.fecha_inscripcion
-        }, 1, client)
-        
-        if (existente.length > 0) throw new Error(`El dato registral ingresado ya existe`)
+        return await this.execWithClient(async (conn) => {
 
-        return await this.repositories.datoRegistral.insertar(data, client)
+            const existente = await this.repositories.datoRegistral.BuscarPorFiltros({
+                num_protocolo: data.num_protocolo,
+                folio: data.folio,
+                hoja: data.hoja,
+                inscripcion: data.inscripcion,
+                fecha_inscripcion: data.fecha_inscripcion
+            }, 1, conn);
+
+            if (existente.length > 0)
+                throw new Error(`El dato registral ingresado ya existe`);
+
+            return await this.repositories.datoRegistral.insertar(data, conn);
+
+        }, client);
     }
 
     // En DatoRegistralService.js, agrega este método
-async actualizarDatoRegistralPorId(idDr, nuevosDatos, client = null) {
-    const ejecutar = async (conn) => {
-        // Verificar que el dato registral existe
-        const datoRegistralExiste = await this.repositories.datoRegistral.ExistePorId({ id_dr: idDr }, conn);
-        if (!datoRegistralExiste) {
-            throw new Error('Dato registral no encontrado');
-        }
-
-        // Preparar datos para actualizar
-        const datosActualizar = {};
-        const camposPermitidos = ['num_protocolo', 'folio', 'hoja', 'inscripcion', 'notario', 'fecha_inscripcion'];
-        
-        camposPermitidos.forEach(campo => {
-            if (nuevosDatos[campo] !== undefined) {
-                datosActualizar[campo] = nuevosDatos[campo];
+    async actualizarDatoRegistralPorId(idDr, nuevosDatos, client = null) {
+        return await this.execWithClient(async (conn) => {
+            // Verificar que el dato registral existe
+            const datoRegistralExiste = await this.repositories.datoRegistral.ExistePorId({ id_dr: idDr }, conn);
+            if (!datoRegistralExiste) {
+                throw new Error('Dato registral no encontrado');
             }
-        });
 
-        console.log('Actualizando dato registral con ID:', idDr, 'Datos:', datosActualizar);
+            // Preparar datos para actualizar
+            const datosActualizar = {};
+            const camposPermitidos = ['num_protocolo', 'folio', 'hoja', 'inscripcion', 'notario', 'fecha_inscripcion'];
 
-        if (Object.keys(datosActualizar).length === 0) {
-            throw new Error('No hay datos válidos para actualizar');
-        }
+            camposPermitidos.forEach(campo => {
+                if (nuevosDatos[campo] !== undefined) {
+                    datosActualizar[campo] = nuevosDatos[campo];
+                }
+            });
 
-        const resultado = await this.repositories.datoRegistral.actualizarPorId(
-            { id_dr: idDr },
-            datosActualizar,
-            conn
-        );
+            console.log('Actualizando dato registral con ID:', idDr, 'Datos:', datosActualizar);
 
-        console.log('Resultado actualización dato registral:', resultado);
+            if (Object.keys(datosActualizar).length === 0) {
+                throw new Error('No hay datos válidos para actualizar');
+            }
 
-        if (!resultado) {
-            throw new Error('No se pudo actualizar los datos registrales');
-        }
+            const resultado = await this.repositories.datoRegistral.actualizarPorId(
+                { id_dr: idDr },
+                datosActualizar,
+                conn
+            );
 
-        return {
-            message: "Datos registrales actualizados correctamente",
-            data: resultado
-        };
-    };
+            console.log('Resultado actualización dato registral:', resultado);
 
-    if (client) {
-        return await ejecutar(client);
-    } else {
-        return await this.withTransaction(ejecutar);
+            if (!resultado) {
+                throw new Error('No se pudo actualizar los datos registrales');
+            }
+
+            return {
+                message: "Datos registrales actualizados correctamente",
+                data: resultado
+            };
+        }, client);
     }
-}
 
     async actualizarDatosRegistrales(claveCatastral, nuevosDatos, client = null) {
-        return await this.withTransaction(async (conn) => {
+        return await this.execWithClient(async (conn) => {
             console.log('Buscando inmueble:', claveCatastral);
-            
+
             // 1. Buscar el inmueble para obtener el id_dr
             const inmuebles = await this.repositories.inmueble.BuscarPorFiltros(
-                { clave_catastral: claveCatastral }, 
+                { clave_catastral: claveCatastral },
                 1,
                 conn
             );
-            
+
             if (inmuebles.length === 0) {
                 throw new Error('Inmueble no encontrado');
             }
@@ -108,7 +107,7 @@ async actualizarDatoRegistralPorId(idDr, nuevosDatos, client = null) {
             // 3. Preparar datos para actualizar (solo campos presentes)
             const datosActualizarDR = {};
             const camposDR = ['num_protocolo', 'folio', 'hoja', 'inscripcion', 'notario', 'fecha_inscripcion'];
-            
+
             camposDR.forEach(campo => {
                 if (nuevosDatos[campo] !== undefined) {
                     datosActualizarDR[campo] = nuevosDatos[campo];
@@ -118,22 +117,25 @@ async actualizarDatoRegistralPorId(idDr, nuevosDatos, client = null) {
             console.log('Actualizando dato registral con:', datosActualizarDR);
 
             // 4. Actualizar datos registrales
-            const datoRegistralActualizado = await this.repositories.datoRegistral.actualizarPorId(
-                { id_dr: idDatoRegistral },
-                datosActualizarDR,
-                conn
-            );
-
-            console.log('Resultado actualización dato registral:', datoRegistralActualizado);
-
-            if (!datoRegistralActualizado) {
-                throw new Error('No se pudo actualizar los datos registrales - actualizarPorId devolvió null');
+            let datoRegistralActualizado
+            if (Object.keys(datosActualizarDR).length > 0) {
+                datoRegistralActualizado = await this.repositories.datoRegistral.actualizarPorId(
+                    { id_dr: idDatoRegistral },
+                    datosActualizarDR,
+                    conn
+                );
+    
+                console.log('Resultado actualización dato registral:', datoRegistralActualizado);
+    
+                if (!datoRegistralActualizado) {
+                    throw new Error('No se pudo actualizar los datos registrales - actualizarPorId devolvió null');
+                }
             }
-
+            
             // 5. Preparar datos para empresa_inmueble
             const datosActualizarEI = {};
             const camposEI = ['valor_adquisicion', 'fecha_adquisicion'];
-            
+
             camposEI.forEach(campo => {
                 if (nuevosDatos[campo] !== undefined) {
                     datosActualizarEI[campo] = nuevosDatos[campo];
@@ -169,7 +171,7 @@ async actualizarDatoRegistralPorId(idDr, nuevosDatos, client = null) {
             }
 
             return {
-                message: "Datos registrales actualizados correctamente",
+                message: "Datos actualizados correctamente",
                 data: {
                     datoRegistral: datoRegistralActualizado,
                     empresaInmueble: empresaInmuebleActualizado
@@ -178,5 +180,5 @@ async actualizarDatoRegistralPorId(idDr, nuevosDatos, client = null) {
         }, client);
     }
 
-  
+
 }

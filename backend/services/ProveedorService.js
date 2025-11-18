@@ -34,7 +34,7 @@ export default class ProveedorService extends BaseService {
     }
 
     async actualizarProveedor(claveCatastral, clave, nuevosDatos, client = null) {
-        return await this.withTransaction(async (conn) => {
+        return await this.execWithClient(async (conn) => {
             const proveedorExiste = await this.repositories.inmuebleProveedor.ExistePorId(
                 { 
                     clave_catastral: claveCatastral, 
