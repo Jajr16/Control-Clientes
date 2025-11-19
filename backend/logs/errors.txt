@@ -228,3 +228,153 @@
     at async InmuebleService.updateSeguro (file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/services/inmuebleService.js:92:16)
     at async InmuebleController.updateSeguro (file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/controllers/InmuebleController.js:52:24)
 
+[2025-11-18T21:38:41.167Z] Error: No se pudo realizar la búsqueda en dato_registral
+    at Repositorio.BuscarPorFiltros (file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/repositories/globalPersistence.js:234:19)
+    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at async file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/services/DatoRegistralService.js:16:31
+    at async DatoRegistralService.execWithClient (file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/services/BaseService.js:27:16)
+    at async DatoRegistralService.crearDatoRegistral (file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/services/DatoRegistralService.js:14:16)
+    at async ejecutar (file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/services/inmuebleService.js:29:35)
+    at async InmuebleService.withTransaction (file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/services/BaseService.js:13:28)
+    at async InmuebleService.nuevoInmueble (file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/services/inmuebleService.js:86:20)
+    at async InmuebleController.insertar (file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/controllers/InmuebleController.js:11:28)
+
+[2025-11-18T21:39:21.001Z] Error: No se pudo realizar la búsqueda en dato_registral
+    at Repositorio.BuscarPorFiltros (file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/repositories/globalPersistence.js:234:19)
+    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at async file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/services/DatoRegistralService.js:16:31
+    at async DatoRegistralService.execWithClient (file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/services/BaseService.js:27:16)
+    at async DatoRegistralService.crearDatoRegistral (file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/services/DatoRegistralService.js:14:16)
+    at async ejecutar (file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/services/inmuebleService.js:29:35)
+    at async InmuebleService.withTransaction (file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/services/BaseService.js:13:28)
+    at async InmuebleService.nuevoInmueble (file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/services/inmuebleService.js:86:20)
+    at async InmuebleController.insertar (file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/controllers/InmuebleController.js:11:28)
+
+[2025-11-18T21:50:32.043Z] Error: No se pudo realizar la búsqueda en dato_registral
+    at Repositorio.BuscarPorFiltros (file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/repositories/globalPersistence.js:234:19)
+    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at async file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/services/DatoRegistralService.js:16:31
+    at async DatoRegistralService.execWithClient (file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/services/BaseService.js:27:16)
+    at async DatoRegistralService.crearDatoRegistral (file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/services/DatoRegistralService.js:14:16)
+    at async ejecutar (file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/services/inmuebleService.js:29:35)
+    at async InmuebleService.withTransaction (file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/services/BaseService.js:13:28)
+    at async InmuebleService.nuevoInmueble (file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/services/inmuebleService.js:86:20)
+    at async InmuebleController.insertar (file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/controllers/InmuebleController.js:11:28)
+
+[2025-11-18T22:18:39.406Z] Error: No se pudo realizar la búsqueda en dato_registral
+    at Repositorio.BuscarPorFiltros (file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/repositories/globalPersistence.js:234:19)
+    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at async file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/services/DatoRegistralService.js:16:31
+    at async DatoRegistralService.execWithClient (file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/services/BaseService.js:27:16)
+    at async DatoRegistralService.crearDatoRegistral (file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/services/DatoRegistralService.js:14:16)
+    at async ejecutar (file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/services/inmuebleService.js:29:35)
+    at async InmuebleService.withTransaction (file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/services/BaseService.js:13:28)
+    at async InmuebleService.nuevoInmueble (file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/services/inmuebleService.js:86:20)
+    at async InmuebleController.insertar (file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/controllers/InmuebleController.js:11:28)
+
+[2025-11-18T22:18:59.432Z] Error: No se pudo realizar la búsqueda en dato_registral
+    at Repositorio.BuscarPorFiltros (file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/repositories/globalPersistence.js:234:19)
+    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at async file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/services/DatoRegistralService.js:16:31
+    at async DatoRegistralService.execWithClient (file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/services/BaseService.js:27:16)
+    at async DatoRegistralService.crearDatoRegistral (file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/services/DatoRegistralService.js:14:16)
+    at async ejecutar (file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/services/inmuebleService.js:29:35)
+    at async InmuebleService.withTransaction (file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/services/BaseService.js:13:28)
+    at async InmuebleService.nuevoInmueble (file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/services/inmuebleService.js:86:20)
+    at async InmuebleController.insertar (file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/controllers/InmuebleController.js:11:28)
+
+[2025-11-18T22:31:56.573Z] Error: No se pudo realizar la búsqueda en dato_registral
+    at Repositorio.BuscarPorFiltros (file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/repositories/globalPersistence.js:266:19)
+    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at async file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/services/DatoRegistralService.js:16:31
+    at async DatoRegistralService.execWithClient (file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/services/BaseService.js:27:16)
+    at async DatoRegistralService.crearDatoRegistral (file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/services/DatoRegistralService.js:14:16)
+    at async ejecutar (file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/services/inmuebleService.js:29:35)
+    at async InmuebleService.withTransaction (file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/services/BaseService.js:13:28)
+    at async InmuebleService.nuevoInmueble (file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/services/inmuebleService.js:86:20)
+    at async InmuebleController.insertar (file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/controllers/InmuebleController.js:11:28)
+
+[2025-11-18T22:33:41.729Z] Error: No se pudo realizar la búsqueda en dato_registral
+    at Repositorio.BuscarPorFiltros (file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/repositories/globalPersistence.js:266:19)
+    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at async file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/services/DatoRegistralService.js:16:31
+    at async DatoRegistralService.execWithClient (file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/services/BaseService.js:27:16)
+    at async DatoRegistralService.crearDatoRegistral (file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/services/DatoRegistralService.js:14:16)
+    at async ejecutar (file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/services/inmuebleService.js:29:35)
+    at async InmuebleService.withTransaction (file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/services/BaseService.js:13:28)
+    at async InmuebleService.nuevoInmueble (file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/services/inmuebleService.js:86:20)
+    at async InmuebleController.insertar (file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/controllers/InmuebleController.js:11:28)
+
+[2025-11-18T22:42:39.124Z] ReferenceError: agregarComponentes is not defined
+    at InmuebleController.agregarComponentes (file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/controllers/InmuebleController.js:20:13)
+    at Layer.handle [as handle_request] (C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\express\lib\router\layer.js:95:5)
+    at next (C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\express\lib\router\route.js:149:13)
+    at Route.dispatch (C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\express\lib\router\route.js:119:3)
+    at Layer.handle [as handle_request] (C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\express\lib\router\layer.js:95:5)
+    at C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\express\lib\router\index.js:284:15
+    at Function.process_params (C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\express\lib\router\index.js:346:12)
+    at next (C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\express\lib\router\index.js:280:10)
+    at Function.handle (C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\express\lib\router\index.js:175:3)
+    at router (C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\express\lib\router\index.js:47:12)
+    at Layer.handle [as handle_request] (C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\express\lib\router\layer.js:95:5)
+    at trim_prefix (C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\express\lib\router\index.js:328:13)
+    at C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\express\lib\router\index.js:286:9
+    at Function.process_params (C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\express\lib\router\index.js:346:12)
+    at next (C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\express\lib\router\index.js:280:10)
+    at C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\body-parser\lib\read.js:137:5
+
+[2025-11-18T22:43:39.567Z] error: el valor nulo en la columna «clave_catastral» de la relación «inmueble_proveedor» viola la restricción de no nulo
+    at C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\pg\lib\client.js:545:17
+    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at async Repositorio.insertar (file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/repositories/globalPersistence.js:54:28)
+    at async ProveedorService.vincularProveedorAInmueble (file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/services/ProveedorService.js:31:9)
+    at async file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/services/inmuebleService.js:31:21
+    at async InmuebleService.withTransaction (file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/services/BaseService.js:13:28)
+    at async InmuebleService.execWithClient (file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/services/BaseService.js:29:16)
+    at async InmuebleService.agregarComponentes (file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/services/inmuebleService.js:28:16)
+    at async InmuebleController.agregarComponentes (file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/controllers/InmuebleController.js:20:28)
+
+[2025-11-18T22:51:13.743Z] error: el valor nulo en la columna «clave_catastral» de la relación «inmueble_proveedor» viola la restricción de no nulo
+    at C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\pg\lib\client.js:545:17
+    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at async Repositorio.insertar (file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/repositories/globalPersistence.js:54:28)
+    at async ProveedorService.vincularProveedorAInmueble (file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/services/ProveedorService.js:31:9)
+    at async file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/services/inmuebleService.js:31:21
+    at async InmuebleService.withTransaction (file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/services/BaseService.js:13:28)
+    at async InmuebleService.execWithClient (file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/services/BaseService.js:29:16)
+    at async InmuebleService.agregarComponentes (file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/services/inmuebleService.js:28:16)
+    at async InmuebleController.agregarComponentes (file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/controllers/InmuebleController.js:20:28)
+
+[2025-11-18T22:52:16.379Z] error: el valor nulo en la columna «clave_catastral» de la relación «inmueble_proveedor» viola la restricción de no nulo
+    at C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\pg\lib\client.js:545:17
+    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at async Repositorio.insertar (file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/repositories/globalPersistence.js:54:28)
+    at async ProveedorService.vincularProveedorAInmueble (file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/services/ProveedorService.js:31:9)
+    at async file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/services/inmuebleService.js:31:21
+    at async InmuebleService.withTransaction (file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/services/BaseService.js:13:28)
+    at async InmuebleService.execWithClient (file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/services/BaseService.js:29:16)
+    at async InmuebleService.agregarComponentes (file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/services/inmuebleService.js:28:16)
+    at async InmuebleController.agregarComponentes (file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/controllers/InmuebleController.js:20:28)
+
+[2025-11-18T22:52:53.449Z] error: el valor nulo en la columna «clave_catastral» de la relación «inmueble_proveedor» viola la restricción de no nulo
+    at C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\pg\lib\client.js:545:17
+    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at async Repositorio.insertar (file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/repositories/globalPersistence.js:54:28)
+    at async ProveedorService.vincularProveedorAInmueble (file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/services/ProveedorService.js:31:9)
+    at async file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/services/inmuebleService.js:31:21
+    at async InmuebleService.withTransaction (file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/services/BaseService.js:13:28)
+    at async InmuebleService.execWithClient (file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/services/BaseService.js:29:16)
+    at async InmuebleService.agregarComponentes (file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/services/inmuebleService.js:28:16)
+    at async InmuebleController.agregarComponentes (file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/controllers/InmuebleController.js:20:28)
+
+[2025-11-18T22:53:50.488Z] error: el valor nulo en la columna «clave_catastral» de la relación «inmueble_proveedor» viola la restricción de no nulo
+    at C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\pg\lib\client.js:545:17
+    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at async Repositorio.insertar (file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/repositories/globalPersistence.js:54:28)
+    at async ProveedorService.vincularProveedorAInmueble (file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/services/ProveedorService.js:31:9)
+    at async file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/services/inmuebleService.js:31:21
+    at async InmuebleService.withTransaction (file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/services/BaseService.js:13:28)
+    at async InmuebleService.execWithClient (file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/services/BaseService.js:29:16)
+    at async InmuebleService.agregarComponentes (file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/services/inmuebleService.js:28:16)
+    at async InmuebleController.agregarComponentes (file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/controllers/InmuebleController.js:20:28)
+

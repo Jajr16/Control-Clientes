@@ -15,6 +15,15 @@ class InmuebleController extends BaseController {
         }
     }
 
+    async agregarComponentes(req, res) {
+        try {
+            const result = await this.service.agregarComponentes(req.body);
+            return this.sendSuccess(res, result, 'Inmueble creado correctamente', 201);
+        } catch (error) {
+            return this.handleError(error, res, "Error al crear el inmueble");
+        }
+    }
+
     async getInmuebleDetails(req, res) {
         try {
             const { cif } = req.params;

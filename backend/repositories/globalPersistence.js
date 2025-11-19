@@ -211,18 +211,50 @@ class Repositorio {
         let query = `SELECT ${columnasQuery} FROM ${this.tabla}`;
         let valores = [];
 
+        // Lista de columnas reconocidas como tipo fecha
+        const columnasFecha = [
+            'fecha', 'fecha_inicio', 'fecha_fin',
+            'vigencia_inicio', 'vigencia_fin',
+            'f_creacion', 'f_modificacion', 'fecha_inscripcion',
+            'fecha_adquisicion', 'fecha_hipoteca',
+        ];
+
         if (tieneFiltros) {
             const columnas = Object.keys(filtros);
+
             const condiciones = columnas
                 .map((col, index) => {
-                    // Si el valor es string usamos ILIKE para ignorar mayúsculas
                     const valor = filtros[col];
-                    if (typeof valor === 'string') return `${col} ILIKE $${index + 1}`;
-                    return `${col} = $${index + 1}`;
+                    const placeholder = `$${index + 1}`;
+
+                    // Si la columna es fecha → comparar directo
+                    if (columnasFecha.includes(col)) {
+                        return `${col} = ${placeholder}`;
+                    }
+
+                    // Strings normales → ILIKE (ignora mayúsculas)
+                    if (typeof valor === 'string') {
+                        return `${col} ILIKE ${placeholder}`;
+                    }
+
+                    // Otros tipos → comparación normal
+                    return `${col} = ${placeholder}`;
                 })
                 .join(' AND ');
 
-            valores = Object.values(filtros).map(val => typeof val === 'string' ? val : val);
+            // Empujar valores
+            valores = Object.keys(filtros).map(col => {
+                const valor = filtros[col];
+
+                // Si columna es fecha, no modificar el string
+                if (columnasFecha.includes(col)) return valor;
+
+                // Si es string, usar el formato para ILIKE
+                if (typeof valor === 'string') return `%${valor}%`;
+
+                return valor;
+            });
+
             query += ` WHERE ${condiciones}`;
         }
 

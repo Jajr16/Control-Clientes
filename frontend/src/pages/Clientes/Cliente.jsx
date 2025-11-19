@@ -6,6 +6,7 @@ import InmuebleDetails from "../../components/elements/InmuebleDetails";
 import { getInmuebles, deleteInmueble, updateInmueble } from "../../api/moduloInmuebles/inmueble";
 import { UserPlusIcon, BuildingOfficeIcon } from "@heroicons/react/24/solid";
 import { Link } from "react-router-dom";
+import ModalAgregarInmueble from "../../components/modals/ModalInmueble";
 
 const Cliente = () => {
     const [selectedClient, setSelectedClient] = useState(null);
@@ -14,7 +15,7 @@ const Cliente = () => {
     const [proveedoresList, setProveedoresSegurosList] = useState(null);
     const [HipotecasList, setHipotecas] = useState(null);
     const [loading, setLoading] = useState(false);
-    
+
     // ✅ NUEVO: Estado para controlar si hay edición activa
     const [isEditingInmueble, setIsEditingInmueble] = useState(false);
 
@@ -114,17 +115,33 @@ const Cliente = () => {
                 '¿Estás seguro de que quieres cambiar de inmueble?\n\n' +
                 'Se perderán todos los cambios no guardados.'
             );
-            
+
             if (!confirmar) {
                 return; // No cambiar de inmueble
             }
-            
+
             // Si confirma, resetear el estado de edición
             setIsEditingInmueble(false);
         }
-        
+
         setSelectedInmueble(inmueble);
     };
+
+    const handleInmuebleAgregado = async () => {
+        if (!selectedClient) return;
+
+        try {
+            setLoading(true);
+            const response = await getInmuebles(selectedClient.cif);
+            setInmueblesList(response.data);
+        } catch (error) {
+            console.error("Error refrescando inmuebles:", error);
+            alert('Error al actualizar la lista de inmuebles');
+        } finally {
+            setLoading(false);
+        }
+    };
+
 
     // ✅ NUEVO: Callback para que InmuebleDetails notifique cambios en modo edición
     const handleEditModeChange = (isEditing) => {
@@ -186,9 +203,10 @@ const Cliente = () => {
                                         onDeleteInmueble={handleDeleteInmueble}
                                         onEditInmueble={handleEditInmueble}
                                         selectedInmueble={selectedInmueble}
-                                        isEditingActive={isEditingInmueble} // ✅ NUEVO
+                                        isEditingActive={isEditingInmueble}
                                     />
                                 </div>
+                                <ModalAgregarInmueble cifCliente={selectedClient.cif} onInmuebleAgregado={handleInmuebleAgregado} />
                             </>
                         )}
                     </div>
@@ -202,7 +220,7 @@ const Cliente = () => {
                                 setHipotecas={setHipotecas}
                                 HipotecasList={HipotecasList}
                                 onInmuebleUpdated={setSelectedInmueble}
-                                onEditModeChange={handleEditModeChange} // ✅ NUEVO
+                                onEditModeChange={handleEditModeChange}
                             />
                         ) : selectedClient && inmueblesList && inmueblesList.length === 0 ? (
                             <div className="h-full border border-black"></div>

@@ -6,6 +6,7 @@ const inmuebleController = new InmuebleController();
 
 // Rutas para operaciones CRUD
 router.post('/', inmuebleController.insertar.bind(inmuebleController));
+router.post('/componentes/', inmuebleController.agregarComponentes.bind(inmuebleController));
 router.get('/inmueblesList/:cif', inmuebleController.getInmuebleDetails.bind(inmuebleController));
 router.get('/inmueblesProveedoresSeguros/:cc', inmuebleController.getProveedoresSegurosDetails.bind(inmuebleController));
 router.get('/hipotecas/:cc', inmuebleController.getHipotecas.bind(inmuebleController));

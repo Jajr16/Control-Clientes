@@ -15,6 +15,7 @@ import {
     ClipboardDocumentListIcon, ChevronDownIcon, ChevronRightIcon,
     PencilIcon, CheckIcon, XMarkIcon, TrashIcon
 } from "@heroicons/react/24/solid";
+import ModalComponentes from "../modals/ModalComponentes";
 
 // ============================================================
 // COMPONENTE: EditableField
@@ -107,10 +108,10 @@ const InmuebleDetails = ({
 
     // ======== EFECTOS ========
     useEffect(() => {
-        if (!globalEditMode) {
+        if (!globalEditMode && inmueble?.clave_catastral !== inmuebleLocal?.clave_catastral) {
             setInmuebleLocal(inmueble);
         }
-    }, [inmueble, globalEditMode]);
+    }, [inmueble?.clave_catastral, globalEditMode]);
 
     useEffect(() => {
         if (onEditModeChange) {
@@ -118,28 +119,25 @@ const InmuebleDetails = ({
         }
     }, [globalEditMode, onEditModeChange]);
 
+    async function fetchData() {
+        try {
+            const [proveedoresResponse, hipotecasResponse] = await Promise.all([
+                getInmuebleDetails(inmuebleLocal.clave_catastral),
+                getInmuebleHipotecas(inmuebleLocal.clave_catastral)
+            ]);
+
+            setProveedoresSegurosList(proveedoresResponse.data);
+            setHipotecas(hipotecasResponse.data);
+        } catch (error) {
+            console.error("Error cargando datos:", error);
+        }
+    }
+
     useEffect(() => {
-        if (!inmuebleLocal) {
-            setProveedoresSegurosList(null);
-            return;
-        }
-
-        async function fetchData() {
-            try {
-                const [proveedoresResponse, hipotecasResponse] = await Promise.all([
-                    getInmuebleDetails(inmuebleLocal.clave_catastral),
-                    getInmuebleHipotecas(inmuebleLocal.clave_catastral)
-                ]);
-
-                setProveedoresSegurosList(proveedoresResponse.data);
-                setHipotecas(hipotecasResponse.data);
-            } catch (error) {
-                console.error("Error cargando datos:", error);
-            }
-        }
+        if (!inmuebleLocal?.clave_catastral) return;
 
         fetchData();
-    }, [inmuebleLocal?.clave_catastral, setProveedoresSegurosList, setHipotecas]);
+    }, [inmuebleLocal?.clave_catastral]);
 
     // ======== FUNCIONES DELETE ========
     const handleDeleteSeguro = useCallback(async (poliza, empresaSeguro) => {
@@ -160,7 +158,7 @@ const InmuebleDetails = ({
             console.error('Error al eliminar seguro:', error);
             alert('Error: ' + (error.response?.data?.message || error.message));
         }
-    }, [inmuebleLocal?.clave_catastral, proveedoresList, setProveedoresSegurosList]);
+    }, [inmuebleLocal?.clave_catastral]);
 
     const handleDeleteProveedor = useCallback(async (claveProveedor, nombreProveedor) => {
         if (!window.confirm(`¿Eliminar el proveedor ${nombreProveedor}?`)) return;
@@ -434,35 +432,37 @@ const InmuebleDetails = ({
     return (
         <div className="absolute flex w-[68%] h-full p-2">
             <div className="w-full h-full flex flex-col border border-black">
-
-                {/* BOTÓN DE EDITAR */}
-                <div className="flex justify-end p-2 border-b border-gray-300">
-                    {!globalEditMode ? (
-                        <button
-                            onClick={startGlobalEdit}
-                            className="bg-blue-500 hover:bg-blue-600 text-white px-4 py-2 rounded-lg shadow-lg transition-colors duration-200 flex items-center"
-                        >
-                            <PencilIcon className="h-5 w-5 mr-2" />
-                            Editar Inmueble
-                        </button>
-                    ) : (
-                        <div className="flex space-x-2">
+                <div className="flex justify-end items-center p-2 gap-3">
+                    <ModalComponentes CC={inmuebleLocal?.clave_catastral} onComponenteAgregado={fetchData} />
+                    {/* BOTÓN DE EDITAR */}
+                    <div className="flex justify-end p-2">
+                        {!globalEditMode ? (
                             <button
-                                onClick={saveAllChanges}
-                                className="bg-green-500 hover:bg-green-600 text-white px-4 py-2 rounded-lg shadow-lg transition-colors duration-200 flex items-center"
+                                onClick={startGlobalEdit}
+                                className="bg-blue-500 hover:bg-blue-600 text-white px-4 py-2 rounded-lg shadow-lg transition-colors duration-200 flex items-center"
                             >
-                                <CheckIcon className="h-5 w-5 mr-2" />
-                                Guardar Todo
+                                <PencilIcon className="h-5 w-5 mr-2" />
+                                Editar Inmueble
                             </button>
-                            <button
-                                onClick={cancelGlobalEdit}
-                                className="bg-red-500 hover:bg-red-600 text-white px-4 py-2 rounded-lg shadow-lg transition-colors duration-200 flex items-center"
-                            >
-                                <XMarkIcon className="h-5 w-5 mr-2" />
-                                Cancelar
-                            </button>
-                        </div>
-                    )}
+                        ) : (
+                            <div className="flex space-x-2">
+                                <button
+                                    onClick={saveAllChanges}
+                                    className="bg-green-500 hover:bg-green-600 text-white px-4 py-2 rounded-lg shadow-lg transition-colors duration-200 flex items-center"
+                                >
+                                    <CheckIcon className="h-5 w-5 mr-2" />
+                                    Guardar Todo
+                                </button>
+                                <button
+                                    onClick={cancelGlobalEdit}
+                                    className="bg-red-500 hover:bg-red-600 text-white px-4 py-2 rounded-lg shadow-lg transition-colors duration-200 flex items-center"
+                                >
+                                    <XMarkIcon className="h-5 w-5 mr-2" />
+                                    Cancelar
+                                </button>
+                            </div>
+                        )}
+                    </div>
                 </div>
 
                 {/* CONTENIDO CON SCROLL */}
@@ -783,7 +783,7 @@ const InmuebleDetails = ({
                     </div>
                 </div>
             </div>
-        </div>
+        </div >
     );
 };
 

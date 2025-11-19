@@ -7,6 +7,11 @@ export const addInmueble = async (inmueble) => {
     return res.data;
 }
 
+export const addComponentes = async (inmueble) => {
+    const res = await axios.post(`${API_URL}/inmueble/componentes`, inmueble);
+    return res.data;
+}
+
 export const getInmuebles = async (cif) => {
     const res = await axios.get(`${API_URL}/inmueble/inmueblesList/${cif}`);
     return res.data;

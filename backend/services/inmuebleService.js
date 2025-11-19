@@ -24,6 +24,49 @@ class InmuebleService extends BaseService {
         this.seguroService = new SeguroService();
     }
 
+    async agregarComponentes(datos, client = null) {
+        return await this.execWithClient(async (conn) => {
+            let proveedores, hipotecas, seguros;
+
+            if (datos.proveedores && datos.proveedores.length > 0) {
+                for (const proveedor of datos.proveedores) {
+                    proveedores = await this.proveedorService.vincularProveedorAInmueble({
+                        clave: proveedor.clave_proveedor,
+                        nombre: proveedor.nombre,
+                        telefono: proveedor.tel_proveedor,
+                        email: proveedor.email_proveedor,
+                        tipo_servicio: proveedor.servicio
+                    }, datos.clave_catastral, conn)
+                }
+            }
+
+            if (datos.hipotecas && datos.hipotecas.length > 0) {
+                for (const hipoteca of datos.hipotecas) {
+                    hipotecas = await this.hipotecaService.vincularHipotecaAInmueble({
+                        prestamo: hipoteca.prestamo,
+                        banco_prestamo: hipoteca.prestamo,
+                        fecha_hipoteca: hipoteca.fecha_hipoteca,
+                        cuota_hipoteca: hipoteca.cuota
+                    }, datos.clave_catastral, conn)
+                }
+            }
+
+            if (datos.seguros && datos.seguros.length > 0) {
+                for (const seguro of datos.seguros) {
+                    seguros = await this.seguroService.vincularSeguroAInmueble({
+                        empresa_seguro: seguro.aseguradora,
+                        tipo_seguro: seguro.tipo_seguro,
+                        telefono: seguro.telefono_seguro,
+                        email: seguro.email_seguro,
+                        poliza: seguro.poliza
+                    }, datos.clave_catastral, conn)
+                }
+            }
+
+            return { message: "Componentes agregados con éxito." };
+        }, client)
+    }
+
     async nuevoInmueble(datos, client = null) {
         const ejecutar = async (conn) => {
             const datoRegistral = await this.datoRegistralService.crearDatoRegistral(datos.datosInmueble.datoRegistralInmueble, conn);
@@ -73,6 +116,10 @@ class InmuebleService extends BaseService {
                 }
             }
 
+            if (datos.cif) {
+                await this.repositories.empresaInmueble.insertar({ cif: datos.cif, clave_catastral: datos.datosInmueble.clave_catastral }, conn)
+            }
+
             return { message: "Inmueble creado con éxito.", data: resultado };
         };
 
@@ -90,8 +137,8 @@ class InmuebleService extends BaseService {
         console.log(poliza)
         console.log(nuevosDatos)
         return await this.seguroService.actualizarSeguro(
-            claveCatastral, 
-            poliza, 
+            claveCatastral,
+            poliza,
             nuevosDatos
         );
     }
@@ -112,16 +159,16 @@ class InmuebleService extends BaseService {
         console.log(nuevosDatos)
         return await this.withTransaction(async (conn) => {
             if (nuevosDatos.clave_catastral_nueva) {
-                const inmuebleCC = await this.repositories.inmueble.actualizarPorId({ clave_catastral: claveCatastral }, 
+                const inmuebleCC = await this.repositories.inmueble.actualizarPorId({ clave_catastral: claveCatastral },
                     { clave_catastral: nuevosDatos.clave_catastral_nueva }, conn)
 
-                
+
                 console.log('AQUI ESTÁ ACTUALIZANDO LA CC')
                 console.log(inmuebleCC)
-                
+
                 claveCatastral = inmuebleCC.clave_catastral
             }
-            
+
             return await this.datoRegistralService.actualizarDatosRegistrales(
                 claveCatastral,
                 nuevosDatos,
@@ -141,91 +188,91 @@ class InmuebleService extends BaseService {
 
     // En InmuebleService.js, agrega este método:
 
-// ========== ACTUALIZAR INMUEBLE ==========
-async updateInmueble(claveCatastral, nuevosDatos) {
-    return await this.withTransaction(async (client) => {
-        console.log(`Actualizando inmueble: ${claveCatastral}`, nuevosDatos);
-        
-        // 1. Verificar que el inmueble existe
-        const inmuebleExiste = await this.repositories.inmueble.ExistePorId(
-            { clave_catastral: claveCatastral }, 
-            client
-        );
+    // ========== ACTUALIZAR INMUEBLE ==========
+    async updateInmueble(claveCatastral, nuevosDatos) {
+        return await this.withTransaction(async (client) => {
+            console.log(`Actualizando inmueble: ${claveCatastral}`, nuevosDatos);
 
-        if (!inmuebleExiste) {
-            throw new Error('Inmueble no encontrado');
-        }
+            // 1. Verificar que el inmueble existe
+            const inmuebleExiste = await this.repositories.inmueble.ExistePorId(
+                { clave_catastral: claveCatastral },
+                client
+            );
 
-        // 2. Obtener datos actuales del inmueble
-        const inmuebleActual = await this.repositories.inmueble.BuscarPorFiltros(
-            { clave_catastral: claveCatastral }, 
-            1, 
-            client
-        );
-
-        if (inmuebleActual.length === 0) {
-            throw new Error('No se pudieron obtener los datos del inmueble');
-        }
-
-        const inmueble = inmuebleActual[0];
-        const idDireccion = inmueble.direccion;
-
-        // 3. Actualizar dirección si hay cambios en los campos de dirección
-        const camposDireccion = ['calle', 'numero', 'piso', 'codigo_postal', 'localidad'];
-        const datosDireccion = {};
-        
-        for (const campo of camposDireccion) {
-            if (nuevosDatos[campo] !== undefined) {
-                datosDireccion[campo] = nuevosDatos[campo];
+            if (!inmuebleExiste) {
+                throw new Error('Inmueble no encontrado');
             }
-        }
 
-        if (Object.keys(datosDireccion).length > 0) {
-            await this.direccionService.actualizarDireccion(idDireccion, datosDireccion, client);
-            console.log('Dirección actualizada');
-        }
-
-        // 4. Actualizar valor_adquisicion en empresa_inmueble si está presente
-        if (nuevosDatos.valor_adquisicion !== undefined) {
-            const empresaInmuebleRelacion = await this.repositories.empresaInmueble.BuscarPorFiltros(
-                { clave_catastral: claveCatastral }, 
+            // 2. Obtener datos actuales del inmueble
+            const inmuebleActual = await this.repositories.inmueble.BuscarPorFiltros(
+                { clave_catastral: claveCatastral },
                 1,
                 client
             );
 
-            if (empresaInmuebleRelacion && empresaInmuebleRelacion.length > 0) {
-                const { cif } = empresaInmuebleRelacion[0];
-                await this.repositories.empresaInmueble.actualizarPorId(
-                    { cif: cif, clave_catastral: claveCatastral },
-                    { valor_adquisicion: nuevosDatos.valor_adquisicion },
+            if (inmuebleActual.length === 0) {
+                throw new Error('No se pudieron obtener los datos del inmueble');
+            }
+
+            const inmueble = inmuebleActual[0];
+            const idDireccion = inmueble.direccion;
+
+            // 3. Actualizar dirección si hay cambios en los campos de dirección
+            const camposDireccion = ['calle', 'numero', 'piso', 'codigo_postal', 'localidad'];
+            const datosDireccion = {};
+
+            for (const campo of camposDireccion) {
+                if (nuevosDatos[campo] !== undefined) {
+                    datosDireccion[campo] = nuevosDatos[campo];
+                }
+            }
+
+            if (Object.keys(datosDireccion).length > 0) {
+                await this.direccionService.actualizarDireccion(idDireccion, datosDireccion, client);
+                console.log('Dirección actualizada');
+            }
+
+            // 4. Actualizar valor_adquisicion en empresa_inmueble si está presente
+            if (nuevosDatos.valor_adquisicion !== undefined) {
+                const empresaInmuebleRelacion = await this.repositories.empresaInmueble.BuscarPorFiltros(
+                    { clave_catastral: claveCatastral },
+                    1,
                     client
                 );
-                console.log('Valor de adquisición actualizado');
+
+                if (empresaInmuebleRelacion && empresaInmuebleRelacion.length > 0) {
+                    const { cif } = empresaInmuebleRelacion[0];
+                    await this.repositories.empresaInmueble.actualizarPorId(
+                        { cif: cif, clave_catastral: claveCatastral },
+                        { valor_adquisicion: nuevosDatos.valor_adquisicion },
+                        client
+                    );
+                    console.log('Valor de adquisición actualizado');
+                }
             }
-        }
 
-        // 5. Retornar el inmueble actualizado
-        const inmuebleActualizado = await this.repositories.inmueble.BuscarPorFiltros(
-            { clave_catastral: claveCatastral }, 
-            1, 
-            client
-        );
+            // 5. Retornar el inmueble actualizado
+            const inmuebleActualizado = await this.repositories.inmueble.BuscarPorFiltros(
+                { clave_catastral: claveCatastral },
+                1,
+                client
+            );
 
-        return {
-            message: "Inmueble actualizado correctamente",
-            data: inmuebleActualizado[0]
-        };
-    });
-}
+            return {
+                message: "Inmueble actualizado correctamente",
+                data: inmuebleActualizado[0]
+            };
+        });
+    }
 
     // ========== ELIMINAR INMUEBLE ==========
     async deleteInmueble(claveCatastral) {
         return await this.withTransaction(async (client) => {
             console.log(`Iniciando eliminación completa del inmueble: ${claveCatastral}`);
-            
+
             // 1. Verificar que el inmueble existe
             const inmuebleExiste = await this.repositories.inmueble.ExistePorId(
-                { clave_catastral: claveCatastral }, 
+                { clave_catastral: claveCatastral },
                 client
             );
 
@@ -235,8 +282,8 @@ async updateInmueble(claveCatastral, nuevosDatos) {
 
             // 2. Obtener datos completos del inmueble
             const inmuebleData = await this.repositories.inmueble.BuscarPorFiltros(
-                { clave_catastral: claveCatastral }, 
-                1, 
+                { clave_catastral: claveCatastral },
+                1,
                 client
             );
 
@@ -273,7 +320,7 @@ async updateInmueble(claveCatastral, nuevosDatos) {
 
             // 3.3 Eliminar relación con empresa
             const empresaInmuebleRelacion = await this.repositories.empresaInmueble.BuscarPorFiltros(
-                { clave_catastral: claveCatastral }, 
+                { clave_catastral: claveCatastral },
                 1,
                 client
             );
@@ -281,7 +328,7 @@ async updateInmueble(claveCatastral, nuevosDatos) {
             if (empresaInmuebleRelacion && empresaInmuebleRelacion.length > 0) {
                 const { cif } = empresaInmuebleRelacion[0];
                 await this.repositories.empresaInmueble.eliminarPorId(
-                    { cif: cif, clave_catastral: claveCatastral }, 
+                    { cif: cif, clave_catastral: claveCatastral },
                     client
                 );
                 console.log('Relación con empresa eliminada');
@@ -289,21 +336,21 @@ async updateInmueble(claveCatastral, nuevosDatos) {
 
             // 4. Eliminar el inmueble principal
             await this.repositories.inmueble.eliminarPorId(
-                { clave_catastral: claveCatastral }, 
+                { clave_catastral: claveCatastral },
                 client
             );
             console.log('Inmueble eliminado de la tabla inmueble');
 
             // 5. Eliminar datos registrales si no son usados
             const otrosInmueblesDatoRegistral = await this.repositories.inmueble.BuscarPorFiltros(
-                { dato_registral: idDatoRegistral }, 
+                { dato_registral: idDatoRegistral },
                 999,
                 client
             );
 
             if (otrosInmueblesDatoRegistral.length === 0) {
                 await this.repositories.datoRegistral.eliminarPorId(
-                    { id_dr: idDatoRegistral }, 
+                    { id_dr: idDatoRegistral },
                     client
                 );
                 console.log('Datos registrales eliminados completamente');
@@ -313,7 +360,7 @@ async updateInmueble(claveCatastral, nuevosDatos) {
 
             // 6. Eliminar dirección si no es usada
             const otrosInmueblesDireccion = await this.repositories.inmueble.BuscarPorFiltros(
-                { direccion: idDireccion }, 
+                { direccion: idDireccion },
                 999,
                 client
             );
