@@ -11,10 +11,12 @@ const ClientSearch = ({
     fieldsToInclude = ["cif", "nombre", "clave"],
     labelFormat = (client) => `${client.clave} - ${client.nombre}`,
 }) => {
+    const isHistoricoAdeudos = window.location.pathname === '/historicoAdeudos';
     const [clients, setClients] = useState([]);
     const [selectedClient, setSelectedClient] = useState(null);
     const [isEditModalOpen, setIsEditModalOpen] = useState(false);
     const [editFormData, setEditFormData] = useState({});
+
 
     useEffect(() => {
         const fetchClients = async () => {
@@ -35,7 +37,6 @@ const ClientSearch = ({
             label: labelFormat(client),
         };
 
-        // Solo incluir campos solicitados
         fieldsToInclude.forEach((field) => {
             base[field] = client[field] ?? "";
         });
@@ -70,34 +71,34 @@ const ClientSearch = ({
     };
 
     const handleSaveEdit = async () => {
-    try {
-        console.log("Datos a enviar:", editFormData);
-        
-        const cifViejo = selectedClient.cif; // A52438818
-        const cifNuevo = editFormData.cif;   // A52438880
-        
-        await updateClient(cifViejo, editFormData);
-        
-        const response = await fetch(`${API_URL}/${routeName}`);
-        const data = await response.json();
-        setClients(data.data);
-        
-        if (cifViejo !== cifNuevo) {
-            const clienteActualizado = data.data.find(client => client.cif === cifNuevo);
-            setSelectedClient(clienteActualizado || editFormData);
-            onSelectClient?.(clienteActualizado || editFormData);
-        } else {
-            setSelectedClient(editFormData);
-            onSelectClient?.(editFormData);
+        try {
+            console.log("Datos a enviar:", editFormData);
+            
+            const cifViejo = selectedClient.cif; 
+            const cifNuevo = editFormData.cif;   
+            
+            await updateClient(cifViejo, editFormData);
+            
+            const response = await fetch(`${API_URL}/${routeName}`);
+            const data = await response.json();
+            setClients(data.data);
+            
+            if (cifViejo !== cifNuevo) {
+                const clienteActualizado = data.data.find(client => client.cif === cifNuevo);
+                setSelectedClient(clienteActualizado || editFormData);
+                onSelectClient?.(clienteActualizado || editFormData);
+            } else {
+                setSelectedClient(editFormData);
+                onSelectClient?.(editFormData);
+            }
+            
+            alert('Cliente actualizado correctamente');
+            setIsEditModalOpen(false);
+        } catch (error) {
+            console.error("Error al actualizar cliente:", error);
+            alert('Error al actualizar el cliente: ' + (error.response?.data?.message || error.message));
         }
-        
-        alert('Cliente actualizado correctamente');
-        setIsEditModalOpen(false);
-    } catch (error) {
-        console.error("Error al actualizar cliente:", error);
-        alert('Error al actualizar el cliente: ' + (error.response?.data?.message || error.message));
-    }
-};
+    };
 
     const handleCancelEdit = () => {
         setIsEditModalOpen(false);
@@ -128,13 +129,16 @@ const ClientSearch = ({
                 
                 {selectedClient && (
                     <div className="flex space-x-1 ml-2">
-                        <button
-                            onClick={handleEditClick}
-                            className="p-2 text-blue-500 hover:text-blue-700 hover:bg-blue-100 rounded transition-colors duration-200"
-                            title="Editar cliente"
-                        >
-                            <PencilIcon className="h-5 w-5" />
-                        </button>
+                        {/* ✅ SOLUCIÓN: Solo mostrar botón de edición si NO estamos en Historial Adeudos */}
+                        {!isHistoricoAdeudos && (
+                            <button
+                                onClick={handleEditClick}
+                                className="p-2 text-blue-500 hover:text-blue-700 hover:bg-blue-100 rounded transition-colors duration-200"
+                                title="Editar cliente"
+                            >
+                                <PencilIcon className="h-5 w-5" />
+                            </button>
+                        )}
                         <button
                             onClick={handleClearSelection}
                             className="p-2 text-gray-500 hover:text-gray-700 hover:bg-gray-100 rounded transition-colors duration-200"

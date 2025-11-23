@@ -7,7 +7,7 @@ const InmueblesList = ({
     onDeleteInmueble, 
     onEditInmueble, 
     selectedInmueble,
-    isEditingActive // ✅ NUEVO: indica si hay edición global activa
+    isEditingActive, 
 }) => {
     const [isSelected, setSelected] = useState(null);
     const [editingInmueble, setEditingInmueble] = useState(null);
@@ -27,7 +27,6 @@ const InmueblesList = ({
     }, [client]);
 
     const handleSelect = (inmueble) => {
-        // ✅ No permitir seleccionar si está en modo edición local
         if (editingInmueble === inmueble.clave_catastral) return;
         
         setSelected(inmueble.clave_catastral);
@@ -91,10 +90,9 @@ const InmueblesList = ({
             <div className="h-full flex flex-col p-2">
                 <div className="relative h-full flex flex-col border border-black p-2 overflow-y-auto">
                     
-                    {/* ✅ NUEVO: Mensaje de advertencia cuando hay edición activa */}
                     {isEditingActive && (
                         <div className="mb-3 p-3 bg-yellow-100 border-l-4 border-yellow-500 text-yellow-700 rounded">
-                            <p className="font-semibold text-sm">⚠️ Modo de edición activo</p>
+                            <p className="font-semibold text-sm">Modo de edición activo</p>
                             <p className="text-xs mt-1">Guarda o cancela los cambios antes de seleccionar otro inmueble</p>
                         </div>
                     )}
@@ -118,10 +116,10 @@ const InmueblesList = ({
                                             : ""
                                     } ${
                                         isEditingActive && isSelected !== inmueble.clave_catastral
-                                            ? "opacity-50 cursor-not-allowed" // ✅ NUEVO: Deshabilitar visualmente
+                                            ? "opacity-50 cursor-not-allowed"
                                             : "cursor-pointer"
                                     }`}
-                                    onClick={() => !isEditingActive && handleSelect(inmueble)} // ✅ MODIFICADO
+                                    onClick={() => !isEditingActive && handleSelect(inmueble)} 
                                 >
                                     <div className="flex justify-between items-start">
                                         <div className="flex-1">
@@ -247,7 +245,7 @@ const InmueblesList = ({
                                                     {onDeleteInmueble && (
                                                         <button
                                                             onClick={(e) => handleDelete(e, inmueble)}
-                                                            disabled={isEditingActive} // ✅ NUEVO
+                                                            disabled={isEditingActive} 
                                                             className={`p-2 text-red-500 hover:text-red-700 hover:bg-red-100 rounded transition-colors duration-200 flex-shrink-0 ${
                                                                 isEditingActive ? 'opacity-30 cursor-not-allowed' : ''
                                                             }`}

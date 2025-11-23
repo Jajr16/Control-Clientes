@@ -16,7 +16,6 @@ const Cliente = () => {
     const [HipotecasList, setHipotecas] = useState(null);
     const [loading, setLoading] = useState(false);
 
-    // ✅ NUEVO: Estado para controlar si hay edición activa
     const [isEditingInmueble, setIsEditingInmueble] = useState(false);
 
     useEffect(() => {
@@ -106,9 +105,7 @@ const Cliente = () => {
         setHipotecas(null);
     };
 
-    // ✅ MODIFICADO: Validar antes de cambiar de inmueble
     const handleSelectInmueble = (inmueble) => {
-        // Si hay edición activa, confirmar antes de cambiar
         if (isEditingInmueble) {
             const confirmar = window.confirm(
                 '⚠️ Tienes cambios sin guardar\n\n' +
@@ -117,10 +114,9 @@ const Cliente = () => {
             );
 
             if (!confirmar) {
-                return; // No cambiar de inmueble
+                return; 
             }
 
-            // Si confirma, resetear el estado de edición
             setIsEditingInmueble(false);
         }
 
@@ -143,14 +139,12 @@ const Cliente = () => {
     };
 
 
-    // ✅ NUEVO: Callback para que InmuebleDetails notifique cambios en modo edición
     const handleEditModeChange = (isEditing) => {
         setIsEditingInmueble(isEditing);
     };
 
     return (
         <div className="h-full flex flex-col">
-            {/* Barra de búsqueda */}
             <div className={`flex-shrink-0 ${selectedClient ? "w-[30%]" : "w-full"} p-2 flex`}>
                 <ClientSearch
                     onSelectClient={handleSelectClient}

@@ -17,9 +17,7 @@ import {
 } from "@heroicons/react/24/solid";
 import ModalComponentes from "../modals/ModalComponentes";
 
-// ============================================================
-// COMPONENTE: EditableField
-// ============================================================
+
 const EditableField = React.memo(({
     value,
     onChange,
@@ -70,9 +68,7 @@ const EditableField = React.memo(({
 
 EditableField.displayName = 'EditableField';
 
-// ============================================================
-// COMPONENTE PRINCIPAL: InmuebleDetails
-// ============================================================
+
 const InmuebleDetails = ({
     inmueble,
     setProveedoresSegurosList,
@@ -82,7 +78,6 @@ const InmuebleDetails = ({
     onInmuebleUpdated,
     onEditModeChange
 }) => {
-    // ======== ESTADOS ========
     const [segurosCollapsed, setSegurosCollapsed] = useState(true);
     const [proveedoresCollapsed, setProveedoresCollapsed] = useState(true);
     const [hipotecasCollapsed, setHipotecasCollapsed] = useState(true);
@@ -91,13 +86,11 @@ const InmuebleDetails = ({
     const [globalEditMode, setGlobalEditMode] = useState(false);
     const [inmuebleLocal, setInmuebleLocal] = useState(inmueble);
 
-    // Estados de edición
     const [editSeguros, setEditSeguros] = useState([]);
     const [editProveedores, setEditProveedores] = useState([]);
     const [editDatosRegistrales, setEditDatosRegistrales] = useState({});
     const [editHipotecas, setEditHipotecas] = useState([]);
 
-    // ✅ NUEVO: Guardar valores originales completos
     const [valoresOriginales, setValoresOriginales] = useState({
         clave_catastral: null,
         datosRegistrales: {},
@@ -106,7 +99,6 @@ const InmuebleDetails = ({
         hipotecas: []
     });
 
-    // ======== EFECTOS ========
     useEffect(() => {
         if (!globalEditMode && inmueble?.clave_catastral !== inmuebleLocal?.clave_catastral) {
             setInmuebleLocal(inmueble);
@@ -139,7 +131,6 @@ const InmuebleDetails = ({
         fetchData();
     }, [inmuebleLocal?.clave_catastral]);
 
-    // ======== FUNCIONES DELETE ========
     const handleDeleteSeguro = useCallback(async (poliza, empresaSeguro) => {
         if (!window.confirm(`¿Eliminar el seguro de ${empresaSeguro}?`)) return;
 
@@ -197,7 +188,6 @@ const InmuebleDetails = ({
         }
     }, [inmuebleLocal?.clave_catastral, HipotecasList, setHipotecas]);
 
-    // ======== MODO EDICIÓN ========
     const startGlobalEdit = useCallback(() => {
         setGlobalEditMode(true);
 
@@ -211,7 +201,6 @@ const InmuebleDetails = ({
         setEditDatosRegistrales(nuevosDatosRegistrales);
         setEditHipotecas(nuevasHipotecas);
 
-        // ✅ Guardar copias profundas de los valores originales
         setValoresOriginales({
             clave_catastral: inmuebleLocal?.clave_catastral || null,
             datosRegistrales: JSON.parse(JSON.stringify(nuevosDatosRegistrales)),
@@ -236,7 +225,6 @@ const InmuebleDetails = ({
         });
     }, []);
 
-    // ✅ FUNCIÓN AUXILIAR: Detectar cambios en un objeto
     const detectarCambios = (original, editado, camposComparar) => {
         const cambios = {};
         for (const campo of camposComparar) {
@@ -251,7 +239,6 @@ const InmuebleDetails = ({
         try {
             let claveCatastralActual = valoresOriginales.clave_catastral;
 
-            // ✅ PASO 1: Actualizar DATOS REGISTRALES (incluye cambio de clave catastral)
             const camposDR = ['num_protocolo', 'folio', 'hoja', 'inscripcion', 'notario',
                 'fecha_inscripcion', 'valor_adquisicion', 'fecha_adquisicion', 'clave_catastral'];
 
@@ -262,7 +249,6 @@ const InmuebleDetails = ({
 
                 const datosRegistralesPayload = { ...cambiosDR };
 
-                // Si cambió la clave catastral, enviar como clave_catastral_nueva
                 if (cambiosDR.clave_catastral && cambiosDR.clave_catastral !== claveCatastralActual) {
                     datosRegistralesPayload.clave_catastral_nueva = cambiosDR.clave_catastral;
                     delete datosRegistralesPayload.clave_catastral;
@@ -270,7 +256,6 @@ const InmuebleDetails = ({
 
                 await updateDatosRegistrales(claveCatastralActual, datosRegistralesPayload);
 
-                // ✅ Actualizar la clave catastral actual si cambió
                 if (cambiosDR.clave_catastral) {
                     claveCatastralActual = cambiosDR.clave_catastral;
                 }
@@ -283,7 +268,6 @@ const InmuebleDetails = ({
                 }
             }
 
-            // ✅ PASO 2: Actualizar SEGUROS (con la clave catastral actualizada)
             for (let i = 0; i < editSeguros.length; i++) {
                 const seguroEditado = editSeguros[i];
                 const seguroOriginal = valoresOriginales.seguros[i];
@@ -296,7 +280,6 @@ const InmuebleDetails = ({
 
                     const seguroPayload = { ...cambiosSeguro };
 
-                    // Si cambió la póliza, enviar como poliza_nueva
                     if (cambiosSeguro.poliza && cambiosSeguro.poliza !== seguroOriginal.poliza) {
                         seguroPayload.poliza_nueva = cambiosSeguro.poliza;
                         delete seguroPayload.poliza;
@@ -306,7 +289,6 @@ const InmuebleDetails = ({
                 }
             }
 
-            // ✅ PASO 3: Actualizar PROVEEDORES
             for (let i = 0; i < editProveedores.length; i++) {
                 const proveedorEditado = editProveedores[i];
                 const proveedorOriginal = valoresOriginales.proveedores[i];
@@ -320,7 +302,6 @@ const InmuebleDetails = ({
                 }
             }
 
-            // ✅ PASO 4: Actualizar HIPOTECAS
             for (let i = 0; i < editHipotecas.length; i++) {
                 const hipotecaEditada = editHipotecas[i];
                 const hipotecaOriginal = valoresOriginales.hipotecas[i];
@@ -334,7 +315,6 @@ const InmuebleDetails = ({
                 }
             }
 
-            // Actualizar estados locales
             if (proveedoresList) {
                 setProveedoresSegurosList({
                     ...proveedoresList,
@@ -367,7 +347,6 @@ const InmuebleDetails = ({
         proveedoresList, HipotecasList, valoresOriginales, setProveedoresSegurosList,
         setHipotecas, onInmuebleUpdated]);
 
-    // ======== FUNCIONES DE ACTUALIZACIÓN DE CAMPOS ========
     const updateSeguroField = useCallback((index, field, value) => {
         setEditSeguros(prev =>
             prev.map((seguro, i) =>
@@ -396,7 +375,6 @@ const InmuebleDetails = ({
         );
     }, []);
 
-    // ======== RENDER DE ENCABEZADOS COLAPSABLES ========
     const renderCollapsibleHeader = useCallback((title, count, isCollapsed, setCollapsed) => {
         const shouldShowToggle = count > 0;
 
@@ -415,7 +393,6 @@ const InmuebleDetails = ({
         );
     }, []);
 
-    // ======== RENDER CONDICIONAL ========
     if (!inmuebleLocal) {
         return (
             <div className="absolute flex w-[68%] h-full p-2">
@@ -428,7 +405,6 @@ const InmuebleDetails = ({
         );
     }
 
-    // ======== RENDER PRINCIPAL ========
     return (
         <div className="absolute flex w-[68%] h-full p-2">
             <div className="w-full h-full flex flex-col border border-black">
