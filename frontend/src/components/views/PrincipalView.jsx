@@ -311,6 +311,7 @@ const PrincipalView = ({
           setRmm={setRmm}
           readOnlyFecha={rmmReadOnly}
           validationErrors={validationErrors}
+          totalEmpresa={empresa.total} 
         />
       )}
 

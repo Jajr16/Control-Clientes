@@ -244,12 +244,10 @@ const handleGuardarAdeudo = useCallback(
   async (rmmState) => {
     const esRMM = /registro\s*mercantil.*madrid/i.test((empresa.proveedor || '').trim());
 
-    // ¿el protocolo seleccionado existe en la lista?
     const normalizados = (protocolosDisponibles || []).map(p => String(p).trim().toLowerCase());
     const valorProt = String(empresa.protocoloentrada || '').trim().toLowerCase();
     const esProtocoloExistente = esRMM && !!valorProt && normalizados.includes(valorProt);
 
-    // resolver concepto y num_factura / ff según el caso
     const concepto = esRMM ? 'Inscripción Registro Mercantil' : (empresa.concepto || '');
 
     let num_factura, ff;
@@ -261,26 +259,33 @@ const handleGuardarAdeudo = useCallback(
       ff = (empresa.fechafactura || '').trim();
     }
 
-    // --- validaciones
-    const camposObligatoriosBase = ['empresa_cif', 'proveedor', 'importe'];
+    // --- Validaciones ---
     const faltantes = [];
 
     if (!empresa.empresa_cif) faltantes.push('empresa_cif');
     if (!empresa.proveedor) faltantes.push('proveedor');
 
-    // importe siempre requerido
-    if (empresa.importe === '' || empresa.importe === null || isNaN(Number(empresa.importe))) {
-      faltantes.push('importe');
-    }
-
     if (esRMM && esProtocoloExistente) {
-      // obligatorios en RMM (protocolo existente)
+      // RMM con protocolo existente - validar campos RMM
+      if (!rmmState?.base_imponible || isNaN(Number(rmmState.base_imponible))) {
+        faltantes.push('base_imponible');
+      }
       if (!num_factura) faltantes.push('num_factura_final');
-      if (!ff)          faltantes.push('ff');
+      if (!ff) faltantes.push('ff (fecha factura)');
+    } else if (esRMM && !esProtocoloExistente) {
+      // RMM nuevo protocolo - validar anticipo y fecha
+      if (!empresa.importe || isNaN(Number(empresa.importe))) {
+        faltantes.push('anticipo');
+      }
+      if (!ff) faltantes.push('fecha_anticipo');
     } else {
-      // obligatorios en caso normal o RMM con "nuevo protocolo"
-      if (!concepto)  faltantes.push('concepto');
-      if (!ff)          faltantes.push('fechafactura');
+      // Adeudo normal
+      if (!concepto) faltantes.push('concepto');
+      if (!ff) faltantes.push('fechafactura');
+      if (!num_factura) faltantes.push('numfactura');
+      if (!empresa.importe || isNaN(Number(empresa.importe))) {
+        faltantes.push('importe');
+      }
     }
 
     if (faltantes.length) {
@@ -288,74 +293,66 @@ const handleGuardarAdeudo = useCallback(
       return;
     }
 
-    const payload = {
-      num_factura,                 // 👈 ya resuelto
-      concepto,                    // 👈 auto en RMM
-      proveedor: empresa.proveedor,
-      ff,                          // 👈 ya resuelto (dd/mm/yyyy si venía con guiones)
-      importe: toNum(empresa.importe),
-      iva: esRMM ? 0 : toNum(empresa.iva),
-      retencion: esRMM ? 0 : toNum(empresa.retencion),
-      empresa_cif: empresa.empresa_cif,
-    };
-
-    // datos “protocolo/entrada” a enviar (sólo si hay algo)
-    let protocolo = null;
-    const tieneProtocolo = !!(empresa.protocoloentrada && empresa.protocoloentrada.trim());
-
-    if (tieneProtocolo) {
-      protocolo = {
-        num_factura,
-        empresa_cif: empresa.empresa_cif,
-        num_protocolo: empresa.protocoloentrada,
-        // en RMM no usamos cs_iva; en caso normal respeta el campo
-        cs_iva: esRMM ? 0 : toNum(empresa.csiniva || 0),
-      };
-    }
-
     try {
       setBotonGuardarDeshabilitado(true);
 
-      // 🔧 CORRECCIÓN: La lógica debe basarse en si el protocolo existe, no en rmmDatos
       if (esRMM && esProtocoloExistente && rmmDatos) {
-        // ✅ FINALIZAR RMM – protocolo existente con datos de entrada_rmm
+        // ✅ FINALIZAR RMM - protocolo existente con entrada_rmm
         console.log('🔄 Finalizando RMM con protocolo existente');
         
+        // Calcular el importe base a partir de base_imponible
+        const baseImponible = parseFloat(rmmState?.base_imponible || 0);
+        const csIva = parseFloat(rmmState?.cs_iva || 0);
+        const iva = baseImponible * 0.21;
+        const retencion = baseImponible * 0.15;
+        const total = baseImponible + iva - retencion + csIva;
+
         await apiService.finalizarRmm({
           empresa_cif: empresa.empresa_cif,
           num_entrada: empresa.protocoloentrada,
-          num_factura_final: (rmmState?.num_factura_final || '').trim(),
-          ff: (rmmState?.ff || '').trim(),
+          num_factura_final: num_factura,
+          ff: ff,
           concepto: 'Inscripción Registro Mercantil',
           proveedor: 'Registro Mercantil de Madrid',
-          protocolo: { num_protocolo: empresa.protocoloentrada, cs_iva: 0 },
+          importe: baseImponible, // 👈 Guardar base_imponible como importe
+          protocolo: { 
+            num_protocolo: empresa.protocoloentrada, 
+            cs_iva: csIva 
+          },
         });
 
       } else if (esRMM && !esProtocoloExistente) {
-        // ✅ CREAR ENTRADA RMM PENDIENTE – protocolo nuevo
+        // ✅ CREAR ENTRADA RMM PENDIENTE - protocolo nuevo
         console.log('📝 Creando nueva entrada RMM pendiente');
+        
+        const anticipoPagado = parseFloat(empresa.importe || 200);
+        const baseImponible = parseFloat(rmmState?.base_imponible || 0);
+        const csIva = parseFloat(rmmState?.cs_iva || 0);
+        const iva = baseImponible * 0.21;
+        const retencion = baseImponible * 0.15;
+        const total = baseImponible + iva - retencion + csIva;
+        const diferencia = anticipoPagado - total;
         
         await apiService.crearEntradaRmmPendiente({
           num_entrada: empresa.protocoloentrada,
           empresa_cif: empresa.empresa_cif,
-          anticipo_pagado: 200,  // Siempre 200 por defecto
-          fecha_anticipo: (empresa.fechafactura || '').trim(),
-          diferencia: Number(rmmState?.diferencia) || 0,
+          anticipo_pagado: anticipoPagado,
+          fecha_anticipo: ff,
+          diferencia: diferencia,
           fecha_devolucion_diferencia: rmmState?.fecha_devolucion_diferencia || null
         });
         
         registrarProtocoloLocal(empresa.protocoloentrada.trim());
-        console.log('Entrada RMM pendiente creada exitosamente');
         
       } else {
         // ✅ ALTA NORMAL (no RMM)
         console.log('📄 Creando adeudo normal');
         
         const payloadAdeudo = {
-          num_factura: (empresa.numfactura || '').trim(),
-          concepto: empresa.concepto,
+          num_factura: num_factura,
+          concepto: concepto,
           proveedor: empresa.proveedor,
-          ff: (empresa.fechafactura || '').trim(),
+          ff: ff,
           importe: toNum(empresa.importe),
           iva: toNum(empresa.iva),
           retencion: toNum(empresa.retencion),
@@ -369,7 +366,7 @@ const handleGuardarAdeudo = useCallback(
         await apiService.guardarAdeudo(payloadAdeudo, protocolo);
       }
 
-      // Reset form y refresh data
+      // Reset form y refresh
       const empresaActual = empresa.empresa_cif;
       setEmpresa({
         empresa_cif: empresaActual,
@@ -398,7 +395,6 @@ const handleGuardarAdeudo = useCallback(
   },
   [empresa, protocolosDisponibles, fetchAdeudos, setEmpresa, setVistaPrevia, rmmDatos, registrarProtocoloLocal]
 );
-
 
   // --- Habilitaciones
   const puedeGenerarLiquidacionLocal = useCallback((empresaCif) => {
