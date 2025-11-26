@@ -155,100 +155,112 @@ class AdeudoService extends BaseService {
 
   // ========== CORRECCIÓN 2: En AdeudoService.js - función finalizarRmmYCrearAdeudo ==========
   async finalizarRmmYCrearAdeudo(datos) {
-  try {
-    console.log(`🔄 Finalizando RMM:`, datos);
+    try {
+      console.log(`🔄 Finalizando RMM:`, datos);
 
-    const { empresa_cif, num_entrada, num_factura_final, ff, concepto, proveedor, importe, protocolo } = datos;
+      const { empresa_cif, num_entrada, num_factura_final, ff, concepto, proveedor, importe, protocolo } = datos;
 
-    if (!empresa_cif || !num_entrada || !num_factura_final || !ff) {
-      throw new Error('empresa_cif, num_entrada, num_factura_final y ff son requeridos');
+      if (!empresa_cif || !num_entrada || !num_factura_final || !ff) {
+        throw new Error('empresa_cif, num_entrada, num_factura_final y ff son requeridos');
+      }
+
+      return await this.withTransaction(async (client) => {
+        // 1) Verificar que existe la entrada RMM
+        const rmm = await this.repositories.entrada_rmm.ObtenerPorId({
+          num_entrada: num_entrada,
+          empresa_cif: empresa_cif
+        });
+
+        if (!rmm) {
+          throw new Error(`No se encontró entrada RMM: ${num_entrada}`);
+        }
+
+        if (rmm.num_factura_final) {
+          throw new Error(`La entrada RMM ${num_entrada} ya está finalizada con factura: ${rmm.num_factura_final}`);
+        }
+
+        // 2) 🔧 USAR EL IMPORTE QUE VIENE EN datos (base_imponible del frontend)
+        // El frontend ya calcula: importe = base_imponible que ingresó el usuario
+        const importeBase = parseFloat(importe || 0);
+
+        console.log(`💰 Guardando RMM con importe base:`, {
+          importe_base: importeBase,
+          num_factura_final: num_factura_final,
+          ff: ff,
+          num_entrada: num_entrada
+        });
+
+        // 3) Crear el adeudo con el importe que viene del frontend
+        const adeudo = {
+          num_factura: num_factura_final,
+          concepto: concepto || 'Inscripción Registro Mercantil',
+          proveedor: proveedor || 'Registro Mercantil de Madrid',
+          ff: ff,
+          importe: importeBase, // 👈 Usar el importe que viene del frontend (base_imponible)
+          cs_iva: Number(datos.cs_iva || 0),
+          num_liquidacion: null,
+          empresa_cif: empresa_cif,
+          estado: 'LIQUIDACIÓN EN CURSO'
+        };
+
+        const inserted = await this.repositories.adeudo.insertar(adeudo, client);
+
+        const anticipo_pagado = await this.repositories.entrada_rmm.BuscarPorFiltros({ num_entrada: num_entrada, empresa_cif: empresa_cif },
+          ['anticipo_pagado']
+        )
+
+        console.log("El anticipo es")
+        console.log(Number(anticipo_pagado[0].anticipo_pagado))
+        console.log(importeBase)
+        console.log(importeBase * .21)
+        console.log(importeBase * .15)
+        console.log(datos.cs_iva)
+        console.log(Number(anticipo_pagado[0].anticipo_pagado) - (importeBase + (importeBase * 0.21) - (importeBase * 0.15) + datos.cs_iva))
+
+        // 4) Actualizar entrada_rmm con la factura final
+        await this.repositories.entrada_rmm.actualizarPorId(
+          { num_entrada: num_entrada, empresa_cif: empresa_cif },
+          { num_factura_final: num_factura_final, diferencia: (Number(anticipo_pagado[0].anticipo_pagado) - (importeBase + (importeBase * 0.21) - (importeBase * 0.15) + datos.cs_iva)) },
+          client
+        );
+
+        // // 5) Insertar protocolo (con cs_iva si viene)
+        // if (protocolo && protocolo.num_protocolo) {
+        //   await this.repositories.protocolo.insertar(
+        //     {
+        //       empresa_cif: empresa_cif,
+        //       num_factura: num_factura_final,
+        //       num_protocolo: protocolo.num_protocolo
+        //     },
+        //     client
+        //   );
+        // }
+
+        // 6) Registrar movimiento
+        const empresa = await this.repositories.empresa.BuscarPorFiltros(
+          { cif: empresa_cif }, ['nombre']
+        );
+
+        if (empresa.length > 0) {
+          await this.repositories.adeudo.registrarMovimiento(
+            {
+              accion: `Finalizar RMM y crear adeudo para: ${empresa[0].nombre} (entrada ${num_entrada})`,
+              datos: {
+                adeudo,
+                entrada_rmm: { num_entrada: num_entrada }
+              }
+            },
+            client
+          );
+        }
+
+        return inserted;
+      });
+    } catch (error) {
+      console.error(`❌ Error finalizando RMM:`, error);
+      throw error;
     }
-
-    return await this.withTransaction(async (client) => {
-      // 1) Verificar que existe la entrada RMM
-      const rmm = await this.repositories.entrada_rmm.ObtenerPorId({
-        num_entrada: num_entrada,
-        empresa_cif: empresa_cif
-      });
-
-      if (!rmm) {
-        throw new Error(`No se encontró entrada RMM: ${num_entrada}`);
-      }
-
-      if (rmm.num_factura_final) {
-        throw new Error(`La entrada RMM ${num_entrada} ya está finalizada con factura: ${rmm.num_factura_final}`);
-      }
-
-      // 2) 🔧 USAR EL IMPORTE QUE VIENE EN datos (base_imponible del frontend)
-      // El frontend ya calcula: importe = base_imponible que ingresó el usuario
-      const importeBase = parseFloat(importe || 0);
-
-      console.log(`💰 Guardando RMM con importe base:`, {
-        importe_base: importeBase,
-        num_factura_final: num_factura_final,
-        ff: ff,
-        num_entrada: num_entrada
-      });
-
-      // 3) Crear el adeudo con el importe que viene del frontend
-      const adeudo = {
-        num_factura: num_factura_final,
-        concepto: concepto || 'Inscripción Registro Mercantil',
-        proveedor: proveedor || 'Registro Mercantil de Madrid',
-        ff: ff,
-        importe: importeBase, // 👈 Usar el importe que viene del frontend (base_imponible)
-        num_liquidacion: null,
-        empresa_cif: empresa_cif,
-        estado: 'LIQUIDACIÓN EN CURSO'
-      };
-
-      const inserted = await this.repositories.adeudo.insertar(adeudo, client);
-
-      // 4) Actualizar entrada_rmm con la factura final
-      await this.repositories.entrada_rmm.actualizarPorId(
-        { num_entrada: num_entrada, empresa_cif: empresa_cif },
-        { num_factura_final: num_factura_final },
-        client
-      );
-
-      // 5) Insertar protocolo (con cs_iva si viene)
-      if (protocolo && protocolo.num_protocolo) {
-        await this.repositories.protocolo.insertar(
-          {
-            empresa_cif: empresa_cif,
-            num_factura: num_factura_final,
-            num_protocolo: protocolo.num_protocolo,
-            cs_iva: parseFloat(protocolo.cs_iva || 0)
-          },
-          client
-        );
-      }
-
-      // 6) Registrar movimiento
-      const empresa = await this.repositories.empresa.BuscarPorFiltros(
-        { cif: empresa_cif }, ['nombre']
-      );
-
-      if (empresa.length > 0) {
-        await this.repositories.adeudo.registrarMovimiento(
-          {
-            accion: `Finalizar RMM y crear adeudo para: ${empresa[0].nombre} (entrada ${num_entrada})`,
-            datos: {
-              adeudo,
-              entrada_rmm: { num_entrada: num_entrada }
-            }
-          },
-          client
-        );
-      }
-
-      return inserted;
-    });
-  } catch (error) {
-    console.error(`❌ Error finalizando RMM:`, error);
-    throw error;
   }
-}
 
   // ========== MEJORADO: obtenerEntradaRmm con mejor manejo ==========
   async obtenerEntradaRmm({ empresa_cif, num_entrada }) {
@@ -746,14 +758,31 @@ class AdeudoService extends BaseService {
 
               // Actualizar entrada_rmm con el num_factura_final
               if (num_entrada_original) {
-                const anticipo_pagado = await this.repositories.entrada_rmm.BuscarPorFiltros({num_entrada: num_entrada_original, 
-                  empresa_cif: empresa_cif}, ['anticipo_pagado'], client)
+                const anticipo_pagado = await this.repositories.entrada_rmm.BuscarPorFiltros({
+                  num_entrada: num_entrada_original,
+                  empresa_cif: empresa_cif
+                }, ['anticipo_pagado'], client)
+
+                console.log("AQUI ES CUANDO VA A INSERTAR UNO NUEVO")
+                console.log(Number(anticipo_pagado[0].anticipo_pagado))
+                console.log(newAdeudo.importe)
+                console.log(newAdeudo.iva)
+                console.log(newAdeudo.retencion)
+                console.log(newAdeudo.cs_iva)
+                console.log(anticipo_pagado[0].anticipo_pagado - (newAdeudo.importe + newAdeudo.iva -
+                  newAdeudo.retencion + newAdeudo.cs_iva))
+
+                console.log(typeof anticipo_pagado[0].anticipo_pagado);
+                console.log(typeof newAdeudo.importe);
+                console.log(typeof newAdeudo.iva);
+                console.log(typeof newAdeudo.retencion);
+                console.log(typeof newAdeudo.cs_iva);
 
                 await this.repositories.entrada_rmm.actualizarPorId(
                   { num_entrada: num_entrada_original, empresa_cif },
                   {
-                    num_factura_final: nuevosDatos.num_factura, diferencia: (anticipo_pagado - (newAdeudo.importe + newAdeudo.iva -
-                      newAdeudo.retencion + newAdeudo.cs_iva))
+                    num_factura_final: nuevosDatos.num_factura, diferencia: (Number(anticipo_pagado[0].anticipo_pagado) - (Number(newAdeudo.importe) + Number(newAdeudo.iva) -
+                      Number(newAdeudo.retencion) + Number(newAdeudo.cs_iva)))
                   },
                   client
                 );
@@ -774,14 +803,25 @@ class AdeudoService extends BaseService {
                   let iva = importe * 0.21;
                   let retencion = importe * 0.15;
 
-                  const entrada_rmmOriginal = await this.repositories.entrada_rmm.BuscarPorFiltros({num_factura_final: num_factura_original, 
-                    empresa_cif: empresa_cif}, ['num_entrada', 'anticipo_pagado'], client);
+                  console.log("AQUI ES CUANDO MODIFICAS NADA MÁS")
+
+                  const entrada_rmmOriginal = await this.repositories.entrada_rmm.BuscarPorFiltros({
+                    num_factura_final: num_factura_original,
+                    empresa_cif: empresa_cif
+                  }, ['num_entrada', 'anticipo_pagado'], client);
+
+                  console.log(Number(entrada_rmmOriginal[0].anticipo_pagado))
+                  console.log(Number(importe))
+                  console.log(Number(iva))
+                  console.log(Number(retencion))
+                  console.log(Number(cs_iva))
+                  console.log(Number(entrada_rmmOriginal[0].anticipo_pagado) - (importe + iva - retencion + cs_iva))
 
                   if (entrada_rmmOriginal) {
                     const resultRMM = await this.repositories.entrada_rmm.actualizarPorId(
                       { num_entrada: entrada_rmmOriginal[0].num_entrada, empresa_cif },
                       {
-                        diferencia: entrada_rmmOriginal[0].anticipo_pagado - (importe + iva - retencion + cs_iva)
+                        diferencia: Number(entrada_rmmOriginal[0].anticipo_pagado) - (Number(importe) + Number(iva) - Number(retencion) + Number(cs_iva))
                       },
                       client
                     );

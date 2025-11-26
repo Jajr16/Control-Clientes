@@ -304,9 +304,9 @@ const handleGuardarAdeudo = useCallback(
           concepto: 'Inscripción Registro Mercantil',
           proveedor: 'Registro Mercantil de Madrid',
           importe: baseImponible, // 👈 Guardar base_imponible como importe
+          cs_iva: csIva,
           protocolo: { 
-            num_protocolo: empresa.protocoloentrada, 
-            cs_iva: csIva 
+            num_protocolo: empresa.protocoloentrada
           },
         });
 
@@ -343,13 +343,14 @@ const handleGuardarAdeudo = useCallback(
           proveedor: empresa.proveedor,
           ff: ff,
           importe: toNum(empresa.importe),
+          cs_iva: toNum(empresa.csiniva || 0),
           iva: toNum(empresa.iva),
           retencion: toNum(empresa.retencion),
           empresa_cif: empresa.empresa_cif,
         };
 
         const protocolo = empresa.protocoloentrada
-          ? { num_protocolo: empresa.protocoloentrada, cs_iva: toNum(empresa.csiniva || 0) }
+          ? { num_protocolo: empresa.protocoloentrada }
           : null;
 
         await apiService.guardarAdeudo(payloadAdeudo, protocolo);
