@@ -45,4 +45,4 @@ export default clienteController;
 
 export const getInfoClientes = clienteController.infoClientes.bind(clienteController)
 export const createCliente = clienteController.createCliente.bind(clienteController)
-export const updateCliente = clienteController.updateCliente.bind(clienteController); // ← AGREGAR ESTA LÍNEA
+export const updateCliente = clienteController.updateCliente.bind(clienteController);

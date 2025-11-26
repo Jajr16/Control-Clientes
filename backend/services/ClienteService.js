@@ -39,11 +39,12 @@ class ClienteService extends BaseService {
             const propietario = await this.propietarioService.crearPropietario(cliente.propietario, clienteBD)
             // INSERTAR EMPRESA
             const { tel, ...empresaData } = cliente.empresa
+
             const empresa = await this.empresaService.crearEmpresa({
                 ...empresaData,
                 telefono: tel,
                 direccion: direccion.id,
-                dato_registral: dato_registral.id,
+                dato_registral: dato_registral.id_dr,
                 propietario: cliente.propietario.nie
             }, clienteBD);
 

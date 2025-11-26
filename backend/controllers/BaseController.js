@@ -14,13 +14,13 @@ export class BaseController {
             '23503': { status: 400, message: 'Clave Catastral inválida' },
             '23502': { status: 400, message: 'Campo requerido faltante' }
         };
-
+        
         const mappedError = errorMap[error.code];
         if (mappedError) {
             return res.status(mappedError.status).json({ error: mappedError.message });
         }
-
-        return res.status(500).json({ error: defaultMessage });
+        
+        return res.status(500).json({ error: error.message || defaultMessage });
     }
 
     sendSuccess(res, data, message = "Operación exitosa", status = 200) {

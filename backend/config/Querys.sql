@@ -33,11 +33,11 @@ BEGIN
         a.num_liquidacion,
         a.fecha_creacion AS f_adeudo_creacion, 
         COALESCE(p.num_protocolo, '-')::TEXT AS num_protocolo,
-        COALESCE(p.cs_iva, 0) AS cs_iva,
+        COALESCE(a.cs_iva, 0) AS cs_iva,
         (COALESCE(a.importe,0) 
          + COALESCE(a.iva,0) 
          - COALESCE(a.retencion,0) 
-         + COALESCE(p.cs_iva,0)) AS total,
+         + COALESCE(a.cs_iva,0)) AS total,
         COALESCE(h.honorario, 0) AS honorarios_base,
         COALESCE(h.iva, 0) AS honorarios_iva,
         a.estado::TEXT,

@@ -1,5 +1,5 @@
 import exceljs from 'exceljs'
-import { parseFecha } from './fechaFormato.js';
+import { parseFecha } from './normalizaciones.js';
 
 export function historicoExcel(data) {
     console.log(data)

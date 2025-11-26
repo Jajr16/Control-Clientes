@@ -368,18 +368,9 @@ const Historico = () => {
                                                             />
                                                         </td>
                                                         <td className="px-2 sm:px-4 py-2 sm:py-3 text-xs sm:text-sm text-gray-900 border-b">
-                                                            {isEditing ? (
-                                                                <input
-                                                                    type="text"
-                                                                    value={row.num_liquidacion || ""}
-                                                                    onChange={(e) => handleCellChange(index, 'num_liquidacion', e.target.value)}
-                                                                    className="w-full max-w-[60px] px-2 py-1 border border-gray-300 rounded text-xs"
-                                                                />
-                                                            ) : (
-                                                                <span className="block truncate max-w-[60px]" title={row.num_liquidacion || '-'}>
-                                                                    {row.num_liquidacion || '-'}
-                                                                </span>
-                                                            )}
+                                                            <span className="block truncate max-w-[60px]" title={row.num_liquidacion || '-'}>
+                                                                {row.num_liquidacion || '-'}
+                                                            </span>
                                                         </td>
                                                         <td className="px-2 sm:px-4 py-2 sm:py-3 text-xs sm:text-sm text-gray-900 border-b relative group">
                                                             {isEditing ? (
@@ -594,22 +585,12 @@ const Historico = () => {
                                                                             <label className="block text-xs font-medium text-gray-600 mb-1">
                                                                                 Diferencia
                                                                             </label>
-                                                                            {isEditing ? (
-                                                                                <input
-                                                                                    type="number"
-                                                                                    step="0.01"
-                                                                                    value={row.diferencia || ''}
-                                                                                    onChange={(e) => handleCellChange(index, 'diferencia', parseFloat(e.target.value) || 0)}
-                                                                                    className="w-full px-2 py-1 text-sm border border-gray-300 rounded focus:ring-2 focus:ring-blue-500 focus:border-transparent"
-                                                                                />
-                                                                            ) : (
-                                                                                <div className={`text-sm font-medium px-2 py-1 rounded truncate ${(row.diferencia || 0) >= 0
-                                                                                    ? 'text-red-600 bg-red-50'
-                                                                                    : 'text-green-600 bg-green-50'
-                                                                                    }`}>
-                                                                                    {formatCurrency(row.diferencia) || '-'}
-                                                                                </div>
-                                                                            )}
+                                                                            <div className={`text-sm font-medium px-2 py-1 rounded truncate ${(row.diferencia || 0) >= 0
+                                                                                ? 'text-green-600 bg-green-50'
+                                                                                : 'text-red-600 bg-red-50'
+                                                                                }`}>
+                                                                                {formatCurrency(row.diferencia) || '-'}
+                                                                            </div>
                                                                         </div>
 
                                                                         <div>

@@ -77,9 +77,9 @@ class LiquidacionService extends BaseService {
                     h.iva as iva_honorarios,
                     h.num_factura as factura_honorarios,
                     COUNT(a.num_factura) as total_adeudos_liquidados,
-                    COALESCE(SUM(a.importe + a.iva - a.retencion + COALESCE(p.cs_iva, 0)), 0) as total_adeudos_importe,
+                    COALESCE(SUM(a.importe + a.iva - a.retencion + COALESCE(a.cs_iva, 0)), 0) as total_adeudos_importe,
                     COALESCE(MAX(an.anticipo), 0) as anticipo,
-                    (COALESCE(SUM(a.importe + a.iva - a.retencion + COALESCE(p.cs_iva, 0)), 0) + h.honorario + h.iva - COALESCE(MAX(an.anticipo), 0)) as adeudo_final
+                    (COALESCE(SUM(a.importe + a.iva - a.retencion + COALESCE(a.cs_iva, 0)), 0) + h.honorario + h.iva - COALESCE(MAX(an.anticipo), 0)) as adeudo_final
                 FROM honorario h
                 LEFT JOIN adeudo a ON h.num_liquidacion = a.num_liquidacion AND h.empresa_cif = a.empresa_cif
                 LEFT JOIN protocolo p ON a.num_factura = p.num_factura
@@ -148,8 +148,8 @@ class LiquidacionService extends BaseService {
                 a.num_liquidacion,
                 a.empresa_cif,
                 COALESCE(p.num_protocolo, '') AS num_protocolo,
-                COALESCE(p.cs_iva, 0) AS cs_iva,
-                (a.importe + a.iva - a.retencion + COALESCE(p.cs_iva, 0)) AS total
+                COALESCE(a.cs_iva, 0) AS cs_iva,
+                (a.importe + a.iva - a.retencion + COALESCE(a.cs_iva, 0)) AS total
             FROM adeudo a
             LEFT JOIN protocolo p ON a.num_factura = p.num_factura
             WHERE a.empresa_cif = $1 AND a.num_liquidacion = $2

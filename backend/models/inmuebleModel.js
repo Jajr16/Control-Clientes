@@ -7,7 +7,9 @@ export const createTableInmueble = async () => {
             CREATE TABLE IF NOT EXISTS inmueble (
                 clave_catastral VARCHAR(25) PRIMARY KEY,
                 direccion INTEGER REFERENCES direccion(id),
-                dato_registral INTEGER REFERENCES dato_registral(id_dr)
+                dato_registral INTEGER REFERENCES dato_registral(id_dr),
+                FOREIGN KEY (dato_registral) REFERENCES dato_registral(id_dr)
+                    ON DELETE CASCADE ON UPDATE CASCADE
             );
         `)
         console.log("Tabla 'inmueble' creada")

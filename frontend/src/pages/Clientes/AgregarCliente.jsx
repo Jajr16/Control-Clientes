@@ -14,6 +14,17 @@ import { manejarLogicaCliente } from "../../hooks/operacionesClienteForm.js";
 
 import { limpiarDatosVacios } from '../../utils/limpiarDatos.js';
 
+import {
+    generarEmpresaRandom,
+    generarDireccionRandom,
+    generarDatoRegistralRandom,
+    generarPropietarioRandom,
+    generarInmuebleRandom,
+    generarProveedorRandom,
+    generarHipotecaRandom,
+    generarSeguroRandom
+} from "../../utils/mockGenerators";
+
 import Swal from 'sweetalert2';
 
 const AddClientesPage = () => {
@@ -159,119 +170,43 @@ const AddClientesPage = () => {
         // ✨ Limpiar datos vacíos antes de enviar
         const datosLimpios = limpiarDatosVacios(datosCompletos);
 
-        console.log('Datos a guardar:', datosLimpios);
-
         const response = await manejarFormularioCliente(datosLimpios);
 
-        Swal.fire({
-            icon: 'success',
-            title: '¡Cliente creado!',
-            text: response.data.message || 'El cliente se creó correctamente',
-            confirmButtonText: 'OK'
-        }).then((result) => {
-            if (result.isConfirmed) {
-                // Limpiar formulario
-                setDatosEmpresa({});
-                setDirEmpresa({});
-                setDatoRegistralEmpresa({});
-                setDatosPropietario({});
-                setInmuebles([]);
-                setErrores({});
-            }
-        });
+        if (response) {
+            Swal.fire({
+                icon: 'success',
+                title: '¡Cliente creado!',
+                text: response.data.message || 'El cliente se creó correctamente',
+                confirmButtonText: 'OK'
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    // Limpiar formulario
+                    setDatosEmpresa({});
+                    setDirEmpresa({});
+                    setDatoRegistralEmpresa({});
+                    setDatosPropietario({});
+                    setInmuebles([]);
+                    setErrores({});
+                }
+            });
+        }
+
     };
 
     useEffect(() => {
-        // 💼 Datos de empresa (todo distinto)
-        const empresaDemo = {
-            cif: "XYZ987654",
-            nombre: "Soluciones Globales S.L.",
-            tel: "554839201",
-            clave: "SOL"
-        };
+        // 🔹 Llenar datos del cliente con mockGenerators
+        setDatosEmpresa(generarEmpresaRandom());
+        setDirEmpresa(generarDireccionRandom());
+        setDatoRegistralEmpresa(generarDatoRegistralRandom());
+        setDatosPropietario(generarPropietarioRandom());
 
-        // 🏢 Dirección de empresa
-        const direccionDemo = {
-            calle: "Paseo de la Independencia",
-            numero: "456",
-            piso: "2",
-            cp: "50001",
-            localidad: "Zaragoza"
-        };
-
-        // 📜 Datos registrales
-        const datoRegistralDemo = {
-            num_protocolo: "99887",
-            folio: "3021",
-            hoja: "03",
-            inscripcion: "87456",
-            notario: "Lic. Marta Castillo",
-            fecha_inscripcion: "2024-06-18"
-        };
-
-        // 👤 Propietario
-        const propietarioDemo = {
-            nie: "Y1234567T",
-            nombre: "Mariana López Hernández",
-            email: "mariana.lopez@example.com",
-            telefono: "553482190"
-        };
-
-        // Llenar estados del formulario
-        setDatosEmpresa(empresaDemo);
-        setDirEmpresa(direccionDemo);
-        setDatoRegistralEmpresa(datoRegistralDemo);
-        setDatosPropietario(propietarioDemo);
-
-        // 🏠 Inmueble nuevo y único
+        // 🔹 Crear un inmueble completo con datos random
         const inmuebleDemo = {
             id: Date.now(),
-            datosInmueble: {
-                clave_catastral: "BCN4459",
-                valor_adquisicion: 635000,
-                fecha_adquisicion: "2024-07-10",
-                datoRegistralInmueble: {
-                    num_protocolo: "55690",
-                    folio: "981",
-                    hoja: "04",
-                    inscripcion: "77411",
-                    notario: "Lic. Pedro Salcedo",
-                    fecha_inscripcion: "2024-08-05"
-                },
-                dirInmueble: {
-                    calle: "Carrer de Balmes",
-                    numero: "210",
-                    piso: 5,
-                    cp: "08006",
-                    localidad: "Barcelona"
-                }
-            },
-            proveedores: [
-                {
-                    clave_proveedor: 'pX9',
-                    nombre: 'AquaNova Servicios',
-                    servicio: 'Agua',
-                    tel_proveedor: '932440112',
-                    email_proveedor: 'contacto@aquanova.es'
-                }
-            ],
-            hipotecas: [
-                {
-                    prestamo: 270000,
-                    banco: 'Banco Sabadell',
-                    cuota: 1850.60,
-                    fecha_hipoteca: '2024-09-01'
-                }
-            ],
-            seguros: [
-                {
-                    aseguradora: 'HogarPlus Seguros',
-                    tipo_seguro: 'Multirriesgo',
-                    poliza: 'HP2024',
-                    telefono_seguro: '900778899',
-                    email_seguro: 'soporte@hogarplus.es'
-                }
-            ]
+            datosInmueble: generarInmuebleRandom(),
+            proveedores: [generarProveedorRandom()],
+            hipotecas: [generarHipotecaRandom()],
+            seguros: [generarSeguroRandom()]
         };
 
         setInmuebles([inmuebleDemo]);

@@ -156,7 +156,6 @@ export const useAdeudosManager = () => {
                 map[item.num_factura] = { num_factura: item.num_factura };
             }
             if ('num_protocolo' in item) map[item.num_factura].num_protocolo = item.num_protocolo;
-            if ('cs_iva' in item) map[item.num_factura].cs_iva = item.cs_iva;
         });
 
         return Object.values(map);
@@ -199,6 +198,7 @@ export const useAdeudosManager = () => {
             const cambiosFilas = editedRows
                 .map((row, index) => {
                     const original = originalRows.find(orig => orig._internal_id === row._internal_id);
+                    console.log(original)
 
                     if (!original) {
                         console.log(`No se encontró original para fila ${index}`);
@@ -219,9 +219,9 @@ export const useAdeudosManager = () => {
                                 })
                             }
                             return
-                        }
+                        } 
 
-                        if (key === 'num_protocolo' || key === 'cs_iva') {
+                        if (key === 'num_protocolo') {
                             if (row[key] !== original[key]) {
                                 cambiosProtocolo.push({
                                     num_factura: row.num_factura,

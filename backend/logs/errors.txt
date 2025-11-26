@@ -378,3 +378,692 @@
     at async InmuebleService.agregarComponentes (file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/services/inmuebleService.js:28:16)
     at async InmuebleController.agregarComponentes (file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/controllers/InmuebleController.js:20:28)
 
+[2025-11-22T21:29:37.045Z] error: el valor nulo en la columna «num_protocolo» de la relación «protocolo» viola la restricción de no nulo
+    at C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\pg\lib\client.js:545:17
+    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at async Repositorio.insertar (file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/repositories/globalPersistence.js:54:28)
+    at async file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/services/AdeudoService.js:726:15
+    at async Promise.all (index 0)
+    at async file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/services/AdeudoService.js:714:9
+    at async AdeudoService.withTransaction (file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/services/BaseService.js:13:28)
+    at async AdeudoService.updateAdeudos (file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/services/AdeudoService.js:676:12)
+    at async AdeudoController.updateAdeudos (file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/controllers/AdeudoController.js:288:22)
+
+[2025-11-22T21:34:18.515Z] error: el valor nulo en la columna «num_protocolo» de la relación «protocolo» viola la restricción de no nulo
+    at C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\pg\lib\client.js:545:17
+    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at async Repositorio.insertar (file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/repositories/globalPersistence.js:54:28)
+    at async file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/services/AdeudoService.js:726:15
+    at async Promise.all (index 0)
+    at async file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/services/AdeudoService.js:714:9
+    at async AdeudoService.withTransaction (file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/services/BaseService.js:13:28)
+    at async AdeudoService.updateAdeudos (file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/services/AdeudoService.js:676:12)
+    at async AdeudoController.updateAdeudos (file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/controllers/AdeudoController.js:288:22)
+
+[2025-11-22T22:05:26.719Z] Error: El dato registral ingresado ya existe
+    at file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/services/DatoRegistralService.js:25:23
+    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at async DatoRegistralService.execWithClient (file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/services/BaseService.js:27:16)
+    at async DatoRegistralService.crearDatoRegistral (file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/services/DatoRegistralService.js:14:16)
+    at async file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/services/ClienteService.js:34:36
+    at async ClienteService.withTransaction (file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/services/BaseService.js:13:28)
+    at async ClienteService.crearCliente (file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/services/ClienteService.js:32:16)
+    at async ClienteController.createCliente (file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/controllers/ClienteController.js:13:28)
+
+[2025-11-22T22:43:42.881Z] Error: El dato registral ingresado ya existe
+    at file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/services/DatoRegistralService.js:25:23
+    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at async DatoRegistralService.execWithClient (file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/services/BaseService.js:27:16)
+    at async DatoRegistralService.crearDatoRegistral (file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/services/DatoRegistralService.js:14:16)
+    at async file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/services/ClienteService.js:34:36
+    at async ClienteService.withTransaction (file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/services/BaseService.js:13:28)
+    at async ClienteService.crearCliente (file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/services/ClienteService.js:32:16)
+    at async ClienteController.createCliente (file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/controllers/ClienteController.js:13:28)
+
+[2025-11-23T19:22:47.831Z] Error: El dato registral ingresado ya existe
+    at file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/services/DatoRegistralService.js:25:23
+    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at async DatoRegistralService.execWithClient (file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/services/BaseService.js:27:16)
+    at async DatoRegistralService.crearDatoRegistral (file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/services/DatoRegistralService.js:14:16)
+    at async file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/services/ClienteService.js:34:36
+    at async ClienteService.withTransaction (file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/services/BaseService.js:13:28)
+    at async ClienteService.crearCliente (file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/services/ClienteService.js:32:16)
+    at async ClienteController.createCliente (file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/controllers/ClienteController.js:13:28)
+
+[2025-11-23T19:23:15.430Z] Error: El dato registral ingresado ya existe
+    at file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/services/DatoRegistralService.js:25:23
+    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at async DatoRegistralService.execWithClient (file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/services/BaseService.js:27:16)
+    at async DatoRegistralService.crearDatoRegistral (file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/services/DatoRegistralService.js:14:16)
+    at async file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/services/ClienteService.js:34:36
+    at async ClienteService.withTransaction (file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/services/BaseService.js:13:28)
+    at async ClienteService.crearCliente (file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/services/ClienteService.js:32:16)
+    at async ClienteController.createCliente (file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/controllers/ClienteController.js:13:28)
+
+[2025-11-23T19:23:29.396Z] Error: El dato registral ingresado ya existe
+    at file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/services/DatoRegistralService.js:25:23
+    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at async DatoRegistralService.execWithClient (file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/services/BaseService.js:27:16)
+    at async DatoRegistralService.crearDatoRegistral (file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/services/DatoRegistralService.js:14:16)
+    at async file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/services/ClienteService.js:34:36
+    at async ClienteService.withTransaction (file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/services/BaseService.js:13:28)
+    at async ClienteService.crearCliente (file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/services/ClienteService.js:32:16)
+    at async ClienteController.createCliente (file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/controllers/ClienteController.js:13:28)
+
+[2025-11-23T19:25:28.616Z] Error: El dato registral ingresado ya existe
+    at file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/services/DatoRegistralService.js:25:23
+    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at async DatoRegistralService.execWithClient (file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/services/BaseService.js:27:16)
+    at async DatoRegistralService.crearDatoRegistral (file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/services/DatoRegistralService.js:14:16)
+    at async file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/services/ClienteService.js:34:36
+    at async ClienteService.withTransaction (file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/services/BaseService.js:13:28)
+    at async ClienteService.crearCliente (file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/services/ClienteService.js:32:16)
+    at async ClienteController.createCliente (file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/controllers/ClienteController.js:13:28)
+
+[2025-11-23T19:33:30.580Z] Error: El dato registral ingresado ya existe
+    at file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/services/DatoRegistralService.js:25:23
+    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at async DatoRegistralService.execWithClient (file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/services/BaseService.js:27:16)
+    at async DatoRegistralService.crearDatoRegistral (file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/services/DatoRegistralService.js:14:16)
+    at async file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/services/ClienteService.js:34:36
+    at async ClienteService.withTransaction (file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/services/BaseService.js:13:28)
+    at async ClienteService.crearCliente (file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/services/ClienteService.js:32:16)
+    at async ClienteController.createCliente (file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/controllers/ClienteController.js:13:28)
+
+[2025-11-23T20:44:33.932Z] Error: El dato registral ingresado ya existe
+    at file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/services/DatoRegistralService.js:25:23
+    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at async DatoRegistralService.execWithClient (file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/services/BaseService.js:27:16)
+    at async DatoRegistralService.crearDatoRegistral (file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/services/DatoRegistralService.js:14:16)
+    at async file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/services/ClienteService.js:34:36
+    at async ClienteService.withTransaction (file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/services/BaseService.js:13:28)
+    at async ClienteService.crearCliente (file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/services/ClienteService.js:32:16)
+    at async ClienteController.createCliente (file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/controllers/ClienteController.js:13:28)
+
+[2025-11-23T20:45:41.797Z] Error: El dato registral ingresado ya existe
+    at file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/services/DatoRegistralService.js:25:23
+    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at async DatoRegistralService.execWithClient (file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/services/BaseService.js:27:16)
+    at async DatoRegistralService.crearDatoRegistral (file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/services/DatoRegistralService.js:14:16)
+    at async file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/services/ClienteService.js:34:36
+    at async ClienteService.withTransaction (file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/services/BaseService.js:13:28)
+    at async ClienteService.crearCliente (file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/services/ClienteService.js:32:16)
+    at async ClienteController.createCliente (file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/controllers/ClienteController.js:13:28)
+
+[2025-11-23T20:46:11.439Z] Error: El dato registral ingresado ya existe
+    at file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/services/DatoRegistralService.js:25:23
+    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at async DatoRegistralService.execWithClient (file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/services/BaseService.js:27:16)
+    at async DatoRegistralService.crearDatoRegistral (file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/services/DatoRegistralService.js:14:16)
+    at async file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/services/ClienteService.js:34:36
+    at async ClienteService.withTransaction (file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/services/BaseService.js:13:28)
+    at async ClienteService.crearCliente (file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/services/ClienteService.js:32:16)
+    at async ClienteController.createCliente (file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/controllers/ClienteController.js:13:28)
+
+[2025-11-23T20:47:33.239Z] Error: El dato registral ingresado ya existe
+    at file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/services/DatoRegistralService.js:25:23
+    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at async DatoRegistralService.execWithClient (file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/services/BaseService.js:27:16)
+    at async DatoRegistralService.crearDatoRegistral (file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/services/DatoRegistralService.js:14:16)
+    at async file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/services/ClienteService.js:34:36
+    at async ClienteService.withTransaction (file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/services/BaseService.js:13:28)
+    at async ClienteService.crearCliente (file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/services/ClienteService.js:32:16)
+    at async ClienteController.createCliente (file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/controllers/ClienteController.js:13:28)
+
+[2025-11-23T20:51:28.224Z] Error: El dato registral ingresado ya existe
+    at file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/services/DatoRegistralService.js:25:23
+    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at async DatoRegistralService.execWithClient (file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/services/BaseService.js:27:16)
+    at async DatoRegistralService.crearDatoRegistral (file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/services/DatoRegistralService.js:14:16)
+    at async file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/services/ClienteService.js:34:36
+    at async ClienteService.withTransaction (file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/services/BaseService.js:13:28)
+    at async ClienteService.crearCliente (file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/services/ClienteService.js:32:16)
+    at async ClienteController.createCliente (file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/controllers/ClienteController.js:13:28)
+
+[2025-11-23T20:51:48.858Z] Error: El dato registral ingresado ya existe
+    at file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/services/DatoRegistralService.js:25:23
+    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at async DatoRegistralService.execWithClient (file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/services/BaseService.js:27:16)
+    at async DatoRegistralService.crearDatoRegistral (file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/services/DatoRegistralService.js:14:16)
+    at async file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/services/ClienteService.js:34:36
+    at async ClienteService.withTransaction (file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/services/BaseService.js:13:28)
+    at async ClienteService.crearCliente (file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/services/ClienteService.js:32:16)
+    at async ClienteController.createCliente (file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/controllers/ClienteController.js:13:28)
+
+[2025-11-23T20:52:31.583Z] Error: El dato registral ingresado ya existe
+    at file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/services/DatoRegistralService.js:25:23
+    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at async DatoRegistralService.execWithClient (file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/services/BaseService.js:27:16)
+    at async DatoRegistralService.crearDatoRegistral (file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/services/DatoRegistralService.js:14:16)
+    at async file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/services/ClienteService.js:34:36
+    at async ClienteService.withTransaction (file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/services/BaseService.js:13:28)
+    at async ClienteService.crearCliente (file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/services/ClienteService.js:32:16)
+    at async ClienteController.createCliente (file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/controllers/ClienteController.js:13:28)
+
+[2025-11-23T21:49:04.096Z] Error: El dato registral ingresado ya existe
+    at file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/services/DatoRegistralService.js:25:23
+    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at async DatoRegistralService.execWithClient (file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/services/BaseService.js:27:16)
+    at async DatoRegistralService.crearDatoRegistral (file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/services/DatoRegistralService.js:14:16)
+    at async file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/services/ClienteService.js:34:36
+    at async ClienteService.withTransaction (file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/services/BaseService.js:13:28)
+    at async ClienteService.crearCliente (file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/services/ClienteService.js:32:16)
+    at async ClienteController.createCliente (file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/controllers/ClienteController.js:13:28)
+
+[2025-11-23T21:53:57.259Z] Error: El dato registral ingresado ya existe
+    at file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/services/DatoRegistralService.js:25:23
+    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at async DatoRegistralService.execWithClient (file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/services/BaseService.js:27:16)
+    at async DatoRegistralService.crearDatoRegistral (file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/services/DatoRegistralService.js:14:16)
+    at async file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/services/ClienteService.js:34:36
+    at async ClienteService.withTransaction (file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/services/BaseService.js:13:28)
+    at async ClienteService.crearCliente (file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/services/ClienteService.js:32:16)
+    at async ClienteController.createCliente (file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/controllers/ClienteController.js:13:28)
+
+[2025-11-23T21:55:25.641Z] Error: El dato registral ingresado ya existe
+    at file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/services/DatoRegistralService.js:25:23
+    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at async DatoRegistralService.execWithClient (file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/services/BaseService.js:27:16)
+    at async DatoRegistralService.crearDatoRegistral (file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/services/DatoRegistralService.js:14:16)
+    at async file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/services/ClienteService.js:34:36
+    at async ClienteService.withTransaction (file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/services/BaseService.js:13:28)
+    at async ClienteService.crearCliente (file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/services/ClienteService.js:32:16)
+    at async ClienteController.createCliente (file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/controllers/ClienteController.js:13:28)
+
+[2025-11-23T21:55:25.687Z] Error: El dato registral ingresado ya existe
+    at file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/services/DatoRegistralService.js:25:23
+    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at async DatoRegistralService.execWithClient (file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/services/BaseService.js:27:16)
+    at async DatoRegistralService.crearDatoRegistral (file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/services/DatoRegistralService.js:14:16)
+    at async file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/services/ClienteService.js:34:36
+    at async ClienteService.withTransaction (file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/services/BaseService.js:13:28)
+    at async ClienteService.crearCliente (file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/services/ClienteService.js:32:16)
+    at async ClienteController.createCliente (file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/controllers/ClienteController.js:13:28)
+
+[2025-11-23T21:55:35.101Z] Error: El dato registral ingresado ya existe
+    at file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/services/DatoRegistralService.js:25:23
+    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at async DatoRegistralService.execWithClient (file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/services/BaseService.js:27:16)
+    at async DatoRegistralService.crearDatoRegistral (file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/services/DatoRegistralService.js:14:16)
+    at async file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/services/ClienteService.js:34:36
+    at async ClienteService.withTransaction (file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/services/BaseService.js:13:28)
+    at async ClienteService.crearCliente (file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/services/ClienteService.js:32:16)
+    at async ClienteController.createCliente (file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/controllers/ClienteController.js:13:28)
+
+[2025-11-23T21:56:05.291Z] Error: El dato registral ingresado ya existe
+    at file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/services/DatoRegistralService.js:25:23
+    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at async DatoRegistralService.execWithClient (file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/services/BaseService.js:27:16)
+    at async DatoRegistralService.crearDatoRegistral (file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/services/DatoRegistralService.js:14:16)
+    at async file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/services/ClienteService.js:34:36
+    at async ClienteService.withTransaction (file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/services/BaseService.js:13:28)
+    at async ClienteService.crearCliente (file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/services/ClienteService.js:32:16)
+    at async ClienteController.createCliente (file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/controllers/ClienteController.js:13:28)
+
+[2025-11-23T21:56:23.183Z] Error: El dato registral ingresado ya existe
+    at file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/services/DatoRegistralService.js:25:23
+    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at async DatoRegistralService.execWithClient (file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/services/BaseService.js:27:16)
+    at async DatoRegistralService.crearDatoRegistral (file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/services/DatoRegistralService.js:14:16)
+    at async file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/services/ClienteService.js:34:36
+    at async ClienteService.withTransaction (file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/services/BaseService.js:13:28)
+    at async ClienteService.crearCliente (file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/services/ClienteService.js:32:16)
+    at async ClienteController.createCliente (file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/controllers/ClienteController.js:13:28)
+
+[2025-11-23T21:58:32.039Z] Error: El dato registral ingresado ya existe
+    at file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/services/DatoRegistralService.js:25:23
+    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at async DatoRegistralService.execWithClient (file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/services/BaseService.js:27:16)
+    at async DatoRegistralService.crearDatoRegistral (file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/services/DatoRegistralService.js:14:16)
+    at async file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/services/ClienteService.js:34:36
+    at async ClienteService.withTransaction (file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/services/BaseService.js:13:28)
+    at async ClienteService.crearCliente (file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/services/ClienteService.js:32:16)
+    at async ClienteController.createCliente (file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/controllers/ClienteController.js:13:28)
+
+[2025-11-24T19:27:54.094Z] Error: El dato registral ingresado ya existe
+    at file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/services/DatoRegistralService.js:25:23
+    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at async DatoRegistralService.execWithClient (file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/services/BaseService.js:27:16)
+    at async DatoRegistralService.crearDatoRegistral (file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/services/DatoRegistralService.js:14:16)
+    at async file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/services/ClienteService.js:34:36
+    at async ClienteService.withTransaction (file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/services/BaseService.js:13:28)
+    at async ClienteService.crearCliente (file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/services/ClienteService.js:32:16)
+    at async ClienteController.createCliente (file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/controllers/ClienteController.js:13:28)
+
+[2025-11-24T19:33:02.724Z] Error: El propietario con NIE Y1234567T ya existe
+    at PropietarioService.crearPropietario (file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/services/PropietarioService.js:13:30)
+    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at async file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/services/ClienteService.js:39:33
+    at async ClienteService.withTransaction (file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/services/BaseService.js:13:28)
+    at async ClienteService.crearCliente (file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/services/ClienteService.js:32:16)
+    at async ClienteController.createCliente (file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/controllers/ClienteController.js:13:28)
+
+[2025-11-25T00:24:51.640Z] error: el valor nulo en la columna «num_protocolo» de la relación «protocolo» viola la restricción de no nulo
+    at C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\pg\lib\client.js:545:17
+    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at async Repositorio.insertar (file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/repositories/globalPersistence.js:54:28)
+    at async file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/services/AdeudoService.js:726:15
+    at async Promise.all (index 0)
+    at async file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/services/AdeudoService.js:714:9
+    at async AdeudoService.withTransaction (file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/services/BaseService.js:13:28)
+    at async AdeudoService.updateAdeudos (file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/services/AdeudoService.js:676:12)
+    at async AdeudoController.updateAdeudos (file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/controllers/AdeudoController.js:288:22)
+
+[2025-11-25T03:26:31.353Z] Error: num_factura es obligatorio en cambios_protocolo
+    at AdeudoService.updateAdeudos (file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/services/AdeudoService.js:668:31)
+    at AdeudoController.updateAdeudos (file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/controllers/AdeudoController.js:288:41)
+    at Layer.handle [as handle_request] (C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\express\lib\router\layer.js:95:5)
+    at next (C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\express\lib\router\route.js:149:13)
+    at Route.dispatch (C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\express\lib\router\route.js:119:3)
+    at Layer.handle [as handle_request] (C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\express\lib\router\layer.js:95:5)
+    at C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\express\lib\router\index.js:284:15
+    at Function.process_params (C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\express\lib\router\index.js:346:12)
+    at next (C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\express\lib\router\index.js:280:10)
+    at Function.handle (C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\express\lib\router\index.js:175:3)
+    at router (C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\express\lib\router\index.js:47:12)
+    at Layer.handle [as handle_request] (C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\express\lib\router\layer.js:95:5)
+    at trim_prefix (C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\express\lib\router\index.js:328:13)
+    at C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\express\lib\router\index.js:286:9
+    at Function.process_params (C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\express\lib\router\index.js:346:12)
+    at next (C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\express\lib\router\index.js:280:10)
+
+[2025-11-25T03:27:29.454Z] error: inserción o actualización en la tabla «protocolo» viola la llave foránea «protocolo_num_factura_empresa_cif_fkey»
+    at C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\pg\lib\client.js:545:17
+    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at async Repositorio.insertar (file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/repositories/globalPersistence.js:54:28)
+    at async file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/services/AdeudoService.js:726:15
+    at async Promise.all (index 0)
+    at async file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/services/AdeudoService.js:714:9
+    at async AdeudoService.withTransaction (file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/services/BaseService.js:13:28)
+    at async AdeudoService.updateAdeudos (file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/services/AdeudoService.js:676:12)
+    at async AdeudoController.updateAdeudos (file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/controllers/AdeudoController.js:288:22)
+
+[2025-11-25T04:21:23.765Z] error: el valor nulo en la columna «num_protocolo» de la relación «protocolo» viola la restricción de no nulo
+    at C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\pg\lib\client.js:545:17
+    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at async Repositorio.insertar (file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/repositories/globalPersistence.js:54:28)
+    at async file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/services/AdeudoService.js:726:15
+    at async Promise.all (index 0)
+    at async file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/services/AdeudoService.js:714:9
+    at async AdeudoService.withTransaction (file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/services/BaseService.js:13:28)
+    at async AdeudoService.updateAdeudos (file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/services/AdeudoService.js:676:12)
+    at async AdeudoController.updateAdeudos (file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/controllers/AdeudoController.js:288:22)
+
+[2025-11-25T04:32:06.692Z] error: el valor nulo en la columna «num_protocolo» de la relación «protocolo» viola la restricción de no nulo
+    at C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\pg\lib\client.js:545:17
+    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at async Repositorio.insertar (file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/repositories/globalPersistence.js:54:28)
+    at async file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/services/AdeudoService.js:726:15
+    at async Promise.all (index 0)
+    at async file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/services/AdeudoService.js:714:9
+    at async AdeudoService.withTransaction (file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/services/BaseService.js:13:28)
+    at async AdeudoService.updateAdeudos (file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/services/AdeudoService.js:676:12)
+    at async AdeudoController.updateAdeudos (file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/controllers/AdeudoController.js:288:22)
+
+[2025-11-25T04:34:39.869Z] error: el valor nulo en la columna «num_protocolo» de la relación «protocolo» viola la restricción de no nulo
+    at C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\pg\lib\client.js:545:17
+    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at async Repositorio.insertar (file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/repositories/globalPersistence.js:54:28)
+    at async file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/services/AdeudoService.js:726:15
+    at async Promise.all (index 0)
+    at async file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/services/AdeudoService.js:714:9
+    at async AdeudoService.withTransaction (file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/services/BaseService.js:13:28)
+    at async AdeudoService.updateAdeudos (file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/services/AdeudoService.js:676:12)
+    at async AdeudoController.updateAdeudos (file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/controllers/AdeudoController.js:288:22)
+
+[2025-11-25T04:37:12.337Z] error: el valor nulo en la columna «num_protocolo» de la relación «protocolo» viola la restricción de no nulo
+    at C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\pg\lib\client.js:545:17
+    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at async Repositorio.insertar (file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/repositories/globalPersistence.js:54:28)
+    at async file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/services/AdeudoService.js:726:15
+    at async Promise.all (index 0)
+    at async file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/services/AdeudoService.js:714:9
+    at async AdeudoService.withTransaction (file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/services/BaseService.js:13:28)
+    at async AdeudoService.updateAdeudos (file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/services/AdeudoService.js:676:12)
+    at async AdeudoController.updateAdeudos (file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/controllers/AdeudoController.js:288:22)
+
+[2025-11-25T04:38:30.741Z] error: el valor nulo en la columna «num_protocolo» de la relación «protocolo» viola la restricción de no nulo
+    at C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\pg\lib\client.js:545:17
+    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at async Repositorio.insertar (file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/repositories/globalPersistence.js:54:28)
+    at async file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/services/AdeudoService.js:726:15
+    at async Promise.all (index 0)
+    at async file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/services/AdeudoService.js:714:9
+    at async AdeudoService.withTransaction (file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/services/BaseService.js:13:28)
+    at async AdeudoService.updateAdeudos (file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/services/AdeudoService.js:676:12)
+    at async AdeudoController.updateAdeudos (file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/controllers/AdeudoController.js:288:22)
+
+[2025-11-25T04:40:46.044Z] Error: num_entrada_original es obligatorio en entrada_RMM
+    at AdeudoService.updateAdeudos (file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/services/AdeudoService.js:673:40)
+    at AdeudoController.updateAdeudos (file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/controllers/AdeudoController.js:288:41)
+    at Layer.handle [as handle_request] (C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\express\lib\router\layer.js:95:5)
+    at next (C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\express\lib\router\route.js:149:13)
+    at Route.dispatch (C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\express\lib\router\route.js:119:3)
+    at Layer.handle [as handle_request] (C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\express\lib\router\layer.js:95:5)
+    at C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\express\lib\router\index.js:284:15
+    at Function.process_params (C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\express\lib\router\index.js:346:12)
+    at next (C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\express\lib\router\index.js:280:10)
+    at Function.handle (C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\express\lib\router\index.js:175:3)
+    at router (C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\express\lib\router\index.js:47:12)
+    at Layer.handle [as handle_request] (C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\express\lib\router\layer.js:95:5)
+    at trim_prefix (C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\express\lib\router\index.js:328:13)
+    at C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\express\lib\router\index.js:286:9
+    at Function.process_params (C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\express\lib\router\index.js:346:12)
+    at next (C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\express\lib\router\index.js:280:10)
+
+[2025-11-25T04:41:55.462Z] error: el valor nulo en la columna «num_protocolo» de la relación «protocolo» viola la restricción de no nulo
+    at C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\pg\lib\client.js:545:17
+    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at async Repositorio.insertar (file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/repositories/globalPersistence.js:54:28)
+    at async file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/services/AdeudoService.js:726:15
+    at async Promise.all (index 0)
+    at async file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/services/AdeudoService.js:714:9
+    at async AdeudoService.withTransaction (file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/services/BaseService.js:13:28)
+    at async AdeudoService.updateAdeudos (file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/services/AdeudoService.js:676:12)
+    at async AdeudoController.updateAdeudos (file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/controllers/AdeudoController.js:288:22)
+
+[2025-11-25T04:43:57.754Z] Error: No se pueden actualizar con datos vacíos.
+    at Repositorio.actualizarPorId (file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/repositories/globalPersistence.js:146:19)
+    at file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/services/AdeudoService.js:853:49
+    at Array.map (<anonymous>)
+    at file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/services/AdeudoService.js:849:22
+    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at async AdeudoService.withTransaction (file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/services/BaseService.js:13:28)
+    at async AdeudoService.updateAdeudos (file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/services/AdeudoService.js:676:12)
+    at async AdeudoController.updateAdeudos (file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/controllers/AdeudoController.js:288:22)
+
+[2025-11-25T04:45:31.083Z] Error: No se pueden actualizar con datos vacíos.
+    at Repositorio.actualizarPorId (file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/repositories/globalPersistence.js:146:19)
+    at file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/services/AdeudoService.js:854:49
+    at Array.map (<anonymous>)
+    at file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/services/AdeudoService.js:849:22
+    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at async AdeudoService.withTransaction (file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/services/BaseService.js:13:28)
+    at async AdeudoService.updateAdeudos (file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/services/AdeudoService.js:676:12)
+    at async AdeudoController.updateAdeudos (file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/controllers/AdeudoController.js:288:22)
+
+[2025-11-25T04:50:38.565Z] error: el valor nulo en la columna «num_protocolo» de la relación «protocolo» viola la restricción de no nulo
+    at C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\pg\lib\client.js:545:17
+    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at async Repositorio.insertar (file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/repositories/globalPersistence.js:54:28)
+    at async file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/services/AdeudoService.js:726:15
+    at async Promise.all (index 0)
+    at async file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/services/AdeudoService.js:714:9
+    at async AdeudoService.withTransaction (file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/services/BaseService.js:13:28)
+    at async AdeudoService.updateAdeudos (file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/services/AdeudoService.js:676:12)
+    at async AdeudoController.updateAdeudos (file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/controllers/AdeudoController.js:288:22)
+
+[2025-11-25T04:55:18.349Z] error: el valor nulo en la columna «num_protocolo» de la relación «protocolo» viola la restricción de no nulo
+    at C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\pg\lib\client.js:545:17
+    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at async Repositorio.insertar (file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/repositories/globalPersistence.js:54:28)
+    at async file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/services/AdeudoService.js:726:15
+    at async Promise.all (index 0)
+    at async file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/services/AdeudoService.js:714:9
+    at async AdeudoService.withTransaction (file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/services/BaseService.js:13:28)
+    at async AdeudoService.updateAdeudos (file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/services/AdeudoService.js:676:12)
+    at async AdeudoController.updateAdeudos (file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/controllers/AdeudoController.js:288:22)
+
+[2025-11-25T04:56:34.929Z] error: el valor nulo en la columna «num_protocolo» de la relación «protocolo» viola la restricción de no nulo
+    at C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\pg\lib\client.js:545:17
+    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at async Repositorio.insertar (file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/repositories/globalPersistence.js:54:28)
+    at async file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/services/AdeudoService.js:726:15
+    at async Promise.all (index 0)
+    at async file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/services/AdeudoService.js:714:9
+    at async AdeudoService.withTransaction (file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/services/BaseService.js:13:28)
+    at async AdeudoService.updateAdeudos (file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/services/AdeudoService.js:676:12)
+    at async AdeudoController.updateAdeudos (file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/controllers/AdeudoController.js:288:22)
+
+[2025-11-25T04:58:26.378Z] error: el valor nulo en la columna «num_protocolo» de la relación «protocolo» viola la restricción de no nulo
+    at C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\pg\lib\client.js:545:17
+    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at async Repositorio.insertar (file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/repositories/globalPersistence.js:54:28)
+    at async file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/services/AdeudoService.js:726:15
+    at async Promise.all (index 0)
+    at async file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/services/AdeudoService.js:714:9
+    at async AdeudoService.withTransaction (file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/services/BaseService.js:13:28)
+    at async AdeudoService.updateAdeudos (file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/services/AdeudoService.js:676:12)
+    at async AdeudoController.updateAdeudos (file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/controllers/AdeudoController.js:288:22)
+
+[2025-11-25T05:05:26.898Z] error: no existe la columna «diferencia» en la relación «adeudo»
+    at C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\pg\lib\client.js:545:17
+    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at async Repositorio.insertar (file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/repositories/globalPersistence.js:54:28)
+    at async file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/services/AdeudoService.js:777:15
+    at async Promise.all (index 0)
+    at async file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/services/AdeudoService.js:738:9
+    at async AdeudoService.withTransaction (file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/services/BaseService.js:13:28)
+    at async AdeudoService.updateAdeudos (file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/services/AdeudoService.js:676:12)
+    at async AdeudoController.updateAdeudos (file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/controllers/AdeudoController.js:288:22)
+
+[2025-11-25T05:11:06.542Z] error: el valor nulo en la columna «num_protocolo» de la relación «protocolo» viola la restricción de no nulo
+    at C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\pg\lib\client.js:545:17
+    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at async Repositorio.insertar (file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/repositories/globalPersistence.js:54:28)
+    at async file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/services/AdeudoService.js:726:15
+    at async Promise.all (index 0)
+    at async file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/services/AdeudoService.js:714:9
+    at async AdeudoService.withTransaction (file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/services/BaseService.js:13:28)
+    at async AdeudoService.updateAdeudos (file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/services/AdeudoService.js:676:12)
+    at async AdeudoController.updateAdeudos (file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/controllers/AdeudoController.js:288:22)
+
+[2025-11-25T05:11:34.731Z] error: el valor nulo en la columna «num_protocolo» de la relación «protocolo» viola la restricción de no nulo
+    at C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\pg\lib\client.js:545:17
+    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at async Repositorio.insertar (file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/repositories/globalPersistence.js:54:28)
+    at async file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/services/AdeudoService.js:726:15
+    at async Promise.all (index 0)
+    at async file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/services/AdeudoService.js:714:9
+    at async AdeudoService.withTransaction (file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/services/BaseService.js:13:28)
+    at async AdeudoService.updateAdeudos (file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/services/AdeudoService.js:676:12)
+    at async AdeudoController.updateAdeudos (file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/controllers/AdeudoController.js:288:22)
+
+[2025-11-25T05:12:08.088Z] error: el valor nulo en la columna «num_protocolo» de la relación «protocolo» viola la restricción de no nulo
+    at C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\pg\lib\client.js:545:17
+    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at async Repositorio.insertar (file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/repositories/globalPersistence.js:54:28)
+    at async file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/services/AdeudoService.js:726:15
+    at async Promise.all (index 0)
+    at async file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/services/AdeudoService.js:714:9
+    at async AdeudoService.withTransaction (file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/services/BaseService.js:13:28)
+    at async AdeudoService.updateAdeudos (file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/services/AdeudoService.js:676:12)
+    at async AdeudoController.updateAdeudos (file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/controllers/AdeudoController.js:288:22)
+
+[2025-11-25T05:12:49.607Z] error: el valor nulo en la columna «num_protocolo» de la relación «protocolo» viola la restricción de no nulo
+    at C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\pg\lib\client.js:545:17
+    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at async Repositorio.insertar (file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/repositories/globalPersistence.js:54:28)
+    at async file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/services/AdeudoService.js:726:15
+    at async Promise.all (index 0)
+    at async file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/services/AdeudoService.js:714:9
+    at async AdeudoService.withTransaction (file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/services/BaseService.js:13:28)
+    at async AdeudoService.updateAdeudos (file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/services/AdeudoService.js:676:12)
+    at async AdeudoController.updateAdeudos (file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/controllers/AdeudoController.js:288:22)
+
+[2025-11-25T05:13:38.529Z] error: el valor nulo en la columna «num_protocolo» de la relación «protocolo» viola la restricción de no nulo
+    at C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\pg\lib\client.js:545:17
+    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at async Repositorio.insertar (file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/repositories/globalPersistence.js:54:28)
+    at async file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/services/AdeudoService.js:726:15
+    at async Promise.all (index 0)
+    at async file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/services/AdeudoService.js:714:9
+    at async AdeudoService.withTransaction (file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/services/BaseService.js:13:28)
+    at async AdeudoService.updateAdeudos (file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/services/AdeudoService.js:676:12)
+    at async AdeudoController.updateAdeudos (file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/controllers/AdeudoController.js:288:22)
+
+[2025-11-25T05:14:16.234Z] error: el valor nulo en la columna «num_protocolo» de la relación «protocolo» viola la restricción de no nulo
+    at C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\pg\lib\client.js:545:17
+    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at async Repositorio.insertar (file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/repositories/globalPersistence.js:54:28)
+    at async file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/services/AdeudoService.js:726:15
+    at async Promise.all (index 0)
+    at async file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/services/AdeudoService.js:714:9
+    at async AdeudoService.withTransaction (file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/services/BaseService.js:13:28)
+    at async AdeudoService.updateAdeudos (file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/services/AdeudoService.js:676:12)
+    at async AdeudoController.updateAdeudos (file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/controllers/AdeudoController.js:288:22)
+
+[2025-11-25T05:37:51.263Z] error: no existe la columna p.cs_iva
+    at C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\pg-pool\index.js:45:11
+    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at async AdeudoService.obtenerTodosAdeudosPorEmpresaAgrupados (file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/services/AdeudoService.js:487:20)
+    at async AdeudoController.getAdeudosByEmpresa (file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/controllers/AdeudoController.js:18:18)
+
+[2025-11-25T05:37:52.942Z] error: no existe la columna p.cs_iva
+    at C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\pg-pool\index.js:45:11
+    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at async AdeudoService.obtenerTodosAdeudosPorEmpresaAgrupados (file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/services/AdeudoService.js:487:20)
+    at async AdeudoController.getAdeudosByEmpresa (file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/controllers/AdeudoController.js:18:18)
+
+[2025-11-25T05:41:32.002Z] error: no existe la columna «cs_iva» en la relación «protocolo»
+    at C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\pg\lib\client.js:545:17
+    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at async Repositorio.insertar (file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/repositories/globalPersistence.js:54:28)
+    at async file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/services/AdeudoService.js:726:15
+    at async Promise.all (index 0)
+    at async file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/services/AdeudoService.js:714:9
+    at async AdeudoService.withTransaction (file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/services/BaseService.js:13:28)
+    at async AdeudoService.updateAdeudos (file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/services/AdeudoService.js:676:12)
+    at async AdeudoController.updateAdeudos (file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/controllers/AdeudoController.js:288:22)
+
+[2025-11-25T05:44:27.218Z] Error: Error de validación en factura (nuevo): "cs_iva" is not allowed
+    at AdeudoService.updateAdeudos (file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/services/AdeudoService.js:661:24)
+    at AdeudoController.updateAdeudos (file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/controllers/AdeudoController.js:288:41)
+    at Layer.handle [as handle_request] (C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\express\lib\router\layer.js:95:5)
+    at next (C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\express\lib\router\route.js:149:13)
+    at Route.dispatch (C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\express\lib\router\route.js:119:3)
+    at Layer.handle [as handle_request] (C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\express\lib\router\layer.js:95:5)
+    at C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\express\lib\router\index.js:284:15
+    at Function.process_params (C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\express\lib\router\index.js:346:12)
+    at next (C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\express\lib\router\index.js:280:10)
+    at Function.handle (C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\express\lib\router\index.js:175:3)
+    at router (C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\express\lib\router\index.js:47:12)
+    at Layer.handle [as handle_request] (C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\express\lib\router\layer.js:95:5)
+    at trim_prefix (C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\express\lib\router\index.js:328:13)
+    at C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\express\lib\router\index.js:286:9
+    at Function.process_params (C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\express\lib\router\index.js:346:12)
+    at next (C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\express\lib\router\index.js:280:10)
+
+[2025-11-25T05:45:06.743Z] Error: Error de validación en factura (nuevo): "cs_iva" is not allowed
+    at AdeudoService.updateAdeudos (file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/services/AdeudoService.js:661:24)
+    at AdeudoController.updateAdeudos (file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/controllers/AdeudoController.js:288:41)
+    at Layer.handle [as handle_request] (C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\express\lib\router\layer.js:95:5)
+    at next (C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\express\lib\router\route.js:149:13)
+    at Route.dispatch (C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\express\lib\router\route.js:119:3)
+    at Layer.handle [as handle_request] (C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\express\lib\router\layer.js:95:5)
+    at C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\express\lib\router\index.js:284:15
+    at Function.process_params (C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\express\lib\router\index.js:346:12)
+    at next (C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\express\lib\router\index.js:280:10)
+    at Function.handle (C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\express\lib\router\index.js:175:3)
+    at router (C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\express\lib\router\index.js:47:12)
+    at Layer.handle [as handle_request] (C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\express\lib\router\layer.js:95:5)
+    at trim_prefix (C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\express\lib\router\index.js:328:13)
+    at C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\express\lib\router\index.js:286:9
+    at Function.process_params (C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\express\lib\router\index.js:346:12)
+    at next (C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\express\lib\router\index.js:280:10)
+
+[2025-11-25T21:03:11.433Z] ReferenceError: diferencia is not defined
+    at file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/services/AdeudoService.js:762:55
+    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at async Promise.all (index 0)
+    at async file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/services/AdeudoService.js:738:9
+    at async AdeudoService.withTransaction (file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/services/BaseService.js:13:28)
+    at async AdeudoService.updateAdeudos (file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/services/AdeudoService.js:676:12)
+    at async AdeudoController.updateAdeudos (file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/controllers/AdeudoController.js:288:22)
+
+[2025-11-25T21:03:50.709Z] ReferenceError: diferencia is not defined
+    at file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/services/AdeudoService.js:764:55
+    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at async Promise.all (index 0)
+    at async file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/services/AdeudoService.js:738:9
+    at async AdeudoService.withTransaction (file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/services/BaseService.js:13:28)
+    at async AdeudoService.updateAdeudos (file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/services/AdeudoService.js:676:12)
+    at async AdeudoController.updateAdeudos (file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/controllers/AdeudoController.js:288:22)
+
+[2025-11-25T21:08:54.406Z] error: no existe la columna «num_factura»
+    at C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\pg\lib\client.js:545:17
+    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at async Repositorio.insertar (file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/repositories/globalPersistence.js:54:28)
+    at async file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/services/AdeudoService.js:750:15
+    at async Promise.all (index 0)
+    at async file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/services/AdeudoService.js:738:9
+    at async AdeudoService.withTransaction (file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/services/BaseService.js:13:28)
+    at async AdeudoService.updateAdeudos (file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/services/AdeudoService.js:676:12)
+    at async AdeudoController.updateAdeudos (file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/controllers/AdeudoController.js:288:22)
+
+[2025-11-25T21:14:17.366Z] error: no existe la columna «num_factura»
+    at C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\pg\lib\client.js:545:17
+    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at async Repositorio.insertar (file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/repositories/globalPersistence.js:54:28)
+    at async file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/services/AdeudoService.js:750:15
+    at async Promise.all (index 0)
+    at async file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/services/AdeudoService.js:738:9
+    at async AdeudoService.withTransaction (file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/services/BaseService.js:13:28)
+    at async AdeudoService.updateAdeudos (file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/services/AdeudoService.js:676:12)
+    at async AdeudoController.updateAdeudos (file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/controllers/AdeudoController.js:288:22)
+
+[2025-11-25T21:15:21.115Z] error: no existe la columna «num_factura»
+    at C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\pg\lib\client.js:545:17
+    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at async Repositorio.insertar (file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/repositories/globalPersistence.js:54:28)
+    at async file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/services/AdeudoService.js:750:15
+    at async Promise.all (index 0)
+    at async file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/services/AdeudoService.js:738:9
+    at async AdeudoService.withTransaction (file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/services/BaseService.js:13:28)
+    at async AdeudoService.updateAdeudos (file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/services/AdeudoService.js:676:12)
+    at async AdeudoController.updateAdeudos (file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/controllers/AdeudoController.js:288:22)
+
+[2025-11-25T21:39:42.944Z] error: no existe la columna «cs_iva» en la relación «protocolo»
+    at C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\pg\lib\client.js:545:17
+    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at async Repositorio.insertar (file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/repositories/globalPersistence.js:54:28)
+    at async file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/services/AdeudoService.js:96:9
+    at async AdeudoService.withTransaction (file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/services/BaseService.js:13:28)
+    at async AdeudoService.crearAdeudoNormal (file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/services/AdeudoService.js:92:12)
+    at async AdeudoController.createAdeudo (file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/controllers/AdeudoController.js:68:22)
+
+[2025-11-25T21:40:55.183Z] error: no existe la columna «cs_iva» en la relación «protocolo»
+    at C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\pg\lib\client.js:545:17
+    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at async Repositorio.insertar (file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/repositories/globalPersistence.js:54:28)
+    at async file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/services/AdeudoService.js:99:9
+    at async AdeudoService.withTransaction (file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/services/BaseService.js:13:28)
+    at async AdeudoService.crearAdeudoNormal (file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/services/AdeudoService.js:95:12)
+    at async AdeudoController.createAdeudo (file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/controllers/AdeudoController.js:68:22)
+
+[2025-11-25T23:08:30.687Z] ReferenceError: Cannot access 'nuevosDatosLimpios' before initialization
+    at file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/services/AdeudoService.js:782:33
+    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at async Promise.all (index 0)
+    at async file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/services/AdeudoService.js:742:9
+    at async AdeudoService.withTransaction (file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/services/BaseService.js:13:28)
+    at async AdeudoService.updateAdeudos (file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/services/AdeudoService.js:680:12)
+    at async AdeudoController.updateAdeudos (file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/controllers/AdeudoController.js:288:22)
+
+[2025-11-25T23:58:20.353Z] Error: No se pudo calcular la diferencia
+    at file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/services/AdeudoService.js:803:27
+    at process.processTicksAndRejections (node:internal/process/task_queues:105:5)
+    at async Promise.all (index 0)
+    at async file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/services/AdeudoService.js:742:9
+    at async AdeudoService.withTransaction (file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/services/BaseService.js:13:28)
+    at async AdeudoService.updateAdeudos (file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/services/AdeudoService.js:680:12)
+    at async AdeudoController.updateAdeudos (file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/controllers/AdeudoController.js:288:22)
+
+[2025-11-26T00:26:14.601Z] Error: Error de validación en factura (nuevo): "ff" must be a string
+    at AdeudoService.updateAdeudos (file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/services/AdeudoService.js:665:24)
+    at AdeudoController.updateAdeudos (file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/controllers/AdeudoController.js:288:41)
+    at Layer.handle [as handle_request] (C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\express\lib\router\layer.js:95:5)
+    at next (C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\express\lib\router\route.js:149:13)
+    at Route.dispatch (C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\express\lib\router\route.js:119:3)
+    at Layer.handle [as handle_request] (C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\express\lib\router\layer.js:95:5)
+    at C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\express\lib\router\index.js:284:15
+    at Function.process_params (C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\express\lib\router\index.js:346:12)
+    at next (C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\express\lib\router\index.js:280:10)
+    at Function.handle (C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\express\lib\router\index.js:175:3)
+    at router (C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\express\lib\router\index.js:47:12)
+    at Layer.handle [as handle_request] (C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\express\lib\router\layer.js:95:5)
+    at trim_prefix (C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\express\lib\router\index.js:328:13)
+    at C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\express\lib\router\index.js:286:9
+    at Function.process_params (C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\express\lib\router\index.js:346:12)
+    at next (C:\Users\alfre\OneDrive\Documentos\GitHub\Finatech\backend\node_modules\express\lib\router\index.js:280:10)
+

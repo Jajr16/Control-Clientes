@@ -233,7 +233,7 @@ const Cliente = () => {
                 )}
 
                 {selectedClient && inmueblesList && inmueblesList.length === 0 && (
-                    <div className="absolute inset-0 flex items-center justify-center">
+                    <div className="absolute right-0 top-0 bottom-0 w-[70%] flex items-center justify-center pointer-events-none">
                         <div className="text-center text-gray-500">
                             <BuildingOfficeIcon className="h-16 w-16 mx-auto mb-4" />
                             <h2 className="text-xl font-semibold">No hay inmuebles</h2>

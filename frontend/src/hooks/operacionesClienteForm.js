@@ -33,7 +33,6 @@ export const manejarLogicaCliente = () => {
             return response;
 
         } catch (error) {
-            console.log(error);
             const datosError = error.response?.data;
 
             if (datosError?.details) {

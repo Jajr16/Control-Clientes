@@ -9,6 +9,7 @@ export const adeudoInsertSchema = Joi.object({
     importe: Joi.number().optional(),
     iva: Joi.number().optional(),
     retencion: Joi.number().optional(),
+    cs_iva: Joi.number().default(0),
     num_liquidacion: Joi.alternatives().try(
         Joi.number(),
         Joi.string().allow(''),
@@ -48,7 +49,6 @@ export const finalizarRmmSchema = Joi.object({
     proveedor: Joi.string().default('Registro Mercantil de Madrid'),
     importe: Joi.number().positive().optional(),
     protocolo: Joi.object({
-        num_protocolo: Joi.string().min(1).required(),
-        cs_iva: Joi.number().default(0)
+        num_protocolo: Joi.string().min(1).required()
     }).optional()
 });

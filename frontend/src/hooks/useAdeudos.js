@@ -58,9 +58,6 @@ export function useAdeudos({ empresa, setEmpresa, adeudosGuardados, setAdeudosGu
   // mantener una lista editable de protocolos (local) por si el usuario agrega uno nuevo
   const [protocolosExtra, setProtocolosExtra] = useState([]);
 
-  // protocolos existentes en adeudos de la empresa seleccionada
- // Reemplaza el useMemo de protocolosDisponibles con este código:
-
 // Reemplaza el useMemo con esto:
 const [protocolosDisponibles, setProtocolosDisponibles] = useState([]);
 
@@ -119,20 +116,12 @@ useEffect(() => {
   });
 }, [adeudosList, empresa?.empresa_cif, protocolosExtra]);
 
-
-
   //helper para registrar un protocolo nuevo a la lista local (no backend)
   const registrarProtocoloLocal = useCallback((prot) => {
     const v = String(prot || "").trim();
     if (!v) return;
     setProtocolosExtra(prev => prev.includes(v) ? prev : [...prev, v]);
   }, []);
-
-  // --- Efecto: cargar al cambiar empresa
-  // useEffect(() => {
-  //   if (empresa.empresa_cif) fetchAdeudos(empresa.empresa_cif);
-  //   // eslint-disable-next-line react-hooks/exhaustive-deps
-  // }, [empresa.empresa_cif]);
 
   // --- API: cargar adeudos
 const fetchAdeudos = useCallback(async (empresaId) => {
@@ -260,9 +249,6 @@ const handleGuardarAdeudo = useCallback(
       num_factura = (empresa.numfactura || '').trim();
       ff = (empresa.fechafactura || '').trim();
     }
-
-    // --- validaciones
-    const camposObligatoriosBase = ['empresa_cif', 'proveedor', 'importe'];
     const faltantes = [];
 
     if (!empresa.empresa_cif) faltantes.push('empresa_cif');
@@ -288,18 +274,6 @@ const handleGuardarAdeudo = useCallback(
       return;
     }
 
-    const payload = {
-      num_factura,                 // 👈 ya resuelto
-      concepto,                    // 👈 auto en RMM
-      proveedor: empresa.proveedor,
-      ff,                          // 👈 ya resuelto (dd/mm/yyyy si venía con guiones)
-      importe: toNum(empresa.importe),
-      iva: esRMM ? 0 : toNum(empresa.iva),
-      retencion: esRMM ? 0 : toNum(empresa.retencion),
-      empresa_cif: empresa.empresa_cif,
-    };
-
-    // datos “protocolo/entrada” a enviar (sólo si hay algo)
     let protocolo = null;
     const tieneProtocolo = !!(empresa.protocoloentrada && empresa.protocoloentrada.trim());
 
@@ -307,9 +281,7 @@ const handleGuardarAdeudo = useCallback(
       protocolo = {
         num_factura,
         empresa_cif: empresa.empresa_cif,
-        num_protocolo: empresa.protocoloentrada,
-        // en RMM no usamos cs_iva; en caso normal respeta el campo
-        cs_iva: esRMM ? 0 : toNum(empresa.csiniva || 0),
+        num_protocolo: empresa.protocoloentrada
       };
     }
 
@@ -328,7 +300,7 @@ const handleGuardarAdeudo = useCallback(
           ff: (rmmState?.ff || '').trim(),
           concepto: 'Inscripción Registro Mercantil',
           proveedor: 'Registro Mercantil de Madrid',
-          protocolo: { num_protocolo: empresa.protocoloentrada, cs_iva: 0 },
+          protocolo: { num_protocolo: empresa.protocoloentrada},
         });
 
       } else if (esRMM && !esProtocoloExistente) {
@@ -360,10 +332,11 @@ const handleGuardarAdeudo = useCallback(
           iva: toNum(empresa.iva),
           retencion: toNum(empresa.retencion),
           empresa_cif: empresa.empresa_cif,
+          cs_iva: toNum(empresa.csiniva || 0)
         };
 
         const protocolo = empresa.protocoloentrada
-          ? { num_protocolo: empresa.protocoloentrada, cs_iva: toNum(empresa.csiniva || 0) }
+          ? { num_protocolo: empresa.protocoloentrada }
           : null;
 
         await apiService.guardarAdeudo(payloadAdeudo, protocolo);

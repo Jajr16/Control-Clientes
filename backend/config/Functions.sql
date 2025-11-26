@@ -24,12 +24,9 @@ BEGIN
                 COALESCE(a.importe, 0) +
                 COALESCE(a.iva, 0) -
                 COALESCE(a.retencion, 0) +
-                COALESCE(p.cs_iva, 0)
+                COALESCE(a.cs_iva, 0)
             ), 0) AS total_calculado
             FROM adeudo a
-            LEFT JOIN protocolo p
-                ON a.num_factura = p.num_factura
-                AND a.empresa_cif = p.empresa_cif
             WHERE a.empresa_cif = empresa_cif_param
               AND a.estado <> 'LIQUIDADO'
         ),
@@ -72,16 +69,13 @@ BEGIN
                     COALESCE(a.importe, 0) +
                     COALESCE(a.iva, 0) -
                     COALESCE(a.retencion, 0) +
-                    COALESCE(p.cs_iva, 0)
+                    COALESCE(a.cs_iva, 0)
                 ), 0) AS total_adeudos,
                 COALESCE(SUM(
                     COALESCE(h.honorario, 0) +
                     COALESCE(h.iva, 0)
                 ), 0) AS total_honorarios
             FROM adeudo a
-            LEFT JOIN protocolo p
-                ON a.num_factura = p.num_factura
-                AND a.empresa_cif = p.empresa_cif
             LEFT JOIN honorario h
                 ON h.empresa_cif = a.empresa_cif
             WHERE a.empresa_cif = empresa_cif_param
@@ -208,8 +202,8 @@ BEGIN
             a.fecha_creacion,
             a.estado,
             COALESCE(p.num_protocolo, ''::VARCHAR) as num_protocolo,
-            COALESCE(p.cs_iva, 0::NUMERIC) as cs_iva,
-            (a.importe + a.iva - a.retencion + COALESCE(p.cs_iva, 0)) as total,
+            COALESCE(a.cs_iva, 0::NUMERIC) as cs_iva,
+            (a.importe + a.iva - a.retencion + COALESCE(a.cs_iva, 0)) as total,
             h.fecha_creacion::DATE as fecha_liquidacion,
             -- Campos RMM
             CASE WHEN a.proveedor = 'Registro Mercantil de Madrid' THEN true ELSE false END as es_rmm,
