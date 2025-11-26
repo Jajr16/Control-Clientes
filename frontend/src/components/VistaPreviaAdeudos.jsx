@@ -16,6 +16,7 @@ const VistaPreviaAdeudos = ({
     const est = norm(a?.estado);
     if (a?.num_liquidacion) return 'LIQUIDADO';
     if (est === 'PENDIENTE DE ENVIAR') return 'LIQUIDADO';
+    if (est === 'RMM PENDIENTE') return 'PENDIENTE'; // 👈 RMM pendiente se trata como pendiente
     return 'PENDIENTE';
   };
 
@@ -30,8 +31,8 @@ const VistaPreviaAdeudos = ({
 
   // Clave estable por fila
   const rowKey = (a) => [
-    a?.num_factura ?? 'nf',
-    a?.num_protocolo ?? 'pe',
+    a?.num_factura ?? a?.num_entrada ?? 'nf',
+    a?.num_protocolo ?? a?.protocoloentrada ?? 'pe',
     a?.ff ?? 'f',
     a?.proveedor ?? 'pv'
   ].join('|');
@@ -50,20 +51,27 @@ const VistaPreviaAdeudos = ({
 
   // Totales solo de pendientes
   const totalPend = adeudosPendientes.reduce((acc, a) => acc + Number(a?.total || 0), 0);
-
-  // (opcional) Si tus filas traen honorarios; si no, puedes quitar esta línea/bloque
   const honorarios = adeudosPendientes.reduce((acc, a) => acc + Number(a?.honorarios || 0), 0);
-
   const anticipo = Number(anticipoP || 0);
   const adeudoPendiente = (totalPend - anticipo).toFixed(2);
 
   // Render helpers
-  const renderEstadoChip = () => (
-    // Etiqueta fija de "LIQUIDACIÓN EN CURSO"
-    <span className="inline-flex px-2 py-1 text-xs font-semibold rounded-full bg-amber-100 text-amber-800">
-      LIQUIDACIÓN EN CURSO
-    </span>
-  );
+  const renderEstadoChip = (adeudo) => {
+    // Si es RMM pendiente, mostrar etiqueta especial
+    if (adeudo.es_entrada_rmm_pendiente) {
+      return (
+        <span className="inline-flex px-2 py-1 text-xs font-semibold rounded-full bg-yellow-100 text-yellow-800">
+          RMM PENDIENTE
+        </span>
+      );
+    }
+    
+    return (
+      <span className="inline-flex px-2 py-1 text-xs font-semibold rounded-full bg-amber-100 text-amber-800">
+        LIQUIDACIÓN EN CURSO
+      </span>
+    );
+  };
 
   const adeudoPendienteNum = Math.max(totalPend - anticipo, 0);
 
@@ -129,11 +137,10 @@ const VistaPreviaAdeudos = ({
                 a.es_entrada_rmm_pendiente ? 'bg-yellow-50 border-l-4 border-yellow-400' : ''
               }`}
             >
-              <td className="border p-2">{renderEstadoChip()}</td>
+              <td className="border p-2">{renderEstadoChip(a)}</td>
               <td className="border p-2">{a?.concepto}</td>
               <td className="border p-2">{a?.proveedor}</td>
               <td className="border p-2">
-                {/* CORREGIDO: Mostrar texto adecuado para RMM pendientes */}
                 {a.es_entrada_rmm_pendiente ? 
                   <em className="text-gray-500">Pendiente</em> : 
                   (a?.ff || '-')
@@ -145,12 +152,12 @@ const VistaPreviaAdeudos = ({
                   (a?.num_factura || '-')
                 }
               </td>
-              <td className="border p-2">{a?.num_protocolo}</td>
+              <td className="border p-2">{a?.num_protocolo || a?.protocoloentrada || '-'}</td>
               <td className="border p-2">{Number(a?.importe || 0).toFixed(2)}</td>
               <td className="border p-2">{Number(a?.iva || 0).toFixed(2)}</td>
               <td className="border p-2">{Number(a?.retencion || 0).toFixed(2)}</td>
               <td className="border p-2">{Number(a?.cs_iva || 0).toFixed(2)}</td>
-              <td className="border p-2">{Number(a?.total || 0).toFixed(2)}</td>
+              <td className="border p-2 font-semibold">{Number(a?.total || 0).toFixed(2)}</td>
             </tr>
           ))}
 
@@ -165,16 +172,18 @@ const VistaPreviaAdeudos = ({
             <td className="border">{anticipo.toFixed(2)}</td>
           </tr>
 
-          {/* (opcional) Honorarios si aplican a pendientes */}
-          <tr className="bg-gray-50">
-            <td colSpan={10} className="text-right pr-2 font-bold border">Honorarios FINATECH (IVA incluido):</td>
-            <td className="border">{honorarios.toFixed(2)}</td>
-          </tr>
+          {/* Honorarios si aplican */}
+          {honorarios > 0 && (
+            <tr className="bg-gray-50">
+              <td colSpan={10} className="text-right pr-2 font-bold border">Honorarios FINATECH (IVA incluido):</td>
+              <td className="border">{honorarios.toFixed(2)}</td>
+            </tr>
+          )}
 
-          {/* Adeudo pendiente (solo pendientes) */}
+          {/* Adeudo pendiente */}
           <tr className="bg-yellow-100 font-bold border-2">
             <td colSpan={10} className="text-right pr-2 border">
-              Adeudo con LIQUIDACIÓN EN CURSO (solo facturas con LIQUIDACIÓN EN CURSO):
+              Adeudo con LIQUIDACIÓN EN CURSO:
             </td>
             <td className="border">{adeudoPendienteNum.toFixed(2)}</td>
           </tr>

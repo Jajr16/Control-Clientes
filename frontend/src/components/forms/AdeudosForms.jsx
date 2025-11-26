@@ -14,38 +14,41 @@ const AdeudosForm = ({
 }) => {
   const h = useAdeudos({ empresa, setEmpresa, adeudosGuardados, setAdeudosGuardados, setVistaPrevia });
 
-  // CORRECCIÓN: Extraer anticipo_original o usar el número directamente
   const anticipoOriginal = React.useMemo(() => {
     if (typeof anticipo === 'number') {
       console.warn('ANTICIPO LLEGÓ COMO NÚMERO, debería ser un objeto con anticipo_original');
-      return anticipo; // Usar el número directamente como fallback
+      return anticipo;
     }
     return anticipo?.anticipo_original ?? anticipo?.anticipo_para_pdf ?? 0;
   }, [anticipo]);
 
-  // NUEVO: estado local para los campos de entrada_rmm (frontend)
+  // Estado local para los campos RMM
   const [rmm, setRmm] = React.useState({
     num_entrada: "",
     empresa_cif: empresa?.empresa_cif || "",
-    anticipo_pagado: 200,
     fecha_anticipo: "",
-    diferencia: "",
+    base_imponible: "", // 👈 NUEVO: Base imponible que ingresa el usuario
+    iva: 0,             // 👈 CALCULADO
+    retencion: 0,       // 👈 CALCULADO
+    cs_iva: 0,          // 👈 Conceptos sin IVA (editable)
+    total: 0,           // 👈 CALCULADO
+    diferencia: "",     // 👈 CALCULADO: anticipo - total
     fecha_devolucion_diferencia: "",
-    num_factura_final: ""
+    num_factura_final: "",
+    ff: ""
   });
 
+  // Sincronizar con rmmDatos del backend cuando vienen de histórico
   React.useEffect(() => {
     if (!h.rmmDatos) return;
+    
     setRmm(prev => ({
       ...prev,
       num_entrada: h.rmmDatos.num_entrada || prev.num_entrada,
       empresa_cif: h.rmmDatos.empresa_cif || prev.empresa_cif,
-      // fecha_anticipo viene de BD y debe estar bloqueada (readOnly)
       fecha_anticipo: h.rmmDatos.fecha_anticipo || prev.fecha_anticipo,
-      // diferencia / fecha_devolucion_diferencia si ya existen:
       diferencia: (h.rmmDatos.diferencia ?? prev.diferencia ?? ''),
       fecha_devolucion_diferencia: (h.rmmDatos.fecha_devolucion_diferencia || prev.fecha_devolucion_diferencia || ''),
-      // num_factura_final y ff los introduce el usuario ahora
     }));
   }, [h.rmmDatos]);
 
@@ -84,12 +87,14 @@ const AdeudosForm = ({
       />
     );
   }
+
   console.log('🔍 DEBUG AdeudosForm antes de PrincipalView:', {
-  'h.protocolosDisponibles': h.protocolosDisponibles,
-  'h.adeudosList.length': h.adeudosList.length,
-  'empresa.empresa_cif': empresa.empresa_cif,
-  'empresa.proveedor': empresa.proveedor
-});
+    'h.protocolosDisponibles': h.protocolosDisponibles,
+    'h.adeudosList.length': h.adeudosList.length,
+    'empresa.empresa_cif': empresa.empresa_cif,
+    'empresa.proveedor': empresa.proveedor
+  });
+
   return (
     <PrincipalView
       empresa={empresa}
@@ -109,14 +114,12 @@ const AdeudosForm = ({
           let updated = { ...prev, [name]: parsed };
           if (name === "proveedor" && typeof parsed === 'string' &&
               /registro\s*mercantil.*madrid/i.test(parsed)) {
-            // Defaults para RMM
             updated.importe = 200;
             updated.csiniva = 0;
-            // Concepto fijo en RMM
             updated.concepto = "Inscripción Registro Mercantil";
           }
           const isRMM = (p) => /registro\s*mercantil.*madrid/i.test(p || '');
-          const esRMM = isRMM(empresa.proveedor);          
+          const esRMM = isRMM(updated.proveedor);          
           const importe = parseFloat(updated.importe) || 0;
           const csiniva = esRMM ? 0 : parseFloat(updated.csiniva) || 0;
           const anticipo_cliente = parseFloat(anticipo) || 0;
