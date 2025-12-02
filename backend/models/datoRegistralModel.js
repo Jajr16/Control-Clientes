@@ -6,9 +6,9 @@ export const createTableDatoRegistral = async () => {
         await pool.query(`
             CREATE TABLE IF NOT EXISTS dato_registral (
                 id_dr SERIAL PRIMARY KEY,
-                num_protocolo INTEGER,
+                num_protocolo VARCHAR(50),
                 folio INTEGER,
-                hoja INTEGER,
+                hoja VARCHAR(50),
                 inscripcion INTEGER,
                 notario VARCHAR(500),
                 fecha_inscripcion DATE,

@@ -1085,3 +1085,9 @@
     at async AdeudoService.finalizarRmmYCrearAdeudo (file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/services/AdeudoService.js:167:12)
     at async AdeudoController.finalizarRmm (file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/controllers/AdeudoController.js:202:20)
 
+[2025-12-01T20:46:20.961Z] TypeError: Joi.number(...).string is not a function
+    at file:///C:/Users/alfre/OneDrive/Documentos/GitHub/Finatech/backend/schemas/clienteSchema.js:27:24
+    at ModuleJob.run (node:internal/modules/esm/module_job:271:25)
+    at async onImport.tracePromise.__proto__ (node:internal/modules/esm/loader:547:26)
+    at async asyncRunEntryPointWithESMLoader (node:internal/modules/run_main:116:5)
+

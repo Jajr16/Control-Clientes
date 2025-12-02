@@ -8,7 +8,7 @@ export const createTableDireccion = async () => {
                 id SERIAL PRIMARY KEY,
                 calle VARCHAR(300),
                 numero INTEGER,
-                piso INTEGER,
+                piso VARCHAR(50),
                 codigo_postal INTEGER,
                 localidad VARCHAR(300)
             );

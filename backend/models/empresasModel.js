@@ -11,7 +11,7 @@ export const createTableEmpresa = async () => {
                 propietario VARCHAR(9),
                 direccion INTEGER REFERENCES direccion(id) NOT NULL,
                 dato_registral INTEGER NOT NULL,
-                telefono VARCHAR(10),
+                telefono VARCHAR(13),
                 FOREIGN KEY (propietario) REFERENCES propietario(nie)
                     ON DELETE CASCADE ON UPDATE CASCADE,
                 FOREIGN KEY (dato_registral) REFERENCES dato_registral(id_dr)

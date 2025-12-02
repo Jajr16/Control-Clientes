@@ -8,7 +8,7 @@ export const createTablePropietario = async () => {
                 nie VARCHAR(9) PRIMARY KEY,
                 nombre VARCHAR(255),
                 email VARCHAR(255),
-                telefono VARCHAR(10)
+                telefono VARCHAR(13)
             );
         `);
         console.log("Tabla 'Propietario' creada");

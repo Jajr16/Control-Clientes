@@ -25,11 +25,13 @@ const app = express();
 app.use(morgan('dev'));
 
 // Permitir solicitudes desde el frontend
-app.use(cors({
-    origin: 'http://localhost:5173', // Permite el acceso solo desde el frontend
-    methods: 'GET,POST,PUT,DELETE', // Métodos permitidos
-    allowedHeaders: 'Content-Type,Authorization' // Headers permitidos
-}));
+app.use(cors(
+    // {
+    // origin: 'http://localhost:5173', // Permite el acceso solo desde el frontend
+    // methods: 'GET,POST,PUT,DELETE', // Métodos permitidos
+    // allowedHeaders: 'Content-Type,Authorization' // Headers permitidos
+// }
+));
 
 // Middleware para JSON
 app.use(express.json());

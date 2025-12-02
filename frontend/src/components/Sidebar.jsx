@@ -3,6 +3,7 @@ import React from "react";
 import { Link, useLocation } from "react-router-dom";
 import { HomeIcon, UserGroupIcon, XMarkIcon } from "@heroicons/react/24/solid";
 import { FaFileInvoiceDollar } from "react-icons/fa";
+import logoLetras from '../img/logoLetras.png';
 
 const Sidebar = ({ isOpen, onClose }) => {
     const location = useLocation();
@@ -53,7 +54,7 @@ const Sidebar = ({ isOpen, onClose }) => {
             }`}>
                 <div className="flex items-center justify-between p-4 border-b border-gray-200">
                     <img 
-                        src="/src/img/logoLetras.png" 
+                        src={logoLetras}
                         alt="Logo" 
                         className="h-6" 
                     />

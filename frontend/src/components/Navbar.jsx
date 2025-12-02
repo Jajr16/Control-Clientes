@@ -1,6 +1,7 @@
 // Navbar.jsx
 import React from "react";
 import { Bars3Icon } from "@heroicons/react/24/solid";
+import logoLetras from '../img/logoLetras.png';
 
 const Navbar = ({ onMenuClick }) => {
     return (
@@ -16,7 +17,7 @@ const Navbar = ({ onMenuClick }) => {
                     </button>
                     
                     <img 
-                        src="/src/img/logoLetras.png" 
+                        src={logoLetras} 
                         alt="Logo" 
                         className="h-5 sm:h-6 lg:h-8" 
                     />

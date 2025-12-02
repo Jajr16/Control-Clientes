@@ -6,7 +6,7 @@ export const createTableProveedor = async () => {
             CREATE TABLE IF NOT EXISTS proveedor (
                 clave VARCHAR(30) PRIMARY KEY,
                 nombre VARCHAR(255),
-                telefono VARCHAR(10),
+                telefono VARCHAR(13),
                 email VARCHAR(255),
                 tipo_servicio VARCHAR(50)
             );

@@ -6,7 +6,7 @@ export const createTableSeguro = async () => {
             CREATE TABLE IF NOT EXISTS seguro(
                 empresa_seguro VARCHAR(300),
                 tipo_seguro VARCHAR(50),
-                telefono VARCHAR(9),
+                telefono VARCHAR(13),
                 email VARCHAR(255),
                 poliza VARCHAR(255) PRIMARY KEY
             );    

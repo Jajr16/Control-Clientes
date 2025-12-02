@@ -7,6 +7,7 @@ import { getInmuebles, deleteInmueble, updateInmueble } from "../../api/moduloIn
 import { UserPlusIcon, BuildingOfficeIcon } from "@heroicons/react/24/solid";
 import { Link } from "react-router-dom";
 import ModalAgregarInmueble from "../../components/modals/ModalInmueble";
+import logoRecortado from '../../img/logoRecortado.png';
 
 const Cliente = () => {
     const [selectedClient, setSelectedClient] = useState(null);
@@ -180,7 +181,7 @@ const Cliente = () => {
             {/* Contenido principal */}
             <div className="flex-1 relative">
                 <div className="absolute inset-0 opacity-30 flex justify-center items-center pointer-events-none">
-                    <img src="/src/img/logoRecortado.png" className="h-full w-full object-contain" alt="logo" />
+                    <img src={logoRecortado} className="h-full w-full object-contain" alt="logo" />
                 </div>
 
                 <div className="h-full grid grid-cols-[30%_70%]">

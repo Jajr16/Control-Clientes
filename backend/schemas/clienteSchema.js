@@ -2,6 +2,7 @@ import Joi from 'joi';
 
 // Mensajes personalizados en español
 const mensajesES = {
+    'string.base': '{#label} debe ser un texto válido',
     'string.empty': '{#label} no puede estar vacío',
     'string.min': '{#label} debe tener al menos {#limit} caracteres',
     'string.max': '{#label} no puede tener más de {#limit} caracteres',
@@ -24,16 +25,25 @@ const mensajesES = {
 const direccionSchema = Joi.object({
     calle: Joi.string().min(5).required().messages(mensajesES).label('Calle'),
     numero: Joi.number().integer().positive().required().messages(mensajesES).label('Número'),
-    piso: Joi.number().integer().positive().required().messages(mensajesES).label('Piso'),
+    piso: Joi.alternatives().try(
+        Joi.string(),
+        Joi.number()
+    ).required().messages(mensajesES).label('Piso'),
     cp: Joi.number().integer().positive().required().messages(mensajesES).label('Código postal'),
     localidad: Joi.string().min(3).required().messages(mensajesES).label('Localidad')
 });
 
 // DATO REGISTRAL
 const datoRegistralSchema = Joi.object({
-    num_protocolo: Joi.number().integer().positive().required().messages(mensajesES).label('Número de protocolo'),
+    num_protocolo: Joi.alternatives().try(
+        Joi.string(),
+        Joi.number()
+    ).required().messages(mensajesES).label('Número de protocolo'),
     folio: Joi.number().integer().positive().required().messages(mensajesES).label('Folio'),
-    hoja: Joi.number().integer().positive().required().messages(mensajesES).label('Hoja'),
+    hoja: Joi.alternatives().try(
+        Joi.string(),
+        Joi.number()
+    ).required().messages(mensajesES).label('Hoja'),
     inscripcion: Joi.number().integer().positive().required().messages(mensajesES).label('Inscripción'),
     notario: Joi.string().min(2).required().messages(mensajesES).label('Notario'),
     fecha_inscripcion: Joi.date().iso().required().messages(mensajesES).label('Fecha de inscripción')
@@ -56,9 +66,9 @@ const proveedorSchema = Joi.object({
     clave_proveedor: Joi.string().required().messages(mensajesES).label('Clave del proveedor'),
     nombre: Joi.string().required().messages(mensajesES).label('Nombre del proveedor'),
     servicio: Joi.string().required().messages(mensajesES).label('Servicio'),
-    tel_proveedor: Joi.string().pattern(/^[0-9]{9}$/).required().messages({
+    tel_proveedor: Joi.string().pattern(/^\+\d{12}$/).required().messages({
         ...mensajesES,
-        'string.pattern.base': 'Teléfono del proveedor debe tener 9 dígitos'
+        'string.pattern.base': 'Teléfono del proveedor debe tener 10 dígitos y 2 de lada'
     }).label('Teléfono del proveedor'),
     email_proveedor: Joi.string().email().required().messages(mensajesES).label('Email del proveedor')
 });
@@ -74,9 +84,9 @@ const seguroSchema = Joi.object({
     aseguradora: Joi.string().required().messages(mensajesES).label('Aseguradora'),
     tipo_seguro: Joi.string().required().messages(mensajesES).label('Tipo de seguro'),
     poliza: Joi.string().required().messages(mensajesES).label('Póliza'),
-    telefono_seguro: Joi.string().pattern(/^[0-9]{9}$/).required().messages({
+    telefono_seguro: Joi.string().pattern(/^\+\d{12}$/).required().messages({
         ...mensajesES,
-        'string.pattern.base': 'Teléfono de la aseguradora debe tener 9 dígitos'
+        'string.pattern.base': 'Teléfono de la aseguradora debe tener 10 dígitos y 2 de lada'
     }).label('Teléfono de la aseguradora'),
     email_seguro: Joi.string().email().required().messages(mensajesES).label('Email de la aseguradora')
 });
@@ -96,9 +106,9 @@ const inmuebleSchema = Joi.object({
 const empresaSchema = Joi.object({
     cif: Joi.string().length(9).required().messages(mensajesES).label('CIF de la empresa'),
     nombre: Joi.string().min(3).required().messages(mensajesES).label('Nombre de la empresa'),
-    tel: Joi.string().pattern(/^[0-9]{9}$/).required().messages({
+    tel: Joi.string().pattern(/^\+\d{12}$/).required().messages({
         ...mensajesES,
-        'string.pattern.base': 'Teléfono de la empresa debe tener 9 dígitos'
+        'string.pattern.base': 'Teléfono de la empresa debe tener 10 dígitos y 2 de lada'
     }).label('Teléfono de la empresa'),
     clave: Joi.string().length(3).required().messages(mensajesES).label('Clave de la empresa')
 });
@@ -111,9 +121,9 @@ const propietarioSchema = Joi.object({
     }).label('NIE del propietario'),
     nombre: Joi.string().min(3).required().messages(mensajesES).label('Nombre del propietario'),
     email: Joi.string().email().required().messages(mensajesES).label('Email del propietario'),
-    telefono: Joi.string().pattern(/^[0-9]{9}$/).required().messages({
+    telefono: Joi.string().pattern(/^\+\d{12}$/).required().messages({
         ...mensajesES,
-        'string.pattern.base': 'Teléfono del propietario debe tener 9 dígitos'
+        'string.pattern.base': 'Teléfono del propietario debe tener 10 dígitos dígitos y 2 de lada'
     }).label('Teléfono del propietario')
 });
 
