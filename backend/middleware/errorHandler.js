@@ -3,6 +3,7 @@ import logger from '../config/logger.js';
 
 export const errorHandler = async (err, req, res, next) => {
     const status = err.isOperational ? err.statusCode : 500;
+    console.error(err)
 
     // Logueo siempre (nivel error si es inesperado)
     logger.error({

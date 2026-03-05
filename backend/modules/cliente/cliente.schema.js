@@ -23,14 +23,14 @@ const mensajesES = {
 
 // DIRECCION
 const direccionSchema = Joi.object({
-    calle: Joi.string().min(5).required().messages(mensajesES).label('Calle'),
-    numero: Joi.number().integer().positive().required().messages(mensajesES).label('Número'),
+    calle: Joi.string().min(5).optional().messages(mensajesES).label('Calle'),
+    numero: Joi.number().integer().positive().optional().messages(mensajesES).label('Número'),
     piso: Joi.alternatives().try(
         Joi.string(),
         Joi.number()
-    ).required().messages(mensajesES).label('Piso'),
-    codigo_postal: Joi.number().integer().positive().required().messages(mensajesES).label('Código postal'),
-    localidad: Joi.string().min(3).required().messages(mensajesES).label('Localidad')
+    ).optional().messages(mensajesES).label('Piso'),
+    codigo_postal: Joi.number().integer().positive().optional().messages(mensajesES).label('Código postal'),
+    localidad: Joi.string().min(3).optional().messages(mensajesES).label('Localidad')
 });
 
 // DATO REGISTRAL
@@ -96,11 +96,11 @@ const empresaSchema = Joi.object({
     nombre: Joi.string().min(3).optional().messages(mensajesES).label('Nombre de la empresa').example('FERPAPULUC'),
     telefono: Joi.string().optional().messages(mensajesES).label('Teléfono de la empresa'),
     direccion: direccionSchema.optional().messages(mensajesES).label('Dirección').example({
-        calle: 'Calle Falsa',
+        calle: 'Juan Bravo',
         numero: 20,
-        piso: 1,
-        codigo_postal: 'A',
-        localidad: 'Springfield'
+        piso: "1o Izq",
+        codigo_postal: 28006,
+        localidad: 'Madrid'
     }),
     dato_registral: datoRegistralSchema.optional().messages(mensajesES).label('Datos registrales'),
     clave: Joi.string().length(3).optional().messages(mensajesES).label('Clave de la empresa').example('FER')
@@ -108,7 +108,7 @@ const empresaSchema = Joi.object({
 
 // PROPIETARIO
 const propietarioSchema = Joi.object({
-    nie: Joi.string().length(9).required().messages(mensajesES).label('NIE del propietario').example('51223263D'),
+    nie: Joi.string().length(9).optional().messages(mensajesES).label('NIE del propietario').example('51223263D'),
     nombre: Joi.string().min(3).optional().messages(mensajesES).label('Nombre del propietario').example('pablo'),
     email: Joi.string().email().optional().messages(mensajesES).label('Email del propietario').example(''),
     telefono: Joi.string().optional().messages(mensajesES).label('Teléfono del propietario').example('')

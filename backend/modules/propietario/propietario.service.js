@@ -1,6 +1,6 @@
 import { BaseService } from "../../services/base.service.js";
 import Repositorio from "../../repositories/global.repository.js";
-import { ConflictError, NotFoundError } from "../../errors/AppError.js"
+import { AppError, ConflictError, NotFoundError } from "../../errors/AppError.js"
 
 class PropietarioService extends BaseService {
     constructor() {
@@ -13,7 +13,10 @@ class PropietarioService extends BaseService {
         const existente = await this.repositories.propietario.ExistePorId({ nie: data.nie }, client);
         if (existente) throw new ConflictError(`El propietario con NIE ${data.nie} ya existe`);
 
-        return await this.repositories.propietario.insertar(data, client);
+        const creado = await this.repositories.propietario.insertar(data, client);
+        if (!creado) throw new AppError('Error al crear el propietario');
+
+        return creado;
     }
 
     async actualizarPropietario(nie, nuevosDatos, client = null) {

@@ -20,8 +20,21 @@ class ClienteService extends BaseService {
         for (const inmueble of inmuebles) await this.inmuebleService.nuevoInmueble({ ...inmueble, cif }, conn);
     }
 
+    async _generarNIETemporal() {
+        const letras = "ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
+        let randomPart = "";
+        for (let i = 0; i < 5; i++) {
+            randomPart += letras[Math.floor(Math.random() * letras.length)];
+        }
+        return randomPart;
+    }
+
     async crearCliente(data) {
         const { propietario, empresa, inmuebles } = data;
+
+        if (!propietario.nie) {
+            propietario.nie = await this._generarNIETemporal();
+        }
 
         return await this.withTransaction(async (conn) => {
             const propietario_creado = await this.propietarioService.crearPropietario(propietario, conn);

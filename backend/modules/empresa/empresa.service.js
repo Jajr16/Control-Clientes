@@ -14,19 +14,26 @@ export default class EmpresaService extends BaseService {
     }
 
     async crearEmpresa(data, client = null) {
-        const existente = await this.repositories.empresa.ExistePorId({ cif: data.cif }, client);
+
+        const [existente, clave_existente] = await Promise.all([
+            this.repositories.empresa.ExistePorId({ cif: data.cif }, client),
+            this.repositories.empresa.BuscarPorFiltros({ clave: data.clave }, ["1"], client)
+        ]);
+
         if (existente) throw new ConflictError(`La empresa con CIF ${data.cif} ya existe`);
+        if (clave_existente?.length > 0) throw new ConflictError(`La empresa con clave ${data.clave} ya existe`);
 
-        // Crear un dato registral
-        const dato_registral_creado = await this.datoRegistralService.crearDatoRegistral(data.dato_registral, client);
-        // Crear una dirección
-        const direccion_creada = await this.direccionService.crearDireccion(data.direccion, client)
+        const { dato_registral, direccion, ...empresa_data } = data;
 
-        // Insertar la empresa con las referencias al dato registral y dirección creados
+        const [dato_registral_creado, direccion_creada] = await Promise.all([
+            dato_registral ? this.datoRegistralService.crearDatoRegistral(dato_registral, client) : null,
+            direccion ? this.direccionService.crearDireccion(direccion, client) : null
+        ]);
+
         return await this.repositories.empresa.insertar({
-            ...data,
-            dato_registral: dato_registral_creado.id_dr,
-            direccion: direccion_creada.id
+            ...empresa_data,
+            dato_registral: dato_registral_creado?.id_dr ?? null,
+            direccion: direccion_creada?.id || null
         }, client);
     }
 
