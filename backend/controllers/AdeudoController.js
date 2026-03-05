@@ -1,4 +1,4 @@
-import { BaseController } from './BaseController.js';
+import { BaseController } from './base.controller.js';
 import AdeudoService from '../services/AdeudoService.js';
 
 class AdeudoController extends BaseController {

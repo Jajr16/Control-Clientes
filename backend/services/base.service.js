@@ -7,7 +7,7 @@ export class BaseService {
 
     async withTransaction(callback) {
         const client = await pool.connect();
-        
+
         try {
             await client.query('BEGIN');
             const result = await callback(client);
@@ -23,10 +23,10 @@ export class BaseService {
     }
 
     async execWithClient(callback, client) {
-    if (client) {
-        return await callback(client);
-    } else {
-        return await this.withTransaction(callback);
+        if (client) {
+            return await callback(client);
+        } else {
+            return await this.withTransaction(callback);
+        }
     }
-}
 }

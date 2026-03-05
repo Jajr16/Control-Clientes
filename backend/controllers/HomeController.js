@@ -1,4 +1,4 @@
-import { BaseController } from "./BaseController.js";
+import { BaseController } from "./base.controller.js";
 import HomeService from "../services/HomeService.js";
 
 class HomeController extends BaseController {

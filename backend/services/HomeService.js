@@ -1,5 +1,5 @@
-import { BaseService } from "./BaseService.js";
-import Repositorio from "../repositories/globalPersistence.js";
+import { BaseService } from "./base.service.js";
+import Repositorio from "../repositories/global.repository.js";
 import { pool } from "../config/db.js";
 
 class HomeService extends BaseService {

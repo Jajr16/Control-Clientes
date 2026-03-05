@@ -1,5 +1,5 @@
-import { BaseService } from "./BaseService.js";
-import Repositorio from "../repositories/globalPersistence.js";
+import { BaseService } from "../../services/base.service.js";
+import Repositorio from "../../repositories/global.repository.js";
 
 export default class ProveedorService extends BaseService {
     constructor () {
@@ -16,7 +16,7 @@ export default class ProveedorService extends BaseService {
         return await this.repositories.proveedor.insertar(data, client);
     }
 
-    async vincularProveedorAInmueble(proveedor, claveCatastral, client) {
+    async vincularProveedorAInmueble(proveedor, clave_catastral, client) {
         let existente = await this.repositories.proveedor.ExistePorId({ clave: proveedor.clave }, client);
         
         if (!existente) {
@@ -24,13 +24,13 @@ export default class ProveedorService extends BaseService {
         }
 
         const relacion = {
-            clave_catastral: claveCatastral,
+            clave_catastral,
             clave: proveedor.clave
         };
 
-        await this.repositories.inmuebleProveedor.insertar(relacion, client);
+        const result = await this.repositories.inmuebleProveedor.insertar(relacion, client);
 
-        return { success: true, message: `Proveedor vinculado a ${claveCatastral}` };
+        return { result, message: `Proveedor vinculado a ${clave_catastral}` };
     }
 
     async actualizarProveedor(claveCatastral, clave, nuevosDatos, client = null) {

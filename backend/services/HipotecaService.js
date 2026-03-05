@@ -1,5 +1,5 @@
-import { BaseService } from "./BaseService.js";
-import Repositorio from "../repositories/globalPersistence.js";
+import { BaseService } from "./base.service.js";
+import Repositorio from "../repositories/global.repository.js";
 
 export default class HipotecaService extends BaseService {
     constructor() {
@@ -13,17 +13,17 @@ export default class HipotecaService extends BaseService {
         return await this.repositories.hipoteca.insertar(data, client);
     }
 
-    async vincularHipotecaAInmueble(hipoteca, claveCatastral, client) {
+    async vincularHipotecaAInmueble(hipoteca, clave_catastral, client) {
         const nuevaHipoteca = await this.repositories.hipoteca.insertar(hipoteca, client);
 
         const relacion = {
-            clave_catastral: claveCatastral,
+            clave_catastral,
             id_hipoteca: nuevaHipoteca.id
         };
 
-        await this.repositories.inmuebleHipoteca.insertar(relacion, client);
+        const result =await this.repositories.inmuebleHipoteca.insertar(relacion, client);
 
-        return { success: true, message: `Hipoteca vinculada a ${claveCatastral}` };
+        return { result, message: `Hipoteca vinculada a ${clave_catastral}` };
     }
 
     async actualizarHipoteca(claveCatastral, id_hipoteca, nuevosDatos, client = null) {

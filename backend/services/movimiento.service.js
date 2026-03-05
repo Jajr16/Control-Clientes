@@ -1,5 +1,5 @@
-import { BaseService } from "./BaseService.js";
-import Repositorio from "../repositories/globalPersistence.js";
+import { BaseService } from "./base.service.js";
+import Repositorio from "../repositories/global.repository.js";
 
 export default class MovimientoService extends BaseService {
     constructor() {

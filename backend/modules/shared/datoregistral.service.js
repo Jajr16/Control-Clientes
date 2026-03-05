@@ -1,5 +1,6 @@
-import { BaseService } from "./BaseService.js";
-import Repositorio from "../repositories/globalPersistence.js";
+import { BaseService } from "../../services/base.service.js";
+import Repositorio from "../../repositories/global.repository.js";
+import { ConflictError, NotFoundError } from "../../errors/AppError.js"
 
 export default class DatoRegistralService extends BaseService {
     constructor() {
@@ -12,7 +13,7 @@ export default class DatoRegistralService extends BaseService {
 
     async crearDatoRegistral(data, client = null) {
         return await this.execWithClient(async (conn) => {
-
+            console.log(data)
             const existente = await this.repositories.datoRegistral.BuscarPorFiltros({
                 num_protocolo: data.num_protocolo,
                 folio: data.folio,
@@ -22,7 +23,7 @@ export default class DatoRegistralService extends BaseService {
             }, 1, conn);
 
             if (existente.length > 0)
-                throw new Error(`El dato registral ingresado ya existe`);
+                throw new ConflictError(`El dato registral ingresado ya existe`);
 
             return await this.repositories.datoRegistral.insertar(data, conn);
 

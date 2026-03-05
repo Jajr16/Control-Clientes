@@ -1,10 +1,10 @@
-import { BaseService } from './BaseService.js';
-import Repositorio from '../repositories/globalPersistence.js';
-import DatoRegistralService from './DatoRegistralService.js';
-import DireccionService from './DireccionService.js';
-import HipotecaService from './HipotecaService.js';
-import ProveedorService from './ProveedorService.js';
-import SeguroService from './SeguroService.js';
+import { BaseService } from '../../services/base.service.js';
+import Repositorio from '../../repositories/global.repository.js';
+import DatoRegistralService from '../shared/datoregistral.service.js';
+import DireccionService from '../shared/direccion.service.js';
+import HipotecaService from '../../services/HipotecaService.js';
+import ProveedorService from '../proveedor/proveedor.service.js';
+import SeguroService from '../../services/SeguroService.js';
 
 class InmuebleService extends BaseService {
     constructor() {
@@ -66,68 +66,53 @@ class InmuebleService extends BaseService {
             return { message: "Componentes agregados con éxito." };
         }, client)
     }
+    
+    async _vincularProveedores(proveedores, clave_catastral, conn) {
+        for (const proveedor of proveedores) await this.proveedorService.vincularProveedorAInmueble(proveedor, clave_catastral, conn)
+    }
 
-    async nuevoInmueble(datos, client = null) {
+    async _vincularHipotecas(hipotecas, clave_catastral, conn) {
+        for (const hipoteca of hipotecas) await this.hipotecaService.vincularHipotecaAInmueble(hipoteca, clave_catastral, conn)
+    }
+
+    async _vincularSeguros(seguros, clave_catastral, conn) {
+        for (const seguro of seguros) await this.seguroService.vincularSeguroAInmueble(seguro, clave_catastral, conn)
+    }
+
+    async nuevoInmueble(data, client = null) {
         const ejecutar = async (conn) => {
-            const datoRegistral = await this.datoRegistralService.crearDatoRegistral(datos.datosInmueble.datoRegistralInmueble, conn);
-            const { cp, ...direccionData } = datos.datosInmueble.dirInmueble
-            const direccion = await this.direccionService.crearDireccion({ ...direccionData, codigo_postal: cp }, conn);
+            const { dato_registral, direccion, proveedores = [], hipotecas = [], seguros = [], ...empresa_inmueble_data } = data
+            // 1. Crear dato registral del inmueble
+            const dato_registral_creado = await this.datoRegistralService.crearDatoRegistral(dato_registral, conn);
+            // 2. Crear dirección del inmueble
+            const direccion_creada = await this.direccionService.crearDireccion(direccion, conn);
 
             const inmuebleData = {
-                clave_catastral: datos.datosInmueble.clave_catastral,
-                direccion: direccion.id,
-                dato_registral: datoRegistral.id_dr
+                clave_catastral: empresa_inmueble_data.clave_catastral,
+                dato_registral: dato_registral_creado.id_dr,
+                direccion: direccion_creada.id
             };
 
-            const resultado = await this.repositories.inmueble.insertar(inmuebleData, conn);
+            const inmueble_creado = await this.repositories.inmueble.insertar(inmuebleData, conn);
 
-            if (datos.proveedores && datos.proveedores.length > 0) {
-                for (const proveedor of datos.proveedores) {
-                    await this.proveedorService.vincularProveedorAInmueble({
-                        clave: proveedor.clave_proveedor,
-                        nombre: proveedor.nombre,
-                        telefono: proveedor.tel_proveedor,
-                        email: proveedor.email_proveedor,
-                        tipo_servicio: proveedor.servicio
-                    }, datos.datosInmueble.clave_catastral, conn)
-                }
+            if (proveedores?.length > 0) {
+                await this._vincularProveedores(proveedores, inmueble_creado.clave_catastral, conn)
             }
 
-            if (datos.hipotecas && datos.hipotecas.length > 0) {
-                for (const hipoteca of datos.hipotecas) {
-                    await this.hipotecaService.vincularHipotecaAInmueble({
-                        prestamo: hipoteca.prestamo,
-                        banco_prestamo: hipoteca.prestamo,
-                        fecha_hipoteca: hipoteca.fecha_hipoteca,
-                        cuota_hipoteca: hipoteca.cuota
-                    }, datos.datosInmueble.clave_catastral, conn)
-                }
+            if (hipotecas?.length > 0) {
+                await this._vincularHipotecas(hipotecas, inmueble_creado.clave_catastral, conn)
             }
 
-            if (datos.seguros && datos.seguros.length > 0) {
-                for (const seguro of datos.seguros) {
-                    await this.seguroService.vincularSeguroAInmueble({
-                        empresa_seguro: seguro.aseguradora,
-                        tipo_seguro: seguro.tipo_seguro,
-                        telefono: seguro.telefono_seguro,
-                        email: seguro.email_seguro,
-                        poliza: seguro.poliza
-                    }, datos.datosInmueble.clave_catastral, conn)
-                }
+            if (seguros?.length > 0) {
+                await this._vincularSeguros(seguros, inmueble_creado.clave_catastral, conn)
             }
+            // Vincular inmueble con empresa
+            await this.repositories.empresaInmueble.insertar(empresa_inmueble_data, conn);
 
-            if (datos.cif) {
-                await this.repositories.empresaInmueble.insertar({ cif: datos.cif, clave_catastral: datos.datosInmueble.clave_catastral }, conn)
-            }
-
-            return { message: "Inmueble creado con éxito.", data: resultado };
+            return { message: "Inmueble creado con éxito.", data: inmueble_creado };
         };
 
-        if (client) {
-            return await ejecutar(client);
-        } else {
-            return await this.withTransaction(ejecutar);
-        }
+        return client ? await ejecutar(client) : await this.withTransaction(ejecutar);
     }
 
     // ======= ACTUALIZAR SEGURO =======

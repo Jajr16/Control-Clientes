@@ -1,78 +1,49 @@
-import { BaseService } from './BaseService.js';
-import InmuebleService from './inmuebleService.js';
-import DatoRegistralService from './DatoRegistralService.js';
-import DireccionService from './DireccionService.js';
-import EmpresaService from './EmpresaService.js';
-import PropietarioService from './PropietarioService.js';
-import MovimientoService from './MovimientoService.js';
-import Repositorio from '../repositories/globalPersistence.js';
+import { BaseService } from '../../services/base.service.js';
+import InmuebleService from '../inmueble/inmueble.service.js';
+import EmpresaService from '../empresa/empresa.service.js';
+import PropietarioService from '../propietario/propietario.service.js';
+import MovimientoService from '../../services/movimiento.service.js';
+import Repositorio from '../../repositories/global.repository.js';
 
 class ClienteService extends BaseService {
     constructor() {
         super({
             empresaInmueble: new Repositorio('empresa_inmueble', ['cif', 'clave_catastral']),
         });
-        this.inmuebleService = new InmuebleService();
-        this.datoRegistralService = new DatoRegistralService();
-        this.direccionService = new DireccionService();
-        this.empresaService = new EmpresaService();
         this.propietarioService = new PropietarioService();
+        this.empresaService = new EmpresaService();
+        this.inmuebleService = new InmuebleService();
         this.movimientoService = new MovimientoService();
     }
 
-    async crearCliente(clienteCompleto) {
-        console.log(clienteCompleto)
-        const cliente = clienteCompleto.cliente
-        const inmuebles = clienteCompleto.inmuebles || null
+    async _crearInmuebles(inmuebles, cif, conn) {
+        for (const inmueble of inmuebles) await this.inmuebleService.nuevoInmueble({ ...inmueble, cif }, conn);
+    }
 
-        if (!cliente?.empresa || !cliente?.direccion || !cliente?.datoRegistral || !cliente?.propietario) {
-            throw new Error('Datos del cliente incompletos.')
-        }
+    async crearCliente(data) {
+        const { propietario, empresa, inmuebles } = data;
 
-        return await this.withTransaction(async (clienteBD) => {
-            // INSERTAR DATO REGISTRAL
-            const dato_registral = await this.datoRegistralService.crearDatoRegistral(cliente.datoRegistral, clienteBD);
-            //INSERTAR DIRECCION
-            const { cp, ...direccionData } = cliente.direccion;
-            const direccion = await this.direccionService.crearDireccion({ ...direccionData, codigo_postal: cp }, clienteBD)
-            // INSERTAR PROPIETARIO
-            const propietario = await this.propietarioService.crearPropietario(cliente.propietario, clienteBD)
-            // INSERTAR EMPRESA
-            const { tel, ...empresaData } = cliente.empresa
+        return await this.withTransaction(async (conn) => {
+            const propietario_creado = await this.propietarioService.crearPropietario(propietario, conn);
 
-            const empresa = await this.empresaService.crearEmpresa({
-                ...empresaData,
-                telefono: tel,
-                direccion: direccion.id,
-                dato_registral: dato_registral.id_dr,
-                propietario: cliente.propietario.nie
-            }, clienteBD);
+            const empresa_creada = await this.empresaService.crearEmpresa({
+                ...empresa,
+                propietario: propietario_creado.nie
+            }, conn);
 
-            // SI VIENEN INMUEBLES
-            if (inmuebles && inmuebles.length > 0) {
-                for (const inmueble of inmuebles) {
-                    const nuevoInmueble = await this.inmuebleService.nuevoInmueble(inmueble, clienteBD);
-                    await this.repositories.empresaInmueble.insertar({
-                        cif: empresa.cif,
-                        clave_catastral: nuevoInmueble.data.clave_catastral,
-                        valor_adquisicion: inmueble.datosInmueble.valor_adquisicion,
-                        fecha_adquisicion: inmueble.datosInmueble.fecha_adquisicion
-                    }, clienteBD);
-                }
-            }
+            if (inmuebles?.length > 0) await this._crearInmuebles(inmuebles, empresa_creada.cif, conn);
 
-            // Registrar movimiento
             await this.movimientoService.crearMovimiento({
-                accion: 'Se agregó el cliente: ' + cliente.empresa.nombre,
-                datos: {
-                    empresa: cliente.empresa.cif,
-                    propietario: cliente.propietario.nie
+                accion: 'Se agregó el cliente: ' + empresa_creada.nombre, datos: {
+                    empresa: empresa_creada.cif,
+                    propietario: propietario_creado.nie
                 }
-            }, clienteBD);
+            }, conn);
 
             return {
-                success: true,
-                message: 'Cliente dado de alta correctamente'
+                propietario: propietario_creado.nombre,
+                clave_empresa: empresa_creada.clave,
+                empresa: empresa_creada.nombre
             }
         })
     }

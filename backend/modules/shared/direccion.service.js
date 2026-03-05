@@ -1,5 +1,6 @@
-import { BaseService } from "./BaseService.js";
-import Repositorio from "../repositories/globalPersistence.js";
+import { BaseService } from "../../services/base.service.js";
+import Repositorio from "../../repositories/global.repository.js";
+import { ConflictError, NotFoundError } from "../../errors/AppError.js"
 
 export default class DireccionService extends BaseService {
     constructor() {
@@ -17,7 +18,7 @@ export default class DireccionService extends BaseService {
                 codigo_postal: data.cp,
                 localidad: data.localidad
             }, 1, client);
-            if (existente.length > 0) throw new Error(`Esa dirección ya había sido registrada anteriormente.`);
+            if (existente.length > 0) throw new ConflictError(`Esa dirección ya había sido registrada anteriormente.`);
 
             return await this.repositories.direccion.insertar(data, conn);
         }, client);

@@ -1,5 +1,5 @@
-import { BaseService } from "./BaseService.js";
-import Repositorio from "../repositories/globalPersistence.js";
+import { BaseService } from "./base.service.js";
+import Repositorio from "../repositories/global.repository.js";
 
 export default class SeguroService extends BaseService {
     constructor() {
@@ -21,9 +21,9 @@ export default class SeguroService extends BaseService {
             poliza: seguro.poliza
         };
 
-        await this.repositories.inmuebleSeguro.insertar(relacion, client);
+        const result = await this.repositories.inmuebleSeguro.insertar(relacion, client);
 
-        return { success: true, message: `Seguro vinculado a ${claveCatastral}` };
+        return { result, message: `Seguro vinculado a ${claveCatastral}` };
     }
 
     async actualizarSeguro(claveCatastral, polizaActual, nuevosDatos, client = null) {
