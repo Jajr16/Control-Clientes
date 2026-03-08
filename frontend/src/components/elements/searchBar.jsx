@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from "react";
 import Select from "react-select";
 import { XMarkIcon, PencilIcon } from "@heroicons/react/24/solid";
-import { updateClient, getClients } from "../../api/moduloClientes/clientes";
+import { updateClient, getClients } from "../../api/clientes";
 
 const API_URL = import.meta.env.VITE_API_URL;
 

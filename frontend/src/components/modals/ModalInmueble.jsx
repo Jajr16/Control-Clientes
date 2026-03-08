@@ -1,7 +1,7 @@
 import Swal from 'sweetalert2';
 import { useState, useEffect } from "react";
 import { X, Plus, Building } from 'lucide-react';
-import InmuebleForm from "../forms/InmuebleForms.jsx";
+import InmuebleForm from "../forms/inmueble/InmuebleForms.jsx";
 import { InmuebleComponentes } from "./InmuebleComponentes.jsx";
 import {
     generarInmuebleRandom,

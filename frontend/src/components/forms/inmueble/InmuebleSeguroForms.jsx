@@ -1,5 +1,5 @@
 import { X } from "lucide-react";
-import InputConError from '../elements/InputError.jsx';
+import InputConError from '../../common/InputError.jsx';
 
 const InmuebleSeguroForm = ({ seguro, setSeguro, onRemove, errores = {}, inmuebleIdx, seguroIdx }) => {
     const prefijo = `inmuebles.${inmuebleIdx}.seguros.${seguroIdx}`;

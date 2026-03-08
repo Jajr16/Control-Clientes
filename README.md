@@ -16,3 +16,39 @@ El sistema constará de diferentes módulos, los cuales son:
     - Transferencia autorizada.
     - Factura disponible para contabilización.
 9. **Perfíl crediticio:** Se debe de realizar el perfil crediticio del cliente, esto en caso de que solicite algún prestamo. Cada que se compre un inmueble se debe de guardar la información del cliente.
+
+
+src/
+├── api/                   # Archivos para llamadas a backend
+│   ├── clientes.js
+│   ├── inmuebles.js
+│   └── adeudos.js
+├── components/            # Componentes reutilizables
+│   ├── common/            # Componentes genéricos (botones, inputs, loaders)
+│   ├── elements/          # Componentes UI más complejos (cards, modals, collapse sections)
+│   │   ├── SeccionColapsable.jsx
+│   │   └── InputError.jsx
+│   ├── forms/             # Formularios separados por entidad
+│   │   ├── Cliente/       # Subcarpeta para cliente
+│   │   │   ├── EmpresaForm.jsx
+│   │   │   ├── PropietarioForm.jsx
+│   │   │   ├── DireccionForm.jsx
+│   │   │   └── DatoRegistralForm.jsx
+│   │   └── Inmueble/      # Subcarpeta para inmuebles
+│   │       ├── InmuebleForm.jsx
+│   │       ├── InmuebleHipotecaForm.jsx
+│   │       ├── InmuebleProveedorForm.jsx
+│   │       └── InmuebleSeguroForm.jsx
+│   └── views/             # Pages o vistas completas
+│       ├── Clientes/      # Carpeta por módulo
+│       │   └── AddClientesPage.jsx
+│       └── Otros módulos...
+├── hooks/                 # Hooks personalizados
+│   ├── useClientes.js
+│   └── useInmuebles.js
+├── utils/                 # Funciones utilitarias
+│   ├── limpiarDatos.js
+│   └── mockGenerators.js
+├── assets/                # Imágenes, iconos, fonts
+├── css/                   # Archivos CSS globales o Tailwind configs
+└── index.jsx

@@ -1,9 +1,9 @@
 import { useState } from "react";
 import { Shield, Users, DollarSign } from 'lucide-react';
-import { SeccionColapsable } from "../elements/SeccionCollapse.jsx";
-import InmuebleHipotecaForm from "../forms/InmuebleHipotecaForms.jsx";
-import InmuebleProveedorForm from "../forms/InmuebleProveedorForms.jsx";
-import InmuebleSeguroForm from "../forms/InmuebleSeguroForms.jsx";
+import { SeccionColapsable } from "../ui/SeccionCollapse.jsx";
+import InmuebleHipotecaForm from "../forms/inmueble/InmuebleHipotecaForms.jsx";
+import ProveedorForm from "../forms/inmueble/ProveedorForms.jsx";
+import InmuebleSeguroForm from "../forms/inmueble/InmuebleSeguroForms.jsx";
 
 export const InmuebleComponentes = ({ seguros, setSeguros, proveedores, setProveedores, hipotecas, setHipotecas }) => {
     const [seccionesAbiertas, setSeccionesAbiertas] = useState({
@@ -55,11 +55,11 @@ export const InmuebleComponentes = ({ seguros, setSeguros, proveedores, setProve
         <div className="space-y-6">
             {/* Seguros */}
             <SeccionColapsable 
-                titulo={`Seguros (${seguros.length})`} 
+                titulo={{ texto: `Seguros (${seguros.length})` }} 
                 icono={Shield} 
                 abierto={seccionesAbiertas.seguros}
                 onToggle={() => setSeccionesAbiertas({ ...seccionesAbiertas, seguros: !seccionesAbiertas.seguros })}
-                botonAgregar={{
+                boton={{
                     texto: "Agregar Seguro",
                     onClick: (e) => {
                         e.stopPropagation();
@@ -87,11 +87,11 @@ export const InmuebleComponentes = ({ seguros, setSeguros, proveedores, setProve
 
             {/* Proveedores */}
             <SeccionColapsable 
-                titulo={`Proveedores (${proveedores.length})`} 
+                titulo={{ texto: `Proveedores (${proveedores.length})` }} 
                 icono={Users} 
                 abierto={seccionesAbiertas.proveedores}
                 onToggle={() => setSeccionesAbiertas({ ...seccionesAbiertas, proveedores: !seccionesAbiertas.proveedores })}
-                botonAgregar={{
+                boton={{
                     texto: "Agregar Proveedor",
                     onClick: (e) => {
                         e.stopPropagation();
@@ -104,7 +104,7 @@ export const InmuebleComponentes = ({ seguros, setSeguros, proveedores, setProve
             >
                 <div className="space-y-3">
                     {proveedores.map((proveedor, idx) => (
-                        <InmuebleProveedorForm
+                        <ProveedorForm
                             key={proveedor.id}
                             proveedor={proveedor}
                             setProveedor={(datos) => actualizarProveedor(proveedor.id, datos)}
@@ -119,11 +119,11 @@ export const InmuebleComponentes = ({ seguros, setSeguros, proveedores, setProve
 
             {/* Hipotecas */}
             <SeccionColapsable 
-                titulo={`Hipotecas (${hipotecas.length})`} 
+                titulo={{ texto: `Hipotecas (${hipotecas.length})` }} 
                 icono={DollarSign} 
                 abierto={seccionesAbiertas.hipotecas}
                 onToggle={() => setSeccionesAbiertas({ ...seccionesAbiertas, hipotecas: !seccionesAbiertas.hipotecas })}
-                botonAgregar={{
+                boton={{
                     texto: "Agregar Hipoteca",
                     onClick: (e) => {
                         e.stopPropagation();

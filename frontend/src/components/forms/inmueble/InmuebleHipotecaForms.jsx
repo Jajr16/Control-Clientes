@@ -1,5 +1,5 @@
 import { X } from "lucide-react";
-import InputConError from '../elements/InputError.jsx';
+import InputConError from '../../common/InputError.jsx';
 
 const InmuebleHipotecaForm = ({ hipoteca, setHipoteca, onRemove, errores = {}, inmuebleIdx, hipotecaIdx }) => {
     const prefijo = `inmuebles.${inmuebleIdx}.hipotecas.${hipotecaIdx}`;

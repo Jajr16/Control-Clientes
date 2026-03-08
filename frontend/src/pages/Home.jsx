@@ -2,7 +2,7 @@ import React from "react";
 import { Link } from "react-router-dom";
 import { PlusIcon, BuildingOfficeIcon, UserGroupIcon, DocumentIcon, ClockIcon } from "@heroicons/react/24/outline";
 import { useEffect, useState } from "react";
-import { getDatosHome } from "../api/Home/home";
+import { getDatosHome } from "../api/home";
 
 const Home = () => {
     const [totalClientes, setTotalClientes] = useState("")
