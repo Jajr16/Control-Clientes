@@ -1,9 +1,9 @@
 import { useState } from "react";
 import { Shield, Users, DollarSign } from 'lucide-react';
 import { SeccionColapsable } from "../ui/SeccionCollapse.jsx";
-import InmuebleHipotecaForm from "../forms/inmueble/InmuebleHipotecaForms.jsx";
+import HipotecaForm from "../forms/inmueble/HipotecaForms.jsx";
 import ProveedorForm from "../forms/inmueble/ProveedorForms.jsx";
-import InmuebleSeguroForm from "../forms/inmueble/InmuebleSeguroForms.jsx";
+import SeguroForm from "../forms/inmueble/SeguroForms.jsx";
 
 export const InmuebleComponentes = ({ seguros, setSeguros, proveedores, setProveedores, hipotecas, setHipotecas }) => {
     const [seccionesAbiertas, setSeccionesAbiertas] = useState({

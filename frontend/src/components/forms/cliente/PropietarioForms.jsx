@@ -14,18 +14,18 @@ const PropietarioForm = () => {
                     />
                     <InputConError
                         name="propietario.nombre"
-                        placeholder="Nombre *"
+                        placeholder="Nombre"
                         className="w-full"
                     />
                     <InputConError
                         name="propietario.email"
-                        placeholder="Email *"
+                        placeholder="Email"
                         type="email"
                         className="w-full"
                     />
                     <InputConError
                         name="propietario.telefono"
-                        placeholder="Teléfono *"
+                        placeholder="Teléfono"
                         className="w-full"
                     />
                 </div>

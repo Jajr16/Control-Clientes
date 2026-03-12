@@ -1,6 +1,8 @@
 import { DatoRegistralForm, DireccionForm } from '../shared'
 import InputConError from '../../common/InputError.jsx';
 import ProveedorSection from './proveedorSection.jsx';
+import HipotecaSection from './hipotecaSection.jsx';
+import SeguroSection from './seguroSection.jsx';
 
 const InmuebleForm = ({ index = 0 }) => {
     const prefijoBase = `inmuebles.${index}`;
@@ -19,13 +21,13 @@ const InmuebleForm = ({ index = 0 }) => {
                         />
                         <InputConError
                             type="number"
-                            placeholder="Valor de adquisición *"
+                            placeholder="Valor de adquisición"
                             name={`${prefijoBase}.valor_adquisicion`}
                             className="w-full"
                         />
                         <InputConError
                             type="date"
-                            placeholder="Fecha de adquisición *"
+                            placeholder="Fecha de adquisición"
                             name={`${prefijoBase}.fecha_adquisicion`}
                             className="w-full"
                         />
@@ -47,6 +49,14 @@ const InmuebleForm = ({ index = 0 }) => {
 
             <div>
                 <ProveedorSection prefijoInmueble={prefijoBase} />
+            </div>
+
+            <div>
+                <HipotecaSection prefijoInmueble={prefijoBase} />
+            </div>
+
+            <div>
+                <SeguroSection prefijoInmueble={prefijoBase} />
             </div>
         </div>
     );

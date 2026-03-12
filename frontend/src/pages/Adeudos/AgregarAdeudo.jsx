@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import AdeudosForm from "../../components/forms/AdeudosForms.jsx";
-import { getEmpresas } from "../../api/moduloClientes/empresas.js";
+import { getEmpresas } from "../../api/clientes/empresas.js";
 import { addAdeudo } from "../../api/moduloAdeudos/adeudos.js";
 
 const API_URL = import.meta.env.VITE_API_URL;

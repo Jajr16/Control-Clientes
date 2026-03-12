@@ -38,7 +38,7 @@ class ClienteService extends BaseService {
 
         return await this.withTransaction(async (conn) => {
             const propietario_creado = await this.propietarioService.crearPropietario(propietario, conn);
-
+            console.log(propietario_creado)
             const empresa_creada = await this.empresaService.crearEmpresa({
                 ...empresa,
                 propietario: propietario_creado.nie

@@ -1,18 +1,22 @@
+import { ValidationError } from "../errors/AppError.js";
+
 export const validateSchema = (schema) => {
     return (req, res, next) => {
-        const { error, value } = schema.validate(req.body, { abortEarly: false });
-        
+        const { error, value } = schema.validate(req.body, {
+            abortEarly: false
+        });
+
         if (error) {
-            return res.status(400).json({
-                message: "Datos inválidos",
-                details: error.details.map(d => ({
-                    path: d.path,
-                    message: d.message,
-                    type: d.type
-                }))
+            const fields = {};
+            error.details.forEach((d) => {
+                const fieldPath = d.path.join(".");
+                fields[fieldPath] = d.message;
             });
+
+            next(new ValidationError("Datos inválidos", fields));
         }
-        req.body = value
+
+        req.body = value;
         next();
-    }
-}
+    };
+};

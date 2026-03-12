@@ -18,17 +18,17 @@ const EmpresaForm = () => {
                         className="w-full"
                     />
                     <InputConError
-                        placeholder="Nombre *"
+                        placeholder="Nombre"
                         name="empresa.nombre"
                         className="w-full"
                     />
                     <InputConError
-                        placeholder="Teléfono *"
+                        placeholder="Teléfono"
                         name="empresa.telefono"
                         className="w-full"
                     />
                     <InputConError
-                        placeholder="Clave *"
+                        placeholder="Clave"
                         name="empresa.clave"
                         className="w-full"
                     />

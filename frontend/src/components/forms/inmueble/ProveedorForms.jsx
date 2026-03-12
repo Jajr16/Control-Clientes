@@ -1,8 +1,8 @@
 import { X } from "lucide-react";
 import InputConError from '../../common/InputError.jsx';
 
-const ProveedorForm = ({ prefijoInmueble, index, onRemove }) => {
-    const prefijo = `${prefijoInmueble}.${index}`;
+const ProveedorForm = ({ prefijo, index, onRemove }) => {
+    const prefijoBase = `${prefijo}.${index}`;
 
     return (
         <div className="border rounded p-3 bg-gray-50 relative">
@@ -12,24 +12,24 @@ const ProveedorForm = ({ prefijoInmueble, index, onRemove }) => {
             <div className="flex pr-6">
                 <InputConError
                     placeholder="Clave proveedor *"
-                    name={`${prefijo}.clave`}
+                    name={`${prefijoBase}.clave`}
                 />
                 <InputConError
                     placeholder="Nombre proveedor *"
-                    name={`${prefijo}.nombre`}
+                    name={`${prefijoBase}.nombre`}
                 />
                 <InputConError
                     placeholder="Tel. proveedor (9 dígitos) *"
-                    name={`${prefijo}.tipo_servicio`}
+                    name={`${prefijoBase}.tipo_servicio`}
                 />
                 <InputConError
                     placeholder="Email proveedor *"
-                    name={`${prefijo}.telefono`}
+                    name={`${prefijoBase}.telefono`}
                     type="email"
                 />
                 <InputConError
                     placeholder="Servicio *"
-                    name={`${prefijo}.email`}
+                    name={`${prefijoBase}.email`}
                 />
             </div>
         </div>

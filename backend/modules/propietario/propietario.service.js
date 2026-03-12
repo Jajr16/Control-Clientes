@@ -11,7 +11,7 @@ class PropietarioService extends BaseService {
 
     async crearPropietario(data, client = null) {
         const existente = await this.repositories.propietario.ExistePorId({ nie: data.nie }, client);
-        if (existente) throw new ConflictError(`El propietario con NIE ${data.nie} ya existe`);
+        if (existente) return data
 
         const creado = await this.repositories.propietario.insertar(data, client);
         if (!creado) throw new AppError('Error al crear el propietario');

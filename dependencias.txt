@@ -9,6 +9,7 @@ npm i axios vite react-router-dom
 npm install @heroicons/react 
 npm install react-select
 npm install react-icons
+npm install react-hook-form zod @hookform/resolvers
 
 Excel
 npm install exceljs file-saver

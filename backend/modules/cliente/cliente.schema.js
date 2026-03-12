@@ -38,15 +38,18 @@ const datoRegistralSchema = Joi.object({
     num_protocolo: Joi.alternatives().try(
         Joi.string(),
         Joi.number()
-    ).required().messages(mensajesES).label('Número de protocolo'),
-    folio: Joi.number().integer().positive().required().messages(mensajesES).label('Folio'),
+    ).optional().messages(mensajesES).label('Número de protocolo'),
+    folio: Joi.alternatives().try(
+        Joi.string(),
+        Joi.number()
+    ).optional().messages(mensajesES).label('Folio'),
     hoja: Joi.alternatives().try(
         Joi.string(),
         Joi.number()
-    ).required().messages(mensajesES).label('Hoja'),
-    inscripcion: Joi.number().integer().positive().required().messages(mensajesES).label('Inscripción'),
-    notario: Joi.string().min(2).required().messages(mensajesES).label('Notario'),
-    fecha_inscripcion: Joi.date().iso().required().messages(mensajesES).label('Fecha de inscripción')
+    ).optional().messages(mensajesES).label('Hoja'),
+    inscripcion: Joi.number().integer().positive().optional().messages(mensajesES).label('Inscripción'),
+    notario: Joi.string().min(2).optional().messages(mensajesES).label('Notario'),
+    fecha_inscripcion: Joi.date().iso().optional().messages(mensajesES).label('Fecha de inscripción')
 });
 
 /**

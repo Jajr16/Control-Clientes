@@ -1,6 +1,6 @@
 import { useState, useCallback } from "react";
 import Swal from 'sweetalert2';
-import { clienteNuevo } from "../api/clientes.js";
+import { clienteNuevo } from "../api/clientes/clientes.js";
 
 // Función para procesar errores y convertirlos en un objeto estructurado
 const procesarErroresValidacion = (detalles) => {

@@ -1,6 +1,6 @@
 import { useFormContext, get } from "react-hook-form";
 
-const InputConError = ({ name, className = "", ...props }) => {
+const InputConError = ({ name, className = "", registerOptions = {}, ...props }) => {
     const { register, formState: { errors } } = useFormContext();
 
     const error = get(errors, name);
@@ -8,7 +8,7 @@ const InputConError = ({ name, className = "", ...props }) => {
     return (
         <div className="w-full">
             <input
-                {...register(name)}
+                {...register(name, registerOptions)}
                 {...props}
                 className={`border p-2 rounded ${className}`}
             />

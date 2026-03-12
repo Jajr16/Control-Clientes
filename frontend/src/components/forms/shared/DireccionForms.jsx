@@ -17,6 +17,7 @@ const DireccionForm = ({ prefijo = 'empresa.direccion' }) => {
                     <div className="grid grid-cols-3 gap-2">
                         <InputConError
                             name={`${prefijo}.numero`}
+                            registerOptions={{ valueAsNumber: true }}
                             placeholder="Número *"
                             className="w-full"
                         />
@@ -27,6 +28,7 @@ const DireccionForm = ({ prefijo = 'empresa.direccion' }) => {
                         />
                         <InputConError
                             name={`${prefijo}.codigo_postal`}
+                            registerOptions={{ valueAsNumber: true }}
                             placeholder="CP *"
                             className="w-full"
                         />

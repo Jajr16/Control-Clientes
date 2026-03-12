@@ -1,4 +1,3 @@
-import { Home } from "lucide-react";
 import { useForm, FormProvider } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 
@@ -15,12 +14,16 @@ import InmuebleSection from "../inmueble/inmuebleSection.jsx";
 
 import { DevTool } from "@hookform/devtools";
 
-export default function ClienteForm({ onSubmit }) {
+export default function ClienteForm({ onSubmit, loading }) {
     const methods = useForm({
         resolver: zodResolver(clienteSchema),
         defaultValues: {
-            propietario: {},
-            empresa: {},
+            propietario: { nie: "", nombre: "", telefono: "" },
+            empresa: {
+                cif: "", nombre: "", telefono: "", clave: "",
+                direccion: { calle: "", numero: "", piso: "", codigo_postal: "", localidad: "" },
+                dato_registral: { fecha_inscripcion: "", folio: "", hoja: "", inscripcion: "", notario: "", num_protocolo: "" }
+            },
             inmuebles: []
         }
     });
@@ -31,11 +34,9 @@ export default function ClienteForm({ onSubmit }) {
         inmueble: false
     })
 
-    const inmuebles = methods.watch("inmuebles")
-
     return (
         <FormProvider {...methods}>
-            <form onSubmit={methods.handleSubmit(onSubmit)}>
+            <form onSubmit={methods.handleSubmit((data) => onSubmit(data, methods.setError))}>
                 {/* SECCIÓN CLIENTE (OBLIGATORIA) */}
                 <SeccionColapsable
                     titulo={{ texto: "Datos del Cliente" }}
@@ -50,16 +51,19 @@ export default function ClienteForm({ onSubmit }) {
                     </div>
                 </SeccionColapsable>
 
-                {/* SECCIÓN INMUEBLES */}
-                <SeccionColapsable
-                    titulo={{ texto:`Inmuebles (${inmuebles?.length ?? 0})` }}
-                    icono={Home}
-                    abierto={seccionesAbiertas.inmuebles}
-                    onToggle={() => toggleSeccion("inmuebles")}
-                    obligatorio={false}
-                >
-                    <InmuebleSection />
-                </SeccionColapsable>
+                <InmuebleSection />
+
+                <div className="flex justify-end mt-6">
+                    <button
+                        type="submit"
+                        disabled={loading}
+                        className={`px-8 py-3 rounded-lg font-semibold shadow-lg transition-colors text-white
+                            ${Object.keys(methods.formState.errors).length ? 'bg-red-600 hover:bg-red-700' : 'bg-blue-600 hover:bg-blue-700'}
+                        `}
+                    >
+                        {Object.keys(methods.formState.errors).length ? "Ha habido errores, consulta arriba" : "Guardar cliente"}
+                    </button>
+                </div>
             </form>
             <DevTool control={methods.control} />
         </FormProvider>
