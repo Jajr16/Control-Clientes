@@ -30,6 +30,7 @@ const InmuebleForm = ({ index = 0 }) => {
                             placeholder="Fecha de adquisición"
                             name={`${prefijoBase}.fecha_adquisicion`}
                             className="w-full"
+                            registerOptions={{ valueAsNumber: true }}
                         />
                     </div>
 

@@ -12,22 +12,23 @@ const HipotecaForm = ({ prefijo, index, onRemove }) => {
             <div className="flex pr-6">
                 <InputConError
                     placeholder="Banco *"
-                    name={`${prefijoBase}.prestamo`}
+                    name={`${prefijoBase}.banco_prestamo`}
                 />
                 <InputConError
                     placeholder="Préstamo *"
-                    name={`${prefijoBase}.banco_prestamo`}
+                    name={`${prefijoBase}.prestamo`}
                     type="number"
                 />
                 <InputConError
                     placeholder="Cuota *"
-                    name={`${prefijoBase}.fecha_hipoteca`}
+                    name={`${prefijoBase}.cuota_hipoteca`}
                     type="number"
                 />
                 <InputConError
                     placeholder="Fecha hipoteca *"
-                    name={`${prefijoBase}.cuota_hipoteca`}
+                    name={`${prefijoBase}.fecha_hipoteca`}
                     type="date"
+                    registerOptions={{ valueAsDate: true }}
                 />
             </div>
         </div>

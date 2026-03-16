@@ -12,21 +12,16 @@ export default class DatoRegistralService extends BaseService {
     }
 
     async crearDatoRegistral(data, client = null) {
-        return await this.execWithClient(async (conn) => {
-            console.log(data)
-            const existente = await this.repositories.datoRegistral.BuscarPorFiltros({
+        return this.execWithClient(async (conn) => {
+            await this.validarExistencia('datoRegistral', {
                 num_protocolo: data.num_protocolo,
                 folio: data.folio,
                 hoja: data.hoja,
                 inscripcion: data.inscripcion,
                 fecha_inscripcion: data.fecha_inscripcion
-            }, 1, conn);
-
-            if (existente.length > 0)
-                throw new ConflictError(`El dato registral ingresado ya existe`);
+            }, conn);
 
             return await this.repositories.datoRegistral.insertar(data, conn);
-
         }, client);
     }
 
@@ -125,14 +120,14 @@ export default class DatoRegistralService extends BaseService {
                     datosActualizarDR,
                     conn
                 );
-    
+
                 console.log('Resultado actualización dato registral:', datoRegistralActualizado);
-    
+
                 if (!datoRegistralActualizado) {
                     throw new Error('No se pudo actualizar los datos registrales - actualizarPorId devolvió null');
                 }
             }
-            
+
             // 5. Preparar datos para empresa_inmueble
             const datosActualizarEI = {};
             const camposEI = ['valor_adquisicion', 'fecha_adquisicion'];

@@ -66,7 +66,7 @@ class InmuebleService extends BaseService {
             return { message: "Componentes agregados con éxito." };
         }, client)
     }
-    
+
     async _vincularProveedores(proveedores, clave_catastral, conn) {
         for (const proveedor of proveedores) await this.proveedorService.vincularProveedorAInmueble(proveedor, clave_catastral, conn)
     }
@@ -80,20 +80,22 @@ class InmuebleService extends BaseService {
     }
 
     async nuevoInmueble(data, client = null) {
-        const ejecutar = async (conn) => {
+        return this.execWithClient(async (conn) => {
+
             const { dato_registral, direccion, proveedores = [], hipotecas = [], seguros = [], ...empresa_inmueble_data } = data
-            // 1. Crear dato registral del inmueble
-            const dato_registral_creado = await this.datoRegistralService.crearDatoRegistral(dato_registral, conn);
-            // 2. Crear dirección del inmueble
-            const direccion_creada = await this.direccionService.crearDireccion(direccion, conn);
+
+            const [dato_registral_creado, direccion_creada] = await Promise.all([
+                dato_registral ? await this.datoRegistralService.crearDatoRegistral(dato_registral, conn) : null,
+                direccion ? await this.direccionService.crearDireccion(direccion, conn) : null
+            ])
 
             const inmuebleData = {
                 clave_catastral: empresa_inmueble_data.clave_catastral,
-                dato_registral: dato_registral_creado.id_dr,
-                direccion: direccion_creada.id
+                dato_registral: dato_registral_creado?.id_dr ?? null,
+                direccion: direccion_creada?.id || null
             };
 
-            const inmueble_creado = await this.repositories.inmueble.insertar(inmuebleData, conn);
+            const inmueble_creado = await this.crear("inmueble", { clave_catastral: inmuebleData.clave_catastral}, inmuebleData, conn);
 
             if (proveedores?.length > 0) {
                 await this._vincularProveedores(proveedores, inmueble_creado.clave_catastral, conn)
@@ -107,13 +109,11 @@ class InmuebleService extends BaseService {
                 await this._vincularSeguros(seguros, inmueble_creado.clave_catastral, conn)
             }
             // Vincular inmueble con empresa
-            await this.repositories.empresaInmueble.insertar(empresa_inmueble_data, conn);
+            await this.crear("empresaInmueble", {cif: empresa_inmueble_data.cif, clave_catastral: empresa_inmueble_data.clave_catastral}, empresa_inmueble_data, conn);
 
             return { message: "Inmueble creado con éxito.", data: inmueble_creado };
-        };
-
-        return client ? await ejecutar(client) : await this.withTransaction(ejecutar);
-    }
+        }, client)
+    };
 
     // ======= ACTUALIZAR SEGURO =======
     async updateSeguro(claveCatastral, poliza, nuevosDatos) {

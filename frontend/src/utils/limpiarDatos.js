@@ -11,6 +11,10 @@ const limpiarDatosVacios = (obj) => {
             });
         return arrayLimpio.length > 0 ? arrayLimpio : undefined;
     }
+
+    if (obj instanceof Date) {
+        return obj; // No limpiar fechas
+    }
     
     if (obj !== null && typeof obj === 'object') {
         // Si es un objeto, limpia cada propiedad

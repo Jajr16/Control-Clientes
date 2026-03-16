@@ -20,16 +20,16 @@ const ProveedorForm = ({ prefijo, index, onRemove }) => {
                 />
                 <InputConError
                     placeholder="Tel. proveedor (9 dígitos) *"
-                    name={`${prefijoBase}.tipo_servicio`}
+                    name={`${prefijoBase}.telefono`}
                 />
                 <InputConError
                     placeholder="Email proveedor *"
-                    name={`${prefijoBase}.telefono`}
+                    name={`${prefijoBase}.email`}
                     type="email"
                 />
                 <InputConError
                     placeholder="Servicio *"
-                    name={`${prefijoBase}.email`}
+                    name={`${prefijoBase}.tipo_servicio`}
                 />
             </div>
         </div>

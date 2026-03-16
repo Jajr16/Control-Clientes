@@ -7,7 +7,9 @@ const AddClientesPage = () => {
     const { submit, loading } = useFormSubmit();
 
     const handleSubmit = async (data, setError) => {
+        console.log(data)
         const normalized = limpiarDatosVacios(data)
+        console.log(normalized)
         await submit({
             apiCall: clienteNuevo,
             data: normalized,

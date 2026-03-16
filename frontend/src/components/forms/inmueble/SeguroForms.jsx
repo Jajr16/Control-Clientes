@@ -15,21 +15,21 @@ const SeguroForm = ({ prefijo, index, onRemove }) => {
                     name={`${prefijoBase}.empresa_seguro`}
                 />
                 <InputConError
-                    placeholder="Tipo de seguro *"
-                    name={`${prefijoBase}.tipo_seguro`}
-                />
-                <InputConError
                     placeholder="Póliza *"
-                    name={`${prefijoBase}.telefono`}
+                    name={`${prefijoBase}.poliza`}
                 />
                 <InputConError
                     placeholder="Teléfono (9 dígitos) *"
-                    name={`${prefijoBase}.email`}
+                    name={`${prefijoBase}.telefono`}
                 />
                 <InputConError
                     placeholder="Email seguro *"
-                    name={`${prefijoBase}.poliza`}
+                    name={`${prefijoBase}.email`}
                     type="email"
+                />
+                <InputConError
+                    placeholder="Tipo de seguro *"
+                    name={`${prefijoBase}.tipo_seguro`}
                 />
             </div>
         </div>

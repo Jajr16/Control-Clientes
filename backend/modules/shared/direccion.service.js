@@ -11,14 +11,13 @@ export default class DireccionService extends BaseService {
 
     async crearDireccion(data, client = null) {
         return await this.execWithClient(async (conn) => {
-            const existente = await this.repositories.direccion.BuscarPorFiltros({
+            await this.validarExistencia('direccion', {
                 calle: data.calle,
                 numero: data.numero,
                 piso: data.piso,
                 codigo_postal: data.cp,
                 localidad: data.localidad
-            }, 1, client);
-            if (existente.length > 0) throw new ConflictError(`Esa dirección ya había sido registrada anteriormente.`);
+            }, client)
 
             return await this.repositories.direccion.insertar(data, conn);
         }, client);

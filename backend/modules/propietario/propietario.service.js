@@ -1,7 +1,6 @@
 import { BaseService } from "../../services/base.service.js";
 import Repositorio from "../../repositories/global.repository.js";
 import { AppError, ConflictError, NotFoundError } from "../../errors/AppError.js"
-
 class PropietarioService extends BaseService {
     constructor() {
         super({

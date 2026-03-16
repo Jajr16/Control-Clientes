@@ -4,6 +4,8 @@ import DireccionService from '../shared/direccion.service.js';
 import Repositorio from "../../repositories/global.repository.js";
 import { ConflictError, NotFoundError, AppError } from "../../errors/AppError.js"
 
+import { QueryBuilder } from "../../utils/queryBuilder.js";
+
 export default class EmpresaService extends BaseService {
     constructor() {
         super({
@@ -13,47 +15,49 @@ export default class EmpresaService extends BaseService {
         this.direccionService = new DireccionService();
     }
 
+    async validarEmpresa(data, conn) {
+        const [cifExiste, claveExiste] = await Promise.all([
+            this.repositories.empresa.ExistePorId({ cif: data.cif }, conn),
+            this.validarExistencia('empresa', { clave: data.clave }, conn)
+        ]);
+
+        if (cifExiste) throw new ConflictError(`La empresa con CIF ${data.cif} ya existe`);
+        if (claveExiste?.length) throw new ConflictError(`La empresa con clave ${data.clave} ya existe`);
+    }
+
     async crearEmpresa(data, client = null) {
+        return this.execWithClient(async (conn) => {
+            await this.validarEmpresa(data, conn)
+            const { dato_registral, direccion, ...empresa_data } = data;
 
-        const [existente, clave_existente] = await Promise.all([
-            this.repositories.empresa.ExistePorId({ cif: data.cif }, client),
-            this.repositories.empresa.BuscarPorFiltros({ clave: data.clave }, ["1"], client)
-        ]);
+            const [dato_registral_creado, direccion_creada] = await Promise.all([
+                dato_registral ? this.datoRegistralService.crearDatoRegistral(dato_registral, client) : null,
+                direccion ? this.direccionService.crearDireccion(direccion, client) : null
+            ]);
 
-        if (existente) throw new ConflictError(`La empresa con CIF ${data.cif} ya existe`);
-        if (clave_existente?.length > 0) throw new ConflictError(`La empresa con clave ${data.clave} ya existe`);
-
-        const { dato_registral, direccion, ...empresa_data } = data;
-
-        const [dato_registral_creado, direccion_creada] = await Promise.all([
-            dato_registral ? this.datoRegistralService.crearDatoRegistral(dato_registral, client) : null,
-            direccion ? this.direccionService.crearDireccion(direccion, client) : null
-        ]);
-
-        return await this.repositories.empresa.insertar({
-            ...empresa_data,
-            dato_registral: dato_registral_creado?.id_dr ?? null,
-            direccion: direccion_creada?.id || null
-        }, client);
+            return await this.crear('empresa', { cif: empresa_data.cif }, {
+                ...empresa_data,
+                dato_registral: dato_registral_creado?.id_dr ?? null,
+                direccion: direccion_creada?.id || null
+            }, client);
+        })
     }
 
     async obtenerEmpresa() {
         try {
-            const joins = [
-                { type: 'INNER', table: 'propietario p', on: 'empresa.propietario = p.nie' },
-                { type: 'INNER', table: 'direccion d', on: 'empresa.direccion = d.id' },
-                { type: 'INNER', table: 'dato_registral dr', on: 'empresa.dato_registral = dr.id_dr' }
-            ];
-
-            const columnas = [
+            const qb = new QueryBuilder('empresa')
+            const { query, params } = qb.select([
                 'empresa.clave', 'empresa.cif', 'empresa.nombre', 'p.nie',
                 'p.nombre AS propietario', 'p.telefono', 'p.email',
                 'd.calle', 'd.numero', 'd.piso', 'd.codigo_postal', 'd.localidad',
                 'dr.num_protocolo', 'dr.folio', 'dr.hoja', 'dr.inscripcion',
                 'dr.notario', 'dr.fecha_inscripcion'
-            ];
-
-            return await this.repositories.empresa.BuscarConJoins(joins, {}, 'AND', columnas);
+            ]).join('INNER', 'propietario p', 'empresa.propietario = p.nie')
+            .join('INNER', 'direccion d', 'empresa.direccion = d.id')
+            .join('INNER', 'dato_registral dr', 'empresa.dato_registral = dr.id_dr')
+            .build()
+            console.log(query)
+            return await this.repositories.empresa.ejecutarQuery(query, params);
         } catch (error) {
             console.error("Error al obtener información de clientes:", error);
             throw new AppError("No se pudo obtener la información de los clientes");

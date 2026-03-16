@@ -61,22 +61,6 @@ class Repositorio {
     }
 
     /**
-     * Método para consultar todos los registros guardados en la tabla
-     * 
-     * @returns Respuesta SQL con todos los registros en la tabla
-     */
-    async ObtenerTodos(client = null) {
-        const queryClient = client || pool;
-        try {
-            const result = await queryClient.query(`SELECT * FROM ${this.tabla};`);
-            return result.rows;
-        } catch (error) {
-            console.error(`Error al obtener registros de ${this.tabla}:`, error);
-            throw new Error(`No se pudieron obtener los registros de ${this.tabla}`);
-        }
-    }
-
-    /**
      * Método para buscar registros por id (sirve con llave primaria compuesta)
      * 
      * @param {*} claves Llave primaria de la tabla
@@ -194,157 +178,15 @@ class Repositorio {
         }
     }
 
-    /**
-     * Método para hacer consultas SQL por diferentes filtros. Se pueden buscar n cantidad de columnas por n filtros posibles
-     * 
-     * @param {*} filtros Columnas junto con sus valores por los que queremos buscar
-     * @param {*} columnasSeleccionadas Columnas que queremos obtener
-     * @returns 
-     */
-    async BuscarPorFiltros(filtros = {}, columnasSeleccionadas = [], client = null) {
+    async ejecutarQuery(query, valores = [], client = null) {
         const queryClient = client || pool;
-        const tieneFiltros = filtros && Object.keys(filtros).length > 0;
-        const columnasQuery = columnasSeleccionadas.length > 0
-            ? columnasSeleccionadas.join(', ')
-            : '*';
-
-        let query = `SELECT ${columnasQuery} FROM ${this.tabla}`;
-        let valores = [];
-
-        // Lista de columnas reconocidas como tipo fecha
-        const columnasFecha = [
-            'fecha', 'fecha_inicio', 'fecha_fin',
-            'vigencia_inicio', 'vigencia_fin',
-            'f_creacion', 'f_modificacion', 'fecha_inscripcion',
-            'fecha_adquisicion', 'fecha_hipoteca',
-        ];
-
-        if (tieneFiltros) {
-            const columnas = Object.keys(filtros);
-
-            const condiciones = columnas
-                .map((col, index) => {
-                    const valor = filtros[col];
-                    const placeholder = `$${index + 1}`;
-
-                    // Si la columna es fecha → comparar directo
-                    if (columnasFecha.includes(col)) {
-                        return `${col} = ${placeholder}`;
-                    }
-
-                    // Strings normales → ILIKE (ignora mayúsculas)
-                    if (typeof valor === 'string') {
-                        return `${col} ILIKE ${placeholder}`;
-                    }
-
-                    // Otros tipos → comparación normal
-                    return `${col} = ${placeholder}`;
-                })
-                .join(' AND ');
-
-            // Empujar valores
-            valores = Object.keys(filtros).map(col => {
-                const valor = filtros[col];
-
-                // Si columna es fecha, no modificar el string
-                if (columnasFecha.includes(col)) return valor;
-
-                // Si es string, usar el formato para ILIKE
-                if (typeof valor === 'string') return `%${valor}%`;
-
-                return valor;
-            });
-
-            query += ` WHERE ${condiciones}`;
-        }
 
         try {
             const result = await queryClient.query(query, valores);
             return result.rows;
         } catch (error) {
-            console.error(`Error al buscar en ${this.tabla} con filtros:`, error);
-            throw new Error(`No se pudo realizar la búsqueda en ${this.tabla}`);
-        }
-    }
-
-    /**
-     * Método para hacer consultas SQL por diferentes filtros y JOINS. Se pueden buscar n cantidad de columnas por n filtros posibles
-     * 
-     * @param {*} joins Valores en donde vamos a unir tablas
-     * @param {*} filtros Filtros que aplicaremos en caso de que ocupemos
-     * @param {*} columnasSeleccionadas Columnas que queremos que se muestren
-     * @returns 
-     */
-    async BuscarConJoins(joins = [], filtros = {}, operador = 'AND', columnasSeleccionadas = [], client = null) {
-        const queryClient = client || pool;
-
-        if (!Array.isArray(joins)) {
-            joins = [joins];
-        }
-
-        // Validar filtros
-        if (!filtros || typeof filtros !== 'object') {
-            filtros = {};
-        }
-
-        // Construir SELECT
-        const columnas = columnasSeleccionadas.length > 0 ?
-            columnasSeleccionadas.join(', ') :
-            `${this.tabla}.*`;
-
-        // Construir JOINs
-        let joinClause = '';
-        joins.forEach(join => {
-            joinClause += ` ${join.type} JOIN ${join.table} ON ${join.on}`;
-        });
-
-        // Construir WHERE
-        const condiciones = [];
-        const valores = [];
-        let contador = 1;
-
-        for (const [campo, valor] of Object.entries(filtros)) {
-            if (valor === null) {
-                condiciones.push(`${campo} IS NULL`);
-            } else if (typeof valor === 'object') {
-                if (valor.raw) {
-                    // Insertar expresión SQL tal cual
-                    condiciones.push(`${campo} = ${valor.raw}`);
-                } else if (valor.op) {
-                    if (valor.value !== undefined) {
-                        condiciones.push(`${campo} ${valor.op} $${contador}`);
-                        valores.push(valor.value);
-                        contador++;
-                    } else {
-                        condiciones.push(`${campo} ${valor.op}`);
-                    }
-                }
-            } else {
-                condiciones.push(`${campo} = $${contador}`);
-                valores.push(valor);
-                contador++;
-            }
-        }
-
-        const whereClause = condiciones.length > 0 ?
-            `WHERE ${condiciones.join(` ${operador} `)}` :
-            '';
-
-        // Construir query final
-        const query = `
-            SELECT ${columnas} 
-            FROM ${this.tabla}
-            ${joinClause}
-            ${whereClause}
-        `;
-
-        try {
-            const result = await queryClient.query(query, valores);
-            console.log(`Query ejecutado en BuscarConJoins: ${query}` + ` con valores: ${valores}`);
-            return result.rows;
-        } catch (error) {
-            console.error(`Error al buscar en ${this.tabla} con JOINs:`, error);
-            throw new Error(`No se pudo realizar la búsqueda en ${this.tabla}`);
+            console.error("Error ejecutando query:", error);
+            throw error;
         }
     }
 

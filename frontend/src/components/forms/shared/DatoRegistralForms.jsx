@@ -42,6 +42,7 @@ const DatoRegistralForm = ({ prefijo = 'empresa.dato_registral' }) => {
                     <InputConError
                         name={`${prefijo}.fecha_inscripcion`}
                         type="date"
+                        registerOptions={{ valueAsNumber: true }}
                         placeholder="Fecha Inscripción *"
                         className="w-full"
                     />
