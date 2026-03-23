@@ -12,7 +12,7 @@ const ProveedorForm = ({ prefijo, index, onRemove }) => {
             <div className="flex pr-6">
                 <InputConError
                     placeholder="Clave proveedor *"
-                    name={`${prefijoBase}.clave`}
+                    name={`${prefijoBase}.cup`}
                 />
                 <InputConError
                     placeholder="Nombre proveedor *"

@@ -1,5 +1,4 @@
 import app from './app.js';
-import { poblarDatos } from './utils/seed.js';
 import { connectDB } from './config/db.js'; 
 import { createTableDireccion } from './models/direccionModel.js'
 import { createTableDatoRegistral } from './models/datoRegistralModel.js'
@@ -23,29 +22,24 @@ const iniciarServidor = async () => {
         // Conectar a la base de datos
         await connectDB();
 
-        // CREAR TABLAS
-        await createTableDireccion();
-        await createTableDatoRegistral();
-        await createTablePropietario();
-        await createTableEmpresa();
-        await createTableInmueble();
-        await createTableProveedor();
-        await createTableSeguro();
-        await createTableHipoteca();
-        await createTableEmpresaInmueble();
-        await createTableInmuebleProveedor();
-        await createTableInmuebleSeguro();
-        await createTableInmuebleHipoteca();
-        await createTableHonorario();
-        await createTableAdeudo();
-        await createTableProtocolo();
-        await createTableEntrada_RMM();
-        await createTableAnticipo();
-        await createTableMovimiento();
-
-        if (process.env.POBLAR_DB === 'true') {
-            await poblarDatos();
-        }
+        // // CREAR TABLAS
+        // await createTableDireccion();
+        // await createTableDatoRegistral();
+        // await createTablePropietario();
+        // await createTableEmpresa();
+        // await createTableInmueble();
+        // await createTableProveedor();
+        // await createTableSeguro();
+        // await createTableHipoteca();
+        // await createTableEmpresaInmueble();
+        // await createTableInmuebleProveedor();
+        // await createTableInmuebleSeguro();
+        // await createTableHonorario();
+        // await createTableAdeudo();
+        // await createTableProtocolo();
+        // await createTableEntrada_RMM();
+        // await createTableAnticipo();
+        // await createTableMovimiento();
 
         app.listen(PORT, '0.0.0.0', () => {
             console.log(`Servidor corriendo en http://localhost:${PORT}`);

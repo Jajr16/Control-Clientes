@@ -28,7 +28,6 @@ const HipotecaForm = ({ prefijo, index, onRemove }) => {
                     placeholder="Fecha hipoteca *"
                     name={`${prefijoBase}.fecha_hipoteca`}
                     type="date"
-                    registerOptions={{ valueAsDate: true }}
                 />
             </div>
         </div>

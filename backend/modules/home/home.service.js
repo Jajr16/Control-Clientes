@@ -48,7 +48,6 @@ class HomeService extends BaseService {
             .limit(10)
             .build();
 
-
         const [
             clientes,
             adeudosPendientes,
@@ -60,7 +59,6 @@ class HomeService extends BaseService {
             this.calcularTotalDebeEmpresas(),
             this.repositories.movimiento.ejecutarQuery(queryMovimientos, paramsMovimientos)
         ]);
-
 
         return {
             clientes: Number(clientes?.[0]?.total ?? 0),

@@ -1,49 +1,57 @@
-import { useState } from "react";
 import Swal from "sweetalert2";
+import { useMutation } from "./useMutation";
 import { setBackendErrors } from "../utils/setBackendErrors";
 
 export const useFormSubmit = () => {
-    const [loading, setLoading] = useState(false);
 
-    const submit = async ({ apiCall, data, setError, successMessage, reload = false }) => {
-        setLoading(true);
+    const { mutate, loading } = useMutation();
 
-        try {
-            const response = await apiCall(data);
+    const submit = async ({
+        apiCall,
+        data,
+        setError,
+        successMessage = "Operación realizada correctamente",
+        showSuccess = true,
+        reload = false,
+        onSuccess
+    }) => {
 
-            if (successMessage) {
-                await Swal.fire({
-                    icon: "success",
-                    title: successMessage,
-                    timer: 2000,
-                    showConfirmButton: false
-                });
+        return mutate(apiCall, {
+            data,
+            onSuccess: async (responseData) => {
+
+                if (showSuccess) {
+                    await Swal.fire({
+                        icon: "success",
+                        title: successMessage,
+                        // timer: 2000,
+                        // showConfirmButton: false
+                    });
+                }
 
                 if (reload) {
                     window.location.reload();
                 }
+
+                if (onSuccess) {
+                    onSuccess(responseData);
+                }
+            },
+            onError: (error) => {
+                const datosError = error.response?.data;
+                if (datosError?.error === "VALIDATION_ERROR" && setError) {
+                    console.log(datosError)
+                    setBackendErrors(datosError.fields, setError);
+                    return;
+                }
+
+                Swal.fire({
+                    icon: "error",
+                    title: "Error",
+                    text: datosError?.message || "Ocurrió un error"
+                });
             }
-
-            return response.data;
-
-        } catch (error) {
-            const datosError = error.response?.data;
-
-            if (datosError?.error === "VALIDATION_ERROR" && setError) {
-                setBackendErrors(datosError.fields, setError);
-                return null;
-            }
-
-            Swal.fire({
-                icon: "error",
-                title: "Error",
-                text: datosError?.message || "Ocurrió un error"
-            });
-
-            throw error;
-        } finally {
-            setLoading(false);
-        }
+        });
     };
 
     return { submit, loading };

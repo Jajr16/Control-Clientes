@@ -17,7 +17,11 @@ class ClienteService extends BaseService {
     }
 
     async _crearInmuebles(inmuebles, cif, conn) {
-        for (const inmueble of inmuebles) await this.inmuebleService.nuevoInmueble({ ...inmueble, cif }, conn);
+        await Promise.all(
+            inmuebles.map(inmueble =>
+                this.inmuebleService.crearInmueble({ ...inmueble, empresa_cif: cif }, conn)
+            )
+        );
     }
 
     async _generarNIETemporal() {
@@ -45,14 +49,18 @@ class ClienteService extends BaseService {
             }, conn);
             console.log(empresa_creada)
 
-            if (inmuebles?.length > 0) await this._crearInmuebles(inmuebles, empresa_creada.cif, conn);
+            const tareasFinales = [
+                this.movimientoService.crearMovimiento({
+                    accion: `Se agregó el cliente: ${empresa_creada.nombre}`,
+                    datos: { empresa: empresa_creada.cif, propietario: propietario_creado.nie }
+                }, conn)
+            ];
 
-            await this.movimientoService.crearMovimiento({
-                accion: 'Se agregó el cliente: ' + empresa_creada.nombre, datos: {
-                    empresa: empresa_creada.cif,
-                    propietario: propietario_creado.nie
-                }
-            }, conn);
+            if (inmuebles.length > 0) {
+                tareasFinales.push(this._crearInmuebles(inmuebles, empresa_creada.cif, conn));
+            }
+
+            await Promise.all(tareasFinales);
 
             return {
                 propietario: propietario_creado.nombre,

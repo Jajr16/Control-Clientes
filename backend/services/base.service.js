@@ -46,15 +46,16 @@ export class BaseService {
 
     async actualizar(repoName, idObject, data, client = null) {
         const repo = this.repositories[repoName]
+        
+        const existe = await repo.ExistePorId(idObject, client)
+        if (!existe) throw new NotFoundError(`${repoName} no encontrado.`)
+
         const llaveCambiada = Object.keys(idObject).some(
             key => data.hasOwnProperty(key) && data[key] !== idObject[key]
         );
 
-        const existe = await repo.ExistePorId(idObject, client)
-        if (!existe) throw new NotFoundError(`${repoName} no encontrado.`)
-
-        const nuevaLlave = {}
         if (llaveCambiada) {
+            const nuevaLlave = {}
 
             for (const key of Object.keys(idObject)) {
                 nuevaLlave[key] = data.hasOwnProperty(key) ? data[key] : idObject[key];
@@ -63,7 +64,7 @@ export class BaseService {
             if (existeNuevo) throw new ConflictError("Ya existe un registro como el que intentas agregar")
         }
 
-        return repo.actualizarPorId(nuevaLlave, data, client);
+        return repo.actualizarPorId(idObject, data, client);
     }
 
     async eliminar(repoName, idObject, client = null) {

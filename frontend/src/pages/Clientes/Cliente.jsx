@@ -155,7 +155,7 @@ const Cliente = () => {
                         "calle", "numero", "piso", "codigo_postal", "localidad",
                         "num_protocolo", "folio", "hoja", "inscripcion", "notario", "fecha_inscripcion"
                     ]}
-                    labelFormat={(c) => `${c.clave} - ${c.nombre}`}
+                    labelFormat={(c) => `${c.clave || '(SIN CLAVE)'} - ${c.nombre}`}
                 />
                 {!selectedClient && (
                     <div className="flex">

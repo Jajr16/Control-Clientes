@@ -8,10 +8,21 @@ class InmuebleController extends BaseController {
 
     async insertar(req, res) {
         try {
-            const result = await this.service.nuevoInmueble(req.body);
+            const result = await this.service.crearInmueble(req.body);
             return this.sendSuccess(res, result, 'Inmueble creado correctamente', 201);
         } catch (error) {
             return this.handleError(error, res, "Error al crear el inmueble");
+        }
+    }
+
+    // ========== ACTUALIZAR INMUEBLE ==========
+    async updateInmueble(req, res) {
+        try {
+            const { claveCatastral } = req.params;
+            const result = await this.service.updateInmueble(claveCatastral, req.body);
+            return this.sendSuccess(res, result, 'Inmueble actualizado correctamente');
+        } catch (error) {
+            return this.handleError(error, res, "Error al actualizar el inmueble");
         }
     }
 
@@ -57,61 +68,50 @@ class InmuebleController extends BaseController {
     //CAMBIOS ALE
     async updateSeguro(req, res) {
         try {
-        const { cc, empresaSeguro } = req.params;
-        const result = await this.service.updateSeguro(cc, empresaSeguro, req.body);
-        return this.sendSuccess(res, result, 'Seguro actualizado correctamente');
+            const { cc, empresaSeguro } = req.params;
+            const result = await this.service.updateSeguro(cc, empresaSeguro, req.body);
+            return this.sendSuccess(res, result, 'Seguro actualizado correctamente');
         } catch (error) {
-        return this.handleError(error, res, "Error al actualizar el seguro");
+            return this.handleError(error, res, "Error al actualizar el seguro");
         }
     }
 
     async updateHipoteca(req, res) {
         try {
-        const { cc, idHipoteca } = req.params;
-        const result = await this.service.updateHipoteca(cc, idHipoteca, req.body);
-        return this.sendSuccess(res, result, 'Hipoteca actualizada correctamente');
+            const { cc, idHipoteca } = req.params;
+            const result = await this.service.updateHipoteca(cc, idHipoteca, req.body);
+            return this.sendSuccess(res, result, 'Hipoteca actualizada correctamente');
         } catch (error) {
-        return this.handleError(error, res, "Error al actualizar la hipoteca");
-        }   
+            return this.handleError(error, res, "Error al actualizar la hipoteca");
+        }
     }
 
     async updateProveedor(req, res) {
         try {
-        const { cc, nombre } = req.params;
-        const result = await this.service.updateProveedor(cc, nombre, req.body);
-        return this.sendSuccess(res, result, 'Proveedor actualizado correctamente');
+            const { cc, nombre } = req.params;
+            const result = await this.service.updateProveedor(cc, nombre, req.body);
+            return this.sendSuccess(res, result, 'Proveedor actualizado correctamente');
         } catch (error) {
-        return this.handleError(error, res, "Error al actualizar el proveedor");
-        }   
+            return this.handleError(error, res, "Error al actualizar el proveedor");
+        }
     }
 
     async updateDatosRegistrales(req, res) {
         try {
-        const { cc } = req.params;
-        const result = await this.service.updateDatosRegistrales(cc, req.body);
-        return this.sendSuccess(res, result, 'Datos registrales actualizados correctamente');
+            const { cc } = req.params;
+            const result = await this.service.updateDatosRegistrales(cc, req.body);
+            return this.sendSuccess(res, result, 'Datos registrales actualizados correctamente');
         } catch (error) {
-        return this.handleError(error, res, "Error al actualizar los datos registrales");
+            return this.handleError(error, res, "Error al actualizar los datos registrales");
         }
     }
 
 
-// ========== ACTUALIZAR INMUEBLE ==========
-async updateInmueble(req, res) {
-    try {
-        const { claveCatastral } = req.params;
-        const result = await this.service.updateInmueble(claveCatastral, req.body);
-        return this.sendSuccess(res, result, 'Inmueble actualizado correctamente');
-    } catch (error) {
-        return this.handleError(error, res, "Error al actualizar el inmueble");
-    }
-}
-
     // ========== ELIMINAR INMUEBLE ==========
-      async deleteInmueble(req, res) {
+    async deleteInmueble(req, res) {
         try {
             const { claveCatastral } = req.params;
-            
+
             // Opcional: aún permitir CIF manual
             let cif = req.body?.cif || req.query?.cif;
 
@@ -153,7 +153,7 @@ async updateInmueble(req, res) {
         } catch (error) {
             return this.handleError(error, res, "Error al eliminar la hipoteca");
         }
-    }  
+    }
 }
 
 export default InmuebleController;

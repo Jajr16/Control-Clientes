@@ -11,10 +11,10 @@ export class QueryBuilder {
         this.offsetValue = "";
     }
 
-    select(cols) {
-        this.selects = cols;
-        return this;
-    }
+    select(cols = ["*"]) {
+    this.selects = Array.isArray(cols) ? cols : [cols];
+    return this;
+}
 
     join(type, table, condition) {
         this.joins.push(`${type} JOIN ${table} ON ${condition}`);
@@ -22,10 +22,12 @@ export class QueryBuilder {
     }
 
     where(col, value, op = "=") {
-        this.params.push(value);
-        this.wheres.push(`${col} ${op} $${this.params.length}`);
-        return this;
-    }
+    if (value === undefined) return this;
+
+    this.params.push(value);
+    this.wheres.push(`${col} ${op} $${this.params.length}`);
+    return this;
+}
 
     orderBy(col, dir = "ASC") {
         this.order = `ORDER BY ${col} ${dir}`

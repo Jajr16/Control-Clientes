@@ -1,10 +1,12 @@
 import { BaseService } from '../../services/base.service.js';
 import Repositorio from '../../repositories/global.repository.js';
-import DatoRegistralService from '../shared/datoregistral.service.js';
-import DireccionService from '../shared/direccion.service.js';
-import HipotecaService from '../../services/HipotecaService.js';
-import ProveedorService from '../proveedor/proveedor.service.js';
-import SeguroService from '../../services/SeguroService.js';
+import DatoRegistralService from '../shared/services/datoregistral.service.js';
+import DireccionService from '../shared/services/direccion.service.js';
+import HipotecaService from './components/hipoteca.service.js';
+import ProveedorService from './components/proveedor.service.js';
+import SeguroService from './components/seguro.service.js';
+import { QueryBuilder } from '../../utils/queryBuilder.js';
+import { AppError } from '../../errors/AppError.js';
 
 class InmuebleService extends BaseService {
     constructor() {
@@ -22,6 +24,88 @@ class InmuebleService extends BaseService {
         this.hipotecaService = new HipotecaService();
         this.proveedorService = new ProveedorService();
         this.seguroService = new SeguroService();
+    }
+
+    async _vincularRelaciones(items, clave_catastral, serviceMethod, conn) {
+        if (!items?.length > 0) return;
+
+        await Promise.all(items.map(item => serviceMethod(item, clave_catastral, conn)))
+    }
+
+    async _vincularProveedores(proveedores, clave, conn) {
+        await this._vincularRelaciones(proveedores, clave, this.proveedorService.vincularProveedorAInmueble.bind(this.proveedorService), conn)
+    }
+
+    async _vincularHipotecas(hipotecas, clave, conn) {
+        await Promise.all(hipotecas.map(hipoteca => this.hipotecaService.crearHipoteca({ ...hipoteca, clave_catastral: clave }, conn)))
+    }
+
+    async _vincularSeguros(seguros, clave, conn) {
+        await this._vincularRelaciones(seguros, clave, this.seguroService.vincularSeguroAInmueble.bind(this.seguroService), conn)
+    }
+
+    async crearInmueble(data, client = null) {
+        return this.execWithClient(async (conn) => {
+            const { dato_registral, direccion, proveedores = [], hipotecas = [], seguros = [], ...empresa_inmueble_data } = data
+
+            const [dato_registral_creado, direccion_creada] = await Promise.all([
+                dato_registral ? await this.datoRegistralService.crearDatoRegistral(dato_registral, conn) : null,
+                direccion ? await this.direccionService.crearDireccion(direccion, conn) : null
+            ])
+
+            const inmuebleData = {
+                ...empresa_inmueble_data,
+                dato_registral: dato_registral_creado?.id_dr ?? null,
+                direccion: direccion_creada?.id || null
+            };
+
+            const inmueble_creado = await this.crear("inmueble", { clave_catastral: inmuebleData.clave_catastral }, inmuebleData, conn);
+
+            await Promise.all([
+                this._vincularProveedores(proveedores, inmueble_creado.clave_catastral, conn),
+                this._vincularHipotecas(hipotecas, inmueble_creado.clave_catastral, conn),
+                this._vincularSeguros(seguros, inmueble_creado.clave_catastral, conn)
+            ]);
+
+            return { message: "Inmueble creado con éxito.", data: inmueble_creado };
+        }, client)
+    };
+
+    async actualizarInmueble(clave_catastral, data, client = null) {
+        return this.execWithClient(async (conn) => {
+            const { dato_registral, direccion, proveedores = [], hipotecas = [], seguros = [], ...inmueble_data } = data
+
+            const inmueble_actualizado = await this.actualizar('inmueble', { clave_catastral }, inmueble_data, conn)
+            console.log(inmueble_actualizado)
+
+            
+
+        }, client)
+    }
+
+    async obtenerInmueblesEmpresa(cif, client = null) {
+        return this.execWithClient(async (conn) => {
+            try {
+                const qb = new QueryBuilder('inmueble')
+
+                const { query, params } = qb.select([
+                    'd.calle', 'd.numero', 'd.piso', 'd.codigo_postal', 'd.localidad',
+                    'inmueble.clave_catastral', 'inmueble.valor_adquisicion',
+                    'inmueble.fecha_adquisicion', 'dr.num_protocolo', 'dr.folio',
+                    'dr.hoja', 'dr.inscripcion', 'dr.notario', 'dr.fecha_inscripcion'
+                ])
+                    .join('INNER', 'direccion d', 'inmueble.direccion = d.id')
+                    .join('INNER', 'dato_registral dr', 'inmueble.dato_registral = dr.id_dr')
+                    .where('empresa_cif', cif)
+                    .build()
+
+                const consulta = await this.consultar('inmueble', query, params, conn)
+                console.log(consulta)
+                return consulta
+            } catch (error) {
+                throw new AppError('No se pudo obtener la información de los inmuebles')
+            }
+        }, client)
     }
 
     async agregarComponentes(datos, client = null) {
@@ -66,54 +150,6 @@ class InmuebleService extends BaseService {
             return { message: "Componentes agregados con éxito." };
         }, client)
     }
-
-    async _vincularProveedores(proveedores, clave_catastral, conn) {
-        for (const proveedor of proveedores) await this.proveedorService.vincularProveedorAInmueble(proveedor, clave_catastral, conn)
-    }
-
-    async _vincularHipotecas(hipotecas, clave_catastral, conn) {
-        for (const hipoteca of hipotecas) await this.hipotecaService.vincularHipotecaAInmueble(hipoteca, clave_catastral, conn)
-    }
-
-    async _vincularSeguros(seguros, clave_catastral, conn) {
-        for (const seguro of seguros) await this.seguroService.vincularSeguroAInmueble(seguro, clave_catastral, conn)
-    }
-
-    async nuevoInmueble(data, client = null) {
-        return this.execWithClient(async (conn) => {
-
-            const { dato_registral, direccion, proveedores = [], hipotecas = [], seguros = [], ...empresa_inmueble_data } = data
-
-            const [dato_registral_creado, direccion_creada] = await Promise.all([
-                dato_registral ? await this.datoRegistralService.crearDatoRegistral(dato_registral, conn) : null,
-                direccion ? await this.direccionService.crearDireccion(direccion, conn) : null
-            ])
-
-            const inmuebleData = {
-                clave_catastral: empresa_inmueble_data.clave_catastral,
-                dato_registral: dato_registral_creado?.id_dr ?? null,
-                direccion: direccion_creada?.id || null
-            };
-
-            const inmueble_creado = await this.crear("inmueble", { clave_catastral: inmuebleData.clave_catastral}, inmuebleData, conn);
-
-            if (proveedores?.length > 0) {
-                await this._vincularProveedores(proveedores, inmueble_creado.clave_catastral, conn)
-            }
-
-            if (hipotecas?.length > 0) {
-                await this._vincularHipotecas(hipotecas, inmueble_creado.clave_catastral, conn)
-            }
-
-            if (seguros?.length > 0) {
-                await this._vincularSeguros(seguros, inmueble_creado.clave_catastral, conn)
-            }
-            // Vincular inmueble con empresa
-            await this.crear("empresaInmueble", {cif: empresa_inmueble_data.cif, clave_catastral: empresa_inmueble_data.clave_catastral}, empresa_inmueble_data, conn);
-
-            return { message: "Inmueble creado con éxito.", data: inmueble_creado };
-        }, client)
-    };
 
     // ======= ACTUALIZAR SEGURO =======
     async updateSeguro(claveCatastral, poliza, nuevosDatos) {
@@ -448,8 +484,8 @@ class InmuebleService extends BaseService {
 
             const columnas = [
                 'd.calle', 'd.numero', 'd.piso', 'd.codigo_postal', 'd.localidad',
-                'empresa_inmueble.clave_catastral', 'empresa_inmueble.valor_adquisicion',
-                'empresa_inmueble.fecha_adquisicion', 'dr.num_protocolo', 'dr.folio',
+                'inmueble.clave_catastral', 'inmueble.valor_adquisicion',
+                'inmueble.fecha_adquisicion', 'dr.num_protocolo', 'dr.folio',
                 'dr.hoja', 'dr.inscripcion', 'dr.notario', 'dr.fecha_inscripcion'
             ];
 

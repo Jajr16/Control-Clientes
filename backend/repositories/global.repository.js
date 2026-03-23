@@ -182,11 +182,12 @@ class Repositorio {
         const queryClient = client || pool;
 
         try {
+            console.log(query)
             const result = await queryClient.query(query, valores);
             return result.rows;
         } catch (error) {
             console.error("Error ejecutando query:", error);
-            throw error;
+            throw new Error(`No se puedo realizar la consulta: ${error}`);
         }
     }
 

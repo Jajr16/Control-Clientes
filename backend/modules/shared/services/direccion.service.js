@@ -1,6 +1,6 @@
-import { BaseService } from "../../services/base.service.js";
-import Repositorio from "../../repositories/global.repository.js";
-import { ConflictError, NotFoundError } from "../../errors/AppError.js"
+import { BaseService } from "../../../services/base.service.js";
+import Repositorio from "../../../repositories/global.repository.js";
+import { ConflictError, NotFoundError } from "../../../errors/AppError.js"
 
 export default class DireccionService extends BaseService {
     constructor() {

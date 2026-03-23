@@ -8,7 +8,10 @@ const InputConError = ({ name, className = "", registerOptions = {}, ...props })
     return (
         <div className="w-full">
             <input
-                {...register(name, registerOptions)}
+                {...register(name, {
+                    ...registerOptions,
+                    setValueAs: (value) => value === "" ? undefined : value
+                })}
                 {...props}
                 className={`border p-2 rounded ${className}`}
             />

@@ -1,5 +1,5 @@
-import { BaseService } from "./base.service.js";
-import Repositorio from "../repositories/global.repository.js";
+import { BaseService } from "../../../services/base.service.js";
+import Repositorio from "../../../repositories/global.repository.js";
 
 export default class SeguroService extends BaseService {
     constructor() {

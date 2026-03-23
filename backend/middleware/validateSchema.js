@@ -3,7 +3,9 @@ import { ValidationError } from "../errors/AppError.js";
 export const validateSchema = (schema) => {
     return (req, res, next) => {
         const { error, value } = schema.validate(req.body, {
-            abortEarly: false
+            abortEarly: false,
+            stripUnknown: true,
+            convert: true
         });
 
         if (error) {

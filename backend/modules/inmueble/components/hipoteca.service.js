@@ -1,31 +1,17 @@
-import { BaseService } from "./base.service.js";
-import Repositorio from "../repositories/global.repository.js";
+import { BaseService } from "../../../services/base.service.js";
+import Repositorio from "../../../repositories/global.repository.js";
 
 export default class HipotecaService extends BaseService {
     constructor() {
         super({
-            hipoteca: new Repositorio("hipoteca", "id"),
-            inmuebleHipoteca: new Repositorio("inmueble_hipoteca", ['clave_catastral', 'id_hipoteca'])
+            hipoteca: new Repositorio("hipoteca", "clave_catastral"),
         })
     }
 
     async crearHipoteca(data, client = null) {
-        return await this.repositories.hipoteca.insertar(data, client);
+        return await this.crear('hipoteca', { clave_catastral: data.clave_catastral }, data, client);
     }
-
-    async vincularHipotecaAInmueble(hipoteca, clave_catastral, client) {
-        const nuevaHipoteca = await this.repositories.hipoteca.insertar(hipoteca, client);
-
-        const relacion = {
-            clave_catastral,
-            id_hipoteca: nuevaHipoteca.id
-        };
-
-        const result =await this.repositories.inmuebleHipoteca.insertar(relacion, client);
-
-        return { result, message: `Hipoteca vinculada a ${clave_catastral}` };
-    }
-
+    
     async actualizarHipoteca(claveCatastral, id_hipoteca, nuevosDatos, client = null) {
         return await this.withTransaction(async (conn) => {
             const hipotecaExiste = await this.repositories.inmuebleHipoteca.ExistePorId(

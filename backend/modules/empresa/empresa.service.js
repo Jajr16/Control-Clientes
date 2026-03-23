@@ -1,6 +1,6 @@
 import { BaseService } from "../../services/base.service.js";
-import DatoRegistralService from '../shared/datoregistral.service.js';
-import DireccionService from '../shared/direccion.service.js';
+import DatoRegistralService from '../shared/services/datoregistral.service.js';
+import DireccionService from '../shared/services/direccion.service.js';
 import Repositorio from "../../repositories/global.repository.js";
 import { ConflictError, NotFoundError, AppError } from "../../errors/AppError.js"
 
@@ -53,8 +53,8 @@ export default class EmpresaService extends BaseService {
                 'dr.num_protocolo', 'dr.folio', 'dr.hoja', 'dr.inscripcion',
                 'dr.notario', 'dr.fecha_inscripcion'
             ]).join('INNER', 'propietario p', 'empresa.propietario = p.nie')
-            .join('INNER', 'direccion d', 'empresa.direccion = d.id')
-            .join('INNER', 'dato_registral dr', 'empresa.dato_registral = dr.id_dr')
+            .join('LEFT', 'direccion d', 'empresa.direccion = d.id')
+            .join('LEFT', 'dato_registral dr', 'empresa.dato_registral = dr.id_dr')
             .build()
             console.log(query)
             return await this.repositories.empresa.ejecutarQuery(query, params);

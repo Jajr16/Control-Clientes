@@ -13,7 +13,7 @@ export const addComponentes = async (inmueble) => {
 }
 
 export const getInmuebles = async (cif) => {
-    const res = await axios.get(`${API_URL}/inmueble/inmueblesList/${cif}`);
+    const res = await axios.get(`${API_URL}/inmueble/${cif}`);
     return res.data;
 };
 
