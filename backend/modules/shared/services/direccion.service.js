@@ -1,6 +1,6 @@
 import { BaseService } from "../../../services/base.service.js";
 import Repositorio from "../../../repositories/global.repository.js";
-import { ConflictError, NotFoundError } from "../../../errors/AppError.js"
+import { AppError, ConflictError, NotFoundError } from "../../../errors/AppError.js"
 
 export default class DireccionService extends BaseService {
     constructor() {
@@ -19,7 +19,7 @@ export default class DireccionService extends BaseService {
                 localidad: data.localidad
             }, client)
 
-            return await this.repositories.direccion.insertar(data, conn);
+            return await this.crearAuto('direccion', data, conn);
         }, client);
     }
 
@@ -31,7 +31,7 @@ export default class DireccionService extends BaseService {
             );
 
             if (!direccionExiste) {
-                throw new Error('Dirección no encontrada');
+                throw new NotFoundError('Dirección no encontrada');
             }
 
             const otrosUsos = await this.repositories.inmueble.contar(
@@ -40,7 +40,7 @@ export default class DireccionService extends BaseService {
             );
 
             if (otrosUsos > 0) {
-                throw new Error('No se puede eliminar la dirección porque está siendo usada por otros inmuebles');
+                throw new AppError('No se puede eliminar la dirección porque está siendo usada por otros inmuebles');
             }
 
             await this.repositories.direccion.eliminarPorId(
@@ -55,21 +55,18 @@ export default class DireccionService extends BaseService {
         }, client);
     }
 
-    async actualizarDireccion(idDireccion, nuevosDatos, client = null) {
+    async actualizarDireccion(data, client = null) {
         return await this.execWithClient(async (conn) => {
-            //Verificar que la dirección existe
-            const direccionExiste = await this.repositories.direccion.ExistePorId({ id: idDireccion }, conn);
-            if (!direccionExiste) {
-                throw new Error('Dirección no encontrada');
-            }
-
-            return await this.repositories.direccion.actualizarPorId(
-                { id: idDireccion },
-                nuevosDatos,
-                conn
-            );
+            return await this.actualizar('direccion', { id: data.id }, data, conn);
         }, client);
     }
 
+    async upsertDireccion(data, client = null) {
+        return await this.execWithClient(async (conn) => {
+            if (data.id) return await this.actualizarDireccion(data, conn);
+
+            return await this.crearDireccion(data, conn);
+        }, client)
+    }
 
 }

@@ -6,17 +6,13 @@ import HipotecaService from './components/hipoteca.service.js';
 import ProveedorService from './components/proveedor.service.js';
 import SeguroService from './components/seguro.service.js';
 import { QueryBuilder } from '../../utils/queryBuilder.js';
-import { AppError } from '../../errors/AppError.js';
+import { AppError, NotFoundError } from '../../errors/AppError.js';
 
 class InmuebleService extends BaseService {
     constructor() {
         super({
             inmueble: new Repositorio('inmueble', 'clave_catastral'),
-            empresaInmueble: new Repositorio('empresa_inmueble', ['cif', 'clave_catastral']),
-            inmuebleProveedor: new Repositorio('inmueble_proveedor', ['clave_catastral', 'clave']),
-            inmuebleSeguro: new Repositorio('inmueble_seguro', ['clave_catastral', 'poliza']),
-            inmuebleHipoteca: new Repositorio("inmueble_hipoteca", ['clave_catastral', 'id_hipoteca']),
-            datoRegistral: new Repositorio('dato_registral', 'id_dr')
+            inmuebleProveedor: new Repositorio('inmueble_proveedor', ['clave_catastral', 'id_proveedor'])
         });
 
         this.datoRegistralService = new DatoRegistralService();
@@ -26,27 +22,72 @@ class InmuebleService extends BaseService {
         this.seguroService = new SeguroService();
     }
 
-    async _vincularRelaciones(items, clave_catastral, serviceMethod, conn) {
-        if (!items?.length > 0) return;
+    async _validarPertenencia(original, clave, conn) {
 
-        await Promise.all(items.map(item => serviceMethod(item, clave_catastral, conn)))
+        const existente = await this.proveedorService._buscarProveedor(original, '*', conn);
+
+        if (!existente) throw new NotFoundError('Proveedor no encontrado');
+
+        const pertenece = await this.repositories.inmuebleProveedor.ObtenerPorId({
+            clave_catastral: clave,
+            id_proveedor: existente.id_proveedor
+        }, conn);
+
+        if (!pertenece) throw new AppError('No puedes modificar un proveedor de otro inmueble');
     }
 
-    async _vincularProveedores(proveedores, clave, conn) {
-        await this._vincularRelaciones(proveedores, clave, this.proveedorService.vincularProveedorAInmueble.bind(this.proveedorService), conn)
+    async _procesarProveedorInmueble(proveedor, conn, clave) {
+        if (proveedor.original && clave) {
+            await this._validarPertenencia(proveedor.original, clave, conn);
+        }
+
+        const proveedorFinal = await this.proveedorService.upsertProveedor(proveedor, conn);
+
+        if (clave) {
+            await this._vincularProveedor({
+                clave_catastral: clave,
+                id_proveedor: proveedorFinal.id_proveedor
+            }, conn);
+        }
+
+        return proveedorFinal;
     }
 
-    async _vincularHipotecas(hipotecas, clave, conn) {
-        await Promise.all(hipotecas.map(hipoteca => this.hipotecaService.crearHipoteca({ ...hipoteca, clave_catastral: clave }, conn)))
+    async _vincularProveedor(data, conn) {
+        return await this.crear('inmuebleProveedor', data, data, conn);
     }
 
-    async _vincularSeguros(seguros, clave, conn) {
-        await this._vincularRelaciones(seguros, clave, this.seguroService.vincularSeguroAInmueble.bind(this.seguroService), conn)
+    async _vincularProveedores(proveedores, conn, clave = null) {
+        if (!proveedores?.length) return;
+
+        await Promise.all(
+            proveedores.map(proveedor => this._procesarProveedorInmueble(proveedor, conn, clave)
+        ));
+    }
+
+    async _vincularHipoteca(hipoteca, conn, clave = null) {
+        await this.hipotecaService.upsertHipoteca(hipoteca, clave, conn)
+    }
+
+    async _vincularSeguros(seguros, conn, clave = null) {
+        if (!seguros?.length) return;
+
+        const segurosClave = seguros.map(seguro => ({
+            ...seguro,
+            data: {
+                ...seguro.data,
+                ...(clave && { clave_catastral: clave })
+            }
+        }))
+        
+        await Promise.all(segurosClave.map(async (seguro) => {
+            return await this.seguroService.upsertSeguro(seguro, conn);
+        }))
     }
 
     async crearInmueble(data, client = null) {
         return this.execWithClient(async (conn) => {
-            const { dato_registral, direccion, proveedores = [], hipotecas = [], seguros = [], ...empresa_inmueble_data } = data
+            const { dato_registral, direccion, proveedores = [], hipoteca = {}, seguros = [], ...inmueble_data } = data
 
             const [dato_registral_creado, direccion_creada] = await Promise.all([
                 dato_registral ? await this.datoRegistralService.crearDatoRegistral(dato_registral, conn) : null,
@@ -54,18 +95,17 @@ class InmuebleService extends BaseService {
             ])
 
             const inmuebleData = {
-                ...empresa_inmueble_data,
+                ...inmueble_data,
                 dato_registral: dato_registral_creado?.id_dr ?? null,
                 direccion: direccion_creada?.id || null
             };
 
             const inmueble_creado = await this.crear("inmueble", { clave_catastral: inmuebleData.clave_catastral }, inmuebleData, conn);
 
-            await Promise.all([
-                this._vincularProveedores(proveedores, inmueble_creado.clave_catastral, conn),
-                this._vincularHipotecas(hipotecas, inmueble_creado.clave_catastral, conn),
-                this._vincularSeguros(seguros, inmueble_creado.clave_catastral, conn)
-            ]);
+            await this._vincularProveedores(proveedores, conn, inmueble_creado.clave_catastral)
+            await this._vincularHipoteca({ ...hipoteca, clave_catastral: inmueble_creado.clave_catastral }, conn)
+            await this._vincularSeguros(seguros, conn, inmueble_creado.clave_catastral)
+
 
             return { message: "Inmueble creado con éxito.", data: inmueble_creado };
         }, client)
@@ -73,13 +113,37 @@ class InmuebleService extends BaseService {
 
     async actualizarInmueble(clave_catastral, data, client = null) {
         return this.execWithClient(async (conn) => {
-            const { dato_registral, direccion, proveedores = [], hipotecas = [], seguros = [], ...inmueble_data } = data
+            const { dato_registral, direccion, proveedores = [], hipoteca = {}, seguros = [], ...inmueble_data } = data
 
-            const inmueble_actualizado = await this.actualizar('inmueble', { clave_catastral }, inmueble_data, conn)
-            console.log(inmueble_actualizado)
+            const inmueble_existente = await this.repositories.inmueble.ObtenerPorId({ clave_catastral })
 
-            
+            if (!inmueble_existente) throw new NotFoundError('Inmueble no encontrado.');
 
+            console.log(inmueble_existente)
+            const [dato_registral_actualizado, direccion_actualizada] = await Promise.all([
+                dato_registral ? await this.datoRegistralService.upsertDatoRegistral({ ...dato_registral, ...(inmueble_existente.dato_registral && { id_dr: inmueble_existente.dato_registral }) }, conn) : null,
+                direccion ? await this.direccionService.upsertDireccion({ ...direccion, ...(inmueble_existente.direccion && { id: inmueble_existente.direccion }) }, conn) : null
+            ])
+
+            await Promise.all([
+                this._vincularProveedores(proveedores, conn, clave_catastral),
+                this._vincularHipoteca(hipoteca, conn, clave_catastral),
+                this._vincularSeguros(seguros, conn, clave_catastral)
+            ])
+
+            const data_final = {
+                ...inmueble_data,
+                ...(dato_registral_actualizado && { dato_registral: dato_registral_actualizado.id_dr }),
+                ...(direccion_actualizada && { direccion: direccion_actualizada.id })
+            }
+
+            return await this.actualizar('inmueble', { clave_catastral }, data_final, conn)
+        }, client)
+    }
+
+    async eliminarInmueble(clave_catastral, client = null) {
+        return this.execWithClient(async (conn) => {
+            return await this.eliminar('inmueble', { clave_catastral }, conn);
         }, client)
     }
 
@@ -108,420 +172,420 @@ class InmuebleService extends BaseService {
         }, client)
     }
 
-    async agregarComponentes(datos, client = null) {
-        return await this.execWithClient(async (conn) => {
-            let proveedores, hipotecas, seguros;
+    // async agregarComponentes(datos, client = null) {
+    //     return await this.execWithClient(async (conn) => {
+    //         let proveedores, hipotecas, seguros;
 
-            if (datos.proveedores && datos.proveedores.length > 0) {
-                for (const proveedor of datos.proveedores) {
-                    proveedores = await this.proveedorService.vincularProveedorAInmueble({
-                        clave: proveedor.clave_proveedor,
-                        nombre: proveedor.nombre,
-                        telefono: proveedor.tel_proveedor,
-                        email: proveedor.email_proveedor,
-                        tipo_servicio: proveedor.servicio
-                    }, datos.clave_catastral, conn)
-                }
-            }
+    //         if (datos.proveedores && datos.proveedores.length > 0) {
+    //             for (const proveedor of datos.proveedores) {
+    //                 proveedores = await this.proveedorService.vincularProveedorAInmueble({
+    //                     clave: proveedor.clave_proveedor,
+    //                     nombre: proveedor.nombre,
+    //                     telefono: proveedor.tel_proveedor,
+    //                     email: proveedor.email_proveedor,
+    //                     tipo_servicio: proveedor.servicio
+    //                 }, datos.clave_catastral, conn)
+    //             }
+    //         }
 
-            if (datos.hipotecas && datos.hipotecas.length > 0) {
-                for (const hipoteca of datos.hipotecas) {
-                    hipotecas = await this.hipotecaService.vincularHipotecaAInmueble({
-                        prestamo: hipoteca.prestamo,
-                        banco_prestamo: hipoteca.prestamo,
-                        fecha_hipoteca: hipoteca.fecha_hipoteca,
-                        cuota_hipoteca: hipoteca.cuota
-                    }, datos.clave_catastral, conn)
-                }
-            }
+    //         if (datos.hipotecas && datos.hipotecas.length > 0) {
+    //             for (const hipoteca of datos.hipotecas) {
+    //                 hipotecas = await this.hipotecaService.vincularHipotecaAInmueble({
+    //                     prestamo: hipoteca.prestamo,
+    //                     banco_prestamo: hipoteca.prestamo,
+    //                     fecha_hipoteca: hipoteca.fecha_hipoteca,
+    //                     cuota_hipoteca: hipoteca.cuota
+    //                 }, datos.clave_catastral, conn)
+    //             }
+    //         }
 
-            if (datos.seguros && datos.seguros.length > 0) {
-                for (const seguro of datos.seguros) {
-                    seguros = await this.seguroService.vincularSeguroAInmueble({
-                        empresa_seguro: seguro.aseguradora,
-                        tipo_seguro: seguro.tipo_seguro,
-                        telefono: seguro.telefono_seguro,
-                        email: seguro.email_seguro,
-                        poliza: seguro.poliza
-                    }, datos.clave_catastral, conn)
-                }
-            }
+    //         if (datos.seguros && datos.seguros.length > 0) {
+    //             for (const seguro of datos.seguros) {
+    //                 seguros = await this.seguroService.vincularSeguroAInmueble({
+    //                     empresa_seguro: seguro.aseguradora,
+    //                     tipo_seguro: seguro.tipo_seguro,
+    //                     telefono: seguro.telefono_seguro,
+    //                     email: seguro.email_seguro,
+    //                     poliza: seguro.poliza
+    //                 }, datos.clave_catastral, conn)
+    //             }
+    //         }
 
-            return { message: "Componentes agregados con éxito." };
-        }, client)
-    }
+    //         return { message: "Componentes agregados con éxito." };
+    //     }, client)
+    // }
 
-    // ======= ACTUALIZAR SEGURO =======
-    async updateSeguro(claveCatastral, poliza, nuevosDatos) {
-        console.log("============== AQUI EMPIEZA A EDITAR SEGURO ==============")
-        console.log(claveCatastral)
-        console.log(poliza)
-        console.log(nuevosDatos)
-        return await this.seguroService.actualizarSeguro(
-            claveCatastral,
-            poliza,
-            nuevosDatos
-        );
-    }
+    // // ======= ACTUALIZAR SEGURO =======
+    // async updateSeguro(claveCatastral, poliza, nuevosDatos) {
+    //     console.log("============== AQUI EMPIEZA A EDITAR SEGURO ==============")
+    //     console.log(claveCatastral)
+    //     console.log(poliza)
+    //     console.log(nuevosDatos)
+    //     return await this.seguroService.actualizarSeguro(
+    //         claveCatastral,
+    //         poliza,
+    //         nuevosDatos
+    //     );
+    // }
 
-    // ======= ACTUALIZAR PROVEEDORES =======
-    async updateProveedor(claveCatastral, clave, nuevosDatos) {
-        return await this.proveedorService.actualizarProveedor(
-            claveCatastral,
-            clave,
-            nuevosDatos
-        );
-    }
+    // // ======= ACTUALIZAR PROVEEDORES =======
+    // async updateProveedor(claveCatastral, clave, nuevosDatos) {
+    //     return await this.proveedorService.actualizarProveedor(
+    //         claveCatastral,
+    //         clave,
+    //         nuevosDatos
+    //     );
+    // }
 
-    // ========== ACTUALIZAR DATOS REGISTRALES ==========
-    async updateDatosRegistrales(claveCatastral, nuevosDatos) {
-        console.log("============== AQUI EMPIEZA A EDITAR DATO REGISTRAL ==============")
-        console.log(claveCatastral)
-        console.log(nuevosDatos)
-        return await this.withTransaction(async (conn) => {
-            if (nuevosDatos.clave_catastral_nueva) {
-                const inmuebleCC = await this.repositories.inmueble.actualizarPorId({ clave_catastral: claveCatastral },
-                    { clave_catastral: nuevosDatos.clave_catastral_nueva }, conn)
+    // // ========== ACTUALIZAR DATOS REGISTRALES ==========
+    // async updateDatosRegistrales(claveCatastral, nuevosDatos) {
+    //     console.log("============== AQUI EMPIEZA A EDITAR DATO REGISTRAL ==============")
+    //     console.log(claveCatastral)
+    //     console.log(nuevosDatos)
+    //     return await this.withTransaction(async (conn) => {
+    //         if (nuevosDatos.clave_catastral_nueva) {
+    //             const inmuebleCC = await this.repositories.inmueble.actualizarPorId({ clave_catastral: claveCatastral },
+    //                 { clave_catastral: nuevosDatos.clave_catastral_nueva }, conn)
 
 
-                console.log('AQUI ESTÁ ACTUALIZANDO LA CC')
-                console.log(inmuebleCC)
+    //             console.log('AQUI ESTÁ ACTUALIZANDO LA CC')
+    //             console.log(inmuebleCC)
 
-                claveCatastral = inmuebleCC.clave_catastral
-            }
+    //             claveCatastral = inmuebleCC.clave_catastral
+    //         }
 
-            return await this.datoRegistralService.actualizarDatosRegistrales(
-                claveCatastral,
-                nuevosDatos,
-                conn
-            );
-        })
-    }
+    //         return await this.datoRegistralService.actualizarDatosRegistrales(
+    //             claveCatastral,
+    //             nuevosDatos,
+    //             conn
+    //         );
+    //     })
+    // }
 
-    // ========== ACTUALIZAR HIPOTECA ==========
-    async updateHipoteca(claveCatastral, id_hipoteca, nuevosDatos) {
-        return await this.hipotecaService.actualizarHipoteca(
-            claveCatastral,
-            id_hipoteca,
-            nuevosDatos
-        );
-    }
+    // // ========== ACTUALIZAR HIPOTECA ==========
+    // async updateHipoteca(claveCatastral, id_hipoteca, nuevosDatos) {
+    //     return await this.hipotecaService.actualizarHipoteca(
+    //         claveCatastral,
+    //         id_hipoteca,
+    //         nuevosDatos
+    //     );
+    // }
 
-    // En InmuebleService.js, agrega este método:
+    // // En InmuebleService.js, agrega este método:
 
-    // ========== ACTUALIZAR INMUEBLE ==========
-    async updateInmueble(claveCatastral, nuevosDatos) {
-        return await this.withTransaction(async (client) => {
-            console.log(`Actualizando inmueble: ${claveCatastral}`, nuevosDatos);
+    // // ========== ACTUALIZAR INMUEBLE ==========
+    // async updateInmueble(claveCatastral, nuevosDatos) {
+    //     return await this.withTransaction(async (client) => {
+    //         console.log(`Actualizando inmueble: ${claveCatastral}`, nuevosDatos);
 
-            // 1. Verificar que el inmueble existe
-            const inmuebleExiste = await this.repositories.inmueble.ExistePorId(
-                { clave_catastral: claveCatastral },
-                client
-            );
+    //         // 1. Verificar que el inmueble existe
+    //         const inmuebleExiste = await this.repositories.inmueble.ExistePorId(
+    //             { clave_catastral: claveCatastral },
+    //             client
+    //         );
 
-            if (!inmuebleExiste) {
-                throw new Error('Inmueble no encontrado');
-            }
+    //         if (!inmuebleExiste) {
+    //             throw new Error('Inmueble no encontrado');
+    //         }
 
-            // 2. Obtener datos actuales del inmueble
-            const inmuebleActual = await this.repositories.inmueble.BuscarPorFiltros(
-                { clave_catastral: claveCatastral },
-                1,
-                client
-            );
+    //         // 2. Obtener datos actuales del inmueble
+    //         const inmuebleActual = await this.repositories.inmueble.BuscarPorFiltros(
+    //             { clave_catastral: claveCatastral },
+    //             1,
+    //             client
+    //         );
 
-            if (inmuebleActual.length === 0) {
-                throw new Error('No se pudieron obtener los datos del inmueble');
-            }
+    //         if (inmuebleActual.length === 0) {
+    //             throw new Error('No se pudieron obtener los datos del inmueble');
+    //         }
 
-            const inmueble = inmuebleActual[0];
-            const idDireccion = inmueble.direccion;
+    //         const inmueble = inmuebleActual[0];
+    //         const idDireccion = inmueble.direccion;
 
-            // 3. Actualizar dirección si hay cambios en los campos de dirección
-            const camposDireccion = ['calle', 'numero', 'piso', 'codigo_postal', 'localidad'];
-            const datosDireccion = {};
+    //         // 3. Actualizar dirección si hay cambios en los campos de dirección
+    //         const camposDireccion = ['calle', 'numero', 'piso', 'codigo_postal', 'localidad'];
+    //         const datosDireccion = {};
 
-            for (const campo of camposDireccion) {
-                if (nuevosDatos[campo] !== undefined) {
-                    datosDireccion[campo] = nuevosDatos[campo];
-                }
-            }
+    //         for (const campo of camposDireccion) {
+    //             if (nuevosDatos[campo] !== undefined) {
+    //                 datosDireccion[campo] = nuevosDatos[campo];
+    //             }
+    //         }
 
-            if (Object.keys(datosDireccion).length > 0) {
-                await this.direccionService.actualizarDireccion(idDireccion, datosDireccion, client);
-                console.log('Dirección actualizada');
-            }
+    //         if (Object.keys(datosDireccion).length > 0) {
+    //             await this.direccionService.actualizarDireccion(idDireccion, datosDireccion, client);
+    //             console.log('Dirección actualizada');
+    //         }
 
-            // 4. Actualizar valor_adquisicion en empresa_inmueble si está presente
-            if (nuevosDatos.valor_adquisicion !== undefined) {
-                const empresaInmuebleRelacion = await this.repositories.empresaInmueble.BuscarPorFiltros(
-                    { clave_catastral: claveCatastral },
-                    1,
-                    client
-                );
+    //         // 4. Actualizar valor_adquisicion en empresa_inmueble si está presente
+    //         if (nuevosDatos.valor_adquisicion !== undefined) {
+    //             const empresaInmuebleRelacion = await this.repositories.empresaInmueble.BuscarPorFiltros(
+    //                 { clave_catastral: claveCatastral },
+    //                 1,
+    //                 client
+    //             );
 
-                if (empresaInmuebleRelacion && empresaInmuebleRelacion.length > 0) {
-                    const { cif } = empresaInmuebleRelacion[0];
-                    await this.repositories.empresaInmueble.actualizarPorId(
-                        { cif: cif, clave_catastral: claveCatastral },
-                        { valor_adquisicion: nuevosDatos.valor_adquisicion },
-                        client
-                    );
-                    console.log('Valor de adquisición actualizado');
-                }
-            }
+    //             if (empresaInmuebleRelacion && empresaInmuebleRelacion.length > 0) {
+    //                 const { cif } = empresaInmuebleRelacion[0];
+    //                 await this.repositories.empresaInmueble.actualizarPorId(
+    //                     { cif: cif, clave_catastral: claveCatastral },
+    //                     { valor_adquisicion: nuevosDatos.valor_adquisicion },
+    //                     client
+    //                 );
+    //                 console.log('Valor de adquisición actualizado');
+    //             }
+    //         }
 
-            // 5. Retornar el inmueble actualizado
-            const inmuebleActualizado = await this.repositories.inmueble.BuscarPorFiltros(
-                { clave_catastral: claveCatastral },
-                1,
-                client
-            );
+    //         // 5. Retornar el inmueble actualizado
+    //         const inmuebleActualizado = await this.repositories.inmueble.BuscarPorFiltros(
+    //             { clave_catastral: claveCatastral },
+    //             1,
+    //             client
+    //         );
 
-            return {
-                message: "Inmueble actualizado correctamente",
-                data: inmuebleActualizado[0]
-            };
-        });
-    }
+    //         return {
+    //             message: "Inmueble actualizado correctamente",
+    //             data: inmuebleActualizado[0]
+    //         };
+    //     });
+    // }
 
-    // ========== ELIMINAR INMUEBLE ==========
-    async deleteInmueble(claveCatastral) {
-        return await this.withTransaction(async (client) => {
-            console.log(`Iniciando eliminación completa del inmueble: ${claveCatastral}`);
+    // // ========== ELIMINAR INMUEBLE ==========
+    // async deleteInmueble(claveCatastral) {
+    //     return await this.withTransaction(async (client) => {
+    //         console.log(`Iniciando eliminación completa del inmueble: ${claveCatastral}`);
 
-            // 1. Verificar que el inmueble existe
-            const inmuebleExiste = await this.repositories.inmueble.ExistePorId(
-                { clave_catastral: claveCatastral },
-                client
-            );
+    //         // 1. Verificar que el inmueble existe
+    //         const inmuebleExiste = await this.repositories.inmueble.ExistePorId(
+    //             { clave_catastral: claveCatastral },
+    //             client
+    //         );
 
-            if (!inmuebleExiste) {
-                throw new Error('Inmueble no encontrado');
-            }
+    //         if (!inmuebleExiste) {
+    //             throw new Error('Inmueble no encontrado');
+    //         }
 
-            // 2. Obtener datos completos del inmueble
-            const inmuebleData = await this.repositories.inmueble.BuscarPorFiltros(
-                { clave_catastral: claveCatastral },
-                1,
-                client
-            );
+    //         // 2. Obtener datos completos del inmueble
+    //         const inmuebleData = await this.repositories.inmueble.BuscarPorFiltros(
+    //             { clave_catastral: claveCatastral },
+    //             1,
+    //             client
+    //         );
 
-            if (inmuebleData.length === 0) {
-                throw new Error('No se pudieron obtener los datos del inmueble');
-            }
+    //         if (inmuebleData.length === 0) {
+    //             throw new Error('No se pudieron obtener los datos del inmueble');
+    //         }
 
-            const inmueble = inmuebleData[0];
-            const idDireccion = inmueble.direccion;
-            const idDatoRegistral = inmueble.dato_registral;
+    //         const inmueble = inmuebleData[0];
+    //         const idDireccion = inmueble.direccion;
+    //         const idDatoRegistral = inmueble.dato_registral;
 
-            console.log(`Datos del inmueble: dirección=${idDireccion}, dato_registral=${idDatoRegistral}`);
+    //         console.log(`Datos del inmueble: dirección=${idDireccion}, dato_registral=${idDatoRegistral}`);
 
-            // 3. Eliminar relaciones en el orden correcto
+    //         // 3. Eliminar relaciones en el orden correcto
 
-            // 3.1 Eliminar hipotecas
-            const hipotecas = await this.getHipotecas(claveCatastral);
-            for (const hipoteca of hipotecas) {
-                await this.hipotecaService.eliminarHipoteca(claveCatastral, hipoteca.id, client);
-            }
-            console.log(`Hipotecas eliminadas: ${hipotecas.length}`);
+    //         // 3.1 Eliminar hipotecas
+    //         const hipotecas = await this.getHipotecas(claveCatastral);
+    //         for (const hipoteca of hipotecas) {
+    //             await this.hipotecaService.eliminarHipoteca(claveCatastral, hipoteca.id, client);
+    //         }
+    //         console.log(`Hipotecas eliminadas: ${hipotecas.length}`);
 
-            // 3.2 Eliminar seguros y proveedores
-            const segurosDetails = await this.getProveedoresSegurosDetails(claveCatastral);
-            for (const seguro of segurosDetails.seguros) {
-                await this.seguroService.eliminarSeguro(claveCatastral, seguro.poliza, client);
-            }
-            console.log(`Seguros eliminados: ${segurosDetails.seguros.length}`);
+    //         // 3.2 Eliminar seguros y proveedores
+    //         const segurosDetails = await this.getProveedoresSegurosDetails(claveCatastral);
+    //         for (const seguro of segurosDetails.seguros) {
+    //             await this.seguroService.eliminarSeguro(claveCatastral, seguro.poliza, client);
+    //         }
+    //         console.log(`Seguros eliminados: ${segurosDetails.seguros.length}`);
 
-            for (const proveedor of segurosDetails.proveedores) {
-                await this.proveedorService.eliminarProveedor(claveCatastral, proveedor.clave, client);
-            }
-            console.log(`Proveedores eliminados: ${segurosDetails.proveedores.length}`);
+    //         for (const proveedor of segurosDetails.proveedores) {
+    //             await this.proveedorService.eliminarProveedor(claveCatastral, proveedor.clave, client);
+    //         }
+    //         console.log(`Proveedores eliminados: ${segurosDetails.proveedores.length}`);
 
-            // 3.3 Eliminar relación con empresa
-            const empresaInmuebleRelacion = await this.repositories.empresaInmueble.BuscarPorFiltros(
-                { clave_catastral: claveCatastral },
-                1,
-                client
-            );
+    //         // 3.3 Eliminar relación con empresa
+    //         const empresaInmuebleRelacion = await this.repositories.empresaInmueble.BuscarPorFiltros(
+    //             { clave_catastral: claveCatastral },
+    //             1,
+    //             client
+    //         );
 
-            if (empresaInmuebleRelacion && empresaInmuebleRelacion.length > 0) {
-                const { cif } = empresaInmuebleRelacion[0];
-                await this.repositories.empresaInmueble.eliminarPorId(
-                    { cif: cif, clave_catastral: claveCatastral },
-                    client
-                );
-                console.log('Relación con empresa eliminada');
-            }
+    //         if (empresaInmuebleRelacion && empresaInmuebleRelacion.length > 0) {
+    //             const { cif } = empresaInmuebleRelacion[0];
+    //             await this.repositories.empresaInmueble.eliminarPorId(
+    //                 { cif: cif, clave_catastral: claveCatastral },
+    //                 client
+    //             );
+    //             console.log('Relación con empresa eliminada');
+    //         }
 
-            // 4. Eliminar el inmueble principal
-            await this.repositories.inmueble.eliminarPorId(
-                { clave_catastral: claveCatastral },
-                client
-            );
-            console.log('Inmueble eliminado de la tabla inmueble');
+    //         // 4. Eliminar el inmueble principal
+    //         await this.repositories.inmueble.eliminarPorId(
+    //             { clave_catastral: claveCatastral },
+    //             client
+    //         );
+    //         console.log('Inmueble eliminado de la tabla inmueble');
 
-            // 5. Eliminar datos registrales si no son usados
-            const otrosInmueblesDatoRegistral = await this.repositories.inmueble.BuscarPorFiltros(
-                { dato_registral: idDatoRegistral },
-                999,
-                client
-            );
+    //         // 5. Eliminar datos registrales si no son usados
+    //         const otrosInmueblesDatoRegistral = await this.repositories.inmueble.BuscarPorFiltros(
+    //             { dato_registral: idDatoRegistral },
+    //             999,
+    //             client
+    //         );
 
-            if (otrosInmueblesDatoRegistral.length === 0) {
-                await this.repositories.datoRegistral.eliminarPorId(
-                    { id_dr: idDatoRegistral },
-                    client
-                );
-                console.log('Datos registrales eliminados completamente');
-            } else {
-                console.log(`Datos registrales conservados (usados por ${otrosInmueblesDatoRegistral.length} otros inmuebles)`);
-            }
+    //         if (otrosInmueblesDatoRegistral.length === 0) {
+    //             await this.repositories.datoRegistral.eliminarPorId(
+    //                 { id_dr: idDatoRegistral },
+    //                 client
+    //             );
+    //             console.log('Datos registrales eliminados completamente');
+    //         } else {
+    //             console.log(`Datos registrales conservados (usados por ${otrosInmueblesDatoRegistral.length} otros inmuebles)`);
+    //         }
 
-            // 6. Eliminar dirección si no es usada
-            const otrosInmueblesDireccion = await this.repositories.inmueble.BuscarPorFiltros(
-                { direccion: idDireccion },
-                999,
-                client
-            );
+    //         // 6. Eliminar dirección si no es usada
+    //         const otrosInmueblesDireccion = await this.repositories.inmueble.BuscarPorFiltros(
+    //             { direccion: idDireccion },
+    //             999,
+    //             client
+    //         );
 
-            let direccionEliminada = false;
-            if (otrosInmueblesDireccion.length === 0) {
-                try {
-                    // Intentar eliminar usando el servicio
-                    await this.direccionService.eliminarDireccion(idDireccion, client);
-                    direccionEliminada = true;
-                    console.log('Dirección eliminada completamente');
-                } catch (error) {
-                    // Si el servicio falla, eliminar directamente desde el repositorio
-                    console.log('Error al eliminar con servicio, eliminando directamente...');
-                    const direccionRepo = new Repositorio('direccion', 'id');
-                    await direccionRepo.eliminarPorId({ id: idDireccion }, client);
-                    direccionEliminada = true;
-                    console.log('Dirección eliminada directamente desde repositorio');
-                }
-            } else {
-                console.log(`Dirección conservada (usada por ${otrosInmueblesDireccion.length} otros inmuebles)`);
-            }
+    //         let direccionEliminada = false;
+    //         if (otrosInmueblesDireccion.length === 0) {
+    //             try {
+    //                 // Intentar eliminar usando el servicio
+    //                 await this.direccionService.eliminarDireccion(idDireccion, client);
+    //                 direccionEliminada = true;
+    //                 console.log('Dirección eliminada completamente');
+    //             } catch (error) {
+    //                 // Si el servicio falla, eliminar directamente desde el repositorio
+    //                 console.log('Error al eliminar con servicio, eliminando directamente...');
+    //                 const direccionRepo = new Repositorio('direccion', 'id');
+    //                 await direccionRepo.eliminarPorId({ id: idDireccion }, client);
+    //                 direccionEliminada = true;
+    //                 console.log('Dirección eliminada directamente desde repositorio');
+    //             }
+    //         } else {
+    //             console.log(`Dirección conservada (usada por ${otrosInmueblesDireccion.length} otros inmuebles)`);
+    //         }
 
-            // 7. Retornar resumen
-            return {
-                message: "Inmueble eliminado completamente con éxito",
-                data: {
-                    clave_catastral: claveCatastral,
-                    eliminaciones: {
-                        hipotecas: hipotecas.length,
-                        seguros: segurosDetails.seguros.length,
-                        proveedores: segurosDetails.proveedores.length,
-                        empresa_inmueble: empresaInmuebleRelacion && empresaInmuebleRelacion.length > 0,
-                        inmueble: true,
-                        dato_registral: otrosInmueblesDatoRegistral.length === 0,
-                        direccion: otrosInmueblesDireccion.length === 0
-                    }
-                }
-            };
-        });
-    }
+    //         // 7. Retornar resumen
+    //         return {
+    //             message: "Inmueble eliminado completamente con éxito",
+    //             data: {
+    //                 clave_catastral: claveCatastral,
+    //                 eliminaciones: {
+    //                     hipotecas: hipotecas.length,
+    //                     seguros: segurosDetails.seguros.length,
+    //                     proveedores: segurosDetails.proveedores.length,
+    //                     empresa_inmueble: empresaInmuebleRelacion && empresaInmuebleRelacion.length > 0,
+    //                     inmueble: true,
+    //                     dato_registral: otrosInmueblesDatoRegistral.length === 0,
+    //                     direccion: otrosInmueblesDireccion.length === 0
+    //                 }
+    //             }
+    //         };
+    //     });
+    // }
 
-    // ========== ELIMINAR SEGURO ==========
-    async deleteSeguro(claveCatastral, poliza) {
-        return await this.seguroService.eliminarSeguro(claveCatastral, poliza);
-    }
+    // // ========== ELIMINAR SEGURO ==========
+    // async deleteSeguro(claveCatastral, poliza) {
+    //     return await this.seguroService.eliminarSeguro(claveCatastral, poliza);
+    // }
 
-    // ========== ELIMINAR PROVEEDOR ==========
-    async deleteProveedor(claveCatastral, claveProveedor) {
-        return await this.proveedorService.eliminarProveedor(claveCatastral, claveProveedor);
-    }
+    // // ========== ELIMINAR PROVEEDOR ==========
+    // async deleteProveedor(claveCatastral, claveProveedor) {
+    //     return await this.proveedorService.eliminarProveedor(claveCatastral, claveProveedor);
+    // }
 
-    // ========== ELIMINAR HIPOTECA ==========
-    async deleteHipoteca(claveCatastral, idHipoteca) {
-        return await this.hipotecaService.eliminarHipoteca(claveCatastral, idHipoteca);
-    }
+    // // ========== ELIMINAR HIPOTECA ==========
+    // async deleteHipoteca(claveCatastral, idHipoteca) {
+    //     return await this.hipotecaService.eliminarHipoteca(claveCatastral, idHipoteca);
+    // }
 
-    async getProveedoresSegurosDetails(claveCatastral) {
-        try {
-            const joinsProveedor = [
-                { type: 'INNER', table: 'proveedor p', on: 'inmueble_proveedor.clave = p.clave' }
-            ];
+    // async getProveedoresSegurosDetails(claveCatastral) {
+    //     try {
+    //         const joinsProveedor = [
+    //             { type: 'INNER', table: 'proveedor p', on: 'inmueble_proveedor.clave = p.clave' }
+    //         ];
 
-            const proveedores = await this.repositories.inmuebleProveedor.BuscarConJoins(
-                joinsProveedor,
-                { 'inmueble_proveedor.clave_catastral': claveCatastral },
-                'AND',
-                ['p.clave', 'p.nombre', 'p.telefono', 'p.email', 'p.tipo_servicio']
-            );
+    //         const proveedores = await this.repositories.inmuebleProveedor.BuscarConJoins(
+    //             joinsProveedor,
+    //             { 'inmueble_proveedor.clave_catastral': claveCatastral },
+    //             'AND',
+    //             ['p.clave', 'p.nombre', 'p.telefono', 'p.email', 'p.tipo_servicio']
+    //         );
 
-            const joinsSeguros = [
-                { type: 'INNER', table: 'seguro s', on: 'inmueble_seguro.poliza = s.poliza' }
-            ];
+    //         const joinsSeguros = [
+    //             { type: 'INNER', table: 'seguro s', on: 'inmueble_seguro.poliza = s.poliza' }
+    //         ];
 
-            const seguros = await this.repositories.inmuebleSeguro.BuscarConJoins(
-                joinsSeguros,
-                { 'inmueble_seguro.clave_catastral': claveCatastral },
-                'AND',
-                ['s.empresa_seguro', 's.tipo_seguro', 's.telefono', 's.email', 's.poliza']
-            );
+    //         const seguros = await this.repositories.inmuebleSeguro.BuscarConJoins(
+    //             joinsSeguros,
+    //             { 'inmueble_seguro.clave_catastral': claveCatastral },
+    //             'AND',
+    //             ['s.empresa_seguro', 's.tipo_seguro', 's.telefono', 's.email', 's.poliza']
+    //         );
 
-            console.log(`Seguros encontrados: ${seguros.length}`);
-            return {
-                proveedores,
-                seguros
-            };
-        } catch (error) {
-            console.error("Error al obtener proveedores y seguros:", error);
-            throw new Error("No se pudo obtener la información de proveedores y seguros");
-        }
-    }
+    //         console.log(`Seguros encontrados: ${seguros.length}`);
+    //         return {
+    //             proveedores,
+    //             seguros
+    //         };
+    //     } catch (error) {
+    //         console.error("Error al obtener proveedores y seguros:", error);
+    //         throw new Error("No se pudo obtener la información de proveedores y seguros");
+    //     }
+    // }
 
-    async getInmuebleDetails(cif) {
-        try {
-            const joins = [
-                { type: 'INNER', table: 'inmueble i', on: 'empresa_inmueble.clave_catastral = i.clave_catastral' },
-                { type: 'INNER', table: 'direccion d', on: 'i.direccion = d.id' },
-                { type: 'INNER', table: 'dato_registral dr', on: 'i.dato_registral = dr.id_dr' }
-            ];
+    // async getInmuebleDetails(cif) {
+    //     try {
+    //         const joins = [
+    //             { type: 'INNER', table: 'inmueble i', on: 'empresa_inmueble.clave_catastral = i.clave_catastral' },
+    //             { type: 'INNER', table: 'direccion d', on: 'i.direccion = d.id' },
+    //             { type: 'INNER', table: 'dato_registral dr', on: 'i.dato_registral = dr.id_dr' }
+    //         ];
 
-            const columnas = [
-                'd.calle', 'd.numero', 'd.piso', 'd.codigo_postal', 'd.localidad',
-                'inmueble.clave_catastral', 'inmueble.valor_adquisicion',
-                'inmueble.fecha_adquisicion', 'dr.num_protocolo', 'dr.folio',
-                'dr.hoja', 'dr.inscripcion', 'dr.notario', 'dr.fecha_inscripcion'
-            ];
+    //         const columnas = [
+    //             'd.calle', 'd.numero', 'd.piso', 'd.codigo_postal', 'd.localidad',
+    //             'inmueble.clave_catastral', 'inmueble.valor_adquisicion',
+    //             'inmueble.fecha_adquisicion', 'dr.num_protocolo', 'dr.folio',
+    //             'dr.hoja', 'dr.inscripcion', 'dr.notario', 'dr.fecha_inscripcion'
+    //         ];
 
-            return await this.repositories.empresaInmueble.BuscarConJoins(
-                joins,
-                { 'empresa_inmueble.cif': cif },
-                'AND',
-                columnas
-            );
-        } catch (error) {
-            console.error("Error al obtener detalles del inmueble:", error);
-            throw new Error("No se pudo obtener los detalles del inmueble");
-        }
-    }
+    //         return await this.repositories.empresaInmueble.BuscarConJoins(
+    //             joins,
+    //             { 'empresa_inmueble.cif': cif },
+    //             'AND',
+    //             columnas
+    //         );
+    //     } catch (error) {
+    //         console.error("Error al obtener detalles del inmueble:", error);
+    //         throw new Error("No se pudo obtener los detalles del inmueble");
+    //     }
+    // }
 
-    async getHipotecas(claveCatastral) {
-        try {
-            const joins = [
-                { type: 'INNER', table: 'hipoteca h', on: 'inmueble_hipoteca.id_hipoteca = h.id' }
-            ];
+    // async getHipotecas(claveCatastral) {
+    //     try {
+    //         const joins = [
+    //             { type: 'INNER', table: 'hipoteca h', on: 'inmueble_hipoteca.id_hipoteca = h.id' }
+    //         ];
 
-            const columnas = [
-                'h.id', 'h.prestamo', 'h.banco_prestamo', 'h.fecha_hipoteca', 'h.cuota_hipoteca'
-            ];
+    //         const columnas = [
+    //             'h.id', 'h.prestamo', 'h.banco_prestamo', 'h.fecha_hipoteca', 'h.cuota_hipoteca'
+    //         ];
 
-            return await this.repositories.inmuebleHipoteca.BuscarConJoins(
-                joins,
-                { 'inmueble_hipoteca.clave_catastral': claveCatastral },
-                'AND',
-                columnas
-            );
-        } catch (error) {
-            console.error("Error al obtener hipotecas:", error);
-            throw new Error("No se pudo obtener las hipotecas");
-        }
-    }
+    //         return await this.repositories.inmuebleHipoteca.BuscarConJoins(
+    //             joins,
+    //             { 'inmueble_hipoteca.clave_catastral': claveCatastral },
+    //             'AND',
+    //             columnas
+    //         );
+    //     } catch (error) {
+    //         console.error("Error al obtener hipotecas:", error);
+    //         throw new Error("No se pudo obtener las hipotecas");
+    //     }
+    // }
 }
 
 export default InmuebleService;

@@ -41,12 +41,16 @@ export class BaseService {
         const existe = await repo.ExistePorId(idObject, client)
         if (existe) throw new ConflictError("Ya existe un recurso con esos datos")
 
-        return this.repositories[repoName].insertar(data, client);
+        return await this.repositories[repoName].insertar(data, client);
+    }
+
+    async crearAuto(repoName, data, client = null) {
+        return await this.repositories[repoName].insertar(data, client);
     }
 
     async actualizar(repoName, idObject, data, client = null) {
         const repo = this.repositories[repoName]
-        
+
         const existe = await repo.ExistePorId(idObject, client)
         if (!existe) throw new NotFoundError(`${repoName} no encontrado.`)
 
@@ -64,16 +68,16 @@ export class BaseService {
             if (existeNuevo) throw new ConflictError("Ya existe un registro como el que intentas agregar")
         }
 
-        return repo.actualizarPorId(idObject, data, client);
+        return await repo.actualizarPorId(idObject, data, client);
     }
 
     async eliminar(repoName, idObject, client = null) {
         const repo = this.repositories[repoName];
 
-        const existe = await repo.existePorId(idObject, client);
+        const existe = await repo.ExistePorId(idObject, client);
         if (!existe) throw new NotFoundError(`${repoName} no encontrado`);
 
-        return repo.eliminarPorId(idObject, client);
+        return await repo.eliminarPorId(idObject, client);
     }
 
     async validarExistencia(repoName, condiciones, client = null) {

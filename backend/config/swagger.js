@@ -53,13 +53,21 @@ const swaggerDocument = {
                 tags: ['Inmueble'],
                 summary: 'Actualizar inmueble',
                 parameters: [
-                    { name: 'claveCatastral', in: 'path', required: true, description: 'Clave única del inmueble', schema: { type: 'string', example: 'MLT13' } }
+                    { name: 'claveCatastral', in: 'path', required: true, description: 'Clave única del inmueble', schema: { type: 'string', example: 'CLAVEPRUEBA' } }
                 ],
                 requestBody: {
                     required: true,
                     content: { 'application/json': { schema: { $ref: '#/components/schemas/InmuebleInput' } } }
                 },
                 responses: { 200: { description: 'Actualizado' } }
+            },
+            delete: {
+                tags: ['Inmueble'],
+                summary: 'Eliminar inmueble',
+                parameters: [
+                    { name: 'claveCatastral', in: 'path', required: true, description: 'Clave única del inmueble', schema: { type: 'string', example: 'CLAVEPRUEBA'}}
+                ],
+                responses: { 200: { description: 'Eliminado' }, 404: { description: 'Inmueble no encontrado' }, 500: { description: 'Error interno' } }
             }
         },
         '/api/inmueble/{cif}': {

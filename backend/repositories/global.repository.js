@@ -42,7 +42,7 @@ class Repositorio {
         const placeholders = valores.map((_, index) => `$${index + 1}`).join(', ')
 
         try {
-            console.log(`Los datos recibidos son ${datos}`)
+            console.log(`Los datos recibidos son `, datos)
 
             const query = `
             INSERT INTO ${this.tabla} (${columnas}) VALUES(${placeholders})

@@ -33,8 +33,28 @@ BEGIN;
 
 COMMIT;
 
-ALTER TABLE hipoteca ADD COLUMN clave_catastral VARCHAR(25) UNIQUE;
-UPDATE hipoteca h SET clave_catastral = ih.clave_catastral FROM inmueble_hipoteca ih WHERE h.id = ih.id_hipoteca;
-ALTER TABLE hipoteca ALTER COLUMN clave_catastral SET NOT NULL;
+ROLLBACK;
+BEGIN;
+	ALTER TABLE seguro ADD COLUMN clave_catastral VARCHAR(25);
+	
+	UPDATE seguro s
+	SET clave_catastral = ins.clave_catastral
+	FROM inmueble_seguro ins
+	WHERE s.clave_catastral = ins.clave_catastral;
+	
+	ALTER TABLE seguro ALTER COLUMN clave_catastral SET NOT NULL;
 
-DROP TABLE inmueble_hipoteca;
+	DROP TABLE inmueble_seguro;
+COMMIT;
+
+ROLLBACK;
+BEGIN;
+	ALTER TABLE hipoteca ADD COLUMN clave_catastral VARCHAR(25) UNIQUE;
+	UPDATE hipoteca h SET clave_catastral = ih.clave_catastral FROM inmueble_hipoteca ih WHERE h.id = ih.id_hipoteca;
+	ALTER TABLE hipoteca ALTER COLUMN clave_catastral SET NOT NULL;
+	ALTER TABLE hipoteca ADD CONSTRAINT hipoteca_pkey PRIMARY KEY clave_catastral;
+	ALTER TABLE hipoteca ADD CONSTRAINT fk_hipoteca_clave_catastral FOREIGN KEY (clave_catastral)
+		REFERENCES inmueble(clave_catastral) ON UPDATE CASCADE ON DELETE CASCADE;
+	
+	DROP TABLE inmueble_hipoteca;
+COMMIT;

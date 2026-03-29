@@ -4,6 +4,7 @@ import EmpresaService from '../empresa/empresa.service.js';
 import PropietarioService from '../propietario/propietario.service.js';
 import MovimientoService from '../../services/movimiento.service.js';
 import Repositorio from '../../repositories/global.repository.js';
+import { AppError } from '../../errors/AppError.js';
 
 class ClienteService extends BaseService {
     constructor() {
@@ -116,7 +117,7 @@ class ClienteService extends BaseService {
 
                 } catch (error) {
                     console.error('Error al cambiar CIF:', error);
-                    throw new Error(`No se pudo cambiar el CIF: ${error.message}`);
+                    throw new AppError(`No se pudo cambiar el CIF: ${error.message}`);
                 }
             }
 
@@ -126,7 +127,7 @@ class ClienteService extends BaseService {
             // 2. Verificar que el cliente existe 
             const empresaExiste = await this.empresaService.obtenerEmpresaPorCif(cifActual, client);
             if (!empresaExiste || empresaExiste.length === 0) {
-                throw new Error('Cliente no encontrado después del cambio de CIF');
+                throw new AppError('Cliente no encontrado después del cambio de CIF');
             }
 
             const empresaActual = empresaExiste[0];
