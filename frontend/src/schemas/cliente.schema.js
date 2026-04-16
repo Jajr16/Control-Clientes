@@ -72,63 +72,43 @@ const datoRegistralSchema = z.object({
  * SCHEMA PARA INMUEBLES
  */
 const proveedorSchema = z.object({
-    clave: z.string({
-        required_error: "Clave del proveedor es obligatorio",
+    data: z.object({
+        cup: z.string().optional(),
+        nombre: z.string({
+            required_error: "Nombre del proveedor es obligatorio"
+        }),
+        tipo_servicio: z.string({
+            required_error: "Servicio es obligatorio"
+        }),
+        telefono: z.string().optional(),
+        email: optionalEmail()
     }),
-    nombre: z.string({
-        required_error: "Nombre del proveedor es obligatorio",
-    }),
-    tipo_servicio: z.string({
-        required_error: "Servicio es obligatorio",
-    }),
-    telefono: z.string({
-        required_error: "Teléfono del proveedor es obligatorio",
-    }),
-    email: z
-        .string({
-            required_error: "Email del proveedor es obligatorio",
-        })
-        .email("Email del proveedor debe ser válido"),
+    original: z.object({
+        nombre: z.string(),
+        tipo_servicio: z.string()
+    }).optional()
 });
 
-const hipotecaSchema = z.object({
-    prestamo: z.coerce
-        .number({
-            required_error: "Préstamo es obligatorio",
-            invalid_type_error: "Préstamo debe ser un número",
-        })
-        .positive("Préstamo debe ser positivo"),
-    banco_prestamo: z
-        .string()
-        .min(2, "Banco debe tener al menos 2 caracteres"),
-    fecha_hipoteca: z.coerce.date({
-        invalid_type_error: "Fecha de la hipoteca debe ser válida",
-    }),
-    cuota_hipoteca: z.coerce
-        .number({
-            invalid_type_error: "Cuota debe ser un número",
-        })
-        .positive("Cuota debe ser positiva"),
+export const hipotecaSchema = z.object({
+    prestamo: optionalNumber(),
+    banco_prestamo: z.string().optional(),
+    fecha_hipoteca: optionalDate(),
+    cuota_hipoteca: optionalNumber(),
+    clave_catastral: z.string().optional(),
 });
 
-const seguroSchema = z.object({
-    empresa_seguro: z.string({
-        required_error: "Aseguradora es obligatorio",
+export const seguroSchema = z.object({
+    data: z.object({
+        empresa_seguro: z.string().optional(),
+        tipo_seguro: z.string().optional(),
+        telefono: z.string().optional(),
+        email: optionalEmail(),
+        poliza: z.string().optional(),
     }),
-    tipo_seguro: z.string({
-        required_error: "Tipo de seguro es obligatorio",
-    }),
-    telefono: z.string({
-        required_error: "Teléfono de la aseguradora es obligatorio",
-    }),
-    email: z
-        .string({
-            required_error: "Email de la aseguradora es obligatorio",
-        })
-        .email("Email de la aseguradora debe ser válido"),
-    poliza: z.string({
-        required_error: "Póliza es obligatorio",
-    }),
+
+    original: z.object({
+        poliza: z.string().optional(),
+    }).optional(),
 });
 
 const inmuebleSchema = z.object({
@@ -140,7 +120,7 @@ const inmuebleSchema = z.object({
     dato_registral: datoRegistralSchema.optional(),
     direccion: direccionSchema.optional(),
     proveedores: z.array(proveedorSchema).optional(),
-    hipotecas: z.array(hipotecaSchema).optional(),
+    hipoteca: hipotecaSchema.optional(),
     seguros: z.array(seguroSchema).optional(),
 });
 
@@ -163,7 +143,6 @@ const empresaSchema = z.object({
     clave: z
         .string()
         .length(3, "Clave de la empresa debe tener 3 caracteres")
-        .optional(),
 });
 
 // PROPIETARIO

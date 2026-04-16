@@ -21,5 +21,5 @@ export const empresaSchema = Joi.object({
         notario: "Fernando Trujillo",
         fecha_inscripcion: "2026-03-27"
     }),
-    clave: Joi.string().length(3).optional().messages(mensajesES).label('Clave de la empresa').example('CCE')
+    clave: Joi.string().length(3).required().messages(mensajesES).label('Clave de la empresa').example('CCE')
 });

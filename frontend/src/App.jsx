@@ -1,12 +1,12 @@
 import React from "react";
 import { BrowserRouter as Router, Routes, Route, Link } from "react-router-dom";
 
-import Layout from "./components/layout";
-import AddAdeudos from "./pages/Adeudos/AgregarAdeudo";
-import HistorialAdeudos from "./pages/Adeudos/HistorialAdeudo";
-import AddClientesPage from "./pages/Clientes/AgregarCliente";
-import Cliente from "./pages/Clientes/Cliente";
-import Home from "./pages/Home";
+import Layout from "./components/layout/layout";
+// import AddAdeudos from "./features/adeudos/pages/AgregarAdeudo";
+// import HistorialAdeudos from "./features/adeudos/pages/HistorialAdeudo";
+import AddClientesPage from "./features/clientes/pages/AgregarCliente";
+import Cliente from "./features/clientes/pages/Cliente";
+import Home from "./features/home/pages/Home";
 
 const App = () => {
     return (
@@ -16,8 +16,8 @@ const App = () => {
                     <Route path="/" element={<Home />} />
                     <Route path="/nuevosClientes" element={<AddClientesPage />} />
                     <Route path="/clientes" element={<Cliente />} />
-                    <Route path="/adeudos" element={<AddAdeudos />} />
-                    <Route path="/historicoAdeudos" element={<HistorialAdeudos />} />
+                    {/* <Route path="/adeudos" element={<AddAdeudos />} />
+                    <Route path="/historicoAdeudos" element={<HistorialAdeudos />} /> */}
                 </Routes>
             </Layout>
         </Router>

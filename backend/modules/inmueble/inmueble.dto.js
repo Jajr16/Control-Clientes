@@ -6,7 +6,13 @@ export class InmuebleDTO {
             clave_catastral: item.clave_catastral,
             valor_adquisicion: item.valor_adquisicion,
             fecha_adquisicion: item.fecha_adquisicion,
-            direccion: `${item.calle}, ${item.numero}, ${item.piso ? item.piso + ',' : ''} ${item.codigo_postal} ${item.localidad}`,
+            direccion: {
+                calle: item.calle,
+                numero: item.numero,
+                piso: item.piso,
+                codigo_postal: item.codigo_postal,
+                localidad: item.localidad
+            },
             dato_registral: {
                 folio: item.folio,
                 hoja: item.hoja,

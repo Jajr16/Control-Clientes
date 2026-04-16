@@ -1,5 +1,5 @@
 import React from 'react';
-import { useAdeudos } from "../../hooks/useAdeudos";
+import { useAdeudos } from "../../features/adeudos/hooks/useAdeudos";
 import PrincipalView from "../views/PrincipalView";
 import BorradorView from "../views/BorradorView";
 import LiquidacionView from "../views/LiquidacionView";

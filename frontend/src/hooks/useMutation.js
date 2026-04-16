@@ -12,19 +12,14 @@ export const useMutation = () => {
 
         try {
             setLoading(true);
-            const response = await apiCall(data);
+            const response = data ? await apiCall(data) : await apiCall();
 
-            if (onSuccess) {
-                onSuccess(response.data);
-            }
+            onSuccess?.(response.data);
 
             return response.data;
         } catch (error) {
-            if (onError) {
-                onError(error);
-            } else {
-                console.error("Mutation error:", error);
-            }
+            onError?.(error)
+
             throw error;
         } finally {
             setLoading(false);
